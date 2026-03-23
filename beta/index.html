@@ -202,7 +202,7 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
     <span id="settingsVersion">Version 0.5.0-beta.1+build.154.sha.c198258.beta</span>
-    <span id="settingsRelease">Mar 23 2026, 3:10 PM EDT</span>
+    <span id="settingsRelease">Mar 23 2026, 3:23 PM EDT</span>
     <span id="settingsState">beta@c198258 clean</span>
   </div>
   <div id="settingsNotes">
@@ -261,7 +261,7 @@ canvas{display:block;width:100vw;height:100vh}
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
     <span id="buildStampVersion">Version 0.5.0-beta.1+build.154.sha.c198258.beta</span>
-    <span id="buildStampRelease">Mar 23 2026, 3:10 PM EDT</span>
+    <span id="buildStampRelease">Mar 23 2026, 3:23 PM EDT</span>
   </div>
 </div>
 <script>
@@ -355,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.154.sha.c198258.beta',commit:'c19825891ac37045a8533451a4935e8223013432',branch:'beta',dirty:false,released:'Mar 23 2026, 3:10 PM EDT',state:'beta@c198258 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.154.sha.c198258.beta',commit:'c19825891ac37045a8533451a4935e8223013432',branch:'beta',dirty:false,released:'Mar 23 2026, 3:23 PM EDT',state:'beta@c198258 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -904,13 +904,22 @@ fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+function keyboardTargetIsEditable(target){
+ if(!target||typeof target.closest!=='function')return false;
+ return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
+}
 addEventListener('keydown',e=>{
+ const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
- if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(typingTarget){
+  if(e.code==='Escape'&&settingsOpen){e.preventDefault();closeSettings();}
+  return;
+ }
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
