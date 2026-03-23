@@ -176,6 +176,44 @@ Expansion beyond Stage `4`, new theme systems, and broader content breadth are
 still valuable, but they are now explicitly post-`1.0` work unless they are
 needed to support this smaller shipped slice.
 
+### Launch Blocking List
+
+This is the maintained release view for the scoped four-stage `1.0` launch.
+Use it as the default triage order until launch unless a new regression clearly
+overrides it.
+
+| Bucket | Issue | Owner | Status | Evidence | Next Action | Plan Stage |
+| --- | --- | --- | --- | --- | --- | --- |
+| Must Fix | `#18` | Codex | Open | Stage `4` still collapses in harness and manual play. | Tune the Stage `4` finish and escort pressure. | Phase 1 |
+| Must Fix | `#61` | Shared | Watching | Hosted Stage `3` -> `4` still has an intermittent bad-transition edge case. | Keep transition telemetry live and capture the next failing run. | Phase 1 |
+| Must Fix | `#32` | Codex | Tuning | Stage `2` improved, but live spacing/fairness still needs confirmation. | Keep manual and persona checks on Stage `2` pressure. | Phase 1 |
+| Must Fix | `#64` | Codex | Open | Challenge enemies firing still breaks bonus-stage fidelity. | Disable enemy fire during challenge stages. | Phase 1 |
+| Must Fix | `#9` | Codex | Open | Stage `3` challenge still is not close enough to original Galaga. | Tighten challenge behavior against reference. | Phase 1 |
+| Must Fix | `#40` | Codex | Open | Capture / rescue still reads unclearly in live play. | Polish rescue feedback and readability. | Phase 3 |
+| Must Fix | `#74` | Codex | Open | The three-kill bonus group is still too spread out to read well. | Tighten bonus-squadron spacing. | Phase 2 |
+| Must Fix | `#47` | Codex | Open | Special squadron spacing and presentation are still too loose. | Compact special-squadron layout and presentation. | Phase 2 |
+| Must Fix | `#38` | Codex | Open | Ship-hit feedback still does not feel release-ready. | Improve explosion, pause, and hit feedback. | Phase 2 |
+| Must Fix | `#76` | Shared | Open | Production and non-production still share the same live score/data path. | Choose environment split and route non-production writes away from production by default. | Phase 4 |
+| Should Fix | `#58` | Codex | Open | Capture rules are much improved but still not fully original. | Finish the rescue-fidelity pass. | Phase 3 |
+| Should Fix | `#73` | Codex | Open | Players still cannot shoot during the early tractor-beam capture window. | Add the shoot-to-save capture moment. | Phase 3 |
+| Should Fix | `#4` | Shared | Watch | Stage `1` feels acceptable manually, with mixed harness urgency. | Revisit only if evidence worsens. | Phase 1 |
+| Should Fix | `#62` | Shared | Watch | Self-play can still fail early in Stage `1`. | Keep the persona baseline in view while tuning. | Phase 1 |
+| Should Fix | `#31` | Codex | Open | Minor public timestamp/date polish remains. | Clean the release date display. | Phase 3 |
+| Can Slip | `#63` | Codex | Queued | Wait-mode score cycling is useful attract polish. | Do it in the attract-mode pass. | Phase 3 |
+| Can Slip | `#49` / `#60` | Codex | Queued | The score panel still wants stronger cues and clearer invocation. | Polish score-view interaction after core gameplay work. | Phase 3 |
+| Can Slip | `#48` | Codex | Partial | The frame exists; decorative fidelity can still wait. | Add cabinet-style frame art later. | Phase 2 |
+| Can Slip | `#65` | Codex | Queued | Aurora / wintry theming is still later polish. | Apply thematic art after gameplay stabilizes. | Phase 2 |
+| Can Slip | `#71` | Codex | Queued | Mute is useful, but not launch-blocking. | Add an audio toggle in the UI. | Phase 3 |
+
+Items currently treated as post-`1.0` unless they become necessary for
+external playtesting or operational stability:
+
+- `#69` remote gameplay logs and optional video artifacts
+- `#70` homepage recent plays / watch links
+- `#17` broader reference baseline work
+- `#19` later-run collision-chain regression outside the four-stage slice
+- replay, submission, theme-system, and broader public-workflow enhancements
+
 ### Track A. Autonomous Original-Galaga Baseline
 
 1. Build and maintain a durable reference baseline using:
