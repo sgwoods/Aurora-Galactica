@@ -25,7 +25,8 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .startBadge{color:#7ef2ff}
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
-#msg .scoreTable{display:grid;grid-template-columns:auto auto auto auto;gap:.08em .85em;justify-content:center;font-size:.75em;line-height:1.25;text-align:right}
+#msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
+#msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
 #msg .scoreName{color:#f4f7ff;text-align:center;min-width:3.4em}
@@ -35,18 +36,24 @@ canvas{display:block;width:100vw;height:100vh}
 #msg .resultsTable{display:grid;grid-template-columns:auto auto;gap:.16em 1.2em;justify-content:center;font-size:.82em;line-height:1.18;text-align:right}
 #msg .resultsLabel{color:#ff6f66;text-align:left}
 #msg .resultsValue{color:#f4f7ff;min-width:4.5em}
-#msg .gameOverEntry{display:block;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em 0 .25em}
-#msg .entryCursor{display:inline-block;min-width:.72em;color:#000;background:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
-#msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;margin-top:.7em}
+#msg .gameOverEntry{display:grid;justify-content:center;gap:.22em;color:#f4f7ff;font-size:.76em;letter-spacing:.06em;margin:.45em auto .35em;width:min(100%,18em)}
+#msg .entryLabel{display:block;color:#f4f7ff}
+#msg .entrySlots{display:flex;justify-content:center;gap:.22em}
+#msg .entrySlot{display:inline-flex;align-items:center;justify-content:center;min-width:1.08em;padding:.04em .16em;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.74);color:#f4f7ff}
+#msg .entryCursor{color:#000;background:#ffd86d;border-color:#ffd86d;animation:blinkCursor .7s steps(1,end) infinite}
+#msg .gameOverFoot{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.05em;line-height:1.18;margin:.7em auto 0;max-width:22em}
+#msg .gameOverFootLine{display:block}
 #msg .blinkPrompt{animation:blinkPrompt .8s steps(1,end) infinite}
-#msg.gameOverScreen{top:52%;width:min(92vw,980px);font-size:clamp(26px,2.15vw,38px);line-height:1.06}
+#msg.gameOverScreen{top:52%;width:min(86vw,720px);font-size:clamp(22px,1.85vw,34px);line-height:1.06}
 #msg.startScreen{top:76%;width:min(92vw,840px);font-size:clamp(22px,1.9vw,32px);line-height:1.08}
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
-#msg.gameOverScreen .gameOverSub{font-size:.9em;letter-spacing:.08em;margin-bottom:.35em}
-#msg.gameOverScreen .scoreTable{gap:.16em 1.3em;font-size:.92em;line-height:1.14}
+#msg.gameOverScreen .gameOverSub{font-size:.82em;letter-spacing:.08em;margin-bottom:.1em}
+#msg.gameOverScreen .gameOverMeta{font-size:.6em;margin-bottom:.38em}
+#msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
-#msg.gameOverScreen .gameOverEntry{font-size:.88em;margin:.34em 0 .18em}
-#msg.gameOverScreen .gameOverFoot{font-size:.82em;margin-top:.45em}
+#msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}
+#msg.gameOverScreen .entrySlot{min-width:1.14em}
+#msg.gameOverScreen .gameOverFoot{font-size:.72em;margin-top:.4em;max-width:24em}
 #msg.startScreen .startTitle{font-size:1.22em}
 #msg.startScreen .startSub{font-size:.8em}
 #msg.startScreen .startHelp{font-size:.94em}
@@ -194,9 +201,9 @@ canvas{display:block;width:100vw;height:100vh}
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane pre-production</span>
-    <span id="settingsVersion">Version 0.5.0-alpha.1+build.147.sha.5164351.dirty</span>
-    <span id="settingsRelease">Mar 23 2026, 1:20 PM EDT</span>
-    <span id="settingsState">main@5164351 dirty</span>
+    <span id="settingsVersion">Version 0.5.0-alpha.1+build.165.sha.2206d4b.dirty</span>
+    <span id="settingsRelease">Mar 24 2026, 8:05 AM EDT</span>
+    <span id="settingsState">main@2206d4b dirty</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -253,8 +260,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane pre-production</span>
-    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.147.sha.5164351.dirty</span>
-    <span id="buildStampRelease">Mar 23 2026, 1:20 PM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-alpha.1+build.165.sha.2206d4b.dirty</span>
+    <span id="buildStampRelease">Mar 24 2026, 8:05 AM EDT</span>
   </div>
 </div>
 <script>
@@ -348,7 +355,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.147.sha.5164351.dirty',commit:'51643514d807419944ccfb288d9e2d9f0fb49b96',branch:'main',dirty:true,released:'Mar 23 2026, 1:20 PM EDT',state:'main@5164351 dirty',releaseChannel:'pre-production'};
+const BUILD_INFO={version:'0.5.0-alpha.1',label:'0.5.0-alpha.1+build.165.sha.2206d4b.dirty',commit:'2206d4b6824f39b434c248a52a0cb0f1d39bfd15',branch:'main',dirty:true,released:'Mar 24 2026, 8:05 AM EDT',state:'main@2206d4b dirty',releaseChannel:'pre-production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -434,7 +441,7 @@ const sfx={
  enemyShot(){this.play(338,.075,'triangle',.009,-130,.002,3000);this.play(258,.05,'square',.004,-90,.002,2600,.012)},
  hit(){this.play(228,.05,'square',.013,-180,.008,3200);this.play(146,.1,'sawtooth',.015,-220,.012,2300,.02);this.noise(.05,.006,1600,.012)},
  bossHit(){this.play(312,.06,'square',.015,-120,.004,3600);this.play(202,.12,'triangle',.012,-80,.003,2500,.014);this.noise(.04,.004,1900,.01)},
- shipHit(){this.play(214,.085,'square',.018,-260,.01,2800);this.play(162,.16,'sawtooth',.02,-280,.014,2200,.012);this.play(118,.22,'triangle',.018,-130,.007,1700,.022);this.noise(.12,.012,1250,.008)},
+ shipHit(){this.play(228,.11,'square',.022,-300,.012,2600);this.play(176,.19,'sawtooth',.024,-320,.016,2100,.016);this.play(124,.28,'triangle',.022,-150,.009,1600,.028);this.noise(.16,.016,1120,.012);this.noise(.08,.01,760,.03)},
  boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
@@ -496,7 +503,7 @@ const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[]
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
 const stageTune=(s,ch)=>ch?{shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2}
  :s<=1?{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2}
- :s===2?{shotCap:1,attackCap:1,diveRate:.64,coolA:6,coolB:3.9,globalA:2.05,globalB:1.48,capChance:.18,diveShotRate:.54,aimMul:.1,aimClamp:14,aimRnd:2,bulletVy:171,bulletVyStage:3}
+ :s===2?{shotCap:1,attackCap:1,diveRate:.56,coolA:6.2,coolB:4.2,globalA:2.2,globalB:1.62,capChance:.12,diveShotRate:.46,aimMul:.1,aimClamp:14,aimRnd:1.8,bulletVy:169,bulletVyStage:3}
  :s===3?{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3}
  :s===4?{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3}
  :s===5?{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3}
@@ -559,16 +566,16 @@ function buildGameOverHtmlFromState(){
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
- const rankTxt=gameOverState.rank?`RANK ${String(gameOverState.rank).padStart(2,'0')}`:'OUT OF TOP 10';
+ const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
-  const shown=gameOverState.initials.map((ch,i)=>`<span class="${i===gameOverState.cursor?'entryCursor':''}">${ch||'_'}</span>`).join(' ');
-  entryHtml=`<span class="gameOverEntry">ENTER INITIALS ${shown}</span>`;
-  footHtml='<span class="gameOverFoot"><span class="k">Left/Right</span> move, <span class="k">Up/Down</span> change, type letters, <span class="k">Enter</span> to save</span>';
+  const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
+  entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
+  footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}   ${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const board=leaderboardRowsForView();
@@ -897,13 +904,22 @@ fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+function keyboardTargetIsEditable(target){
+ if(!target||typeof target.closest!=='function')return false;
+ return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
+}
 addEventListener('keydown',e=>{
+ const typingTarget=keyboardTargetIsEditable(e.target);
  const wasDown=!!keys[e.code];
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
- if(e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
+ if(typingTarget){
+  if(e.code==='Escape'&&settingsOpen){e.preventDefault();closeSettings();}
+  return;
+ }
  keys[e.code]=1;
  if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
@@ -1597,7 +1613,7 @@ function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
- logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge});
+ logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily});
  if(S.challenge){spawnChallenge();S.bannerTxt='CHALLENGING STAGE';S.bannerSub=`STAGE ${S.stage}`;S.bannerMode='challenge';S.banner=2.6}
  else{spawnFormation();S.bannerTxt='STAGE '+S.stage;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
@@ -1645,9 +1661,10 @@ function start(){
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
+ S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{inv:0,dual:0,captured:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0});
- logEvent('game_start');
+ logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
 }
@@ -1680,19 +1697,20 @@ function loseShip(cause={}){
   timeSinceFighterCaptured:S.lastFighterCapturedT==null?null:+(S.stageClock-S.lastFighterCapturedT).toFixed(3),
   playerHitbox:{w:hp.w,h:hp.h}
  },cause));
- S.shake=.8;
- S.recoverT=Math.max(S.recoverT,S.stage>=4?2.35:1.45);
- S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.55:1.18);
+ S.shake=1.1;
+ S.recoverT=Math.max(S.recoverT,S.stage>=4?2.75:1.75);
+ S.attackGapT=Math.max(S.attackGapT,S.stage>=4?1.9:1.42);
  S.eb.length=0;
- p.inv=2.35;
- p.cd=Math.max(p.cd,0.35);
- ex(p.x,p.y,34,'#86c7ff');
- ex(p.x,p.y,18,'#f4f8ff');
+ p.inv=2.7;
+ p.cd=Math.max(p.cd,0.42);
+ ex(p.x,p.y,42,'#86c7ff');
+ ex(p.x,p.y,28,'#f4f8ff');
+ ex(p.x,p.y,14,'#ff7f9f');
  S.alertTxt='SHIP DESTROYED';
- S.alertT=Math.max(S.alertT,1.05);
+ S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
  if(p.dual)p.dual=0;
- S.lives--;p.spawn=1.18;
+ S.lives--;p.spawn=1.32;
  if(S.lives<0)gameOver();
 }
 
@@ -1729,6 +1747,45 @@ function attractMoveAxis(p){
  if(Math.abs(target.x-p.x)<8)return 0;
  return target.x>p.x?1:-1;
 }
+const HARNESS_PERSONAS={
+ novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
+ advanced:{name:'advanced',moveMul:.72,urgentDx:34,urgentLook:162,deadZone:8,aimBoss:14,aimOther:10,fireChance:.78,challengeFireChance:.76,openShotY:78,diveBias:420,carryBias:240,bossBias:120,activeBias:100,heightBias:1,distanceBias:1},
+ expert:{name:'expert',moveMul:.92,urgentDx:40,urgentLook:188,deadZone:6,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:64,diveBias:560,carryBias:320,bossBias:160,activeBias:120,heightBias:1.08,distanceBias:.9}
+};
+function harnessPersonaCfg(){
+ const key=(window.__auroraHarnessPersona||'').toLowerCase();
+ return HARNESS_PERSONAS[key]||null;
+}
+function harnessTargetScore(e,p,cfg){
+ return (e.dive?cfg.diveBias:0)+(e.carry?cfg.carryBias:0)+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
+}
+function harnessSelectTarget(p,cfg){
+ return S.e.filter(e=>e.hp>0).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||null;
+}
+function harnessMoveAxis(p,cfg){
+ const hp=playerHitbox();
+ const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&p.y-b.y<cfg.urgentLook&&Math.abs(b.x-p.x)<cfg.urgentDx).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
+ if(urgent){
+  const away=urgent.x>=p.x?-1:1;
+  if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
+ }
+ const target=harnessSelectTarget(p,cfg);
+ if(!target)return 0;
+ const dx=target.x-p.x;
+ if(Math.abs(dx)<cfg.deadZone)return 0;
+ return dx>0?1:-1;
+}
+function runHarnessPlayer(dt,p,cfg){
+ if(p.spawn>0||p.captured)return;
+ const hp=playerHitbox();
+ const axis=harnessMoveAxis(p,cfg);
+ p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
+ const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY)).sort((a,b)=>harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg))[0]||harnessSelectTarget(p,cfg);
+ if(!target||p.cd>0||S.pb.length>=bulletsMax())return;
+ const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
+ const fireChance=S.challenge?cfg.challengeFireChance:cfg.fireChance;
+ if(Math.abs(target.x-p.x)<=tol&&randUnit()<=fireChance)shoot();
+}
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
  const hp=playerHitbox();
@@ -1755,30 +1812,79 @@ function diveAccel(stage){
 }
 
 function shoot(){
- const p=S.p;if(p.cd>0||p.spawn>0||p.captured)return;if(S.pb.length>=bulletsMax())return;
+ const p=S.p;
+ const captureWindow=!!(p.captured&&p.capBoss&&p.capBoss.hp>0&&p.capT>.55);
+ if(p.cd>0||p.spawn>0||(!captureWindow&&p.captured))return;
+ if(S.pb.length>=bulletsMax())return;
  p.cd=S.challenge?.095:.24;const y=p.y-40;
  const shotXs=dualShotOffsets().map(off=>p.x+off);
  S.stats.shots+=p.dual?2:1;
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
- logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length});
+ logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length,captureWindow});
  sfx.shot();
 }
 
 function hasCarriedFighter(){
  return S.e.some(e=>e.hp>0&&e.carry);
 }
-function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0}
+function canCapture(){const p=S.p;return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0}
 function capturePlayer(e){if(!canCapture())return;const p=S.p;p.captured=1;p.capBoss=e;p.capT=1.2;e.beam=1;e.beamT=Math.max(.5,e.beamT);S.lastCaptureStartT=S.stageClock;logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));sfx.beam()}
 function finishCapture(){const p=S.p,e=p.capBoss;if(!e||e.hp<=0){p.captured=0;p.capBoss=null;p.inv=1.2;return;}e.carry=1;e.beam=0;e.dive=3;e.vx=0;e.vy=0;e.esc=0;p.captured=0;p.capBoss=null;p.pending=1;p.spawn=1;S.lives--;S.captureCountStage++;S.lastFighterCapturedT=S.stageClock;S.recoverT=Math.max(S.recoverT,1.6);S.attackGapT=Math.max(S.attackGapT,1.35);startSequence('captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');logEvent('fighter_captured',Object.assign({stage:S.stage,stageClock:+S.stageClock.toFixed(3),captureCountStage:S.captureCountStage,livesAfter:Math.max(0,S.lives+1),playerLane:playLane(p.x),timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)},enemyRef(e)));logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});sfx.captureRetreat();if(S.lives<0)gameOver()}
+function breakCapture(reason='boss_destroyed'){
+ const p=S.p,e=p.capBoss;
+ p.captured=0;
+ p.capBoss=null;
+ p.capT=0;
+ p.inv=Math.max(p.inv||0,1.2);
+ p.cd=Math.max(p.cd||0,.16);
+ S.alertTxt='CAPTURE BROKEN';
+ S.alertT=Math.max(S.alertT,1.15);
+ S.bannerTxt='CAPTURE BROKEN';
+ S.bannerSub='FIGHTER ESCAPED';
+ S.bannerMode='captureEscape';
+ S.banner=1.05;
+ ex(p.x,p.y,12,'#d8f2ff');
+ logEvent('capture_escape',{
+  stage:S.stage,
+  reason,
+  playerX:+p.x.toFixed(2),
+  playerY:+p.y.toFixed(2),
+  playerLane:playLane(p.x),
+  bossId:e?.id||null,
+  timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)
+ });
+ sfx.join();
+}
 function activeEscortCount(e){
  if(!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
 
+function specialSquadronTuning(stage=S.stage){
+ if(stage===4){
+  return {
+   escortOffset:42,
+   escortTrackX:5.8,
+   escortTrackY:5.9,
+   escortLift:20
+  };
+ }
+ return {
+  escortOffset:44,
+  escortTrackX:6.2,
+  escortTrackY:6,
+  escortLift:24
+ };
+}
+
 function carriedFighterOffset(e){
  if(!e?.carry)return {x:0,y:18};
- return e.dive ? {x:0,y:-18} : {x:0,y:18};
+ // Docked bosses carry the fighter tucked above/behind them in formation.
+ // When the boss is diving, keep the fighter trailing from the same back-side
+ // anchor so the carried state reads as "behind the boss" rather than hanging
+ // below it.
+ return e.dive ? {x:0,y:-16} : {x:0,y:-18};
 }
 
 function carriedFighterTarget(e){
@@ -1801,38 +1907,48 @@ function destroyCarriedFighter(e){
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
+ S.bannerTxt='CAPTURED FIGHTER';
+ S.bannerSub='DESTROYED';
+ S.bannerMode='captureLoss';
+ S.banner=1.05;
  ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
  sfx.hit();
  return points;
 }
 
 function releaseCapturedFighter(e){
+ const carryPos=carriedFighterTarget(e);
  S.cap={
   mode:'dock',
-  x:e.x,
-  y:e.y,
+  x:carryPos?.x??e.x,
+  y:carryPos?.y??e.y,
   vx:0,
   vy:78,
   t:8,
   spin:0,
   side:S.p.x<PLAY_W/2?1:-1
  };
- logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+e.x.toFixed(2),releaseY:+e.y.toFixed(2)},enemyRef(e)));
+ logEvent('captured_fighter_released',Object.assign({stage:S.stage,releaseX:+S.cap.x.toFixed(2),releaseY:+S.cap.y.toFixed(2)},enemyRef(e)));
  S.alertTxt='FIGHTER RELEASED';
  S.alertT=Math.max(S.alertT,1.5);
+ S.bannerTxt='FIGHTER RELEASED';
+ S.bannerSub='RETURNING TO SHIP';
+ S.bannerMode='rescueReturn';
+ S.banner=1.1;
  sfx.rescue();
 }
 
 function spawnHostileCapturedFighter(e){
  const rogue=makeEnemy('rogue',e.r,e.c,e.tx,e.ty,S.profile);
+ const carryPos=carriedFighterTarget(e);
  rogue.form=1;
  rogue.spawn=0;
  rogue.en=3;
- rogue.x=e.tx;
- rogue.y=e.ty;
- rogue.cool=.55;
- rogue.hitT=.2;
- S.e.push(rogue);
+ rogue.x=carryPos?.x??e.tx;
+ rogue.y=carryPos?.y??e.ty;
+  rogue.cool=.55;
+  rogue.hitT=.2;
+  S.e.push(rogue);
  logEvent('captured_fighter_hostile_spawned',Object.assign({stage:S.stage,hostileId:rogue.id,spawnX:+rogue.x.toFixed(2),spawnY:+rogue.y.toFixed(2)},enemyRef(e)));
  return rogue;
 }
@@ -1893,7 +2009,7 @@ function assignEscorts(boss){
  const squadId=++S.squadSeq;
  const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;boss.squadId=cand.length?squadId:0;
- const escortOffset=S.stage===4?58:50;
+ const { escortOffset }=specialSquadronTuning(S.stage);
  for(const [i,e] of cand.entries()){e.dive=5;e.lead=boss.id;e.off=(i?1:-1)*escortOffset;e.shot=1;e.squadId=squadId;boss.esc++;logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});}
 }
 
@@ -1978,7 +2094,7 @@ function updateEnemy(e,dt,t,T,p){
  if(e.dive===5){
   S.att++;const l=S.e.find(q=>q.id===e.lead&&q.hp>0&&(q.dive===1||q.dive===4||q.dive===2));
   if(!l){e.dive=1;e.low=0;e.lead=null;e.vx=rnd(26,-26);e.vy=S.stage<=2?96:104;return}
-  const escortTrackX=S.stage===4?4.9:6.2,escortTrackY=S.stage===4?4.8:6,escortLift=S.stage===4?34:28;
+  const { escortTrackX, escortTrackY, escortLift }=specialSquadronTuning(S.stage);
   e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');e.shot--;}
   return;
@@ -2005,11 +2121,11 @@ function updateEnemy(e,dt,t,T,p){
  e.x+=(tx-e.x)*Math.min(1,dt*6);e.y+=(ty-e.y)*Math.min(1,dt*6);e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
- if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.1)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
+ if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
-  if(e.t==='boss'&&canCapture()&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
-  else{const steer=(S.stage===2?.48:S.stage===4?.31:S.stage>=5?.48:.56)*fm.steer,jitter=(S.stage===2?28:S.stage===4?20:S.stage>=5?32:38)*fm.jitter;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(S.stage===4?14:S.stage>=5?20:S.stage===2?10:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
-  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?.94:1.18)+rnd(.12,.03);
+  if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){e.dive=4;e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);e.targetY=138;e.vx=0;e.vy=S.stage<=2?116:128;e.shot=0;e.esc=0;logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});}
+  else{const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:.56)*fm.steer,jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:38)*fm.jitter;e.dive=1;e.low=0;e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(S.stage===4?14:S.stage>=5?20:S.stage===2?8:12);e.shot=e.t==='boss'?2:1;logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});if(e.t==='boss')assignEscorts(e)}
+  if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
  }
 }
 
@@ -2062,14 +2178,26 @@ function update(dt){
   }else S.postChallengeT-=dt;
   return;
  }
- if(p.captured&&p.capBoss&&p.capBoss.hp>0){const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;p.capT-=dt;p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);p.y+=(capY-p.y)*Math.min(1,dt*3.9);if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();}
- else if(p.captured){p.captured=0;p.capBoss=null;p.inv=1.2;}
+ if(p.captured&&p.capBoss&&p.capBoss.hp>0){
+  const capY=p.capBoss.y+26+Math.sin(performance.now()/140)*2.5;
+  p.capT-=dt;
+  p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);
+  p.y+=(capY-p.y)*Math.min(1,dt*3.9);
+  if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();
+ }else if(p.captured){
+  breakCapture('boss_destroyed');
+ }
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom}
+ const harnessPersona=harnessPersonaCfg();
+ const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
+ const manualFire=!!keys.Space;
  if(p.spawn<=0&&!p.captured){
   if(S.attract)runAttractPlayer(dt,p);
-  else{const hp=playerHitbox();p.x=cl(p.x+(((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0))*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
+  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+  else{const hp=playerHitbox();p.x=cl(p.x+manualAxis*p.s*dt,hp.w+2,PLAY_W-hp.w-2);}
  }
- if(!S.attract&&keys.Space)shoot();
+ if(!S.attract&&!harnessPersona&&keys.Space)shoot();
+ else if(!S.attract&&harnessPersona&&manualFire)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
  S.liveCount=alive.length;
@@ -2288,13 +2416,6 @@ function drawEnemy(e){
  else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
  else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
  else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
- const damaged=e.t==='boss'&&e.max>1&&e.hp===1;
- if(damaged){
-  ctx.fillStyle='rgba(255,244,168,.28)';
-  ctx.fillRect(-10,-8,20,4);
-  ctx.fillStyle='rgba(255,86,180,.42)';
-  ctx.fillRect(-2,-4,4,10);
- }
  if(e.hitT>0){
   ctx.globalAlpha=Math.min(.9,e.hitT/.34);
   ctx.fillStyle=e.t==='boss'?'rgba(255,248,196,.86)':'rgba(255,255,255,.72)';
@@ -2467,6 +2588,9 @@ if(!toolsVisible)closeSettings();
  if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
  else if(S.bannerMode==='stageTransition')msg.innerHTML=`<span class="splashTitle">GET READY</span><span class="splashScore">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
  else if(S.bannerMode==='captureBeat')msg.innerHTML=`<span class="splashTitle">FIGHTER CAPTURED</span><span class="splashSub">BOSS RETREAT</span>`;
+ else if(S.bannerMode==='captureEscape')msg.innerHTML=`<span class="splashTitle">CAPTURE BROKEN</span><span class="splashSub">FIGHTER ESCAPED</span>`;
+ else if(S.bannerMode==='captureLoss')msg.innerHTML=`<span class="splashTitle">CAPTURED FIGHTER</span><span class="splashSub">DESTROYED</span>`;
+ else if(S.bannerMode==='rescueReturn')msg.innerHTML=`<span class="splashTitle">FIGHTER RELEASED</span><span class="splashSub">RETURNING TO SHIP</span>`;
  else if(S.bannerMode==='rescueBeat')msg.innerHTML=`<span class="splashTitle">DUAL FIGHTER</span><span class="splashSub">JOINED</span>`;
  else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
   else if(S.bannerMode==='challengeResult'){
@@ -2488,14 +2612,15 @@ window.__galagaHarness__={
    localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
    syncRecordUi();
   }
-  if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
-   testStage.value=cl(+cfg.stage||1,1,99)|0;
-   testShips.value=cl(+cfg.ships||3,1,9)|0;
-   testChallenge.checked=!!cfg.challenge;
-   saveTestCfg();
-  }
-  if(!started)start();
- },
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined){
+  testStage.value=cl(+cfg.stage||1,1,99)|0;
+  testShips.value=cl(+cfg.ships||3,1,9)|0;
+  testChallenge.checked=!!cfg.challenge;
+  saveTestCfg();
+ }
+ window.__auroraHarnessPersona=(cfg.persona||'').toLowerCase();
+ if(!started)start();
+},
  stop(label='harness'){
   logEvent('harness_stop',{label});
   logSnapshot('harness_stop');
@@ -2506,7 +2631,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
  spawnPlayerBullet(cfg={}){
   const x=cl(+cfg.x||S.p.x,2,PLAY_W-2),y=+cfg.y||Math.max(20,S.p.y-40),v=+cfg.v||560;
   S.pb.push({x,y,v});
@@ -2610,8 +2735,22 @@ window.__galagaHarness__={
   spare.hp=1;spare.max=1;spare.form=1;spare.dive=0;spare.carry=0;spare.beam=0;spare.beamT=0;spare.low=0;spare.x=spare.tx;spare.y=spare.ty;
   boss.hp=1;boss.max=2;boss.form=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.dive=4;boss.shot=0;
   boss.targetX=p.x;boss.targetY=138;boss.vx=0;boss.vy=S.stage<=2?116:124;boss.x=cl(+cfg.bossX||p.x,26,PLAY_W-26);boss.y=+cfg.bossY||70;
-  logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage,keepAlive:extra.length});
-  logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
+ logEvent('harness_natural_capture_cycle_setup',{boss:boss.id,spare:spare.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage,keepAlive:extra.length});
+ logEnemyAttackStart(boss,'capture',{targetX:+boss.targetX.toFixed(2),targetY:boss.targetY,scripted:0,harness:1,naturalCapture:1});
+ return true;
+},
+ setupCaptureEscapeTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=+cfg.playerY||186;p.dual=0;p.captured=1;p.pending=0;p.spawn=0;p.capBoss=boss;p.capT=+cfg.capT||0.95;p.inv=0;p.cd=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||4);S.stageClock=0;S.challenge=0;
+  S.lastCaptureStartT=0;S.lastFighterCapturedT=null;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=1;boss.max=2;boss.form=1;boss.dive=2;boss.carry=0;boss.beam=1;boss.beamT=+cfg.beamT||1.4;boss.low=0;boss.esc=0;boss.squadId=0;boss.shot=0;
+  boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||110;boss.vx=0;boss.vy=0;
+  logEvent('harness_capture_escape_setup',{boss:boss.id,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),capT:+p.capT.toFixed(2),stage:S.stage});
+  logEnemyAttackStart(boss,'capture',{targetX:+boss.x.toFixed(2),targetY:+(boss.y+26).toFixed(2),scripted:0,harness:1,captureEscape:1});
   return true;
  },
  setupCarriedBossFormationTest(cfg={}){
@@ -2672,11 +2811,12 @@ window.__galagaHarness__={
   if(escorts.length<2)return false;
   p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
   S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=4;S.stageClock=0;
-  const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
-  for(const e of S.e)if(!keep.has(e.id))e.hp=0;
+ const keep=new Set([boss.id,...escorts.map(e=>e.id)]);
+ for(const e of S.e)if(!keep.has(e.id))e.hp=0;
   const squadId=++S.squadSeq;
+  const tuning=typeof specialSquadronTuning==='function' ? specialSquadronTuning(4) : { escortOffset:18, escortLift:8 };
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=1;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=2;boss.squadId=squadId;boss.x=p.x;boss.y=112;boss.vx=0;boss.vy=42;boss.shot=0;
-  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-18:18;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-8;});
+  escorts.forEach((e,i)=>{e.hp=1;e.max=1;e.form=1;e.dive=5;e.lead=boss.id;e.off=i===0?-tuning.escortOffset:tuning.escortOffset;e.shot=0;e.carry=0;e.beam=0;e.beamT=0;e.low=0;e.squadId=squadId;e.x=boss.x+e.off;e.y=boss.y-tuning.escortLift;});
   logEvent('harness_squadron_bonus_setup',{boss:boss.id,escorts:escorts.map(e=>e.id),playerX:+p.x.toFixed(2)});
   logEnemyAttackStart(boss,'dive',{targetX:+p.x.toFixed(2),scripted:0,harness:1,squadron:1});
   for(const e of escorts)logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off,harness:1,squadron:1});
