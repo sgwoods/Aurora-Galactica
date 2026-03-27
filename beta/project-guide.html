@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.231.sha.09c386e.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.234.sha.bb075d4.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -766,6 +766,12 @@
   
 
     <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/HOME_MACHINE_SETUP.md">Home Machine Setup</a>
+      <p>How to clone the dev repo on a second machine, stay in sync cleanly, and publish from either workstation.</p>
+    </article>
+  
+
+    <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_POLICY.md">Release Policy</a>
       <p>Versioning and release recommendation rules.</p>
     </article>
@@ -854,10 +860,10 @@
 <h3>Run Locally (macOS / Chrome)</h3>
 <ol><li>Open Terminal in this folder:</li></ol>
 <pre><code data-lang="bash">   cd /Users/stevenwoods/Documents/Codex-Test1</code></pre>
-<ol><li>Build the current production output:</li></ol>
+<ol><li>Build the current local dev output:</li></ol>
 <pre><code data-lang="bash">   npm run build</code></pre>
 <ol><li>Start a local server against the generated build:</li></ol>
-<pre><code data-lang="bash">   python3 -m http.server 8000 --directory dist/production</code></pre>
+<pre><code data-lang="bash">   python3 -m http.server 8000 --directory dist/dev</code></pre>
 <ol><li>Open:</li></ol>
 <ul><li><code>http://localhost:8000</code></li></ul>
 <h3>Controls</h3>
@@ -865,9 +871,9 @@
 <h3>What Is Implemented</h3>
 <ul><li>Fixed arcade playfield with integer scaling and fullscreen letterboxing</li><li>Stage progression with challenge stages</li><li>Stage 1 scripted opening timing for consistency</li><li>Boss capture beam, ship capture, rescue, and dual-fighter fire mode</li><li>Enemy dive behavior and tuned missile pacing/spread</li><li>Pixel-art sprite rendering and starfield</li><li>Synthesized arcade-style SFX</li><li>Local high score persistence via browser storage</li></ul>
 <h3>Development</h3>
-<ul><li>Editable source files live in:<ul><li><code>src/index.template.html</code></li><li><code>src/styles.css</code></li><li><code>src/js/00-boot.js</code></li><li><code>src/js/10-gameplay.js</code></li><li><code>src/js/20-render.js</code></li><li><code>src/js/90-harness.js</code></li></ul></li><li>Source orientation guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>Contributor guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md</code></li></ul></li><li>Architecture overview:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>Reference baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md</code></li></ul></li><li>Served artifact:<ul><li><code>dist/production/index.html</code></li></ul></li><li>Build the served file from source with:</li></ul>
+<ul><li>Editable source files live in:<ul><li><code>src/index.template.html</code></li><li><code>src/styles.css</code></li><li><code>src/js/00-boot.js</code></li><li><code>src/js/10-gameplay.js</code></li><li><code>src/js/20-render.js</code></li><li><code>src/js/90-harness.js</code></li></ul></li><li>Source orientation guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>Contributor guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md</code></li></ul></li><li>Home machine setup:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md</code></li></ul></li><li>Architecture overview:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>Reference baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md</code></li></ul></li><li>Local dev artifact:<ul><li><code>dist/dev/index.html</code></li></ul></li><li>Build the served file from source with:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
-<ul><li>Build outputs are generated into:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul></li><li>Do not hand-edit generated files under <code>dist/</code>; treat them as disposable build output.</li><li>Start the local artifact review viewer with:</li></ul>
+<ul><li>Build outputs are generated into:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul></li><li>Do not hand-edit generated files under <code>dist/</code>; treat them as disposable build output.</li><li>Start the local artifact review viewer with:</li></ul>
 <pre><code data-lang="bash">  npm run log-viewer</code></pre>
 <p>Then open:</p>
 <ul><li><code>http://127.0.0.1:4311/</code></li></ul>
@@ -880,10 +886,13 @@
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <p>This creates or refreshes:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul>
-<p>The production build lives in:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul>
+<p>from the current dev build in:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li></ul>
 <p>Publish the generated <code>dist/beta/</code> snapshot into <code>https://github.com/sgwoods/Aurora-Galactica</code> when you want the hosted <code>https://sgwoods.github.io/Aurora-Galactica/beta/</code> lane to move.</p>
-<ul><li>Sync the separate public repo from the latest build metadata with:</li></ul>
+<ul><li>Promote the current dev build into the stable production artifact with:</li></ul>
+<pre><code data-lang="bash">  npm run promote:production</code></pre>
+<p>This creates or refreshes:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul><ul><li>Sync the separate public repo from the latest build metadata with:</li></ul>
 <pre><code data-lang="bash">  npm run sync:public</code></pre>
 <p>This updates the canonical Aurora public/status files:</p>
 <ul><li><code>/Users/stevenwoods/GitPages/public/aurora-galactica.html</code></li><li><code>/Users/stevenwoods/GitPages/public/data/projects/aurora-galactica.json</code></li></ul>
@@ -892,18 +901,18 @@
 <p>It does not update <code>/Users/stevenwoods/GitPages/public/index.html</code> directly.</p>
 <ul><li>Verify that the public repo content reflects the current build metadata with:</li></ul>
 <pre><code data-lang="bash">  npm run verify:public</code></pre>
-<ul><li>Build script:<ul><li><code>tools/build/build-index.js</code></li></ul></li><li>Public-pages sync script:<ul><li><code>tools/build/sync-public-pages.js</code></li></ul></li><li>Public-pages verification script:<ul><li><code>tools/build/verify-public-sync.js</code></li></ul></li><li>Build metadata output:<ul><li><code>dist/production/build-info.json</code></li></ul></li><li>Release notes source:<ul><li><code>release-notes.json</code></li></ul></li><li>Release/versioning policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>Product roadmap:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li></ul></li><li>Project guide source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li></ul></li><li>Generated project guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html</code></li></ul></li><li>This page is regenerated during <code>npm run build</code> from the guide config and the maintained docs above.</li></ul>
+<ul><li>Build script:<ul><li><code>tools/build/build-index.js</code></li></ul></li><li>Public-pages sync script:<ul><li><code>tools/build/sync-public-pages.js</code></li></ul></li><li>Public-pages verification script:<ul><li><code>tools/build/verify-public-sync.js</code></li></ul></li><li>Local dev build metadata output:<ul><li><code>dist/dev/build-info.json</code></li></ul></li><li>Release notes source:<ul><li><code>release-notes.json</code></li></ul></li><li>Release/versioning policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>Product roadmap:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li></ul></li><li>Project guide source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li></ul></li><li>Generated local dev project guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html</code></li></ul></li><li>This page is regenerated during <code>npm run build</code> from the guide config and the maintained docs above.</li></ul>
 <h3>End-To-End Workflow</h3>
 <h4>1. Develop In Source</h4>
 <ul><li>Make gameplay, UI, harness, or documentation changes in:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/</code></li><li>maintained docs such as:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>structured release/project data such as:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li></ul></li></ul>
 <h4>2. Build Local Outputs</h4>
 <ul><li>Run:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
-<ul><li>This regenerates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/project-guide.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/release-dashboard.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li></ul>
+<ul><li>This regenerates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-dashboard.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li></ul>
 <h4>3. Test Against The Built App</h4>
-<ul><li>Manual local play should use the generated production build:</li></ul>
-<pre><code data-lang="bash">  python3 -m http.server 8000 --directory dist/production</code></pre>
-<ul><li>Harness/browser checks also run against <code>dist/production/</code>, not raw source.</li><li>The log viewer is separate and reads run artifacts from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li></ul>
+<ul><li>Manual local play should use the generated dev build:</li></ul>
+<pre><code data-lang="bash">  python3 -m http.server 8000 --directory dist/dev</code></pre>
+<ul><li>Harness/browser checks also run against <code>dist/dev/</code>, not raw source.</li><li>The log viewer is separate and reads run artifacts from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li></ul>
 <h4>4. Promote A Beta Snapshot</h4>
 <ul><li>When the current build is worth external testing, run:</li></ul>
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
@@ -917,6 +926,8 @@
 <p>into the <code>/beta/</code> folder, commits, and pushes.</p>
 <ul><li>Then GitHub Pages updates:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
 <h4>6. Publish Hosted Production</h4>
+<ul><li>First promote the approved dev build into the stable production artifact:</li></ul>
+<pre><code data-lang="bash">  npm run promote:production</code></pre>
 <ul><li>Preflight:</li></ul>
 <pre><code data-lang="bash">  npm run publish:check:production</code></pre>
 <ul><li>Preferred:</li></ul>
@@ -992,6 +1003,100 @@
 <ul><li>Both <code>Feature Request</code> and <code>Bug Report</code> submissions post to FormSubmit, which forwards them to <code>default-dimiglyd88@inbox.modem.dev</code></li><li>If FormSubmit cannot send directly, the game falls back to opening a prefilled <code>mailto:</code> draft</li><li>The submission body includes the report plus game metadata (build, timestamp, stage, score, lives, and user agent)</li></ul>
 <p>One-time setup:</p>
 <ul><li>FormSubmit is free and does not require an account</li><li>The first submission to a destination email triggers a confirmation email from FormSubmit that must be clicked once for that exact inbox address</li></ul>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="home-machine-setup-doc">
+      <div class="sectionHeader">
+        <h2>Home Machine Setup Source</h2>
+        <p>Second-machine setup, sync strategy, and publish workflow are documented in the dedicated home-machine guide.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>HOME_MACHINE_SETUP.md</code> during build.</p>
+        <div class="markdown">
+          <p>This guide is the recommended way to work on Aurora Galactica from a second machine while staying in sync cleanly with the main workstation.</p>
+<h3>Goal</h3>
+<p>Use <code>Codex-Test1</code> as the only development repo on both machines.</p>
+<ul><li><code>Codex-Test1</code><ul><li>source of truth for gameplay, docs, harnesses, and release tooling</li></ul></li><li><code>Aurora-Galactica</code><ul><li>public release host only</li><li>do not use it as the normal day-to-day development repo</li></ul></li></ul>
+<h3>Prerequisites</h3>
+<p>Install on the home machine:</p>
+<ul><li><code>git</code></li><li><code>node</code> and <code>npm</code></li><li>Google Chrome</li><li>GitHub CLI <code>gh</code></li></ul>
+<p>Optional but useful:</p>
+<ul><li>Python 3 for a simple local static server</li></ul>
+<h3>First-Time Setup</h3>
+<ol><li>Clone the development repo:</li></ol>
+<pre><code data-lang="bash">   git clone https://github.com/sgwoods/Codex-Test1.git
+   cd Codex-Test1</code></pre>
+<ol><li>Install dependencies:</li></ol>
+<pre><code data-lang="bash">   npm install</code></pre>
+<ol><li>Authenticate GitHub CLI if you plan to publish beta or production from this machine:</li></ol>
+<pre><code data-lang="bash">   gh auth login</code></pre>
+<h3>Local Development Loop</h3>
+<ol><li>Start each session by syncing:</li></ol>
+<pre><code data-lang="bash">   git pull --rebase origin main
+   npm install</code></pre>
+<ol><li>Build the current local dev output:</li></ol>
+<pre><code data-lang="bash">   npm run build</code></pre>
+<ol><li>Run the game locally:</li></ol>
+<pre><code data-lang="bash">   python3 -m http.server 8000 --directory dist/dev</code></pre>
+<ol><li>Open:</li></ol>
+<ul><li><code>http://localhost:8000</code></li></ul>
+<h3>Local Tools</h3>
+<h4>Harness</h4>
+<p>Run a scenario:</p>
+<pre><code data-lang="bash">npm run harness -- --scenario stage1-opening</code></pre>
+<p>Run a batch:</p>
+<pre><code data-lang="bash">npm run harness:batch -- --profile quick</code></pre>
+<h4>Log Viewer</h4>
+<p>Start:</p>
+<pre><code data-lang="bash">npm run log-viewer</code></pre>
+<p>Open:</p>
+<ul><li><code>http://127.0.0.1:4311/</code></li></ul>
+<p>The viewer expects artifacts under:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul>
+<p>On the home machine that means the same repo-relative folder inside your local clone.</p>
+<h3>Staying In Sync Across Machines</h3>
+<p>The simplest rule is:</p>
+<ul><li>do not leave meaningful unpushed work on both machines at the same time</li></ul>
+<p>Recommended pattern:</p>
+<ol><li>Pull before starting work:</li></ol>
+<pre><code data-lang="bash">   git pull --rebase origin main</code></pre>
+<ol><li>Make a small unit of change</li><li>Build and test</li><li>Commit and push:</li></ol>
+<pre><code data-lang="bash">   git add ...
+   git commit -m &quot;...&quot;
+   git push origin main</code></pre>
+<ol><li>On the other machine, pull again before continuing</li></ol>
+<h3>Branching</h3>
+<p>For larger changes:</p>
+<pre><code data-lang="bash">git checkout -b codex/my-feature
+git push -u origin codex/my-feature</code></pre>
+<p>Recommended use:</p>
+<ul><li>small safe changes:<ul><li><code>main</code></li></ul></li><li>bigger or riskier changes:<ul><li><code>codex/...</code></li></ul></li></ul>
+<h3>Publishing Beta</h3>
+<p>When a build is ready for the hosted beta lane:</p>
+<pre><code data-lang="bash">npm run build
+npm run promote:beta
+npm run publish:check:beta
+npm run publish:beta</code></pre>
+<p>This publishes:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul>
+<p>into the public Aurora beta surface.</p>
+<h3>Publishing Production</h3>
+<p>When a build is ready for the hosted production lane:</p>
+<pre><code data-lang="bash">npm run build
+npm run promote:production
+npm run publish:check:production
+npm run publish:production</code></pre>
+<p>This publishes:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul>
+<p>into the public Aurora production surface.</p>
+<h3>Important Defaults</h3>
+<ul><li>edit source under <code>src/</code></li><li>do not hand-edit <code>dist/</code></li><li>use <code>Codex-Test1</code> for development</li><li>use <code>Aurora-Galactica</code> only as the release target</li></ul>
+<h3>Practical Recommendation</h3>
+<p>If you want the least-friction two-machine workflow:</p>
+<ol><li>keep both machines cloned to <code>Codex-Test1</code></li><li>pull before every session</li><li>push before switching machines</li><li>publish from either machine only after the preflight passes</li></ol>
         </div>
       </div>
     </section>
@@ -1224,10 +1329,10 @@
 <h4>Source Files</h4>
 <ul><li>HTML shell:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html</code></li></ul></li><li>Styles:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/styles.css</code></li></ul></li><li>Boot / metadata / audio / UI / logging:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>Gameplay / stage flow / scoring / capture / enemy logic:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Rendering / HUD / overlays / sprites:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Harness hooks:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
 <h4>Generated Output</h4>
-<ul><li>Served file:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li></ul></li><li>Build metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li><li>Promoted beta snapshot:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
+<ul><li>Local dev build:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li></ul></li><li>Local dev build metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li><li>Stable production artifact:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li></ul></li><li>Stable production build metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li><li>Promoted beta snapshot:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
 <h3>Build / Deploy Flow</h3>
 <h4>Local Build</h4>
-<ul><li>Build script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li><li>Generates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li></ul>
+<ul><li>Build script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li><li>Generates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li><li>Production promotion:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js</code></li></ul></li><li>Produces:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li></ul>
 <h4>Pages Deploy</h4>
 <ul><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml</code></li></ul></li><li>CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate <code>Aurora-Galactica</code> repo.</li><li>In practice:<ul><li><code>Codex-Test1</code> produces generated artifacts in <code>dist/</code></li><li><code>Aurora-Galactica</code> is the public artifact host for:<ul><li><code>/</code></li><li><code>/beta/</code></li></ul></li><li>lane publishing is now scripted through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>publish readiness is checked through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li></ul></li></ul>
 <h4>Public Project Pages Sync</h4>
@@ -1279,8 +1384,9 @@
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code><ul><li>harness-only hooks exposed on <code>window.__galagaHarness__</code></li><li>deterministic setup helpers for scenarios and regression checks</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/</code><ul><li>local artifact review app</li><li><code>server.js</code> indexes run folders under <code>harness-artifacts/</code></li><li><code>app.js</code> synchronizes repaired videos, event streams, clips, and issue drafting</li><li>expects a run folder with <code>summary.json</code> plus neighboring session/video artifacts</li></ul></li></ul>
 <h3>Build / Deploy</h3>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code><ul><li>assembles source files into <code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li>writes <code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li></ul>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js</code><ul><li>copies the current production build into <code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li><li>rewrites build identity there for the public beta lane</li></ul></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code><ul><li>assembles source files into <code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li>writes <code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js</code><ul><li>copies the current dev build into <code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li><li>rewrites build identity there for the public beta lane</li></ul></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js</code><ul><li>copies the approved dev build into <code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li><li>rewrites build identity there for the stable production lane</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code><ul><li>publishes either <code>dist/beta/</code> or <code>dist/production/</code> into <code>sgwoods/Aurora-Galactica</code></li><li>automates the clone/copy/commit/push release step</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code><ul><li>verifies the repo is clean and the chosen lane was built from the current <code>HEAD</code></li><li>fails early if required generated files are missing or stale</li></ul></li></ul>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code><ul><li>exports project-status content from the current production build into the separate <code>sgwoods/public</code> repo</li><li>does not publish the playable Aurora build</li></ul></li></ul>
@@ -1413,6 +1519,8 @@
 <h3>Building And Running</h3>
 <ul><li>Build the game:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
+<ul><li>Promote the current dev build into the stable production artifact:</li></ul>
+<pre><code data-lang="bash">  npm run promote:production</code></pre>
 <ul><li>Promote the current built output into a beta snapshot:</li></ul>
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <ul><li>Publish a generated lane into the public Aurora repo:</li></ul>
@@ -1420,7 +1528,7 @@
   npm run publish:beta
   npm run publish:check:production
   npm run publish:production</code></pre>
-<ul><li>The main local playable build is generated at:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li></ul></li><li>The beta-ready snapshot is generated at:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li><li>Replay a saved gameplay session:</li></ul>
+<ul><li>The main local playable build is generated at:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li></ul></li><li>The beta-ready snapshot is generated at:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li><li>The stable production artifact is generated at:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul></li><li>Replay a saved gameplay session:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --session /absolute/path/to/neo-galaga-session.json</code></pre>
 <ul><li>Run a built-in scenario:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --scenario stage3-challenge</code></pre>
@@ -1467,14 +1575,14 @@
 <h3>Beta Promotion Workflow</h3>
 <ol><li>Update source content in <code>Codex-Test1</code>:</li></ol>
 <ul><li>gameplay/UI under <code>src/</code></li><li>maintained docs and release metadata under the repo root</li></ul>
-<ol><li>Build the current production artifacts:</li></ol>
+<ol><li>Build the current dev artifacts:</li></ol>
 <ul><li><code>npm run build</code></li></ul>
-<ol><li>Test the generated production build in:</li></ol>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul>
-<ol><li>Promote the current production build into the beta lane:</li></ol>
+<ol><li>Test the generated dev build in:</li></ol>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li></ul>
+<ol><li>Promote the current dev build into the beta lane:</li></ol>
 <ul><li><code>npm run promote:beta</code></li></ul>
 <ol><li>Review the generated output in:</li></ol>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul>
 <ol><li>Run the beta preflight:</li></ol>
 <ul><li><code>npm run publish:check:beta</code></li></ul>
 <ol><li>Publish the promoted beta snapshot with:</li></ol>
@@ -1484,8 +1592,10 @@
 <p>serves the promoted checkpoint</p>
 <p>The beta lane is intentionally a snapshot of selected generated artifacts under <code>dist/</code>, not a separate branch or a second build pipeline. <code>Codex-Test1</code> remains the engineering source of truth; <code>Aurora-Galactica</code> is the public release surface for both production and beta.</p>
 <h3>Production Publish Workflow</h3>
-<ol><li>Build and validate the current production output:</li></ol>
+<ol><li>Build and validate the current dev output:</li></ol>
 <ul><li><code>npm run build</code></li><li>plus whatever harness/manual checks are appropriate for the release</li></ul>
+<ol><li>Promote the approved dev build into the stable production artifact:</li></ol>
+<ul><li><code>npm run promote:production</code></li></ul>
 <ol><li>Run the production preflight:</li></ol>
 <ul><li><code>npm run publish:check:production</code></li></ul>
 <ol><li>Publish the generated production surface with:</li></ol>
@@ -1494,8 +1604,8 @@
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul>
 <p>serves the promoted production build</p>
 <h3>Public Project Status Sync Workflow</h3>
-<ol><li>Build the current production output:</li></ol>
-<ul><li><code>npm run build</code></li></ul>
+<ol><li>Build the current dev output and promote the stable production artifact:</li></ol>
+<ul><li><code>npm run build</code></li><li><code>npm run promote:production</code></li></ul>
 <ol><li>Run:</li></ol>
 <ul><li><code>npm run sync:public</code></li></ul>
 <ol><li>This updates the separate <code>sgwoods/public</code> project-summary pages and manifests from:</li></ol>
@@ -1566,6 +1676,9 @@
     <li><a href="#readme-doc">README Source</a></li>
   
 
+    <li><a href="#home-machine-setup-doc">Home Machine Setup Source</a></li>
+  
+
     <li><a href="#plan-doc">Plan Source</a></li>
   
 
@@ -1589,7 +1702,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.231.sha.09c386e.beta
+          Build: 0.5.0-beta.1+build.234.sha.bb075d4.beta
         </p>
       </aside>
     </main>
