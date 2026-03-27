@@ -89,6 +89,12 @@ canvas{display:block;width:100vw;height:100vh}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
+#controlPanel{border-top:1px solid rgba(136,245,255,.12);padding-top:10px;margin-top:10px}
+#controlPanel h4{margin:0 0 8px;font-size:13px;color:#e8f3ff;letter-spacing:.05em}
+#controlRow{display:flex;align-items:center;gap:8px}
+#controlRow input{width:auto;transform:translateY(1px)}
+#controlRow label{margin:0;font-size:12px;color:#d9eeff}
+#controlHint{margin-top:8px;font-size:11px;color:#a9cfe6;line-height:1.3}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
 #settingsChannel{color:rgba(126,242,255,.82);text-transform:uppercase}
@@ -200,11 +206,19 @@ canvas{display:block;width:100vw;height:100vh}
     </div>
     <div id="testHint">Applies on next game start only.</div>
   </div>
+  <div id="controlPanel">
+    <h4>Controls</h4>
+    <div id="controlRow">
+      <input id="switchHand" type="checkbox" />
+      <label for="switchHand">Switch Hand</label>
+    </div>
+    <div id="controlHint">Standard uses arrows. Switched uses Fn/Ctrl for left and Option for right.</div>
+  </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.230.sha.5afa11a.beta</span>
-    <span id="settingsRelease">Mar 27 2026, 10:42 AM EDT</span>
-    <span id="settingsState">beta@5afa11a clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.231.sha.09c386e.beta</span>
+    <span id="settingsRelease">Mar 27 2026, 11:08 AM EDT</span>
+    <span id="settingsState">beta@09c386e clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -293,8 +307,8 @@ canvas{display:block;width:100vw;height:100vh}
   <div id="buildStamp">
     <span id="pilotStamp" hidden>Pilot ---</span>
     <span id="buildStampChannel">Lane production beta</span>
-    <span id="buildStampVersion">Version 0.5.0-beta.1+build.230.sha.5afa11a.beta</span>
-    <span id="buildStampRelease">Mar 27 2026, 10:42 AM EDT</span>
+    <span id="buildStampVersion">Version 0.5.0-beta.1+build.231.sha.09c386e.beta</span>
+    <span id="buildStampRelease">Mar 27 2026, 11:08 AM EDT</span>
   </div>
 </div>
 <script>
@@ -335,6 +349,7 @@ const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
+const controlPanel=document.getElementById('controlPanel'),switchHand=document.getElementById('switchHand');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -346,6 +361,7 @@ const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
+const HAND_SWITCH_PREF_KEY=`${STORAGE_PREFIX}SwitchHand`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
@@ -353,8 +369,10 @@ const LEGACY_STORAGE_KEYS={
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
+ [HAND_SWITCH_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}SwitchHand`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
 };
+let switchHandMode=readPref(HAND_SWITCH_PREF_KEY)==='1';
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -390,7 +408,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.230.sha.5afa11a.beta',commit:'5afa11a69bc9cdd3cdd3a15fe6946b9aa71f3fe7',branch:'beta',dirty:false,released:'Mar 27 2026, 10:42 AM EDT',state:'beta@5afa11a clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.231.sha.09c386e.beta',commit:'09c386ead5e8f71aee6e9ea69a8cf59dc2240751',branch:'beta',dirty:false,released:'Mar 27 2026, 11:08 AM EDT',state:'beta@09c386e clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -810,6 +828,28 @@ function loadTestCfg(){
   return{stage:cl(+raw.stage||1,1,99)|0,ships:cl(+raw.ships||3,1,9)|0,challenge:!!raw.challenge};
  }catch{return{stage:1,ships:3,challenge:0}}
 }
+function movementLeftCodes(){
+ return switchHandMode?['Fn','ControlLeft']:['ArrowLeft','KeyA'];
+}
+function movementRightCodes(){
+ return switchHandMode?['AltLeft']:['ArrowRight','KeyD'];
+}
+function movementControlCodes(){
+ return [...movementLeftCodes(),...movementRightCodes()];
+}
+function controlMoveHelpHtml(){
+ if(switchHandMode)return `<span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+}
+function syncControlUi(){
+ if(switchHand)switchHand.checked=!!switchHandMode;
+}
+function setSwitchHandMode(next,opts={}){
+ switchHandMode=!!next;
+ writePref(HAND_SWITCH_PREF_KEY,switchHandMode?'1':'0');
+ syncControlUi();
+ if(!opts.silent)showToast(switchHandMode?'Switched movement to Fn/Ctrl + Option':'Switched movement to arrows');
+}
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
@@ -825,6 +865,7 @@ function syncSettingsUi(){
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
+ syncControlUi();
  syncSettingsUi();
 }
 function closeSettings(){
@@ -1066,6 +1107,7 @@ recordBtn.addEventListener('click',()=>{
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
+if(switchHand)switchHand.addEventListener('change',()=>setSwitchHandMode(!!switchHand.checked,{silent:0}));
 fbCancel.addEventListener('click',()=>closeFeedback());
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -1091,7 +1133,7 @@ addEventListener('keydown',e=>{
  }
  keys[e.code]=1;
  if(!wasDown)keyState[e.code]={downAt:now,upAt:0};
- if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
+ if([...movementControlCodes(),'Space'].includes(e.code))e.preventDefault();
  if(e.code==='KeyF')toggleFullscreen();
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
  if(e.code==='KeyT'){
@@ -1184,6 +1226,7 @@ addEventListener('pointerdown',e=>{
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
  closeSettings();
 });
+syncTestUi();
 
 // Source: src/js/05-supabase.js
 // Shared leaderboard and Supabase client integration.
@@ -2539,7 +2582,8 @@ function update(dt){
  }
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom;p.vx=0}
  const harnessPersona=harnessPersonaCfg();
- const manualAxis=((keys.ArrowRight||keys.KeyD)?1:0)-((keys.ArrowLeft||keys.KeyA)?1:0);
+ const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
+ const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
  logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
  if(p.spawn<=0&&!p.captured&&!p.returning){
@@ -2547,8 +2591,8 @@ function update(dt){
  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
-   const leftHeld=keyHeldMs('ArrowLeft','KeyA');
-   const rightHeld=keyHeldMs('ArrowRight','KeyD');
+   const leftHeld=keyHeldMs(...leftCodes);
+   const rightHeld=keyHeldMs(...rightCodes);
    const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
    const precisionWindow=p.manualTapWindow*1000;
    const reverseWindow=p.manualReverseWindow*1000;
@@ -3014,7 +3058,7 @@ if(!toolsVisible)closeSettings();
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
   else if(gameOverHtml)msg.innerHTML=gameOverHtml;
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
-  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
+  else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
  }
  else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
  else if(S.alertT>0)msg.textContent=S.alertTxt;
