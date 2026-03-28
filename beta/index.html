@@ -345,6 +345,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <h3>Developer Tools</h3>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
+    <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
@@ -362,9 +363,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.247.sha.4253ab4.beta</span>
-    <span id="settingsRelease">Mar 28 2026, 11:12 AM EDT</span>
-    <span id="settingsState">beta@4253ab4 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.250.sha.28ef6e7.beta</span>
+    <span id="settingsRelease">Mar 28 2026, 11:33 AM EDT</span>
+    <span id="settingsState">beta@28ef6e7 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -391,7 +392,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <div class="controlCard">
             <span class="controlCardIcon" aria-hidden="true">🕹</span>
             <span class="controlCardTitle">Movement</span>
-            <span class="controlCardBody">Use <strong>Arrow Left/Right</strong> or <strong>A / D</strong>. For cabinet-style play, <strong>Fn or Ctrl</strong> moves left and <strong>Option</strong> moves right.</span>
+            <span class="controlCardBody">Use <strong>Arrow Left/Right</strong> or <strong>A / D</strong>. For cabinet-style play on the web, <strong>Ctrl</strong> moves left and <strong>Command</strong> moves right. Mac browsers do not reliably expose the <strong>Fn</strong> key.</span>
           </div>
           <div class="controlCard">
             <span class="controlCardIcon" aria-hidden="true">🚀</span>
@@ -405,8 +406,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           </div>
         </div>
         <div id="controlsIndex">
-          <div class="controlRow"><span class="controlKeys">Arrow Left / A / Fn / Ctrl</span><span class="controlAction">Move left</span></div>
-          <div class="controlRow"><span class="controlKeys">Arrow Right / D / Option</span><span class="controlAction">Move right</span></div>
+          <div class="controlRow"><span class="controlKeys">Arrow Left / A / Ctrl</span><span class="controlAction">Move left</span></div>
+          <div class="controlRow"><span class="controlKeys">Arrow Right / D / Command</span><span class="controlAction">Move right</span></div>
           <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
           <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
           <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
@@ -500,8 +501,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.247.sha.4253ab4.beta</span>
-  <span id="buildStampRelease">Mar 28 2026, 11:12 AM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.250.sha.28ef6e7.beta</span>
+  <span id="buildStampRelease">Mar 28 2026, 11:33 AM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -539,6 +540,7 @@ const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
+const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
 const controlsDockBtn=document.getElementById('controlsDockBtn');
 const feedbackDockBtn=document.getElementById('feedbackDockBtn');
@@ -610,7 +612,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.247.sha.4253ab4.beta',commit:'4253ab472d691b66584b223ec02dbd3f8fa4a85f',branch:'beta',dirty:false,released:'Mar 28 2026, 11:12 AM EDT',state:'beta@4253ab4 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.250.sha.28ef6e7.beta',commit:'28ef6e786d1b26794870684a711b54bf73e88757',branch:'beta',dirty:false,released:'Mar 28 2026, 11:33 AM EDT',state:'beta@28ef6e7 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1034,16 +1036,16 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return ['ArrowLeft','KeyA','Fn','ControlLeft'];
+ return ['ArrowLeft','KeyA','ControlLeft'];
 }
 function movementRightCodes(){
- return ['ArrowRight','KeyD','AltLeft'];
+ return ['ArrowRight','KeyD','MetaLeft'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">CTRL</span> LEFT   <span class="k">COMMAND</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
@@ -1151,8 +1153,18 @@ function openSettings(){
 function logViewerUrl(){
  return 'http://127.0.0.1:4311/';
 }
-function playersGuideUrl(){
+function projectGuideUrl(){
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
+}
+function playersGuideUrl(){
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}player-guide.html`;
+}
+function openProjectGuide(){
+ const win=window.open(projectGuideUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened project guide');
+ }else showToast('Allow popups to open the project guide');
 }
 function openPlayersGuideWindow(){
  const win=window.open(playersGuideUrl(), '_blank', 'noopener');
@@ -1414,6 +1426,7 @@ addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
+if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
 if(controlsDockBtn)controlsDockBtn.addEventListener('click',()=>openHelp('controls'));
 if(feedbackDockBtn)feedbackDockBtn.addEventListener('click',openFeedback);
