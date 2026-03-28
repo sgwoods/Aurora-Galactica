@@ -246,6 +246,34 @@ canvas{display:block;width:100vw;height:100vh}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
 #statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#movieModal{position:fixed;inset:0;z-index:41;display:none;background:transparent}
+#movieModal.open{display:block}
+#moviePanel{position:fixed;display:none;overflow:hidden;color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+#moviePanel.visible{display:block}
+#movieVideo{position:absolute;inset:0;width:100%;height:100%;display:none;background:#000;object-fit:cover;object-position:center center}
+#moviePanel.ready #movieVideo{display:block}
+#movieEmptyState{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;color:rgba(218,236,255,.74);text-align:center;background:rgba(0,0,0,.42)}
+#moviePanel.ready #movieEmptyState{display:none}
+#movieReplayBadge{position:absolute;left:12px;top:12px;padding:5px 10px;border:1px solid rgba(255,216,109,.6);background:rgba(60,44,8,.82);color:#ffe39a;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase}
+#moviePanelClose{position:absolute;right:12px;top:12px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;width:32px;height:32px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#movieSelectionOverlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px;width:min(84%,460px);padding:14px;border:1px solid rgba(136,245,255,.2);background:rgba(7,12,24,.84);backdrop-filter:blur(4px);box-shadow:0 14px 42px rgba(0,0,0,.44)}
+#moviePanel.ready #movieSelectionOverlay{display:none}
+#movieRunPicker{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.82);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.05em}
+#movieRunPicker span{color:rgba(218,236,255,.72);text-transform:uppercase}
+#movieRunSelect{min-width:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:6px 8px;font:700 11px/1 "Courier New",Consolas,monospace}
+#moviePanelStatus{padding:7px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(7,12,24,.72);color:rgba(218,236,255,.82);font:700 11px/1.35 "Courier New",Consolas,monospace}
+#movieSelectionActions{display:flex;justify-content:center}
+#movieStartBtn{border:1px solid rgba(255,216,109,.48);background:rgba(60,44,8,.76);color:#ffe39a;padding:8px 14px;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer;min-width:132px}
+#movieStartBtn:hover{background:rgba(84,61,12,.88);border-color:rgba(255,216,109,.82)}
+#movieStartBtn:disabled{opacity:.5;cursor:default}
+#movieTopBar{position:absolute;left:120px;right:52px;top:12px;display:none;flex-direction:column;gap:5px;padding:4px 6px 6px;border:1px solid rgba(136,245,255,.14);background:rgba(7,12,24,.56);backdrop-filter:blur(2px)}
+#moviePanel.ready #movieTopBar{display:flex}
+#moviePlaybackMeta{min-height:12px;color:rgba(218,236,255,.9);font:700 10px/1.1 "Courier New",Consolas,monospace;letter-spacing:.06em;text-align:left}
+#movieControls{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}
+#movieControls button{border:1px solid rgba(136,245,255,.22);background:rgba(8,18,35,.62);color:#dff7ff;padding:4px 7px;font:700 10px/1 "Courier New",Consolas,monospace;cursor:pointer;min-width:0;white-space:nowrap}
+#movieControls button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
+#movieCloseToWaitBtn{margin-left:auto}
+#movieTimeline{width:100%;margin:0;height:12px}
 #leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -283,6 +311,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
+#buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
+#buildStamp.replay #buildStampChannel{color:#ffe39a}
+#buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
 .k{color:var(--a)}
 @media (max-width:980px){
  #cabinetRightFrame{display:none!important}
@@ -294,6 +325,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #settingsPanel{bottom:126px!important}
  #statusPanels{align-items:stretch;bottom:126px!important}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #movieSelectionOverlay{width:min(calc(100% - 24px),420px)}
+ #movieTopBar{left:10px;right:46px;top:48px;padding:7px 8px}
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
@@ -327,6 +360,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <div class="dockToolGroup dockToolGroupPrimary">
         <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
         <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
         <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
         <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
@@ -363,9 +397,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.250.sha.28ef6e7.beta</span>
-    <span id="settingsRelease">Mar 28 2026, 11:33 AM EDT</span>
-    <span id="settingsState">beta@28ef6e7 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.251.sha.dc8eb8c.beta</span>
+    <span id="settingsRelease">Mar 28 2026, 1:35 PM EDT</span>
+    <span id="settingsState">beta@dc8eb8c clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -410,6 +444,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <div class="controlRow"><span class="controlKeys">Arrow Right / D / Command</span><span class="controlAction">Move right</span></div>
           <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
           <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
+          <div class="controlRow"><span class="controlKeys">🎞</span><span class="controlAction">Open recent replays saved on this device</span></div>
           <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
           <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
           <div class="controlRow"><span class="controlKeys">X</span><span class="controlAction">Export and return to wait mode</span></div>
@@ -446,6 +481,35 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
 </div>
 <div id="feedbackToast" aria-live="polite"></div>
+<div id="movieModal" aria-hidden="true">
+  <div id="moviePanel" aria-live="polite" hidden>
+    <video id="movieVideo" preload="metadata" playsinline></video>
+    <div id="movieEmptyState">No replay selected yet.</div>
+    <div id="movieReplayBadge">REPLAY</div>
+    <button type="button" id="moviePanelClose" aria-label="Close replay panel">×</button>
+    <div id="movieSelectionOverlay">
+      <label id="movieRunPicker">
+        <span>Run</span>
+        <select id="movieRunSelect" aria-label="Recent replay list"></select>
+      </label>
+      <div id="moviePanelStatus">Finish a game and your replay will appear here.</div>
+      <div id="movieSelectionActions">
+        <button type="button" id="movieStartBtn">Play Replay</button>
+      </div>
+    </div>
+    <div id="movieTopBar">
+      <div id="moviePlaybackMeta"></div>
+      <div id="movieControls">
+        <button type="button" id="movieBackBtn">-5s</button>
+        <button type="button" id="moviePlayPauseBtn">Play</button>
+        <button type="button" id="movieForwardBtn">+5s</button>
+        <button type="button" id="movieDeleteBtn">Delete</button>
+        <button type="button" id="movieCloseToWaitBtn">Back To Wait</button>
+      </div>
+      <input id="movieTimeline" type="range" min="0" max="0" step="0.001" value="0" aria-label="Replay timeline" />
+    </div>
+  </div>
+</div>
 <div id="statusPanels">
   <div id="accountPanel" aria-live="polite" hidden>
     <div id="accountPanelHead">
@@ -501,8 +565,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.250.sha.28ef6e7.beta</span>
-  <span id="buildStampRelease">Mar 28 2026, 11:33 AM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.251.sha.dc8eb8c.beta</span>
+  <span id="buildStampRelease">Mar 28 2026, 1:35 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -533,6 +597,145 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script>
 (()=>{
 // Generated from src/js/*.js
+(function(global){
+  const DB_NAME = 'auroraGalacticaReplayDb';
+  const DB_VERSION = 1;
+  const STORE_NAME = 'replays';
+  const MAX_REPLAYS = 5;
+
+  function supported(){
+    return typeof indexedDB !== 'undefined';
+  }
+
+  function openDb(){
+    return new Promise((resolve, reject) => {
+      if(!supported()){
+        reject(new Error('IndexedDB unavailable'));
+        return;
+      }
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if(!db.objectStoreNames.contains(STORE_NAME)){
+          const store = db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+          store.createIndex('createdAt', 'createdAt', { unique: false });
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error || new Error('Could not open replay database'));
+    });
+  }
+
+  function transactionDone(tx){
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error || new Error('Replay database transaction failed'));
+      tx.onabort = () => reject(tx.error || new Error('Replay database transaction aborted'));
+    });
+  }
+
+  async function getAllRecords(){
+    const db = await openDb();
+    try{
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+      const records = await new Promise((resolve, reject) => {
+        const req = store.getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error || new Error('Could not load replays'));
+      });
+      await transactionDone(tx);
+      return records.sort((a,b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+    } finally {
+      db.close();
+    }
+  }
+
+  async function pruneExcess(limit=MAX_REPLAYS){
+    const records = await getAllRecords();
+    const doomed = records.slice(limit);
+    if(!doomed.length) return;
+    const db = await openDb();
+    try{
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      for(const record of doomed){
+        store.delete(record.id);
+      }
+      await transactionDone(tx);
+    } finally {
+      db.close();
+    }
+  }
+
+  async function saveReplay(record){
+    if(!record?.id || !record?.blob) throw new Error('Replay record needs id and blob');
+    const db = await openDb();
+    try{
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).put(record);
+      await transactionDone(tx);
+    } finally {
+      db.close();
+    }
+    await pruneExcess();
+    return record.id;
+  }
+
+  async function listReplays(limit=MAX_REPLAYS){
+    const records = await getAllRecords();
+    return records.slice(0, limit).map(record => ({
+      id: record.id,
+      createdAt: record.createdAt,
+      duration: record.duration || 0,
+      score: record.score || 0,
+      stage: record.stage || 0,
+      challenge: !!record.challenge,
+      build: record.build || '',
+      stats: record.stats || { shots: 0, hits: 0 },
+      source: record.source || 'local'
+    }));
+  }
+
+  async function loadReplay(id){
+    const db = await openDb();
+    try{
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+      const record = await new Promise((resolve, reject) => {
+        const req = store.get(id);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error || new Error('Could not load replay'));
+      });
+      await transactionDone(tx);
+      return record;
+    } finally {
+      db.close();
+    }
+  }
+
+  async function deleteReplay(id){
+    const db = await openDb();
+    try{
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).delete(id);
+      await transactionDone(tx);
+    } finally {
+      db.close();
+    }
+  }
+
+  global.AuroraReplayStore = {
+    supported,
+    saveReplay,
+    listReplays,
+    loadReplay,
+    deleteReplay,
+    MAX_REPLAYS
+  };
+})(window);
+
+
 // Source: src/js/00-boot.js
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
@@ -612,7 +815,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.250.sha.28ef6e7.beta',commit:'28ef6e786d1b26794870684a711b54bf73e88757',branch:'beta',dirty:false,released:'Mar 28 2026, 11:33 AM EDT',state:'beta@28ef6e7 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.251.sha.dc8eb8c.beta',commit:'dc8eb8c403963a10710f0af8d2c1d426fe6b74d5',branch:'beta',dirty:false,released:'Mar 28 2026, 1:35 PM EDT',state:'beta@dc8eb8c clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -626,7 +829,7 @@ let gameOverHtml='';
 let gameOverState=null;
 const ATTRACT={active:0,phase:'',timer:0,cycle:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
-const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[]};
+const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=0;
 const PLAY_W=280,PLAY_H=360;
 const VIS={shipW:36,shipH:28,enemyW:36,enemyH:28,gx:118,gy:66,playerBottom:92,beamLen:380,formTop:28};
@@ -1084,6 +1287,16 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
+ const override=window.__auroraBuildStampOverride;
+ if(override){
+  buildStamp.classList.remove('production');
+  buildStamp.classList.add('replay');
+  if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
+  if(buildStampVersion)buildStampVersion.textContent=override.version||'';
+  if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  return;
+ }
+ buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
  buildStamp.classList.toggle('production',production);
@@ -1216,6 +1429,12 @@ function downloadBlob(blob,file){
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function videoRecordSupported(){return !!(c.captureStream&&window.MediaRecorder);}
+function localReplaySupported(){
+ return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
+}
+function shouldCaptureRunVideo(){
+ return videoRecordSupported()&&(VIDEO_REC.enabled||localReplaySupported());
+}
 function pickVideoMime(){
  const list=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
  for(const m of list)if(!window.MediaRecorder||!MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(m))return m;
@@ -1225,11 +1444,41 @@ function syncRecordUi(){
  const supported=videoRecordSupported();
  recordBtn.disabled=!supported;
  recordBtn.classList.toggle('active',VIDEO_REC.enabled||VIDEO_REC.active);
- recordBtn.textContent=supported?(VIDEO_REC.active?'Recording Video...':`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
+ recordBtn.textContent=supported?(VIDEO_REC.active?(VIDEO_REC.enabled?'Recording Video...':'Recording Replay...'):`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
+}
+function currentReplayMeta(){
+ return {
+  id:VIDEO_REC.sessionId||REC?.id||`replay-${Date.now()}`,
+  source:'game_native',
+  build:BUILD,
+  createdAt:REC?.createdAt||new Date().toISOString(),
+  duration:recTime(),
+  score:S.score|0,
+  stage:S.stage|0,
+  challenge:!!S.challenge,
+  attract:!!S.attract,
+  reason:REC?.reason||'unknown',
+  persona:S.harnessPersona||null,
+  stats:{shots:S.stats?.shots|0,hits:S.stats?.hits|0}
+ };
+}
+async function persistLocalReplay(blob,meta){
+ if(!blob||!meta||!localReplaySupported())return;
+ if(meta.attract||meta.reason!=='game_start'||meta.duration<3)return;
+ try{
+  await window.AuroraReplayStore.saveReplay(Object.assign({},meta,{
+   blob,
+   mime:blob.type||VIDEO_REC.mime||'video/webm'
+  }));
+  if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
+ }catch(err){
+  console.warn('local replay save failed',err);
+ }
 }
 function stopRunRecording(){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
  VIDEO_REC.active=0;
+ VIDEO_REC.stopMeta=currentReplayMeta();
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
@@ -1238,7 +1487,7 @@ function stopRunRecording(){
  syncRecordUi();
 }
 function startRunRecording(){
- if(!VIDEO_REC.enabled||!videoRecordSupported())return;
+ if(!shouldCaptureRunVideo())return;
  if(VIDEO_REC.active)stopRunRecording();
  const mime=pickVideoMime();
  VIDEO_REC.mime=mime;
@@ -1261,16 +1510,25 @@ function startRunRecording(){
  VIDEO_REC.chunks=chunks;
  VIDEO_REC.sessionId=REC?.id||`run-${Date.now()}`;
  VIDEO_REC.file=`neo-galaga-video-${VIDEO_REC.sessionId}.webm`;
+ VIDEO_REC.stopMeta=null;
  const file=VIDEO_REC.file;
  const currentStream=VIDEO_REC.stream;
  const rec=mime?new MediaRecorder(currentStream,{mimeType:mime}):new MediaRecorder(currentStream);
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
   const blob=new Blob(chunks,{type:mime||'video/webm'});
+  const replayMeta=VIDEO_REC.stopMeta||currentReplayMeta();
   if(currentStream)for(const t of currentStream.getTracks())t.stop();
   if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
   if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
-  if(blob.size>0){downloadBlob(blob,file);showToast('Run video downloaded');}
+  if(blob.size>0){
+   persistLocalReplay(blob,replayMeta);
+   if(VIDEO_REC.enabled){
+    downloadBlob(blob,file);
+    showToast('Run video downloaded');
+   }
+  }
+  VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
  rec.start(1000);
@@ -1462,6 +1720,7 @@ addEventListener('keydown',e=>{
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
+ if(typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()){if(e.code==='Escape'){e.preventDefault();closeMoviePanel();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
@@ -2184,6 +2443,248 @@ addEventListener('pointerdown',e=>{
 });
 syncLeaderboardUi();
 initLeaderboard();
+
+// Source: src/js/06-movie.js
+// Native local replay panel and browser-backed replay catalog.
+const movieDockBtn=document.getElementById('movieDockBtn');
+const movieModal=document.getElementById('movieModal');
+const moviePanel=document.getElementById('moviePanel');
+const moviePanelClose=document.getElementById('moviePanelClose');
+const movieCloseToWaitBtn=document.getElementById('movieCloseToWaitBtn');
+const moviePanelStatus=document.getElementById('moviePanelStatus');
+const movieRunSelect=document.getElementById('movieRunSelect');
+const movieStartBtn=document.getElementById('movieStartBtn');
+const movieEmptyState=document.getElementById('movieEmptyState');
+const movieVideo=document.getElementById('movieVideo');
+const moviePlaybackMeta=document.getElementById('moviePlaybackMeta');
+const movieBackBtn=document.getElementById('movieBackBtn');
+const moviePlayPauseBtn=document.getElementById('moviePlayPauseBtn');
+const movieForwardBtn=document.getElementById('movieForwardBtn');
+const movieDeleteBtn=document.getElementById('movieDeleteBtn');
+const movieTimeline=document.getElementById('movieTimeline');
+
+const MOVIE={panelOpen:0,prevPaused:0,runs:[],selectedId:'',pendingId:'',current:null,loading:0,objectUrl:'',status:''};
+
+function movieStoreAvailable(){
+ return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
+}
+function movieDurationLabel(seconds=0){
+ const total=Math.max(0,Math.round(+seconds||0));
+ const mins=Math.floor(total/60);
+ const secs=String(total%60).padStart(2,'0');
+ return `${mins}:${secs}`;
+}
+function movieAgeLabel(value=''){
+ if(!value)return 'just now';
+ const stamp=new Date(value).getTime();
+ if(!Number.isFinite(stamp))return 'recent';
+ const diff=Math.max(0,Date.now()-stamp);
+ const mins=Math.round(diff/60000);
+ if(mins<1)return 'just now';
+ if(mins<60)return `${mins}m ago`;
+ const hours=Math.round(mins/60);
+ if(hours<24)return `${hours}h ago`;
+ const days=Math.round(hours/24);
+ return `${days}d ago`;
+}
+function revokeMovieObjectUrl(){
+ if(MOVIE.objectUrl){
+  try{URL.revokeObjectURL(MOVIE.objectUrl)}catch{}
+  MOVIE.objectUrl='';
+ }
+}
+function updateMovieControls(){
+ const ready=!!MOVIE.current;
+ moviePanel.classList.toggle('ready',ready);
+ movieBackBtn.disabled=!ready;
+ moviePlayPauseBtn.disabled=!ready;
+ movieForwardBtn.disabled=!ready;
+ movieDeleteBtn.disabled=!ready;
+ movieTimeline.disabled=!ready;
+ movieRunSelect.disabled=!MOVIE.runs.length;
+ if(movieStartBtn)movieStartBtn.disabled=!MOVIE.runs.length||!MOVIE.pendingId;
+ moviePlayPauseBtn.textContent=ready&&!movieVideo.paused?'Pause':'Play';
+ syncMovieBuildStamp();
+}
+function syncMovieBuildStamp(){
+ window.__auroraBuildStampOverride=MOVIE.panelOpen&&MOVIE.current?{
+  channel:`Replay Stage ${String(MOVIE.current.stage||0).padStart(2,'0')}`,
+  version:`Score ${formatScore(MOVIE.current.score||0)}   Length ${movieDurationLabel(MOVIE.current.duration||0)}`,
+  release:`${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current.duration||0))}   •   ${movieAgeLabel(MOVIE.current.createdAt)}`
+ }:null;
+ if(typeof syncBuildStampUi==='function')syncBuildStampUi();
+}
+function updateMovieTimeline(){
+ const duration=Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current?.duration||0);
+ movieTimeline.max=duration||0;
+ movieTimeline.value=movieVideo.currentTime||0;
+  const meta=MOVIE.current
+  ? `STG ${String(MOVIE.current.stage||0).padStart(2,'0')}   ${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(duration)}`
+  : '';
+ moviePlaybackMeta.textContent=meta;
+ syncMovieBuildStamp();
+ updateMovieControls();
+}
+function renderMovieRuns(){
+ if(!movieRunSelect)return;
+ if(!MOVIE.runs.length){
+ movieRunSelect.innerHTML='<option value="">No local replays yet</option>';
+  movieRunSelect.value='';
+  return;
+ }
+ movieRunSelect.innerHTML=MOVIE.runs.map(run=>`<option value="${run.id}">STG ${String(run.stage||0).padStart(2,'0')} · ${formatScore(run.score||0)} · ${movieDurationLabel(run.duration||0)} · ${movieAgeLabel(run.createdAt)}</option>`).join('');
+ movieRunSelect.value=MOVIE.pendingId||MOVIE.selectedId||MOVIE.runs[0].id;
+}
+function syncMoviePanelVisibility(){
+ if(!moviePanel||!movieDockBtn)return;
+ const show=!!MOVIE.panelOpen;
+ if(movieModal){
+  movieModal.classList.toggle('open',show);
+  movieModal.setAttribute('aria-hidden',show?'false':'true');
+ }
+ moviePanel.hidden=!show;
+ moviePanel.classList.toggle('visible',show);
+ movieDockBtn.classList.toggle('active',show);
+ movieDockBtn.classList.toggle('open',show);
+ movieDockBtn.setAttribute('aria-expanded',show?'true':'false');
+}
+function setMovieStatus(text=''){
+ MOVIE.status=String(text||'');
+ if(moviePanelStatus)moviePanelStatus.textContent=MOVIE.status;
+}
+function clearMovieSelection(){
+ MOVIE.current=null;
+ MOVIE.selectedId='';
+ MOVIE.pendingId=MOVIE.runs[0]?.id||'';
+ revokeMovieObjectUrl();
+ movieVideo.pause();
+ movieVideo.removeAttribute('src');
+ movieVideo.load();
+ movieTimeline.value=0;
+ moviePanel.classList.remove('ready');
+ movieEmptyState.textContent='No replay selected yet.';
+ moviePlaybackMeta.textContent='';
+ renderMovieRuns();
+ syncMovieBuildStamp();
+ updateMovieControls();
+}
+async function loadMovieReplay(id){
+ if(!movieStoreAvailable())return;
+ try{
+  setMovieStatus('Loading replay...');
+  const replay=await window.AuroraReplayStore.loadReplay(id);
+  if(!replay||!replay.blob)throw new Error('Replay not found');
+  MOVIE.selectedId=id;
+  MOVIE.current=replay;
+  revokeMovieObjectUrl();
+  MOVIE.objectUrl=URL.createObjectURL(replay.blob);
+  movieVideo.src=MOVIE.objectUrl;
+  movieVideo.currentTime=0;
+  movieEmptyState.textContent='Replay ready.';
+  setMovieStatus(`Showing local replay from ${movieAgeLabel(replay.createdAt)}.`);
+  renderMovieRuns();
+  moviePanel.classList.add('ready');
+  updateMovieTimeline();
+ }catch(err){
+  setMovieStatus(err.message||'Could not load replay');
+  clearMovieSelection();
+ }
+}
+async function refreshMovieCatalog(opts={}){
+ if(!movieStoreAvailable()){
+  MOVIE.runs=[];
+  clearMovieSelection();
+  setMovieStatus('Local replays need browser storage support.');
+  return;
+ }
+ try{
+  if(!opts.silent)setMovieStatus('Loading recent replays...');
+  MOVIE.runs=await window.AuroraReplayStore.listReplays();
+  renderMovieRuns();
+  if(!MOVIE.runs.length){
+    clearMovieSelection();
+    setMovieStatus('Finish a few games and your recent runs will appear here.');
+    return;
+  }
+  setMovieStatus(`${MOVIE.runs.length} recent replay${MOVIE.runs.length===1?'':'s'} stored on this device.`);
+  MOVIE.pendingId=MOVIE.selectedId&&MOVIE.runs.some(run=>run.id===MOVIE.selectedId)?MOVIE.selectedId:MOVIE.runs[0].id;
+  renderMovieRuns();
+  updateMovieControls();
+ }catch(err){
+  MOVIE.runs=[];
+  clearMovieSelection();
+  setMovieStatus(err.message||'Could not load local replays');
+ }
+}
+function openMoviePanel(){
+ if(MOVIE.panelOpen)return;
+ closeSettings();
+ if(helpOpen)closeHelp(1);
+ if(feedbackOpen)closeFeedback(1);
+ if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+ if(typeof closeAccountPanel==='function')closeAccountPanel();
+ MOVIE.prevPaused=paused;
+ if(started&&!paused)paused=1;
+ MOVIE.panelOpen=1;
+ syncMoviePanelVisibility();
+ if(typeof syncPauseUi==='function')syncPauseUi();
+  refreshMovieCatalog();
+}
+function returnToWaitModeAfterReplay(){
+ clearMovieSelection();
+ MOVIE.panelOpen=0;
+ syncMoviePanelVisibility();
+ if(movieModal)movieModal.blur?.();
+ if(typeof startAttractDemo==='function')startAttractDemo({record:false});
+ else{
+  started=0;
+  paused=0;
+  if(typeof syncPauseUi==='function')syncPauseUi();
+ }
+ syncMovieBuildStamp();
+ showToast('Returned to wait mode');
+}
+function closeMoviePanel(force=0){
+ if(!MOVIE.panelOpen&&!force)return;
+ returnToWaitModeAfterReplay();
+}
+function isMoviePanelOpen(){return !!MOVIE.panelOpen}
+window.refreshMovieCatalog=refreshMovieCatalog;
+window.closeMoviePanel=closeMoviePanel;
+window.isMoviePanelOpen=isMoviePanelOpen;
+
+if(movieDockBtn)movieDockBtn.addEventListener('click',e=>{e.stopPropagation();if(MOVIE.panelOpen)closeMoviePanel();else openMoviePanel();});
+if(moviePanelClose)moviePanelClose.addEventListener('click',()=>closeMoviePanel());
+if(movieCloseToWaitBtn)movieCloseToWaitBtn.addEventListener('click',()=>closeMoviePanel());
+if(moviePanel)moviePanel.addEventListener('click',e=>e.stopPropagation());
+if(movieRunSelect)movieRunSelect.addEventListener('change',()=>{MOVIE.pendingId=movieRunSelect.value||'';updateMovieControls();});
+if(movieStartBtn)movieStartBtn.addEventListener('click',()=>{if(MOVIE.pendingId)loadMovieReplay(MOVIE.pendingId);});
+if(movieBackBtn)movieBackBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.max(0,(movieVideo.currentTime||0)-5);});
+if(movieForwardBtn)movieForwardBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.min(movieVideo.duration||MOVIE.current.duration||0,(movieVideo.currentTime||0)+5);});
+if(moviePlayPauseBtn)moviePlayPauseBtn.addEventListener('click',()=>{if(!MOVIE.current)return;if(movieVideo.paused)movieVideo.play();else movieVideo.pause();});
+if(movieTimeline)movieTimeline.addEventListener('input',()=>{if(MOVIE.current)movieVideo.currentTime=+movieTimeline.value||0;});
+if(movieDeleteBtn)movieDeleteBtn.addEventListener('click',async()=>{
+ if(!MOVIE.current||!movieStoreAvailable())return;
+ const id=MOVIE.current.id;
+ await window.AuroraReplayStore.deleteReplay(id);
+ if(id===MOVIE.selectedId)clearMovieSelection();
+ refreshMovieCatalog({silent:1});
+});
+if(movieVideo){
+ movieVideo.addEventListener('loadedmetadata',updateMovieTimeline);
+ movieVideo.addEventListener('timeupdate',updateMovieTimeline);
+ movieVideo.addEventListener('play',updateMovieControls);
+ movieVideo.addEventListener('pause',updateMovieControls);
+ movieVideo.addEventListener('ended',updateMovieControls);
+}
+if(movieModal)movieModal.addEventListener('click',e=>{if(e.target===movieModal)closeMoviePanel();});
+document.addEventListener('keydown',e=>{
+ if(!MOVIE.panelOpen||keyboardTargetIsEditable(e.target))return;
+ if(e.code==='Space'){e.preventDefault();moviePlayPauseBtn.click();return;}
+ if(e.code==='ArrowLeft'){e.preventDefault();movieBackBtn.click();return;}
+ if(e.code==='ArrowRight'){e.preventDefault();movieForwardBtn.click();return;}
+});
+updateMovieControls();
 
 // Source: src/js/10-gameplay.js
 // Enemy spawning, stage flow, combat, capture, and game-state updates.
@@ -3435,6 +3936,13 @@ function draw(){
   playfieldFrame.style.width=`${viewW+DISPLAY_SHELL.frameOuterInset*2}px`;
   playfieldFrame.style.height=`${viewH+DISPLAY_SHELL.frameOuterInset*2}px`;
   playfieldFrame.style.setProperty('--frame-inner-inset',`${Math.max(9,Math.floor(scale*DISPLAY_SHELL.frameInnerInset))}px`);
+ }
+ const movieOverlayPanel=document.getElementById('moviePanel');
+ if(movieOverlayPanel){
+  movieOverlayPanel.style.left=`${ox}px`;
+  movieOverlayPanel.style.top=`${oy}px`;
+  movieOverlayPanel.style.width=`${viewW}px`;
+  movieOverlayPanel.style.height=`${viewH}px`;
  }
  const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
