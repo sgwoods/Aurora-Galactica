@@ -399,11 +399,11 @@
           </div>
           <h1>Aurora Galactica Project Guide</h1>
           <p>A readable, current map of the project: what we are building, how the code and tooling fit together, and what still matters before the polished four-stage 1.0 launch.</p>
-          <div class="goal"><strong>Current goal:</strong> Ship a polished four-stage 1.0 slice with a cleaner arcade shell, trustworthy public release flow, and a player-ready guide that stays inside the game.</div>
+          <div class="goal"><strong>Current goal:</strong> Ship a polished four-stage 1.0 slice with native replays, a player-ready in-game guide, and a corrected production publish path that matches beta.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0+build.252.sha.bbafd42</span>
+              <span class="metaValue">0.5.0+build.257.sha.cdb89e4</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Aurora production lane and public beta split</span>
+              <span class="metaValue">Native replay viewer, player guide, and launch-shell polish</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -442,7 +442,7 @@
 
     <article class="card">
       <h3>Where The Game Is Strong</h3>
-      <p>Manual play says the core slice is healthy enough to launch if the presentation lands cleanly: capture/rescue is now guarded end-to-end, the shell/control rail is much stronger, the release flow is scripted, and the log viewer gives us a practical debugging loop.</p>
+      <p>Manual play says the core slice is healthy enough to launch if the final trust items land cleanly: capture/rescue is guarded end-to-end, the shell/control rail is much stronger, native replay is in the game, and the remaining release work is mostly production correctness plus final presentation confidence.</p>
     </article>
   
 
@@ -486,7 +486,7 @@
     <li>The special boss-with-two-escorts bonus attack still needs one more readability pass before 1.0 is called done.</li>
   
 
-    <li>The production-vs-beta operational split and final release-readiness pass remain real launch-significant items.</li>
+    <li>The production-vs-beta operational split, the public production deploy path, and the final release-readiness pass remain the real launch-significant items.</li>
   
 </ul>
     </section>
@@ -581,7 +581,7 @@
 
     <article class="card">
       <h3>Build / Public Sync</h3>
-      <p>`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff.</p>
+      <p>`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces and the Pages workflow contract into `Aurora-Galactica`, where Pages should package committed artifacts rather than rebuild stale source. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff.</p>
     </article>
   
 
@@ -934,7 +934,7 @@
 <h4>6. Publish Hosted Production</h4>
 <ul><li>Preferred:</li></ul>
 <pre><code data-lang="bash">  npm run publish:production</code></pre>
-<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li>Optional manual inspection steps still exist:</li></ul>
+<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li><code>Aurora-Galactica</code> Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.</li><li>Optional manual inspection steps still exist:</li></ul>
 <pre><code data-lang="bash">  npm run promote:production
   npm run publish:check:production
   npm run publish:production:raw</code></pre>
@@ -948,7 +948,7 @@
 <h3>Versioning</h3>
 <ul><li>Current versioning uses three release surfaces with build metadata:<ul><li>pre-production:<ul><li>prerelease SemVer from <code>package.json</code></li></ul></li><li>production:<ul><li>stable public label without the prerelease suffix</li></ul></li><li>production beta:<ul><li>promoted public beta label</li></ul></li></ul></li><li>Local and deployed builds carry:<ul><li>version</li><li>build number</li><li>short commit</li><li>branch / dirty state</li><li>Eastern release timestamp</li></ul></li><li>The settings drawer also shows the latest human-written release note from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li><li>Each release can also keep a structured session summary and optional raw transcript under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>The separate public project pages repo is synced from <code>dist/production/build-info.json</code> and <code>release-notes.json</code><ul><li>CI uses the <code>PUBLIC_REPO_SYNC_TOKEN</code> secret when available</li><li>The token should have <code>contents:write</code> access to <code>sgwoods/public</code></li></ul></li><li>Example production build label:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>Example production beta build label:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li><li>See:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
 <h3>Session Logging</h3>
-<ul><li>The game records keyboard events, major lifecycle events, and periodic gameplay snapshots</li><li>Exported logs are downloaded as JSON from the in-game <code>Export Log</code> button</li><li>Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots</li></ul>
+<ul><li>The game records keyboard events, major lifecycle events, and periodic gameplay snapshots</li><li>Exported logs are downloaded as JSON from the in-game <code>Export Log</code> button</li><li>Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots</li><li>Player-triggered exports are browser downloads, not repo-local harness artifacts<ul><li>they usually land in the user’s downloads directory</li></ul></li><li>The in-game <code>🎞</code> replay surface is separate and keeps recent local replay state in browser storage</li><li>The canonical developer review archive is still:<ul><li><code>harness-artifacts/</code></li></ul></li><li>See the formal distinction in:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md</code></li></ul></li></ul>
 <h3>Gameplay Harness</h3>
 <ul><li>A local replay harness can run the game in Chrome, replay a saved session JSON, and write fresh <code>.webm</code> and <code>.json</code> artifacts into <code>harness-artifacts/</code></li><li>It uses your installed <code>/Applications/Google Chrome.app</code></li><li>Harness execution and artifact generation are local-only on your Mac; it does not use cloud compute</li><li>Run it with a previously exported session:</li></ul>
 <pre><code data-lang="bash">  npm run harness -- --session /absolute/path/to/neo-galaga-session.json</code></pre>
@@ -998,7 +998,7 @@
 <pre><code data-lang="bash">  npm run harness:tune -- --batch /absolute/path/to/harness-artifacts/batch-folder</code></pre>
 <ul><li>You can import the latest self-play capture pair from your Downloads folder into <code>harness-artifacts/</code> and analyze it in one step:</li></ul>
 <pre><code data-lang="bash">  npm run harness:import-latest</code></pre>
-<ul><li>You can also check for a new self-play run without duplicating already imported files:</li></ul>
+<ul><li>This import step is the intended bridge from:<ul><li>browser download artifacts in the user’s downloads location</li><li>to the normalized developer review archive in <code>harness-artifacts/</code></li></ul></li><li>You can also check for a new self-play run without duplicating already imported files:</li></ul>
 <pre><code data-lang="bash">  npm run harness:check-latest</code></pre>
 <ul><li>Optional import flags:</li></ul>
 <pre><code data-lang="bash">  npm run harness:import-latest -- --session-id ngt-1773602145011-2
@@ -1068,6 +1068,11 @@
 <ul><li><code>http://127.0.0.1:4311/</code></li></ul>
 <p>The viewer expects artifacts under:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul>
+<p>Player-triggered exported logs and videos are different:</p>
+<ul><li>they download through the browser first</li><li>on macOS that is usually the user’s <code>Downloads</code> folder</li><li>import them into <code>harness-artifacts/</code> when you want them in the developer review archive:</li></ul>
+<pre><code data-lang="bash">  npm run harness:import-latest</code></pre>
+<p>See:</p>
+<ul><li><code>~/Documents/Codex-Test1/ARTIFACT_POLICY.md</code></li></ul>
 <p>On the home machine that means the same repo-relative folder inside your local clone.</p>
 <h3>Staying In Sync Across Machines</h3>
 <p>The simplest rule is:</p>
@@ -1174,6 +1179,10 @@ npm run publish:production</code></pre>
 <p>generated artifacts moved under <code>dist/</code> and publish scripts now use scripted lane promotion.</p>
 <ul><li><code>#97</code> and <code>#99</code> are useful platform directions, but they should not displace the four-stage <code>1.0</code> slice.</li><li><code>#111</code> is now the explicit early post-<code>1.0</code> platform-refactor umbrella:</li></ul>
 <p>ship <code>1.0</code> first, then extract a shared arcade platform so Aurora variants, Galaxian, and similar cabinet shooters can reuse the mature shell/replay/ harness/build layer with less churn.</p>
+<ul><li><code>#110</code> has now crossed from concept into a shipped first cut:</li></ul>
+<p>native in-game replay exists, so the remaining work is polish and follow-up behavior rather than whether replay should exist at all.</p>
+<ul><li><code>#112</code> is a fresh replay-exit regression:</li></ul>
+<p>returning to wait mode after replay can restart idle audio unexpectedly, so replay exit needs to preserve a quiet wait state before the next production refresh.</p>
 <ul><li>Fresh Modem feedback on <code>2026-03-28</code> mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:<ul><li><code>#105</code> is effectively a direct refinement of <code>#86</code> and is now treated as part of the same active shell pass</li><li><code>#103</code> extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface</li><li><code>#107</code> reinforces the already-open <code>#79</code> control-feel concern rather than creating a meaningfully different launch bucket</li><li><code>#104</code> is a stronger post-<code>v1</code> version of the Players Guide surface unless a lightweight manual viewer lands almost for free</li><li><code>#106</code> is visible presentation polish and is worth keeping near the launch queue after the shell pass</li></ul></li><li>User direction for this review:<ul><li>treat Stage <code>2</code> / <code>4</code> fairness tuning as a likely <code>1.1</code> experimental pass unless a fresh regression makes them launch-critical again</li><li>move broader challenge-stage variation/fidelity work out of the launch path</li><li>keep tooling/platform features post-<code>1.0</code></li><li>spend remaining prelaunch energy on visible polish, trust, and stable graphical structure</li><li>keep recent icon, settings, HUD, and control-surface issues inside <code>v1</code></li></ul></li></ul>
 <div class="tableWrap">
           <table class="dataTable">
@@ -1189,13 +1198,14 @@ npm run publish:production</code></pre>
 <tr><td>Must Fix Now</td><td><code>#91</code></td><td>Codex</td><td>Open</td><td>The score header still wants stronger arcade alignment with the playfield top edge.</td><td>Lock the top HUD to the gameboard width and edge in the shell polish pass.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#48</code></td><td>Codex</td><td>Open</td><td>The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately.</td><td>Finish a stable playfield frame treatment and keep it aligned with the HUD shell.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#44</code></td><td>Codex</td><td>Open</td><td>A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work.</td><td>Add the stage indicator as part of the HUD polish pass rather than as a separate later feature.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#82</code></td><td>Codex</td><td>Open</td><td>Wait-mode score surfaces still risk overlapping the playfield under narrower desktop layouts, which weakens the shell polish.</td><td>Rework the wait-mode score panel so it stays clearly outside the active playfield and matches the new shell layout.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix Now</td><td><code>#82</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Wait-mode score surfaces now shift into a centered overlay locally instead of intruding into the playfield, but that resize behavior still needs hosted confirmation.</td><td>Refresh beta and verify the wait-mode score overlay stays intentional across common desktop sizes.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#49</code> / <code>#60</code></td><td>Codex</td><td>Open</td><td>Score-view controls now belong to the player-facing shell, but their state changes/loading cues still feel too subtle.</td><td>Make score-view switches open or animate an explicit scoreboard/loading surface as part of the shell polish pass.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#74</code></td><td>Codex</td><td>Open</td><td>Latest manual beta pass still says the three-ship bonus/special squadron is too spread out.</td><td>Tighten the three-ship attack geometry again and keep the squadron spacing check green.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#47</code></td><td>Codex</td><td>Open</td><td>Latest manual beta pass still says the special squadron reads too loose visually.</td><td>Tighten lateral/vertical squadron coherence and recheck it in beta.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#38</code></td><td>Codex</td><td>Beta review</td><td>Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play.</td><td>Verify and polish explosion, pause, and recovery feel.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#45</code></td><td>Codex</td><td>Automated check + manual confirm</td><td>Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact.</td><td>Confirm boss first-hit feedback still looks clean in beta and close it if it does.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#87</code></td><td>Codex</td><td>Open</td><td>Wait-mode/demo ship jitter makes the attract presentation look unfinished.</td><td>Stabilize the demo ship rendering and verify with the existing wait-mode video/debug path.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix Now</td><td><code>#87</code></td><td>Codex</td><td>Improved in dev / needs ship</td><td>Wait-mode/demo ship jitter is materially reduced after smoothing the attract pilot and adding a short target lock, but it still wants hosted confirmation before we call it done.</td><td>Refresh beta with the attract stabilizer and verify the remaining shimmer is acceptable in live review.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix Now</td><td><code>#112</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Exiting replay back to wait mode can restart idle audio unexpectedly, which is especially annoying when the tab stays open after review.</td><td>Ship the attract/wait-mode audio fix and confirm replay exit returns to a quiet idle state.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#40</code></td><td>Codex</td><td>Partial automation + beta review</td><td>Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation.</td><td>Verify the updated beta capture feedback in manual play and close if it feels clear.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#80</code></td><td>Codex</td><td>Beta review + automation</td><td>Carry-state automation now proves drag-up stays <code>below</code> and docked/wait-mode carried states render <code>above</code>, but the exact swap timing still needs live eyes.</td><td>Verify the fighter flips from below to above only at the correct top-dock moment in beta.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#88</code></td><td>Codex</td><td>Low-risk beta confirm</td><td>Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state.</td><td>Keep one more live confirmation while we close the remaining capture items.</td><td>Phase 3</td></tr>
@@ -1203,13 +1213,16 @@ npm run publish:production</code></pre>
 <tr><td>Should Fix Before Launch</td><td><code>#77</code></td><td>Codex</td><td>Automated check + low-risk manual confirm</td><td>Automated recovery check now proves beam-escape recovery returns the ship to the bottom row and allows post-escape firing.</td><td>Confirm the drop-back animation/control return still looks clean in beta.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#58</code></td><td>Codex</td><td>Open</td><td>Capture rules are much improved but still not fully original.</td><td>Finish the rescue-fidelity pass.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#73</code></td><td>Codex</td><td>Automated check + beta review</td><td>Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked.</td><td>Verify the feel/fairness of the shoot-to-save window in beta.</td><td>Phase 3</td></tr>
-<tr><td>Should Fix</td><td><code>#79</code></td><td>Codex</td><td>Beta review</td><td>Manual beta play says keyboard control is better, but fine single-tap alignment still needs a final confidence check.</td><td>Keep the current manual-control baseline and revisit only if new live evidence says the feel is still off.</td><td>Phase 1</td></tr>
-<tr><td>Should Fix</td><td><code>#106</code></td><td>Codex</td><td>Open</td><td>Between-level and in-game status messaging is still visually fragmented and would benefit from one centered display system.</td><td>Standardize message presentation once the shell and combat-polish cluster is stable.</td><td>Phase 2</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#79</code> / <code>#107</code></td><td>Codex</td><td>Beta review</td><td>The velocity-based control model is now in place, but fine single-tap alignment and overall feel still need final live confidence.</td><td>Keep the current movement baseline, do one more hosted beta pass, and only retune if fresh evidence says targeting still overshoots.</td><td>Phase 1</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#106</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Between-level and in-game status messaging now uses a shared centered board-message path locally, including multi-line ship-loss text.</td><td>Refresh beta and confirm the centered message treatment feels consistent in live play.</td><td>Phase 2</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#108</code></td><td>Codex</td><td>Likely fixed / needs confirm</td><td>Current start-position smoke passes, so the mid-screen respawn/new-game issue appears fixed on the dev line, but the report was severe enough that it still deserves one explicit hosted replay.</td><td>Confirm second-game spawn reset in beta and close if the ship reliably starts at the bottom center.</td><td>Phase 1</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#109</code></td><td>Codex</td><td>Resolved in behavior / close after docs confirm</td><td>Browser <code>Fn</code> is not reliable on the web, and the shipped left-hand mapping is now documented and implemented as <code>Ctrl</code> left / <code>Command</code> right.</td><td>Confirm the player guide/controls overlay wording is right in beta, then close as a clarified web-platform constraint.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#31</code></td><td>Codex</td><td>Open</td><td>Minor public timestamp/date polish remains.</td><td>Clean the release date display.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#71</code></td><td>Codex</td><td>Queued</td><td>Audio control belongs in the shipped settings/control surface if it lands cleanly in the same shell work.</td><td>Pull mute into the <code>v1</code> settings pass rather than leaving it as indefinite polish.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#95</code></td><td>Shared</td><td>Process</td><td>We now use persona distributions to judge balance, so the ladder can drift silently after gameplay changes.</td><td>Re-run the persona ladder only if a prelaunch polish pass materially changes difficulty or control feel.</td><td>Phase 1</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#96</code></td><td>Shared</td><td>Watch</td><td>Recorder repair, artifact quality checks, and salvage scripts landed; <code>64</code> historical videos are still unrecoverable but new runs are now checkable.</td><td>Keep <code>npm run harness:check:video-artifact</code> green and file immediately if new artifacts regress.</td><td>Phase 4</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#98</code></td><td>Shared</td><td>Implemented / close</td><td>Dist-based release outputs, publish preflights, and scripted beta/production publishing are now in place.</td><td>Let the new flow soak briefly, then close the issue once no further migration fallout appears.</td><td>Phase 4</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#110</code></td><td>Codex</td><td>First cut shipped / polish</td><td>Native in-game replay is now live and much cleaner, but it still wants final polish around playback presentation, state transitions, and follow-up behavior.</td><td>Keep replay as a shipped <code>v1</code> surface and finish only the highest-value polish/regression fixes.</td><td>Phase 3</td></tr>
 <tr><td>Can Slip</td><td><code>#63</code></td><td>Codex</td><td>Queued</td><td>Wait-mode score cycling is useful attract polish.</td><td>Do it in the attract-mode pass.</td><td>Phase 3</td></tr>
 <tr><td>Can Slip</td><td><code>#104</code></td><td>Codex</td><td>Queued</td><td>A richer in-game manual viewer is useful, but the current launch need is satisfied by a strong Players Guide entry point; search/PDF/embedded browsing can slip if needed.</td><td>Keep the guide icon for <code>v1</code>; revisit the full manual viewer if it falls out naturally from the shell work.</td><td>Phase 4</td></tr>
 <tr><td>Can Slip</td><td><code>#49</code> / <code>#60</code></td><td>Codex</td><td>Queued</td><td>The score panel still wants stronger cues and clearer invocation.</td><td>Polish score-view interaction after core gameplay work.</td><td>Phase 3</td></tr>
@@ -1395,7 +1408,7 @@ npm run publish:production</code></pre>
 <h4>Log Viewer</h4>
 <ul><li>Local review server:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/server.js</code></li></ul></li><li>Viewer UI:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/app.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/styles.css</code></li></ul></li><li>The viewer reads the same recursive artifact tree under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Review-ready runs should include:<ul><li><code>summary.json</code></li><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code> when available</li></ul></li><li>The viewer uses <code>summary.json</code> as the run index and then resolves the neighboring session/video files from the summary metadata.</li></ul>
 <h4>Real Play</h4>
-<ul><li>Player-generated <code>.json</code> and <code>.webm</code> can be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li><li>The log viewer can inspect those imported runs as long as they are copied into the expected <code>harness-artifacts/</code> folder structure and have a <code>summary.json</code> beside them.</li></ul>
+<ul><li>Player-generated <code>.json</code> and <code>.webm</code> are browser download artifacts first<ul><li>they typically land in the user’s downloads location</li></ul></li><li>Player-native in-game replay state is browser-local storage, not the harness archive</li><li>Player-generated <code>.json</code> and <code>.webm</code> can then be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li><li>The log viewer can inspect those imported runs as long as they are copied into the expected <code>harness-artifacts/</code> folder structure and have a <code>summary.json</code> beside them.</li><li>Formal policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md</code></li></ul></li></ul>
 <h3>Reference Flow</h3>
 <h4>Durable Sources</h4>
 <ul><li>Reference root:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code></li></ul></li><li>Manual:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/</code></li></ul></li><li>Walkthrough notes:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/walkthroughs/trueachievements-galaga/</code></li></ul></li></ul>
@@ -1538,6 +1551,51 @@ npm run publish:production</code></pre>
 <ul><li>GitHub</li><li>GitHub API</li></ul>
 <h4>Not External</h4>
 <ul><li>replay storage</li><li>replay capture</li><li>local dev server</li><li>local log viewer</li></ul>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="artifact-policy-doc">
+      <div class="sectionHeader">
+        <h2>Artifact Policy Source</h2>
+        <p>The formal distinction between browser-local replay state, browser download exports, and the canonical harness-artifacts review archive is documented in the artifact policy.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>ARTIFACT_POLICY.md</code> during build.</p>
+        <div class="markdown">
+          <p>This project has three distinct artifact locations. Treating them as separate on purpose avoids the recurring confusion between player exports, browser-local replay state, and the developer review archive.</p>
+<h3>Policy</h3>
+<h4>1. In-Game Player Replay State</h4>
+<p>This is the browser-native replay feature used by a player who launches the game in-browser with no extra setup.</p>
+<ul><li>Storage:<ul><li>browser-local <code>IndexedDB</code></li></ul></li><li>Contents:<ul><li>recent replay metadata</li><li>recent replay video blobs used by the in-game <code>🎞</code> replay surface</li></ul></li><li>Scope:<ul><li>local to that browser/profile on that device</li><li>not intended as the canonical developer artifact archive</li></ul></li></ul>
+<p>This is the right default for <code>dev</code>, <code>beta</code>, and <code>production</code> player use because it requires no filesystem access and works inside normal browser constraints.</p>
+<h4>2. Exported Player Capture Files</h4>
+<p>This is the explicit user-facing export path for logs and downloaded recordings.</p>
+<ul><li>Current filenames:<ul><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.webm</code></li></ul></li><li>Destination:<ul><li>the browser download location</li><li>typically the user’s downloads directory</li><li>on macOS that is usually:<ul><li><code>~/Downloads/</code></li></ul></li></ul></li></ul>
+<p>This is the correct export destination for <code>dev</code>, <code>beta</code>, and <code>production</code> because the browser controls download placement. The game should not promise a repo-local path for player-triggered downloads.</p>
+<h4>3. Canonical Developer Review Archive</h4>
+<p>This is the normalized artifact tree used by the harness, analyzer, and log viewer.</p>
+<ul><li>Root:<ul><li><code>&lt;workspace&gt;/harness-artifacts/</code></li></ul></li><li>Review-ready run folders should include:<ul><li><code>summary.json</code></li><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code> when available</li></ul></li></ul>
+<p>This is the source of truth for:</p>
+<ul><li>log viewer inspection</li><li>synchronized event/video review</li><li>harness analysis</li><li>tuning reports</li><li>durable review evidence inside the repo workspace</li></ul>
+<h3>Formal Workflow</h3>
+<h4>Dev</h4>
+<ol><li>Player-triggered exports download through the browser into the user’s downloads location.</li><li>If the run should become a durable review artifact, import it into:</li></ol>
+<ul><li><code>&lt;workspace&gt;/harness-artifacts/</code></li></ul>
+<ol><li>Use:</li></ol>
+<pre><code data-lang="bash">   npm run harness:import-latest</code></pre>
+<ol><li>Review it in the viewer or analyzer from the imported run folder.</li></ol>
+<h4>Beta / Production</h4>
+<ol><li>In-game replay uses browser-local replay storage.</li><li>Explicit exports still go to the browser download location.</li><li>If we want a run to enter developer review, we import that downloaded pair into <code>&lt;workspace&gt;/harness-artifacts/</code> on a dev machine.</li></ol>
+<p>There is no separate filesystem export location for <code>beta</code> or <code>production</code>.</p>
+<ul><li><code>dev</code>: replay lives in browser storage, exports go to browser downloads</li><li><code>beta</code>: replay lives in browser storage, exports go to browser downloads</li><li><code>production</code>: replay lives in browser storage, exports go to browser downloads</li></ul>
+<h3>Non-Goals</h3>
+<ul><li><code>dist/dev/</code>, <code>dist/beta/</code>, and <code>dist/production/</code> are not runtime capture archives.</li><li><code>export.mov.png</code> is a build snapshot artifact, not a session/replay artifact.</li><li>The game should not imply that exported logs/videos automatically land in <code>&lt;workspace&gt;/harness-artifacts/</code>.</li></ul>
+<h3>Source of Truth</h3>
+<p>Going forward, use this distinction:</p>
+<ul><li><code>IndexedDB</code> = native local replay feature for players</li><li>browser download directory = exported log/video files</li><li><code>&lt;workspace&gt;/harness-artifacts/</code> = canonical developer review archive after import/normalization</li></ul>
+<p>If documentation or UI text blurs those boundaries, treat it as a documentation bug and correct it.</p>
         </div>
       </div>
     </section>
@@ -1805,6 +1863,9 @@ npm run publish:production</code></pre>
     <li><a href="#external-services-doc">External Services Source</a></li>
   
 
+    <li><a href="#artifact-policy-doc">Artifact Policy Source</a></li>
+  
+
     <li><a href="#baseline-doc">Reference Baseline Source</a></li>
   
 
@@ -1815,8 +1876,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0+build.252.sha.bbafd42
+          Latest release note: <strong>Native replay viewer, player guide, and launch-shell polish</strong><br>
+          Build: 0.5.0+build.257.sha.cdb89e4
         </p>
       </aside>
     </main>

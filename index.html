@@ -111,6 +111,12 @@ canvas{display:block;width:100vw;height:100vh}
 #hud .hudLabel{color:#ff3a36}
 #hud .hudValue{color:#f4f7ff}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
+#msg.boardMessage{top:50%;width:min(82vw,620px);font-size:clamp(22px,2vw,34px);line-height:1.06}
+#msg .boardTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.12em;text-transform:uppercase}
+#msg .boardAccent{display:block;color:#4fe4f4;font-size:1.02em;letter-spacing:.08em;text-transform:uppercase}
+#msg .boardScore{display:block;color:#ffd86d;font-size:.96em;letter-spacing:.08em}
+#msg .boardLine{display:block;color:#f4f7ff;font-size:.78em;letter-spacing:.06em;line-height:1.28}
+#msg .boardMinor{color:rgba(231,240,255,.84);font-size:.68em;letter-spacing:.08em}
 #msg .splashTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.08em}
 #msg .splashSub{display:block;color:#f4f7ff;font-size:.9em;letter-spacing:.05em}
 #msg .splashScore{display:block;color:#ffd86d;font-size:1em;letter-spacing:.06em}
@@ -246,6 +252,13 @@ canvas{display:block;width:100vw;height:100vh}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
 #accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
 #statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#statusPanels.waitOverlay{align-items:stretch;gap:8px;max-width:min(84vw,420px)}
+#statusPanels.waitOverlay #leaderboardPanel,
+#statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
+#statusPanels.waitOverlay #leaderboardViewsHead{align-items:flex-start;flex-direction:column;gap:6px}
+#statusPanels.waitOverlay #leaderboardStatus{text-align:left;max-width:none}
+#statusPanels.waitOverlay #leaderboardViewButtons{flex-direction:column;align-items:stretch}
+#statusPanels.waitOverlay #leaderboardViewButtons button{width:100%;min-width:0;text-align:left}
 #movieModal{position:fixed;inset:0;z-index:41;display:none;background:transparent}
 #movieModal.open{display:block}
 #moviePanel{position:fixed;display:none;overflow:hidden;color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
@@ -397,14 +410,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production</span>
-    <span id="settingsVersion">Version 0.5.0+build.252.sha.bbafd42</span>
-    <span id="settingsRelease">Mar 28 2026, 1:46 PM EDT</span>
-    <span id="settingsState">main@bbafd42 clean</span>
+    <span id="settingsVersion">Version 0.5.0+build.257.sha.cdb89e4</span>
+    <span id="settingsRelease">Mar 28 2026, 3:15 PM EDT</span>
+    <span id="settingsState">main@cdb89e4 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Aurora production lane and public beta split</span>
-    <span id="settingsNotesBody">Established Aurora Galactica as the official production URL, published a distinct production-beta lane, preserved legacy Codex bookmarks with redirects, and clarified release labeling so public players no longer see alpha branding on the live build.</span>
+    <span id="settingsNotesTitle">Native replay viewer, player guide, and launch-shell polish</span>
+    <span id="settingsNotesBody">Added a browser-native in-game replay viewer with local recent runs, introduced a player-focused guide and in-game controls/help overlays, promoted bug reporting and utility actions into the icon rail, improved wait-mode and centered message presentation, and tightened the beta-to-production release path.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -565,8 +578,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production</span>
-  <span id="buildStampVersion">Version 0.5.0+build.252.sha.bbafd42</span>
-  <span id="buildStampRelease">Mar 28 2026, 1:46 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0+build.257.sha.cdb89e4</span>
+  <span id="buildStampRelease">Mar 28 2026, 3:15 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -815,7 +828,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0',label:'0.5.0+build.252.sha.bbafd42',commit:'bbafd42bbdbdc041c8d1df8d3348b43e96c58174',branch:'main',dirty:false,released:'Mar 28 2026, 1:46 PM EDT',state:'main@bbafd42 clean',releaseChannel:'production'};
+const BUILD_INFO={version:'0.5.0',label:'0.5.0+build.257.sha.cdb89e4',commit:'cdb89e40cf7bca50a5a78d8d84309e4e9e60ee60',branch:'main',dirty:false,released:'Mar 28 2026, 3:15 PM EDT',state:'main@cdb89e4 clean',releaseChannel:'production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -959,7 +972,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:STAGE_BAND_PROFILES[0],
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const isChallengeStage=s=>s===3||((s-3)%4===0&&s>3);
@@ -1079,7 +1092,7 @@ function buildGameOverState(score,stage){
 function resetAttractBackdrop(){
  S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.alertT=0;S.alertTxt='';S.banner=0;S.bannerTxt='';S.bannerMode='';S.bannerSub='';
  for(const e of S.e)e.hp=0;
- S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.hNoShotT=0;S.p.hDebugT=0;
+ S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.hNoShotT=0;S.p.hDebugT=0;S.p.demoTargetId=null;S.p.demoTargetT=0;
 }
 function enterAttractScores(){
  ATTRACT.active=1;
@@ -1104,6 +1117,7 @@ function startAttractDemo(opts={}){
  autoExportedSessionId='';
  resetSession('attract_demo');
  gameOverHtml='';gameOverState=null;
+ aud=0;
  started=0;paused=0;
  syncPauseUi();
  ATTRACT.active=1;
@@ -1112,7 +1126,7 @@ function startAttractDemo(opts={}){
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1});
  S.stats={shots:0,hits:0};
- Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0});
+ Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle,record});
  if(record)startRunRecording();
  spawnStage();
@@ -2841,7 +2855,8 @@ function loseShip(cause={}){
  ex(p.x,p.y,42,'#86c7ff');
  ex(p.x,p.y,28,'#f4f8ff');
  ex(p.x,p.y,14,'#ff7f9f');
- S.alertTxt='SHIP DESTROYED';
+ const shipsRemaining=Math.max(0,S.lives+1);
+ S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
  if(p.dual)p.dual=0;
@@ -2872,16 +2887,21 @@ function attractMoveAxis(p){
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&Math.abs(b.x-p.x)<34).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
+  p.demoTargetId=null;
+  p.demoTargetT=0;
   const away=urgent.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
- const target=S.e.filter(e=>e.hp>0).sort((a,b)=>{
+ const lockedTarget=p.demoTargetId==null?null:S.e.find(e=>e.hp>0&&e.id===p.demoTargetId);
+ const target=(lockedTarget&&p.demoTargetT>0)?lockedTarget:S.e.filter(e=>e.hp>0).sort((a,b)=>{
   const ap=(b.dive?1000:0)+(b.carry?250:0)+b.y;
   const bp=(a.dive?1000:0)+(a.carry?250:0)+a.y;
   return bp-ap;
  })[0];
  if(!target)return 0;
- if(Math.abs(target.x-p.x)<8)return 0;
+ p.demoTargetId=target.id;
+ p.demoTargetT=Math.max(p.demoTargetT||0,target.dive?0.32:0.2);
+ if(Math.abs(target.x-p.x)<12)return 0;
  return target.x>p.x?1:-1;
 }
 const HARNESS_PERSONAS={
@@ -3004,9 +3024,15 @@ function runHarnessPlayer(dt,p,cfg){
 }
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
+ p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
  const hp=playerHitbox();
  const axis=attractMoveAxis(p);
- p.x=cl(p.x+axis*p.s*dt*.78,hp.w+2,PLAY_W-hp.w-2);
+ const targetVx=axis*p.s*.68;
+ const blend=Math.min(1,p.accel*dt*.82);
+ p.vx+=(targetVx-p.vx)*blend;
+ if(!axis&&Math.abs(p.vx)<8)p.vx=0;
+ p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
+ if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
@@ -3891,6 +3917,80 @@ function drawReserveShips(lives){
 
 function drawPostFx(){}
 
+function escapeMessageHtml(value=''){
+ return String(value)
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;');
+}
+
+function collectMessageLines(...parts){
+ const lines=[];
+ for(const part of parts){
+  if(part==null)continue;
+  for(const line of String(part).split('\n')){
+   const trimmed=line.trim();
+   if(trimmed)lines.push(trimmed);
+  }
+ }
+ return lines;
+}
+
+function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
+ const body=[];
+ if(title)body.push(`<span class="boardTitle">${escapeMessageHtml(title)}</span>`);
+ if(accent)body.push(`<span class="boardAccent">${escapeMessageHtml(accent)}</span>`);
+ if(score)body.push(`<span class="boardScore">${escapeMessageHtml(score)}</span>`);
+ for(const line of collectMessageLines(...lines)){
+  body.push(`<span class="boardLine">${escapeMessageHtml(line)}</span>`);
+ }
+ return body.join('');
+}
+
+function gameplayMessageState(){
+ if(paused){
+  return {mode:'board',html:buildBoardMessageHtml({title:'PAUSED',lines:['Press P to resume']}),topRatio:.48};
+ }
+ if(S.alertT>0){
+  const lines=collectMessageLines(S.alertTxt);
+  return {
+   mode:'board',
+   html:buildBoardMessageHtml({title:lines.shift()||'',lines}),
+   topRatio:.48
+  };
+ }
+ if(S.banner<=0)return null;
+ switch(S.bannerMode){
+  case 'challengeIntro':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'stageTransition':
+   return {mode:'board',html:buildBoardMessageHtml({title:'GET READY',score:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'captureBeat':
+   return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER CAPTURED',lines:['BOSS RETREAT']}),topRatio:.48};
+  case 'captureEscape':
+   return {mode:'board',html:buildBoardMessageHtml({title:'CAPTURE BROKEN',lines:['FIGHTER ESCAPED']}),topRatio:.48};
+  case 'captureLoss':
+   return {mode:'board',html:buildBoardMessageHtml({title:'CAPTURED FIGHTER',lines:['DESTROYED']}),topRatio:.48};
+  case 'rescueReturn':
+   return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER RELEASED',lines:['RETURNING TO SHIP']}),topRatio:.48};
+  case 'rescueBeat':
+   return {mode:'board',html:buildBoardMessageHtml({title:'DUAL FIGHTER',lines:['JOINED']}),topRatio:.48};
+  case 'challenge':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
+  case 'challengeResult':{
+   const parts=collectMessageLines(S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:S.bannerTxt,score:parts[0]||'',lines:parts.slice(1)}),topRatio:.46};
+  }
+  case 'stage':
+   return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt}),topRatio:.46};
+  default:{
+   const lines=collectMessageLines(S.bannerTxt,S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:lines.shift()||'',lines}),topRatio:.48};
+  }
+ }
+}
+
 function draw(){
  const sh=S.shake*8,dx=rnd(sh,-sh),dy=rnd(sh,-sh);
  const compactCabinet=innerWidth<1500||innerHeight<980;
@@ -3967,9 +4067,21 @@ function draw(){
    cabinetRightFrame.style.height=`${railH}px`;
   }else cabinetRightFrame.style.display='none';
  }
+ const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
  if(statusPanels){
-  statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
-  statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+  statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  if(waitScoreOverlay){
+   const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
+   statusPanels.style.width=`${panelW}px`;
+   statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
+   statusPanels.style.right='auto';
+   statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
+  }else{
+   statusPanels.style.width='';
+   statusPanels.style.left='auto';
+   statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
+   statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+  }
  }
  if(settingsPanel){
   settingsPanel.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
@@ -3980,6 +4092,7 @@ function draw(){
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
   buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
   }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
  ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);
@@ -4024,9 +4137,11 @@ if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibi
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
- msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
+ const activeMessage=started?gameplayMessageState():null;
+ msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):(activeMessage?.mode==='board'?'boardMessage':'');
  if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.72)}px`;
  else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
+ else if(activeMessage?.mode==='board')msg.style.top=`${Math.floor(oy+viewH*(activeMessage.topRatio||.48))}px`;
  else msg.style.top='';
  if(!started){
   if(gameOverState)msg.innerHTML=buildGameOverHtmlFromState();
@@ -4034,23 +4149,7 @@ if(!toolsVisible)closeSettings();
   else if(ATTRACT.active&&ATTRACT.phase==='scores')msg.innerHTML=buildAttractScoreboardHtml();
   else msg.innerHTML=`<span class="startTitle">AURORA GALACTICA</span><span class="startSub">WAIT MODE</span><span class="startHelp">PRESS <span class="k">ENTER</span> TO START</span><span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span><span class="startMeta">AUTO DEMO IN PROGRESS   HIGH SCORES NEXT</span><span class="startMeta">${controlMoveHelpHtml()}</span><span class="startMeta"><span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS</span>`;
  }
- else if(paused)msg.innerHTML='PAUSED\n\nPress <span class="k">P</span> to resume';
- else if(S.alertT>0)msg.textContent=S.alertTxt;
- else if(S.banner>0){
- if(S.bannerMode==='challengeIntro')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
- else if(S.bannerMode==='stageTransition')msg.innerHTML=`<span class="splashTitle">GET READY</span><span class="splashScore">${S.bannerTxt}</span><span class="splashSub">${S.bannerSub}</span>`;
- else if(S.bannerMode==='captureBeat')msg.innerHTML=`<span class="splashTitle">FIGHTER CAPTURED</span><span class="splashSub">BOSS RETREAT</span>`;
- else if(S.bannerMode==='captureEscape')msg.innerHTML=`<span class="splashTitle">CAPTURE BROKEN</span><span class="splashSub">FIGHTER ESCAPED</span>`;
- else if(S.bannerMode==='captureLoss')msg.innerHTML=`<span class="splashTitle">CAPTURED FIGHTER</span><span class="splashSub">DESTROYED</span>`;
- else if(S.bannerMode==='rescueReturn')msg.innerHTML=`<span class="splashTitle">FIGHTER RELEASED</span><span class="splashSub">RETURNING TO SHIP</span>`;
- else if(S.bannerMode==='rescueBeat')msg.innerHTML=`<span class="splashTitle">DUAL FIGHTER</span><span class="splashSub">JOINED</span>`;
- else if(S.bannerMode==='challenge')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.06em;letter-spacing:.1em">${S.bannerTxt}</span><span class="splashSub" style="color:#7ef2ff">${S.bannerSub}</span>`;
-  else if(S.bannerMode==='challengeResult'){
-   const parts=String(S.bannerSub||'').split('\n');
-   msg.innerHTML=`<span class="splashTitle">${S.bannerTxt}</span><span class="splashScore">${parts[0]||''}</span>${parts[1]?`<span class="splashSub">${parts[1]}</span>`:''}`;
-  }else if(S.bannerMode==='stage')msg.innerHTML=`<span class="splashSub" style="color:#4fe4f4;font-size:1.02em;letter-spacing:.08em">${S.bannerTxt}</span>`;
-  else msg.textContent=S.bannerTxt;
- }
+ else if(activeMessage)msg.innerHTML=activeMessage.html;
  else msg.textContent='';
 }
 
@@ -4155,9 +4254,90 @@ window.__galagaHarness__={
   started=0;paused=0;
   msg.textContent='';
  },
+ async seedLocalReplay(cfg={}){
+  if(!window.AuroraReplayStore?.supported?.()) return false;
+  if(cfg.clearExisting){
+   const existing = await window.AuroraReplayStore.listReplays();
+   for(const replay of existing) await window.AuroraReplayStore.deleteReplay(replay.id);
+  }
+  const bytes = Array.isArray(cfg.blobBytes) && cfg.blobBytes.length
+   ? cfg.blobBytes
+   : [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88];
+  const blob = new Blob([new Uint8Array(bytes)], { type: cfg.type || 'video/webm' });
+  await window.AuroraReplayStore.saveReplay({
+   id: cfg.id || `harness-replay-${Date.now()}`,
+   createdAt: cfg.createdAt || new Date().toISOString(),
+   duration: +cfg.duration || 12,
+   score: +cfg.score || 4321,
+   stage: +cfg.stage || 2,
+   challenge: !!cfg.challenge,
+   build: (window.BUILD && window.BUILD.version) || '',
+   stats: cfg.stats || { shots: 6, hits: 4 },
+   source: cfg.source || 'local',
+   blob
+  });
+  return true;
+ },
+ openMoviePanel(){
+  if(typeof window.refreshMovieCatalog === 'function')window.refreshMovieCatalog({ silent: 1 });
+  if(typeof movieDockBtn !== 'undefined' && movieDockBtn)movieDockBtn.click();
+  return !!(typeof window.isMoviePanelOpen === 'function' && window.isMoviePanelOpen());
+ },
+ startSelectedMovieReplay(){
+  if(typeof movieStartBtn !== 'undefined' && movieStartBtn)movieStartBtn.click();
+  return true;
+ },
+ closeMoviePanel(){
+  if(typeof window.closeMoviePanel === 'function')window.closeMoviePanel();
+  return true;
+ },
+ openWaitLeaderboard(view='all'){
+  startAttractDemo({ record: false });
+  if(typeof openLeaderboardPanel === 'function')openLeaderboardPanel(view);
+  return true;
+ },
+ restartCurrentConfig(){
+  S.lives = -1;
+  gameOver();
+  start();
+  return snapshot();
+ },
+ setBoardMessage(cfg={}){
+  paused = !!cfg.paused;
+  if(typeof syncPauseUi === 'function')syncPauseUi();
+  if(cfg.mode === 'alert'){
+   S.banner = 0;
+   S.bannerTxt = '';
+   S.bannerSub = '';
+   S.bannerMode = '';
+   S.alertTxt = String(cfg.text || '');
+   S.alertT = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  if(cfg.mode === 'banner'){
+   S.alertT = 0;
+   S.alertTxt = '';
+   S.bannerMode = String(cfg.bannerMode || '');
+   S.bannerTxt = String(cfg.title || '');
+   S.bannerSub = String(cfg.subtitle || '');
+   S.banner = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  return false;
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ uiState(){
+  return {
+   started: !!started,
+   paused: !!paused,
+   aud,
+   attract: { active: !!ATTRACT.active, phase: ATTRACT.phase || '' },
+   movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
+   leaderboardOpen: typeof LEADERBOARD !== 'undefined' ? !!LEADERBOARD.panelOpen : false
+  };
+ },
  recentEvents(cfg={}){
   const count=Math.max(1,Math.min(200,+cfg.count||20));
   return REC ? REC.events.slice(-count) : [];
