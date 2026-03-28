@@ -399,11 +399,11 @@
           </div>
           <h1>Aurora Galactica Project Guide</h1>
           <p>A readable, current map of the project: what we are building, how the code and tooling fit together, and what still matters before the polished four-stage 1.0 launch.</p>
-          <div class="goal"><strong>Current goal:</strong> Ship a polished four-stage 1.0 slice with a cleaner arcade shell, trustworthy public release flow, and a player-ready guide that stays inside the game.</div>
+          <div class="goal"><strong>Current goal:</strong> Ship a polished four-stage 1.0 slice with native replays, a player-ready in-game guide, and a corrected production publish path that matches beta.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.256.sha.3ea989d.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.257.sha.cdb89e4.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Aurora production lane and public beta split</span>
+              <span class="metaValue">Native replay viewer, player guide, and launch-shell polish</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -442,7 +442,7 @@
 
     <article class="card">
       <h3>Where The Game Is Strong</h3>
-      <p>Manual play says the core slice is healthy enough to launch if the presentation lands cleanly: capture/rescue is now guarded end-to-end, the shell/control rail is much stronger, the release flow is scripted, and the log viewer gives us a practical debugging loop.</p>
+      <p>Manual play says the core slice is healthy enough to launch if the final trust items land cleanly: capture/rescue is guarded end-to-end, the shell/control rail is much stronger, native replay is in the game, and the remaining release work is mostly production correctness plus final presentation confidence.</p>
     </article>
   
 
@@ -486,7 +486,7 @@
     <li>The special boss-with-two-escorts bonus attack still needs one more readability pass before 1.0 is called done.</li>
   
 
-    <li>The production-vs-beta operational split and final release-readiness pass remain real launch-significant items.</li>
+    <li>The production-vs-beta operational split, the public production deploy path, and the final release-readiness pass remain the real launch-significant items.</li>
   
 </ul>
     </section>
@@ -581,7 +581,7 @@
 
     <article class="card">
       <h3>Build / Public Sync</h3>
-      <p>`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces into `Aurora-Galactica`. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff.</p>
+      <p>`tools/build/build-index.js` assembles the local dev build into `dist/dev/`, including the release dashboard, project guide, and player guide. `tools/build/promote-beta.js` and `tools/build/promote-production.js` snapshot that output into `dist/beta/` and `dist/production/`. `tools/build/check-publish-ready.js` verifies a lane is publishable from the current `HEAD`. `tools/build/publish-lane.js` publishes generated surfaces and the Pages workflow contract into `Aurora-Galactica`, where Pages should package committed artifacts rather than rebuild stale source. `tools/dev/local-resume.js` brings the local game and viewer back up together after a machine handoff.</p>
     </article>
   
 
@@ -934,7 +934,7 @@
 <h4>6. Publish Hosted Production</h4>
 <ul><li>Preferred:</li></ul>
 <pre><code data-lang="bash">  npm run publish:production</code></pre>
-<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li>Optional manual inspection steps still exist:</li></ul>
+<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li><code>Aurora-Galactica</code> Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.</li><li>Optional manual inspection steps still exist:</li></ul>
 <pre><code data-lang="bash">  npm run promote:production
   npm run publish:check:production
   npm run publish:production:raw</code></pre>
@@ -1876,8 +1876,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.256.sha.3ea989d.beta
+          Latest release note: <strong>Native replay viewer, player guide, and launch-shell polish</strong><br>
+          Build: 0.5.0-beta.1+build.257.sha.cdb89e4.beta
         </p>
       </aside>
     </main>

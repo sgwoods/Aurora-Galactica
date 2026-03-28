@@ -410,14 +410,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.256.sha.3ea989d.beta</span>
-    <span id="settingsRelease">Mar 28 2026, 2:45 PM EDT</span>
-    <span id="settingsState">beta@3ea989d clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.257.sha.cdb89e4.beta</span>
+    <span id="settingsRelease">Mar 28 2026, 3:14 PM EDT</span>
+    <span id="settingsState">beta@cdb89e4 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Aurora production lane and public beta split</span>
-    <span id="settingsNotesBody">Established Aurora Galactica as the official production URL, published a distinct production-beta lane, preserved legacy Codex bookmarks with redirects, and clarified release labeling so public players no longer see alpha branding on the live build.</span>
+    <span id="settingsNotesTitle">Native replay viewer, player guide, and launch-shell polish</span>
+    <span id="settingsNotesBody">Added a browser-native in-game replay viewer with local recent runs, introduced a player-focused guide and in-game controls/help overlays, promoted bug reporting and utility actions into the icon rail, improved wait-mode and centered message presentation, and tightened the beta-to-production release path.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -578,8 +578,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.256.sha.3ea989d.beta</span>
-  <span id="buildStampRelease">Mar 28 2026, 2:45 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.257.sha.cdb89e4.beta</span>
+  <span id="buildStampRelease">Mar 28 2026, 3:14 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -828,7 +828,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.256.sha.3ea989d.beta',commit:'3ea989dd20282257ccade3aa5d0b01c5bd3737e3',branch:'beta',dirty:false,released:'Mar 28 2026, 2:45 PM EDT',state:'beta@3ea989d clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.257.sha.cdb89e4.beta',commit:'cdb89e40cf7bca50a5a78d8d84309e4e9e60ee60',branch:'beta',dirty:false,released:'Mar 28 2026, 3:14 PM EDT',state:'beta@cdb89e4 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -4254,9 +4254,90 @@ window.__galagaHarness__={
   started=0;paused=0;
   msg.textContent='';
  },
+ async seedLocalReplay(cfg={}){
+  if(!window.AuroraReplayStore?.supported?.()) return false;
+  if(cfg.clearExisting){
+   const existing = await window.AuroraReplayStore.listReplays();
+   for(const replay of existing) await window.AuroraReplayStore.deleteReplay(replay.id);
+  }
+  const bytes = Array.isArray(cfg.blobBytes) && cfg.blobBytes.length
+   ? cfg.blobBytes
+   : [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88];
+  const blob = new Blob([new Uint8Array(bytes)], { type: cfg.type || 'video/webm' });
+  await window.AuroraReplayStore.saveReplay({
+   id: cfg.id || `harness-replay-${Date.now()}`,
+   createdAt: cfg.createdAt || new Date().toISOString(),
+   duration: +cfg.duration || 12,
+   score: +cfg.score || 4321,
+   stage: +cfg.stage || 2,
+   challenge: !!cfg.challenge,
+   build: (window.BUILD && window.BUILD.version) || '',
+   stats: cfg.stats || { shots: 6, hits: 4 },
+   source: cfg.source || 'local',
+   blob
+  });
+  return true;
+ },
+ openMoviePanel(){
+  if(typeof window.refreshMovieCatalog === 'function')window.refreshMovieCatalog({ silent: 1 });
+  if(typeof movieDockBtn !== 'undefined' && movieDockBtn)movieDockBtn.click();
+  return !!(typeof window.isMoviePanelOpen === 'function' && window.isMoviePanelOpen());
+ },
+ startSelectedMovieReplay(){
+  if(typeof movieStartBtn !== 'undefined' && movieStartBtn)movieStartBtn.click();
+  return true;
+ },
+ closeMoviePanel(){
+  if(typeof window.closeMoviePanel === 'function')window.closeMoviePanel();
+  return true;
+ },
+ openWaitLeaderboard(view='all'){
+  startAttractDemo({ record: false });
+  if(typeof openLeaderboardPanel === 'function')openLeaderboardPanel(view);
+  return true;
+ },
+ restartCurrentConfig(){
+  S.lives = -1;
+  gameOver();
+  start();
+  return snapshot();
+ },
+ setBoardMessage(cfg={}){
+  paused = !!cfg.paused;
+  if(typeof syncPauseUi === 'function')syncPauseUi();
+  if(cfg.mode === 'alert'){
+   S.banner = 0;
+   S.bannerTxt = '';
+   S.bannerSub = '';
+   S.bannerMode = '';
+   S.alertTxt = String(cfg.text || '');
+   S.alertT = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  if(cfg.mode === 'banner'){
+   S.alertT = 0;
+   S.alertTxt = '';
+   S.bannerMode = String(cfg.bannerMode || '');
+   S.bannerTxt = String(cfg.title || '');
+   S.bannerSub = String(cfg.subtitle || '');
+   S.banner = Math.max(0.1, +cfg.duration || 1.2);
+   return true;
+  }
+  return false;
+ },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,persona:(window.__auroraHarnessPersona||'').toLowerCase()||null}},
+ uiState(){
+  return {
+   started: !!started,
+   paused: !!paused,
+   aud,
+   attract: { active: !!ATTRACT.active, phase: ATTRACT.phase || '' },
+   movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
+   leaderboardOpen: typeof LEADERBOARD !== 'undefined' ? !!LEADERBOARD.panelOpen : false
+  };
+ },
  recentEvents(cfg={}){
   const count=Math.max(1,Math.min(200,+cfg.count||20));
   return REC ? REC.events.slice(-count) : [];
