@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.251.sha.dc8eb8c.beta</span>
+              <span class="metaValue">0.5.0-beta.1+build.252.sha.bbafd42.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -922,20 +922,22 @@
 <pre><code data-lang="bash">  npm run promote:beta</code></pre>
 <ul><li>This creates a beta-ready snapshot in:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
 <h4>5. Publish Hosted Beta</h4>
-<ul><li>Preflight:</li></ul>
-<pre><code data-lang="bash">  npm run publish:check:beta</code></pre>
 <ul><li>Preferred:</li></ul>
 <pre><code data-lang="bash">  npm run publish:beta</code></pre>
+<ul><li>This command now refreshes the beta lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/beta</code></li><li>runs beta preflight</li><li>publishes the lane</li></ul></li><li>Optional manual inspection steps still exist:</li></ul>
+<pre><code data-lang="bash">  npm run promote:beta
+  npm run publish:check:beta
+  npm run publish:beta:raw</code></pre>
 <ul><li>This clones <code>sgwoods/Aurora-Galactica</code>, copies:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
 <p>into the <code>/beta/</code> folder, commits, and pushes.</p>
 <ul><li>Then GitHub Pages updates:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
 <h4>6. Publish Hosted Production</h4>
-<ul><li>First promote the approved dev build into the stable production artifact:</li></ul>
-<pre><code data-lang="bash">  npm run promote:production</code></pre>
-<ul><li>Preflight:</li></ul>
-<pre><code data-lang="bash">  npm run publish:check:production</code></pre>
 <ul><li>Preferred:</li></ul>
 <pre><code data-lang="bash">  npm run publish:production</code></pre>
+<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li>Optional manual inspection steps still exist:</li></ul>
+<pre><code data-lang="bash">  npm run promote:production
+  npm run publish:check:production
+  npm run publish:production:raw</code></pre>
 <ul><li>This clones <code>sgwoods/Aurora-Galactica</code>, copies:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul></li></ul>
 <p>into the root published surface, commits, and pushes.</p>
 <ul><li>Then GitHub Pages updates:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li></ul>
@@ -1814,7 +1816,7 @@ npm run publish:production</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora production lane and public beta split</strong><br>
-          Build: 0.5.0-beta.1+build.251.sha.dc8eb8c.beta
+          Build: 0.5.0-beta.1+build.252.sha.bbafd42.beta
         </p>
       </aside>
     </main>
