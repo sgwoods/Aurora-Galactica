@@ -81,10 +81,10 @@ canvas{display:block;width:100vw;height:100vh}
 }
 #cabinetMarquee{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:min(62%,520px);max-width:62%;padding:.12em .7em .1em;border:3px solid #f05e1d;background:linear-gradient(180deg,#fbfcff,#edf4ff);clip-path:polygon(5% 0,95% 0,100% 22%,96% 100%,4% 100%,0 22%);box-shadow:0 0 0 4px #38d6a0,inset 0 0 0 2px rgba(255,255,255,.75),0 8px 20px rgba(0,0,0,.3)}
 #cabinetMarqueeTitle{font:900 clamp(18px,2.4vw,40px)/1 "Georgia","Times New Roman",serif;font-style:italic;letter-spacing:.02em;text-transform:none;color:#f4ad1d;text-shadow:-2px 0 #d41f27,0 2px #d41f27,2px 0 #d41f27,0 -2px #d41f27,3px 3px 0 #2bd5a0,0 0 18px rgba(255,232,102,.18);white-space:nowrap}
-#playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;border:1px solid rgba(201,228,255,.12);box-shadow:inset 0 0 0 1px rgba(255,220,122,.08)}
+#playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;--frame-inner-inset:11px;border:1px solid rgba(171,214,255,.28);box-shadow:0 10px 34px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,220,122,.08)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;pointer-events:none}
-#playfieldFrame::before{inset:10px;border:1px solid rgba(255,255,255,.04)}
-#playfieldFrame::after{inset:0;box-shadow:inset 0 0 24px rgba(5,10,24,.48)}
+#playfieldFrame::before{inset:var(--frame-inner-inset);border:1px solid rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(28,53,116,.58)}
+#playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
 #cabinetRightFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
  radial-gradient(circle at 26% 12%,rgba(255,226,111,.55) 0 7%,transparent 8%),
  radial-gradient(circle at 78% 88%,rgba(255,217,88,.46) 0 8%,transparent 9%),
@@ -101,7 +101,8 @@ canvas{display:block;width:100vw;height:100vh}
  radial-gradient(circle at 84% 14%,rgba(255,255,255,.76) 0 1px,transparent 2px);
  opacity:.95}
 #cabinetRightFrame::before,#cabinetRightFrame::after{pointer-events:none}
-#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;padding:4px 14px 3px;background:rgba(0,0,0,.72);font-size:clamp(14px,1vw,22px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:14px;padding:4px 10px 0;min-height:var(--hud-band-height,30px);font-size:clamp(14px,.96vw,21px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
+#hud::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--hud-band-height,30px) + var(--hud-band-fade,30px));background:linear-gradient(180deg,rgba(0,0,0,.82),rgba(0,0,0,.48) 58%,rgba(0,0,0,0));z-index:-1}
 #left,#center,#right{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #left{text-align:left}
 #center{text-align:center}
@@ -180,8 +181,31 @@ canvas{display:block;width:100vw;height:100vh}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
-#feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
-#feedbackModal.open{display:flex}
+#helpModal,#feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
+#helpModal.open,#feedbackModal.open{display:flex}
+#helpPanel{width:min(820px,calc(100vw - 26px));height:min(78vh,720px);display:flex;flex-direction:column;gap:12px;background:rgba(8,13,25,.97);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
+#helpHead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+#helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
+#helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
+#helpClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#helpTabs{display:flex;gap:8px}
+#helpTabs button{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;padding:8px 12px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer;letter-spacing:.05em}
+#helpTabs button[aria-selected="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
+#helpPanels{min-height:0;flex:1}
+.helpSection{display:none;height:100%}
+.helpSection.visible{display:flex;flex-direction:column;gap:12px}
+#controlsLegend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.controlCard{display:flex;flex-direction:column;gap:7px;min-height:124px;padding:12px;border:1px solid rgba(136,245,255,.2);background:rgba(8,18,35,.72)}
+.controlCardIcon{font-size:20px;line-height:1}
+.controlCardTitle{font:700 14px/1 "Courier New",Consolas,monospace;color:#ffe39a;letter-spacing:.05em}
+.controlCardBody{font-size:13px;line-height:1.45;color:#e8f4ff}
+#controlsIndex{display:grid;grid-template-columns:minmax(190px,240px) minmax(0,1fr);gap:8px 16px;padding:12px;border:1px solid rgba(136,245,255,.18);background:rgba(4,10,20,.82);overflow:auto}
+.controlRow{display:contents}
+.controlKeys{color:#7ef2ff;font:700 13px/1.3 "Courier New",Consolas,monospace}
+.controlAction{color:#f4f7ff;font-size:13px;line-height:1.35}
+#helpGuideActions{display:flex;justify-content:flex-end}
+#helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
 #feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
 #feedbackPanel h2{margin:0 0 10px;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
@@ -194,14 +218,18 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
-#statusDock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px;width:calc(100% - 24px)}
+#statusDock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px;width:calc(100% - 24px);height:calc(100% - 28px)}
 #statusDock{pointer-events:auto}
-#dockQuickTools{display:flex;flex-direction:column;gap:8px;width:100%;max-width:116px}
-#dockQuickTools button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding:0 12px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
+#dockQuickTools{display:flex;flex-direction:column;justify-content:space-between;gap:16px;width:100%;max-width:68px;height:100%}
+#dockQuickTools .dockToolGroup{display:flex;flex-direction:column;gap:8px}
+#dockQuickTools .dockToolGroupUtility{margin-top:auto}
+#dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
 #dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
 #dockQuickTools button.active,#dockQuickTools button.open{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#dockQuickTools .dockLabel{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-#handToggleBtn{justify-content:center;font-size:12px}
+#dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none}
+#dockQuickTools button:disabled:hover{background:rgba(8,18,35,.78);border-color:rgba(136,245,255,.28)}
+#dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;transform:translateY(-1px)}
+#muteToggleBtn[data-muted="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
 #accountPanel{display:none;flex-direction:column;gap:8px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
 #accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -260,7 +288,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #cabinetRightFrame{display:none!important}
  #statusDock,#statusPanels,#settingsPanel,#buildStamp{left:14px!important;right:14px!important;top:auto!important;bottom:14px!important;transform:none!important;width:auto!important}
  #statusDock{position:fixed;display:block}
- #dockQuickTools{max-width:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #dockQuickTools{max-width:none;display:grid;grid-template-columns:repeat(2,minmax(0,60px));justify-content:start;height:auto}
+ #dockQuickTools .dockToolGroup{display:contents}
  #dockQuickTools button{justify-content:center}
  #settingsPanel{bottom:126px!important}
  #statusPanels{align-items:stretch;bottom:126px!important}
@@ -269,9 +298,13 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
  #buildStamp{align-items:flex-start}
- #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 5px}
+ #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}
+ #helpPanel{height:min(84vh,760px)}
+ #controlsLegend{grid-template-columns:1fr}
+ #controlsIndex{grid-template-columns:1fr}
+ #helpTabs{flex-wrap:wrap}
 }
 </style>
 </head>
@@ -291,10 +324,18 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="cabinetRightFrame" aria-hidden="true">
   <div id="statusDock">
     <div id="dockQuickTools">
-      <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores">🏆<span class="dockLabel">Scores</span></button>
-      <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account">👤<span class="dockLabel">Pilot</span></button>
-      <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings">⚙<span class="dockLabel">Tools</span></button>
-      <button id="handToggleBtn" type="button" aria-pressed="false" aria-label="Toggle handed controls">Hand R</button>
+      <div class="dockToolGroup dockToolGroupPrimary">
+        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
+        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
+        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
+        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
+      </div>
+      <div class="dockToolGroup dockToolGroupUtility">
+        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
+        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
+        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Developer Tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -304,7 +345,6 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <h3>Developer Tools</h3>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
-    <button id="feedbackBtn" aria-expanded="false" aria-controls="feedbackModal">Feedback</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
   </div>
@@ -322,14 +362,65 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.238.sha.e0e1160.beta</span>
-    <span id="settingsRelease">Mar 27 2026, 7:55 PM EDT</span>
-    <span id="settingsState">beta@e0e1160 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.247.sha.4253ab4.beta</span>
+    <span id="settingsRelease">Mar 28 2026, 11:12 AM EDT</span>
+    <span id="settingsState">beta@4253ab4 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
     <span id="settingsNotesTitle">Aurora production lane and public beta split</span>
     <span id="settingsNotesBody">Established Aurora Galactica as the official production URL, published a distinct production-beta lane, preserved legacy Codex bookmarks with redirects, and clarified release labeling so public players no longer see alpha branding on the live build.</span>
+  </div>
+</div>
+<div id="helpModal" aria-hidden="true">
+  <div id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div id="helpHead">
+      <div>
+        <h2 id="helpTitle">Pilot Reference</h2>
+        <div id="helpSubtitle">Keep the game in view while you check controls and the guide.</div>
+      </div>
+      <button type="button" id="helpClose" aria-label="Close reference">×</button>
+    </div>
+    <div id="helpTabs" role="tablist" aria-label="Reference tabs">
+      <button type="button" id="helpTabControls" data-help-tab="controls" aria-selected="true" aria-controls="helpControlsPanel">Controls</button>
+      <button type="button" id="helpTabGuide" data-help-tab="guide" aria-selected="false" aria-controls="helpGuidePanel">Guide</button>
+    </div>
+    <div id="helpPanels">
+      <section id="helpControlsPanel" class="helpSection visible" data-help-panel="controls">
+        <div id="controlsLegend">
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">🕹</span>
+            <span class="controlCardTitle">Movement</span>
+            <span class="controlCardBody">Use <strong>Arrow Left/Right</strong> or <strong>A / D</strong>. For cabinet-style play, <strong>Fn or Ctrl</strong> moves left and <strong>Option</strong> moves right.</span>
+          </div>
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">🚀</span>
+            <span class="controlCardTitle">Fire</span>
+            <span class="controlCardBody">Press <strong>Space</strong> to fire. The game supports both-handed movement layouts at the same time.</span>
+          </div>
+          <div class="controlCard">
+            <span class="controlCardIcon" aria-hidden="true">⏸</span>
+            <span class="controlCardTitle">Pause</span>
+            <span class="controlCardBody"><strong>P</strong> pauses the run. <strong>T</strong> opens Developer Tools. <strong>L</strong> exports the log and <strong>X</strong> exports and returns to wait mode.</span>
+          </div>
+        </div>
+        <div id="controlsIndex">
+          <div class="controlRow"><span class="controlKeys">Arrow Left / A / Fn / Ctrl</span><span class="controlAction">Move left</span></div>
+          <div class="controlRow"><span class="controlKeys">Arrow Right / D / Option</span><span class="controlAction">Move right</span></div>
+          <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
+          <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
+          <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
+          <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
+          <div class="controlRow"><span class="controlKeys">X</span><span class="controlAction">Export and return to wait mode</span></div>
+        </div>
+      </section>
+      <section id="helpGuidePanel" class="helpSection" data-help-panel="guide" hidden>
+        <div id="helpGuideActions">
+          <button type="button" id="helpOpenWindowBtn">Open in New Window</button>
+        </div>
+        <iframe id="helpGuideFrame" title="Aurora Galactica guide" loading="lazy"></iframe>
+      </section>
+    </div>
   </div>
 </div>
 <div id="feedbackModal" aria-hidden="true">
@@ -409,8 +500,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.238.sha.e0e1160.beta</span>
-  <span id="buildStampRelease">Mar 27 2026, 7:55 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.247.sha.4253ab4.beta</span>
+  <span id="buildStampRelease">Mar 28 2026, 11:12 AM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -448,11 +539,17 @@ const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
-const feedbackBtn=document.getElementById('feedbackBtn'),feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
+const guideDockBtn=document.getElementById('guideDockBtn');
+const controlsDockBtn=document.getElementById('controlsDockBtn');
+const feedbackDockBtn=document.getElementById('feedbackDockBtn');
+const helpModal=document.getElementById('helpModal'),helpClose=document.getElementById('helpClose'),helpGuideFrame=document.getElementById('helpGuideFrame'),helpOpenWindowBtn=document.getElementById('helpOpenWindowBtn');
+const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
+const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
-const handToggleBtn=document.getElementById('handToggleBtn');
+const muteToggleBtn=document.getElementById('muteToggleBtn');
+const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -466,7 +563,7 @@ const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
-const HAND_SWITCH_PREF_KEY=`${STORAGE_PREFIX}SwitchHand`;
+const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
@@ -474,10 +571,10 @@ const LEGACY_STORAGE_KEYS={
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
- [HAND_SWITCH_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}SwitchHand`,
+ [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
 };
-let switchHandMode=readPref(HAND_SWITCH_PREF_KEY)==='1';
+let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -513,12 +610,13 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.238.sha.e0e1160.beta',commit:'e0e11607378072159cde0cbcc8c071b7d941d02d',branch:'beta',dirty:false,released:'Mar 27 2026, 7:55 PM EDT',state:'beta@e0e1160 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.247.sha.4253ab4.beta',commit:'4253ab472d691b66584b223ec02dbd3f8fa4a85f',branch:'beta',dirty:false,released:'Mar 28 2026, 11:12 AM EDT',state:'beta@4253ab4 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
 let autoExportedSessionId='';
@@ -573,7 +671,7 @@ const AC=()=>{
  const A=new (window.AudioContext||webkitAudioContext)();
  sfx.a=A;
  sfx.bus=A.createGain();
- sfx.bus.gain.value=.9;
+ sfx.bus.gain.value=audioMuted?0:.9;
  sfx.tap=A.createMediaStreamDestination();
  sfx.keep=A.createConstantSource();
  sfx.keep.offset.value=0;
@@ -802,6 +900,7 @@ function startAttractDemo(opts={}){
  resetSession('attract_demo');
  gameOverHtml='';gameOverState=null;
  started=0;paused=0;
+ syncPauseUi();
  ATTRACT.active=1;
  ATTRACT.phase='demo';
  ATTRACT.timer=11.5;
@@ -819,6 +918,7 @@ function stopAttractLoop(){
  ATTRACT.phase='';
  ATTRACT.timer=0;
  S.attract=0;
+ syncPauseUi();
 }
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
@@ -934,30 +1034,51 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return switchHandMode?['Fn','ControlLeft']:['ArrowLeft','KeyA'];
+ return ['ArrowLeft','KeyA','Fn','ControlLeft'];
 }
 function movementRightCodes(){
- return switchHandMode?['AltLeft']:['ArrowRight','KeyD'];
+ return ['ArrowRight','KeyD','AltLeft'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- if(switchHandMode)return `<span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
- return `ARROWS MOVE   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">FN/CTRL</span> LEFT   <span class="k">OPTION</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
 }
-function syncControlUi(){
- if(handToggleBtn){
-  handToggleBtn.textContent=switchHandMode?'Hand L':'Hand R';
-  handToggleBtn.setAttribute('aria-pressed',switchHandMode?'true':'false');
-  handToggleBtn.title=switchHandMode?'Switched controls: Fn/Ctrl left, Option right':'Standard controls: arrows move';
- }
+function syncAudioUi(){
+ if(!muteToggleBtn)return;
+ muteToggleBtn.dataset.muted=audioMuted?'true':'false';
+ muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
+ muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
+ muteToggleBtn.title=audioMuted?'Game audio muted':'Game audio on';
+ const icon=muteToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=audioMuted?'🔇':'🔊';
+ if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
 }
-function setSwitchHandMode(next,opts={}){
- switchHandMode=!!next;
- writePref(HAND_SWITCH_PREF_KEY,switchHandMode?'1':'0');
- syncControlUi();
- if(!opts.silent)showToast(switchHandMode?'Switched movement to Fn/Ctrl + Option':'Switched movement to arrows');
+function syncPauseUi(){
+ if(!pauseToggleBtn)return;
+ const canPause=!!started;
+ const active=!!(started&&paused&&!feedbackOpen&&!helpOpen&&!settingsOpen);
+ pauseToggleBtn.disabled=!canPause;
+ pauseToggleBtn.dataset.paused=active?'true':'false';
+ pauseToggleBtn.setAttribute('aria-pressed',active?'true':'false');
+ pauseToggleBtn.setAttribute('aria-label',active?'Resume game':'Pause game');
+ pauseToggleBtn.title=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
+ const icon=pauseToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=active?'▶':'⏸';
+ pauseToggleBtn.classList.toggle('active',active);
+}
+function toggleGameplayPause(){
+ if(!started)return;
+ paused=!paused;
+ if(!paused&&settingsOpen)closeSettings();
+ syncPauseUi();
+}
+function setAudioMuted(next,opts={}){
+ audioMuted=!!next;
+ writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
+ syncAudioUi();
+ if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
@@ -980,25 +1101,95 @@ function syncSettingsUi(){
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
 }
+function syncHelpUi(){
+ if(!helpModal)return;
+ helpModal.classList.toggle('open',helpOpen);
+ helpModal.setAttribute('aria-hidden',helpOpen?'false':'true');
+ if(guideDockBtn){
+  const open=helpOpen&&helpMode==='guide';
+  guideDockBtn.classList.toggle('open',open);
+  guideDockBtn.setAttribute('aria-expanded',open?'true':'false');
+ }
+ if(controlsDockBtn){
+  const open=helpOpen&&helpMode==='controls';
+  controlsDockBtn.classList.toggle('open',open);
+  controlsDockBtn.setAttribute('aria-expanded',open?'true':'false');
+ }
+ helpTabButtons.forEach(btn=>{
+  const active=btn.dataset.helpTab===helpMode;
+  btn.setAttribute('aria-selected',active?'true':'false');
+  btn.classList.toggle('active',active);
+ });
+ helpPanels.forEach(panel=>{
+  const active=panel.dataset.helpPanel===helpMode;
+  panel.hidden=!active;
+  panel.classList.toggle('visible',active);
+ });
+ if(helpGuideFrame&&helpMode==='guide'&&!helpGuideFrame.src)helpGuideFrame.src=playersGuideUrl();
+}
 function syncTestUi(){
  const cfg=loadTestCfg();
  testStage.value=cfg.stage;testShips.value=cfg.ships;testChallenge.checked=cfg.challenge;
- syncControlUi();
+ syncAudioUi();
+ syncPauseUi();
  syncSettingsUi();
+ syncHelpUi();
 }
 function closeSettings(){
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
  syncSettingsUi();
+ syncPauseUi();
 }
 function openSettings(){
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
  syncSettingsUi();
+ syncPauseUi();
 }
 function logViewerUrl(){
  return 'http://127.0.0.1:4311/';
+}
+function playersGuideUrl(){
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
+}
+function openPlayersGuideWindow(){
+ const win=window.open(playersGuideUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened players guide');
+ }else showToast('Allow popups to open the players guide');
+}
+function openHelp(mode='controls'){
+ if(helpOpen&&helpMode===mode)return;
+ closeSettings();
+ if(feedbackOpen)closeFeedback(1);
+ helpPrevPaused=paused;
+ if(started&&!paused)paused=1;
+ helpMode=mode==='guide'?'guide':'controls';
+ helpOpen=1;
+ keys={};keyState={};
+ logEvent('help_open',{mode:helpMode});
+ syncHelpUi();
+ syncPauseUi();
+ setTimeout(()=>{
+  const target=helpMode==='guide'?helpOpenWindowBtn:helpTabButtons.find(btn=>btn.dataset.helpTab===helpMode);
+  target?.focus?.();
+ },0);
+}
+function closeHelp(force=0){
+ if(!helpOpen&&!force)return;
+ helpOpen=0;
+ if(started)paused=helpPrevPaused;
+ logEvent('help_close',{force:!!force,mode:helpMode});
+ syncHelpUi();
+ syncPauseUi();
+}
+function setHelpMode(mode='controls'){
+ helpMode=mode==='guide'?'guide':'controls';
+ if(helpOpen)logEvent('help_tab',{mode:helpMode});
+ syncHelpUi();
 }
 function openLogViewer(){
  const win=window.open(logViewerUrl(), '_blank', 'noopener');
@@ -1105,12 +1296,17 @@ function showToast(t){
 function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
+ if(helpOpen)closeHelp(1);
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
- feedbackBtn.setAttribute('aria-expanded','true');
+ if(feedbackDockBtn){
+  feedbackDockBtn.classList.add('open');
+  feedbackDockBtn.setAttribute('aria-expanded','true');
+ }
  setFeedbackStatus('');
+ syncPauseUi();
  setTimeout(()=>fbSummary.focus(),0);
 }
 function closeFeedback(force=0){
@@ -1119,7 +1315,11 @@ function closeFeedback(force=0){
  logEvent('feedback_close',{force:!!force});
  feedbackModal.classList.remove('open');
  feedbackModal.setAttribute('aria-hidden','true');
- feedbackBtn.setAttribute('aria-expanded','false');
+ if(feedbackDockBtn){
+  feedbackDockBtn.classList.remove('open');
+  feedbackDockBtn.setAttribute('aria-expanded','false');
+ }
+ syncPauseUi();
 }
 function openMailFallback(subject,lines){
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
@@ -1214,7 +1414,12 @@ addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
-feedbackBtn.addEventListener('click',openFeedback);
+if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
+if(controlsDockBtn)controlsDockBtn.addEventListener('click',()=>openHelp('controls'));
+if(feedbackDockBtn)feedbackDockBtn.addEventListener('click',openFeedback);
+if(helpClose)helpClose.addEventListener('click',()=>closeHelp());
+if(helpOpenWindowBtn)helpOpenWindowBtn.addEventListener('click',openPlayersGuideWindow);
+helpTabButtons.forEach(btn=>btn.addEventListener('click',()=>setHelpMode(btn.dataset.helpTab)));
 exportBtn.addEventListener('click',exportSession);
 recordBtn.addEventListener('click',()=>{
  if(VIDEO_REC.active)return;
@@ -1225,8 +1430,10 @@ recordBtn.addEventListener('click',()=>{
 });
 for(const el of [testStage,testShips,testChallenge])el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
-if(handToggleBtn)handToggleBtn.addEventListener('click',()=>setSwitchHandMode(!switchHandMode,{silent:0}));
+if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
+if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
+if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)closeHelp();});
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
@@ -1240,6 +1447,7 @@ addEventListener('keydown',e=>{
  const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
+ if(helpOpen){if(e.code==='Escape'){e.preventDefault();closeHelp();}return;}
  if(feedbackOpen){if(e.code==='Escape'){e.preventDefault();closeFeedback();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
@@ -1328,8 +1536,7 @@ addEventListener('keydown',e=>{
   stopAttractLoop();start();
  }
  if(started&&e.code==='KeyP'){
-  paused=!paused;
-  if(!paused&&settingsOpen)closeSettings();
+  toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
 });
@@ -2074,6 +2281,7 @@ function start(){
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
  started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0});
+ if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
@@ -2136,6 +2344,8 @@ function gameOver(){
  logEvent('game_over',{score:S.score,stage:S.stage});
  logSnapshot('game_over');
  started=0;
+ paused=0;
+ if(typeof syncPauseUi==='function')syncPauseUi();
  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
  stopRunRecording();
  gameOverState=buildGameOverState(S.score,S.stage);
@@ -2893,6 +3103,20 @@ function update(dt){
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
 window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
+const DISPLAY_SHELL=Object.freeze({
+ hudInsetX:12,
+ hudInsetTop:6,
+ hudInsetBottom:38,
+ hudMinWidth:220,
+ frameOuterInset:2,
+ frameInnerInset:11,
+ stageBadgeRight:12,
+ stageBadgeBottom:12,
+ stageBadgeGap:9,
+ reserveLeft:12,
+ reserveBottom:8,
+ stageLabelGap:5
+});
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
  stingray:[[2,0],[3,0],[1,4],[4,4]],
@@ -3089,32 +3313,58 @@ function drawRescuePod(){
 }
 
 function drawBadges(stage){
- const vals=[50,30,20,10,5,1],col=['#f3cf65','#f0b35e','#ef9559','#ec7755','#e95b51','#e53f4e'];
- let x=PLAY_W-10,y=PLAY_H-8;
- for(let i=0;i<vals.length;i++)while(stage>=vals[i]){
-  stage-=vals[i];
+ if(stage<=0)return;
+ const bigCount=Math.floor(stage/5);
+ const smallCount=stage%5;
+ const badges=[];
+ const rightEdge=PLAY_W-DISPLAY_SHELL.stageBadgeRight;
+ const minX=PLAY_W-88;
+ let x=rightEdge;
+ let y=PLAY_H-DISPLAY_SHELL.stageBadgeBottom;
+ const layout=[...Array(bigCount).fill('big'),...Array(smallCount).fill('small')];
+ for(const size of layout){
+  const w=size==='big'?11:8;
+  const step=size==='big'?13:DISPLAY_SHELL.stageBadgeGap;
+  badges.push({x,y,size});
+  x-=step;
+  if(x<minX){
+   x=rightEdge;
+   y-=14;
+  }
+ }
+ const right=badges.reduce((m,b)=>Math.max(m,b.x+(b.size==='big'?5.5:4)),0);
+ const bottom=badges.reduce((m,b)=>Math.max(m,b.y),0);
+ ctx.save();
+ for(const badge of badges){
   ctx.save();
-  ctx.translate(x,y);
-  ctx.fillStyle=col[i];
+  ctx.translate(badge.x,badge.y);
+  const big=badge.size==='big';
+  ctx.fillStyle=big?'#7ab7ff':'#e95b51';
   ctx.beginPath();
   ctx.moveTo(0,0);
-  ctx.lineTo(-4,-6);
-  ctx.lineTo(4,-6);
+  ctx.lineTo(big?-5.5:-4,big?-9:-6);
+  ctx.lineTo(big?5.5:4,big?-9:-6);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle='rgba(255,245,210,.72)';
-  ctx.fillRect(-.5,-6,1,5);
-  ctx.fillStyle='rgba(120,36,24,.42)';
-  ctx.fillRect(-3,-4,6,1);
+  ctx.fillStyle=big?'rgba(222,240,255,.82)':'rgba(255,245,210,.78)';
+  ctx.fillRect(-.5,big?-9:-6,1,big?8:5);
+  ctx.fillStyle=big?'rgba(24,68,136,.5)':'rgba(120,36,24,.46)';
+  ctx.fillRect(big?-4:-3,big?-6:-4,big?8:6,1);
   ctx.restore();
-  x-=8;
-  if(x<PLAY_W-72){x=PLAY_W-10;y-=9;}
  }
+ if(badges.length){
+  ctx.textAlign='right';
+  ctx.textBaseline='top';
+  ctx.font='7px "Courier New",Consolas,monospace';
+  ctx.fillStyle='rgba(169,216,255,.72)';
+  ctx.fillText('STAGE',right,bottom+DISPLAY_SHELL.stageLabelGap);
+ }
+ ctx.restore();
 }
 
 function drawReserveShips(lives){
  let reserve=Math.max(0,lives|0);
- let x=12,y=PLAY_H-8;
+ let x=DISPLAY_SHELL.reserveLeft,y=PLAY_H-DISPLAY_SHELL.reserveBottom;
  while(reserve>0){
   ctx.save();
   ctx.translate(x,y);
@@ -3152,9 +3402,14 @@ function draw(){
  const ox=shellX+shellPadL;
  const oy=shellY+shellPadT;
  if(hud){
-  hud.style.left=`${ox+16}px`;
-  hud.style.top=`${Math.max(6,oy+4)}px`;
-  hud.style.width=`${Math.max(220,viewW-32)}px`;
+  const hudLeft=ox+DISPLAY_SHELL.hudInsetX;
+  const hudTop=oy+DISPLAY_SHELL.hudInsetTop;
+  const hudWidth=Math.max(DISPLAY_SHELL.hudMinWidth,viewW-DISPLAY_SHELL.hudInsetX*2);
+  hud.style.left=`${hudLeft}px`;
+  hud.style.top=`${hudTop}px`;
+  hud.style.width=`${hudWidth}px`;
+  hud.style.setProperty('--hud-band-height',`${Math.max(28,Math.floor(scale*24))}px`);
+  hud.style.setProperty('--hud-band-fade',`${Math.max(18,Math.floor(scale*30))}px`);
  }
  if(msg){
   msg.style.left=`${Math.floor(ox+viewW/2)}px`;
@@ -3162,10 +3417,11 @@ function draw(){
  }
  if(playfieldFrame){
   playfieldFrame.style.display='block';
-  playfieldFrame.style.left=`${ox-2}px`;
-  playfieldFrame.style.top=`${oy-2}px`;
-  playfieldFrame.style.width=`${viewW+4}px`;
-  playfieldFrame.style.height=`${viewH+4}px`;
+  playfieldFrame.style.left=`${ox-DISPLAY_SHELL.frameOuterInset}px`;
+  playfieldFrame.style.top=`${oy-DISPLAY_SHELL.frameOuterInset}px`;
+  playfieldFrame.style.width=`${viewW+DISPLAY_SHELL.frameOuterInset*2}px`;
+  playfieldFrame.style.height=`${viewH+DISPLAY_SHELL.frameOuterInset*2}px`;
+  playfieldFrame.style.setProperty('--frame-inner-inset',`${Math.max(9,Math.floor(scale*DISPLAY_SHELL.frameInnerInset))}px`);
  }
  const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
@@ -3248,7 +3504,7 @@ if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
 if(!toolsVisible)closeSettings();
  else syncSettingsUi();
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):'';
- if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.74)}px`;
+ if(!started&&msg.className==='startScreen')msg.style.top=`${Math.floor(oy+viewH*.72)}px`;
  else if(!started&&msg.className==='gameOverScreen')msg.style.top=`${Math.floor(oy+viewH*.54)}px`;
  else msg.style.top='';
  if(!started){
