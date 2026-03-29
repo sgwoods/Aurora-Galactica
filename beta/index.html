@@ -163,20 +163,25 @@ canvas{display:block;width:100vw;height:100vh}
 #msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#settingsPanel{position:fixed;z-index:30;width:248px;background:rgba(7,12,24,.95);border:1px solid rgba(136,245,255,.26);padding:12px 12px 10px;display:none;box-shadow:0 10px 32px rgba(0,0,0,.45);backdrop-filter:blur(3px)}
+#settingsPanel{position:fixed;z-index:30;width:248px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);padding:16px 18px;display:none;box-shadow:0 16px 36px rgba(0,0,0,.34);backdrop-filter:blur(4px);color:#eaf6ff;overflow:auto}
 #settingsPanel.open{display:block}
-#settingsPanel h3{margin:0 0 10px;font-size:15px;color:#dff7ff;letter-spacing:.05em}
-#settingsActions{display:grid;gap:8px;margin-bottom:10px}
+#settingsPanel h3{margin:0}
+#settingsPanelClose,#feedbackClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
+.framePopupHead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:1;padding-bottom:10px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.92))}
+.framePopupTitle{display:block;font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
+.framePopupSub{display:block;margin-top:4px;font:400 11px/1.3 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff}
+#settingsActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
 #openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
 #openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
-#testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:10px}
+#testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:12px}
 #testPanel h4{margin:0 0 8px;font-size:13px;color:#d8ffe4;letter-spacing:.05em}
 #testPanel label{display:block;margin:6px 0 3px;font-size:12px;color:#b7efd0}
 #testPanel input{width:100%;box-sizing:border-box;border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7;padding:6px;font:13px/1.2 "Courier New",Consolas,monospace}
+#testStage,#testShips{max-width:240px}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
@@ -187,10 +192,9 @@ canvas{display:block;width:100vw;height:100vh}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
-#helpModal,#feedbackModal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px)}
+#helpModal,#feedbackModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
 #helpModal.open,#feedbackModal.open{display:flex}
-#helpPanel{width:min(820px,calc(100vw - 26px));height:min(78vh,720px);display:flex;flex-direction:column;gap:12px;background:rgba(8,13,25,.97);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
-#helpHead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+#helpPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
 #helpClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
@@ -212,9 +216,10 @@ canvas{display:block;width:100vw;height:100vh}
 #helpGuideActions{display:flex;justify-content:flex-end}
 #helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
-#feedbackPanel{width:min(560px,calc(100vw - 26px));background:rgba(8,13,25,.96);border:1px solid rgba(136,245,255,.4);box-shadow:0 12px 60px rgba(0,0,0,.7);padding:14px}
-#feedbackPanel h2{margin:0 0 10px;font-size:20px;letter-spacing:.03em}
+#feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#feedbackPanel h2{margin:0;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
+#feedbackForm{display:flex;flex-direction:column;min-height:0}
 #feedbackPanel select,#feedbackPanel input,#feedbackPanel textarea{width:100%;border:1px solid #2f5f81;background:#050a14;color:#f4f7ff;padding:8px;font:15px/1.3 "Courier New",Consolas,monospace;box-sizing:border-box}
 #feedbackPanel textarea{min-height:120px;resize:vertical}
 #feedbackActions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
@@ -224,10 +229,11 @@ canvas{display:block;width:100vw;height:100vh}
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
-#statusDock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px;width:calc(100% - 24px);height:calc(100% - 28px)}
+#statusDock{position:absolute;left:12px;top:12px;right:12px;bottom:12px;z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px}
 #statusDock{pointer-events:auto}
-#dockQuickTools{display:flex;flex-direction:column;justify-content:space-between;gap:16px;width:100%;max-width:68px;height:100%}
+#dockQuickTools{display:flex;flex-direction:column;justify-content:flex-start;gap:18px;width:100%;height:100%}
 #dockQuickTools .dockToolGroup{display:flex;flex-direction:column;gap:8px}
+#dockQuickTools .dockToolGroupPilot{margin-bottom:28px}
 #dockQuickTools .dockToolGroupUtility{margin-top:auto}
 #dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
 #dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
@@ -235,23 +241,71 @@ canvas{display:block;width:100vw;height:100vh}
 #dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none}
 #dockQuickTools button:disabled:hover{background:rgba(8,18,35,.78);border-color:rgba(136,245,255,.28)}
 #dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;transform:translateY(-1px)}
+#accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
+#accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
+#accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
+#accountDockBtn[data-signed-in="true"] .dockPilotIcon{filter:none;opacity:1}
+#accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+#accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
+#accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
 #muteToggleBtn[data-muted="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
-#accountPanel{display:none;flex-direction:column;gap:8px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#accountPanel{display:none;flex-direction:column;gap:12px;width:min(100%,620px);padding:16px 18px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
 #accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#accountPanelHero{display:flex;align-items:flex-start;gap:12px;min-width:0}
+#accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:96px;height:96px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+#accountPanelPortrait{font-size:64px;line-height:1;filter:grayscale(1);opacity:.68}
+#accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
 #accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
 #accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
+#accountPilotCallsign{font:700 14px/1.1 "Courier New",Consolas,monospace;letter-spacing:.08em;color:#ffe39a;text-transform:uppercase}
+#accountPilotStatus{font-size:11px;line-height:1.3;color:rgba(223,247,255,.76)}
 #accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#accountIdentityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.accountIdentityCard,.accountSection{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
+.accountIdentityLabel,.accountSectionTitle{font:700 11px/1.1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#7ef2ff}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
+#accountCredentials{display:flex;flex-direction:column;gap:8px}
+#accountRecoveryFields{display:flex;flex-direction:column;gap:8px}
+#accountRecoveryFields[hidden]{display:none}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
+#accountActions{flex-wrap:wrap}
 #accountActions button,#accountInitialsRow button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:7px 10px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountActions button[disabled],#accountInitialsRow button[disabled]{opacity:.5;cursor:default}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
+#accountInitialsDisplay{padding:8px 10px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82);font:700 13px/1.25 "Courier New",Consolas,monospace;color:#f4fbff}
 #accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
-#accountMeta{display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.3;color:rgba(218,236,255,.68)}
-#statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,380px)}
+#accountIdentityEmail,#accountIdentityUserId{font-size:11px;line-height:1.35;color:#dff7ff;overflow-wrap:anywhere}
+#accountFlightStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.accountStatCard{display:flex;flex-direction:column;gap:2px;padding:8px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82)}
+.accountStatLabel{font-size:10px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:rgba(223,247,255,.62)}
+.accountStatValue{font:700 13px/1.2 "Courier New",Consolas,monospace;color:#f4fbff}
+#accountRecordsTop5{display:flex;flex-direction:column;gap:6px}
+.accountRecordRow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 8px;border:1px solid rgba(136,245,255,.12);background:rgba(10,18,34,.76)}
+.accountRecordRank{color:#7ef2ff;font:700 11px/1 "Courier New",Consolas,monospace}
+.accountRecordMain{display:flex;flex-direction:column;gap:2px;min-width:0}
+.accountRecordScore{font:700 13px/1.1 "Courier New",Consolas,monospace;color:#f4fbff}
+.accountRecordMeta{font-size:10px;line-height:1.2;color:rgba(223,247,255,.62)}
+.accountRecordActions{display:flex;align-items:center;gap:8px}
+.accountRecordReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;padding:5px 8px;cursor:pointer}
+.accountRecordReplayBtn:hover,.accountRecordReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
+.accountRecordStamp{font-size:10px;line-height:1.2;color:#ffe39a;text-align:right}
+.accountRecordEmpty{font-size:11px;line-height:1.35;color:rgba(223,247,255,.68)}
+#accountCredentials[hidden],
+#accountEmailLabel[hidden],
+#accountPasswordLabel[hidden],
+#accountRecoveryFields[hidden],
+#accountSignupBtn[hidden],
+#accountLoginBtn[hidden],
+#accountResetBtn[hidden],
+#accountApplyResetBtn[hidden],
+#accountLogoutBtn[hidden],
+#accountInitialsSection[hidden],
+#accountInitialsDisplay[hidden]{display:none!important}
+#statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,680px);--overlay-max-height:none}
 #statusPanels.waitOverlay{align-items:stretch;gap:8px;max-width:min(84vw,420px)}
 #statusPanels.waitOverlay #leaderboardPanel,
 #statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
@@ -287,7 +341,7 @@ canvas{display:block;width:100vw;height:100vh}
 #movieControls button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
 #movieCloseToWaitBtn{margin-left:auto}
 #movieTimeline{width:100%;margin:0;height:12px}
-#leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,360px);padding:12px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #leaderboardPanelTitle,#leaderboardPanelSub{display:block}
@@ -304,7 +358,7 @@ canvas{display:block;width:100vw;height:100vh}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
 #leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
-#leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,360px);padding:10px 12px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
+#leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,400px);padding:12px 14px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
 #leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 #leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
 #leaderboardViewButtons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
@@ -335,9 +389,13 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #dockQuickTools{max-width:none;display:grid;grid-template-columns:repeat(2,minmax(0,60px));justify-content:start;height:auto}
  #dockQuickTools .dockToolGroup{display:contents}
  #dockQuickTools button{justify-content:center}
+ #accountDockBtn{min-height:72px;padding:6px}
+ #accountDockLabel,#accountDockStatus{display:none}
  #settingsPanel{bottom:126px!important}
+ #settingsActions{grid-template-columns:1fr}
  #statusPanels{align-items:stretch;bottom:126px!important}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
+ #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}
  #movieSelectionOverlay{width:min(calc(100% - 24px),420px)}
  #movieTopBar{left:10px;right:46px;top:48px;padding:7px 8px}
  #leaderboardViewsHead{align-items:flex-start}
@@ -352,6 +410,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #controlsIndex{grid-template-columns:1fr}
  #helpTabs{flex-wrap:wrap}
 }
+#accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel{max-height:var(--overlay-max-height);overflow:auto}
+#accountPanelHead,#leaderboardPanelHead{position:sticky;top:0;z-index:1;padding-bottom:8px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.9))}
 </style>
 </head>
 <body>
@@ -370,12 +430,18 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="cabinetRightFrame" aria-hidden="true">
   <div id="statusDock">
     <div id="dockQuickTools">
+      <div class="dockToolGroup dockToolGroupPilot">
+        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot information" title="Pilot Information">
+          <span id="accountDockIcon" class="dockIcon dockPilotIcon" aria-hidden="true">🧑‍🚀</span>
+          <span id="accountDockLabel">SIGN IN</span>
+          <span id="accountDockStatus">Pilot offline</span>
+        </button>
+      </div>
       <div class="dockToolGroup dockToolGroupPrimary">
         <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
         <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
         <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
         <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
-        <button id="accountDockBtn" type="button" aria-expanded="false" aria-controls="accountPanel" aria-label="Open pilot account" title="Pilot Account"><span class="dockIcon" aria-hidden="true">👤</span></button>
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
@@ -389,12 +455,19 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
 <div id="settingsPanel" aria-hidden="true">
-  <h3>Developer Tools</h3>
+  <div id="settingsPanelHead" class="framePopupHead">
+    <div>
+      <span id="settingsPanelTitle" class="framePopupTitle">Developer Tools</span>
+      <span id="settingsPanelSub" class="framePopupSub">Local tools and diagnostic controls for this build.</span>
+    </div>
+    <button type="button" id="settingsPanelClose" aria-label="Close developer tools">×</button>
+  </div>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
+    <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
   <div id="testPanel">
     <h4>Developer Start State</h4>
@@ -410,19 +483,19 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.258.sha.2320d51.beta</span>
-    <span id="settingsRelease">Mar 28 2026, 3:19 PM EDT</span>
-    <span id="settingsState">beta@2320d51 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.263.sha.cb65cfa.beta</span>
+    <span id="settingsRelease">Mar 29 2026, 10:45 AM EDT</span>
+    <span id="settingsState">beta@cb65cfa clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Native replay viewer, player guide, and launch-shell polish</span>
-    <span id="settingsNotesBody">Added a browser-native in-game replay viewer with local recent runs, introduced a player-focused guide and in-game controls/help overlays, promoted bug reporting and utility actions into the icon rail, improved wait-mode and centered message presentation, and tightened the beta-to-production release path.</span>
+    <span id="settingsNotesTitle">Pilot profile card, in-frame overlays, and rescue-flow polish</span>
+    <span id="settingsNotesBody">Added a fuller in-game pilot profile card with sign-in, reset-password, and flight-history surfaces, constrained the main popup windows to the gameplay frame with consistent dismiss controls, preserved released captured fighters through stage clear so dual-fighter joins are not skipped, and kept the native replay viewer, player guide, and launch-shell polish aligned for beta checkpoint testing.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
   <div id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-    <div id="helpHead">
+    <div id="helpHead" class="framePopupHead">
       <div>
         <h2 id="helpTitle">Pilot Reference</h2>
         <div id="helpSubtitle">Keep the game in view while you check controls and the guide.</div>
@@ -474,7 +547,13 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="feedbackModal" aria-hidden="true">
   <div id="feedbackPanel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
-    <h2 id="feedbackTitle">Send Feedback</h2>
+    <div id="feedbackHead" class="framePopupHead">
+      <div>
+        <h2 id="feedbackTitle">Send Feedback</h2>
+        <div id="feedbackSubtitle" class="framePopupSub">Report a bug or send a feature idea without leaving the game board.</div>
+      </div>
+      <button type="button" id="feedbackClose" aria-label="Close feedback panel">×</button>
+    </div>
     <form id="feedbackForm">
       <label for="fbType">Type</label>
       <select id="fbType" required>
@@ -526,30 +605,65 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="statusPanels">
   <div id="accountPanel" aria-live="polite" hidden>
     <div id="accountPanelHead">
-      <div>
-        <span id="accountPanelTitle">PILOT PROFILE</span>
-        <span id="accountPanelSub">SIGN IN FOR VALIDATED SCORES</span>
+      <div id="accountPanelHero">
+        <div id="accountPanelPortraitWrap">
+          <span id="accountPanelPortrait" aria-hidden="true">🧑‍🚀</span>
+        </div>
+        <div id="accountPanelHeroText">
+        <span id="accountPanelTitle">PILOT INFORMATION</span>
+        <span id="accountPanelSub">IDENTITY, RECORDS, AND FLIGHT HISTORY</span>
+          <span id="accountPilotCallsign">PILOT OFFLINE</span>
+          <span id="accountPilotStatus">Sign in to board a pilot identity.</span>
+        </div>
       </div>
       <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
     </div>
-    <label for="accountEmail">Email</label>
-    <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label for="accountPassword">Password</label>
-    <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
-    <div id="accountActions">
-      <button id="accountSignupBtn" type="button">Create Account</button>
-      <button id="accountLoginBtn" type="button">Log In</button>
-      <button id="accountLogoutBtn" type="button">Log Out</button>
+    <div id="accountIdentityGrid">
+      <div class="accountIdentityCard">
+        <span class="accountIdentityLabel">Identity</span>
+        <span id="accountIdentityEmail">Email: --</span>
+        <span id="accountIdentityUserId">User ID: --</span>
+      </div>
+      <div class="accountIdentityCard">
+        <span class="accountIdentityLabel">Access</span>
+        <span id="accountSummary">Not signed in. Anonymous scores still work.</span>
+      </div>
     </div>
-    <label for="accountInitials">Display Initials</label>
-    <div id="accountInitialsRow">
-      <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
-      <button id="accountSaveInitialsBtn" type="button">Save</button>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Pilot Access</span>
+      <div id="accountCredentials">
+        <label id="accountEmailLabel" for="accountEmail">Email</label>
+        <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+        <label id="accountPasswordLabel" for="accountPassword">Password</label>
+        <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <div id="accountRecoveryFields" hidden>
+          <label for="accountPasswordConfirm">Confirm New Password</label>
+          <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+        </div>
+      </div>
+      <div id="accountActions">
+        <button id="accountSignupBtn" type="button">Create New Pilot</button>
+        <button id="accountLoginBtn" type="button">Sign In</button>
+        <button id="accountResetBtn" type="button">Reset Password</button>
+        <button id="accountApplyResetBtn" type="button" hidden>Set New Password</button>
+        <button id="accountLogoutBtn" type="button">Sign Out</button>
+      </div>
+      <div id="accountInitialsSection">
+        <label for="accountInitials">Display Initials</label>
+        <div id="accountInitialsRow">
+          <input id="accountInitials" type="text" maxlength="3" placeholder="ABC" autocomplete="off" />
+          <button id="accountSaveInitialsBtn" type="button">Save</button>
+        </div>
+      </div>
+      <div id="accountInitialsDisplay" hidden></div>
     </div>
-    <div id="accountSummary">Not signed in. Anonymous scores still work.</div>
-    <div id="accountMeta">
-      <span id="accountBest">Best: --</span>
-      <span id="accountRecent">Recent: --</span>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Flight History</span>
+      <div id="accountFlightStats"></div>
+    </div>
+    <div class="accountSection">
+      <span class="accountSectionTitle">Flight Records</span>
+      <div id="accountRecordsTop5"></div>
     </div>
   </div>
   <div id="leaderboardPanel" aria-live="polite" hidden>
@@ -578,8 +692,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.258.sha.2320d51.beta</span>
-  <span id="buildStampRelease">Mar 28 2026, 3:19 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.263.sha.cb65cfa.beta</span>
+  <span id="buildStampRelease">Mar 29 2026, 10:45 AM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -752,7 +866,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 // Source: src/js/00-boot.js
 // Boot, constants, audio, logging, UI, and input handling.
 const c=document.getElementById('c'),ctx=c.getContext('2d'),msg=document.getElementById('msg'),hud=document.getElementById('hud'),left=document.getElementById('left'),center=document.getElementById('center'),right=document.getElementById('right');
-const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel');
+const settingsBtn=document.getElementById('settingsBtn'),settingsPanel=document.getElementById('settingsPanel'),settingsPanelClose=document.getElementById('settingsPanelClose');
 const cabinetShell=document.getElementById('cabinetShell');
 const cabinetRightFrame=document.getElementById('cabinetRightFrame');
 const openViewerBtn=document.getElementById('openViewerBtn');
@@ -762,7 +876,7 @@ const controlsDockBtn=document.getElementById('controlsDockBtn');
 const feedbackDockBtn=document.getElementById('feedbackDockBtn');
 const helpModal=document.getElementById('helpModal'),helpClose=document.getElementById('helpClose'),helpGuideFrame=document.getElementById('helpGuideFrame'),helpOpenWindowBtn=document.getElementById('helpOpenWindowBtn');
 const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
-const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm');
+const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
@@ -828,7 +942,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.258.sha.2320d51.beta',commit:'2320d513ab872a81c3171b008f42a3d7e66201f6',branch:'beta',dirty:false,released:'Mar 28 2026, 3:19 PM EDT',state:'beta@2320d51 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.263.sha.cb65cfa.beta',commit:'cb65cfafd03323ff1f3cd46b2e8e27a13c8ce0eb',branch:'beta',dirty:false,released:'Mar 29 2026, 10:45 AM EDT',state:'beta@cb65cfa clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1030,8 +1144,8 @@ function buildResultsHtml(stats,score,stage){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${String(stage).padStart(2,'0')}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
-function recordScore(score,stage){
- const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:'YOU',score:score|0,stage:stage|0,at:new Date().toISOString()};
+function recordScore(score,stage,initials='YOU'){
+ const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString()};
  const board=loadScoreboard();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
@@ -1074,8 +1188,10 @@ function buildAttractScoreboardHtml(){
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage){
- const res=recordScore(score,stage);
- const editing=!!res.rank;
+ const pilotInitials=(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'').padEnd(3,'-').slice(0,3);
+ const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
+ const res=recordScore(score,stage,lockedPilotInitials?pilotInitials:'YOU');
+ const editing=!!res.rank&&!lockedPilotInitials;
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -1083,7 +1199,7 @@ function buildGameOverState(score,stage){
   score:score|0,
   stage:stage|0,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
-  initials:['Y','O','U'],
+  initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
   remoteSubmitted:0
@@ -1697,6 +1813,7 @@ function rs(){
 addEventListener('resize',rs);
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{settingsOpen=!settingsOpen;syncSettingsUi();});
+if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
 if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(guideDockBtn)guideDockBtn.addEventListener('click',()=>openHelp('guide'));
@@ -1718,6 +1835,7 @@ for(const el of [testStage,testShips])el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
+if(feedbackClose)feedbackClose.addEventListener('click',()=>closeFeedback());
 if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)closeHelp();});
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
@@ -1855,20 +1973,47 @@ const leaderboardDockBtn=document.getElementById('leaderboardDockBtn');
 const accountDockBtn=document.getElementById('accountDockBtn');
 const accountPanel=document.getElementById('accountPanel');
 const accountPanelClose=document.getElementById('accountPanelClose');
+const accountCredentials=document.getElementById('accountCredentials');
 const accountEmail=document.getElementById('accountEmail');
+const accountEmailLabel=document.getElementById('accountEmailLabel');
 const accountPassword=document.getElementById('accountPassword');
+const accountPasswordLabel=document.getElementById('accountPasswordLabel');
+const accountRecoveryFields=document.getElementById('accountRecoveryFields');
+const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
 const accountLoginBtn=document.getElementById('accountLoginBtn');
+const accountResetBtn=document.getElementById('accountResetBtn');
+const accountApplyResetBtn=document.getElementById('accountApplyResetBtn');
 const accountLogoutBtn=document.getElementById('accountLogoutBtn');
+const accountInitialsSection=document.getElementById('accountInitialsSection');
 const accountInitials=document.getElementById('accountInitials');
 const accountSaveInitialsBtn=document.getElementById('accountSaveInitialsBtn');
+const accountInitialsDisplay=document.getElementById('accountInitialsDisplay');
 const accountSummary=document.getElementById('accountSummary');
 const accountBest=document.getElementById('accountBest');
 const accountRecent=document.getElementById('accountRecent');
+const resetTestPilotScoresBtn=document.getElementById('resetTestPilotScoresBtn');
 const pilotStamp=document.getElementById('pilotStamp');
+const accountPanelTitle=document.getElementById('accountPanelTitle');
+const accountPanelSub=document.getElementById('accountPanelSub');
+const accountDockIcon=document.getElementById('accountDockIcon');
+const accountDockLabel=document.getElementById('accountDockLabel');
+const accountDockStatus=document.getElementById('accountDockStatus');
+const accountPilotCallsign=document.getElementById('accountPilotCallsign');
+const accountPilotStatus=document.getElementById('accountPilotStatus');
+const accountIdentityEmail=document.getElementById('accountIdentityEmail');
+const accountIdentityUserId=document.getElementById('accountIdentityUserId');
+const accountFlightStats=document.getElementById('accountFlightStats');
+const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
+const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
+const TEST_ACCOUNT_USER_ID='69f14bed-87b3-493a-bba6-a81eb9b33b04';
+const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
+const TEST_ACCOUNT_USER_IDS=["69f14bed-87b3-493a-bba6-a81eb9b33b04"];
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
+const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
+const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
 const LEGACY_LEADERBOARD_CACHE_PREFIX='neoGalagaLeaderboardCache.v1.';
 const LEADERBOARD_STALE_MS=45000;
@@ -1888,9 +2033,11 @@ const LEADERBOARD={
  loading:{all:0,validated:0,mine:0},
  user:null,
  profile:null,
+ accountNotice:'',
   lastRemoteOk:0,
-  submitBusy:0,
+ submitBusy:0,
  authBusy:0,
+ recoveryMode:0,
  primed:0,
  refreshTimer:0,
  panelOpen:0,
@@ -1898,6 +2045,148 @@ const LEADERBOARD={
  overlayPauseApplied:0,
  overlayPausePrev:0
 };
+
+function remoteLeaderboardPolicyLabel(){
+ return remoteWriteEnabled()?'live':'read-only mirror';
+}
+function nonProductionAccountSummary(){
+ if(testAccountEnabled())return `Test pilot lane active for ${configuredTestPilotLabel()}. Shared scores stay read-only unless one of those pilots is signed in.`;
+ return 'Pilot account is disabled in this lane. Shared scores are read-only; your runs save locally on this device.';
+}
+function setAccountNotice(text=''){
+ LEADERBOARD.accountNotice=String(text||'').trim();
+}
+function normalizeTestAccountEmail(value=''){
+ return String(value||'').trim().toLowerCase();
+}
+function configuredTestAccountEmails(){
+ const values=Array.isArray(TEST_ACCOUNT_EMAILS)?TEST_ACCOUNT_EMAILS:[];
+ const normalized=values.map(normalizeTestAccountEmail).filter(Boolean);
+ if(normalized.length)return Array.from(new Set(normalized));
+ const single=normalizeTestAccountEmail(TEST_ACCOUNT_EMAIL);
+ return single?[single]:[];
+}
+function configuredTestAccountUserIds(){
+ const values=Array.isArray(TEST_ACCOUNT_USER_IDS)?TEST_ACCOUNT_USER_IDS:[];
+ const normalized=values.map(value=>String(value||'').trim()).filter(Boolean);
+ if(normalized.length)return Array.from(new Set(normalized));
+ return TEST_ACCOUNT_USER_ID?[String(TEST_ACCOUNT_USER_ID).trim()]:[];
+}
+function primaryTestAccountEmail(){
+ return configuredTestAccountEmails()[0]||'';
+}
+function configuredTestPilotLabel(){
+ const emails=configuredTestAccountEmails();
+ if(!emails.length)return 'configured test pilot';
+ if(emails.length===1)return emails[0];
+ if(emails.length===2)return `${emails[0]} or ${emails[1]}`;
+ return `${emails[0]}, ${emails[1]}, +${emails.length-2} more`;
+}
+function deriveInitialsFromEmail(email=''){
+ const local=String(email||'').split('@')[0]||'';
+ return sanitizeInitials(local);
+}
+function testAccountEnabled(){
+ return NON_PRODUCTION_LANE&&configuredTestAccountEmails().length>0;
+}
+function isConfiguredTestAccountEmail(value=''){
+ return configuredTestAccountEmails().includes(normalizeTestAccountEmail(value));
+}
+function isSignedInAsTestAccount(){
+ const email=normalizeTestAccountEmail(LEADERBOARD.user?.email||'');
+ const userIds=configuredTestAccountUserIds();
+ if(userIds.length&&LEADERBOARD.user?.id)return userIds.includes(LEADERBOARD.user.id);
+ return !!email&&isConfiguredTestAccountEmail(email);
+}
+function remoteAuthEnabled(){
+ return RELEASE_CHANNEL==='production'||testAccountEnabled();
+}
+function remoteWriteEnabled(){
+ if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
+ return isSignedInAsTestAccount();
+}
+function shouldHideTestAccountScores(){
+ return configuredTestAccountUserIds().length>0;
+}
+function normalizeLeaderboardViewForLane(view){
+ if(view==='mine'&&!remoteAuthEnabled())return 'local';
+ return view;
+}
+function pilotDisplayId(){
+ const initials=preferredInitialsFromUser();
+ if(initials)return initials;
+ const email=String(LEADERBOARD.user?.email||'').trim();
+ if(email){
+  const local=email.split('@')[0]||email;
+  return sanitizeInitials(local).slice(0,3)||local.slice(0,10).toUpperCase();
+ }
+ return 'GUEST';
+}
+function rowsForPilotProfile(){
+ if(LEADERBOARD.user&&remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine))return LEADERBOARD.remote.mine.slice();
+ return localLeaderboardRows();
+}
+function formatWhenShort(value=''){
+ if(!value)return '--';
+ const at=Date.parse(value);
+ if(!Number.isFinite(at))return '--';
+ const delta=Math.max(0,Date.now()-at);
+ const minutes=Math.round(delta/60000);
+ if(minutes<1)return 'just now';
+ if(minutes<60)return `${minutes}m ago`;
+ const hours=Math.round(minutes/60);
+ if(hours<24)return `${hours}h ago`;
+ const days=Math.round(hours/24);
+ return `${days}d ago`;
+}
+function renderPilotFlightStats(rows,signedIn){
+ if(!accountFlightStats)return;
+ if(!rows.length){
+  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
+  return;
+ }
+ const latest=[...rows].sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))[0]||rows[0];
+ const bestScore=Math.max(...rows.map(row=>+row.score||0),0);
+ const bestStage=Math.max(...rows.map(row=>+row.stage||0),0);
+ const verifiedRuns=rows.filter(row=>row.verified).length;
+ const cards=[
+  ['Sorties Logged', String(rows.length)],
+  ['Best Score', formatScore(bestScore)],
+  ['Last Stage Reached', `STG ${String(+latest.stage||0).padStart(2,'0')}`],
+  ['Latest Score', formatScore(+latest.score||0)],
+  ['Latest Flight', formatWhenShort(latest.at)],
+  ['Verified Runs', signedIn?String(verifiedRuns):'--']
+ ];
+ accountFlightStats.innerHTML=cards.map(([label,value])=>`<div class="accountStatCard"><span class="accountStatLabel">${label}</span><span class="accountStatValue">${value}</span></div>`).join('');
+}
+function renderPilotRecords(rows){
+ if(!accountRecordsTop5)return;
+ if(!rows.length){
+  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
+  return;
+ }
+ const replayRuns=Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
+  const topRows=[...rows]
+  .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
+  .slice(0,5);
+ const replayForRow=(row)=>{
+  const rowStamp=Date.parse(row.at||'');
+  return replayRuns.find(run=>{
+   if((+run.score||0)!== (+row.score||0))return false;
+   if((+run.stage||0)!== (+row.stage||0))return false;
+   if(!Number.isFinite(rowStamp))return true;
+   const replayStamp=Date.parse(run.createdAt||'');
+   if(!Number.isFinite(replayStamp))return false;
+   return Math.abs(replayStamp-rowStamp)<=120000;
+  })||null;
+ };
+ accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
+  const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
+  const stamp=formatWhenShort(row.at);
+  const replay=replayForRow(row);
+  return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
+ }).join('');
+}
 
 function normalizeRemoteScoreRow(row){
  return{
@@ -1910,7 +2199,7 @@ function normalizeRemoteScoreRow(row){
  };
 }
 function preferredInitialsFromUser(user=LEADERBOARD.user){
- return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||'').slice(0,3);
+ return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||deriveInitialsFromEmail(user?.email||'')||'').slice(0,3);
 }
 function localLeaderboardRows(){
  return loadScoreboard().map(row=>Object.assign({verified:0},row));
@@ -1925,6 +2214,7 @@ function currentLeaderboardTitle(){
 }
 function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='local')return localLeaderboardRows();
+ if(view==='mine'&&!remoteAuthEnabled())return localLeaderboardRows();
  if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
  const rows=LEADERBOARD.remote[view]||[];
  if(rows.length)return rows;
@@ -1935,8 +2225,9 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='loading')return view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...';
  if(mode==='fallback')return view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local';
  if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
- if(mode==='signed_out')return 'Sign in required · showing local';
+ if(mode==='signed_out')return remoteAuthEnabled()?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
  if(mode==='local')return 'Local device scores';
+ if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
@@ -2075,6 +2366,7 @@ function openAccountPanel(){
  syncLeaderboardPanelVisibility();
  syncAccountPanelVisibility();
  syncAccountUi();
+ if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
  syncOverlayPause();
 }
 function closeAccountPanel(){
@@ -2093,56 +2385,131 @@ function toggleAccountPanel(){
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
  const pending=LEADERBOARD.configured===null;
- const signedIn=!!LEADERBOARD.user;
- const verified=!!LEADERBOARD.user?.email_confirmed_at;
- const initials=preferredInitialsFromUser();
- if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
- if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
- if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
- if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
- return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
+  const signedIn=!!LEADERBOARD.user;
+  const verified=!!LEADERBOARD.user?.email_confirmed_at;
+  const initials=preferredInitialsFromUser();
+  if(pending)return 'CONNECTING ONLINE LEADERBOARD...';
+  if(!configured)return 'LOCAL SCORES ACTIVE   ONLINE LEADERBOARD UNAVAILABLE';
+ if(!remoteAuthEnabled())return testAccountEnabled()?`TEST PILOT ${configuredTestPilotLabel().toUpperCase()} AVAILABLE IN THIS LANE`:'LOCAL SCORES ACTIVE   PRODUCTION SCORES READ ONLY';
+ if(NON_PRODUCTION_LANE&&!signedIn)return `SIGN IN AS TEST PILOT <span class="k">${configuredTestPilotLabel()}</span>`;
+  if(signedIn&&initials)return `SIGNED IN AS <span class="k">${initials}</span>${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+  if(signedIn)return `SIGNED IN${verified?' <span class="startBadge">🔒 VERIFIED</span>':''}`;
+  return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
+}
+function enterRecoveryMode(){
+ LEADERBOARD.recoveryMode=1;
+ LEADERBOARD.accountPanelOpen=1;
+ LEADERBOARD.panelOpen=0;
+ setAccountNotice('Choose a new password for your pilot account, then save it here.');
+ syncLeaderboardPanelVisibility();
+ syncAccountPanelVisibility();
+ syncAccountUi();
+ syncOverlayPause();
+}
+function exitRecoveryMode(){
+ LEADERBOARD.recoveryMode=0;
+ if(accountPassword)accountPassword.value='';
+ if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ setAccountNotice('');
+ syncAccountUi();
 }
 function syncAccountUi(){
- const configured=!!LEADERBOARD.configured;
+  const configured=!!LEADERBOARD.configured;
  const signedIn=!!LEADERBOARD.user;
  const verified=!!LEADERBOARD.user?.email_confirmed_at;
- const pending=LEADERBOARD.configured===null;
- if(accountSignupBtn)accountSignupBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
- if(accountLoginBtn)accountLoginBtn.disabled=!configured||LEADERBOARD.authBusy||signedIn;
- if(accountLogoutBtn)accountLogoutBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
- if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||LEADERBOARD.authBusy||!signedIn;
- if(accountEmail)accountEmail.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
- if(accountPassword)accountPassword.disabled=!configured||pending||LEADERBOARD.authBusy||signedIn;
- if(accountInitials){
-  accountInitials.disabled=!configured||pending||LEADERBOARD.authBusy||!signedIn;
-  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?preferredInitialsFromUser():'';
- }
- if(accountSummary){
-  if(pending)accountSummary.textContent='Connecting leaderboard...';
-  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
-  else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
-  else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
- }
- const best=LEADERBOARD.remote.mine[0]?.score||0;
- if(accountBest)accountBest.textContent=signedIn?`Best: ${best?formatScore(best):'--'}`:'Best: --';
- if(accountRecent){
-  if(!signedIn)accountRecent.textContent='Recent: --';
-  else{
-   const recent=LEADERBOARD.remote.mine.slice(0,3).map(row=>`${formatScore(row.score)} · STG ${String(row.stage).padStart(2,'0')}`).join('   /   ');
-   accountRecent.textContent=`Recent: ${recent||'--'}`;
-  }
- }
+  const pending=LEADERBOARD.configured===null;
+ const recovering=!!LEADERBOARD.recoveryMode;
  const initials=preferredInitialsFromUser();
- const hudInitials=signedIn&&initials?initials:'---';
+ const dockId=pilotDisplayId();
+ const hasLockedInitials=!!signedIn;
+ if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'IDENTITY, RECORDS, AND FLIGHT HISTORY';
+ if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
+ if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
+ if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
+ if(accountPasswordLabel)accountPasswordLabel.hidden=signedIn&&!recovering;
+ if(accountSignupBtn){
+  accountSignupBtn.hidden=recovering||signedIn;
+  accountSignupBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountLoginBtn){
+  accountLoginBtn.hidden=recovering||signedIn;
+  accountLoginBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountResetBtn){
+  accountResetBtn.hidden=recovering||signedIn;
+  accountResetBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||signedIn||recovering;
+ }
+ if(accountApplyResetBtn){
+  accountApplyResetBtn.hidden=!recovering;
+  accountApplyResetBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!recovering;
+ }
+ if(accountLogoutBtn){
+  accountLogoutBtn.hidden=!signedIn;
+  accountLogoutBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn;
+ }
+ if(accountSaveInitialsBtn)accountSaveInitialsBtn.disabled=!configured||!remoteAuthEnabled()||LEADERBOARD.authBusy||!signedIn||hasLockedInitials;
+ if(accountEmail)accountEmail.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||signedIn||recovering;
+ if(accountPassword){
+  accountPassword.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||(signedIn&&!recovering);
+  accountPassword.placeholder=recovering?'New password':'Password';
+  accountPassword.autocomplete=recovering?'new-password':'current-password';
+ }
+ if(accountPasswordConfirm)accountPasswordConfirm.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!recovering;
+ if(accountEmail&&testAccountEnabled()&&!signedIn&&document.activeElement!==accountEmail&&String(accountEmail.value||'').trim()===''){
+  accountEmail.value=primaryTestAccountEmail();
+ }
+ if(accountInitialsSection)accountInitialsSection.hidden=!signedIn||hasLockedInitials;
+ if(accountInitialsDisplay){
+  accountInitialsDisplay.hidden=!(signedIn&&hasLockedInitials);
+  if(hasLockedInitials)accountInitialsDisplay.textContent=`Pilot ID locked: ${dockId}`;
+ }
+ if(accountInitials){
+  accountInitials.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!signedIn||hasLockedInitials;
+  if(document.activeElement!==accountInitials)accountInitials.value=signedIn?initials:'';
+  }
+  if(accountSummary){
+   if(pending)accountSummary.textContent='Connecting leaderboard...';
+   else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
+  else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
+  else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
+  else if(recovering)accountSummary.textContent='Recovery link accepted. Save a new password to finish signing back into this pilot account.';
+   else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
+   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
+  }
+ const rows=rowsForPilotProfile();
+ if(accountDockBtn){
+  accountDockBtn.dataset.signedIn=signedIn?'true':'false';
+  accountDockBtn.classList.toggle('open',!!LEADERBOARD.accountPanelOpen);
+  accountDockBtn.title=signedIn?`${dockId} onboard`:'Pilot Sign In';
+ }
+ if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
+ if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
+ if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Flight history and records are synced below.':'Sign in, create a pilot, or keep playing locally and track records on this device.');
+ if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
+ if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
+ if(accountPanel){
+  accountPanel.dataset.signedIn=signedIn?'true':'false';
+ }
+ renderPilotFlightStats(rows,signedIn);
+ renderPilotRecords(rows);
+ const hudInitials=signedIn?dockId:'---';
  window.__auroraPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ if(resetTestPilotScoresBtn){
+  const show=testAccountEnabled();
+  resetTestPilotScoresBtn.hidden=!show;
+  resetTestPilotScoresBtn.disabled=!show||LEADERBOARD.authBusy||!isSignedInAsTestAccount();
+  resetTestPilotScoresBtn.textContent=isSignedInAsTestAccount()?'🧹 Reset Test Pilot Scores':'🧹 Reset Test Pilot Scores (Sign in required)';
+ }
 }
 function syncLeaderboardUi(){
- const signedIn=!!LEADERBOARD.user;
- for(const btn of leaderboardViewButtons){
-  const view=btn.dataset.view||'all';
-  btn.classList.toggle('active',view===LEADERBOARD.view);
-  btn.disabled=view==='mine'&&!signedIn;
- }
+  const signedIn=!!LEADERBOARD.user;
+  for(const btn of leaderboardViewButtons){
+   const view=btn.dataset.view||'all';
+   btn.classList.toggle('active',view===LEADERBOARD.view);
+  btn.disabled=view==='mine'&&(!signedIn||!remoteAuthEnabled());
+  }
  if(leaderboardStatusEl)leaderboardStatusEl.textContent=LEADERBOARD.status;
  renderLeaderboardPanel();
  syncLeaderboardPanelVisibility();
@@ -2170,6 +2537,7 @@ async function loadOwnProfile(){
  return LEADERBOARD.profile;
 }
 async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
+ view=normalizeLeaderboardViewForLane(view);
  if(view==='local'){
   syncLeaderboardBest();
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel('local','local'));
@@ -2181,7 +2549,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
   syncLeaderboardUi();
   return localLeaderboardRows();
  }
- if(view==='mine'&&!LEADERBOARD.user){
+ if(view==='mine'&&(!remoteAuthEnabled()||!LEADERBOARD.user)){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'signed_out'));
   syncLeaderboardUi();
   return localLeaderboardRows();
@@ -2198,6 +2566,11 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  syncLeaderboardUi();
  let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
+ if(shouldHideTestAccountScores()&&view!=='mine'){
+  const hiddenIds=configuredTestAccountUserIds();
+  if(hiddenIds.length===1)query=query.neq('user_id',hiddenIds[0]);
+  else query=query.not('user_id','in',`(${hiddenIds.join(',')})`);
+ }
  if(view==='mine')query=query.eq('user_id',LEADERBOARD.user.id);
  const {data,error}=await query;
  LEADERBOARD.loading[view]=0;
@@ -2216,11 +2589,11 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  return LEADERBOARD.remote[view];
 }
 function setLeaderboardView(view){
- const next=['all','validated','local','mine'].includes(view)?view:'all';
+ const next=normalizeLeaderboardViewForLane(['all','validated','local','mine'].includes(view)?view:'all');
  LEADERBOARD.view=next;
  LEADERBOARD.panelOpen=1;
  writePref(LEADERBOARD_PREF_KEY,next);
- if(next==='mine'&&!LEADERBOARD.user)setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
+ if(next==='mine'&&(!remoteAuthEnabled()||!LEADERBOARD.user))setLeaderboardStatus(leaderboardStatusLabel(next,'signed_out'));
  else if(next==='local')setLeaderboardStatus(leaderboardStatusLabel(next,'local'));
  else if((LEADERBOARD.remote[next]||[]).length||LEADERBOARD.cacheStamp[next])setLeaderboardStatus(leaderboardCacheFresh(next)?leaderboardStatusLabel(next,'ready'):leaderboardStatusLabel(next,'cached'));
  syncLeaderboardUi();
@@ -2229,7 +2602,7 @@ function setLeaderboardView(view){
 async function prefetchLeaderboards(force=0){
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
  const tasks=[refreshLeaderboard('all',{silent:1,force}),refreshLeaderboard('validated',{silent:1,force})];
- if(LEADERBOARD.user)tasks.push(refreshLeaderboard('mine',{silent:1,force}));
+ if(remoteAuthEnabled()&&LEADERBOARD.user)tasks.push(refreshLeaderboard('mine',{silent:1,force}));
  await Promise.all(tasks);
  if(['all','validated','mine'].includes(LEADERBOARD.view))setLeaderboardStatus(leaderboardStatusLabel(LEADERBOARD.view,'ready'));
  syncLeaderboardUi();
@@ -2260,6 +2633,11 @@ function resolveGameOverScoreEntry(){
 }
 async function submitScoreRemote(entry){
  if(!entry||!LEADERBOARD.configured||!LEADERBOARD.client)return 0;
+ if(!remoteWriteEnabled()){
+  setLeaderboardStatus('Saved locally · production submit disabled in this lane');
+  syncLeaderboardUi();
+  return 0;
+ }
  const payload={
   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
   score:+entry.score|0,
@@ -2297,15 +2675,41 @@ function submitGameOverScore(){
 function authRedirectUrl(){
  return `${location.origin}${location.pathname}`;
 }
+function friendlyAuthError(action,error){
+ const message=String(error?.message||'').trim();
+ const lower=message.toLowerCase();
+ if(lower.includes('email rate limit exceeded')){
+  if(action==='reset'){
+   return 'Too many reset emails were requested recently. Use the newest reset email you already received, or wait a bit before requesting another.';
+  }
+  if(action==='signup'){
+   return 'Too many email actions were requested recently. Wait a bit, then try creating the account again.';
+  }
+ }
+ if(lower.includes('invalid login credentials')){
+  return 'Invalid email or password.';
+ }
+ if(lower.includes('email not confirmed')){
+  return 'Your email is not verified yet. Use the newest verification email, then try logging in again.';
+ }
+ return message||'Unknown authentication error.';
+}
 async function signUpAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
  const initials=sanitizeInitials(accountInitials?.value||'').slice(0,3);
  if(!email||!password){
-  if(accountSummary)accountSummary.textContent='Enter an email and password first.';
+  setAccountNotice('Enter an email and password first.');
+  syncAccountUi();
   return;
  }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can create an account from this lane.`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signUp({
@@ -2318,46 +2722,123 @@ async function signUpAccount(){
  });
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Signup failed: ${error.message}`;
+  setAccountNotice(`Signup failed: ${friendlyAuthError('signup',error)}`);
   syncAccountUi();
   return;
  }
- if(accountSummary)accountSummary.textContent='Check your email to verify your account, then log in here.';
+ setAccountNotice('Check your email to verify your account, then log in here.');
  syncAccountUi();
 }
 async function loginAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const email=String(accountEmail?.value||'').trim();
  const password=String(accountPassword?.value||'');
  if(!email||!password){
-  if(accountSummary)accountSummary.textContent='Enter your email and password first.';
+  setAccountNotice('Enter your email and password first.');
+  syncAccountUi();
   return;
  }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can sign in from this lane.`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signInWithPassword({email,password});
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Login failed: ${error.message}`;
+  setAccountNotice(`Login failed: ${friendlyAuthError('login',error)}`);
   syncAccountUi();
   return;
  }
  if(accountPassword)accountPassword.value='';
+ setAccountNotice('');
  syncAccountUi();
 }
+async function resetAccountPassword(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
+ const email=String(accountEmail?.value||'').trim();
+ if(!email){
+  setAccountNotice('Enter your email first so we know where to send the reset link.');
+  syncAccountUi();
+  return;
+ }
+ if(NON_PRODUCTION_LANE&&!isConfiguredTestAccountEmail(email)){
+  setAccountNotice(`Only configured test pilots (${configuredTestPilotLabel()}) can reset a password from this lane.`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Reset password failed: ${friendlyAuthError('reset',error)}`);
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice(`Password reset email sent to ${email}. Check your inbox and spam folder.`);
+ syncAccountUi();
+}
+async function applyRecoveredPassword(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
+ const password=String(accountPassword?.value||'');
+ const confirm=String(accountPasswordConfirm?.value||'');
+ if(!password){
+  setAccountNotice('Enter a new password first.');
+  syncAccountUi();
+  return;
+ }
+ if(password.length<6){
+  setAccountNotice('Use a password with at least 6 characters.');
+  syncAccountUi();
+  return;
+ }
+ if(password!==confirm){
+  setAccountNotice('New password and confirmation do not match.');
+  syncAccountUi();
+  return;
+ }
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.auth.updateUser({password});
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Could not update password: ${error.message}`);
+  syncAccountUi();
+  return;
+ }
+ const {data:{session}}=await LEADERBOARD.client.auth.getSession();
+ LEADERBOARD.user=session?.user||LEADERBOARD.user;
+ if(LEADERBOARD.user)await loadOwnProfile();
+ setAccountNotice('Password updated. You can now keep using this pilot account.');
+ LEADERBOARD.recoveryMode=0;
+ if(accountPassword)accountPassword.value='';
+ if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ syncLeaderboardBest();
+ syncAccountUi();
+ syncLeaderboardUi();
+}
 async function logoutAccount(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy)return;
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const {error}=await LEADERBOARD.client.auth.signOut();
  LEADERBOARD.authBusy=0;
- if(error&&accountSummary)accountSummary.textContent=`Logout failed: ${error.message}`;
+ if(error)setAccountNotice(`Logout failed: ${error.message}`);
  if(!error&&accountPassword)accountPassword.value='';
+ if(!error)setAccountNotice('');
  syncAccountUi();
 }
 async function saveAccountInitials(){
- if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy)return;
+ if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
  const initials=sanitizeInitials(accountInitials?.value||'').padEnd(3,'-').slice(0,3);
+ setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
  const [{data,error},metaResult]=await Promise.all([
@@ -2366,14 +2847,35 @@ async function saveAccountInitials(){
  ]);
  LEADERBOARD.authBusy=0;
  if(error){
-  if(accountSummary)accountSummary.textContent=`Could not save initials: ${error.message}`;
+  setAccountNotice(`Could not save initials: ${error.message}`);
   syncAccountUi();
   return;
  }
  if(metaResult?.data?.user)LEADERBOARD.user=metaResult.data.user;
  LEADERBOARD.profile=data||{user_id:LEADERBOARD.user.id,display_initials:initials};
- if(accountSummary)accountSummary.textContent=`Saved display initials ${initials}.`;
+ setAccountNotice(`Saved display initials ${initials}.`);
  syncAccountUi();
+}
+async function resetTestPilotScores(){
+ if(!LEADERBOARD.client||LEADERBOARD.authBusy||!isSignedInAsTestAccount())return;
+ setAccountNotice('');
+ LEADERBOARD.authBusy=1;
+ syncAccountUi();
+ const {error}=await LEADERBOARD.client.from('scores').delete().eq('user_id',LEADERBOARD.user.id);
+ LEADERBOARD.authBusy=0;
+ if(error){
+  setAccountNotice(`Could not reset test pilot scores: ${error.message}`);
+  syncAccountUi();
+  return;
+ }
+ LEADERBOARD.remote.mine=[];
+ LEADERBOARD.cacheStamp.mine=0;
+ setLeaderboardStatus('Test pilot scores cleared');
+ setAccountNotice('Cleared remote scores for the configured test pilot.');
+ syncLeaderboardUi();
+ refreshLeaderboard('all',{force:1});
+ refreshLeaderboard('validated',{force:1});
+ refreshLeaderboard('mine',{force:1});
 }
 async function initLeaderboard(){
  if(HARNESS_SUPABASE_BYPASS){
@@ -2397,36 +2899,64 @@ async function initLeaderboard(){
   });
   hydrateLeaderboardCache('all');
   hydrateLeaderboardCache('validated');
-  const hadAuthHash=location.hash.includes('access_token=');
-  const {data:{session}}=await LEADERBOARD.client.auth.getSession();
-  LEADERBOARD.user=session?.user||null;
-  if(LEADERBOARD.user){
-   hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-   await loadOwnProfile();
-  }
-  syncLeaderboardBest();
-  if(hadAuthHash)history.replaceState({},document.title,location.pathname+location.search);
-  setLeaderboardStatus(LEADERBOARD.user?'Shared leaderboard ready · signed in':'Shared leaderboard ready');
-  syncLeaderboardUi();
-  primeLeaderboard();
-  scheduleLeaderboardRefresh();
-  LEADERBOARD.client.auth.onAuthStateChange(async(_event,sessionState)=>{
-   LEADERBOARD.user=sessionState?.user||null;
+  if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
+  const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
+  const hadRecoveryHash=remoteAuthEnabled()&&location.hash.includes('type=recovery');
+  if(remoteAuthEnabled()){
+   const {data:{session}}=await LEADERBOARD.client.auth.getSession();
+   LEADERBOARD.user=session?.user||null;
+   if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+    await LEADERBOARD.client.auth.signOut();
+    LEADERBOARD.user=null;
+    setAccountNotice('The test pilot account is disabled in production.');
+   }
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
+    if(hadRecoveryHash)enterRecoveryMode();
    }
-   else{
-    LEADERBOARD.profile=null;
-    LEADERBOARD.remote.mine=[];
-    LEADERBOARD.cacheStamp.mine=0;
-    if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
-   }
-   syncLeaderboardBest();
-   syncLeaderboardUi();
-   primeLeaderboard();
-   scheduleLeaderboardRefresh();
-  });
+  }else{
+   LEADERBOARD.user=null;
+   LEADERBOARD.profile=null;
+   LEADERBOARD.remote.mine=[];
+   LEADERBOARD.cacheStamp.mine=0;
+  }
+  syncLeaderboardBest();
+  if(hadAuthHash)history.replaceState({},document.title,location.pathname+location.search);
+  if(!remoteWriteEnabled())setLeaderboardStatus(`Production scores ready · ${remoteLeaderboardPolicyLabel()}`);
+  else setLeaderboardStatus(LEADERBOARD.user?'Shared leaderboard ready · signed in':'Shared leaderboard ready');
+  syncLeaderboardUi();
+  primeLeaderboard();
+  scheduleLeaderboardRefresh();
+  if(remoteAuthEnabled()){
+  LEADERBOARD.client.auth.onAuthStateChange(async(event,sessionState)=>{
+    LEADERBOARD.user=sessionState?.user||null;
+    if(event==='PASSWORD_RECOVERY')LEADERBOARD.recoveryMode=1;
+    else if(sessionState?.user)LEADERBOARD.recoveryMode=0;
+    if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+     await LEADERBOARD.client.auth.signOut();
+     LEADERBOARD.user=null;
+     setAccountNotice('The test pilot account is disabled in production.');
+    }
+    if(LEADERBOARD.user){
+     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
+     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+     await loadOwnProfile();
+    }
+    else{
+     LEADERBOARD.recoveryMode=0;
+     setAccountNotice('');
+     LEADERBOARD.profile=null;
+     LEADERBOARD.remote.mine=[];
+     LEADERBOARD.cacheStamp.mine=0;
+     if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
+    }
+    syncLeaderboardBest();
+    syncLeaderboardUi();
+    primeLeaderboard();
+    scheduleLeaderboardRefresh();
+   });
+  }
  }catch(err){
   LEADERBOARD.client=null;
   LEADERBOARD.configured=0;
@@ -2446,8 +2976,17 @@ if(accountPanelClose)accountPanelClose.addEventListener('click',closeAccountPane
 if(accountPanel)accountPanel.addEventListener('click',e=>e.stopPropagation());
 if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
+if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword);
+if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
+ const btn=e.target.closest('.accountRecordReplayBtn');
+ if(!btn)return;
+ const replayId=btn.dataset.replayId||'';
+ if(replayId&&typeof window.openMovieReplayById==='function')window.openMovieReplayById(replayId);
+});
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
  const inLeaderboard=LEADERBOARD.panelOpen&&leaderboardPanel&&(e.target===leaderboardDockBtn||leaderboardPanel.contains(e.target)||leaderboardViews.contains(e.target));
@@ -2478,6 +3017,7 @@ const movieDeleteBtn=document.getElementById('movieDeleteBtn');
 const movieTimeline=document.getElementById('movieTimeline');
 
 const MOVIE={panelOpen:0,prevPaused:0,runs:[],selectedId:'',pendingId:'',current:null,loading:0,objectUrl:'',status:''};
+window.__auroraReplayCatalog=[];
 
 function movieStoreAvailable(){
  return !!(window.AuroraReplayStore&&typeof window.AuroraReplayStore.supported==='function'&&window.AuroraReplayStore.supported());
@@ -2549,6 +3089,10 @@ function renderMovieRuns(){
  movieRunSelect.innerHTML=MOVIE.runs.map(run=>`<option value="${run.id}">STG ${String(run.stage||0).padStart(2,'0')} · ${formatScore(run.score||0)} · ${movieDurationLabel(run.duration||0)} · ${movieAgeLabel(run.createdAt)}</option>`).join('');
  movieRunSelect.value=MOVIE.pendingId||MOVIE.selectedId||MOVIE.runs[0].id;
 }
+function publishReplayCatalog(){
+ window.__auroraReplayCatalog=MOVIE.runs.slice();
+ if(typeof syncAccountUi==='function')syncAccountUi();
+}
 function syncMoviePanelVisibility(){
  if(!moviePanel||!movieDockBtn)return;
  const show=!!MOVIE.panelOpen;
@@ -2608,12 +3152,14 @@ async function refreshMovieCatalog(opts={}){
  if(!movieStoreAvailable()){
   MOVIE.runs=[];
   clearMovieSelection();
+  publishReplayCatalog();
   setMovieStatus('Local replays need browser storage support.');
   return;
  }
  try{
   if(!opts.silent)setMovieStatus('Loading recent replays...');
   MOVIE.runs=await window.AuroraReplayStore.listReplays();
+  publishReplayCatalog();
   renderMovieRuns();
   if(!MOVIE.runs.length){
     clearMovieSelection();
@@ -2627,8 +3173,21 @@ async function refreshMovieCatalog(opts={}){
  }catch(err){
   MOVIE.runs=[];
   clearMovieSelection();
+  publishReplayCatalog();
   setMovieStatus(err.message||'Could not load local replays');
  }
+}
+async function openMovieReplayById(id){
+ if(!id)return;
+ if(!MOVIE.panelOpen)openMoviePanel();
+ await refreshMovieCatalog({silent:1});
+ if(!MOVIE.runs.some(run=>run.id===id)){
+  setMovieStatus('That replay is no longer available on this device.');
+  return;
+ }
+ MOVIE.pendingId=id;
+ renderMovieRuns();
+ await loadMovieReplay(id);
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
@@ -2666,6 +3225,7 @@ function isMoviePanelOpen(){return !!MOVIE.panelOpen}
 window.refreshMovieCatalog=refreshMovieCatalog;
 window.closeMoviePanel=closeMoviePanel;
 window.isMoviePanelOpen=isMoviePanelOpen;
+window.openMovieReplayById=openMovieReplayById;
 
 if(movieDockBtn)movieDockBtn.addEventListener('click',e=>{e.stopPropagation();if(MOVIE.panelOpen)closeMoviePanel();else openMoviePanel();});
 if(moviePanelClose)moviePanelClose.addEventListener('click',()=>closeMoviePanel());
@@ -3482,14 +4042,8 @@ function update(dt){
  else if(!S.attract&&harnessPersona&&manualFire)shoot();
 
  const alive=S.e.filter(e=>e.hp>0);
+ const normalStageCleared=!alive.length&&!S.challenge;
  S.liveCount=alive.length;
- if(!alive.length&&!S.challenge){
-  if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
-  logEvent('stage_clear',{stage:S.stage,score:S.score});
-  S.stage++;
-  queueStageTransition();
-  return
- }
  if(S.challenge&&!alive.length&&!S.ch.done){
   logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(S.ch.upperBandY||PLAY_H*.5),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
   S.ch.done=1;
@@ -3636,12 +4190,28 @@ function update(dt){
    else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0){S.cap=null;p.dual=1;S.score+=1000;S.recoverT=Math.max(S.recoverT,1.15);S.attackGapT=Math.max(S.attackGapT,.9);startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');logEvent('fighter_rescued',{stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2)});logEvent('rescue_join_phase',{stage:S.stage,duration:1.1,playerX:+p.x.toFixed(2)});sfx.rescue();sfx.join()}
   }
  }
+ if(normalStageCleared){
+  // Let a released captured fighter finish its return/join flow before the
+  // stage transition starts. Without this, killing the last carrying boss on
+  // descent can queue stage clear immediately and skip the dual-fighter join.
+  if(S.cap)return;
+  if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
+  logEvent('stage_clear',{stage:S.stage,score:S.score});
+  S.stage++;
+  queueStageTransition();
+  return
+ }
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
 }
 
 // Source: src/js/20-render.js
 // Hitboxes, sprite rendering, HUD, overlays, and frame drawing.
 const playfieldFrame=document.getElementById('playfieldFrame');
+const renderHelpModal=document.getElementById('helpModal');
+const renderHelpPanel=document.getElementById('helpPanel');
+const renderFeedbackModal=document.getElementById('feedbackModal');
+const renderFeedbackPanel=document.getElementById('feedbackPanel');
+const renderSettingsPanel=document.getElementById('settingsPanel');
 window.__auroraRenderDebug=window.__auroraRenderDebug||{carryDraws:[]};
 const DISPLAY_SHELL=Object.freeze({
  hudInsetX:12,
@@ -4044,9 +4614,9 @@ function draw(){
   movieOverlayPanel.style.width=`${viewW}px`;
   movieOverlayPanel.style.height=`${viewH}px`;
  }
- const railH=Math.max(220,Math.min(viewH-10,Math.floor(viewH*.76)));
+ const railH=Math.max(220,viewH);
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
- const railTop=oy+Math.floor((viewH-railH)/2);
+ const railTop=oy;
  if(cabinetShell){
   cabinetShell.style.display='block';
   cabinetShell.style.left=`${shellX}px`;
@@ -4068,25 +4638,65 @@ function draw(){
   }else cabinetRightFrame.style.display='none';
  }
  const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
+ const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!waitScoreOverlay&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
  if(statusPanels){
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  statusPanels.style.setProperty('--overlay-max-height','none');
   if(waitScoreOverlay){
    const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
    statusPanels.style.width=`${panelW}px`;
    statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
    statusPanels.style.right='auto';
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
+   statusPanels.style.bottom='auto';
+ }else if(framedOverlayOpen){
+   const panelW=Math.min(Math.max(420,Math.floor(viewW*.84)),660);
+   const top=Math.floor(oy+12);
+   const maxHeight=Math.max(180,Math.floor(viewH-24));
+   statusPanels.style.width=`${panelW}px`;
+   statusPanels.style.left=`${Math.floor(ox+viewW/2-panelW/2)}px`;
+   statusPanels.style.right='auto';
+   statusPanels.style.top=`${top}px`;
+   statusPanels.style.bottom='auto';
+   statusPanels.style.setProperty('--overlay-max-height',`${maxHeight}px`);
   }else{
    statusPanels.style.width='';
    statusPanels.style.left='auto';
    statusPanels.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
    statusPanels.style.top=`${Math.max(14,oy+14)}px`;
+   statusPanels.style.bottom='auto';
   }
  }
- if(settingsPanel){
-  settingsPanel.style.right=`${Math.max(14,innerWidth-(shellX+shellW)+railInset)}px`;
-  settingsPanel.style.top=`${Math.max(14,oy+14)}px`;
+ if(renderSettingsPanel){
+  const settingsW=Math.min(Math.max(420,Math.floor(viewW*.58)),680);
+  const top=Math.floor(oy+12);
+  const maxHeight=Math.max(220,Math.floor(viewH-24));
+  renderSettingsPanel.style.width=`${settingsW}px`;
+  renderSettingsPanel.style.left=`${Math.floor(ox+viewW/2-settingsW/2)}px`;
+  renderSettingsPanel.style.right='auto';
+  renderSettingsPanel.style.top=`${top}px`;
+  renderSettingsPanel.style.maxHeight=`${maxHeight}px`;
  }
+ if(renderHelpModal){
+  renderHelpModal.style.left=`${ox}px`;
+  renderHelpModal.style.top=`${oy}px`;
+  renderHelpModal.style.width=`${viewW}px`;
+  renderHelpModal.style.height=`${viewH}px`;
+ }
+ if(renderHelpPanel){
+  renderHelpPanel.style.width=`${Math.min(Math.max(340,Math.floor(viewW-24)),820)}px`;
+  renderHelpPanel.style.height=`${Math.max(220,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderFeedbackModal){
+  renderFeedbackModal.style.left=`${ox}px`;
+  renderFeedbackModal.style.top=`${oy}px`;
+  renderFeedbackModal.style.width=`${viewW}px`;
+  renderFeedbackModal.style.height=`${viewH}px`;
+ }
+ if(renderFeedbackPanel){
+  renderFeedbackPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),720)}px`;
+  renderFeedbackPanel.style.maxHeight=`${Math.max(220,Math.min(Math.floor(viewH-24),720))}px`;
+  }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
   buildStamp.style.width=`${stampW}px`;
@@ -4130,7 +4740,10 @@ function draw(){
  ctx.setTransform(1,0,0,1,0,0);
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- right.innerHTML=window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`;
+ const pilotHudHtml=(typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
+  ? `<span class="hudLabel">PILOT</span> <span class="hudValue">${pilotDisplayId()}</span>`
+  : (window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
+ right.innerHTML=pilotHudHtml;
 const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
@@ -4412,6 +5025,20 @@ window.__galagaHarness__={
   awardKill(boss,boss.dive);
   ex(boss.x,boss.y,16,'#ff8cd7');
   logEvent('harness_trigger_carried_boss_kill',{boss:boss.id,dive:boss.dive});
+  return true;
+ },
+ clearNonCarryingEnemies(){
+  const carryingBoss=S.e.find(e=>e.hp>0&&e.t==='boss'&&e.carry);
+  if(!carryingBoss)return false;
+  let cleared=0;
+  for(const e of S.e){
+   if(e.id===carryingBoss.id)continue;
+   if(e.hp>0){
+    e.hp=0;
+    cleared++;
+   }
+  }
+  logEvent('harness_clear_non_carrying_enemies',{boss:carryingBoss.id,cleared});
   return true;
  },
  triggerBossFirstHit(){

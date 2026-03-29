@@ -66,6 +66,28 @@ After GitHub Pages deploys, play at:
 
 The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The `/beta/` lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in `Codex-Test1` as the pre-production development line.
 
+Current score/data policy:
+
+- production:
+  - live shared leaderboard reads and writes
+  - pilot account actions enabled
+- beta and local pre-production:
+  - production leaderboard reads only
+  - score submission disabled by default
+  - pilot account/profile writes disabled unless a configured non-production test pilot is signed in
+  - local device scores still save normally
+
+Optional non-production test pilot configuration:
+
+- set `TEST_ACCOUNT_EMAILS` to enable one or more specific beta/dev pilot accounts for auth and write-flow testing
+- set `TEST_ACCOUNT_USER_IDS` to exclude those pilots' scores from shared leaderboard views
+- the local-only example file is:
+  - `/Users/stevenwoods/Documents/Codex-Test1/.env.local.example`
+- when one of those configured test pilots is signed in on beta/dev:
+  - `My Scores` becomes available
+  - score submission is enabled for that pilot only
+  - the Developer Tools panel can reset that pilot's remote scores
+
 ## Screenshot
 
 ![Gameplay Screenshot](./export.mov.png)
@@ -111,6 +133,7 @@ npm run local:stop
 - `U`: Ultra scale toggle
 - `Enter`: Start / Restart
 - `F1` or `?`: Open in-game feedback form
+- featured pilot icon: Open the pilot identity/profile card
 - `ℹ` icon: Open the player guide inside the game
 - `🕹` icon: Open the controls reference inside the game
 - `🎞` icon: Watch recent local replays saved on this device
@@ -122,6 +145,8 @@ npm run local:stop
 - Stage progression with challenge stages
 - Stage 1 scripted opening timing for consistency
 - Boss capture beam, ship capture, rescue, and dual-fighter fire mode
+- In-game pilot profile card with sign-in, sign-out, create-account, and reset-password flows
+- Browser-native pilot replay viewer and in-frame popup surfaces for pilot/help/scores/feedback/settings
 - Enemy dive behavior and tuned missile pacing/spread
 - Pixel-art sprite rendering and starfield
 - Synthesized arcade-style SFX
