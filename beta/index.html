@@ -415,7 +415,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
+<canvas id="c" tabindex="0"></canvas>
 <div id="cabinetShell" aria-hidden="true">
   <div class="shellPanel shellTop">
     <div id="cabinetMarquee">
@@ -483,9 +483,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.263.sha.cb65cfa.beta</span>
-    <span id="settingsRelease">Mar 29 2026, 10:45 AM EDT</span>
-    <span id="settingsState">beta@cb65cfa clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.264.sha.3d9dc54.beta</span>
+    <span id="settingsRelease">Mar 29 2026, 1:12 PM EDT</span>
+    <span id="settingsState">beta@3d9dc54 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -692,8 +692,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.263.sha.cb65cfa.beta</span>
-  <span id="buildStampRelease">Mar 29 2026, 10:45 AM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.264.sha.3d9dc54.beta</span>
+  <span id="buildStampRelease">Mar 29 2026, 1:12 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -942,7 +942,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.263.sha.cb65cfa.beta',commit:'cb65cfafd03323ff1f3cd46b2e8e27a13c8ce0eb',branch:'beta',dirty:false,released:'Mar 29 2026, 10:45 AM EDT',state:'beta@cb65cfa clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.264.sha.3d9dc54.beta',commit:'3d9dc5456a83aac6042d2f21d040852a7939167a',branch:'beta',dirty:false,released:'Mar 29 2026, 1:12 PM EDT',state:'beta@3d9dc54 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -2139,13 +2139,38 @@ function formatWhenShort(value=''){
  const days=Math.round(hours/24);
  return `${days}d ago`;
 }
+function replayCatalogRows(){
+ return Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
+}
+function resolveRowTimestamp(row){
+ const direct=String(row?.at||'').trim();
+ if(direct&&Number.isFinite(Date.parse(direct)))return direct;
+ const score=+row?.score||0;
+ const stage=+row?.stage||0;
+ const localMatch=localLeaderboardRows().find(localRow=>{
+  if((+localRow.score||0)!==score)return false;
+  if((+localRow.stage||0)!==stage)return false;
+  const stamp=String(localRow.at||'').trim();
+  return !!stamp&&Number.isFinite(Date.parse(stamp));
+ });
+ if(localMatch)return localMatch.at;
+ const replayMatch=replayCatalogRows().find(run=>{
+  if((+run.score||0)!==score)return false;
+  if((+run.stage||0)!==stage)return false;
+  const stamp=String(run.createdAt||'').trim();
+  return !!stamp&&Number.isFinite(Date.parse(stamp));
+ });
+ return replayMatch?.createdAt||'';
+}
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
   accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
   return;
  }
- const latest=[...rows].sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))[0]||rows[0];
+ const latest=[...rows]
+  .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)}))
+  .sort((a,b)=>Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))[0]||rows[0];
  const bestScore=Math.max(...rows.map(row=>+row.score||0),0);
  const bestStage=Math.max(...rows.map(row=>+row.stage||0),0);
  const verifiedRuns=rows.filter(row=>row.verified).length;
@@ -2154,7 +2179,7 @@ function renderPilotFlightStats(rows,signedIn){
   ['Best Score', formatScore(bestScore)],
   ['Last Stage Reached', `STG ${String(+latest.stage||0).padStart(2,'0')}`],
   ['Latest Score', formatScore(+latest.score||0)],
-  ['Latest Flight', formatWhenShort(latest.at)],
+  ['Latest Flight', formatWhenShort(latest.resolvedAt||latest.at)],
   ['Verified Runs', signedIn?String(verifiedRuns):'--']
  ];
  accountFlightStats.innerHTML=cards.map(([label,value])=>`<div class="accountStatCard"><span class="accountStatLabel">${label}</span><span class="accountStatValue">${value}</span></div>`).join('');
@@ -2165,24 +2190,38 @@ function renderPilotRecords(rows){
   accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
   return;
  }
- const replayRuns=Array.isArray(window.__auroraReplayCatalog)?window.__auroraReplayCatalog:[];
   const topRows=[...rows]
   .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
   .slice(0,5);
  const replayForRow=(row)=>{
-  const rowStamp=Date.parse(row.at||'');
-  return replayRuns.find(run=>{
-   if((+run.score||0)!== (+row.score||0))return false;
-   if((+run.stage||0)!== (+row.stage||0))return false;
-   if(!Number.isFinite(rowStamp))return true;
-   const replayStamp=Date.parse(run.createdAt||'');
-   if(!Number.isFinite(replayStamp))return false;
-   return Math.abs(replayStamp-rowStamp)<=120000;
-  })||null;
+  const runs=replayCatalogRows();
+  const rowScore=+row.score||0;
+  const rowStage=+row.stage||0;
+  const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
+  const byScoreStage=runs.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+  if(Number.isFinite(rowStamp)){
+   const exactTimed=byScoreStage.find(run=>{
+    const replayStamp=Date.parse(run.createdAt||'');
+    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+   });
+   if(exactTimed)return exactTimed;
+  }
+  if(byScoreStage.length)return byScoreStage[0];
+  if(Number.isFinite(rowStamp)){
+   const sameStageTimed=runs.find(run=>{
+    if((+run.stage||0)!==rowStage)return false;
+    const replayStamp=Date.parse(run.createdAt||'');
+    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+   });
+   if(sameStageTimed)return sameStageTimed;
+  }
+  const sameStageRuns=runs.filter(run=>(+run.stage||0)===rowStage);
+  if(sameStageRuns.length===1)return sameStageRuns[0];
+  return null;
  };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
-  const stamp=formatWhenShort(row.at);
+  const stamp=formatWhenShort(resolveRowTimestamp(row)||row.at);
   const replay=replayForRow(row);
   return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
@@ -2607,6 +2646,11 @@ async function prefetchLeaderboards(force=0){
  if(['all','validated','mine'].includes(LEADERBOARD.view))setLeaderboardStatus(leaderboardStatusLabel(LEADERBOARD.view,'ready'));
  syncLeaderboardUi();
 }
+async function refreshSignedInPilotRecords(force=1){
+ if(!remoteAuthEnabled()||!LEADERBOARD.user)return;
+ await refreshLeaderboard('mine',{silent:1,force});
+ syncAccountUi();
+}
 function primeLeaderboard(){
  if(!LEADERBOARD.configured||!LEADERBOARD.client)return;
  if(started&&!paused)return;
@@ -2755,6 +2799,7 @@ async function loginAccount(){
  }
  if(accountPassword)accountPassword.value='';
  setAccountNotice('');
+ await refreshSignedInPilotRecords(1);
  syncAccountUi();
 }
 async function resetAccountPassword(){
@@ -2815,6 +2860,7 @@ async function applyRecoveredPassword(){
  const {data:{session}}=await LEADERBOARD.client.auth.getSession();
  LEADERBOARD.user=session?.user||LEADERBOARD.user;
  if(LEADERBOARD.user)await loadOwnProfile();
+ await refreshSignedInPilotRecords(1);
  setAccountNotice('Password updated. You can now keep using this pilot account.');
  LEADERBOARD.recoveryMode=0;
  if(accountPassword)accountPassword.value='';
@@ -2938,11 +2984,12 @@ async function initLeaderboard(){
      LEADERBOARD.user=null;
      setAccountNotice('The test pilot account is disabled in production.');
     }
-    if(LEADERBOARD.user){
-     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
-     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-     await loadOwnProfile();
-    }
+  if(LEADERBOARD.user){
+    if(!LEADERBOARD.recoveryMode)setAccountNotice('');
+    hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+    await loadOwnProfile();
+    await refreshSignedInPilotRecords(1);
+   }
     else{
      LEADERBOARD.recoveryMode=0;
      setAccountNotice('');
@@ -3047,6 +3094,16 @@ function revokeMovieObjectUrl(){
   MOVIE.objectUrl='';
  }
 }
+async function tryMovieAutoplay(){
+ if(!movieVideo)return 0;
+ try{
+  const maybe=movieVideo.play();
+  if(maybe&&typeof maybe.then==='function')await maybe;
+  return true;
+ }catch{
+  return false;
+ }
+}
 function updateMovieControls(){
  const ready=!!MOVIE.current;
  moviePanel.classList.toggle('ready',ready);
@@ -3126,7 +3183,7 @@ function clearMovieSelection(){
  syncMovieBuildStamp();
  updateMovieControls();
 }
-async function loadMovieReplay(id){
+async function loadMovieReplay(id,opts={}){
  if(!movieStoreAvailable())return;
  try{
   setMovieStatus('Loading replay...');
@@ -3143,6 +3200,11 @@ async function loadMovieReplay(id){
   renderMovieRuns();
   moviePanel.classList.add('ready');
   updateMovieTimeline();
+  if(opts.autoplay){
+   const playing=await tryMovieAutoplay();
+   setMovieStatus(playing?`Playing local replay from ${movieAgeLabel(replay.createdAt)}.`:`Showing local replay from ${movieAgeLabel(replay.createdAt)}.`);
+   updateMovieControls();
+  }
  }catch(err){
   setMovieStatus(err.message||'Could not load replay');
   clearMovieSelection();
@@ -3187,7 +3249,7 @@ async function openMovieReplayById(id){
  }
  MOVIE.pendingId=id;
  renderMovieRuns();
- await loadMovieReplay(id);
+ await loadMovieReplay(id,{autoplay:true});
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
@@ -3232,7 +3294,7 @@ if(moviePanelClose)moviePanelClose.addEventListener('click',()=>closeMoviePanel(
 if(movieCloseToWaitBtn)movieCloseToWaitBtn.addEventListener('click',()=>closeMoviePanel());
 if(moviePanel)moviePanel.addEventListener('click',e=>e.stopPropagation());
 if(movieRunSelect)movieRunSelect.addEventListener('change',()=>{MOVIE.pendingId=movieRunSelect.value||'';updateMovieControls();});
-if(movieStartBtn)movieStartBtn.addEventListener('click',()=>{if(MOVIE.pendingId)loadMovieReplay(MOVIE.pendingId);});
+if(movieStartBtn)movieStartBtn.addEventListener('click',()=>{if(MOVIE.pendingId)loadMovieReplay(MOVIE.pendingId,{autoplay:true});});
 if(movieBackBtn)movieBackBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.max(0,(movieVideo.currentTime||0)-5);});
 if(movieForwardBtn)movieForwardBtn.addEventListener('click',()=>{if(MOVIE.current)movieVideo.currentTime=Math.min(movieVideo.duration||MOVIE.current.duration||0,(movieVideo.currentTime||0)+5);});
 if(moviePlayPauseBtn)moviePlayPauseBtn.addEventListener('click',()=>{if(!MOVIE.current)return;if(movieVideo.paused)movieVideo.play();else movieVideo.pause();});
@@ -3362,6 +3424,13 @@ function startSequence(mode,duration,title,subtitle=''){
 
 function start(){
  stopAttractLoop();
+ try{document.activeElement?.blur?.()}catch{}
+ if(typeof closeAccountPanel==='function')closeAccountPanel();
+ if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+ if(typeof closeSettings==='function')closeSettings();
+ if(typeof closeHelp==='function'&&helpOpen)closeHelp(1);
+ if(typeof closeFeedback==='function'&&feedbackOpen)closeFeedback(1);
+ if(typeof closeMoviePanel==='function'&&typeof isMoviePanelOpen==='function'&&isMoviePanelOpen())closeMoviePanel(1);
  resetSession('game_start');
  autoExportedSessionId='';
  const cfg=saveTestCfg();
@@ -3376,6 +3445,7 @@ function start(){
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';sfx.start();
+ c?.focus?.();
 }
 
 function fillPat(px,py,s,pat,col){if(!pat||!col)return;ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s)}
@@ -4877,7 +4947,7 @@ window.__galagaHarness__={
    ? cfg.blobBytes
    : [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88];
   const blob = new Blob([new Uint8Array(bytes)], { type: cfg.type || 'video/webm' });
-  await window.AuroraReplayStore.saveReplay({
+ await window.AuroraReplayStore.saveReplay({
    id: cfg.id || `harness-replay-${Date.now()}`,
    createdAt: cfg.createdAt || new Date().toISOString(),
    duration: +cfg.duration || 12,
@@ -4889,6 +4959,67 @@ window.__galagaHarness__={
    source: cfg.source || 'local',
    blob
   });
+  return true;
+ },
+ async setupPilotRecordsPanelTest(cfg={}){
+  const replayCreatedAt=cfg.createdAt || new Date(Date.now()-18*60*1000).toISOString();
+  if(window.AuroraReplayStore?.supported?.()){
+   const existing=await window.AuroraReplayStore.listReplays();
+   for(const replay of existing){
+    if(replay.id=== (cfg.replayId || 'replay-stage7-local'))await window.AuroraReplayStore.deleteReplay(replay.id);
+   }
+   await window.AuroraReplayStore.saveReplay({
+    id: cfg.replayId || 'replay-stage7-local',
+    createdAt: replayCreatedAt,
+    duration: +cfg.duration || 113,
+    score: +cfg.score || 654321,
+    stage: +cfg.stage || 7,
+    challenge: !!cfg.challenge,
+    build: (window.BUILD && window.BUILD.version) || '',
+    stats: cfg.stats || { shots: 12, hits: 8 },
+    source: 'local',
+    blob: new Blob([new Uint8Array(cfg.blobBytes || [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88])], { type: cfg.type || 'video/webm' })
+   });
+  }
+  window.__auroraReplayCatalog=[{
+   id: cfg.replayId || 'replay-stage7-local',
+   score: +cfg.score || 654321,
+   stage: +cfg.stage || 7,
+   createdAt: replayCreatedAt,
+   duration: +cfg.duration || 113
+  }];
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user={
+   id: cfg.userId || 'pilot-swd',
+   email: cfg.email || 'sgwoods@gmail.com',
+   email_confirmed_at: new Date().toISOString(),
+   user_metadata: { display_initials: cfg.initials || 'SWD' }
+  };
+  LEADERBOARD.profile={user_id:LEADERBOARD.user.id,display_initials:cfg.initials || 'SWD'};
+  LEADERBOARD.remote.mine=[
+   {
+    id:'remote-top-run',
+    initials:cfg.initials || 'SWD',
+    score:+cfg.score || 654321,
+    stage:+cfg.stage || 7,
+    at:'',
+    verified:true
+   },
+   {
+    id:'remote-backup-run',
+    initials:cfg.initials || 'SWD',
+    score:100020,
+    stage:4,
+    at:'',
+    verified:true
+   }
+  ];
+  LEADERBOARD.cacheStamp.mine=Date.now();
+  LEADERBOARD.accountPanelOpen=1;
+  LEADERBOARD.panelOpen=0;
+  syncLeaderboardPanelVisibility();
+  syncAccountPanelVisibility();
+  syncAccountUi();
   return true;
  },
  openMoviePanel(){
