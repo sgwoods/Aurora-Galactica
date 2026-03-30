@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0+build.258.sha.2320d51</span>
+              <span class="metaValue">0.5.0+build.270.sha.f0dbeef</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -411,11 +411,11 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">March 28, 2026</span>
+              <span class="metaValue">March 30, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Native replay viewer, player guide, and launch-shell polish</span>
+              <span class="metaValue">Pilot profile card, in-frame overlays, and rescue-flow polish</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -507,7 +507,7 @@
               <tr><td><a href="https://github.com/sgwoods/Codex-Test1/issues/61">#61</a></td><td>Shared</td><td>Watching</td><td>Hosted Stage 3-&gt;4 can still hit the empty-playfield edge case</td><td>Keep telemetry live and treat the next reproducible bad run as launch-blocking</td><td>Phase 1</td></tr>
             
 
-              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/76">#76</a></td><td>Shared</td><td>Open</td><td>Production and non-production still share the same live score/data path</td><td>Choose environment split and route non-production writes away from production by default</td><td>Phase 4</td></tr>
+              <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/76">#76</a></td><td>Shared</td><td>Implemented on dev</td><td>Non-production lanes now use a production-score read-only mirror with local-only score saves by default</td><td>Refresh beta, confirm the read-only lane messaging and blocked submit path, then close if it holds</td><td>Phase 4</td></tr>
             
 
               <tr><td>Must</td><td><a href="https://github.com/sgwoods/Codex-Test1/issues/85">#85</a></td><td>Shared</td><td>Open</td><td>Final release-readiness still needs security review, code/docs consistency, and a short player guide</td><td>Schedule the final release-readiness cycle once the shell/polish list is short</td><td>Phase 4</td></tr>
@@ -725,6 +725,12 @@
   
 
     <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_READINESS_REVIEW.md">Release Readiness Review</a>
+      <p>Explicit final-release review for 1.0 covering security posture, docs/public-surface consistency, lane discipline, and accepted launch risks.</p>
+    </article>
+  
+
+    <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/ARCHITECTURE.md">Architecture</a>
       <p>Short system layout and how build, deploy, harness, and reference flows fit together.</p>
     </article>
@@ -855,6 +861,10 @@
 <p>After GitHub Pages deploys, play at:</p>
 <ul><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
 <p>The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The <code>/beta/</code> lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in <code>Codex-Test1</code> as the pre-production development line.</p>
+<p>Current score/data policy:</p>
+<ul><li>production:<ul><li>live shared leaderboard reads and writes</li><li>pilot account actions enabled</li></ul></li><li>beta and local pre-production:<ul><li>production leaderboard reads only</li><li>score submission disabled by default</li><li>pilot account/profile writes disabled unless a configured non-production test pilot is signed in</li><li>local device scores still save normally</li></ul></li></ul>
+<p>Optional non-production test pilot configuration:</p>
+<ul><li>set <code>TEST_ACCOUNT_EMAILS</code> to enable one or more specific beta/dev pilot accounts for auth and write-flow testing</li><li>set <code>TEST_ACCOUNT_USER_IDS</code> to exclude those pilots&#39; scores from shared leaderboard views</li><li>the local-only example file is:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.env.local.example</code></li></ul></li><li>when one of those configured test pilots is signed in on beta/dev:<ul><li><code>My Scores</code> becomes available</li><li>score submission is enabled for that pilot only</li><li>the Developer Tools panel can reset that pilot&#39;s remote scores</li></ul></li></ul>
 <h3>Screenshot</h3>
 <p><img alt="Gameplay Screenshot" src="./export.mov.png"></p>
 <h3>Run Locally (macOS / Chrome)</h3>
@@ -871,9 +881,9 @@
 <p>To stop the locally tracked game and viewer services cleanly:</p>
 <pre><code data-lang="bash">npm run local:stop</code></pre>
 <h3>Controls</h3>
-<ul><li><code>Left/Right</code> or <code>A/D</code>: Move</li><li><code>Ctrl</code>: Left-handed cabinet-style move left on the web</li><li><code>Command</code>: Left-handed cabinet-style move right on the web</li><li><code>Space</code>: Fire (arcade-style shot cap)</li><li><code>P</code> or pause icon: Pause</li><li><code>F</code>: Fullscreen</li><li><code>U</code>: Ultra scale toggle</li><li><code>Enter</code>: Start / Restart</li><li><code>F1</code> or <code>?</code>: Open in-game feedback form</li><li><code>ℹ</code> icon: Open the player guide inside the game</li><li><code>🕹</code> icon: Open the controls reference inside the game</li><li><code>🎞</code> icon: Watch recent local replays saved on this device</li><li><code>Export Log</code> button: Download the current gameplay session as JSON</li></ul>
+<ul><li><code>Left/Right</code> or <code>A/D</code>: Move</li><li><code>Ctrl</code>: Left-handed cabinet-style move left on the web</li><li><code>Command</code>: Left-handed cabinet-style move right on the web</li><li><code>Space</code>: Fire (arcade-style shot cap)</li><li><code>P</code> or pause icon: Pause</li><li><code>F</code>: Fullscreen</li><li><code>U</code>: Ultra scale toggle</li><li><code>Enter</code>: Start / Restart</li><li><code>F1</code> or <code>?</code>: Open in-game feedback form</li><li>featured pilot icon: Open the pilot identity/profile card</li><li><code>ℹ</code> icon: Open the player guide inside the game</li><li><code>🕹</code> icon: Open the controls reference inside the game</li><li><code>🎞</code> icon: Watch recent local replays saved on this device</li><li><code>Export Log</code> button: Download the current gameplay session as JSON</li></ul>
 <h3>What Is Implemented</h3>
-<ul><li>Fixed arcade playfield with integer scaling and fullscreen letterboxing</li><li>Stage progression with challenge stages</li><li>Stage 1 scripted opening timing for consistency</li><li>Boss capture beam, ship capture, rescue, and dual-fighter fire mode</li><li>Enemy dive behavior and tuned missile pacing/spread</li><li>Pixel-art sprite rendering and starfield</li><li>Synthesized arcade-style SFX</li><li>Local high score persistence via browser storage</li></ul>
+<ul><li>Fixed arcade playfield with integer scaling and fullscreen letterboxing</li><li>Stage progression with challenge stages</li><li>Stage 1 scripted opening timing for consistency</li><li>Boss capture beam, ship capture, rescue, and dual-fighter fire mode</li><li>In-game pilot profile card with sign-in, sign-out, create-account, and reset-password flows</li><li>Browser-native pilot replay viewer and in-frame popup surfaces for pilot/help/scores/feedback/settings</li><li>Enemy dive behavior and tuned missile pacing/spread</li><li>Pixel-art sprite rendering and starfield</li><li>Synthesized arcade-style SFX</li><li>Local high score persistence via browser storage</li></ul>
 <h3>Development</h3>
 <ul><li>Editable source files live in:<ul><li><code>src/index.template.html</code></li><li><code>src/styles.css</code></li><li><code>src/js/00-boot.js</code></li><li><code>src/js/10-gameplay.js</code></li><li><code>src/js/20-render.js</code></li><li><code>src/js/90-harness.js</code></li></ul></li><li>Source orientation guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>Contributor guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md</code></li></ul></li><li>Home machine setup:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md</code></li></ul></li><li>Home Codex prompt:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md</code></li></ul></li><li>Repo-managed Codex skill source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/codex-skills/aurora-dev-refresh/SKILL.md</code></li></ul></li><li>Architecture overview:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>Reference baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md</code></li></ul></li><li>Local dev artifact:<ul><li><code>dist/dev/index.html</code></li></ul></li><li>Build the served file from source with:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
@@ -905,7 +915,9 @@
 <p>It does not update <code>/Users/stevenwoods/GitPages/public/index.html</code> directly.</p>
 <ul><li>Verify that the public repo content reflects the current build metadata with:</li></ul>
 <pre><code data-lang="bash">  npm run verify:public</code></pre>
-<ul><li>Build script:<ul><li><code>tools/build/build-index.js</code></li></ul></li><li>Public-pages sync script:<ul><li><code>tools/build/sync-public-pages.js</code></li></ul></li><li>Public-pages verification script:<ul><li><code>tools/build/verify-public-sync.js</code></li></ul></li><li>Local dev build metadata output:<ul><li><code>dist/dev/build-info.json</code></li></ul></li><li>Release notes source:<ul><li><code>release-notes.json</code></li></ul></li><li>Release/versioning policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>Product roadmap:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li></ul></li><li>Project guide source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li></ul></li><li>Generated local dev project guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html</code></li></ul></li><li>Generated local dev player guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html</code></li></ul></li><li>This page is regenerated during <code>npm run build</code> from the guide config and the maintained docs above.</li></ul>
+<ul><li>Build script:<ul><li><code>tools/build/build-index.js</code></li></ul></li><li>Public-pages sync script:<ul><li><code>tools/build/sync-public-pages.js</code></li></ul></li><li>Public-pages verification script:<ul><li><code>tools/build/verify-public-sync.js</code></li></ul></li><li>Local dev build metadata output:<ul><li><code>dist/dev/build-info.json</code></li></ul></li><li>Release notes source:<ul><li><code>release-notes.json</code></li></ul></li><li>Release/versioning policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>Release-readiness review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li></ul></li><li>Product roadmap:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li></ul></li><li>Shared authenticated pilot video publishing is currently planned as a</li></ul>
+<p>post-<code>1.0</code>, pre-<code>2.0</code> stretch goal:</p>
+<ul><li>canonical run metadata in Supabase</li><li>optional Aurora-owned YouTube mirroring for selected validated runs</li><li>pilot-safe public identity using pilot ID / initials instead of email</li></ul><ul><li>Project guide source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li></ul></li><li>Generated local dev project guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html</code></li></ul></li><li>Generated local dev player guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html</code></li></ul></li><li>This page is regenerated during <code>npm run build</code> from the guide config and the maintained docs above.</li></ul>
 <h3>End-To-End Workflow</h3>
 <h4>1. Develop In Source</h4>
 <ul><li>Make gameplay, UI, harness, or documentation changes in:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/</code></li><li>maintained docs such as:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>structured release/project data such as:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li></ul></li></ul>
@@ -931,10 +943,14 @@
 <ul><li>This clones <code>sgwoods/Aurora-Galactica</code>, copies:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
 <p>into the <code>/beta/</code> folder, commits, and pushes.</p>
 <ul><li>Then GitHub Pages updates:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
+<h4>5a. Approve The Beta Candidate</h4>
+<ul><li>After reviewing the hosted beta candidate and deciding it is the one production should come from, run:</li></ul>
+<pre><code data-lang="bash">  npm run approve:beta</code></pre>
+<ul><li>This writes:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/approved-build-info.json</code></li></ul></li><li>Production promotion is now gated on that approval marker.</li></ul>
 <h4>6. Publish Hosted Production</h4>
 <ul><li>Preferred:</li></ul>
 <pre><code data-lang="bash">  npm run publish:production</code></pre>
-<ul><li>This command now refreshes the production lane from the current <code>HEAD</code> automatically:<ul><li>rebuilds <code>dist/dev</code></li><li>promotes to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li><code>Aurora-Galactica</code> Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.</li><li>Optional manual inspection steps still exist:</li></ul>
+<ul><li>This command now refreshes the production lane from the approved beta candidate:<ul><li>rebuilds <code>dist/dev</code></li><li>expects an already promoted and approved <code>dist/beta</code></li><li>promotes approved beta artifacts to <code>dist/production</code></li><li>runs production preflight</li><li>publishes the lane</li></ul></li><li>Production publish now fails unless the current beta snapshot has been explicitly approved with:<ul><li><code>npm run approve:beta</code></li></ul></li><li><code>Aurora-Galactica</code> Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.</li><li>Optional manual inspection steps still exist:</li></ul>
 <pre><code data-lang="bash">  npm run promote:production
   npm run publish:check:production
   npm run publish:production:raw</code></pre>
@@ -1169,9 +1185,9 @@ npm run publish:production</code></pre>
 <h4>Launch Blocking List</h4>
 <p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
 <p>Current beta-review cluster:</p>
-<ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#77</code> capture escape drop-back recovery</li><li><code>#80</code> wait-mode carried fighter dock direction</li><li><code>#88</code> captured fighter disappears at top</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li></ul>
+<ul><li><code>#40</code> capture / rescue feedback</li><li><code>#73</code> shoot during beam-up</li><li><code>#77</code> capture escape drop-back recovery</li><li><code>#80</code> wait-mode carried fighter dock direction</li><li><code>#88</code> captured fighter disappears at top</li><li><code>#74</code> bonus spacing</li><li><code>#47</code> special squadron spacing</li><li><code>#45</code> boss damaged-text linger</li><li><code>#38</code> ship-loss feedback</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#113</code> enforce production promotion only from approved beta</li></ul>
 <p>Current coding priority once those beta checks are confirmed:</p>
-<ol><li><code>#91</code> / <code>#48</code> / <code>#44</code> / <code>#86</code> / <code>#71</code> / <code>#82</code> / <code>#49</code> / <code>#60</code> / <code>#103</code> / <code>#105</code> display-shell, icon/control-surface, and score-panel polish</li><li><code>#74</code> / <code>#47</code> / <code>#38</code> / <code>#45</code> special-squadron and combat-feedback polish</li><li><code>#87</code> wait-mode/demo visual stability</li><li><code>#106</code> standardized between-level message presentation</li><li><code>#76</code> production vs non-production data separation design</li><li><code>#85</code> final release-readiness pass</li></ol>
+<ol><li><code>#76</code> production vs non-production data separation design</li><li><code>#113</code> enforce production promotion only from approved beta</li><li><code>#85</code> final release-readiness pass</li><li><code>#74</code> / <code>#47</code> / <code>#38</code> / <code>#45</code> remaining visual polish with live confidence</li><li><code>#40</code> / <code>#73</code> / <code>#77</code> / <code>#80</code> / <code>#88</code> remaining capture/rescue live confidence</li></ol>
 <p>Recent additions since the last review:</p>
 <ul><li><code>#95</code> is now the standing process reminder that persona ladders must be rechecked after meaningful difficulty changes.</li><li><code>#96</code> is a release-support watch item, not a fresh gameplay blocker:</li></ul>
 <p>artifact-quality checks and repair landed, but recorder trust now needs to stay explicitly green.</p>
@@ -1183,6 +1199,8 @@ npm run publish:production</code></pre>
 <p>native in-game replay exists, so the remaining work is polish and follow-up behavior rather than whether replay should exist at all.</p>
 <ul><li><code>#112</code> is a fresh replay-exit regression:</li></ul>
 <p>returning to wait mode after replay can restart idle audio unexpectedly, so replay exit needs to preserve a quiet wait state before the next production refresh.</p>
+<ul><li><code>#113</code> now tracks a release-process rule we want to harden before launch:</li></ul>
+<p>production should only be promoted from an explicitly approved beta candidate, not directly from arbitrary dev output.</p>
 <ul><li>Fresh Modem feedback on <code>2026-03-28</code> mostly reinforced the current shell/control-surface direction rather than changing the launch strategy:<ul><li><code>#105</code> is effectively a direct refinement of <code>#86</code> and is now treated as part of the same active shell pass</li><li><code>#103</code> extends the shell pass by replacing the hand-toggle model with simultaneous support plus an input/help surface</li><li><code>#107</code> reinforces the already-open <code>#79</code> control-feel concern rather than creating a meaningfully different launch bucket</li><li><code>#104</code> is a stronger post-<code>v1</code> version of the Players Guide surface unless a lightweight manual viewer lands almost for free</li><li><code>#106</code> is visible presentation polish and is worth keeping near the launch queue after the shell pass</li></ul></li><li>User direction for this review:<ul><li>treat Stage <code>2</code> / <code>4</code> fairness tuning as a likely <code>1.1</code> experimental pass unless a fresh regression makes them launch-critical again</li><li>move broader challenge-stage variation/fidelity work out of the launch path</li><li>keep tooling/platform features post-<code>1.0</code></li><li>spend remaining prelaunch energy on visible polish, trust, and stable graphical structure</li><li>keep recent icon, settings, HUD, and control-surface issues inside <code>v1</code></li></ul></li></ul>
 <div class="tableWrap">
           <table class="dataTable">
@@ -1191,21 +1209,21 @@ npm run publish:production</code></pre>
             </thead>
             <tbody>
               <tr><td>Must Fix Now</td><td><code>#61</code></td><td>Shared</td><td>Watching</td><td>Hosted Stage <code>3</code> -&gt; <code>4</code> can still hit the empty-playfield edge case, which directly undermines public trust.</td><td>Keep transition telemetry live and treat the next reproducible bad run as launch-blocking.</td><td>Phase 1</td></tr>
-<tr><td>Must Fix Now</td><td><code>#76</code></td><td>Shared</td><td>Open</td><td>Production and non-production still share the same live score/data path.</td><td>Choose environment split and route non-production writes away from production by default.</td><td>Phase 4</td></tr>
-<tr><td>Must Fix Now</td><td><code>#85</code></td><td>Shared</td><td>Open</td><td>Final release-readiness pass still needs security review, code/docs consistency, and a short players guide.</td><td>Schedule the final release-readiness cycle once the visual polish cluster is down to a short list.</td><td>Phase 4</td></tr>
+<tr><td>Must Fix Now</td><td><code>#76</code></td><td>Shared</td><td>Implemented on dev</td><td>Non-production lanes now use a production-score read-only mirror with local-only score saves by default; this still needs hosted confirmation and issue closure.</td><td>Refresh beta, confirm the read-only lane messaging and blocked submit path, then close if it holds.</td><td>Phase 4</td></tr>
+<tr><td>Must Fix Now</td><td><code>#113</code></td><td>Shared</td><td>Implemented on dev</td><td>Production promotion now sources from approved beta artifacts, and production preflight checks for a matching approved beta snapshot.</td><td>Let the new beta-approval gate soak briefly, then verify it during the next real production rehearsal and close if it holds.</td><td>Phase 4</td></tr>
+<tr><td>Must Fix Now</td><td><code>#85</code></td><td>Shared</td><td>Implemented on dev</td><td>A concrete release-readiness review now exists, covering security posture, lane discipline, docs/public-surface consistency, the shipped player guide, and accepted launch risks.</td><td>Reopen this checklist for one final sign-off sweep once the remaining visible blockers are down to a short list.</td><td>Phase 4</td></tr>
 <tr><td>Must Fix Now</td><td><code>#86</code></td><td>Codex</td><td>Open</td><td>The production shell still needs the players-guide / account / scores / feedback-reporting / persistent-settings layout to feel intentionally shipped.</td><td>Finish the production-shell pass, move the remaining player actions into the icon/control surface, and confirm settings pause/resume cleanly during active play.</td><td>Phase 4</td></tr>
 <tr><td>Must Fix Now</td><td><code>#103</code> / <code>#105</code></td><td>Codex</td><td>Open</td><td>Fresh March 28 Modem feedback confirms the shell still wants bug-report promotion, tooltip-first icons, and simultaneous left/right-handed support without a mode toggle.</td><td>Finish the icon rail around tooltip-first controls, promote bug reporting into the rail, and replace the handed toggle with always-on combined controls plus a control index surface.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#91</code></td><td>Codex</td><td>Open</td><td>The score header still wants stronger arcade alignment with the playfield top edge.</td><td>Lock the top HUD to the gameboard width and edge in the shell polish pass.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#48</code></td><td>Codex</td><td>Open</td><td>The browser presentation still benefits from a clearer playfield frame / bezel so the arcade boundary reads immediately.</td><td>Finish a stable playfield frame treatment and keep it aligned with the HUD shell.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#44</code></td><td>Codex</td><td>Open</td><td>A bottom-right stage indicator is part of the cabinet-like HUD language and belongs in the same visual shell pass as the top HUD/frame work.</td><td>Add the stage indicator as part of the HUD polish pass rather than as a separate later feature.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#82</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Wait-mode score surfaces now shift into a centered overlay locally instead of intruding into the playfield, but that resize behavior still needs hosted confirmation.</td><td>Refresh beta and verify the wait-mode score overlay stays intentional across common desktop sizes.</td><td>Phase 2</td></tr>
+<tr><td>Must Fix Now</td><td><code>#82</code></td><td>Codex</td><td>Automated check + shipped</td><td>The wait-mode score overlay now has a passing regression check and is live on beta/production with the centered overlay layout.</td><td>Keep the new wait-overlay check green and close after final manual confidence.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#49</code> / <code>#60</code></td><td>Codex</td><td>Open</td><td>Score-view controls now belong to the player-facing shell, but their state changes/loading cues still feel too subtle.</td><td>Make score-view switches open or animate an explicit scoreboard/loading surface as part of the shell polish pass.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#74</code></td><td>Codex</td><td>Open</td><td>Latest manual beta pass still says the three-ship bonus/special squadron is too spread out.</td><td>Tighten the three-ship attack geometry again and keep the squadron spacing check green.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#47</code></td><td>Codex</td><td>Open</td><td>Latest manual beta pass still says the special squadron reads too loose visually.</td><td>Tighten lateral/vertical squadron coherence and recheck it in beta.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#38</code></td><td>Codex</td><td>Beta review</td><td>Ship-loss feedback is better, but it is still one of the most visible “finished/not finished” signals in live play.</td><td>Verify and polish explosion, pause, and recovery feel.</td><td>Phase 2</td></tr>
 <tr><td>Must Fix Now</td><td><code>#45</code></td><td>Codex</td><td>Automated check + manual confirm</td><td>Automated first-hit visual regression now proves the boss flash appears and settles without a lingering oversized artifact.</td><td>Confirm boss first-hit feedback still looks clean in beta and close it if it does.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#87</code></td><td>Codex</td><td>Improved in dev / needs ship</td><td>Wait-mode/demo ship jitter is materially reduced after smoothing the attract pilot and adding a short target lock, but it still wants hosted confirmation before we call it done.</td><td>Refresh beta with the attract stabilizer and verify the remaining shimmer is acceptable in live review.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#112</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Exiting replay back to wait mode can restart idle audio unexpectedly, which is especially annoying when the tab stays open after review.</td><td>Ship the attract/wait-mode audio fix and confirm replay exit returns to a quiet idle state.</td><td>Phase 3</td></tr>
+<tr><td>Must Fix Now</td><td><code>#112</code></td><td>Codex</td><td>Automated check + shipped</td><td>Replay exit now has a passing regression check and the quiet-wait fix is live on beta/production.</td><td>Keep the replay-exit audio check green and close after one last manual confidence pass.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#40</code></td><td>Codex</td><td>Partial automation + beta review</td><td>Automated checks now lock down the key capture/rescue banner wording and sequencing, but readability in motion still needs live confirmation.</td><td>Verify the updated beta capture feedback in manual play and close if it feels clear.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#80</code></td><td>Codex</td><td>Beta review + automation</td><td>Carry-state automation now proves drag-up stays <code>below</code> and docked/wait-mode carried states render <code>above</code>, but the exact swap timing still needs live eyes.</td><td>Verify the fighter flips from below to above only at the correct top-dock moment in beta.</td><td>Phase 3</td></tr>
 <tr><td>Must Fix Now</td><td><code>#88</code></td><td>Codex</td><td>Low-risk beta confirm</td><td>Latest manual pass says the rest of the capture/carry cluster looks okay, and carry-visual automation now guards against the fighter disappearing at the top carried state.</td><td>Keep one more live confirmation while we close the remaining capture items.</td><td>Phase 3</td></tr>
@@ -1214,8 +1232,8 @@ npm run publish:production</code></pre>
 <tr><td>Should Fix</td><td><code>#58</code></td><td>Codex</td><td>Open</td><td>Capture rules are much improved but still not fully original.</td><td>Finish the rescue-fidelity pass.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#73</code></td><td>Codex</td><td>Automated check + beta review</td><td>Automated shot-window checks now prove early beam-up shots work and late shots are correctly blocked.</td><td>Verify the feel/fairness of the shoot-to-save window in beta.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#79</code> / <code>#107</code></td><td>Codex</td><td>Beta review</td><td>The velocity-based control model is now in place, but fine single-tap alignment and overall feel still need final live confidence.</td><td>Keep the current movement baseline, do one more hosted beta pass, and only retune if fresh evidence says targeting still overshoots.</td><td>Phase 1</td></tr>
-<tr><td>Should Fix Before Launch</td><td><code>#106</code></td><td>Codex</td><td>Fix in dev / needs ship</td><td>Between-level and in-game status messaging now uses a shared centered board-message path locally, including multi-line ship-loss text.</td><td>Refresh beta and confirm the centered message treatment feels consistent in live play.</td><td>Phase 2</td></tr>
-<tr><td>Should Fix Before Launch</td><td><code>#108</code></td><td>Codex</td><td>Likely fixed / needs confirm</td><td>Current start-position smoke passes, so the mid-screen respawn/new-game issue appears fixed on the dev line, but the report was severe enough that it still deserves one explicit hosted replay.</td><td>Confirm second-game spawn reset in beta and close if the ship reliably starts at the bottom center.</td><td>Phase 1</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#106</code></td><td>Codex</td><td>Automated check + shipped</td><td>Between-level and in-game status messaging now uses a shared centered board-message path with a passing regression check, and the current implementation is live on beta/production.</td><td>Keep the board-message check green and close after one last visual confidence pass.</td><td>Phase 2</td></tr>
+<tr><td>Should Fix Before Launch</td><td><code>#108</code></td><td>Codex</td><td>Automated check + shipped</td><td>New-game spawn reset now has a passing restart regression check and matches the expected bottom-center start position.</td><td>Close after one last hosted confidence pass if no contradictory report appears.</td><td>Phase 1</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#109</code></td><td>Codex</td><td>Resolved in behavior / close after docs confirm</td><td>Browser <code>Fn</code> is not reliable on the web, and the shipped left-hand mapping is now documented and implemented as <code>Ctrl</code> left / <code>Command</code> right.</td><td>Confirm the player guide/controls overlay wording is right in beta, then close as a clarified web-platform constraint.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix</td><td><code>#31</code></td><td>Codex</td><td>Open</td><td>Minor public timestamp/date polish remains.</td><td>Clean the release date display.</td><td>Phase 3</td></tr>
 <tr><td>Should Fix Before Launch</td><td><code>#71</code></td><td>Codex</td><td>Queued</td><td>Audio control belongs in the shipped settings/control surface if it lands cleanly in the same shell work.</td><td>Pull mute into the <code>v1</code> settings pass rather than leaving it as indefinite polish.</td><td>Phase 3</td></tr>
@@ -1234,11 +1252,13 @@ npm run publish:production</code></pre>
 <tr><td>Post-1.0</td><td><code>#19</code> / <code>#62</code></td><td>Shared</td><td>Watch</td><td>Later-run and self-play balance regressions remain useful signals, but not launch-critical if manual play remains healthy.</td><td>Keep measuring them without promoting them over visible polish.</td><td>Post-1.0</td></tr>
 <tr><td>Post-1.0</td><td><code>#89</code> / <code>#90</code> / <code>#92</code> / <code>#97</code></td><td>Shared</td><td>Open</td><td>Tooling, artifact workflow, and broader harness/platform improvements are useful leverage, but they are not required to ship the four-stage slice.</td><td>Keep them in the post-<code>1.0</code> tooling/platform lane.</td><td>Post-1.0</td></tr>
 <tr><td>Post-1.0</td><td><code>#99</code> / <code>#84</code> / <code>#83</code> / <code>#30</code> / <code>#26</code>-<code>#29</code></td><td>Shared</td><td>Open</td><td>Theme/package/custom-stage work is strategically important, but it is platform expansion, not launch work.</td><td>Keep capturing seams now; do the full abstraction after launch.</td><td>Post-1.0</td></tr>
+<tr><td>Post-1.0</td><td><code>#121</code></td><td>Shared</td><td>Planned pre-2.0 stretch goal</td><td>Shared authenticated pilot media and Aurora-owned YouTube publishing are strategically valuable, but they depend on stable pilot identity, local replay, and post-<code>1.0</code> platform seams.</td><td>Keep this out of the <code>1.0</code> blocker path and target it as a pre-<code>2.0</code> milestone after the early platform extraction work.</td><td>Post-1.0</td></tr>
             </tbody>
           </table>
         </div>
 <p>Items currently treated as post-<code>1.0</code> unless they become necessary for external playtesting or operational stability:</p>
-<ul><li><code>#69</code> remote gameplay logs and optional video artifacts</li><li><code>#70</code> homepage recent plays / watch links</li><li><code>#17</code> broader reference baseline work</li><li><code>#18</code> / <code>#32</code> experimental Stage <code>2</code> / <code>4</code> tuning for <code>1.1</code></li><li><code>#9</code> broader challenge-stage fidelity / variation work</li><li><code>#19</code> later-run collision-chain regression outside the four-stage slice</li><li>replay, submission, theme-system, and broader public-workflow enhancements</li></ul>
+<ul><li><code>#69</code> remote gameplay logs and optional video artifacts</li><li><code>#70</code> homepage recent plays / watch links</li><li><code>#121</code> shared authenticated pilot media and Aurora-owned YouTube publishing</li><li><code>#17</code> broader reference baseline work</li><li><code>#18</code> / <code>#32</code> experimental Stage <code>2</code> / <code>4</code> tuning for <code>1.1</code></li><li><code>#9</code> broader challenge-stage fidelity / variation work</li><li><code>#19</code> later-run collision-chain regression outside the four-stage slice</li><li>replay, submission, theme-system, and broader public-workflow enhancements</li><li>treat shared authenticated video publishing as a post-<code>1.0</code>, pre-<code>2.0</code></li></ul>
+<p>stretch goal rather than a launch requirement</p>
 <h4>Track A. Autonomous Original-Galaga Baseline</h4>
 <ol><li>Build and maintain a durable reference baseline using:</li></ol>
 <ul><li>manuals</li><li>curated gameplay footage</li><li>emulator captures when available</li><li>secondary written references only where they help fill later-stage context</li></ul>
@@ -1358,6 +1378,13 @@ npm run publish:production</code></pre>
 <ul><li><code>#111</code> extract a shared arcade platform for Galaga-family cabinet shooters</li><li>early <code>gameDef</code> / game-pack extraction</li><li>shared shell / replay / harness / build systems</li><li>shared left-right cabinet input model for sibling fixed-screen shooters</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.1.x</code></li><li><code>1.2.x</code></li></ul>
+<h3>Milestone H: Shared Pilot Media And Publishing</h3>
+<p>Target outcome:</p>
+<ul><li>authenticated pilot runs can become canonical shared run records</li><li>selected validated runs can be published through the Aurora-owned YouTube channel</li><li>pilot history can show official runs plus replay/watch links where available</li><li>local replay remains the immediate playback path and fallback</li></ul>
+<p>Key issue groups:</p>
+<ul><li><code>#121</code> shared authenticated pilot media and YouTube publishing</li><li>canonical Supabase run/video metadata for authenticated runs</li><li>pilot-safe public identity rules using pilot ID / initials / callsign instead of email</li><li>selected-run publish workflow and publish-state tracking</li><li>Aurora-owned YouTube mirroring for approved runs</li><li>fuller pilot scorebook/history with replay/watch links where available</li></ul>
+<p>Suggested versioning:</p>
+<ul><li><code>1.3.x</code></li><li><code>1.4.x</code></li><li>potentially <code>1.5.x</code></li><li>explicitly before any future <code>2.0.0</code></li></ul>
 <h3>Post-1.0 Architecture Themes</h3>
 <p>These are the architectural themes we should keep capturing incrementally during the <code>v1</code> push so they can become the basis of a focused post-<code>v1</code> platform plan.</p>
 <ul><li>move game rules and tuning further into data-driven <code>gameDef</code> structures</li><li>use <code>#111</code> as the early post-<code>1.0</code> umbrella for turning Aurora into a shared</li></ul>
@@ -1372,6 +1399,8 @@ npm run publish:production</code></pre>
 <p>the four-stage slice is stable enough that theming work does not destabilize launch</p>
 <ul><li>evolve the log viewer from a local artifact tree toward an optional remote</li></ul>
 <p>catalog after <code>1.0</code>, while keeping the current local-first debugging flow as the default</p>
+<ul><li>add shared authenticated pilot media as a pre-<code>2.0</code> stretch goal only after</li></ul>
+<p>pilot identity, local replay, and the early post-<code>1.0</code> platform seams are stable enough to support it cleanly</p>
 <ul><li>use Aurora&#39;s ongoing work to reduce the eventual cost of supporting Galaxian</li></ul>
 <p>and other future variants without pausing product progress now</p>
 <h3>How We Should Use This Roadmap</h3>
@@ -1760,18 +1789,25 @@ npm run publish:production</code></pre>
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul>
 <p>serves the promoted checkpoint</p>
 <p>The beta lane is intentionally a snapshot of selected generated artifacts under <code>dist/</code>, not a separate branch or a second build pipeline. <code>Codex-Test1</code> remains the engineering source of truth; <code>Aurora-Galactica</code> is the public release surface for both production and beta.</p>
+<h3>Score/Data Lane Policy</h3>
+<ul><li><code>production</code><ul><li>full online Supabase path</li><li>shared leaderboard reads enabled</li><li>score submission enabled</li><li>pilot account/auth/profile actions enabled</li></ul></li><li><code>beta</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li><li><code>pre-production</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li></ul>
+<p>This is the current launch-safe answer to <code>#76</code>: non-production lanes no longer use the same default write path as production, even though they can still mirror production leaderboard reads.</p>
+<p>Optional test-pilot override for non-production:</p>
+<ul><li><code>TEST_ACCOUNT_EMAIL</code><ul><li>enables one specific beta/dev pilot account for auth and write-flow testing</li></ul></li><li><code>TEST_ACCOUNT_USER_ID</code><ul><li>excludes that pilot&#39;s scores from shared leaderboard reads</li></ul></li><li>when configured:<ul><li>beta/dev may authenticate only that test pilot</li><li>score submission is enabled only while that pilot is signed in</li><li>production continues to reject that pilot account for normal use</li></ul></li></ul>
 <h3>Production Publish Workflow</h3>
-<ol><li>Build and validate the current dev output:</li></ol>
+<ol><li>Treat production as a promotion from an approved beta candidate, not as a direct publish from arbitrary dev output.</li><li>Build and validate the current dev output:</li></ol>
 <ul><li><code>npm run build</code></li><li>plus whatever harness/manual checks are appropriate for the release</li></ul>
-<ol><li>Promote the approved dev build into the stable production artifact:</li></ol>
-<ul><li><code>npm run promote:production</code></li></ul>
-<ol><li>Run the production preflight:</li></ol>
-<ul><li><code>npm run publish:check:production</code></li></ul>
-<ol><li>Publish the generated production surface with:</li></ol>
+<ol><li>Promote and review the beta candidate first:</li></ol>
+<ul><li><code>npm run publish:beta</code></li></ul>
+<ol><li>Once that beta candidate is explicitly approved, mark that exact beta snapshot as approved:</li></ol>
+<ul><li><code>npm run approve:beta</code></li></ul>
+<ol><li>Only then promote the matching release into the stable production artifact:</li></ol>
 <ul><li><code>npm run publish:production</code></li></ul>
 <ol><li>Let GitHub Pages deploy from <code>Aurora-Galactica</code> so:</li></ol>
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul>
 <p>serves the promoted production build</p>
+<p>Tracked hardening item:</p>
+<ul><li><code>#113</code><ul><li>enforce dev -&gt; beta -&gt; approve -&gt; production as the only supported publish chain</li><li>production preflight fails if the current production publish is not sourced from the approved beta candidate</li></ul></li></ul>
 <h3>Public Project Status Sync Workflow</h3>
 <ol><li>Build the current dev output and promote the stable production artifact:</li></ol>
 <ul><li><code>npm run build</code></li><li><code>npm run promote:production</code></li></ul>
@@ -1795,13 +1831,8 @@ npm run publish:production</code></pre>
 <ul><li>the hosted build, high-score flow, and public project pages are suitable</li></ul>
 <p>for general external use</p>
 <h3>Post-1.0 Environment Goal</h3>
-<ul><li>after <code>1.0</code>, cleanly separate production and non-production score/data paths</li><li>production should remain the canonical public Aurora environment</li><li>non-production should no longer write directly into the same live score path</li></ul>
-<p>by default</p>
-<ul><li>preferred order after <code>1.0</code>:</li></ul>
-<ol><li>keep Aurora production and Aurora beta together only if that remains useful</li><li>isolate pre-production/dev writes behind a separate environment, separate</li></ol>
-<p>tables, or a no-submit/dev-only mode</p>
-<ol><li>make the active environment obvious in the build label and account/status</li></ol>
-<p>surfaces</p>
+<ul><li>keep production as the canonical public Aurora environment</li><li>keep the current non-production read-only/default-local policy unless there is a strong reason to loosen it</li><li>preferred order after <code>1.0</code>:</li></ul>
+<ol><li>decide whether beta should remain a production-read mirror or move to its own backend</li><li>isolate non-production fully behind a separate Supabase project or clearly separate tables if shared reads stop being useful</li><li>keep the active environment obvious in the build label and account/status surfaces</li></ol>
         </div>
       </div>
     </section>
@@ -1876,8 +1907,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Native replay viewer, player guide, and launch-shell polish</strong><br>
-          Build: 0.5.0+build.258.sha.2320d51
+          Latest release note: <strong>Pilot profile card, in-frame overlays, and rescue-flow polish</strong><br>
+          Build: 0.5.0+build.270.sha.f0dbeef
         </p>
       </aside>
     </main>

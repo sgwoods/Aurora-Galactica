@@ -66,6 +66,28 @@ After GitHub Pages deploys, play at:
 
 The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The `/beta/` lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in `Codex-Test1` as the pre-production development line.
 
+Current score/data policy:
+
+- production:
+  - live shared leaderboard reads and writes
+  - pilot account actions enabled
+- beta and local pre-production:
+  - production leaderboard reads only
+  - score submission disabled by default
+  - pilot account/profile writes disabled unless a configured non-production test pilot is signed in
+  - local device scores still save normally
+
+Optional non-production test pilot configuration:
+
+- set `TEST_ACCOUNT_EMAILS` to enable one or more specific beta/dev pilot accounts for auth and write-flow testing
+- set `TEST_ACCOUNT_USER_IDS` to exclude those pilots' scores from shared leaderboard views
+- the local-only example file is:
+  - `/Users/stevenwoods/Documents/Codex-Test1/.env.local.example`
+- when one of those configured test pilots is signed in on beta/dev:
+  - `My Scores` becomes available
+  - score submission is enabled for that pilot only
+  - the Developer Tools panel can reset that pilot's remote scores
+
 ## Screenshot
 
 ![Gameplay Screenshot](./export.mov.png)
@@ -111,6 +133,7 @@ npm run local:stop
 - `U`: Ultra scale toggle
 - `Enter`: Start / Restart
 - `F1` or `?`: Open in-game feedback form
+- featured pilot icon: Open the pilot identity/profile card
 - `ℹ` icon: Open the player guide inside the game
 - `🕹` icon: Open the controls reference inside the game
 - `🎞` icon: Watch recent local replays saved on this device
@@ -122,6 +145,8 @@ npm run local:stop
 - Stage progression with challenge stages
 - Stage 1 scripted opening timing for consistency
 - Boss capture beam, ship capture, rescue, and dual-fighter fire mode
+- In-game pilot profile card with sign-in, sign-out, create-account, and reset-password flows
+- Browser-native pilot replay viewer and in-frame popup surfaces for pilot/help/scores/feedback/settings
 - Enemy dive behavior and tuned missile pacing/spread
 - Pixel-art sprite rendering and starfield
 - Synthesized arcade-style SFX
@@ -216,8 +241,15 @@ npm run local:stop
   - `release-notes.json`
 - Release/versioning policy:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
+- Release-readiness review:
+  - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md`
 - Product roadmap:
   - `/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md`
+- Shared authenticated pilot video publishing is currently planned as a
+  post-`1.0`, pre-`2.0` stretch goal:
+  - canonical run metadata in Supabase
+  - optional Aurora-owned YouTube mirroring for selected validated runs
+  - pilot-safe public identity using pilot ID / initials instead of email
 - Project guide source:
   - `/Users/stevenwoods/Documents/Codex-Test1/project-guide.json`
 - Generated local dev project guide:
@@ -299,17 +331,30 @@ npm run local:stop
 - Then GitHub Pages updates:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
+### 5a. Approve The Beta Candidate
+
+- After reviewing the hosted beta candidate and deciding it is the one production should come from, run:
+  ```bash
+  npm run approve:beta
+  ```
+- This writes:
+  - `/Users/stevenwoods/Documents/Codex-Test1/dist/beta/approved-build-info.json`
+- Production promotion is now gated on that approval marker.
+
 ### 6. Publish Hosted Production
 
 - Preferred:
   ```bash
   npm run publish:production
   ```
-- This command now refreshes the production lane from the current `HEAD` automatically:
+- This command now refreshes the production lane from the approved beta candidate:
   - rebuilds `dist/dev`
-  - promotes to `dist/production`
+  - expects an already promoted and approved `dist/beta`
+  - promotes approved beta artifacts to `dist/production`
   - runs production preflight
   - publishes the lane
+- Production publish now fails unless the current beta snapshot has been explicitly approved with:
+  - `npm run approve:beta`
 - `Aurora-Galactica` Pages should package the committed production and beta artifacts directly; it should not rebuild the live production root from stale public-repo source files.
 - Optional manual inspection steps still exist:
   ```bash
