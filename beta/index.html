@@ -285,6 +285,8 @@ canvas{display:block;width:100vw;height:100vh}
 .accountStatValue{font:700 13px/1.2 "Courier New",Consolas,monospace;color:#f4fbff}
 #accountRecordsTop5{display:flex;flex-direction:column;gap:6px}
 .accountRecordRow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 8px;border:1px solid rgba(136,245,255,.12);background:rgba(10,18,34,.76)}
+.accountRecordRow.hasReplay{cursor:pointer}
+.accountRecordRow.hasReplay:hover,.accountRecordRow.hasReplay:focus-within{border-color:rgba(255,217,128,.28);background:rgba(18,24,40,.86)}
 .accountRecordRank{color:#7ef2ff;font:700 11px/1 "Courier New",Consolas,monospace}
 .accountRecordMain{display:flex;flex-direction:column;gap:2px;min-width:0}
 .accountRecordScore{font:700 13px/1.1 "Courier New",Consolas,monospace;color:#f4fbff}
@@ -483,9 +485,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 0.5.0-beta.1+build.264.sha.3d9dc54.beta</span>
-    <span id="settingsRelease">Mar 29 2026, 1:12 PM EDT</span>
-    <span id="settingsState">beta@3d9dc54 clean</span>
+    <span id="settingsVersion">Version 0.5.0-beta.1+build.270.sha.f0dbeef.beta</span>
+    <span id="settingsRelease">Mar 30 2026, 7:54 PM EDT</span>
+    <span id="settingsState">beta@f0dbeef clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -692,8 +694,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 0.5.0-beta.1+build.264.sha.3d9dc54.beta</span>
-  <span id="buildStampRelease">Mar 29 2026, 1:12 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0-beta.1+build.270.sha.f0dbeef.beta</span>
+  <span id="buildStampRelease">Mar 30 2026, 7:54 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -820,7 +822,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       challenge: !!record.challenge,
       build: record.build || '',
       stats: record.stats || { shots: 0, hits: 0 },
-      source: record.source || 'local'
+      source: record.source || 'local',
+      pilotUserId: record.pilotUserId || '',
+      pilotEmail: record.pilotEmail || '',
+      pilotInitials: record.pilotInitials || ''
     }));
   }
 
@@ -942,7 +947,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.264.sha.3d9dc54.beta',commit:'3d9dc5456a83aac6042d2f21d040852a7939167a',branch:'beta',dirty:false,released:'Mar 29 2026, 1:12 PM EDT',state:'beta@3d9dc54 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'0.5.0-beta.1',label:'0.5.0-beta.1+build.270.sha.f0dbeef.beta',commit:'f0dbeeff6a3429ee3d9e00c7abbd23b6aa4c8aec',branch:'beta',dirty:false,released:'Mar 30 2026, 7:54 PM EDT',state:'beta@f0dbeef clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -1577,6 +1582,9 @@ function syncRecordUi(){
  recordBtn.textContent=supported?(VIDEO_REC.active?(VIDEO_REC.enabled?'Recording Video...':'Recording Replay...'):`Auto Video: ${VIDEO_REC.enabled?'On':'Off'}`):'Auto Video: Unsupported';
 }
 function currentReplayMeta(){
+ const pilotUserId=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.id?String(LEADERBOARD.user.id):'';
+ const pilotEmail=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email?String(LEADERBOARD.user.email):'';
+ const pilotInitials=typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'';
  return {
   id:VIDEO_REC.sessionId||REC?.id||`replay-${Date.now()}`,
   source:'game_native',
@@ -1589,6 +1597,9 @@ function currentReplayMeta(){
   attract:!!S.attract,
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
+  pilotUserId,
+  pilotEmail,
+  pilotInitials,
   stats:{shots:S.stats?.shots|0,hits:S.stats?.hits|0}
  };
 }
@@ -2122,8 +2133,58 @@ function pilotDisplayId(){
  }
  return 'GUEST';
 }
+function replayMatchesActivePilot(run){
+ const activePilotUserId=String(LEADERBOARD.user?.id||'');
+ const activePilotEmail=String(LEADERBOARD.user?.email||'').trim().toLowerCase();
+ const activePilotInitials=preferredInitialsFromUser();
+ const runUserId=String(run?.pilotUserId||'');
+ const runEmail=String(run?.pilotEmail||'').trim().toLowerCase();
+ const runInitials=sanitizeInitials(run?.pilotInitials||'');
+ if(activePilotUserId&&runUserId&&runUserId===activePilotUserId)return true;
+ if(activePilotEmail&&runEmail&&runEmail===activePilotEmail)return true;
+ return !!(activePilotInitials&&runInitials&&runInitials===activePilotInitials);
+}
+function pilotLocalReplayRows(){
+ if(!LEADERBOARD.user)return [];
+ return replayCatalogRows()
+  .filter(replayMatchesActivePilot)
+  .map(run=>({
+   id:`local-replay:${run.id}`,
+   initials:sanitizeInitials(run.pilotInitials||preferredInitialsFromUser()||'YOU').padEnd(3,'-').slice(0,3),
+   score:+run.score||0,
+   stage:+run.stage||0,
+   at:String(run.createdAt||''),
+   verified:0,
+   replayId:String(run.id||''),
+   localReplay:1
+  }));
+}
+function mergePilotProfileRows(remoteRows,localRows){
+ const merged=remoteRows.map(row=>Object.assign({},row));
+ for(const localRow of localRows){
+  const localStamp=Date.parse(localRow.at||'');
+  const existing=merged.find(row=>{
+   if((+row.score||0)!== (+localRow.score||0))return false;
+   if((+row.stage||0)!== (+localRow.stage||0))return false;
+   const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
+   if(Number.isFinite(localStamp)&&Number.isFinite(rowStamp))return Math.abs(localStamp-rowStamp)<=120000;
+   return false;
+  });
+  if(existing){
+   if(localRow.replayId)existing.replayId=localRow.replayId;
+   if(localRow.at&&!existing.at)existing.at=localRow.at;
+   continue;
+  }
+  merged.push(localRow);
+ }
+ return merged;
+}
 function rowsForPilotProfile(){
- if(LEADERBOARD.user&&remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine))return LEADERBOARD.remote.mine.slice();
+ if(LEADERBOARD.user){
+  const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
+  const localRows=pilotLocalReplayRows();
+  if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
+ }
  return localLeaderboardRows();
 }
 function formatWhenShort(value=''){
@@ -2190,15 +2251,22 @@ function renderPilotRecords(rows){
   accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
   return;
  }
-  const topRows=[...rows]
-  .sort((a,b)=>(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0)||(Date.parse(b.at||0)-Date.parse(a.at||0)))
+ const topRows=[...rows]
+  .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)||row.at||''}))
+  .sort((a,b)=>(Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))||(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0))
   .slice(0,5);
  const replayForRow=(row)=>{
   const runs=replayCatalogRows();
+  if(row?.replayId){
+   const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
+   if(directRun)return directRun;
+  }
+  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run));
+  const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
   const rowScore=+row.score||0;
   const rowStage=+row.stage||0;
   const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
-  const byScoreStage=runs.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+  const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
   if(Number.isFinite(rowStamp)){
    const exactTimed=byScoreStage.find(run=>{
     const replayStamp=Date.parse(run.createdAt||'');
@@ -2208,23 +2276,42 @@ function renderPilotRecords(rows){
   }
   if(byScoreStage.length)return byScoreStage[0];
   if(Number.isFinite(rowStamp)){
-   const sameStageTimed=runs.find(run=>{
+   const sameStageTimed=runPool.find(run=>{
     if((+run.stage||0)!==rowStage)return false;
     const replayStamp=Date.parse(run.createdAt||'');
     return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
    });
    if(sameStageTimed)return sameStageTimed;
   }
-  const sameStageRuns=runs.filter(run=>(+run.stage||0)===rowStage);
+  const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
   if(sameStageRuns.length===1)return sameStageRuns[0];
+  if(pilotMatchedRuns.length===1)return pilotMatchedRuns[0];
   return null;
  };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
-  const stamp=formatWhenShort(resolveRowTimestamp(row)||row.at);
+  const stamp=formatWhenShort(row.resolvedAt||resolveRowTimestamp(row)||row.at);
   const replay=replayForRow(row);
-  return `<div class="accountRecordRow"><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
+  return `<div class="accountRecordRow${replay?' hasReplay':''}"${replay?` data-replay-id="${replay.id}" tabindex="0" role="button" aria-label="Replay this flight"`:''}><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}" title="Replay this flight">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
+ const bindReplayAction=(node,opts={})=>{
+  if(!node||node.__replayBound)return;
+  node.__replayBound=1;
+  const trigger=e=>{
+   if(opts.row&&e.target.closest('.accountRecordReplayBtn'))return;
+   e.preventDefault();
+   e.stopPropagation();
+   openReplayFromPilotRecordsTarget(node);
+  };
+  node.addEventListener('pointerdown',trigger);
+  node.addEventListener('click',trigger);
+  node.addEventListener('keydown',e=>{
+   if(e.key!=='Enter'&&e.key!==' ')return;
+   trigger(e);
+  });
+ };
+ accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
+ accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
 
 function normalizeRemoteScoreRow(row){
@@ -3028,11 +3115,37 @@ if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecov
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
+async function openReplayFromPilotRecordsTarget(target){
+ const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
+ if(replayId&&typeof window.openMovieReplayById==='function'){
+  if(typeof closeAccountPanel==='function')closeAccountPanel();
+  await window.openMovieReplayById(replayId);
+  return true;
+ }
+ return false;
+}
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
- const btn=e.target.closest('.accountRecordReplayBtn');
+ const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
  if(!btn)return;
- const replayId=btn.dataset.replayId||'';
- if(replayId&&typeof window.openMovieReplayById==='function')window.openMovieReplayById(replayId);
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(btn);
+});
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('pointerup',e=>{
+ const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
+ if(!btn)return;
+ if(typeof e.button==='number'&&e.button!==0)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(btn);
+});
+if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const row=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
+ if(!row)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromPilotRecordsTarget(row);
 });
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
@@ -3320,6 +3433,7 @@ document.addEventListener('keydown',e=>{
  if(e.code==='ArrowLeft'){e.preventDefault();movieBackBtn.click();return;}
  if(e.code==='ArrowRight'){e.preventDefault();movieForwardBtn.click();return;}
 });
+if(movieStoreAvailable())setTimeout(()=>{refreshMovieCatalog({silent:1});},0);
 updateMovieControls();
 
 // Source: src/js/10-gameplay.js
@@ -3740,17 +3854,17 @@ function activeEscortCount(e){
 function specialSquadronTuning(stage=S.stage){
  if(stage===4){
   return {
-   escortOffset:34,
-   escortTrackX:6.4,
-   escortTrackY:32,
-   escortLift:18
+   escortOffset:28,
+   escortTrackX:7.2,
+   escortTrackY:34,
+   escortLift:16
   };
  }
  return {
-  escortOffset:36,
-   escortTrackX:6.8,
-  escortTrackY:28,
-  escortLift:20
+  escortOffset:30,
+   escortTrackX:7.4,
+  escortTrackY:30,
+  escortLift:18
  };
 }
 
@@ -4957,6 +5071,9 @@ window.__galagaHarness__={
    build: (window.BUILD && window.BUILD.version) || '',
    stats: cfg.stats || { shots: 6, hits: 4 },
    source: cfg.source || 'local',
+   pilotUserId: cfg.pilotUserId || '',
+   pilotEmail: cfg.pilotEmail || '',
+   pilotInitials: cfg.pilotInitials || '',
    blob
   });
   return true;
@@ -4978,6 +5095,9 @@ window.__galagaHarness__={
     build: (window.BUILD && window.BUILD.version) || '',
     stats: cfg.stats || { shots: 12, hits: 8 },
     source: 'local',
+    pilotUserId: cfg.userId || 'pilot-swd',
+    pilotEmail: cfg.email || 'sgwoods@gmail.com',
+    pilotInitials: cfg.initials || 'SWD',
     blob: new Blob([new Uint8Array(cfg.blobBytes || [0x1a,0x45,0xdf,0xa3,0x93,0x42,0x82,0x88])], { type: cfg.type || 'video/webm' })
    });
   }
@@ -4986,7 +5106,10 @@ window.__galagaHarness__={
    score: +cfg.score || 654321,
    stage: +cfg.stage || 7,
    createdAt: replayCreatedAt,
-   duration: +cfg.duration || 113
+   duration: +cfg.duration || 113,
+   pilotUserId: cfg.userId || 'pilot-swd',
+   pilotEmail: cfg.email || 'sgwoods@gmail.com',
+   pilotInitials: cfg.initials || 'SWD'
   }];
   LEADERBOARD.configured=1;
   LEADERBOARD.user={
