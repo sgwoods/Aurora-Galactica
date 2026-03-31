@@ -491,9 +491,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.0-beta.1+build.280.sha.11346ba.beta</span>
-    <span id="settingsRelease">Mar 31 2026, 12:23 PM EDT</span>
-    <span id="settingsState">beta@11346ba clean</span>
+    <span id="settingsVersion">Version 1.0.0-beta.1+build.281.sha.083dca4.beta</span>
+    <span id="settingsRelease">Mar 31 2026, 2:09 PM EDT</span>
+    <span id="settingsState">beta@083dca4 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -700,8 +700,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.0-beta.1+build.280.sha.11346ba.beta</span>
-  <span id="buildStampRelease">Mar 31 2026, 12:23 PM EDT</span>
+  <span id="buildStampVersion">Version 1.0.0-beta.1+build.281.sha.083dca4.beta</span>
+  <span id="buildStampRelease">Mar 31 2026, 2:09 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1047,11 +1047,19 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.280.sha.11346ba.beta',commit:'11346ba7e02e127bc8c934763d333fba8d0584c4',branch:'beta',dirty:false,released:'Mar 31 2026, 12:23 PM EDT',state:'beta@11346ba clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.281.sha.083dca4.beta',commit:'083dca40f354449f12eff89e2f4d3ec0e82ebebc',branch:'beta',dirty:false,released:'Mar 31 2026, 2:09 PM EDT',state:'beta@083dca4 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
-const BUILD_UPDATE={available:0,label:'',notified:0,timer:0,checking:0};
+const BUILD_SEEN_KEY=`${STORAGE_PREFIX}LastSeenBuild:${String(BUILD_INFO.releaseChannel||'development').toLowerCase().replace(/[^a-z0-9]+/g,'-')}`;
+const BUILD_UPDATE={available:0,label:'',mode:'',notified:0,timer:0,checking:0};
+const BUILD_REFRESH_HINT=(()=>{
+ try{
+  return new URLSearchParams(location.search).get('refreshHint')==='1';
+ }catch{
+  return false;
+ }
+})();
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -1546,10 +1554,38 @@ function syncBuildStampUi(){
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
-   ? 'New build available. Refresh this tab to get the latest fix.'
+   ? (BUILD_UPDATE.mode==='seen'
+     ? 'This build updated since your last visit. Refresh once if anything looks stale.'
+     : 'New build available. Refresh this tab to get the latest fix.')
    : (production?'':BUILD_INFO.released);
  }
  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+}
+function markHostedBuildSeen(){
+ writePref(BUILD_SEEN_KEY,BUILD_INFO.label);
+}
+function applySeenBuildReminder(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
+ const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
+ if(testHint){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('Refresh reminder test active. Use Refresh Now below or refresh the tab.');
+  return;
+ }
+ if(seenLabel&&seenLabel!==BUILD_INFO.label){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('This build updated since your last visit. Use Refresh Now below or refresh the tab.');
+ }
 }
 async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
@@ -1564,6 +1600,7 @@ async function checkForHostedBuildUpdate(){
   const available=!!nextLabel&&nextLabel!==BUILD_INFO.label;
   BUILD_UPDATE.available=available?1:0;
   BUILD_UPDATE.label=available?nextLabel:'';
+  BUILD_UPDATE.mode=available?'remote':'';
   syncBuildStampUi();
   if(available&&!BUILD_UPDATE.notified){
    BUILD_UPDATE.notified=1;
@@ -1579,6 +1616,8 @@ function startHostedBuildUpdateChecks(){
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  if(!['production','production beta'].includes(channel))return;
  clearInterval(BUILD_UPDATE.timer);
+ applySeenBuildReminder();
+ markHostedBuildSeen();
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
