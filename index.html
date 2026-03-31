@@ -485,9 +485,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production</span>
-    <span id="settingsVersion">Version 0.5.0+build.270.sha.f0dbeef</span>
-    <span id="settingsRelease">Mar 30 2026, 7:54 PM EDT</span>
-    <span id="settingsState">beta@f0dbeef clean</span>
+    <span id="settingsVersion">Version 0.5.0+build.273.sha.d168628</span>
+    <span id="settingsRelease">Mar 30 2026, 9:08 PM EDT</span>
+    <span id="settingsState">beta@d168628 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -694,8 +694,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production</span>
-  <span id="buildStampVersion">Version 0.5.0+build.270.sha.f0dbeef</span>
-  <span id="buildStampRelease">Mar 30 2026, 7:54 PM EDT</span>
+  <span id="buildStampVersion">Version 0.5.0+build.273.sha.d168628</span>
+  <span id="buildStampRelease">Mar 30 2026, 9:08 PM EDT</span>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -947,7 +947,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'0.5.0',label:'0.5.0+build.270.sha.f0dbeef',commit:'f0dbeeff6a3429ee3d9e00c7abbd23b6aa4c8aec',branch:'beta',dirty:false,released:'Mar 30 2026, 7:54 PM EDT',state:'beta@f0dbeef clean',releaseChannel:'production'};
+const BUILD_INFO={version:'0.5.0',label:'0.5.0+build.273.sha.d168628',commit:'d1686285a3fda6e6c15f6a73448068d10fbc0072',branch:'beta',dirty:false,released:'Mar 30 2026, 9:08 PM EDT',state:'beta@d168628 clean',releaseChannel:'production'};
 const BUILD=BUILD_INFO.label;
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
@@ -3599,7 +3599,7 @@ function loseShip(cause={}){
  ex(p.x,p.y,42,'#86c7ff');
  ex(p.x,p.y,28,'#f4f8ff');
  ex(p.x,p.y,14,'#ff7f9f');
- const shipsRemaining=Math.max(0,S.lives+1);
+ const shipsRemaining=Math.max(0,S.lives);
  S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
  sfx.shipHit();
@@ -5191,6 +5191,27 @@ window.__galagaHarness__={
    return true;
   }
   return false;
+ },
+ triggerShipLoss(cfg={}){
+  const reserveLives = Math.max(0, Number.isFinite(+cfg.reserveLives) ? (+cfg.reserveLives|0) : 1);
+  S.lives = reserveLives;
+  S.alertTxt = '';
+  S.alertT = 0;
+  S.eb.length = 0;
+  S.recoverT = 0;
+  S.attackGapT = 0;
+  const p = S.p;
+  p.inv = 0;
+  p.spawn = 0;
+  p.captured = 0;
+  p.dual = 0;
+  loseShip({ cause: cfg.cause || 'harness_ship_loss' });
+  return {
+   alertTxt: S.alertTxt || '',
+   livesAfter: S.lives,
+   spawn: +(+p.spawn || 0).toFixed(3),
+   inv: +(+p.inv || 0).toFixed(3)
+  };
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
