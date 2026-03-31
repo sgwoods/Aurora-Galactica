@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.0-beta.1+build.278.sha.431ee08.beta</span>
+              <span class="metaValue">1.0.0-beta.1+build.280.sha.11346ba.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -1768,6 +1768,42 @@ npm run publish:production</code></pre>
 <ol><li>Let GitHub Pages deploy from <code>Aurora-Galactica</code> so:</li></ol>
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul>
 <p>serves the promoted production build</p>
+<h3>Hotfix Process</h3>
+<p>A hotfix is a small, controlled production repair. It is not a fast path around the release process.</p>
+<p>Goals:</p>
+<ul><li>fix the live issue without widening scope</li><li>preserve evidence before mutating data</li><li>add a regression when the failure can recur</li><li>validate the exact fix in beta before promoting production</li></ul>
+<p>Required process:</p>
+<ol><li>Freeze scope to the specific production failure:</li></ol>
+<ul><li>do not combine unrelated cleanup, refactor, or opportunistic polish</li></ul>
+<ol><li>Preserve evidence first:</li></ol>
+<ul><li>screenshots</li><li>user-visible symptoms</li><li>timestamps</li><li>score/account identifiers if relevant</li><li>production data inspection before mutation</li></ul>
+<ol><li>Assess blast radius:</li></ol>
+<ul><li>gameplay</li><li>auth</li><li>leaderboard/data integrity</li><li>replay/media</li><li>release tooling</li></ul>
+<ol><li>Patch source in <code>Codex-Test1</code> first:</li></ol>
+<ul><li>never treat direct production editing as the real fix</li></ul>
+<ol><li>Add or update a focused regression:</li></ol>
+<ul><li>especially for score submit, auth, replay, and game-over flows</li></ul>
+<ol><li>Verify locally:</li></ol>
+<ul><li><code>npm run build</code></li><li>focused harness checks</li><li>adjacent sanity checks for nearby behavior</li></ul>
+<ol><li>Publish to beta first:</li></ol>
+<ul><li><code>npm run publish:beta</code></li></ul>
+<ol><li>Manually verify the exact failure in hosted beta</li><li>If the hotfix changes behavior that can remain stale in an already-open tab,</li></ol>
+<p>provide an in-app refresh reminder:</p>
+<ul><li>tell the player that a new fix is available</li><li>tell them how to refresh</li><li>prefer a direct refresh action when the UI allows it</li></ul>
+<ol><li>Approve beta and only then publish production:</li></ol>
+<ul><li><code>npm run approve:beta</code></li><li><code>npm run publish:production</code></li></ul>
+<ol><li>Verify the original user flow in production after release</li><li>Record the fix, regression coverage, and any production data correction</li></ol>
+<p>Production data rule:</p>
+<ul><li>If a stopgap production data correction is required, inspect first and mutate</li></ul>
+<p>minimally.</p>
+<ul><li>Record exactly what changed.</li><li>Still ship the real source fix through the normal hotfix path.</li></ul>
+<p>Aurora hotfix checklist:</p>
+<pre><code data-lang="bash">npm run build
+# run focused harness checks
+npm run publish:beta
+# manual hosted beta verification
+npm run approve:beta
+npm run publish:production</code></pre>
 <h4>True 1.0 Launch Baseline Reset</h4>
 <ul><li><code>#130</code> is a required pre-<code>1.0</code> release operation.</li><li>Before the true <code>1.0</code> production launch, reset the shared production</li></ul>
 <p>leaderboard so the official public scoreboard starts from zero.</p>
@@ -1875,7 +1911,7 @@ npm run publish:production</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora Galactica 1.0 launch</strong><br>
-          Build: 1.0.0-beta.1+build.278.sha.431ee08.beta
+          Build: 1.0.0-beta.1+build.280.sha.11346ba.beta
         </p>
       </aside>
     </main>

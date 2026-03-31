@@ -378,11 +378,17 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
+#buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
+#buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
 #buildStamp.replay #buildStampChannel{color:#ffe39a}
 #buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
+#buildStamp.updateAvailable{pointer-events:auto;border-color:rgba(255,216,109,.55);box-shadow:inset 0 0 0 1px rgba(255,229,122,.1),0 0 16px rgba(255,216,109,.14)}
+#buildStamp.updateAvailable #buildStampRelease{display:block;color:#ffe39a}
+#buildStamp.updateAvailable #buildStampRefreshBtn{display:inline-block}
+#buildStamp.production.updateAvailable #buildStampRelease{display:block}
 .k{color:var(--a)}
 @media (max-width:980px){
  #cabinetRightFrame{display:none!important}
@@ -485,9 +491,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.0-beta.1+build.278.sha.431ee08.beta</span>
-    <span id="settingsRelease">Mar 31 2026, 11:51 AM EDT</span>
-    <span id="settingsState">beta@431ee08 clean</span>
+    <span id="settingsVersion">Version 1.0.0-beta.1+build.280.sha.11346ba.beta</span>
+    <span id="settingsRelease">Mar 31 2026, 12:23 PM EDT</span>
+    <span id="settingsState">beta@11346ba clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -694,8 +700,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.0-beta.1+build.278.sha.431ee08.beta</span>
-  <span id="buildStampRelease">Mar 31 2026, 11:51 AM EDT</span>
+  <span id="buildStampVersion">Version 1.0.0-beta.1+build.280.sha.11346ba.beta</span>
+  <span id="buildStampRelease">Mar 31 2026, 12:23 PM EDT</span>
+  <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -890,6 +897,7 @@ const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -1039,8 +1047,11 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.278.sha.431ee08.beta',commit:'431ee08b0459996b2927fc0e03da7298f615e17e',branch:'beta',dirty:false,released:'Mar 31 2026, 11:51 AM EDT',state:'beta@431ee08 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.280.sha.11346ba.beta',commit:'11346ba7e02e127bc8c934763d333fba8d0584c4',branch:'beta',dirty:false,released:'Mar 31 2026, 12:23 PM EDT',state:'beta@11346ba clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
+const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
+const BUILD_REFRESH_CHECK_MS=60000;
+const BUILD_UPDATE={available:0,label:'',notified:0,timer:0,checking:0};
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
@@ -1518,19 +1529,60 @@ function syncBuildStampUi(){
  const override=window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
+  buildStamp.classList.remove('updateAvailable');
   buildStamp.classList.add('replay');
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=`Lane ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
- if(buildStampRelease)buildStampRelease.textContent=production?'':BUILD_INFO.released;
+ if(buildStampRelease){
+  buildStampRelease.textContent=BUILD_UPDATE.available
+   ? 'New build available. Refresh this tab to get the latest fix.'
+   : (production?'':BUILD_INFO.released);
+ }
+ if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+}
+async function checkForHostedBuildUpdate(){
+ if(BUILD_UPDATE.checking||location.protocol==='file:')return;
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ BUILD_UPDATE.checking=1;
+ try{
+  const response=await fetch(`${BUILD_INFO_URL}?t=${Date.now()}`,{cache:'no-store'});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const live=await response.json();
+  const nextLabel=String(live?.label||'').trim();
+  const available=!!nextLabel&&nextLabel!==BUILD_INFO.label;
+  BUILD_UPDATE.available=available?1:0;
+  BUILD_UPDATE.label=available?nextLabel:'';
+  syncBuildStampUi();
+  if(available&&!BUILD_UPDATE.notified){
+   BUILD_UPDATE.notified=1;
+   showToast('New build available. Use Refresh Now below or refresh the tab.');
+  }
+ }catch(err){
+  logEvent('build_update_check_failed',{message:String(err?.message||err||'build update check failed')});
+ }finally{
+  BUILD_UPDATE.checking=0;
+ }
+}
+function startHostedBuildUpdateChecks(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ clearInterval(BUILD_UPDATE.timer);
+ checkForHostedBuildUpdate();
+ BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
+ addEventListener('focus',()=>{checkForHostedBuildUpdate();});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForHostedBuildUpdate();});
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -1954,6 +2006,7 @@ if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)clos
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
  return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
@@ -2071,6 +2124,7 @@ addEventListener('pointerdown',e=>{
 });
 syncTestUi();
 syncBuildStampUi();
+startHostedBuildUpdateChecks();
 
 // Source: src/js/05-supabase.js
 // Shared leaderboard and Supabase client integration.
