@@ -491,9 +491,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.0-beta.1+build.281.sha.083dca4.beta</span>
-    <span id="settingsRelease">Mar 31 2026, 2:09 PM EDT</span>
-    <span id="settingsState">beta@083dca4 clean</span>
+    <span id="settingsVersion">Version 1.0.0-beta.1+build.282.sha.8835b7d.beta</span>
+    <span id="settingsRelease">Mar 31 2026, 2:24 PM EDT</span>
+    <span id="settingsState">beta@8835b7d clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -700,8 +700,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.0-beta.1+build.281.sha.083dca4.beta</span>
-  <span id="buildStampRelease">Mar 31 2026, 2:09 PM EDT</span>
+  <span id="buildStampVersion">Version 1.0.0-beta.1+build.282.sha.8835b7d.beta</span>
+  <span id="buildStampRelease">Mar 31 2026, 2:24 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1047,7 +1047,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.281.sha.083dca4.beta',commit:'083dca40f354449f12eff89e2f4d3ec0e82ebebc',branch:'beta',dirty:false,released:'Mar 31 2026, 2:09 PM EDT',state:'beta@083dca4 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.282.sha.8835b7d.beta',commit:'8835b7db7d09e7faf26eed1fa500b29fb6195e6a',branch:'beta',dirty:false,released:'Mar 31 2026, 2:24 PM EDT',state:'beta@8835b7d clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -5168,9 +5168,12 @@ function draw(){
   }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
+  const compactStampH=56;
+  const stampH=buildStamp.offsetHeight||compactStampH;
+  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
-  buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
   buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
   }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
