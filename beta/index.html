@@ -491,9 +491,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.0-beta.1+build.282.sha.8835b7d.beta</span>
-    <span id="settingsRelease">Mar 31 2026, 2:24 PM EDT</span>
-    <span id="settingsState">beta@8835b7d clean</span>
+    <span id="settingsVersion">Version 1.0.0-beta.1+build.283.sha.147042f.beta</span>
+    <span id="settingsRelease">Mar 31 2026, 2:36 PM EDT</span>
+    <span id="settingsState">beta@147042f clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -700,8 +700,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.0-beta.1+build.282.sha.8835b7d.beta</span>
-  <span id="buildStampRelease">Mar 31 2026, 2:24 PM EDT</span>
+  <span id="buildStampVersion">Version 1.0.0-beta.1+build.283.sha.147042f.beta</span>
+  <span id="buildStampRelease">Mar 31 2026, 2:36 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1047,7 +1047,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.282.sha.8835b7d.beta',commit:'8835b7db7d09e7faf26eed1fa500b29fb6195e6a',branch:'beta',dirty:false,released:'Mar 31 2026, 2:24 PM EDT',state:'beta@8835b7d clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.0.0-beta.1',label:'1.0.0-beta.1+build.283.sha.147042f.beta',commit:'147042f6d007722762f2b21fdc884b46251abe79',branch:'beta',dirty:false,released:'Mar 31 2026, 2:36 PM EDT',state:'beta@147042f clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1591,6 +1591,7 @@ async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  if(!['production','production beta'].includes(channel))return;
+ if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  BUILD_UPDATE.checking=1;
  try{
   const response=await fetch(`${BUILD_INFO_URL}?t=${Date.now()}`,{cache:'no-store'});
@@ -1618,6 +1619,7 @@ function startHostedBuildUpdateChecks(){
  clearInterval(BUILD_UPDATE.timer);
  applySeenBuildReminder();
  markHostedBuildSeen();
+ if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
