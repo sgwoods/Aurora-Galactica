@@ -403,19 +403,19 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">0.5.0-beta.1+build.273.sha.d168628.beta</span>
+              <span class="metaValue">1.0.0-beta.1+build.276.sha.a59c5ad.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
-              <span class="metaValue">0.5.0-alpha.1</span>
+              <span class="metaValue">1.0.0</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">March 30, 2026</span>
+              <span class="metaValue">March 31, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Pilot profile card, in-frame overlays, and rescue-flow polish</span>
+              <span class="metaValue">Aurora Galactica 1.0 launch</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -961,6 +961,20 @@
 <ul><li>The separate public project-summary repo is not the game host.</li><li>It is updated from the current production build metadata with:</li></ul>
 <pre><code data-lang="bash">  npm run sync:public</code></pre>
 <ul><li>That updates Aurora’s public project/status surfaces in <code>sgwoods/public</code>, not the playable game itself.</li><li>Release history:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>Auto deploy workflow: <code>.github/workflows/pages.yml</code></li><li>Cross-repo public-pages sync workflow:<ul><li><code>.github/workflows/sync-public-pages.yml</code></li></ul></li><li>Durable reference material:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code></li><li>challenge-stage baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/first-challenge-stage/README.md</code></li></ul></li></ul></li></ul>
+<h4>8. Reset The Production Leaderboard For True 1.0</h4>
+<ul><li><code>#130</code> is an explicit pre-<code>1.0</code> release operation.</li><li>The goal is to start the official <code>1.0</code> production leaderboard from a clean</li></ul>
+<p>baseline rather than carrying forward pre-<code>1.0</code> scores from moving tuning and rule sets.</p>
+<ul><li>This operation deletes rows from the shared production <code>scores</code> table. It</li></ul>
+<p>does not delete pilot accounts.</p>
+<ul><li>Dry-run inspection first:</li></ul>
+<pre><code data-lang="bash">  SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:inspect:production</code></pre>
+<ul><li>Execute the reset only when we are ready to launch from the approved <code>1.0</code></li></ul>
+<p>candidate:</p>
+<pre><code data-lang="bash">  SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:reset:production</code></pre>
+<ul><li>Expected order for the true <code>1.0</code> launch:</li></ul>
+<ol><li>confirm the reviewed production candidate</li><li>inspect the current production leaderboard with the dry-run command</li><li>reset the production leaderboard</li><li>publish the final <code>1.0</code> production build</li><li>verify the live site and shared leaderboard start from zero</li></ol>
+<ul><li>The reset command requires an operator-only Supabase service-role key and is</li></ul>
+<p>intentionally not runnable from the browser auth path.</p>
 <h3>Versioning</h3>
 <ul><li>Current versioning uses three release surfaces with build metadata:<ul><li>pre-production:<ul><li>prerelease SemVer from <code>package.json</code></li></ul></li><li>production:<ul><li>stable public label without the prerelease suffix</li></ul></li><li>production beta:<ul><li>promoted public beta label</li></ul></li></ul></li><li>Local and deployed builds carry:<ul><li>version</li><li>build number</li><li>short commit</li><li>branch / dirty state</li><li>Eastern release timestamp</li></ul></li><li>The settings drawer also shows the latest human-written release note from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li><li>Each release can also keep a structured session summary and optional raw transcript under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>The separate public project pages repo is synced from <code>dist/production/build-info.json</code> and <code>release-notes.json</code><ul><li>CI uses the <code>PUBLIC_REPO_SYNC_TOKEN</code> secret when available</li><li>The token should have <code>contents:write</code> access to <code>sgwoods/public</code></li></ul></li><li>Example production build label:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>Example production beta build label:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li><li>See:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
 <h3>Session Logging</h3>
@@ -1185,25 +1199,26 @@ npm run publish:production</code></pre>
 <h4>Launch Blocking List</h4>
 <p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
 <p>Current launch checkpoint:</p>
-<ul><li>beta refreshed to:<ul><li><code>0.5.0-beta.1+build.271.sha.ab5bc3c.beta</code></li></ul></li><li>production approval path has been exercised successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>most former launch blockers are now closed</li><li>the launch list is down to one fresh gameplay bug, the final signoff pass,</li></ul>
-<p>and two explicit “do or slip” visual decisions</p>
+<ul><li>beta refreshed to:<ul><li><code>0.5.0-beta.1+build.273.sha.d168628.beta</code></li></ul></li><li>production approval path has been exercised successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff is complete</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
+<p>fields</p>
+<ul><li>most former launch blockers are now closed</li><li>the only explicit pre-<code>1.0</code> release operation left is the production</li></ul>
+<p>leaderboard reset for the true launch baseline</p>
 <p>Current coding priority:</p>
-<ol><li>confirm <code>#125</code> on hosted beta and close it if clean</li><li>run the final <code>#85</code> release-readiness/signoff pass</li><li>decide whether <code>#48</code> and <code>#44</code> belong in <code>1.0</code> or should slip to <code>1.x</code></li></ol>
+<ol><li>execute <code>#130</code> production leaderboard reset before the final <code>1.0</code> push</li><li>make the final production launch decision from the current reviewed</li></ol>
+<p>candidate</p>
+<ol><li>move <code>#44</code> and the broader refinement/admin/identity work into <code>1.x</code></li></ol>
 <p>What changed since the last full review:</p>
-<ul><li>closed:<ul><li><code>#61</code></li><li><code>#76</code></li><li><code>#79</code></li><li><code>#82</code></li><li><code>#106</code></li><li><code>#107</code></li><li><code>#108</code></li><li><code>#109</code></li><li><code>#112</code></li><li><code>#113</code></li></ul></li><li>fixed on dev and shipped to beta:<ul><li><code>#125</code> ship-loss remaining-ships overcount</li></ul></li><li>release-path hardening is now proven in a real rehearsal, not just implemented</li><li>remaining pilot/admin/email/platform work is now clearly tracked as post-<code>1.0</code></li></ul>
+<ul><li>closed:<ul><li><code>#48</code></li><li><code>#85</code></li><li><code>#125</code></li><li><code>#61</code></li><li><code>#76</code></li><li><code>#79</code></li><li><code>#82</code></li><li><code>#106</code></li><li><code>#107</code></li><li><code>#108</code></li><li><code>#109</code></li><li><code>#112</code></li><li><code>#113</code></li></ul></li><li>deferred from the <code>1.0</code> path:<ul><li><code>#44</code></li></ul></li><li>release-path hardening is now proven in a real rehearsal, not just implemented</li><li>remaining pilot/admin/email/platform work is now clearly tracked as post-<code>1.0</code></li><li>the production leaderboard reset is now an explicit release operation:<ul><li><code>#130</code></li></ul></li></ul>
 <div class="tableWrap">
           <table class="dataTable">
             <thead>
               <tr><th>Bucket</th><th>Issue</th><th>Owner</th><th>Status</th><th>Evidence</th><th>Next Action</th><th>Plan Stage</th></tr>
             </thead>
             <tbody>
-              <tr><td>Must Fix Now</td><td><code>#125</code></td><td>Codex</td><td>Fixed on dev + beta</td><td>The ship-loss alert used to count the ship being destroyed and could report too many remaining ships. Dedicated harness now proves <code>ONE SHIP REMAINING</code> in the one-reserve case, and beta now includes commit <code>ab5bc3c</code>.</td><td>Confirm once on hosted beta, then close.</td><td>Phase 2</td></tr>
-<tr><td>Must Fix Now</td><td><code>#85</code></td><td>Shared</td><td>Implemented on dev</td><td><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code> now exists and the broader launch blocker list has been reduced to a short, real set.</td><td>Run the final release-readiness/signoff pass.</td><td>Phase 4</td></tr>
-<tr><td>Should Fix Before Launch</td><td><code>#48</code></td><td>Shared</td><td>Reassess</td><td>The playfield frame now feels much better than it did when filed, but it is still worth making a deliberate launch call rather than letting it linger by inertia.</td><td>Decide explicitly: close for <code>1.0</code> or slip to <code>1.x</code>.</td><td>Phase 2</td></tr>
-<tr><td>Should Fix Before Launch</td><td><code>#44</code></td><td>Shared</td><td>Reassess</td><td>A bottom-right stage indicator is still attractive arcade polish, but it may no longer justify launch-path attention.</td><td>Decide explicitly: implement for <code>1.0</code> or slip to <code>1.x</code>.</td><td>Phase 2</td></tr>
+              <tr><td>Must Fix Now</td><td><code>#130</code></td><td>Shared</td><td>Required pre-launch operation</td><td>The current production leaderboard still contains pre-<code>1.0</code> scores from a moving rules/tuning baseline. A true <code>1.0</code> launch should start from a clean official scoreboard.</td><td>Reset the production leaderboard before the final <code>1.0</code> production push.</td><td>Phase 4</td></tr>
+<tr><td>Can Slip</td><td><code>#96</code> / <code>#98</code></td><td>Shared</td><td>Watch / close candidate</td><td>Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers.</td><td>Keep the checks green and close if no new regression appears during final signoff.</td><td>Phase 4</td></tr>
 <tr><td>Can Slip</td><td><code>#103</code> / <code>#105</code> / <code>#110</code> / <code>#114</code> / <code>#115</code> / <code>#116</code> / <code>#117</code> / <code>#119</code> / <code>#120</code></td><td>Shared</td><td>Post-blocker polish</td><td>The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears.</td><td>Keep improving in <code>1.x</code> unless a concrete launch issue reappears.</td><td>Phase 3</td></tr>
-<tr><td>Should Fix Before Launch</td><td><code>#96</code> / <code>#98</code></td><td>Shared</td><td>Watch / close candidate</td><td>Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers.</td><td>Keep the checks green and close if no new regression appears during final signoff.</td><td>Phase 4</td></tr>
-<tr><td>Post-1.0</td><td><code>#121</code> / <code>#124</code> / <code>#126</code> / <code>#127</code> / <code>#128</code></td><td>Shared</td><td>Planned</td><td>Shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, and richer email branding are all valuable next-phase work.</td><td>Keep them in the structured <code>1.x</code> program, not the <code>1.0</code> blocker path.</td><td>Post-1.0</td></tr>
+<tr><td>Post-1.0</td><td><code>#44</code> / <code>#121</code> / <code>#124</code> / <code>#126</code> / <code>#127</code> / <code>#128</code> / <code>#129</code></td><td>Shared</td><td>Planned</td><td>Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the <code>1.x</code> refinement track.</td><td>Keep them in the structured <code>1.x</code> program, not the <code>1.0</code> blocker path.</td><td>Post-1.0</td></tr>
             </tbody>
           </table>
         </div>
@@ -1265,8 +1280,8 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Release Train</h3>
-<ul><li>Current line:<ul><li><code>0.5.x-alpha</code></li></ul></li><li>Current phase:<ul><li><code>alpha</code></li></ul></li><li>Goal of this phase:<ul><li>turn the project from a strong tribute prototype into a polished, shippable</li></ul></li></ul>
-<p>four-stage arcade slice</p>
+<ul><li>Current line:<ul><li><code>1.0.0</code></li></ul></li><li>Current phase:<ul><li><code>launch</code></li></ul></li><li>Goal of this phase:<ul><li>ship the polished four-stage arcade slice cleanly and begin the <code>1.x</code></li></ul></li></ul>
+<p>refinement track without reopening the launch scope</p>
 <h3>Immediate Target: 1.0 Four-Stage Slice</h3>
 <p>Definition:</p>
 <ul><li>Stage <code>1</code></li><li>Stage <code>2</code></li><li>Stage <code>3</code> challenging stage</li><li>Stage <code>4</code></li></ul>
@@ -1757,6 +1772,11 @@ npm run publish:production</code></pre>
 <ol><li>Let GitHub Pages deploy from <code>Aurora-Galactica</code> so:</li></ol>
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul>
 <p>serves the promoted production build</p>
+<h4>True 1.0 Launch Baseline Reset</h4>
+<ul><li><code>#130</code> is a required pre-<code>1.0</code> release operation.</li><li>Before the true <code>1.0</code> production launch, reset the shared production</li></ul>
+<p>leaderboard so the official public scoreboard starts from zero.</p>
+<ul><li>Use a dry run first:<ul><li><code>SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:inspect:production</code></li></ul></li><li>Then execute the reset when the launch candidate is approved:<ul><li><code>SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:reset:production</code></li></ul></li><li>This operation deletes rows from the production <code>scores</code> table.</li><li>It does not delete pilot accounts.</li><li>It requires operator-only Supabase service-role access and should be treated</li></ul>
+<p>as an explicit release step, not a routine browser-side admin action.</p>
 <p>Tracked hardening item:</p>
 <ul><li><code>#113</code><ul><li>enforce dev -&gt; beta -&gt; approve -&gt; production as the only supported publish chain</li><li>production preflight fails if the current production publish is not sourced from the approved beta candidate</li></ul></li></ul>
 <h3>Public Project Status Sync Workflow</h3>
@@ -1858,8 +1878,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Pilot profile card, in-frame overlays, and rescue-flow polish</strong><br>
-          Build: 0.5.0-beta.1+build.273.sha.d168628.beta
+          Latest release note: <strong>Aurora Galactica 1.0 launch</strong><br>
+          Build: 1.0.0-beta.1+build.276.sha.a59c5ad.beta
         </p>
       </aside>
     </main>
