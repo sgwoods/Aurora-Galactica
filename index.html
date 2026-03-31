@@ -378,11 +378,17 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
+#buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
+#buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
 #buildStamp.replay #buildStampChannel{color:#ffe39a}
 #buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
+#buildStamp.updateAvailable{pointer-events:auto;border-color:rgba(255,216,109,.55);box-shadow:inset 0 0 0 1px rgba(255,229,122,.1),0 0 16px rgba(255,216,109,.14)}
+#buildStamp.updateAvailable #buildStampRelease{display:block;color:#ffe39a}
+#buildStamp.updateAvailable #buildStampRefreshBtn{display:inline-block}
+#buildStamp.production.updateAvailable #buildStampRelease{display:block}
 .k{color:var(--a)}
 @media (max-width:980px){
  #cabinetRightFrame{display:none!important}
@@ -485,9 +491,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production</span>
-    <span id="settingsVersion">Version 1.0.0+build.276.sha.a59c5ad</span>
-    <span id="settingsRelease">Mar 31 2026, 7:15 AM EDT</span>
-    <span id="settingsState">beta@a59c5ad clean</span>
+    <span id="settingsVersion">Version 1.0.0+build.284.sha.f77ca58</span>
+    <span id="settingsRelease">Mar 31 2026, 2:40 PM EDT</span>
+    <span id="settingsState">beta@f77ca58 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -694,8 +700,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production</span>
-  <span id="buildStampVersion">Version 1.0.0+build.276.sha.a59c5ad</span>
-  <span id="buildStampRelease">Mar 31 2026, 7:15 AM EDT</span>
+  <span id="buildStampVersion">Version 1.0.0+build.284.sha.f77ca58</span>
+  <span id="buildStampRelease">Mar 31 2026, 2:40 PM EDT</span>
+  <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -883,12 +890,14 @@ const helpModal=document.getElementById('helpModal'),helpClose=document.getEleme
 const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),helpPanels=Array.from(document.querySelectorAll('[data-help-panel]'));
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
+const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testChallenge=document.getElementById('testChallenge');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 window.__auroraCarryDebug=window.__auroraCarryDebug||0;
@@ -902,6 +911,7 @@ const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
+const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
  [RECORD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AutoVideo`,
  [TEST_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}TestCfg`,
@@ -909,8 +919,10 @@ const LEGACY_STORAGE_KEYS={
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
- [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`
+ [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
+ [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
+const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 function readPref(key){
  try{
@@ -931,6 +943,94 @@ function writePref(key,value){
 function removePref(key){
  try{localStorage.removeItem(key)}catch{}
 }
+function loadSystemLog(){
+ try{
+  return JSON.parse(readPref(SYSTEM_LOG_KEY)||'[]')
+   .filter(entry=>entry&&entry.at&&entry.action)
+   .slice(-SYSTEM_LOG_LIMIT);
+ }catch{
+  return [];
+ }
+}
+function saveSystemLog(entries){
+ writePref(SYSTEM_LOG_KEY,JSON.stringify((entries||[]).slice(-SYSTEM_LOG_LIMIT)));
+}
+function recentSystemLogEntries(limit=20){
+ const count=Math.max(1,Math.min(SYSTEM_LOG_LIMIT,+limit||20));
+ return loadSystemLog().slice(-count);
+}
+function queueBugSuggestion(summary='',description=''){
+ pendingBugSuggestion={
+  summary:String(summary||'').trim(),
+  description:String(description||'').trim(),
+  at:Date.now()
+ };
+}
+function applyPendingBugSuggestion(){
+ if(!pendingBugSuggestion)return;
+ if(fbType)fbType.value='bug_report';
+ if(fbSummary&&!String(fbSummary.value||'').trim())fbSummary.value=pendingBugSuggestion.summary||'Unexpected game issue';
+ if(fbDescription&&!String(fbDescription.value||'').trim())fbDescription.value=pendingBugSuggestion.description||'Please describe what happened. Recent diagnostics will be attached automatically.';
+ pendingBugSuggestion=null;
+}
+function formatDiagnosticsLines(label,rows){
+ if(!rows.length)return [`${label}: none`];
+ return[
+  `${label}:`,
+  ...rows.map(row=>`- ${row.at||'--'} | ${row.level||'info'} | ${row.action||'event'} | ${row.message||''}${row.data?` | ${JSON.stringify(row.data)}`:''}`)
+ ];
+}
+function recentSessionDiagnostics(limit=20){
+ const count=Math.max(1,Math.min(200,+limit||20));
+ if(!REC)return [];
+ return REC.events.slice(-count).map(event=>({
+  at:`+${Number.isFinite(+event.t)?(+event.t).toFixed(3):'0.000'}s`,
+  level:'info',
+  action:event.type||'event',
+  message:event.type||'event',
+  data:event
+ }));
+}
+function getSystemDiagnosticsReport(limit=20){
+ return{
+  systemLog:recentSystemLogEntries(limit),
+  sessionEvents:recentSessionDiagnostics(limit)
+ };
+}
+function recordSystemIssue(action,message,data={},opts={}){
+ const entry={
+  at:new Date().toISOString(),
+  level:String(opts.level||'error'),
+  action:String(action||'issue'),
+  message:String(message||'').trim()||'Unexpected issue',
+  build:BUILD,
+  channel:String(BUILD_INFO?.releaseChannel||'development'),
+  url:location.href,
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  started:!!started,
+  paused:!!paused
+ };
+ if(data&&Object.keys(data).length)entry.data=data;
+ const rows=loadSystemLog();
+ rows.push(entry);
+ saveSystemLog(rows);
+ logEvent('system_issue',{level:entry.level,action:entry.action,message:entry.message});
+ if(opts.suggestBugReport){
+  queueBugSuggestion(
+   opts.summary||'Unexpected game issue',
+   opts.description||`${entry.message}\n\nPlease describe what you were doing when this happened.`
+  );
+  const prompt=opts.prompt||'Please submit a bug report. Recent diagnostics will be attached automatically.';
+  if(feedbackOpen)setFeedbackStatus(prompt,1);
+  showToast(prompt);
+ }
+ return entry;
+}
+window.recordSystemIssue=recordSystemIssue;
+window.getSystemDiagnosticsReport=getSystemDiagnosticsReport;
+window.recentSystemLogEntries=recentSystemLogEntries;
 function randUnit(){
  if(!RNG_SEED)return Math.random();
  RNG_STATE=(RNG_STATE+0x6D2B79F5)|0;
@@ -947,12 +1047,32 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0',label:'1.0.0+build.276.sha.a59c5ad',commit:'a59c5ad5f066e544cd06c538762fd6db67023274',branch:'beta',dirty:false,released:'Mar 31 2026, 7:15 AM EDT',state:'beta@a59c5ad clean',releaseChannel:'production'};
+const BUILD_INFO={version:'1.0.0',label:'1.0.0+build.284.sha.f77ca58',commit:'f77ca5894be881b3af935a729242fbd4dd93f354',branch:'beta',dirty:false,released:'Mar 31 2026, 2:40 PM EDT',state:'beta@f77ca58 clean',releaseChannel:'production'};
 const BUILD=BUILD_INFO.label;
+const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
+const BUILD_REFRESH_CHECK_MS=60000;
+const BUILD_SEEN_KEY=`${STORAGE_PREFIX}LastSeenBuild:${String(BUILD_INFO.releaseChannel||'development').toLowerCase().replace(/[^a-z0-9]+/g,'-')}`;
+const BUILD_UPDATE={available:0,label:'',mode:'',notified:0,timer:0,checking:0};
+const BUILD_REFRESH_HINT=(()=>{
+ try{
+  return new URLSearchParams(location.search).get('refreshHint')==='1';
+ }catch{
+  return false;
+ }
+})();
+function clearBuildRefreshHintUrl(){
+ if(!BUILD_REFRESH_HINT)return;
+ try{
+  const url=new URL(location.href);
+  url.searchParams.delete('refreshHint');
+  history.replaceState(null,'',url.toString());
+ }catch{}
+}
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
 let settingsOpen=0,settingsPrevPaused=0;
 let REC=null,recShotT=0,sessionN=0;
@@ -1425,19 +1545,96 @@ function syncBuildStampUi(){
  const override=window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
+  buildStamp.classList.remove('updateAvailable');
   buildStamp.classList.add('replay');
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=`Lane ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
- if(buildStampRelease)buildStampRelease.textContent=production?'':BUILD_INFO.released;
+ if(buildStampRelease){
+  buildStampRelease.textContent=BUILD_UPDATE.available
+   ? (BUILD_UPDATE.mode==='seen'
+     ? 'This build updated since your last visit. Refresh once if anything looks stale.'
+     : 'New build available. Refresh this tab to get the latest fix.')
+   : (production?'':BUILD_INFO.released);
+ }
+ if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=!BUILD_UPDATE.available;
+}
+function markHostedBuildSeen(){
+ writePref(BUILD_SEEN_KEY,BUILD_INFO.label);
+}
+function applySeenBuildReminder(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
+ const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
+ if(testHint){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('Refresh reminder test active. Use Refresh Now below or refresh the tab.');
+  return;
+ }
+ if(seenLabel&&seenLabel!==BUILD_INFO.label){
+  BUILD_UPDATE.available=1;
+  BUILD_UPDATE.label=BUILD_INFO.label;
+  BUILD_UPDATE.mode='seen';
+  BUILD_UPDATE.notified=1;
+  syncBuildStampUi();
+  showToast('This build updated since your last visit. Use Refresh Now below or refresh the tab.');
+ }
+}
+async function checkForHostedBuildUpdate(){
+ if(BUILD_UPDATE.checking||location.protocol==='file:')return;
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ if(BUILD_REFRESH_HINT&&channel==='production beta')return;
+ BUILD_UPDATE.checking=1;
+ try{
+  const response=await fetch(`${BUILD_INFO_URL}?t=${Date.now()}`,{cache:'no-store'});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const live=await response.json();
+  const nextLabel=String(live?.label||'').trim();
+  const available=!!nextLabel&&nextLabel!==BUILD_INFO.label;
+  BUILD_UPDATE.available=available?1:0;
+  BUILD_UPDATE.label=available?nextLabel:'';
+  BUILD_UPDATE.mode=available?'remote':'';
+  syncBuildStampUi();
+  if(available&&!BUILD_UPDATE.notified){
+   BUILD_UPDATE.notified=1;
+   showToast('New build available. Use Refresh Now below or refresh the tab.');
+  }
+ }catch(err){
+  logEvent('build_update_check_failed',{message:String(err?.message||err||'build update check failed')});
+ }finally{
+  BUILD_UPDATE.checking=0;
+ }
+}
+function startHostedBuildUpdateChecks(){
+ const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+ if(!['production','production beta'].includes(channel))return;
+ clearInterval(BUILD_UPDATE.timer);
+ applySeenBuildReminder();
+ markHostedBuildSeen();
+ if(BUILD_REFRESH_HINT&&channel==='production beta'){
+  clearBuildRefreshHintUrl();
+  return;
+ }
+ checkForHostedBuildUpdate();
+ BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
+ addEventListener('focus',()=>{checkForHostedBuildUpdate();});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForHostedBuildUpdate();});
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -1716,6 +1913,8 @@ function openFeedback(){
   feedbackDockBtn.classList.add('open');
   feedbackDockBtn.setAttribute('aria-expanded','true');
  }
+ if(feedbackSubtitle)feedbackSubtitle.textContent='Report a bug or send a feature idea without leaving the game board. Recent diagnostics are attached automatically.';
+ applyPendingBugSuggestion();
  setFeedbackStatus('');
  syncPauseUi();
  setTimeout(()=>fbSummary.focus(),0);
@@ -1747,12 +1946,13 @@ async function submitFeedback(ev){
  if(description.length<10){setFeedbackStatus('Description must be at least 10 characters.',1);return;}
  feedbackBusy=1;
  setFeedbackStatus('Sending feedback...');
-  const payload={
+ const payload={
   type,title,description,
   timestamp:new Date(now).toISOString(),
   game:{name:PRODUCT_NAME,version:BUILD,url:location.href,user_agent:navigator.userAgent,language:navigator.language},
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
+ const diagnostics=getSystemDiagnosticsReport(20);
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
  const subject=`[${kind}] ${title}`;
  const lines=[
@@ -1768,7 +1968,11 @@ async function submitFeedback(ev){
   `Started: ${started?1:0}`,
   `Paused: ${paused?1:0}`,
   `Challenge: ${S.challenge?1:0}`,
-  `User-Agent: ${navigator.userAgent}`
+  `User-Agent: ${navigator.userAgent}`,
+  '',
+  ...formatDiagnosticsLines('Recent system log',diagnostics.systemLog),
+  '',
+  ...formatDiagnosticsLines('Recent session events',diagnostics.sessionEvents)
  ];
  try{
   const r=await fetch(FORMSUBMIT_ENDPOINT,{
@@ -1791,6 +1995,8 @@ async function submitFeedback(ev){
     paused:paused?1:0,
     challenge:S.challenge?1:0,
     user_agent:navigator.userAgent,
+    system_log:JSON.stringify(diagnostics.systemLog),
+    recent_session_events:JSON.stringify(diagnostics.sessionEvents),
     message:lines.join('\n')
    })
   });
@@ -1802,6 +2008,7 @@ async function submitFeedback(ev){
   showToast('Feedback sent');
   setTimeout(()=>closeFeedback(),220);
  }catch(err){
+  recordSystemIssue('feedback_submit_failed',String(err?.message||err||'Feedback submission failed'),{type,title},{level:'warn'});
   openMailFallback(subject,lines);
   setFeedbackStatus('FormSubmit could not send directly. Opened mail draft fallback.',1);
   showToast('Mail fallback opened');
@@ -1851,6 +2058,7 @@ if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)clos
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
+if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
  return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
@@ -1968,6 +2176,7 @@ addEventListener('pointerdown',e=>{
 });
 syncTestUi();
 syncBuildStampUi();
+startHostedBuildUpdateChecks();
 
 // Source: src/js/05-supabase.js
 // Shared leaderboard and Supabase client integration.
@@ -2113,6 +2322,7 @@ function remoteAuthEnabled(){
  return RELEASE_CHANNEL==='production'||testAccountEnabled();
 }
 function remoteWriteEnabled(){
+ if(window.__auroraHarnessForceRemoteWrite)return true;
  if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
  return isSignedInAsTestAccount();
 }
@@ -2767,6 +2977,14 @@ async function submitScoreRemote(entry){
  if(!remoteWriteEnabled()){
   setLeaderboardStatus('Saved locally · production submit disabled in this lane');
   syncLeaderboardUi();
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_blocked','Remote score submit blocked by lane policy',{
+    score:+entry.score|0,
+    stage:+entry.stage|0,
+    initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+    releaseChannel:RELEASE_CHANNEL
+   },{level:'info'});
+  }
   return 0;
  }
  const payload={
@@ -2779,9 +2997,63 @@ async function submitScoreRemote(entry){
   payload.user_id=LEADERBOARD.user.id;
   payload.is_verified=!!LEADERBOARD.user.email_confirmed_at;
  }
- const {error}=await LEADERBOARD.client.from('scores').insert(payload);
- if(error){
-  setLeaderboardStatus('Saved locally · online submit unavailable');
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_attempt','Attempting remote score submit',{
+   score:payload.score,
+   stage:payload.stage,
+   initials:payload.initials,
+   verified:!!payload.is_verified,
+   userId:payload.user_id||''
+  },{level:'info'});
+ }
+ try{
+  const {error}=await LEADERBOARD.client.from('scores').insert(payload);
+  if(error){
+   if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(error.message||error)||'Remote score insert failed',{
+     score:payload.score,
+     stage:payload.stage,
+     initials:payload.initials,
+     verified:!!payload.is_verified,
+     userId:payload.user_id||''
+    },{
+     level:'error',
+     suggestBugReport:1,
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    });
+   }
+   setLeaderboardStatus('Saved locally only · online submit failed');
+   syncLeaderboardUi();
+   return 0;
+  }
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_ok','Remote score submit succeeded',{
+    score:payload.score,
+    stage:payload.stage,
+    initials:payload.initials,
+    verified:!!payload.is_verified,
+    userId:payload.user_id||''
+   },{level:'info'});
+  }
+ }catch(err){
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
+    score:payload.score,
+    stage:payload.stage,
+    initials:payload.initials,
+    verified:!!payload.is_verified,
+    userId:payload.user_id||''
+   },{
+    level:'error',
+    suggestBugReport:1,
+    summary:'Online score save failed',
+    description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+    prompt:'Online score save failed. Please submit a bug report.'
+   });
+  }
+  setLeaderboardStatus('Saved locally only · online submit failed');
   syncLeaderboardUi();
   return 0;
  }
@@ -2798,9 +3070,31 @@ function submitGameOverScore(){
  if(!entry)return;
  gameOverState.remoteSubmitted='pending';
  LEADERBOARD.submitBusy=1;
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_queued','Queued game-over score for remote submit',{
+   score:+entry.score|0,
+   stage:+entry.stage|0,
+   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+  },{level:'info'});
+ }
  submitScoreRemote(entry)
   .then(ok=>{gameOverState.remoteSubmitted=ok?1:0;})
-  .catch(()=>{gameOverState.remoteSubmitted=0;})
+  .catch(err=>{
+   gameOverState.remoteSubmitted=0;
+   if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
+     score:+entry.score|0,
+     stage:+entry.stage|0,
+     initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+    },{
+     level:'error',
+     suggestBugReport:1,
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but the online leaderboard submit rejected unexpectedly.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    });
+   }
+  })
   .finally(()=>{LEADERBOARD.submitBusy=0;});
 }
 function authRedirectUrl(){
@@ -2853,6 +3147,7 @@ async function signUpAccount(){
  });
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_signup_failed',friendlyAuthError('signup',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Signup failed: ${friendlyAuthError('signup',error)}`);
   syncAccountUi();
   return;
@@ -2880,6 +3175,7 @@ async function loginAccount(){
  const {error}=await LEADERBOARD.client.auth.signInWithPassword({email,password});
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_login_failed',friendlyAuthError('login',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Login failed: ${friendlyAuthError('login',error)}`);
   syncAccountUi();
   return;
@@ -2908,6 +3204,7 @@ async function resetAccountPassword(){
  const {error}=await LEADERBOARD.client.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
  LEADERBOARD.authBusy=0;
  if(error){
+  if(typeof recordSystemIssue==='function')recordSystemIssue('auth_reset_failed',friendlyAuthError('reset',error),{emailDomain:email.split('@')[1]||'', lane:RELEASE_CHANNEL},{level:'warn'});
   setAccountNotice(`Reset password failed: ${friendlyAuthError('reset',error)}`);
   syncAccountUi();
   return;
@@ -3623,6 +3920,7 @@ function gameOver(){
  stopRunRecording();
  gameOverState=buildGameOverState(S.score,S.stage);
  gameOverHtml=buildGameOverHtmlFromState();
+ if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
  sfx.over();
 }
 function bulletsMax(){return S.p.dual?4:2}
@@ -4883,9 +5181,12 @@ function draw(){
   }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
+  const compactStampH=56;
+  const stampH=buildStamp.offsetHeight||compactStampH;
+  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
-  buildStamp.style.top=`${shellY+shellH-Math.max(66,Math.floor(shellPadB*.78))}px`;
+  buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
   buildStamp.style.visibility=waitScoreOverlay?'hidden':'visible';
   }
  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,c.width,c.height);
@@ -5211,6 +5512,77 @@ window.__galagaHarness__={
    livesAfter: S.lives,
    spawn: +(+p.spawn || 0).toFixed(3),
    inv: +(+p.inv || 0).toFixed(3)
+  };
+ },
+ setupRemoteScoreSubmitTest(cfg={}){
+  window.__auroraHarnessForceRemoteWrite=1;
+  localStorage.removeItem(SCOREBOARD_KEY);
+  localStorage.removeItem(SYSTEM_LOG_KEY);
+  const initials=sanitizeInitials(cfg.initials||'SGW').padEnd(3,'-').slice(0,3);
+  const harnessState={
+   mode:cfg.mode==='failure'?'failure':'success',
+   calls:[],
+   errorMessage:String(cfg.errorMessage||'Harness remote submit failed')
+  };
+  window.__auroraScoreSubmitHarness=harnessState;
+  window.__auroraRefreshLeaderboardReal=window.__auroraRefreshLeaderboardReal||refreshLeaderboard;
+  refreshLeaderboard=async()=>[];
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user={
+   id:String(cfg.userId||'pilot-harness'),
+   email:String(cfg.email||'pilot@example.com'),
+   email_confirmed_at:new Date().toISOString(),
+   user_metadata:{display_initials:initials}
+  };
+  LEADERBOARD.profile={user_id:LEADERBOARD.user.id,display_initials:initials};
+  LEADERBOARD.client={
+   from(table){
+    if(table!=='scores')throw new Error(`Unexpected table ${table}`);
+    return{
+     async insert(payload){
+      harnessState.calls.push(Object.assign({},payload));
+      if(harnessState.mode==='failure')return{error:{message:harnessState.errorMessage}};
+      return{error:null};
+     }
+    };
+   }
+  };
+  syncAccountUi();
+  return true;
+ },
+ triggerRemoteScoreGameOver(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  S.attract=0;
+  S.score=+cfg.score||76770;
+  S.stage=+cfg.stage||12;
+  S.lives=Math.max(0,(+cfg.reserveLives||0));
+  S.stats={shots:+cfg.shots||10,hits:+cfg.hits||8};
+  S.p.dual=0;
+  S.p.captured=0;
+  S.p.pending=0;
+  S.p.spawn=0;
+  S.p.inv=0;
+  S.p.capBoss=null;
+  gameOver();
+  return{
+   remoteSubmitted:gameOverState?.remoteSubmitted||0,
+   phase:gameOverState?.phase||'',
+   score:S.score,
+   stage:S.stage
+  };
+ },
+ remoteScoreSubmitState(){
+  return{
+   calls:(window.__auroraScoreSubmitHarness?.calls||[]).map(call=>Object.assign({},call)),
+   remoteSubmitted:gameOverState?.remoteSubmitted||0,
+   systemLog:typeof recentSystemLogEntries==='function'?recentSystemLogEntries(20):[],
+   summary:fbSummary?.value||'',
+   description:fbDescription?.value||'',
+   accountSummary:accountSummary?.textContent||'',
+   leaderboardStatus:leaderboardStatusEl?.textContent||''
   };
  },
  export(){exportSession({silent:1})},

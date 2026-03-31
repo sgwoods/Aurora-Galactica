@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.0+build.276.sha.a59c5ad</span>
+              <span class="metaValue">1.0.0+build.284.sha.f77ca58</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -1196,27 +1196,23 @@ npm run publish:production</code></pre>
 <p>The project is now targeting a smaller <code>1.0</code> sub-goal first:</p>
 <ul><li>a polished Stage <code>1</code> through Stage <code>4</code> experience</li><li>one cleaned-up challenge stage</li><li>one solid capture / rescue loop</li><li>stable local and hosted play</li><li>persistent high scores and clean end-of-run flow</li></ul>
 <p>Expansion beyond Stage <code>4</code>, new theme systems, and broader content breadth are still valuable, but they are now explicitly post-<code>1.0</code> work unless they are needed to support this smaller shipped slice.</p>
-<h4>Launch Blocking List</h4>
-<p>This is the maintained release view for the scoped four-stage <code>1.0</code> launch. Use it as the default triage order until launch unless a new regression clearly overrides it.</p>
-<p>Current launch checkpoint:</p>
-<ul><li>beta refreshed to:<ul><li><code>0.5.0-beta.1+build.273.sha.d168628.beta</code></li></ul></li><li>production approval path has been exercised successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff is complete</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
+<h4>Post-Launch View</h4>
+<p><code>1.0.0</code> is now live.</p>
+<p>Current release checkpoint:</p>
+<ul><li>beta:<ul><li><code>1.0.0-beta.1+build.276.sha.a59c5ad.beta</code></li></ul></li><li>production:<ul><li><code>1.0.0+build.276.sha.a59c5ad</code></li></ul></li><li>production promotion path was used successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff was completed</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
 <p>fields</p>
-<ul><li>most former launch blockers are now closed</li><li>the only explicit pre-<code>1.0</code> release operation left is the production</li></ul>
-<p>leaderboard reset for the true launch baseline</p>
+<ul><li>the production leaderboard baseline reset for <code>#130</code> is complete</li></ul>
 <p>Current coding priority:</p>
-<ol><li>execute <code>#130</code> production leaderboard reset before the final <code>1.0</code> push</li><li>make the final production launch decision from the current reviewed</li></ol>
-<p>candidate</p>
-<ol><li>move <code>#44</code> and the broader refinement/admin/identity work into <code>1.x</code></li></ol>
+<ol><li>keep <code>1.0.0</code> stable in production</li><li>move <code>#44</code> and the broader refinement/admin/identity work into <code>1.x</code></li><li>start the structured post-launch quality and platform track deliberately</li></ol>
 <p>What changed since the last full review:</p>
-<ul><li>closed:<ul><li><code>#48</code></li><li><code>#85</code></li><li><code>#125</code></li><li><code>#61</code></li><li><code>#76</code></li><li><code>#79</code></li><li><code>#82</code></li><li><code>#106</code></li><li><code>#107</code></li><li><code>#108</code></li><li><code>#109</code></li><li><code>#112</code></li><li><code>#113</code></li></ul></li><li>deferred from the <code>1.0</code> path:<ul><li><code>#44</code></li></ul></li><li>release-path hardening is now proven in a real rehearsal, not just implemented</li><li>remaining pilot/admin/email/platform work is now clearly tracked as post-<code>1.0</code></li><li>the production leaderboard reset is now an explicit release operation:<ul><li><code>#130</code></li></ul></li></ul>
+<ul><li>closed:<ul><li><code>#48</code></li><li><code>#85</code></li><li><code>#125</code></li><li><code>#61</code></li><li><code>#76</code></li><li><code>#79</code></li><li><code>#82</code></li><li><code>#106</code></li><li><code>#107</code></li><li><code>#108</code></li><li><code>#109</code></li><li><code>#112</code></li><li><code>#113</code></li></ul></li><li>deferred from the <code>1.0</code> path:<ul><li><code>#44</code></li></ul></li><li>release-path hardening is now proven in a real rehearsal, not just implemented</li><li>remaining pilot/admin/email/platform work is now clearly tracked as post-<code>1.0</code></li><li>the production leaderboard reset is complete:<ul><li><code>#130</code></li></ul></li></ul>
 <div class="tableWrap">
           <table class="dataTable">
             <thead>
               <tr><th>Bucket</th><th>Issue</th><th>Owner</th><th>Status</th><th>Evidence</th><th>Next Action</th><th>Plan Stage</th></tr>
             </thead>
             <tbody>
-              <tr><td>Must Fix Now</td><td><code>#130</code></td><td>Shared</td><td>Required pre-launch operation</td><td>The current production leaderboard still contains pre-<code>1.0</code> scores from a moving rules/tuning baseline. A true <code>1.0</code> launch should start from a clean official scoreboard.</td><td>Reset the production leaderboard before the final <code>1.0</code> production push.</td><td>Phase 4</td></tr>
-<tr><td>Can Slip</td><td><code>#96</code> / <code>#98</code></td><td>Shared</td><td>Watch / close candidate</td><td>Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers.</td><td>Keep the checks green and close if no new regression appears during final signoff.</td><td>Phase 4</td></tr>
+              <tr><td>Can Slip</td><td><code>#96</code> / <code>#98</code></td><td>Shared</td><td>Watch / close candidate</td><td>Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers.</td><td>Keep the checks green and close if no new regression appears during final signoff.</td><td>Phase 4</td></tr>
 <tr><td>Can Slip</td><td><code>#103</code> / <code>#105</code> / <code>#110</code> / <code>#114</code> / <code>#115</code> / <code>#116</code> / <code>#117</code> / <code>#119</code> / <code>#120</code></td><td>Shared</td><td>Post-blocker polish</td><td>The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears.</td><td>Keep improving in <code>1.x</code> unless a concrete launch issue reappears.</td><td>Phase 3</td></tr>
 <tr><td>Post-1.0</td><td><code>#44</code> / <code>#121</code> / <code>#124</code> / <code>#126</code> / <code>#127</code> / <code>#128</code> / <code>#129</code></td><td>Shared</td><td>Planned</td><td>Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the <code>1.x</code> refinement track.</td><td>Keep them in the structured <code>1.x</code> program, not the <code>1.0</code> blocker path.</td><td>Post-1.0</td></tr>
             </tbody>
@@ -1280,8 +1276,8 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Release Train</h3>
-<ul><li>Current line:<ul><li><code>1.0.0</code></li></ul></li><li>Current phase:<ul><li><code>launch</code></li></ul></li><li>Goal of this phase:<ul><li>ship the polished four-stage arcade slice cleanly and begin the <code>1.x</code></li></ul></li></ul>
-<p>refinement track without reopening the launch scope</p>
+<ul><li>Current line:<ul><li><code>1.0.x</code></li></ul></li><li>Current phase:<ul><li><code>post-launch stabilization</code></li></ul></li><li>Goal of this phase:<ul><li>keep the shipped four-stage arcade slice stable while moving the broader</li></ul></li></ul>
+<p>identity, admin, and media work into the planned <code>1.x</code> track</p>
 <h3>Immediate Target: 1.0 Four-Stage Slice</h3>
 <p>Definition:</p>
 <ul><li>Stage <code>1</code></li><li>Stage <code>2</code></li><li>Stage <code>3</code> challenging stage</li><li>Stage <code>4</code></li></ul>
@@ -1772,6 +1768,42 @@ npm run publish:production</code></pre>
 <ol><li>Let GitHub Pages deploy from <code>Aurora-Galactica</code> so:</li></ol>
 <ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul>
 <p>serves the promoted production build</p>
+<h3>Hotfix Process</h3>
+<p>A hotfix is a small, controlled production repair. It is not a fast path around the release process.</p>
+<p>Goals:</p>
+<ul><li>fix the live issue without widening scope</li><li>preserve evidence before mutating data</li><li>add a regression when the failure can recur</li><li>validate the exact fix in beta before promoting production</li></ul>
+<p>Required process:</p>
+<ol><li>Freeze scope to the specific production failure:</li></ol>
+<ul><li>do not combine unrelated cleanup, refactor, or opportunistic polish</li></ul>
+<ol><li>Preserve evidence first:</li></ol>
+<ul><li>screenshots</li><li>user-visible symptoms</li><li>timestamps</li><li>score/account identifiers if relevant</li><li>production data inspection before mutation</li></ul>
+<ol><li>Assess blast radius:</li></ol>
+<ul><li>gameplay</li><li>auth</li><li>leaderboard/data integrity</li><li>replay/media</li><li>release tooling</li></ul>
+<ol><li>Patch source in <code>Codex-Test1</code> first:</li></ol>
+<ul><li>never treat direct production editing as the real fix</li></ul>
+<ol><li>Add or update a focused regression:</li></ol>
+<ul><li>especially for score submit, auth, replay, and game-over flows</li></ul>
+<ol><li>Verify locally:</li></ol>
+<ul><li><code>npm run build</code></li><li>focused harness checks</li><li>adjacent sanity checks for nearby behavior</li></ul>
+<ol><li>Publish to beta first:</li></ol>
+<ul><li><code>npm run publish:beta</code></li></ul>
+<ol><li>Manually verify the exact failure in hosted beta</li><li>If the hotfix changes behavior that can remain stale in an already-open tab,</li></ol>
+<p>provide an in-app refresh reminder:</p>
+<ul><li>tell the player that a new fix is available</li><li>tell them how to refresh</li><li>prefer a direct refresh action when the UI allows it</li></ul>
+<ol><li>Approve beta and only then publish production:</li></ol>
+<ul><li><code>npm run approve:beta</code></li><li><code>npm run publish:production</code></li></ul>
+<ol><li>Verify the original user flow in production after release</li><li>Record the fix, regression coverage, and any production data correction</li></ol>
+<p>Production data rule:</p>
+<ul><li>If a stopgap production data correction is required, inspect first and mutate</li></ul>
+<p>minimally.</p>
+<ul><li>Record exactly what changed.</li><li>Still ship the real source fix through the normal hotfix path.</li></ul>
+<p>Aurora hotfix checklist:</p>
+<pre><code data-lang="bash">npm run build
+# run focused harness checks
+npm run publish:beta
+# manual hosted beta verification
+npm run approve:beta
+npm run publish:production</code></pre>
 <h4>True 1.0 Launch Baseline Reset</h4>
 <ul><li><code>#130</code> is a required pre-<code>1.0</code> release operation.</li><li>Before the true <code>1.0</code> production launch, reset the shared production</li></ul>
 <p>leaderboard so the official public scoreboard starts from zero.</p>
@@ -1879,7 +1911,7 @@ npm run publish:production</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora Galactica 1.0 launch</strong><br>
-          Build: 1.0.0+build.276.sha.a59c5ad
+          Build: 1.0.0+build.284.sha.f77ca58
         </p>
       </aside>
     </main>
