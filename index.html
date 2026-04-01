@@ -491,14 +491,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production</span>
-    <span id="settingsVersion">Version 1.0.0+build.284.sha.f77ca58</span>
-    <span id="settingsRelease">Mar 31 2026, 2:40 PM EDT</span>
-    <span id="settingsState">beta@f77ca58 clean</span>
+    <span id="settingsVersion">Version 1.0.1+build.288.sha.14398e9</span>
+    <span id="settingsRelease">Apr 01 2026, 8:04 AM EDT</span>
+    <span id="settingsState">beta@14398e9 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Aurora Galactica 1.0 launch</span>
-    <span id="settingsNotesBody">Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring.</span>
+    <span id="settingsNotesTitle">Input and feedback hotfix</span>
+    <span id="settingsNotesBody">Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, and tightened the in-game feedback transport and diagnostics while keeping mail fallback active until the current upstream FormSubmit outage clears.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -700,8 +700,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production</span>
-  <span id="buildStampVersion">Version 1.0.0+build.284.sha.f77ca58</span>
-  <span id="buildStampRelease">Mar 31 2026, 2:40 PM EDT</span>
+  <span id="buildStampVersion">Version 1.0.1+build.288.sha.14398e9</span>
+  <span id="buildStampRelease">Apr 01 2026, 8:04 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1047,7 +1047,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.0',label:'1.0.0+build.284.sha.f77ca58',commit:'f77ca5894be881b3af935a729242fbd4dd93f354',branch:'beta',dirty:false,released:'Mar 31 2026, 2:40 PM EDT',state:'beta@f77ca58 clean',releaseChannel:'production'};
+const BUILD_INFO={version:'1.0.1',label:'1.0.1+build.288.sha.14398e9',commit:'14398e94d917f0987fbf333fb5ebaeace6e7feee',branch:'beta',dirty:false,released:'Apr 01 2026, 8:04 AM EDT',state:'beta@14398e9 clean',releaseChannel:'production'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1070,7 +1070,8 @@ function clearBuildRefreshHintUrl(){
 }
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
-const FORMSUBMIT_ENDPOINT=`https://formsubmit.co/ajax/${MODEM_FEATURE_EMAIL}`;
+const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY='b945e5f9-b6fa-4503-a373-bfa670c48a79';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
@@ -1357,6 +1358,7 @@ function startAttractDemo(opts={}){
  stopRunRecording();
  autoExportedSessionId='';
  resetSession('attract_demo');
+ resetActiveInputState('attract_demo');
  gameOverHtml='';gameOverState=null;
  aud=0;
  started=0;paused=0;
@@ -1494,16 +1496,25 @@ function loadTestCfg(){
  }catch{return{stage:1,ships:3,challenge:0}}
 }
 function movementLeftCodes(){
- return ['ArrowLeft','KeyA','ControlLeft'];
+ return ['ArrowLeft','KeyA','KeyZ'];
 }
 function movementRightCodes(){
- return ['ArrowRight','KeyD','MetaLeft'];
+ return ['ArrowRight','KeyD','KeyC'];
 }
 function movementControlCodes(){
  return [...movementLeftCodes(),...movementRightCodes()];
 }
 function controlMoveHelpHtml(){
- return `ARROWS OR <span class="k">A/D</span> MOVE   <span class="k">CTRL</span> LEFT   <span class="k">COMMAND</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+ return `ARROWS OR <span class="k">A/Z</span> LEFT   <span class="k">D/C</span> RIGHT   <span class="k">SPACE</span> FIRE   <span class="k">P</span> PAUSE`;
+}
+function resetActiveInputState(reason='manual'){
+ const hadKeys=Object.keys(keys).some(code=>!!keys[code]);
+ const hadState=Object.keys(keyState).length>0;
+ const hadMotion=!!(S?.p&&Math.abs(+S.p.vx||0)>0);
+ keys={};
+ keyState={};
+ if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
+ if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
@@ -1634,7 +1645,14 @@ function startHostedBuildUpdateChecks(){
  checkForHostedBuildUpdate();
  BUILD_UPDATE.timer=setInterval(checkForHostedBuildUpdate,BUILD_REFRESH_CHECK_MS);
  addEventListener('focus',()=>{checkForHostedBuildUpdate();});
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForHostedBuildUpdate();});
+ addEventListener('blur',()=>resetActiveInputState('window_blur'));
+ document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden'){
+   resetActiveInputState('document_hidden');
+   return;
+  }
+  if(document.visibilityState==='visible')checkForHostedBuildUpdate();
+ });
 }
 function saveTestCfg(){
  const cfg={stage:cl(+testStage.value||1,1,99)|0,ships:cl(+testShips.value||3,1,9)|0,challenge:!!testChallenge.checked};
@@ -1685,6 +1703,7 @@ function syncTestUi(){
 function closeSettings(){
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
+ resetActiveInputState('settings_close');
  syncSettingsUi();
  syncPauseUi();
 }
@@ -1692,6 +1711,7 @@ function openSettings(){
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
+ resetActiveInputState('settings_open');
  syncSettingsUi();
  syncPauseUi();
 }
@@ -1726,7 +1746,7 @@ function openHelp(mode='controls'){
  if(started&&!paused)paused=1;
  helpMode=mode==='guide'?'guide':'controls';
  helpOpen=1;
- keys={};keyState={};
+ resetActiveInputState('help_open');
  logEvent('help_open',{mode:helpMode});
  syncHelpUi();
  syncPauseUi();
@@ -1739,6 +1759,7 @@ function closeHelp(force=0){
  if(!helpOpen&&!force)return;
  helpOpen=0;
  if(started)paused=helpPrevPaused;
+ resetActiveInputState('help_close');
  logEvent('help_close',{force:!!force,mode:helpMode});
  syncHelpUi();
  syncPauseUi();
@@ -1905,7 +1926,7 @@ function openFeedback(){
  if(feedbackOpen)return;
  closeSettings();
  if(helpOpen)closeHelp(1);
- feedbackPrevPaused=paused;paused=1;feedbackOpen=1;keys={};keyState={};
+ feedbackPrevPaused=paused;paused=1;feedbackOpen=1;resetActiveInputState('feedback_open');
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
  feedbackModal.setAttribute('aria-hidden','false');
@@ -1922,6 +1943,7 @@ function openFeedback(){
 function closeFeedback(force=0){
  if(!feedbackOpen||(!force&&feedbackBusy))return;
  feedbackOpen=0;paused=feedbackPrevPaused;
+ resetActiveInputState('feedback_close');
  logEvent('feedback_close',{force:!!force});
  feedbackModal.classList.remove('open');
  feedbackModal.setAttribute('aria-hidden','true');
@@ -1932,7 +1954,27 @@ function closeFeedback(force=0){
  syncPauseUi();
 }
 function openMailFallback(subject,lines){
+ if(typeof window.__auroraOpenMailFallbackOverride==='function'){
+  window.__auroraOpenMailFallbackOverride(subject,lines);
+  return;
+ }
  window.location.href=`mailto:${MODEM_FEATURE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
+async function sendFeedbackDirect(fields){
+ const response=await fetch(WEB3FORMS_ENDPOINT,{
+  method:'POST',
+  headers:{Accept:'application/json'},
+  body:fields
+ });
+ const contentType=String(response.headers?.get?.('content-type')||'').toLowerCase();
+ if(contentType.includes('application/json')){
+  const data=await response.json().catch(()=>null);
+  if(!response.ok||data?.success===false)throw new Error(data?.message||`HTTP ${response.status}`);
+  return {ok:1,status:response.status,data};
+ }
+ const text=(await response.text().catch(()=>'' )).trim();
+ if(!response.ok)throw new Error(text||`HTTP ${response.status}`);
+ return {ok:1,status:response.status,data:null,text};
 }
 async function submitFeedback(ev){
  ev.preventDefault();
@@ -1975,42 +2017,38 @@ async function submitFeedback(ev){
   ...formatDiagnosticsLines('Recent session events',diagnostics.sessionEvents)
  ];
  try{
-  const r=await fetch(FORMSUBMIT_ENDPOINT,{
-   method:'POST',
-   headers:{'Content-Type':'application/json','Accept':'application/json'},
-   body:JSON.stringify({
-    _subject:subject,
-    _template:'table',
-    product:PRODUCT_NAME,
-    type:kind,
-    title,
-    description,
-    build:BUILD,
-    timestamp:payload.timestamp,
-    url:location.href,
-    stage:S.stage,
-    score:S.score,
-    lives:Math.max(0,S.lives+1),
-    started:started?1:0,
-    paused:paused?1:0,
-    challenge:S.challenge?1:0,
-    user_agent:navigator.userAgent,
-    system_log:JSON.stringify(diagnostics.systemLog),
-    recent_session_events:JSON.stringify(diagnostics.sessionEvents),
-    message:lines.join('\n')
-   })
-  });
-  const data=await r.json().catch(()=>null);
-  if(!r.ok||data?.success===false)throw new Error(data?.message||`HTTP ${r.status}`);
+  const fields=new FormData();
+  fields.set('access_key',WEB3FORMS_ACCESS_KEY);
+  fields.set('subject',subject);
+  fields.set('from_name',PRODUCT_NAME);
+  fields.set('botcheck','');
+  fields.set('product',PRODUCT_NAME);
+  fields.set('type',kind);
+  fields.set('title',title);
+  fields.set('description',description);
+  fields.set('build',BUILD);
+  fields.set('timestamp',payload.timestamp);
+  fields.set('url',location.href);
+  fields.set('stage',String(S.stage));
+  fields.set('score',String(S.score));
+  fields.set('lives',String(Math.max(0,S.lives+1)));
+  fields.set('started',started?'1':'0');
+  fields.set('paused',paused?'1':'0');
+  fields.set('challenge',S.challenge?'1':'0');
+  fields.set('user_agent',navigator.userAgent);
+  fields.set('system_log',JSON.stringify(diagnostics.systemLog));
+  fields.set('recent_session_events',JSON.stringify(diagnostics.sessionEvents));
+  fields.set('message',lines.join('\n'));
+  await sendFeedbackDirect(fields);
   feedbackLastSubmit=now;
   fbType.value='bug_report';fbSummary.value='';fbDescription.value='';
   setFeedbackStatus('Sent to Modem inbox.');
   showToast('Feedback sent');
-  setTimeout(()=>closeFeedback(),220);
+  setTimeout(()=>closeFeedback(),1200);
  }catch(err){
   recordSystemIssue('feedback_submit_failed',String(err?.message||err||'Feedback submission failed'),{type,title},{level:'warn'});
   openMailFallback(subject,lines);
-  setFeedbackStatus('FormSubmit could not send directly. Opened mail draft fallback.',1);
+  setFeedbackStatus('Direct send could not complete. Opened mail draft fallback.',1);
   showToast('Mail fallback opened');
  }
  feedbackBusy=0;
@@ -3836,6 +3874,7 @@ function startSequence(mode,duration,title,subtitle=''){
 function start(){
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
+ if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');
  if(typeof closeAccountPanel==='function')closeAccountPanel();
  if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
  if(typeof closeSettings==='function')closeSettings();
@@ -5511,8 +5550,24 @@ window.__galagaHarness__={
    alertTxt: S.alertTxt || '',
    livesAfter: S.lives,
    spawn: +(+p.spawn || 0).toFixed(3),
-   inv: +(+p.inv || 0).toFixed(3)
+  inv: +(+p.inv || 0).toFixed(3)
   };
+ },
+ inputState(){
+  return{
+   leftCodes:typeof movementLeftCodes==='function'?[...movementLeftCodes()]:[],
+   rightCodes:typeof movementRightCodes==='function'?[...movementRightCodes()]:[],
+   playerX:+(+S.p.x||0).toFixed(2),
+   playerVx:+(+S.p.vx||0).toFixed(2),
+   spawn:+(+S.p.spawn||0).toFixed(3),
+   started:!!started,
+   keys:Object.keys(keys||{}).filter(code=>!!keys[code]),
+   keyStateCount:Object.keys(keyState||{}).length
+  };
+ },
+ resetInputState(reason='harness'){
+  if(typeof resetActiveInputState==='function')resetActiveInputState(reason);
+  return this.inputState();
  },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__auroraHarnessForceRemoteWrite=1;
