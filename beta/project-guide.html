@@ -403,11 +403,11 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.0-beta.1+build.284.sha.f77ca58.beta</span>
+              <span class="metaValue">1.0.1-beta.1+build.286.sha.80c4d77.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.0.0</span>
+              <span class="metaValue">1.0.1</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Aurora Galactica 1.0 launch</span>
+              <span class="metaValue">Input and feedback hotfix</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -1719,7 +1719,7 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_POLICY.md</code> during build.</p>
         <div class="markdown">
           <h3>Version Format</h3>
-<ul><li>We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.</li><li>Pre-production development format:<ul><li><code>MAJOR.MINOR.PATCH-prerelease</code></li></ul></li><li>Production format:<ul><li><code>MAJOR.MINOR.PATCH</code></li></ul></li><li>Production beta format:<ul><li><code>MAJOR.MINOR.PATCH-beta.&lt;number&gt;</code></li></ul></li><li>Current build label format adds build metadata to the surface version:<ul><li><code>surface-version+build.&lt;number&gt;.sha.&lt;shortcommit&gt;</code></li></ul></li><li>Dirty local builds append:<ul><li><code>.dirty</code></li></ul></li></ul>
+<ul><li>We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.</li><li>Pre-production development format:<ul><li><code>MAJOR.MINOR.PATCH-prerelease</code></li></ul></li><li>Production format:<ul><li><code>MAJOR.MINOR.PATCH</code></li></ul></li><li>Production beta format:<ul><li><code>MAJOR.MINOR.PATCH-beta.&lt;number&gt;</code></li></ul></li><li>Current build label format adds build metadata to the surface version:<ul><li><code>surface-version+build.&lt;number&gt;.sha.&lt;shortcommit&gt;</code></li></ul></li><li>Dirty local builds append:<ul><li><code>.dirty</code></li></ul></li><li>After <code>1.0.0</code>, production hotfixes should bump <code>PATCH</code>:<ul><li><code>1.0.1</code></li><li><code>1.0.2</code></li><li>and so on</li></ul></li></ul>
 <p>Examples:</p>
 <ul><li>pre-production:<ul><li><code>0.5.0-alpha.1+build.115.sha.b0d812c</code></li></ul></li><li>production:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>production beta:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li></ul>
 <h3>Meaning</h3>
@@ -1784,7 +1784,8 @@ npm run publish:production</code></pre>
 <ol><li>Add or update a focused regression:</li></ol>
 <ul><li>especially for score submit, auth, replay, and game-over flows</li></ul>
 <ol><li>Verify locally:</li></ol>
-<ul><li><code>npm run build</code></li><li>focused harness checks</li><li>adjacent sanity checks for nearby behavior</li></ul>
+<ul><li><code>npm run build</code></li><li>focused harness checks</li><li>adjacent sanity checks for nearby behavior</li><li>when the hotfix touches an external runtime dependency, run a live probe of</li></ul>
+<p>that dependency before beta if the probe is available</p>
 <ol><li>Publish to beta first:</li></ol>
 <ul><li><code>npm run publish:beta</code></li></ul>
 <ol><li>Manually verify the exact failure in hosted beta</li><li>If the hotfix changes behavior that can remain stale in an already-open tab,</li></ol>
@@ -1800,6 +1801,7 @@ npm run publish:production</code></pre>
 <p>Aurora hotfix checklist:</p>
 <pre><code data-lang="bash">npm run build
 # run focused harness checks
+# run external dependency probes when the hotfix touches them
 npm run publish:beta
 # manual hosted beta verification
 npm run approve:beta
@@ -1910,8 +1912,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Aurora Galactica 1.0 launch</strong><br>
-          Build: 1.0.0-beta.1+build.284.sha.f77ca58.beta
+          Latest release note: <strong>Input and feedback hotfix</strong><br>
+          Build: 1.0.1-beta.1+build.286.sha.80c4d77.beta
         </p>
       </aside>
     </main>
