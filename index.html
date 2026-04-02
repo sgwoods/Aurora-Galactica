@@ -491,14 +491,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsMeta">
     <span id="settingsChannel">Lane production</span>
-    <span id="settingsVersion">Version 1.0.1+build.288.sha.14398e9</span>
-    <span id="settingsRelease">Apr 01 2026, 8:04 AM EDT</span>
-    <span id="settingsState">beta@14398e9 clean</span>
+    <span id="settingsVersion">Version 1.0.2+build.290.sha.831a2c6</span>
+    <span id="settingsRelease">Apr 02 2026, 10:33 AM EDT</span>
+    <span id="settingsState">beta@831a2c6 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Input and feedback hotfix</span>
-    <span id="settingsNotesBody">Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, and tightened the in-game feedback transport and diagnostics while keeping mail fallback active until the current upstream FormSubmit outage clears.</span>
+    <span id="settingsNotesTitle">Movement reset hotfix</span>
+    <span id="settingsNotesBody">Fixed a production regression where hidden tool-surface cleanup was repeatedly resetting active input during live play, restored full left and right movement on the 1.0.2 line, and strengthened the pre-release movement harness so tiny non-playable nudges and repeated input resets cannot pass as valid control behavior again.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -700,8 +700,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production</span>
-  <span id="buildStampVersion">Version 1.0.1+build.288.sha.14398e9</span>
-  <span id="buildStampRelease">Apr 01 2026, 8:04 AM EDT</span>
+  <span id="buildStampVersion">Version 1.0.2+build.290.sha.831a2c6</span>
+  <span id="buildStampRelease">Apr 02 2026, 10:33 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1047,7 +1047,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.1',label:'1.0.1+build.288.sha.14398e9',commit:'14398e94d917f0987fbf333fb5ebaeace6e7feee',branch:'beta',dirty:false,released:'Apr 01 2026, 8:04 AM EDT',state:'beta@14398e9 clean',releaseChannel:'production'};
+const BUILD_INFO={version:'1.0.2',label:'1.0.2+build.290.sha.831a2c6',commit:'831a2c643d89b2ec74f1f2281e2582970d3b7dda',branch:'beta',dirty:false,released:'Apr 02 2026, 10:33 AM EDT',state:'beta@831a2c6 clean',releaseChannel:'production'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1071,7 +1071,7 @@ function clearBuildRefreshHintUrl(){
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY='b945e5f9-b6fa-4503-a373-bfa670c48a79';
+const WEB3FORMS_ACCESS_KEY='';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let pendingBugSuggestion=null;
 let helpOpen=0,helpPrevPaused=0,helpMode='controls';
@@ -1701,6 +1701,7 @@ function syncTestUi(){
  syncHelpUi();
 }
 function closeSettings(){
+ if(!settingsOpen)return;
  if(settingsOpen&&started)paused=settingsPrevPaused;
  settingsOpen=0;
  resetActiveInputState('settings_close');
@@ -2266,9 +2267,9 @@ const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
 const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
-const TEST_ACCOUNT_USER_ID='69f14bed-87b3-493a-bba6-a81eb9b33b04';
+const TEST_ACCOUNT_USER_ID='';
 const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
-const TEST_ACCOUNT_USER_IDS=["69f14bed-87b3-493a-bba6-a81eb9b33b04"];
+const TEST_ACCOUNT_USER_IDS=[];
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
@@ -5272,7 +5273,7 @@ const toolsVisible=!started||paused||feedbackOpen;
 settingsBtn.style.display='block';
 if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
 if((!started||paused)&&typeof primeLeaderboard==='function')primeLeaderboard();
-if(!toolsVisible)closeSettings();
+if(!toolsVisible&&settingsOpen)closeSettings();
  else syncSettingsUi();
  const activeMessage=started?gameplayMessageState():null;
  msg.className=!started?(((gameOverState||gameOverHtml)||ATTRACT.phase==='scores')?'gameOverScreen':'startScreen'):(activeMessage?.mode==='board'?'boardMessage':'');
