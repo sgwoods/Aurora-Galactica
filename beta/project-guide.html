@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.2-beta.1+build.289.sha.2d6ceb2.beta</span>
+              <span class="metaValue">1.0.2-beta.1+build.290.sha.831a2c6.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -1784,6 +1784,7 @@ npm run publish:production</code></pre>
 <ol><li>Verify locally:</li></ol>
 <ul><li><code>npm run build</code></li><li>focused harness checks</li><li>adjacent sanity checks for nearby behavior</li><li>when the hotfix touches an external runtime dependency, run a live probe of</li></ul>
 <p>that dependency before beta if the probe is available</p>
+<ul><li>when the hotfix touches obvious gameplay input or motion, run the hotfix smoke suite:<ul><li><code>npm run harness:check:hotfix-smoke</code></li></ul></li><li>when the hotfix affects controls, overlays, or input lifecycles, run a hosted-lane input probe:<ul><li><code>npm run harness:check:live-input:beta</code></li></ul></li></ul>
 <ol><li>Publish to beta first:</li></ol>
 <ul><li><code>npm run publish:beta</code></li></ul>
 <ol><li>Manually verify the exact failure in hosted beta</li><li>If the hotfix changes behavior that can remain stale in an already-open tab,</li></ol>
@@ -1799,11 +1800,16 @@ npm run publish:production</code></pre>
 <p>Aurora hotfix checklist:</p>
 <pre><code data-lang="bash">npm run build
 # run focused harness checks
+npm run harness:check:hotfix-smoke
+# if controls/input/overlay behavior changed
+npm run harness:check:live-input:beta
 # run external dependency probes when the hotfix touches them
 npm run publish:beta
 # manual hosted beta verification
 npm run approve:beta
 npm run publish:production</code></pre>
+<p>Hotfix smoke suite contents:</p>
+<ul><li><code>node tools/harness/check-input-mapping.js</code><ul><li>verifies playable left/right movement distance, expected key mapping, and no repeated input resets during active movement</li></ul></li><li><code>node tools/harness/check-popup-surfaces.js</code><ul><li>verifies settings/help/pilot/score/feedback surfaces still open and fit correctly after UI-adjacent hotfixes</li></ul></li><li><code>node tools/harness/check-feedback-submit-path.js</code><ul><li>verifies direct feedback success and fallback diagnostics are still intact</li></ul></li><li><code>node tools/harness/check-remote-score-submit.js</code><ul><li>verifies the main game-over remote score path still behaves correctly on success and failure</li></ul></li></ul>
 <h4>True 1.0 Launch Baseline Reset</h4>
 <ul><li><code>#130</code> is a required pre-<code>1.0</code> release operation.</li><li>Before the true <code>1.0</code> production launch, reset the shared production</li></ul>
 <p>leaderboard so the official public scoreboard starts from zero.</p>
@@ -1911,7 +1917,7 @@ npm run publish:production</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Movement reset hotfix</strong><br>
-          Build: 1.0.2-beta.1+build.289.sha.2d6ceb2.beta
+          Build: 1.0.2-beta.1+build.290.sha.831a2c6.beta
         </p>
       </aside>
     </main>
