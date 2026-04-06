@@ -7,116 +7,48 @@
 <style>
 /* Generated from src/styles.css */
 /* UI and cabinet-style presentation for the generated game page. */
-:root{--fg:#f4f7ff;--a:#74e6ff;--shell-line:rgba(83,140,255,.32);--shell-glow:rgba(255,222,134,.08);--frame-line:rgba(171,214,255,.28);--frame-glow:rgba(255,220,122,.08);--marquee-border:#f05e1d;--marquee-glow:#38d6a0}
+:root{--fg:#f4f7ff;--a:#74e6ff;--shell-line:rgba(122,215,255,.28);--shell-glow:rgba(178,236,255,.12);--frame-line:rgba(171,214,255,.28);--frame-glow:rgba(255,220,122,.08);--marquee-border:#8ce8ff;--marquee-glow:rgba(122,215,255,.34);--marquee-bg:linear-gradient(180deg,#f7fbff,#dde8f5);--shell-top-bg:radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%),radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%),linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%),linear-gradient(180deg,rgba(10,16,32,.97),rgba(18,28,48,.9));--shell-side-bg:radial-gradient(circle at 50% 14%,rgba(163,236,255,.2) 0 9%,transparent 10%),radial-gradient(circle at 22% 82%,rgba(255,235,171,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.16) 0 14%,transparent 14% 28%,rgba(255,255,255,.06) 28% 34%,transparent 34% 48%,rgba(116,167,225,.12) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(6,12,26,.98),rgba(12,20,39,.96));--shell-bottom-bg:radial-gradient(circle at 20% 62%,rgba(164,229,255,.16) 0 11%,transparent 12%),radial-gradient(circle at 82% 58%,rgba(255,224,147,.14) 0 10%,transparent 11%),linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%),linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98));--shell-unified-bg:radial-gradient(circle at 8% 12%,rgba(170,214,255,.24) 0 10%,transparent 11%),radial-gradient(circle at 92% 8%,rgba(142,210,255,.18) 0 12%,transparent 13%),radial-gradient(circle at 12% 86%,rgba(255,221,148,.12) 0 9%,transparent 10%),radial-gradient(circle at 88% 90%,rgba(178,226,255,.12) 0 10%,transparent 11%),linear-gradient(146deg,rgba(125,176,228,.12) 0 10%,transparent 10% 22%,rgba(255,255,255,.04) 22% 30%,transparent 30% 42%,rgba(125,176,228,.08) 42% 56%,transparent 56%),linear-gradient(180deg,rgba(9,16,31,.98),rgba(13,22,40,.96));--shell-unified-stars:radial-gradient(circle at 10% 24%,rgba(255,255,255,.84) 0 1px,transparent 2px),radial-gradient(circle at 84% 18%,rgba(255,255,255,.7) 0 1px,transparent 2px),radial-gradient(circle at 18% 68%,rgba(255,255,255,.62) 0 1px,transparent 2px),radial-gradient(circle at 76% 74%,rgba(255,255,255,.58) 0 1px,transparent 2px),radial-gradient(circle at 52% 88%,rgba(255,255,255,.54) 0 1px,transparent 2px);--shell-panel-border:rgba(188,226,255,.18);--shell-panel-shadow:inset 0 -8px 18px rgba(0,0,0,.28);--left-rail-border:rgba(142,206,255,.22);--left-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%),radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--right-rail-border:rgba(142,206,255,.22);--right-rail-bg:radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%),radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%),linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86)),repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px);--rail-inner-border:rgba(255,255,255,.06);--rail-inner-glow:rgba(255,229,122,.04)}
 html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:"Courier New",Consolas,monospace;color:var(--fg)}
 canvas{display:block;width:100vw;height:100vh}
-#cabinetShell{position:fixed;display:none;pointer-events:none;z-index:4;--shell-left:40px;--shell-top:132px;--shell-right:168px;--shell-bottom:84px}
+#cabinetShell{position:fixed;display:none;pointer-events:none;z-index:4;overflow:hidden;background:var(--shell-unified-bg);--shell-left:40px;--shell-top:132px;--shell-right:168px;--shell-bottom:84px}
 #cabinetShell::before{content:"";position:absolute;inset:0;border:1px solid var(--shell-line);box-shadow:0 14px 48px rgba(0,0,0,.42),inset 0 0 0 1px var(--shell-glow)}
+#cabinetShell::after{content:"";position:absolute;inset:0;background:var(--shell-unified-stars);opacity:.88;pointer-events:none}
 .shellPanel{position:absolute;overflow:hidden}
 .shellTop{left:0;top:0;right:0;height:var(--shell-top)}
 .shellLeft{left:0;top:var(--shell-top);bottom:var(--shell-bottom);width:var(--shell-left)}
 .shellRight{right:0;top:var(--shell-top);bottom:var(--shell-bottom);width:var(--shell-right)}
 .shellBottom{left:0;right:0;bottom:0;height:var(--shell-bottom)}
-.shellPanel::before,.shellPanel::after{content:"";position:absolute;inset:0}
-.shellPanel::before{
- background:
-  radial-gradient(circle at 8% 18%,rgba(233,212,84,.68) 0 7%,rgba(160,129,41,.42) 8%,transparent 16%),
-  radial-gradient(circle at 90% 14%,rgba(240,183,74,.62) 0 8%,rgba(170,84,39,.26) 9%,transparent 17%),
-  radial-gradient(circle at 18% 84%,rgba(121,139,255,.28) 0 10%,transparent 18%),
-  radial-gradient(circle at 82% 78%,rgba(227,192,81,.44) 0 9%,rgba(140,91,30,.18) 10%,transparent 18%),
-  repeating-linear-gradient(150deg,rgba(45,69,206,.62) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(3,6,18,.99),rgba(4,7,20,.99));
-}
-.shellPanel::after{
- background:
-  radial-gradient(circle at 13% 26%,rgba(255,255,255,.88) 0 1px,transparent 2px),
-  radial-gradient(circle at 86% 29%,rgba(255,255,255,.64) 0 1px,transparent 2px),
-  radial-gradient(circle at 22% 71%,rgba(255,255,255,.7) 0 1px,transparent 2px),
-  radial-gradient(circle at 78% 74%,rgba(255,255,255,.7) 0 1px,transparent 2px),
-  radial-gradient(circle at 47% 13%,rgba(255,255,255,.86) 0 1px,transparent 2px),
-  radial-gradient(circle at 53% 87%,rgba(255,255,255,.6) 0 1px,transparent 2px);
- opacity:.92
-}
-.shellTop::before,.shellTop::after{border-bottom:1px solid rgba(171,214,255,.18)}
-.shellLeft::before,.shellLeft::after{border-right:1px solid rgba(171,214,255,.18)}
-.shellRight::before,.shellRight::after{border-left:1px solid rgba(171,214,255,.18)}
-.shellBottom::before,.shellBottom::after{border-top:1px solid rgba(171,214,255,.18)}
+.shellPanel::before,.shellPanel::after{display:none}
+.shellTop::before,.shellTop::after{border-bottom:1px solid var(--shell-panel-border)}
+.shellLeft::before,.shellLeft::after{border-right:1px solid var(--shell-panel-border)}
+.shellRight::before,.shellRight::after{border-left:1px solid var(--shell-panel-border)}
+.shellBottom::before,.shellBottom::after{border-top:1px solid var(--shell-panel-border)}
 .shellTop::before{
- background:
-  radial-gradient(circle at 12% 22%,rgba(255,232,102,.38) 0 9%,transparent 10%),
-  radial-gradient(circle at 88% 24%,rgba(242,181,78,.3) 0 11%,transparent 12%),
-  repeating-linear-gradient(150deg,rgba(42,66,201,.48) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(5,8,24,.95),rgba(8,14,32,.82));
+ background:var(--shell-top-bg);
 }
 .shellTop::after{
  background:none;
- border-bottom:1px solid rgba(171,214,255,.14);
- box-shadow:inset 0 -8px 18px rgba(0,0,0,.28);
+ border-bottom:1px solid var(--shell-panel-border);
+ box-shadow:var(--shell-panel-shadow);
  opacity:1
 }
 .shellLeft::before{
- background:
-  radial-gradient(circle at 38% 12%,rgba(228,214,89,.74) 0 8%,rgba(165,138,48,.38) 9%,transparent 18%),
-  radial-gradient(circle at 28% 78%,rgba(110,126,255,.34) 0 11%,transparent 18%),
-  radial-gradient(circle at 70% 30%,rgba(255,255,255,.92) 0 1px,transparent 2px),
-  radial-gradient(circle at 40% 62%,rgba(255,255,255,.78) 0 1px,transparent 2px),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98));
+ background:var(--shell-side-bg);
 }
 .shellRight::before{
- background:
-  radial-gradient(circle at 70% 12%,rgba(242,181,78,.74) 0 9%,rgba(171,84,34,.32) 10%,transparent 18%),
-  radial-gradient(circle at 74% 86%,rgba(229,208,86,.58) 0 10%,rgba(143,94,28,.22) 11%,transparent 18%),
-  radial-gradient(circle at 28% 26%,rgba(255,255,255,.84) 0 1px,transparent 2px),
-  radial-gradient(circle at 66% 74%,rgba(255,255,255,.78) 0 1px,transparent 2px),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98));
+ background:var(--shell-side-bg);
 }
 .shellBottom::before{
- background:
-  radial-gradient(circle at 16% 70%,rgba(110,126,255,.24) 0 11%,transparent 17%),
-  radial-gradient(circle at 86% 66%,rgba(229,208,86,.36) 0 10%,transparent 16%),
-  repeating-linear-gradient(150deg,rgba(40,64,198,.58) 0 24px,transparent 24px 54px),
-  linear-gradient(180deg,rgba(4,6,18,.98),rgba(2,4,12,.98));
+ background:var(--shell-bottom-bg);
 }
-#cabinetMarquee{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:min(62%,520px);max-width:62%;padding:.12em .7em .1em;border:3px solid var(--marquee-border);background:linear-gradient(180deg,#fbfcff,#edf4ff);clip-path:polygon(5% 0,95% 0,100% 22%,96% 100%,4% 100%,0 22%);box-shadow:0 0 0 4px var(--marquee-glow),inset 0 0 0 2px rgba(255,255,255,.75),0 8px 20px rgba(0,0,0,.3)}
+#cabinetMarquee{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:min(62%,520px);max-width:62%;padding:.12em .7em .1em;border:3px solid var(--marquee-border);background:var(--marquee-bg);clip-path:polygon(5% 0,95% 0,100% 22%,96% 100%,4% 100%,0 22%);box-shadow:0 0 0 4px var(--marquee-glow),inset 0 0 0 2px rgba(255,255,255,.75),0 8px 20px rgba(0,0,0,.3)}
 #cabinetMarqueeTitle{font:900 clamp(18px,2.4vw,40px)/1 "Georgia","Times New Roman",serif;font-style:italic;letter-spacing:.02em;text-transform:none;color:#f4ad1d;text-shadow:-2px 0 #d41f27,0 2px #d41f27,2px 0 #d41f27,0 -2px #d41f27,3px 3px 0 #2bd5a0,0 0 18px rgba(255,232,102,.18);white-space:nowrap}
 #playfieldFrame{position:fixed;display:none;pointer-events:none;z-index:6;--frame-inner-inset:11px;border:1px solid var(--frame-line);box-shadow:0 10px 34px rgba(0,0,0,.34),inset 0 0 0 1px var(--frame-glow)}
 #playfieldFrame::before,#playfieldFrame::after{content:"";position:absolute;pointer-events:none}
 #playfieldFrame::before{display:none}
 #playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
-#cabinetRightFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
- radial-gradient(circle at 26% 12%,rgba(255,226,111,.55) 0 7%,transparent 8%),
- radial-gradient(circle at 78% 88%,rgba(255,217,88,.46) 0 8%,transparent 9%),
- radial-gradient(circle at 22% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%),
- linear-gradient(160deg,rgba(13,18,42,.72),rgba(4,8,20,.8)),
- repeating-linear-gradient(155deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px);
- box-shadow:inset 0 0 0 1px rgba(255,229,122,.05)}
-#cabinetRightFrame::before,#cabinetRightFrame::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.06)}
-#cabinetRightFrame::after{inset:0;background:
- radial-gradient(circle at 34% 20%,rgba(255,255,255,.86) 0 1px,transparent 2px),
- radial-gradient(circle at 70% 34%,rgba(255,255,255,.66) 0 1px,transparent 2px),
- radial-gradient(circle at 60% 70%,rgba(255,255,255,.56) 0 1px,transparent 2px),
- radial-gradient(circle at 18% 86%,rgba(255,255,255,.78) 0 1px,transparent 2px),
- radial-gradient(circle at 84% 14%,rgba(255,255,255,.76) 0 1px,transparent 2px);
- opacity:.95}
-#cabinetRightFrame::before,#cabinetRightFrame::after{pointer-events:none}
-#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:1px solid rgba(127,183,255,.18);background:
- radial-gradient(circle at 74% 12%,rgba(115,200,255,.42) 0 7%,transparent 8%),
- radial-gradient(circle at 26% 88%,rgba(255,214,104,.34) 0 8%,transparent 9%),
- radial-gradient(circle at 78% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%),
- linear-gradient(200deg,rgba(13,18,42,.72),rgba(4,8,20,.8)),
- repeating-linear-gradient(25deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px);
- box-shadow:inset 0 0 0 1px rgba(255,229,122,.05)}
-#cabinetLeftFrame::before,#cabinetLeftFrame::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.06)}
-#cabinetLeftFrame::after{inset:0;background:
- radial-gradient(circle at 66% 20%,rgba(255,255,255,.86) 0 1px,transparent 2px),
- radial-gradient(circle at 30% 34%,rgba(255,255,255,.66) 0 1px,transparent 2px),
- radial-gradient(circle at 40% 70%,rgba(255,255,255,.56) 0 1px,transparent 2px),
- radial-gradient(circle at 82% 86%,rgba(255,255,255,.78) 0 1px,transparent 2px),
- radial-gradient(circle at 16% 14%,rgba(255,255,255,.76) 0 1px,transparent 2px);
- opacity:.95}
-#cabinetLeftFrame::before,#cabinetLeftFrame::after{pointer-events:none}
+#cabinetRightFrame,#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:0;background:transparent;box-shadow:none}
+#cabinetRightFrame::before,#cabinetRightFrame::after,#cabinetLeftFrame::before,#cabinetLeftFrame::after{display:none}
 #hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:14px;padding:4px 10px 0;min-height:var(--hud-band-height,30px);font-size:clamp(14px,.96vw,21px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
 #hud::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--hud-band-height,30px) + var(--hud-band-fade,30px));background:linear-gradient(180deg,rgba(0,0,0,.82),rgba(0,0,0,.48) 58%,rgba(0,0,0,0));z-index:-1}
 #left,#center,#right{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -353,6 +285,9 @@ canvas{display:block;width:100vw;height:100vh}
 #accountInitialsDisplay[hidden]{display:none!important}
 #statusPanels{position:fixed;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(92vw,680px);--overlay-max-height:none}
 #statusPanels.waitOverlay{align-items:stretch;gap:8px;max-width:min(84vw,420px)}
+#statusPanels.framedOverlay{align-items:stretch;max-width:min(92vw,940px)}
+#statusPanels.framedOverlay #accountPanel,
+#statusPanels.framedOverlay #leaderboardPanel{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardPanel,
 #statusPanels.waitOverlay #leaderboardViews{width:100%;max-width:none}
 #statusPanels.waitOverlay #leaderboardViewsHead{align-items:flex-start;flex-direction:column;gap:6px}
@@ -409,17 +344,25 @@ canvas{display:block;width:100vw;height:100vh}
 #movieControls button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
 #movieCloseToWaitBtn{margin-left:auto}
 #movieTimeline{width:100%;margin:0;height:12px}
-#leaderboardPanel{display:none;flex-direction:column;gap:10px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#leaderboardPanel{display:none;flex-direction:column;gap:12px;width:min(100%,400px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.96),rgba(4,10,20,.94));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
 #leaderboardPanel.visible{display:flex}
+#statusPanels.framedOverlay #leaderboardPanel{min-height:min(720px,var(--overlay-max-height));padding:18px 20px 16px}
 #leaderboardPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #leaderboardPanelTitle,#leaderboardPanelSub{display:block}
 #leaderboardPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#ff4b43}
+#statusPanels.framedOverlay #leaderboardPanelTitle{font-size:26px}
 #leaderboardPanelSub{margin-top:4px;font:400 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#dff7ff}
+#statusPanels.framedOverlay #leaderboardPanelSub{font-size:15px}
 #leaderboardPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#statusPanels.framedOverlay #leaderboardPanelClose{width:36px;height:36px;font-size:24px}
 #leaderboardPanelStatus{min-height:18px;color:rgba(218,236,255,.74);font:700 11px/1.3 "Courier New",Consolas,monospace}
-#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(48px,1fr) minmax(90px,1.2fr) 46px;gap:6px 10px;align-items:baseline}
+#statusPanels.framedOverlay #leaderboardPanelStatus{font-size:13px}
+#leaderboardPanelTable{display:grid;grid-template-columns:44px minmax(56px,1fr) minmax(120px,1.6fr) 52px;gap:6px 12px;align-items:baseline}
+#statusPanels.framedOverlay #leaderboardPanelTable{grid-template-columns:56px minmax(90px,1fr) minmax(180px,1.8fr) 68px;gap:12px 18px;align-content:start;flex:1}
 #leaderboardPanelTable .scoreCellHead{color:#dff7ff;font:700 12px/1 "Courier New",Consolas,monospace;letter-spacing:.08em}
+#statusPanels.framedOverlay #leaderboardPanelTable .scoreCellHead{font-size:16px}
 #leaderboardPanelTable .scoreCell{color:#f7fbff;font:400 13px/1.1 "Courier New",Consolas,monospace}
+#statusPanels.framedOverlay #leaderboardPanelTable .scoreCell{font-size:18px;line-height:1.2}
 #leaderboardPanelTable .scoreCell.rank{color:#f0f4ff}
 #leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
 #leaderboardPanelTable .scoreCell.score{text-align:right}
@@ -427,6 +370,11 @@ canvas{display:block;width:100vw;height:100vh}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
 #leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,400px);padding:12px 14px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
+#statusPanels.framedOverlay #leaderboardViews{width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:none;box-shadow:none}
+#statusPanels.framedOverlay #leaderboardViewsHead{align-items:flex-start;justify-content:space-between}
+#statusPanels.framedOverlay #leaderboardViewButtons{gap:10px;justify-content:flex-start}
+#statusPanels.framedOverlay #leaderboardViewButtons button{padding:10px 14px;font-size:16px;min-width:132px}
+#statusPanels.framedOverlay #leaderboardStatus{text-align:left;max-width:none}
 #leaderboardViewsHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 #leaderboardViewsLabel{color:rgba(218,236,255,.68);text-transform:uppercase}
 #leaderboardViewButtons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
@@ -576,9 +524,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.2-beta.1+build.351.sha.64db91e.beta</span>
-    <span id="settingsRelease">Apr 06 2026, 6:37 PM EDT</span>
-    <span id="settingsState">beta@64db91e clean</span>
+    <span id="settingsVersion">Version 1.0.2-beta.1+build.357.sha.3189b7f.beta</span>
+    <span id="settingsRelease">Apr 06 2026, 7:38 PM EDT</span>
+    <span id="settingsState">beta@3189b7f clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -712,7 +660,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <button type="button" id="gamePreviewClose" aria-label="Close game preview">×</button>
     </div>
     <div id="gamePreviewBody">
-      <img id="gamePreviewImage" src="assets/galaxy-guardians-coming-soon.png" alt="Galaxy Guardians coming soon splash art" />
+      <img id="gamePreviewImage" src="assets/galaxy-guardians-coming-soon.svg" alt="Galaxy Guardians coming soon splash art" />
       <div id="gamePreviewCopy">
         <p id="gamePreviewSummary">Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. The shell preview is live now; gameplay arrives later.</p>
         <p id="gamePreviewDetail">Aurora Galactica remains the current playable cabinet while we finish the rerelease framing and platform surfaces.</p>
@@ -823,24 +771,24 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="leaderboardPanelStatus">Choose a score view to load scores.</div>
     <div id="leaderboardPanelTable"></div>
-  </div>
-  <div id="leaderboardViews" aria-label="Leaderboard view selector">
-    <div id="leaderboardViewsHead">
-      <span id="leaderboardViewsLabel">Score View</span>
-      <span id="leaderboardStatus">Local fallback</span>
-    </div>
-    <div id="leaderboardViewButtons">
-      <button type="button" data-view="all">All</button>
-      <button type="button" data-view="validated">Validated</button>
-      <button type="button" data-view="local">Local</button>
-      <button type="button" data-view="mine">My Scores</button>
+    <div id="leaderboardViews" aria-label="Leaderboard view selector">
+      <div id="leaderboardViewsHead">
+        <span id="leaderboardViewsLabel">Score View</span>
+        <span id="leaderboardStatus">Local fallback</span>
+      </div>
+      <div id="leaderboardViewButtons">
+        <button type="button" data-view="all">All</button>
+        <button type="button" data-view="validated">Validated</button>
+        <button type="button" data-view="local">Local</button>
+        <button type="button" data-view="mine">My Scores</button>
+      </div>
     </div>
   </div>
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.2-beta.1+build.351.sha.64db91e.beta</span>
-  <span id="buildStampRelease">Apr 06 2026, 6:37 PM EDT</span>
+  <span id="buildStampVersion">Version 1.0.2-beta.1+build.357.sha.3189b7f.beta</span>
+  <span id="buildStampRelease">Apr 06 2026, 7:38 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1061,6 +1009,185 @@ window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDeb
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
 let PRODUCT_NAME=PLATFORM_NAME;
+const PLATINUM_SHELL_FRAME_THEMES=Object.freeze({
+ 'platinum-release':Object.freeze({
+  shellLine:'rgba(122,215,255,.28)',
+  shellGlow:'rgba(178,236,255,.12)',
+  marqueeBorder:'#8ce8ff',
+  marqueeGlow:'rgba(122,215,255,.34)',
+  marqueeBackground:'linear-gradient(180deg,#f7fbff,#dde8f5)',
+ shellTopBackground:[
+   'radial-gradient(circle at 14% 26%,rgba(189,221,255,.28) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 30%,rgba(112,216,255,.24) 0 10%,transparent 11%)',
+   'linear-gradient(135deg,rgba(255,255,255,.16) 0 10%,transparent 10% 22%,rgba(126,189,255,.12) 22% 33%,transparent 33% 46%,rgba(255,255,255,.08) 46% 56%,transparent 56%)',
+   'linear-gradient(180deg,rgba(10,16,32,.97),rgba(18,28,48,.9))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 50% 14%,rgba(163,236,255,.2) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 22% 82%,rgba(255,235,171,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(116,167,225,.16) 0 14%,transparent 14% 28%,rgba(255,255,255,.06) 28% 34%,transparent 34% 48%,rgba(116,167,225,.12) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(6,12,26,.98),rgba(12,20,39,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 20% 62%,rgba(164,229,255,.16) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 82% 58%,rgba(255,224,147,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(116,167,225,.14) 0 14%,transparent 14% 28%,rgba(255,255,255,.05) 28% 34%,transparent 34% 48%,rgba(116,167,225,.1) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(10,16,32,.98),rgba(4,8,20,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(188,226,255,.08)',
+  shellPanelShadow:'inset 0 -6px 14px rgba(0,0,0,.18)',
+  leftRailBorder:'rgba(142,206,255,.1)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 14%,rgba(145,224,255,.24) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 84%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
+   'repeating-linear-gradient(24deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(142,206,255,.1)',
+  rightRailBackground:[
+   'radial-gradient(circle at 72% 14%,rgba(145,224,255,.22) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 86%,rgba(255,224,151,.12) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(16,24,46,.78),rgba(6,11,24,.86))',
+   'repeating-linear-gradient(156deg,rgba(114,171,230,.16) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,0)',
+  railInnerGlow:'rgba(255,229,122,.015)'
+ }),
+ 'aurora-crown':Object.freeze({
+  shellLine:'rgba(121,246,198,.34)',
+  shellGlow:'rgba(255,227,138,.14)',
+  marqueeBorder:'#48f0c3',
+  marqueeGlow:'rgba(201,140,255,.32)',
+  marqueeBackground:'linear-gradient(180deg,#fbfcff,#eef8f7)',
+  shellTopBackground:[
+   'radial-gradient(circle at 14% 24%,rgba(121,246,198,.24) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 28%,rgba(201,140,255,.2) 0 10%,transparent 11%)',
+   'linear-gradient(140deg,rgba(121,246,198,.12) 0 12%,transparent 12% 24%,rgba(201,140,255,.1) 24% 38%,transparent 38% 52%,rgba(255,231,138,.08) 52% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(8,18,32,.96),rgba(18,28,48,.88))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 46% 14%,rgba(121,246,198,.18) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 28% 82%,rgba(201,140,255,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(121,246,198,.12) 0 14%,transparent 14% 28%,rgba(201,140,255,.08) 28% 34%,transparent 34% 48%,rgba(255,231,138,.08) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(5,12,24,.98),rgba(11,20,34,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 18% 62%,rgba(121,246,198,.14) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 84% 58%,rgba(201,140,255,.14) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(121,246,198,.12) 0 14%,transparent 14% 28%,rgba(201,140,255,.08) 28% 34%,transparent 34% 48%,rgba(255,231,138,.08) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(8,15,28,.98),rgba(4,8,20,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(173,255,229,.16)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(121,246,198,.2)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 16%,rgba(121,246,198,.2) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 86%,rgba(201,140,255,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(12,22,36,.8),rgba(4,9,20,.86))',
+   'repeating-linear-gradient(24deg,rgba(121,246,198,.14) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(201,140,255,.2)',
+  rightRailBackground:[
+   'radial-gradient(circle at 74% 16%,rgba(201,140,255,.2) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 84%,rgba(255,231,138,.12) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(12,22,36,.8),rgba(4,9,20,.86))',
+   'repeating-linear-gradient(156deg,rgba(201,140,255,.14) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.04)'
+ }),
+ 'guardians-preview':Object.freeze({
+  shellLine:'rgba(255,124,116,.32)',
+  shellGlow:'rgba(255,215,133,.12)',
+  marqueeBorder:'#ff6c57',
+  marqueeGlow:'rgba(255,216,109,.28)',
+  marqueeBackground:'linear-gradient(180deg,#fffaf6,#ffe8db)',
+  shellTopBackground:[
+   'radial-gradient(circle at 16% 24%,rgba(255,108,87,.26) 0 10%,transparent 11%)',
+   'radial-gradient(circle at 86% 24%,rgba(255,216,109,.18) 0 10%,transparent 11%)',
+   'linear-gradient(142deg,rgba(255,108,87,.12) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 40%,transparent 40% 54%,rgba(255,255,255,.08) 54% 64%,transparent 64%)',
+   'linear-gradient(180deg,rgba(20,10,16,.97),rgba(40,14,18,.9))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 50% 14%,rgba(255,124,116,.16) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 24% 82%,rgba(255,216,109,.12) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(255,124,116,.1) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 34%,transparent 34% 48%,rgba(255,255,255,.05) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(18,8,14,.98),rgba(26,10,18,.96))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 18% 62%,rgba(255,124,116,.14) 0 11%,transparent 12%)',
+   'radial-gradient(circle at 84% 56%,rgba(255,216,109,.12) 0 10%,transparent 11%)',
+   'linear-gradient(150deg,rgba(255,124,116,.1) 0 14%,transparent 14% 28%,rgba(255,216,109,.08) 28% 34%,transparent 34% 48%,rgba(255,255,255,.05) 48% 62%,transparent 62%)',
+   'linear-gradient(180deg,rgba(18,8,14,.98),rgba(10,4,10,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(255,181,151,.16)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(255,124,116,.2)',
+  leftRailBackground:[
+   'radial-gradient(circle at 72% 16%,rgba(255,124,116,.18) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 24% 84%,rgba(255,216,109,.12) 0 9%,transparent 10%)',
+   'linear-gradient(200deg,rgba(35,14,18,.8),rgba(14,6,12,.86))',
+   'repeating-linear-gradient(24deg,rgba(255,124,116,.12) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  rightRailBorder:'rgba(255,181,151,.2)',
+  rightRailBackground:[
+   'radial-gradient(circle at 74% 16%,rgba(255,216,109,.16) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 76% 84%,rgba(255,124,116,.14) 0 9%,transparent 10%)',
+   'linear-gradient(160deg,rgba(35,14,18,.8),rgba(14,6,12,.86))',
+   'repeating-linear-gradient(156deg,rgba(255,181,151,.12) 0 16px,transparent 16px 38px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.04)'
+ }),
+ 'classic-blue':Object.freeze({
+  shellLine:'rgba(83,140,255,.32)',
+  shellGlow:'rgba(255,222,134,.08)',
+  marqueeBorder:'#f05e1d',
+  marqueeGlow:'#38d6a0',
+  marqueeBackground:'linear-gradient(180deg,#fbfcff,#edf4ff)',
+  shellTopBackground:[
+   'radial-gradient(circle at 12% 22%,rgba(255,232,102,.38) 0 9%,transparent 10%)',
+   'radial-gradient(circle at 88% 24%,rgba(242,181,78,.3) 0 11%,transparent 12%)',
+   'repeating-linear-gradient(150deg,rgba(42,66,201,.48) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(5,8,24,.95),rgba(8,14,32,.82))'
+  ].join(','),
+  shellSideBackground:[
+   'radial-gradient(circle at 38% 12%,rgba(228,214,89,.74) 0 8%,rgba(165,138,48,.38) 9%,transparent 18%)',
+   'radial-gradient(circle at 28% 78%,rgba(110,126,255,.34) 0 11%,transparent 18%)',
+   'repeating-linear-gradient(150deg,rgba(40,64,198,.68) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(2,4,12,.98),rgba(4,6,18,.98))'
+  ].join(','),
+  shellBottomBackground:[
+   'radial-gradient(circle at 16% 70%,rgba(110,126,255,.24) 0 11%,transparent 17%)',
+   'radial-gradient(circle at 86% 66%,rgba(229,208,86,.36) 0 10%,transparent 16%)',
+   'repeating-linear-gradient(150deg,rgba(40,64,198,.58) 0 24px,transparent 24px 54px)',
+   'linear-gradient(180deg,rgba(4,6,18,.98),rgba(2,4,12,.98))'
+  ].join(','),
+  shellPanelBorder:'rgba(171,214,255,.18)',
+  shellPanelShadow:'inset 0 -8px 18px rgba(0,0,0,.28)',
+  leftRailBorder:'rgba(127,183,255,.18)',
+  leftRailBackground:[
+   'radial-gradient(circle at 74% 12%,rgba(115,200,255,.42) 0 7%,transparent 8%)',
+   'radial-gradient(circle at 26% 88%,rgba(255,214,104,.34) 0 8%,transparent 9%)',
+   'radial-gradient(circle at 78% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%)',
+   'linear-gradient(200deg,rgba(13,18,42,.72),rgba(4,8,20,.8))',
+   'repeating-linear-gradient(25deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px)'
+  ].join(','),
+  rightRailBorder:'rgba(127,183,255,.18)',
+  rightRailBackground:[
+   'radial-gradient(circle at 70% 12%,rgba(242,181,78,.74) 0 9%,rgba(171,84,34,.32) 10%,transparent 18%)',
+   'radial-gradient(circle at 74% 86%,rgba(229,208,86,.58) 0 10%,rgba(143,94,28,.22) 11%,transparent 18%)',
+   'radial-gradient(circle at 22% 72%,rgba(123,163,255,.18) 0 10%,transparent 11%)',
+   'linear-gradient(160deg,rgba(13,18,42,.72),rgba(4,8,20,.8))',
+   'repeating-linear-gradient(155deg,rgba(58,76,255,.44) 0 18px,transparent 18px 44px)'
+  ].join(','),
+  railInnerBorder:'rgba(255,255,255,.06)',
+  railInnerGlow:'rgba(255,229,122,.05)'
+ })
+});
+function platinumShellFrameTheme(id='platinum-release'){
+ return PLATINUM_SHELL_FRAME_THEMES[id]||PLATINUM_SHELL_FRAME_THEMES['platinum-release'];
+}
 // Keep the existing browser storage namespace until we plan and ship an
 // explicit migration for live users and their historical local data.
 const STORAGE_PREFIX='auroraGalactica';
@@ -1236,7 +1363,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.2-beta.1',label:'1.0.2-beta.1+build.351.sha.64db91e.beta',commit:'64db91e8bd2076c3e166a40a6a3d3eb14de84f4b',branch:'beta',dirty:false,released:'Apr 06 2026, 6:37 PM EDT',state:'beta@64db91e clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.0.2-beta.1',label:'1.0.2-beta.1+build.357.sha.3189b7f.beta',commit:'3189b7f02c028b6653b1a48813298a6646d40699',branch:'beta',dirty:false,released:'Apr 06 2026, 7:38 PM EDT',state:'beta@3189b7f clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1645,6 +1772,7 @@ function closeSettings(){
  syncPauseUi();
 }
 function openSettings(){
+ closeDockOverlays('settings');
  settingsPrevPaused=paused;
  if(started&&!paused)paused=1;
  settingsOpen=1;
@@ -1677,10 +1805,7 @@ function openPlayersGuideWindow(){
 }
 function openHelp(mode='controls'){
  if(helpOpen&&helpMode===mode)return;
- closeSettings();
- if(feedbackOpen)closeFeedback(1);
- if(platformSplashOpen)closePlatformSplash(1);
- if(gamePreviewOpen)closeGamePreview(1);
+ closeDockOverlays('help');
  helpPrevPaused=paused;
  if(started&&!paused)paused=1;
  helpMode=mode==='guide'?'guide':'controls';
@@ -1696,11 +1821,7 @@ function openHelp(mode='controls'){
 }
 function openPlatformSplash(){
  if(platformSplashOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(gamePickerOpen)closeGamePicker(1);
- if(gamePreviewOpen)closeGamePreview(1);
+ closeDockOverlays('platformSplash');
  platformSplashPrevPaused=paused;
  if(started&&!paused)paused=1;
  platformSplashOpen=1;
@@ -1721,11 +1842,7 @@ function closePlatformSplash(force=0){
 }
 function openGamePreview(){
  if(gamePreviewOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(platformSplashOpen)closePlatformSplash(1);
- if(gamePickerOpen)closeGamePicker(1);
+ closeDockOverlays('gamePreview');
  gamePreviewPrevPaused=paused;
  if(started&&!paused)paused=1;
  gamePreviewOpen=1;
@@ -1794,8 +1911,7 @@ function showToast(t){
 }
 function openFeedback(){
  if(feedbackOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
+ closeDockOverlays('feedback');
  feedbackPrevPaused=paused;paused=1;feedbackOpen=1;resetActiveInputState('feedback_open');
  logEvent('feedback_open');
  feedbackModal.classList.add('open');
@@ -2113,6 +2229,17 @@ function resetActiveInputState(reason='manual'){
  keyState={};
  if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
  if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
+}
+function closeDockOverlays(except=''){
+ if(except!=='settings'&&typeof settingsOpen!=='undefined'&&settingsOpen&&typeof closeSettings==='function')closeSettings();
+ if(except!=='help'&&typeof helpOpen!=='undefined'&&helpOpen&&typeof closeHelp==='function')closeHelp(1);
+ if(except!=='feedback'&&typeof feedbackOpen!=='undefined'&&feedbackOpen&&typeof closeFeedback==='function')closeFeedback(1);
+ if(except!=='platformSplash'&&typeof platformSplashOpen!=='undefined'&&platformSplashOpen&&typeof closePlatformSplash==='function')closePlatformSplash(1);
+ if(except!=='gamePreview'&&typeof gamePreviewOpen!=='undefined'&&gamePreviewOpen&&typeof closeGamePreview==='function')closeGamePreview(1);
+ if(except!=='gamePicker'&&typeof gamePickerOpen!=='undefined'&&gamePickerOpen&&typeof closeGamePicker==='function')closeGamePicker(1);
+ if(except!=='leaderboard'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.panelOpen&&typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+ if(except!=='account'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.accountPanelOpen&&typeof closeAccountPanel==='function')closeAccountPanel();
+ if(except!=='movie'&&typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()&&typeof closeMoviePanel==='function')closeMoviePanel(1);
 }
 function syncAudioUi(){
  if(!muteToggleBtn)return;
@@ -2840,6 +2967,7 @@ function syncOverlayPause(){
  }
 }
 function openLeaderboardPanel(view=LEADERBOARD.view){
+ closeDockOverlays('leaderboard');
  LEADERBOARD.panelOpen=1;
  LEADERBOARD.accountPanelOpen=0;
  if(view&&view!==LEADERBOARD.view)setLeaderboardView(view);
@@ -2873,6 +3001,7 @@ function syncAccountPanelVisibility(){
  }
 }
 function openAccountPanel(){
+ closeDockOverlays('account');
  LEADERBOARD.accountPanelOpen=1;
  LEADERBOARD.panelOpen=0;
  syncLeaderboardPanelVisibility();
@@ -4158,11 +4287,7 @@ async function openMovieReplayById(id){
 }
 function openMoviePanel(){
  if(MOVIE.panelOpen)return;
- closeSettings();
- if(helpOpen)closeHelp(1);
- if(feedbackOpen)closeFeedback(1);
- if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
- if(typeof closeAccountPanel==='function')closeAccountPanel();
+ closeDockOverlays('movie');
  MOVIE.prevPaused=paused;
  if(started&&!paused)paused=1;
  MOVIE.panelOpen=1;
@@ -5491,6 +5616,7 @@ const AURORA_GAME_PACK=Object.freeze({
   utilityLine:'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
   noticeHint:'Future game picker, release notes, and approved quote moments route through this shell surface.',
   pickerHint:'GAME PICKER COMING SOON',
+  shellFrameTheme:'platinum-release',
   frameAccent:'classic-blue',
   quotePlaceholder:Object.freeze({
    kicker:'SIGNAL',
@@ -5500,8 +5626,9 @@ const AURORA_GAME_PACK=Object.freeze({
   quoteSurface:'wait-mode'
  }),
  shellThemes:Object.freeze([
-  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue',default:1}),
-  Object.freeze({id:'aurora-crown',label:'Aurora Crown',frameAccent:'aurora-crown'})
+  Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'classic-blue',default:1}),
+  Object.freeze({id:'aurora-crown',label:'Aurora Crown',shellFrameTheme:'aurora-crown',frameAccent:'aurora-crown'}),
+  Object.freeze({id:'classic-blue',label:'Classic Blue',shellFrameTheme:'classic-blue',frameAccent:'classic-blue'})
  ]),
  capabilities:Object.freeze({
   usesFormationRack:1,
@@ -5540,6 +5667,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   utilityLine:'<span class="k">SELECT</span> TO RESTYLE THE CABINET   <span class="k">PLAY</span> COMES LATER',
   noticeHint:'This sibling pack is a shell-and-identity preview while the shared runtime contract is still being proved.',
   pickerHint:'USE CHOOSE GAME TO SWITCH BACK TO AURORA',
+  shellFrameTheme:'guardians-preview',
   frameAccent:'signal-crimson',
   quotePlaceholder:Object.freeze({
    kicker:'GALAXY GUARDIANS',
@@ -5549,8 +5677,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   quoteSurface:'wait-mode'
  }),
  shellThemes:Object.freeze([
-  Object.freeze({id:'signal-crimson',label:'Signal Crimson',frameAccent:'signal-crimson',default:1}),
-  Object.freeze({id:'classic-blue',label:'Classic Blue',frameAccent:'classic-blue'})
+  Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
+  Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'signal-crimson'}),
+  Object.freeze({id:'classic-blue',label:'Classic Blue',shellFrameTheme:'classic-blue',frameAccent:'classic-blue'})
  ]),
  capabilities:Object.freeze({
   usesFormationRack:1,
@@ -5707,6 +5836,7 @@ function currentGamePackFrontDoor(){
   utilityLine:frontDoor.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
   noticeHint:frontDoor.noticeHint||'',
   pickerHint:frontDoor.pickerHint||'',
+  shellFrameTheme:frontDoor.shellFrameTheme||'platinum-release',
   frameAccent:frontDoor.frameAccent||'classic-blue',
   quotePlaceholder:Object.freeze({
    kicker:frontDoor.quotePlaceholder?.kicker||'',
@@ -5725,7 +5855,13 @@ function currentPlatformPackLabel(){
 function currentGamePackShellThemes(){
  const themes=Array.isArray(currentGamePack().shellThemes)&&currentGamePack().shellThemes.length
   ? currentGamePack().shellThemes
-  : [Object.freeze({id:currentGamePackFrontDoor().frameAccent,label:'Default',frameAccent:currentGamePackFrontDoor().frameAccent,default:1})];
+  : [Object.freeze({
+   id:currentGamePackFrontDoor().shellFrameTheme||currentGamePackFrontDoor().frameAccent,
+   label:'Default',
+   shellFrameTheme:currentGamePackFrontDoor().shellFrameTheme||'platinum-release',
+   frameAccent:currentGamePackFrontDoor().frameAccent,
+   default:1
+  })];
  return themes;
 }
 
@@ -5736,7 +5872,13 @@ function currentGamePackShellThemePrefKey(gameKey=currentGamePackKey()){
 function selectedShellThemeForPack(pack=currentGamePack(),gameKey=currentGamePackKey()){
  const themes=Array.isArray(pack?.shellThemes)&&pack.shellThemes.length
   ? pack.shellThemes
-  : [Object.freeze({id:pack?.frontDoor?.frameAccent||'classic-blue',label:'Default',frameAccent:pack?.frontDoor?.frameAccent||'classic-blue',default:1})];
+  : [Object.freeze({
+   id:pack?.frontDoor?.shellFrameTheme||pack?.frontDoor?.frameAccent||'classic-blue',
+   label:'Default',
+   shellFrameTheme:pack?.frontDoor?.shellFrameTheme||'platinum-release',
+   frameAccent:pack?.frontDoor?.frameAccent||'classic-blue',
+   default:1
+  })];
  const prefId=String(readPref(currentGamePackShellThemePrefKey(gameKey))||'').trim();
  return themes.find(theme=>theme.id===prefId)
   || themes.find(theme=>theme.default)
@@ -5752,6 +5894,11 @@ function currentGamePackFrontDoorFrameAccent(){
  return selected?.frameAccent||currentGamePackFrontDoor().frameAccent||'classic-blue';
 }
 
+function currentGamePackFrontDoorShellFrameTheme(){
+ const selected=currentGamePackSelectedShellTheme();
+ return selected?.shellFrameTheme||currentGamePackFrontDoor().shellFrameTheme||'platinum-release';
+}
+
 function setCurrentGamePackShellTheme(themeId=''){
  const themes=currentGamePackShellThemes();
  const next=themes.find(theme=>theme.id===themeId)||themes.find(theme=>theme.default)||themes[0];
@@ -5764,19 +5911,32 @@ function setCurrentGamePackShellTheme(themeId=''){
 function syncInstalledPackShellChrome(){
  const pack=currentGamePack();
  const frontDoor=currentGamePackFrontDoor();
- const theme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ const frameTheme=currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue'];
+ const shellTheme=platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme());
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
   if(marquee)marquee.textContent=frontDoor.marqueeTitle;
  if(settingsRuntime)settingsRuntime.textContent=`Platform ${currentPlatformPackLabel()}`;
  const root=document.documentElement;
- if(root&&theme){
-  root.style.setProperty('--shell-line',theme.shellLine);
-  root.style.setProperty('--shell-glow',theme.shellGlow);
-  root.style.setProperty('--frame-line',theme.frameLine);
-  root.style.setProperty('--frame-glow',theme.frameGlow);
-  root.style.setProperty('--marquee-border',theme.marqueeBorder);
-  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ if(root&&frameTheme&&shellTheme){
+  root.style.setProperty('--shell-line',shellTheme.shellLine);
+  root.style.setProperty('--shell-glow',shellTheme.shellGlow);
+  root.style.setProperty('--frame-line',frameTheme.frameLine);
+  root.style.setProperty('--frame-glow',frameTheme.frameGlow);
+  root.style.setProperty('--marquee-border',shellTheme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',shellTheme.marqueeGlow);
+  root.style.setProperty('--marquee-bg',shellTheme.marqueeBackground);
+  root.style.setProperty('--shell-top-bg',shellTheme.shellTopBackground);
+  root.style.setProperty('--shell-side-bg',shellTheme.shellSideBackground);
+  root.style.setProperty('--shell-bottom-bg',shellTheme.shellBottomBackground);
+  root.style.setProperty('--shell-panel-border',shellTheme.shellPanelBorder);
+  root.style.setProperty('--shell-panel-shadow',shellTheme.shellPanelShadow);
+  root.style.setProperty('--left-rail-border',shellTheme.leftRailBorder);
+  root.style.setProperty('--left-rail-bg',shellTheme.leftRailBackground);
+  root.style.setProperty('--right-rail-border',shellTheme.rightRailBorder);
+  root.style.setProperty('--right-rail-bg',shellTheme.rightRailBackground);
+  root.style.setProperty('--rail-inner-border',shellTheme.railInnerBorder);
+  root.style.setProperty('--rail-inner-glow',shellTheme.railInnerGlow);
  }
 }
 
@@ -6093,6 +6253,7 @@ function renderGamePicker(){
 function openGamePicker(force=0){
  if(!gamePickerModal)return;
  if(gamePickerOpen&&!force)return;
+ closeDockOverlays('gamePicker');
  gamePickerOpen=1;
  gamePickerPrevPaused=paused;
  if(started)paused=1;
@@ -6193,17 +6354,32 @@ const DISPLAY_SHELL=Object.freeze({
 });
 
 function applyStageChromeTheme(){
- const theme=!started&&typeof currentGamePack==='function'
+ const frameTheme=!started&&typeof currentGamePack==='function'
   ? currentGamePack().frameAccents[currentGamePackFrontDoorFrameAccent()]||currentGamePack().frameAccents['classic-blue']
   : currentGamePackFrameAccentTheme(S.stagePresentation);
+ const shellTheme=typeof currentGamePackFrontDoorShellFrameTheme==='function'
+  ? platinumShellFrameTheme(currentGamePackFrontDoorShellFrameTheme())
+  : platinumShellFrameTheme('platinum-release');
  const root=document.documentElement;
- if(root){
-  root.style.setProperty('--shell-line',theme.shellLine);
-  root.style.setProperty('--shell-glow',theme.shellGlow);
-  root.style.setProperty('--frame-line',theme.frameLine);
-  root.style.setProperty('--frame-glow',theme.frameGlow);
-  root.style.setProperty('--marquee-border',theme.marqueeBorder);
-  root.style.setProperty('--marquee-glow',theme.marqueeGlow);
+ if(root&&frameTheme&&shellTheme){
+  root.style.setProperty('--shell-line',shellTheme.shellLine);
+  root.style.setProperty('--shell-glow',shellTheme.shellGlow);
+  root.style.setProperty('--frame-line',frameTheme.frameLine);
+  root.style.setProperty('--frame-glow',frameTheme.frameGlow);
+  root.style.setProperty('--marquee-border',shellTheme.marqueeBorder);
+  root.style.setProperty('--marquee-glow',shellTheme.marqueeGlow);
+  root.style.setProperty('--marquee-bg',shellTheme.marqueeBackground);
+  root.style.setProperty('--shell-top-bg',shellTheme.shellTopBackground);
+  root.style.setProperty('--shell-side-bg',shellTheme.shellSideBackground);
+  root.style.setProperty('--shell-bottom-bg',shellTheme.shellBottomBackground);
+  root.style.setProperty('--shell-panel-border',shellTheme.shellPanelBorder);
+  root.style.setProperty('--shell-panel-shadow',shellTheme.shellPanelShadow);
+  root.style.setProperty('--left-rail-border',shellTheme.leftRailBorder);
+  root.style.setProperty('--left-rail-bg',shellTheme.leftRailBackground);
+  root.style.setProperty('--right-rail-border',shellTheme.rightRailBorder);
+  root.style.setProperty('--right-rail-bg',shellTheme.rightRailBackground);
+  root.style.setProperty('--rail-inner-border',shellTheme.railInnerBorder);
+  root.style.setProperty('--rail-inner-glow',shellTheme.railInnerGlow);
  }
 }
 
@@ -6364,6 +6540,7 @@ function syncCabinetShellLayout({
  }
  if(statusPanels){
   statusPanels.classList.toggle('waitOverlay',waitScoreOverlay);
+  statusPanels.classList.toggle('framedOverlay',framedOverlayOpen);
   statusPanels.style.setProperty('--overlay-max-height','none');
   if(waitScoreOverlay){
    const panelW=Math.min(Math.max(280,Math.floor(viewW*.48)),420);
@@ -6373,7 +6550,7 @@ function syncCabinetShellLayout({
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
    statusPanels.style.bottom='auto';
   }else if(framedOverlayOpen){
-   const panelW=Math.min(Math.max(420,Math.floor(viewW*.84)),660);
+   const panelW=Math.min(Math.max(620,Math.floor(viewW*.9)),940);
    const top=Math.floor(oy+12);
    const maxHeight=Math.max(180,Math.floor(viewH-24));
    statusPanels.style.width=`${panelW}px`;
@@ -6531,8 +6708,8 @@ function draw(){
  const railH=Math.max(220,viewH);
  const railLeft=shellX+shellW-shellPadR+Math.floor((shellPadR-railW)/2);
  const railTop=oy;
- const waitScoreOverlay=!started&&typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD.panelOpen;
- const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!waitScoreOverlay&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
+ const waitScoreOverlay=0;
+ const framedOverlayOpen=typeof LEADERBOARD!=='undefined'&&!!(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen);
 
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,
