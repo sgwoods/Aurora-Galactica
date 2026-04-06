@@ -1,8 +1,20 @@
 # Aurora Galactica
 
-Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.
+`Aurora Galactica` is the first fully playable game pack running on the
+`Platinum` arcade game platform.
 
-Current shipping target:
+![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
+
+- `Platinum`
+  - the shared cabinet-shooter platform, shell, services, harness boundary,
+    and pack-hosting runtime
+- `Aurora Galactica`
+  - the currently shipped game experience and the first real Platinum pack
+
+Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue
+mechanics, multi-stage progression, and arcade-style tuning.
+
+Current public shipping target:
 
 - a polished four-stage slice:
   - Stage `1`
@@ -64,7 +76,12 @@ After GitHub Pages deploys, play at:
 - beta:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
-The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The `/beta/` lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in `Codex-Test1` as the pre-production development line.
+The root Aurora build is the official public production lane, even while the
+product is still prerelease in SemVer terms. The `/beta/` lane is a manually
+promoted public checkpoint used for less-frequent milestone playtesting.
+Day-to-day engineering work continues in `Codex-Test1` as the pre-production
+development line where Platinum platform work and Aurora pack work are both
+evolving together.
 
 Current score/data policy:
 
@@ -124,9 +141,8 @@ npm run local:stop
 
 ## Controls
 
-- `Left/Right` or `A/D`: Move
-- `Ctrl`: Left-handed cabinet-style move left on the web
-- `Command`: Left-handed cabinet-style move right on the web
+- `A`, `Z`, or `Left Arrow`: Move left
+- `D`, `C`, or `Right Arrow`: Move right
 - `Space`: Fire (arcade-style shot cap)
 - `P` or pause icon: Pause
 - `F`: Fullscreen
@@ -153,6 +169,45 @@ npm run local:stop
 - Local high score persistence via browser storage
 
 ## Development
+
+### Platform vs Game
+
+- `Platinum`
+  - owns the shell, picker, notices, quote surfaces, service seams, shared
+    harness categories, and game-pack install path
+- `Aurora Galactica`
+  - owns Aurora gameplay rules, stage cadence, challenge structure, rescue
+    behavior, scoring tables, and Aurora-branded presentation
+
+The next major platform milestone is:
+
+- rerelease Aurora as the existing public game on explicitly branded Platinum
+- keep Aurora behavior aligned with the shipped `1.0.2` baseline
+- use the game picker to preview future titles without pretending they are
+  playable before they are ready
+
+### What Is Next On Platform Work
+
+The immediate platform sequence is now:
+
+1. complete the `Aurora-on-Platinum` rerelease hardening pass
+2. verify the Platinum shell surfaces manually in dev one more time
+3. ship Aurora clearly as a Platinum-hosted title
+4. return to the tracked Aurora gameplay follow-ups that affect trust and
+   clarity
+5. only then begin the first truly playable `Galaxy Guardians` slice
+
+### Platform Visuals
+
+Maintained Platinum and pack-separation graphics:
+
+![Platinum Platform Stack](reference-artifacts/diagrams/platinum/platinum-platform-stack.svg)
+
+![Platinum vs Game Packs](reference-artifacts/diagrams/platinum/platinum-pack-separation.svg)
+
+![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
+
+![Galaxy Guardians Pack Card](reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg)
 
 - Editable source files live in:
   - `src/index.template.html`
