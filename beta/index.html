@@ -170,8 +170,8 @@ mask:
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotesBody{font-size:10px;line-height:1.32;color:rgba(230,240,255,.72);overflow-wrap:anywhere;word-break:break-word}
-#helpModal,#feedbackModal,#platformSplashModal,#gamePreviewModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
-#helpModal.open,#feedbackModal.open,#platformSplashModal.open,#gamePreviewModal.open{display:flex}
+#helpModal,#feedbackModal,#platformSplashModal,#gamePreviewModal,#gamePickerModal{position:fixed;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);overflow:hidden}
+#helpModal.open,#feedbackModal.open,#platformSplashModal.open,#gamePreviewModal.open,#gamePickerModal.open{display:flex}
 #helpPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #helpHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #helpSubtitle{margin-top:4px;font-size:12px;line-height:1.3;color:#bfefff}
@@ -196,7 +196,7 @@ mask:
 #helpGuideActions button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:8px 13px;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #helpGuideFrame{width:100%;height:100%;min-height:0;flex:1;border:1px solid rgba(136,245,255,.18);background:#050a14}
 #feedbackPanel{display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
-#platformSplashPanel,#gamePreviewPanel{display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
+#platformSplashPanel,#gamePreviewPanel,#gamePickerPanel{display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);box-shadow:0 16px 36px rgba(0,0,0,.34);padding:16px 18px;color:#eaf6ff;overflow:auto}
 #platformSplashBody,#gamePreviewBody{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:18px;align-items:center}
 #platformSplashImage,#gamePreviewImage{display:block;width:100%;height:auto;object-fit:contain;border:1px solid rgba(136,245,255,.16);background:rgba(8,18,35,.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 #platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
@@ -317,9 +317,7 @@ mask:
 #statusPanels.waitOverlay #leaderboardViewButtons button{width:100%;min-width:0;text-align:left}
 #movieModal{position:fixed;inset:0;z-index:41;display:none;background:transparent}
 #movieModal.open{display:block}
-#gamePickerModal{position:fixed;inset:0;z-index:41;display:none;background:rgba(3,7,18,.48);backdrop-filter:blur(2px)}
-#gamePickerModal.open{display:block}
-#gamePickerPanel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px;width:min(88vw,760px);max-height:min(82vh,760px);overflow:auto;padding:16px 18px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#gamePickerPanel{gap:12px;backdrop-filter:blur(4px);font:400 12px/1.35 "Courier New",Consolas,monospace}
 #gamePickerCurrent,#gamePickerStatus{padding:10px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
 #gamePickerCurrent{display:flex;flex-direction:column;gap:4px}
 #gamePickerCurrent strong{font:700 12px/1.2 "Courier New",Consolas,monospace;letter-spacing:.12em;color:#7ef2ff;text-transform:uppercase}
@@ -329,7 +327,7 @@ mask:
 .gamePickerThemeBtn{border:1px solid rgba(136,245,255,.22);background:rgba(8,18,35,.78);color:#dff7ff;padding:6px 8px;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer}
 .gamePickerThemeBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82)}
 .gamePickerThemeBtn.isSelected{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.76);color:#ffe39a}
-#gamePickerList{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+#gamePickerList{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
 .gamePickerCard{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid rgba(136,245,255,.18);background:rgba(8,18,35,.78)}
 .gamePickerCard.isActive{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92))}
 .gamePickerCardTitle{font:700 16px/1.1 "Courier New",Consolas,monospace;letter-spacing:.08em;color:#f4fbff}
@@ -339,6 +337,7 @@ mask:
 .gamePickerCardAction{border:1px solid rgba(255,216,109,.48);background:rgba(60,44,8,.76);color:#ffe39a;padding:8px 12px;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer}
 .gamePickerCardAction:hover{background:rgba(84,61,12,.88);border-color:rgba(255,216,109,.82)}
 .gamePickerCardAction[disabled]{opacity:.55;cursor:default}
+#gamePickerHead h2{margin:0;font-size:20px;letter-spacing:.03em}
 #moviePanel{position:fixed;display:none;overflow:hidden;color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 #moviePanel.visible{display:block}
 #movieVideo{position:absolute;inset:0;width:100%;height:100%;display:none;background:#000;object-fit:cover;object-position:center center}
@@ -545,14 +544,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.0.2-beta.1+build.358.sha.3bf414a.beta</span>
-    <span id="settingsRelease">Apr 06 2026, 7:50 PM EDT</span>
-    <span id="settingsState">beta@3bf414a clean</span>
+    <span id="settingsVersion">Version 1.2.0-beta.1+build.364.sha.106adfd.beta</span>
+    <span id="settingsRelease">Apr 07 2026, 8:23 AM EDT</span>
+    <span id="settingsState">beta@106adfd clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Movement regression hotfix</span>
-    <span id="settingsNotesBody">Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion.</span>
+    <span id="settingsNotesTitle">Platinum Release 1</span>
+    <span id="settingsNotesBody">Reframed Aurora Galactica as the first playable game pack on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted /dev alongside hosted /beta and hosted /production, and aligned the release ladder, documentation, and overlay surfaces around the Platinum launch.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -808,8 +807,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.0.2-beta.1+build.358.sha.3bf414a.beta</span>
-  <span id="buildStampRelease">Apr 06 2026, 7:50 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.0-beta.1+build.364.sha.106adfd.beta</span>
+  <span id="buildStampRelease">Apr 07 2026, 8:23 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1384,7 +1383,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.0.2-beta.1',label:'1.0.2-beta.1+build.358.sha.3bf414a.beta',commit:'3bf414afbeae3c011376db2dfeb1a251d0a1bd56',branch:'beta',dirty:false,released:'Apr 06 2026, 7:50 PM EDT',state:'beta@3bf414a clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.2.0-beta.1',label:'1.2.0-beta.1+build.364.sha.106adfd.beta',commit:'106adfdc36c4aa5353b290c33023e6eef280cf3a',branch:'beta',dirty:false,released:'Apr 07 2026, 8:23 AM EDT',state:'beta@106adfd clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1882,6 +1881,14 @@ function closeGamePreview(force=0){
  syncGamePreviewUi();
  syncPauseUi();
 }
+function restorePlayableGamePackForLaunch(){
+ if(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable())return 0;
+ if(typeof installGamePack==='function')installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
+ closeGamePreview(1);
+ if(typeof draw==='function')draw();
+ showToast('Galaxy Guardians is preview-only. Launching Aurora Galactica.');
+ return 1;
+}
 function closeHelp(force=0){
  if(!helpOpen&&!force)return;
  helpOpen=0;
@@ -2189,8 +2196,7 @@ addEventListener('keydown',e=>{
  if(!started&&e.code==='Enter'){
   if(typeof currentGamePackPlayable==='function'&&!currentGamePackPlayable()){
    e.preventDefault();
-   openGamePreview();
-   return;
+   restorePlayableGamePackForLaunch();
   }
   if(gameOverState&&!gameOverState.editing)submitGameOverScore();
   stopAttractLoop();start();
@@ -5754,6 +5760,10 @@ function currentGamePackPlayable(){
  return currentGamePack().metadata?.playable!==0&&currentGamePack().metadata?.playable!==false;
 }
 
+function packIsPlayable(pack=null){
+ return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
+}
+
 function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  const nextPack=getGamePack(key);
  ACTIVE_GAME_PACK_KEY=nextPack.metadata?.gameKey||DEFAULT_GAME_PACK_KEY;
@@ -5989,12 +5999,22 @@ function challengeGroupBonus(stage){
  return currentGamePackChallengeGroupBonus(stage);
 }
 
-installGamePack(readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY);
+{
+ const savedGamePackKey=readPref(GAME_PACK_PREF_KEY)||DEFAULT_GAME_PACK_KEY;
+ const savedPack=getGamePack(savedGamePackKey);
+ if(packIsPlayable(savedPack)){
+  installGamePack(savedGamePackKey);
+ }else{
+  removePref(GAME_PACK_PREF_KEY);
+  installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
+ }
+}
 window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
+window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
@@ -6303,7 +6323,9 @@ function chooseGamePack(key=''){
   showToast('Return to wait mode before switching games.');
   return;
  }
- installGamePack(key,{persist:1});
+ const nextPack=getGamePack(key);
+ const playable=typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false);
+ installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
  if(!currentGamePackPlayable()){
@@ -6357,6 +6379,8 @@ const renderPlatformSplashModal=document.getElementById('platformSplashModal');
 const renderPlatformSplashPanel=document.getElementById('platformSplashPanel');
 const renderGamePreviewModal=document.getElementById('gamePreviewModal');
 const renderGamePreviewPanel=document.getElementById('gamePreviewPanel');
+const renderGamePickerModal=document.getElementById('gamePickerModal');
+const renderGamePickerPanel=document.getElementById('gamePickerPanel');
 const renderSettingsPanel=document.getElementById('settingsPanel');
 
 const DISPLAY_SHELL=Object.freeze({
@@ -6637,6 +6661,16 @@ function syncCabinetShellLayout({
  if(renderGamePreviewPanel){
   renderGamePreviewPanel.style.width=`${Math.min(Math.max(420,Math.floor(viewW*.82)),780)}px`;
   renderGamePreviewPanel.style.maxHeight=`${Math.max(240,Math.min(Math.floor(viewH-24),720))}px`;
+ }
+ if(renderGamePickerModal){
+  renderGamePickerModal.style.left=`${ox}px`;
+  renderGamePickerModal.style.top=`${oy}px`;
+  renderGamePickerModal.style.width=`${viewW}px`;
+  renderGamePickerModal.style.height=`${viewH}px`;
+ }
+ if(renderGamePickerPanel){
+  renderGamePickerPanel.style.width=`${Math.min(Math.max(560,Math.floor(viewW*.9)),940)}px`;
+  renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
   const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));

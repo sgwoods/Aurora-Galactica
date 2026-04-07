@@ -71,24 +71,25 @@ Repository roles:
 
 After GitHub Pages deploys, play at:
 
+- hosted `/dev`:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/`
+- hosted `/beta`:
+  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 - production:
   - `https://sgwoods.github.io/Aurora-Galactica/`
-- beta:
-  - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 
-The root Aurora build is the official public production lane, even while the
-product is still prerelease in SemVer terms. The `/beta/` lane is a manually
-promoted public checkpoint used for less-frequent milestone playtesting.
-Day-to-day engineering work continues in `Codex-Test1` as the pre-production
-development line where Platinum platform work and Aurora pack work are both
-evolving together.
+The root Aurora build is the official hosted `/production` lane. Hosted
+`/beta` is the release-candidate checkpoint, and hosted `/dev` is the shared
+integration preview of the current local `localhost` candidate. Day-to-day
+engineering work continues in `Codex-Test1`, where Platinum platform work and
+Aurora pack work evolve together before promotion.
 
 Current score/data policy:
 
 - production:
   - live shared leaderboard reads and writes
   - pilot account actions enabled
-- beta and local pre-production:
+- hosted `/beta`, hosted `/dev`, and local `localhost`:
   - production leaderboard reads only
   - score submission disabled by default
   - pilot account/profile writes disabled unless a configured non-production test pilot is signed in
@@ -181,7 +182,7 @@ npm run local:stop
 
 The next major platform milestone is:
 
-- rerelease Aurora as the existing public game on explicitly branded Platinum
+- ship `1.2.0 — Platinum Release 1`
 - keep Aurora behavior aligned with the shipped `1.0.2` baseline
 - use the game picker to preview future titles without pretending they are
   playable before they are ready
@@ -469,13 +470,15 @@ Maintained Platinum and pack-separation graphics:
 
 ## Versioning
 
-- Current versioning uses three release surfaces with build metadata:
-  - pre-production:
-    - prerelease SemVer from `package.json`
-  - production:
-    - stable public label without the prerelease suffix
-  - production beta:
-    - promoted public beta label
+- Current versioning uses four release surfaces with build metadata:
+  - local `localhost`:
+    - source SemVer from `package.json`, plus build metadata
+  - hosted `/dev`:
+    - current integrated candidate label
+  - hosted `/beta`:
+    - promoted release-candidate label
+  - hosted `/production`:
+    - stable public label
 - Local and deployed builds carry:
   - version
   - build number
@@ -489,9 +492,9 @@ Maintained Platinum and pack-separation graphics:
 - The separate public project pages repo is synced from `dist/production/build-info.json` and `release-notes.json`
   - CI uses the `PUBLIC_REPO_SYNC_TOKEN` secret when available
   - The token should have `contents:write` access to `sgwoods/public`
-- Example production build label:
+- Example hosted `/production` build label:
   - `0.5.0+build.9.sha.457df28`
-- Example production beta build label:
+- Example hosted `/beta` build label:
   - `0.5.0-beta.1+build.9.sha.457df28.beta`
 - See:
   - `/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md`
