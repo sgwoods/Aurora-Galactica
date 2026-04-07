@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Galactica Player Guide</title>
+  <style>
+:root{
+      --bg:#06111b;
+      --bg2:#10253b;
+      --bg3:#14354f;
+      --card:rgba(7,19,31,0.78);
+      --card2:rgba(255,255,255,0.05);
+      --line:rgba(144,210,255,0.18);
+      --text:#eef8ff;
+      --muted:#a1c7e0;
+      --soft:#84adc9;
+      --accent:#69e2a7;
+      --accent2:#7ac3ff;
+      --shadow:0 18px 40px rgba(0,0,0,0.28);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(105,226,167,0.16), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(122,195,255,0.2), transparent 28%),
+        linear-gradient(160deg,var(--bg),var(--bg2) 55%,var(--bg3));
+      min-height:100vh;
+    }
+    a{color:#d8f7ff}
+    .shell{
+      max-width:1280px;
+      margin:0 auto;
+      padding:34px 18px 72px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 280px;
+      gap:24px;
+      align-items:start;
+    }
+    .main{min-width:0}
+    .hero,.section,.toc{
+      border:1px solid rgba(177,222,255,0.16);
+      border-radius:28px;
+      background:
+        linear-gradient(160deg, rgba(12,34,54,0.88), rgba(7,19,31,0.72)),
+        radial-gradient(circle at 20% 0%, rgba(103,230,168,0.12), transparent 32%);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:34px 32px 28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      color:#d7ecff;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-0.04em;
+    }
+    .hero p{
+      max-width:900px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.65;
+      margin:0 0 16px;
+    }
+    .goal{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e7f6ff;
+      font-size:16px;
+      line-height:1.55;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .metaCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .metaLabel{
+      display:block;
+      color:#8fb3cc;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .metaValue{
+      font-size:18px;
+      font-weight:600;
+    }
+    .heroLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 16px;
+      border-radius:999px;
+      background:rgba(122,195,255,0.16);
+      border:1px solid rgba(122,195,255,0.3);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:.04em;
+    }
+    .section{
+      margin-top:20px;
+      padding:28px 26px 24px;
+    }
+    .sectionHeader{
+      margin-bottom:18px;
+      padding-bottom:14px;
+      border-bottom:1px solid var(--line);
+    }
+    .sectionHeader h2{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:-0.03em;
+    }
+    .sectionHeader p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .cardGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .card,.linkCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .card h3,.linkCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .card p,.linkCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+    .bulletList li{
+      position:relative;
+      padding:14px 16px 14px 42px;
+      border-radius:18px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList li::before{
+      content:"";
+      position:absolute;
+      left:16px;
+      top:18px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(122,195,255,0.08);
+    }
+    .linkGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .linkCard a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      margin-bottom:10px;
+      text-decoration:none;
+    }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
+    .docWrap{
+      padding:20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .docMeta{
+      margin:0 0 14px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .markdown h3,.markdown h4,.markdown h5{
+      margin:24px 0 10px;
+      letter-spacing:-0.02em;
+      color:#f2fbff;
+    }
+    .markdown h3{font-size:24px}
+    .markdown h4{font-size:20px}
+    .markdown h5{font-size:17px}
+    .markdown p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .markdown ul,.markdown ol{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      padding-left:22px;
+    }
+    .markdown li{
+      margin:0 0 8px;
+      line-height:1.65;
+    }
+    .markdown pre{
+      margin:0 0 16px;
+      padding:14px 16px;
+      overflow:auto;
+      border-radius:16px;
+      background:rgba(3,10,16,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f6ff;
+    }
+    .markdown pre code{
+      color:inherit;
+      font-size:13px;
+    }
+    .markdown img{
+      display:block;
+      max-width:100%;
+      margin:0 0 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      position:sticky;
+      top:20px;
+      padding:22px 20px 18px;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+    .toc p{
+      margin:0 0 14px;
+      color:var(--soft);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .toc ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      gap:10px;
+    }
+    .toc li a{
+      display:block;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      text-decoration:none;
+      color:#e9f7ff;
+      font-size:14px;
+      line-height:1.4;
+    }
+    .footer{
+      margin-top:18px;
+      color:#8db0c8;
+      font-size:13px;
+      line-height:1.6;
+    }
+    code{
+      font-family:"SFMono-Regular",Consolas,monospace;
+      color:#edf7ff;
+      font-size:.95em;
+    }
+    @media (max-width: 980px){
+      .shell{grid-template-columns:1fr}
+      .toc{position:static; order:-1}
+    }
+    @media (max-width: 720px){
+      .shell{padding:20px 14px 54px}
+      .hero,.section,.toc{padding:22px 20px}
+      .hero p{font-size:17px}
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Player Guide</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Beta Build</a>
+          </div>
+          <h1>Aurora Galactica Player Guide</h1>
+          <p>A quick, player-first guide to starting the game, reading the screen, staying alive, and using the key in-game controls.</p>
+          <div class="goal"><strong>Guide focus:</strong> Help a new player start quickly, understand the cabinet-style HUD, and make sense of the capture/rescue loop without needing developer context.</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Build</span>
+              <span class="metaValue">1.0.2+build.360.sha.7563b2d</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Release Line</span>
+              <span class="metaValue">1.0.2</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">April 6, 2026</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">Movement regression hotfix</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Play production build</a>
+            <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Play beta build</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
+          </div>
+        </section>
+        
+    <section class="section" id="start-fast">
+      <div class="sectionHeader">
+        <h2>Start Fast</h2>
+        <p>The shortest path from opening the game to surviving your first run.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Start A Run</h3>
+      <p>Press Enter to begin from the title/wait screen. The current development build may start from a selected stage if Developer Tools were used, but the normal player flow starts at Stage 1.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Basic Controls</h3>
+      <p>Move with Arrow Left/Right or A / D. Fire with Space. Pause with P or the pause icon on the right rail. Cabinet-style left-hand play is also supported on the web: Ctrl moves left and Command moves right. Mac browsers do not reliably expose the Fn key.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Use The Rail</h3>
+      <p>The right-side icon rail keeps key actions in the game: guide, controls, recent replays, scores, account, bug report, mute, pause, and settings. You should not need to leave the game to learn, review, or report something.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="hud">
+      <div class="sectionHeader">
+        <h2>Read The Screen</h2>
+        <p>The HUD follows classic Galaga conventions closely enough that the key signals should be familiar once you know where to look.</p>
+      </div>
+      <ul class="bulletList">
+
+    <li>Top-left shows your current score.</li>
+  
+
+    <li>Top-center shows the high score.</li>
+  
+
+    <li>Bottom-right stage markers track your current stage in Galaga-style count markers.</li>
+  
+
+    <li>Reserve ships at the lower-left show how many lives remain after the current fighter.</li>
+  
+
+    <li>Short center-screen banners explain captures, rescues, transitions, and challenge-stage results.</li>
+  
+</ul>
+    </section>
+  
+
+    <section class="section" id="survive">
+      <div class="sectionHeader">
+        <h2>How To Survive</h2>
+        <p>The game is still about lane reading and timing, not spraying bullets constantly.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Prioritize Descending Enemies</h3>
+      <p>The biggest danger usually comes from enemies diving or converging into your lane. Clear close threats early and avoid getting trapped between bullets and a descending enemy.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Move Early, Not Late</h3>
+      <p>The ship rewards small early corrections more than last-second swerves. If a lane is becoming dangerous, slide out before the dive path closes on you.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Know When To Stop Shooting</h3>
+      <p>You have an arcade-style shot limit. If the screen is already carrying your shot, focus on positioning instead of hammering fire and expecting another projectile immediately.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="capture">
+      <div class="sectionHeader">
+        <h2>Capture And Rescue</h2>
+        <p>Bosses can capture your fighter, and later you can rescue it for a stronger dual-fighter attack.</p>
+      </div>
+      <ul class="bulletList">
+
+    <li>A boss using the tractor beam can pull your fighter upward if you stay in the beam.</li>
+  
+
+    <li>If you break the capture at the right moment, your ship returns and the boss retreats.</li>
+  
+
+    <li>If the fighter is fully captured, the boss may carry it later during an attack.</li>
+  
+
+    <li>Destroying the carrying boss can release the captured fighter and let it rejoin you.</li>
+  
+
+    <li>A successful rescue creates a dual-fighter state with wider firepower.</li>
+  
+</ul>
+    </section>
+  
+
+    <section class="section" id="challenge">
+      <div class="sectionHeader">
+        <h2>Challenge Stage</h2>
+        <p>Challenge stages are a scoring break: fewer survival demands, more emphasis on accuracy.</p>
+      </div>
+      <ul class="bulletList">
+
+    <li>Focus on clean hits and rhythm rather than panic movement.</li>
+  
+
+    <li>The challenge stage is the best place to recover mentally before the next live combat stage.</li>
+  
+
+    <li>Perfect or high-accuracy clears are valuable, but surviving the normal stages still matters more overall.</li>
+  
+</ul>
+    </section>
+  
+
+    <section class="section" id="support">
+      <div class="sectionHeader">
+        <h2>Helpful In-Game Tools</h2>
+        <p>The game includes a few player-support surfaces beyond the core action.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Controls Overlay</h3>
+      <p>Use the joystick icon to open a compact controls index without leaving the game.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Recent Replays</h3>
+      <p>Use the movie icon to watch the last few games saved on this device. The first cut is local-only and lets you pause, scrub, rewind, and delete stored replays.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Bug Report</h3>
+      <p>Use the bug icon to report gameplay or visual problems directly from the rail.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Pilot Account And Scores</h3>
+      <p>Use the account and trophy icons to manage your profile and review score tables.</p>
+    </article>
+  
+</div>
+    </section>
+  
+      </div>
+      <aside class="toc">
+        <h2>Player Index</h2>
+        <p>This guide is generated during the normal build so the in-game manual stays aligned with the current shipped controls and UI.</p>
+        <ul>
+          
+    <li><a href="#start-fast">Start Fast</a></li>
+  
+
+    <li><a href="#hud">Read The Screen</a></li>
+  
+
+    <li><a href="#survive">How To Survive</a></li>
+  
+
+    <li><a href="#capture">Capture And Rescue</a></li>
+  
+
+    <li><a href="#challenge">Challenge Stage</a></li>
+  
+
+    <li><a href="#support">Helpful In-Game Tools</a></li>
+  
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>Movement regression hotfix</strong><br>
+          Build: 1.0.2+build.360.sha.7563b2d
+        </p>
+      </aside>
+    </main>
+</body>
+</html>
