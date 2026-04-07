@@ -403,19 +403,19 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.2+build.290.sha.831a2c6</span>
+              <span class="metaValue">1.2.0+build.364.sha.106adfd</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.0.2</span>
+              <span class="metaValue">1.2.0</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 2, 2026</span>
+              <span class="metaValue">April 7, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Movement reset hotfix</span>
+              <span class="metaValue">Platinum Release 1</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -845,8 +845,13 @@
       <div class="docWrap">
         <p class="docMeta">Generated from <code>README.md</code> during build.</p>
         <div class="markdown">
-          <p>Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.</p>
-<p>Current shipping target:</p>
+          <p><code>Aurora Galactica</code> is the first fully playable game pack running on the <code>Platinum</code> arcade game platform.</p>
+<p><img alt="Platinum Hero" src="reference-artifacts/diagrams/platinum/platinum-hero.svg"></p>
+<ul><li><code>Platinum</code><ul><li>the shared cabinet-shooter platform, shell, services, harness boundary,</li></ul></li></ul>
+<p>and pack-hosting runtime</p>
+<ul><li><code>Aurora Galactica</code><ul><li>the currently shipped game experience and the first real Platinum pack</li></ul></li></ul>
+<p>Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.</p>
+<p>Current public shipping target:</p>
 <ul><li>a polished four-stage slice:<ul><li>Stage <code>1</code></li><li>Stage <code>2</code></li><li>Stage <code>3</code> challenging stage</li><li>Stage <code>4</code></li></ul></li></ul>
 <p>Expansion beyond Stage <code>4</code> is currently treated as post-<code>1.0</code> work unless it directly supports polishing this slice.</p>
 <p>Release dashboard:</p>
@@ -859,10 +864,10 @@
 <ul><li>development repo:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>public release repo:<ul><li><code>https://github.com/sgwoods/Aurora-Galactica</code></li></ul></li><li>external runtime and tooling services:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md</code></li></ul></li></ul>
 <h3>Live</h3>
 <p>After GitHub Pages deploys, play at:</p>
-<ul><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
-<p>The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The <code>/beta/</code> lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in <code>Codex-Test1</code> as the pre-production development line.</p>
+<ul><li>hosted <code>/dev</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/dev/</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li></ul>
+<p>The root Aurora build is the official hosted <code>/production</code> lane. Hosted <code>/beta</code> is the release-candidate checkpoint, and hosted <code>/dev</code> is the shared integration preview of the current local <code>localhost</code> candidate. Day-to-day engineering work continues in <code>Codex-Test1</code>, where Platinum platform work and Aurora pack work evolve together before promotion.</p>
 <p>Current score/data policy:</p>
-<ul><li>production:<ul><li>live shared leaderboard reads and writes</li><li>pilot account actions enabled</li></ul></li><li>beta and local pre-production:<ul><li>production leaderboard reads only</li><li>score submission disabled by default</li><li>pilot account/profile writes disabled unless a configured non-production test pilot is signed in</li><li>local device scores still save normally</li></ul></li></ul>
+<ul><li>production:<ul><li>live shared leaderboard reads and writes</li><li>pilot account actions enabled</li></ul></li><li>hosted <code>/beta</code>, hosted <code>/dev</code>, and local <code>localhost</code>:<ul><li>production leaderboard reads only</li><li>score submission disabled by default</li><li>pilot account/profile writes disabled unless a configured non-production test pilot is signed in</li><li>local device scores still save normally</li></ul></li></ul>
 <p>Optional non-production test pilot configuration:</p>
 <ul><li>set <code>TEST_ACCOUNT_EMAILS</code> to enable one or more specific beta/dev pilot accounts for auth and write-flow testing</li><li>set <code>TEST_ACCOUNT_USER_IDS</code> to exclude those pilots&#39; scores from shared leaderboard views</li><li>the local-only example file is:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.env.local.example</code></li></ul></li><li>when one of those configured test pilots is signed in on beta/dev:<ul><li><code>My Scores</code> becomes available</li><li>score submission is enabled for that pilot only</li><li>the Developer Tools panel can reset that pilot&#39;s remote scores</li></ul></li></ul>
 <h3>Screenshot</h3>
@@ -881,10 +886,29 @@
 <p>To stop the locally tracked game and viewer services cleanly:</p>
 <pre><code data-lang="bash">npm run local:stop</code></pre>
 <h3>Controls</h3>
-<ul><li><code>Left/Right</code> or <code>A/D</code>: Move</li><li><code>Ctrl</code>: Left-handed cabinet-style move left on the web</li><li><code>Command</code>: Left-handed cabinet-style move right on the web</li><li><code>Space</code>: Fire (arcade-style shot cap)</li><li><code>P</code> or pause icon: Pause</li><li><code>F</code>: Fullscreen</li><li><code>U</code>: Ultra scale toggle</li><li><code>Enter</code>: Start / Restart</li><li><code>F1</code> or <code>?</code>: Open in-game feedback form</li><li>featured pilot icon: Open the pilot identity/profile card</li><li><code>ℹ</code> icon: Open the player guide inside the game</li><li><code>🕹</code> icon: Open the controls reference inside the game</li><li><code>🎞</code> icon: Watch recent local replays saved on this device</li><li><code>Export Log</code> button: Download the current gameplay session as JSON</li></ul>
+<ul><li><code>A</code>, <code>Z</code>, or <code>Left Arrow</code>: Move left</li><li><code>D</code>, <code>C</code>, or <code>Right Arrow</code>: Move right</li><li><code>Space</code>: Fire (arcade-style shot cap)</li><li><code>P</code> or pause icon: Pause</li><li><code>F</code>: Fullscreen</li><li><code>U</code>: Ultra scale toggle</li><li><code>Enter</code>: Start / Restart</li><li><code>F1</code> or <code>?</code>: Open in-game feedback form</li><li>featured pilot icon: Open the pilot identity/profile card</li><li><code>ℹ</code> icon: Open the player guide inside the game</li><li><code>🕹</code> icon: Open the controls reference inside the game</li><li><code>🎞</code> icon: Watch recent local replays saved on this device</li><li><code>Export Log</code> button: Download the current gameplay session as JSON</li></ul>
 <h3>What Is Implemented</h3>
 <ul><li>Fixed arcade playfield with integer scaling and fullscreen letterboxing</li><li>Stage progression with challenge stages</li><li>Stage 1 scripted opening timing for consistency</li><li>Boss capture beam, ship capture, rescue, and dual-fighter fire mode</li><li>In-game pilot profile card with sign-in, sign-out, create-account, and reset-password flows</li><li>Browser-native pilot replay viewer and in-frame popup surfaces for pilot/help/scores/feedback/settings</li><li>Enemy dive behavior and tuned missile pacing/spread</li><li>Pixel-art sprite rendering and starfield</li><li>Synthesized arcade-style SFX</li><li>Local high score persistence via browser storage</li></ul>
 <h3>Development</h3>
+<h4>Platform vs Game</h4>
+<ul><li><code>Platinum</code><ul><li>owns the shell, picker, notices, quote surfaces, service seams, shared</li></ul></li></ul>
+<p>harness categories, and game-pack install path</p>
+<ul><li><code>Aurora Galactica</code><ul><li>owns Aurora gameplay rules, stage cadence, challenge structure, rescue</li></ul></li></ul>
+<p>behavior, scoring tables, and Aurora-branded presentation</p>
+<p>The next major platform milestone is:</p>
+<ul><li>ship <code>1.2.0 — Platinum Release 1</code></li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> baseline</li><li>use the game picker to preview future titles without pretending they are</li></ul>
+<p>playable before they are ready</p>
+<h4>What Is Next On Platform Work</h4>
+<p>The immediate platform sequence is now:</p>
+<ol><li>complete the <code>Aurora-on-Platinum</code> rerelease hardening pass</li><li>verify the Platinum shell surfaces manually in dev one more time</li><li>ship Aurora clearly as a Platinum-hosted title</li><li>return to the tracked Aurora gameplay follow-ups that affect trust and</li></ol>
+<p>clarity</p>
+<ol><li>only then begin the first truly playable <code>Galaxy Guardians</code> slice</li></ol>
+<h4>Platform Visuals</h4>
+<p>Maintained Platinum and pack-separation graphics:</p>
+<p><img alt="Platinum Platform Stack" src="reference-artifacts/diagrams/platinum/platinum-platform-stack.svg"></p>
+<p><img alt="Platinum vs Game Packs" src="reference-artifacts/diagrams/platinum/platinum-pack-separation.svg"></p>
+<p><img alt="Aurora Pack Card" src="reference-artifacts/diagrams/platinum/aurora-pack-card.svg"></p>
+<p><img alt="Galaxy Guardians Pack Card" src="reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg"></p>
 <ul><li>Editable source files live in:<ul><li><code>src/index.template.html</code></li><li><code>src/styles.css</code></li><li><code>src/js/00-boot.js</code></li><li><code>src/js/10-gameplay.js</code></li><li><code>src/js/20-render.js</code></li><li><code>src/js/90-harness.js</code></li></ul></li><li>Source orientation guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/SOURCE_MAP.md</code></li></ul></li><li>Contributor guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTRIBUTING.md</code></li></ul></li><li>Home machine setup:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/HOME_MACHINE_SETUP.md</code></li></ul></li><li>Home Codex prompt:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/HOME_CODEX_PROMPT.md</code></li></ul></li><li>Repo-managed Codex skill source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/codex-skills/aurora-dev-refresh/SKILL.md</code></li></ul></li><li>Architecture overview:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>Reference baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/REFERENCE_BASELINE.md</code></li></ul></li><li>Local dev artifact:<ul><li><code>dist/dev/index.html</code></li></ul></li><li>Build the served file from source with:</li></ul>
 <pre><code data-lang="bash">  npm run build</code></pre>
 <ul><li>Build outputs are generated into:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/</code></li></ul></li><li>Do not hand-edit generated files under <code>dist/</code>; treat them as disposable build output.</li><li>Start the local artifact review viewer with:</li></ul>
@@ -976,7 +1000,7 @@
 <ul><li>The reset command requires an operator-only Supabase service-role key and is</li></ul>
 <p>intentionally not runnable from the browser auth path.</p>
 <h3>Versioning</h3>
-<ul><li>Current versioning uses three release surfaces with build metadata:<ul><li>pre-production:<ul><li>prerelease SemVer from <code>package.json</code></li></ul></li><li>production:<ul><li>stable public label without the prerelease suffix</li></ul></li><li>production beta:<ul><li>promoted public beta label</li></ul></li></ul></li><li>Local and deployed builds carry:<ul><li>version</li><li>build number</li><li>short commit</li><li>branch / dirty state</li><li>Eastern release timestamp</li></ul></li><li>The settings drawer also shows the latest human-written release note from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li><li>Each release can also keep a structured session summary and optional raw transcript under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>The separate public project pages repo is synced from <code>dist/production/build-info.json</code> and <code>release-notes.json</code><ul><li>CI uses the <code>PUBLIC_REPO_SYNC_TOKEN</code> secret when available</li><li>The token should have <code>contents:write</code> access to <code>sgwoods/public</code></li></ul></li><li>Example production build label:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>Example production beta build label:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li><li>See:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
+<ul><li>Current versioning uses four release surfaces with build metadata:<ul><li>local <code>localhost</code>:<ul><li>source SemVer from <code>package.json</code>, plus build metadata</li></ul></li><li>hosted <code>/dev</code>:<ul><li>current integrated candidate label</li></ul></li><li>hosted <code>/beta</code>:<ul><li>promoted release-candidate label</li></ul></li><li>hosted <code>/production</code>:<ul><li>stable public label</li></ul></li></ul></li><li>Local and deployed builds carry:<ul><li>version</li><li>build number</li><li>short commit</li><li>branch / dirty state</li><li>Eastern release timestamp</li></ul></li><li>The settings drawer also shows the latest human-written release note from:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul></li><li>Each release can also keep a structured session summary and optional raw transcript under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-history/</code></li></ul></li><li>The separate public project pages repo is synced from <code>dist/production/build-info.json</code> and <code>release-notes.json</code><ul><li>CI uses the <code>PUBLIC_REPO_SYNC_TOKEN</code> secret when available</li><li>The token should have <code>contents:write</code> access to <code>sgwoods/public</code></li></ul></li><li>Example hosted <code>/production</code> build label:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>Example hosted <code>/beta</code> build label:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li><li>See:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
 <h3>Session Logging</h3>
 <ul><li>The game records keyboard events, major lifecycle events, and periodic gameplay snapshots</li><li>Exported logs are downloaded as JSON from the in-game <code>Export Log</code> button</li><li>Each export includes build metadata, browser/user agent, viewport info, input events, and game-state snapshots</li><li>Player-triggered exports are browser downloads, not repo-local harness artifacts<ul><li>they usually land in the user’s downloads directory</li></ul></li><li>The in-game <code>🎞</code> replay surface is separate and keeps recent local replay state in browser storage</li><li>The canonical developer review archive is still:<ul><li><code>harness-artifacts/</code></li></ul></li><li>See the formal distinction in:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md</code></li></ul></li></ul>
 <h3>Gameplay Harness</h3>
@@ -1161,10 +1185,15 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<ul><li>Browser-based fixed-screen arcade shooter built from readable source modules and served from <code>dist/production/index.html</code></li><li>Build identity is now part of the product:<ul><li>prerelease SemVer in <code>package.json</code> for the pre-production engineering line</li><li>production and production-beta labels derived from that source version during Aurora release builds</li><li>generated <code>dist/production/build-info.json</code></li><li>in-game settings drawer shows the current build label and Eastern release timestamp</li></ul></li><li>Hosted on GitHub Pages: <code>https://sgwoods.github.io/Aurora-Galactica/</code></li><li>Core gameplay implemented:<ul><li>stage progression</li><li>capture / rescue / dual-fighter flow</li><li>challenge stages</li><li>fullscreen and ultra scale</li><li>in-game feedback form</li></ul></li><li>Local automation harness implemented:<ul><li>session replay in Chrome</li><li>seeded scenario runs</li><li>batch execution</li><li>automatic artifact analysis and tuning reports</li></ul></li><li>Feedback delivery currently uses Web3Forms as the direct-send transport</li><li>If direct send fails, the game falls back to a prefilled <code>mailto:</code> draft</li><li>High-score entry now supports Galaga-style three-letter initials with arcade-flavored cursor/input behavior</li><li>Public status export now follows the shared <code>public</code> repo contract:<ul><li>this repo updates its own public project page</li></ul></li><li>this repo updates its canonical public status manifest in <code>data/projects/aurora-galactica.json</code></li><li>and keeps the legacy compatibility alias in <code>data/projects/codex-test1.json</code><ul><li>this repo no longer rewrites the shared public homepage directly</li></ul></li></ul>
+<ul><li><code>Platinum</code> now names the shared arcade-game platform</li><li><code>Aurora Galactica</code> is the first fully playable game pack running on Platinum</li><li>the Platinum shell now has a real public-facing identity:<ul><li>Platinum button</li><li>Platinum splash</li><li>game picker</li><li><code>Galaxy Guardians</code> coming-soon preview</li><li>platform-owned frame themes</li></ul></li><li>launch shell review and refinement should follow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>Browser-based fixed-screen arcade shooter built from readable source modules and served from <code>dist/production/index.html</code></li><li>Build identity is now part of the product:<ul><li>prerelease SemVer in <code>package.json</code> for the pre-production engineering line</li><li>production and production-beta labels derived from that source version during Aurora release builds</li><li>generated <code>dist/production/build-info.json</code></li><li>in-game settings drawer shows the current build label and Eastern release timestamp</li></ul></li><li>Hosted on GitHub Pages: <code>https://sgwoods.github.io/Aurora-Galactica/</code></li><li>Core gameplay implemented:<ul><li>stage progression</li><li>capture / rescue / dual-fighter flow</li><li>challenge stages</li><li>fullscreen and ultra scale</li><li>in-game feedback form</li></ul></li><li>Local automation harness implemented:<ul><li>session replay in Chrome</li><li>seeded scenario runs</li><li>batch execution</li><li>automatic artifact analysis and tuning reports</li></ul></li><li>Feedback delivery currently uses Web3Forms as the direct-send transport</li><li>If direct send fails, the game falls back to a prefilled <code>mailto:</code> draft</li><li>High-score entry now supports Galaga-style three-letter initials with arcade-flavored cursor/input behavior</li><li>Public status export now follows the shared <code>public</code> repo contract:<ul><li>this repo updates its own public project page</li></ul></li><li>this repo updates its canonical public status manifest in <code>data/projects/aurora-galactica.json</code></li><li>and keeps the legacy compatibility alias in <code>data/projects/codex-test1.json</code><ul><li>this repo no longer rewrites the shared public homepage directly</li></ul></li><li>Aurora is now dev-playable through the explicit Platinum selected-pack path</li><li>Platform-only harness coverage now exists alongside game-pack and seam</li></ul>
+<p>harnesses</p>
 <h3>Working Assumptions</h3>
 <ul><li>The game should continue to run as a lightweight localhost-friendly Chrome experience</li><li>Fidelity to original Galaga remains a primary product goal</li><li>We now have a reproducible local tuning loop and should use it as the default evaluation path</li><li>GitHub issues should mirror the active roadmap closely enough that we can pick up work later without re-deriving context</li><li>Release recommendations should follow an explicit policy and roadmap rather than ad hoc judgment</li><li>Official reference material such as manuals and curated clips should live under <code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/</code> so rules and visual comparisons are not stranded in Downloads</li><li>Secondary sources such as walkthroughs should inform later-stage breadth and player-facing behavior, but should not override manuals or original gameplay footage on arcade-rule questions</li></ul>
 <h3>Known Problems</h3>
+<ul><li>Public production still presents Aurora as the whole product rather than as</li></ul>
+<p>the first shipped game on Platinum</p>
+<ul><li><code>#140</code> challenge stages still count as numbered stages in the current Aurora</li></ul>
+<p>HUD flow even though they should behave like bonus opportunities in the Galaga model</p>
 <ul><li>We now depend on a valid local <code>WEB3FORMS_ACCESS_KEY</code> for direct feedback delivery</li><li>Stage 4 remains the main gameplay balance problem for the four-stage <code>1.0</code> slice</li><li>Stage 4 failures are now better localized:<ul><li>early formation-shot fairness</li><li>later escort / diagonal collision fairness</li></ul></li><li>Imported self-play summaries still need capture-driven life-loss accounting and better post-hit pause reporting in the day-to-day workflow</li><li>Modem feedback is surfacing two current product concerns that should stay visible:<ul><li>hit/explosion/post-hit pause feel</li><li>whether a stage should allow more than one successful fighter capture</li></ul></li><li>The Stage 4+ special three-ship boss squadron behavior is only partially closed:<ul><li>bonus logic exists</li><li>but we still need it to show up naturally in gameplay and read clearly as a</li></ul></li></ul>
 <p>visible arcade event before the four-stage release is considered complete</p>
 <ul><li>Stage progression in the five-ship scenario is still too shallow for richer late-stage comparison</li><li>Later-stage enemy variety is still far below Galaga&#39;s broader stage-band content</li><li>Original reference videos remain helpful because the current automated harness measures outcomes, not visual fidelity on its own</li></ul>
@@ -1197,13 +1226,19 @@ npm run publish:production</code></pre>
 <ul><li>a polished Stage <code>1</code> through Stage <code>4</code> experience</li><li>one cleaned-up challenge stage</li><li>one solid capture / rescue loop</li><li>stable local and hosted play</li><li>persistent high scores and clean end-of-run flow</li></ul>
 <p>Expansion beyond Stage <code>4</code>, new theme systems, and broader content breadth are still valuable, but they are now explicitly post-<code>1.0</code> work unless they are needed to support this smaller shipped slice.</p>
 <h4>Post-Launch View</h4>
-<p><code>1.0.0</code> is now live.</p>
+<p><code>1.0.2</code> is now live.</p>
 <p>Current release checkpoint:</p>
-<ul><li>beta:<ul><li><code>1.0.0-beta.1+build.276.sha.a59c5ad.beta</code></li></ul></li><li>production:<ul><li><code>1.0.0+build.276.sha.a59c5ad</code></li></ul></li><li>production promotion path was used successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff was completed</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
+<ul><li>local <code>localhost</code>:<ul><li><code>1.2.0</code> candidate in active integration</li></ul></li><li>hosted <code>/dev</code>:<ul><li>current integrated Platinum candidate once published</li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.0.2-beta.1+build.290.sha.831a2c6.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.0.2+build.290.sha.831a2c6</code></li></ul></li><li>production promotion path was used successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff was completed</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
 <p>fields</p>
-<ul><li>the production leaderboard baseline reset for <code>#130</code> is complete</li></ul>
+<ul><li>the production leaderboard baseline reset for <code>#130</code> is complete</li><li>the first post-launch hotfix line is now established:<ul><li>production-visible fixes after <code>1.0.0</code> bump <code>PATCH</code></li><li>build metadata still identifies the exact artifact</li></ul></li></ul>
 <p>Current coding priority:</p>
-<ol><li>keep <code>1.0.0</code> stable in production</li><li>move <code>#44</code> and the broader refinement/admin/identity work into <code>1.x</code></li><li>start the structured post-launch quality and platform track deliberately</li></ol>
+<ol><li>keep Aurora <code>1.0.2</code> stable in production</li><li>complete the Platinum rerelease milestone for the existing Aurora game</li><li>close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable</li><li>use <code>1.2.0</code> for the Platinum platform release milestone</li><li>use <code>1.2.x</code> patch releases for Aurora-on-Platinum stabilization after launch</li><li>begin the Aurora-specific <code>Game Designer</code> planning phase using:</li></ol>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md</code></li></ul>
+<h4>Current platform next steps</h4>
+<p>The immediate Platinum path is:</p>
+<ol><li>finish and verify the Aurora-on-Platinum rerelease baseline</li><li>keep the selected-pack shell, splash, picker, and platform-only harnesses green</li><li>release Aurora publicly as a clearly Platinum-hosted game</li><li>then start preparation for the first playable <code>Galaxy Guardians</code> slice</li></ol>
+<p>The current stabilization gate lives in:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md</code></li></ul>
 <p>What changed since the last full review:</p>
 <ul><li>closed:<ul><li><code>#48</code></li><li><code>#85</code></li><li><code>#125</code></li><li><code>#61</code></li><li><code>#76</code></li><li><code>#79</code></li><li><code>#82</code></li><li><code>#106</code></li><li><code>#107</code></li><li><code>#108</code></li><li><code>#109</code></li><li><code>#112</code></li><li><code>#113</code></li></ul></li><li>deferred from the <code>1.0</code> path:<ul><li><code>#44</code></li></ul></li><li>release-path hardening is now proven in a real rehearsal, not just implemented</li><li>remaining pilot/admin/email/platform work is now clearly tracked as post-<code>1.0</code></li><li>the production leaderboard reset is complete:<ul><li><code>#130</code></li></ul></li></ul>
 <div class="tableWrap">
@@ -1214,13 +1249,72 @@ npm run publish:production</code></pre>
             <tbody>
               <tr><td>Can Slip</td><td><code>#96</code> / <code>#98</code></td><td>Shared</td><td>Watch / close candidate</td><td>Recorder trust and release-pipeline cleanup both improved significantly. These no longer look like primary launch blockers.</td><td>Keep the checks green and close if no new regression appears during final signoff.</td><td>Phase 4</td></tr>
 <tr><td>Can Slip</td><td><code>#103</code> / <code>#105</code> / <code>#110</code> / <code>#114</code> / <code>#115</code> / <code>#116</code> / <code>#117</code> / <code>#119</code> / <code>#120</code></td><td>Shared</td><td>Post-blocker polish</td><td>The shell, pilot, popup, and replay surfaces are all much stronger now. Remaining work is polish/expansion unless a new trust bug appears.</td><td>Keep improving in <code>1.x</code> unless a concrete launch issue reappears.</td><td>Phase 3</td></tr>
-<tr><td>Post-1.0</td><td><code>#44</code> / <code>#121</code> / <code>#124</code> / <code>#126</code> / <code>#127</code> / <code>#128</code> / <code>#129</code></td><td>Shared</td><td>Planned</td><td>Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, and version-aware leaderboard tracking all belong to the <code>1.x</code> refinement track.</td><td>Keep them in the structured <code>1.x</code> program, not the <code>1.0</code> blocker path.</td><td>Post-1.0</td></tr>
+<tr><td>Post-1.0</td><td><code>#44</code> / <code>#121</code> / <code>#124</code> / <code>#126</code> / <code>#127</code> / <code>#128</code> / <code>#129</code> / <code>#133</code></td><td>Shared</td><td>Planned</td><td>Bottom-right stage indicator, shared pilot media, control-centre/admin tooling, cleaner non-production backend split, permanent pilot identity/account deletion, branded email polish, version-aware leaderboard tracking, and a Cloudflare-owned feedback transport all belong to the structured <code>1.x</code> platform track.</td><td>Keep them in the staged <code>1.1.x</code> / <code>1.2.x</code> program, not the <code>1.0</code> blocker path.</td><td>Post-1.0</td></tr>
             </tbody>
           </table>
         </div>
 <p>Items currently treated as post-<code>1.0</code> unless they become necessary for external playtesting or operational stability:</p>
 <ul><li><code>#69</code> remote gameplay logs and optional video artifacts</li><li><code>#70</code> homepage recent plays / watch links</li><li><code>#121</code> shared authenticated pilot media and Aurora-owned YouTube publishing</li><li><code>#17</code> broader reference baseline work</li><li><code>#18</code> / <code>#32</code> experimental Stage <code>2</code> / <code>4</code> tuning for <code>1.1</code></li><li><code>#9</code> broader challenge-stage fidelity / variation work</li><li><code>#19</code> later-run collision-chain regression outside the four-stage slice</li><li>replay, submission, theme-system, and broader public-workflow enhancements</li><li>treat shared authenticated video publishing as a post-<code>1.0</code>, pre-<code>2.0</code></li></ul>
 <p>stretch goal rather than a launch requirement</p>
+<h4>Structured <code>1.x</code> Release Path</h4>
+<h5>Immediate Platinum Milestone: Aurora Rerelease On Platinum</h5>
+<p>Primary goal:</p>
+<ul><li>rerelease the existing Aurora game explicitly as a Platinum-hosted title</li></ul>
+<p>without changing the shipped <code>1.0.2</code> gameplay contract</p>
+<p>Execution order:</p>
+<ol><li>keep Aurora behavior matched to the shipped <code>1.0.2</code> baseline</li><li>finish clarifying public shell language so Platinum is the host platform and</li></ol>
+<p>Aurora is the current game pack</p>
+<ol><li>make the game-picker path feel intentional for the rerelease:</li></ol>
+<ul><li>Platinum branding button in the shell</li><li>dismissable Platinum splash surface</li><li>game-picker preview with a dismissable <code>Coming Soon</code> splash for</li></ul>
+<p><code>Galaxy Guardians</code></p>
+<ol><li>only after the rerelease, start dev-playable sibling gameplay work</li></ol>
+<p>Definition of success:</p>
+<ul><li>Aurora still plays like the shipped game</li><li>Platinum is visible as the host platform rather than hidden implementation</li></ul>
+<p>terminology</p>
+<ul><li>the picker can advertise future games without implying they are already</li></ul>
+<p>playable</p>
+<h5><code>1.1.x</code>: Architectural Stabilization And Shared Runtime Extraction</h5>
+<p>Primary goal:</p>
+<ul><li>make Aurora the first clean game pack on a shared fixed-screen shooter runtime</li></ul>
+<p>Execution order:</p>
+<ol><li>stabilize Aurora into explicit internal layers:</li></ol>
+<ul><li>runtime core</li><li>shell</li><li>replay/logging/harness</li><li>service boundaries</li><li>Aurora-specific game rules</li></ul>
+<ol><li>extract shared modules inside the monorepo without changing behavior</li><li>keep existing harnesses green through each extraction step</li><li>move only proven seams:</li></ol>
+<ul><li>do not build a generic physics engine</li><li>do not split repos</li><li>do not generalize multi-genre abstractions yet</li></ul>
+<p>Expected issue groups:</p>
+<ul><li><code>#111</code></li><li><code>#44</code></li><li>selected replay/shell polish items that support the extracted seam</li></ul>
+<p>Definition of success:</p>
+<ul><li>Aurora still ships reliably</li><li>replay, shell, input, harness, and build systems are less one-off</li><li>shared module boundaries are real enough to support a sibling shooter later</li><li>Aurora can be rereleased publicly as a Platinum-hosted title without losing</li></ul>
+<p>player trust</p>
+<h5><code>1.2.x</code>: Shared Services And Operator Infrastructure</h5>
+<p>Primary goal:</p>
+<ul><li>move from Aurora-only services toward platform-owned services</li></ul>
+<p>Execution order:</p>
+<ol><li>make player identity more explicit and permanent</li><li>separate production and non-production backend paths more cleanly</li><li>key scores and runs by version/game context</li><li>replace third-party feedback relay dependence with a platform-owned path</li><li>introduce the first operator/control-centre surfaces</li></ol>
+<p>Expected issue groups:</p>
+<ul><li><code>#126</code></li><li><code>#127</code></li><li><code>#128</code></li><li><code>#129</code></li><li><code>#124</code></li><li><code>#133</code></li></ul>
+<p>Definition of success:</p>
+<ul><li>identity, scoreboard, feedback, and operational tooling are no longer tightly</li></ul>
+<p>coupled to Aurora-only assumptions</p>
+<ul><li>the project is ready to support shared services across close sibling games</li></ul>
+<h5>Later <code>1.x</code>: Shared Media And Second-Game Proof</h5>
+<p>Primary goal:</p>
+<ul><li>prove the platform with one close sibling and add optional shared media</li></ul>
+<p>Expected issue groups:</p>
+<ul><li><code>#121</code></li><li>second-game extraction work under <code>#111</code></li></ul>
+<p>Definition of success:</p>
+<ul><li>Aurora runs cleanly on the shared runtime</li><li>one Galaxian-like sibling can reuse the runtime without changing its core</li><li>media and replay publishing sit on top of stable identity and service seams</li></ul>
+<h4>Current Next Steps</h4>
+<ol><li>run the Platinum beta/production promotion rehearsal for the current Aurora</li></ol>
+<p>rerelease candidate</p>
+<ol><li>verify the promoted public-lane build metadata, shell framing, and</li></ol>
+<p>lane-specific service behavior</p>
+<ol><li>ship the Platinum rerelease milestone for Aurora with:</li></ol>
+<ul><li>Aurora playable</li><li><code>Galaxy Guardians</code> clearly marked as coming soon</li></ul>
+<ol><li>return to Aurora gameplay and polish follow-up work after the rerelease</li></ol>
+<p>baseline is public and trusted, starting with:</p>
+<ul><li><code>#140</code></li><li>carried-fighter/results-screen visual cleanup</li><li>extra-ship visibility/audio</li><li>dual-ship survival edge cases</li></ul>
+<ol><li>only then begin the first dev-only playable <code>Galaxy Guardians</code> slice</li></ol>
 <h4>Track A. Autonomous Original-Galaga Baseline</h4>
 <ol><li>Build and maintain a durable reference baseline using:</li></ol>
 <ul><li>manuals</li><li>curated gameplay footage</li><li>emulator captures when available</li><li>secondary written references only where they help fill later-stage context</li></ul>
@@ -1276,8 +1370,42 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Release Train</h3>
-<ul><li>Current line:<ul><li><code>1.0.x</code></li></ul></li><li>Current phase:<ul><li><code>post-launch stabilization</code></li></ul></li><li>Goal of this phase:<ul><li>keep the shipped four-stage arcade slice stable while moving the broader</li></ul></li></ul>
-<p>identity, admin, and media work into the planned <code>1.x</code> track</p>
+<ul><li>Current line:<ul><li><code>1.2.0</code></li></ul></li><li>Current phase:<ul><li><code>Platinum Release 1 promotion</code></li></ul></li><li>Goal of this phase:<ul><li>keep the shipped four-stage Aurora arcade slice stable while promoting the</li></ul></li></ul>
+<p>first public Platinum-hosted release and keeping the <code>localhost</code> -&gt; hosted <code>/dev</code> -&gt; hosted <code>/beta</code> -&gt; hosted <code>/production</code> lane model disciplined</p>
+<h3>Immediate Platform Milestone: Aurora Rerelease On Platinum</h3>
+<p>Target outcome:</p>
+<ul><li>Aurora remains the same shipped game in play feel and trust terms</li><li>Platinum becomes visible as the host platform rather than only an internal</li></ul>
+<p>architecture name</p>
+<ul><li>the shell can advertise future games without pretending they are playable</li></ul>
+<p>Current status:</p>
+<ul><li>in progress</li><li>dev-visible Platinum shell framing is now real</li><li>Aurora is already playable on Platinum in dev</li><li>the main remaining work is rerelease hardening, manual shell verification,</li></ul>
+<p>and public-facing wording/identity polish</p>
+<p>Definition:</p>
+<ul><li>rerelease the existing Aurora build path with Platinum host framing</li><li>keep the shipped <code>1.0.2</code> gameplay contract intact</li><li>add a platform-owned Platinum splash surface</li><li>use the game picker to show a dismissable <code>Coming Soon</code> splash for</li></ul>
+<p><code>Galaxy Guardians</code></p>
+<p>Immediate next steps:</p>
+<ol><li>keep the Platinum shell and platform harnesses green</li><li>verify the Platinum-framed Aurora experience manually in dev</li><li>decide which Aurora gameplay follow-ups are post-rerelease rather than</li></ol>
+<p>blockers</p>
+<ol><li>promote the next stable Aurora build with explicit Platinum framing</li></ol>
+<p>Current stabilization artifact:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md</code></li></ul>
+<h3>Minimal Second-Game Dev Slice: Galaxy Guardians</h3>
+<p>Target outcome:</p>
+<ul><li>a dev-only second game pack that proves Platinum can host a clearly different</li></ul>
+<p>ruleset without shipping that second game publicly yet</p>
+<p>Minimal scope:</p>
+<ul><li>formation rack</li><li>enemy dives</li><li>flagship/escort scoring behavior</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss / game over / results</li></ul>
+<p>Explicitly not required in the first dev-only slice:</p>
+<ul><li>capture/rescue</li><li>dual fighter</li><li>challenge stages</li><li>production polish</li><li>rich designer/content systems</li></ul>
+<p>Why this matters:</p>
+<ul><li>it proves the platform seam with a smaller and different game</li><li>it keeps the second-game effort narrow enough to be useful rather than</li></ul>
+<p>sprawling</p>
+<ul><li>it avoids rushing a second public release before Platinum is truly ready</li></ul>
+<p>Key issue groups:</p>
+<ul><li>platform shell identity and copy cleanup</li><li>picker / splash / notice surfaces</li><li>Aurora-on-Platinum proof harnesses</li><li>public-facing wording that distinguishes host platform vs active game</li><li><code>#140</code> bonus-stage numbering so challenge stages read like bonus</li></ul>
+<p>opportunities instead of ordinary numbered progression</p>
+<p>Suggested versioning:</p>
+<ul><li><code>1.2.0</code></li></ul>
 <h3>Immediate Target: 1.0 Four-Stage Slice</h3>
 <p>Definition:</p>
 <ul><li>Stage <code>1</code></li><li>Stage <code>2</code></li><li>Stage <code>3</code> challenging stage</li><li>Stage <code>4</code></li></ul>
@@ -1333,14 +1461,39 @@ npm run publish:production</code></pre>
 <ul><li>production vs pre-production score/data separation</li><li>environment-aware build labeling and account/status presentation</li><li>release workflow hardening between dev, production, and beta lanes</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.0.x</code></li><li><code>1.1.x</code></li></ul>
-<h3>Milestone G: Early Post-1.0 Arcade Platform Extraction</h3>
+<h3>Milestone G: <code>1.1.x</code> Aurora Runtime Stabilization</h3>
 <p>Target outcome:</p>
-<ul><li>Aurora keeps shipping as the first game pack on a more stable shared runtime</li><li>replay, shell, harness, input, build, and logging systems become less one-off</li><li>similar cabinet shooters can reuse mature systems with less churn</li></ul>
+<ul><li>Aurora keeps shipping cleanly while its current one-off runtime is separated</li></ul>
+<p>into clearer internal layers</p>
+<ul><li>runtime, shell, replay/logging, and service boundaries become explicit</li><li>future extraction work can move modules without redesigning gameplay at the</li></ul>
+<p>same time</p>
+<ul><li>Aurora can be described and shipped clearly as a Platinum-hosted game pack</li></ul>
 <p>Key issue groups:</p>
-<ul><li><code>#111</code> extract a shared arcade platform for Galaga-family cabinet shooters</li><li>early <code>gameDef</code> / game-pack extraction</li><li>shared shell / replay / harness / build systems</li><li>shared left-right cabinet input model for sibling fixed-screen shooters</li></ul>
+<ul><li><code>#111</code> extract a shared arcade platform for Galaga-family cabinet shooters</li><li>shell/replay/harness/input cleanup that creates real module seams</li><li>selective post-launch polish that supports stable extraction boundaries</li><li><code>#44</code> bottom-right stage indicator only if it helps the stabilized HUD seam</li></ul>
+<p>Suggested versioning:</p>
+<ul><li><code>1.1.x</code></li></ul>
+<h3>Milestone H: <code>1.1.x</code> Early Arcade Platform Extraction</h3>
+<p>Target outcome:</p>
+<ul><li>Aurora keeps shipping as the first game pack on a more stable shared runtime</li><li>replay, shell, harness, input, build, and logging systems become less one-off</li><li>similar cabinet shooters can reuse mature systems with less churn</li><li>future-title previews can exist in the shell before their gameplay slices are</li></ul>
+<p>ready</p>
+<p>Key issue groups:</p>
+<ul><li><code>#111</code> extract a shared arcade platform for Galaga-family cabinet shooters</li><li>early <code>gameDef</code> / game-pack extraction</li><li>shared shell / replay / harness / build systems</li><li>shared left-right cabinet input model for sibling fixed-screen shooters</li><li>keep Aurora-specific gameplay rules local until a second game proves the seam</li></ul>
 <p>Suggested versioning:</p>
 <ul><li><code>1.1.x</code></li><li><code>1.2.x</code></li></ul>
-<h3>Milestone H: Shared Pilot Media And Publishing</h3>
+<h3>Milestone I: <code>1.2.x</code> Shared Services And Operator Surfaces</h3>
+<p>Target outcome:</p>
+<ul><li>pilot identity, scoreboards, feedback, and environment separation become</li></ul>
+<p>platform-owned services rather than Aurora-only assumptions</p>
+<ul><li>the project gains the first operator tooling needed to support a growing</li></ul>
+<p>game family</p>
+<p>Key issue groups:</p>
+<ul><li><code>#126</code> separate non-production Supabase identities and score paths</li><li><code>#127</code> require permanent pilot identity and support account deletion</li><li><code>#128</code> brand and clarify account emails</li><li><code>#129</code> track scores by exact version</li><li><code>#124</code> control-centre/admin surface</li><li><code>#133</code> replace third-party feedback relay with a Cloudflare-owned path and</li></ul>
+<p>evaluate free fallbacks as needed</p>
+<p>Suggested versioning:</p>
+<ul><li><code>1.2.x</code></li></ul>
+<h3>Current Next-Step Read</h3>
+<ol><li>finish the Aurora rerelease framing on Platinum</li><li>keep Aurora gameplay baseline aligned with shipped <code>1.0.2</code></li><li>continue separating platform harnesses from game-pack harnesses</li><li>only then begin the first dev-playable sibling gameplay slice</li></ol>
+<h3>Milestone J: Shared Pilot Media And Publishing</h3>
 <p>Target outcome:</p>
 <ul><li>authenticated pilot runs can become canonical shared run records</li><li>selected validated runs can be published through the Aurora-owned YouTube channel</li><li>pilot history can show official runs plus replay/watch links where available</li><li>local replay remains the immediate playback path and fallback</li></ul>
 <p>Key issue groups:</p>
@@ -1349,7 +1502,9 @@ npm run publish:production</code></pre>
 <ul><li><code>1.3.x</code></li><li><code>1.4.x</code></li><li>potentially <code>1.5.x</code></li><li>explicitly before any future <code>2.0.0</code></li></ul>
 <h3>Post-1.0 Architecture Themes</h3>
 <p>These are the architectural themes we should keep capturing incrementally during the <code>v1</code> push so they can become the basis of a focused post-<code>v1</code> platform plan.</p>
-<ul><li>move game rules and tuning further into data-driven <code>gameDef</code> structures</li><li>use <code>#111</code> as the early post-<code>1.0</code> umbrella for turning Aurora into a shared</li></ul>
+<ul><li>move game rules and tuning further into data-driven <code>gameDef</code> structures only</li></ul>
+<p>after Aurora already runs cleanly on the extracted runtime</p>
+<ul><li>use <code>#111</code> as the early post-<code>1.0</code> umbrella for turning Aurora into a shared</li></ul>
 <p>arcade platform that can support Galaga variants, Galaxian, and other similar cabinet shooters</p>
 <ul><li>isolate optional systems so capture, challenge stages, special squadrons, and</li></ul>
 <p>dual-fighter behavior are less entangled with the core update loop</p>
@@ -1357,6 +1512,8 @@ npm run publish:production</code></pre>
 <p>runtime refactors</p>
 <ul><li>separate engine-like concerns from game-specific rules only when the seam is</li></ul>
 <p>real and already helping Aurora</p>
+<ul><li>avoid building a generic physics engine or broad multi-genre engine layer too</li></ul>
+<p>early</p>
 <ul><li>decouple visual/stylistic assets toward a swappable brand-package only after</li></ul>
 <p>the four-stage slice is stable enough that theming work does not destabilize launch</p>
 <ul><li>evolve the log viewer from a local artifact tree toward an optional remote</li></ul>
@@ -1381,16 +1538,42 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>ARCHITECTURE.md</code> during build.</p>
         <div class="markdown">
           <p>This document is the short technical map for how the project is organized and how work should flow through it.</p>
+<p>Related planning artifact:</p>
+<ul><li>maintained platform/game separation diagram:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>audio planning and source manifest:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AUDIO_PLAN.md</code></li></ul></li><li>curated splash/quote/content planning:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/CONTENT_PLAN.md</code></li></ul></li><li>Aurora-specific game designer inventory:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md</code></li></ul></li><li>architect review response baseline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECT_REVIEW_RESPONSE.md</code></li></ul></li><li>Platinum-focused forward architecture review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li><li>Aurora stabilization gate for the Platinum rerelease:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_PLATINUM_STABILIZATION_CHECKLIST.md</code></li></ul></li></ul>
+<h3>Current Migration State</h3>
+<p>The architecture migration is now in the middle phase, not the speculative phase.</p>
+<p>What is already true:</p>
+<ul><li>Platinum exists as the named host platform</li><li>Aurora is the first fully playable game pack on Platinum in dev</li><li>the selected-pack path, picker shell, shell themes, and platform-only boot</li></ul>
+<p>proof harness are all real</p>
+<ul><li>major gameplay, render, replay, service, and entity seams have already been</li></ul>
+<p>extracted into explicit modules</p>
+<p>What is not done yet:</p>
+<ul><li>the final public <code>1.2.0</code> promotion still needs hosted <code>/beta</code> and hosted</li></ul>
+<p><code>/production</code> verification</p>
+<ul><li>some shell/bootstrap/debug/storage compatibility shims are still Aurora-named</li><li>future-game shell previews can still be polished further</li></ul>
+<p>This means the current work is no longer &quot;extract modules until something looks like a platform.&quot; The current work is:</p>
+<ol><li>finish the <code>1.2.0</code> Platinum Release 1 promotion path</li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> contract</li><li>only then start the first truly playable sibling game slice</li></ol>
+<p>The next game-owned design phase should use:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md</code></li></ul>
+<p>as the planning baseline for expanding Aurora stages, challenge-stage themes, boss personality, and game-owned content definitions without re-entangling those decisions with Platinum core platform work.</p>
+<h3>Platform Naming</h3>
+<p>The shared cabinet-shooter platform should now be referred to as:</p>
+<ul><li><code>Platinum</code></li></ul>
+<p>This helps keep the language clear:</p>
+<ul><li><code>Platinum</code><ul><li>the shared platform, shell, services, and pack-hosting runtime</li></ul></li><li><code>Aurora Galactica</code><ul><li>the first fully playable game pack running on Platinum</li></ul></li><li>future sibling packs such as <code>Galaxy Guardians</code><ul><li>additional game packs hosted by Platinum</li></ul></li></ul>
+<p>Naming rule for sibling planning:</p>
+<ul><li><code>Galaxian</code><ul><li>the original game/reference lineage</li></ul></li><li><code>Galaxy Guardians</code><ul><li>the planned future Platinum game title inspired in part by that lineage</li></ul></li></ul>
+<p>Where older Aurora-branded storage keys, debug globals, or compatibility shims still exist, they should be treated as transitional implementation details, not as the platform name.</p>
 <h3>Runtime Layout</h3>
 <h4>Source Files</h4>
-<ul><li>HTML shell:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html</code></li></ul></li><li>Styles:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/styles.css</code></li></ul></li><li>Boot / metadata / audio / UI / logging:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>Gameplay / stage flow / scoring / capture / enemy logic:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Rendering / HUD / overlays / sprites:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Harness hooks:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
+<ul><li>HTML shell:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html</code></li></ul></li><li>Styles:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/styles.css</code></li></ul></li><li>Boot / metadata / audio / storage / session logging:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>Shared runtime input / build-stamp / shell helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>Shared replay / session telemetry / recording helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul></li><li>Shared platform service policy / identity / transport helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js</code></li></ul></li><li>Shared leaderboard / account UI / panel-state helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li></ul></li><li>Aurora-specific player lifecycle, harness control, and manual movement helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-flow.js</code></li></ul></li><li>Aurora-specific player combat, bullet resolution, and rescue-return helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-combat.js</code></li></ul></li><li>Aurora-specific enemy dive / challenge motion / attack helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/06-enemy-behavior.js</code></li></ul></li><li>Aurora-specific capture / rescue / carried-fighter helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/07-capture-rescue.js</code></li></ul></li><li>Aurora-specific scoring / rescue-award / challenge-bonus helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/08-score-awards.js</code></li></ul></li><li>Aurora-specific stage setup / formation / transition helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/09-stage-flow.js</code></li></ul></li><li>Shared remote leaderboard fetch / cache / score-submit helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li></ul></li><li>Shared account auth / session / Supabase init helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js</code></li></ul></li><li>Aurora game-pack metadata / capabilities / stage themes / scoring tables:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li></ul></li><li>Shared enemy/entity model helpers for pack-owned core and optional fields:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul></li><li>Shared game-picker shell surface for installed and preview pack selection:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul></li><li>Gameplay / scoring / capture / enemy logic:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Shared cabinet render shell / HUD layout / board-message helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js</code></li></ul></li><li>Aurora render orchestration / scene composition:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Aurora-specific board rendering / sprites / entity draw routines:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/21-render-board.js</code></li></ul></li><li>Harness hooks:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
 <h4>Generated Output</h4>
 <ul><li>Local dev build:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li></ul></li><li>Local dev build metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li><li>Stable production artifact:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li></ul></li><li>Stable production build metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li><li>Promoted beta snapshot:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/beta/</code></li></ul></li></ul>
 <h3>Build / Deploy Flow</h3>
 <h4>Local Build</h4>
 <ul><li>Build script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li><li>Generates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li><li>Production promotion:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js</code></li></ul></li><li>Produces:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li><li>Local ready-state helper:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/dev/local-resume.js</code></li><li>starts the local <code>dist/dev</code> game server and the log viewer together for machine handoff/debugging</li></ul></li></ul>
 <h4>Pages Deploy</h4>
-<ul><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml</code></li></ul></li><li>CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate <code>Aurora-Galactica</code> repo.</li><li>In practice:<ul><li><code>Codex-Test1</code> produces generated artifacts in <code>dist/</code></li><li><code>Aurora-Galactica</code> is the public artifact host for:<ul><li><code>/</code></li><li><code>/beta/</code></li></ul></li><li>lane publishing is now scripted through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>publish readiness is checked through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li></ul></li></ul>
+<ul><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml</code></li></ul></li><li>CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate <code>Aurora-Galactica</code> repo.</li><li>In practice:<ul><li><code>Codex-Test1</code> produces generated artifacts in <code>dist/</code></li><li><code>Aurora-Galactica</code> is the public artifact host for:<ul><li><code>/dev/</code></li><li><code>/</code></li><li><code>/beta/</code></li></ul></li><li>lane publishing is now scripted through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>publish readiness is checked through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li></ul></li></ul>
 <h4>Public Project Pages Sync</h4>
 <ul><li>Sync script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code></li></ul></li><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/sync-public-pages.yml</code></li></ul></li><li>This syncs project/status surfaces to <code>sgwoods/public</code>.</li><li>It does not publish the playable game.</li></ul>
 <h3>Testing / Evidence Flow</h3>
@@ -1398,6 +1581,56 @@ npm run publish:production</code></pre>
 <ul><li>Run gameplay:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>Analyze a run:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li><li>Batch runner:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>Batch prioritization:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/tuning-report.js</code></li></ul></li><li>Scenarios:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/scenarios/</code></li></ul></li></ul>
 <h4>Log Viewer</h4>
 <ul><li>Local review server:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/server.js</code></li></ul></li><li>Viewer UI:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/app.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/log-viewer/styles.css</code></li></ul></li><li>The viewer reads the same recursive artifact tree under:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/</code></li></ul></li><li>Review-ready runs should include:<ul><li><code>summary.json</code></li><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.review.webm</code> when available</li></ul></li><li>The viewer uses <code>summary.json</code> as the run index and then resolves the neighboring session/video files from the summary metadata.</li></ul>
+<h4>Harness Separation Model</h4>
+<p>As Platinum becomes a real platform, the harness model should separate platform-proof tests from game-pack behavior tests. We should stop treating all harnesses as one flat category.</p>
+<p>The intended harness families are:</p>
+<ul><li>platform-only harnesses<ul><li>prove shell, picker, layout, notices, replay plumbing, service adapters,</li></ul></li></ul>
+<p>and active-pack install behavior without depending on Aurora-only mechanics</p>
+<ul><li>game-pack harnesses<ul><li>prove Aurora or future sibling gameplay behavior such as formations, dives,</li></ul></li></ul>
+<p>capture/rescue, score rules, and stage progression</p>
+<ul><li>include role/persona outcome-distribution checks so we can catch</li></ul>
+<p>unintended difficulty or timing drift even when the structural rules still look valid</p>
+<ul><li>seam / contract harnesses<ul><li>prove that the boundary between Platinum and a <code>gamePack</code> is stable</li><li>these should validate:<ul><li>required pack metadata</li><li>capability flags</li><li>entity contract compatibility</li><li>stage/scoring/theme hooks</li><li>graceful omission of unsupported mechanics</li></ul></li></ul></li><li>migration / compatibility harnesses<ul><li>prove that compatibility shims, storage migrations, and staged rollouts do</li></ul></li></ul>
+<p>not silently destroy old user data or break downgrade-safe behavior</p>
+<h4>Architectural-Only Harnesses</h4>
+<p>Yes, we should explicitly have architectural-only harnesses. These are different from normal gameplay harnesses.</p>
+<p>Architectural-only harnesses should answer questions like:</p>
+<ul><li>can Platinum install a selected pack and boot through that path cleanly</li><li>can the shell switch packs and shell themes without breaking wait mode</li><li>can a pack omit capture/rescue or challenge features and still render safely</li><li>do shared services still work when pack identity changes</li><li>does the runtime consume capability-gated entity fields through helpers</li></ul>
+<p>rather than assuming Aurora-only state</p>
+<p>These tests should not care whether Aurora cleared stage 4 correctly. They should care whether the platform boundary behaved correctly.</p>
+<h4>Seam Tests Are First-Class</h4>
+<p>The seams themselves need harness coverage. That means the tests should not only validate outcomes on screen; they should also validate the contract shape.</p>
+<p>Examples:</p>
+<ul><li>a pack without <code>usesCaptureRescue</code> should not require <code>carry</code>, <code>beam</code>, or</li></ul>
+<p>related entity fields</p>
+<ul><li>a challenge-stage layout change should be caught both by:<ul><li>a seam harness that checks the planned wave composition and cadence</li><li>and a game-pack outcome harness that compares persona success/failure</li></ul></li></ul>
+<p>distribution against the known-good baseline</p>
+<ul><li>a challenge-stage motion change should also be caught by a motion-profile</li></ul>
+<p>harness that samples fixed wave positions against the shipped baseline</p>
+<ul><li>a pack without challenge stages should still boot, render, and score</li><li>shell/front-door surfaces should render from pack-owned copy instead of</li></ul>
+<p>Aurora literals</p>
+<ul><li>score, auth, replay, and feedback flows should remain platform-owned even as</li></ul>
+<p>the active pack changes</p>
+<h4>Documentation Rule</h4>
+<p>Documentation must mirror these separations.</p>
+<p>That means:</p>
+<ul><li><code>ARCHITECTURE.md</code><ul><li>owns the runtime/platform/game-pack boundary and the harness categories</li></ul></li><li><code>AUDIO_PLAN.md</code><ul><li>owns the platform audio event vocabulary vs pack-owned audio identity</li></ul></li><li><code>CONTENT_PLAN.md</code><ul><li>owns approved quote/splash/notice content boundaries</li></ul></li><li>future harness docs should name which family a test belongs to:<ul><li>platform-only</li><li>game-pack</li><li>seam / contract</li><li>migration / compatibility</li></ul></li></ul>
+<h4>Near-Term Testing Direction</h4>
+<p>The next useful harness organization step should be:</p>
+<ol><li>tag existing harnesses by family</li><li>add the first explicit platform-only boot/install harness for Aurora on</li></ol>
+<p>Platinum</p>
+<ol><li>add the first seam harness that boots a minimal capability-reduced sibling</li></ol>
+<p>fixture without capture/rescue</p>
+<ol><li>keep hotfix smoke suites separate from architecture-proof suites</li></ol>
+<p>This separation will matter more, not less, as we start extending Platinum for new game packs.</p>
+<p>The first explicit platform-only proof harness is now:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js</code></li></ul>
+<p>Its role is to prove that:</p>
+<ul><li>Aurora can sit in wait mode as the active installed pack</li><li>the Platinum shell can switch to a preview sibling pack and back</li><li>the selected pack, not an Aurora-only fallback path, governs launch</li><li>Aurora still starts correctly after being launched through that selected-pack</li></ul>
+<p>path</p>
+<p>Current status:</p>
+<ul><li>this harness is now green on the current tree</li><li>that gives us the first explicit automated proof that Aurora can sit in the</li></ul>
+<p>Platinum shell, survive pack switching, and then launch again through the selected-pack path</p>
 <h4>Real Play</h4>
 <ul><li>Player-generated <code>.json</code> and <code>.webm</code> are browser download artifacts first<ul><li>they typically land in the user’s downloads location</li></ul></li><li>Player-native in-game replay state is browser-local storage, not the harness archive</li><li>Player-generated <code>.json</code> and <code>.webm</code> can then be imported and analyzed</li><li>The same analysis pipeline should be used whenever possible so live play and harness results stay comparable</li><li>The log viewer can inspect those imported runs as long as they are copied into the expected <code>harness-artifacts/</code> folder structure and have a <code>summary.json</code> beside them.</li><li>Formal policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARTIFACT_POLICY.md</code></li></ul></li></ul>
 <h3>Reference Flow</h3>
@@ -1425,6 +1658,302 @@ npm run publish:production</code></pre>
 <p>The intended configurable/game-pack layer is:</p>
 <ul><li>formations</li><li>enemy families</li><li>scoring tables</li><li>stage cadence</li><li>attack scripts</li><li>optional mechanics such as capture/rescue or challenge stages</li></ul>
 <p>The goal is to reduce churn in mature infrastructure while letting future games such as Galaxian, Aurora variants, or similar fixed-screen cabinet shooters reuse the stable platform with smaller game-specific packs.</p>
+<h3>First Platform Contract</h3>
+<p>The next phase should stop extracting only by file size and start extracting toward a real platform contract. The first contract should stay small and practical.</p>
+<h4>runtimeState</h4>
+<p>Owns the cross-game runtime state that should not depend on Aurora rules:</p>
+<ul><li>lane, build, and release metadata</li><li>frame clock and scene lifecycle</li><li>pause / wait / attract / active / results states</li><li>normalized input state</li><li>replay / telemetry session state</li><li>panel and overlay visibility state</li><li>durable local storage handles and cached settings</li></ul>
+<h4>shellState</h4>
+<p>Owns the cabinet shell and presentation surfaces that should be reusable across close sibling games:</p>
+<ul><li>board layout and viewport metrics</li><li>HUD slots and score banner placement</li><li>build stamp and refresh-reminder state</li><li>popup and modal placement</li><li>wait-mode and board-message surfaces</li><li>cabinet control rail state</li><li>platform-owned shell frame themes:<ul><li>top / left / right / bottom frame styling</li><li>marquee chrome</li><li>rail backgrounds and trim</li><li>release vs preview shell looks</li></ul></li></ul>
+<p>The active game pack should be able to select a default shell frame theme, but the frame theme definition itself belongs to Platinum rather than to Aurora or future sibling games.</p>
+<h4>serviceAdapters</h4>
+<p>Defines the small set of platform-owned service boundaries. These should be consumed as interfaces, even if the current implementation is still thin.</p>
+<ul><li><code>authService</code><ul><li>sign in</li><li>sign out</li><li>sign up</li><li>reset password</li><li>load session</li></ul></li><li><code>scoreService</code><ul><li>submit score</li><li>fetch leaderboard</li><li>fetch pilot records</li></ul></li><li><code>replayService</code><ul><li>save local run</li><li>list runs</li><li>load run</li><li>export artifacts</li></ul></li><li><code>feedbackService</code><ul><li>submit report</li><li>preserve diagnostics</li><li>expose fallback behavior cleanly</li></ul></li></ul>
+<h4>gamePack</h4>
+<p>Defines the game-owned behavior and content that the runtime loads.</p>
+<ul><li>metadata<ul><li><code>gameKey</code></li><li><code>title</code></li><li><code>versionLine</code></li></ul></li><li>rules/config<ul><li>formations</li><li>enemy families</li><li>scoring tables</li><li>stage flow</li><li>attack scripts</li></ul></li><li>mechanics capabilities<ul><li>capture/rescue</li><li>challenge stages</li><li>escort/squad bonuses</li><li>dual-fighter support</li></ul></li><li>rendering hooks<ul><li>board entity draw</li><li>theme assets</li><li>game-specific HUD additions</li></ul></li><li>lifecycle hooks<ul><li>new game setup</li><li>per-frame gameplay update</li><li>stage transition handling</li><li>results/stat mapping</li></ul></li></ul>
+<p>The key rule is:</p>
+<ul><li>the runtime should host a <code>gamePack</code></li><li>the <code>gamePack</code> should not need to own the whole application shell</li></ul>
+<h4>Shared Enemy / Entity Contract</h4>
+<p>The first reusable runtime contract for enemy entities should now be treated as two layers:</p>
+<ul><li>core shared fields<ul><li><code>id</code></li><li><code>t</code> enemy type</li><li><code>fam</code> family/archetype</li><li><code>band</code> stage-band label</li><li><code>r</code> / <code>c</code> logical grid position</li><li><code>hp</code> / <code>max</code></li><li><code>x</code> / <code>y</code></li><li><code>tx</code> / <code>ty</code></li><li><code>form</code></li><li><code>dive</code></li><li><code>vx</code> / <code>vy</code></li><li><code>cool</code></li><li><code>spawn</code></li><li><code>targetX</code> / <code>targetY</code></li><li><code>shot</code></li><li><code>en</code></li><li><code>miss</code></li><li><code>low</code></li><li><code>hitT</code></li></ul></li><li>optional capability-owned fields<ul><li>escort pattern fields<ul><li><code>lead</code></li><li><code>off</code></li><li><code>esc</code></li><li><code>squadId</code></li></ul></li><li>capture/rescue fields<ul><li><code>carry</code></li><li><code>beam</code></li><li><code>beamT</code></li></ul></li><li>challenge-stage fields<ul><li><code>ch</code></li><li><code>wave</code></li><li><code>side</code></li><li><code>slot</code></li><li><code>group</code></li><li><code>sweep</code></li><li><code>upperBandY</code></li></ul></li></ul></li></ul>
+<p>The runtime should increasingly consume these through shared helpers rather than direct Aurora-only assumptions. That is the purpose of:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul>
+<p>The important platform rule is:</p>
+<ul><li>a sibling pack should be able to omit capture, escort, or challenge fields</li></ul>
+<p>entirely when its capabilities do not use them</p>
+<ul><li>runtime systems should ask for those capabilities through helpers instead of</li></ul>
+<p>assuming every enemy has every mechanic</p>
+<h4>First Platform Run Milestone</h4>
+<p>We should try to boot Aurora as a clearly hosted platform game once these conditions are true:</p>
+<ul><li>the runtime and render layers consume pack-owned enemy/entity helpers rather</li></ul>
+<p>than raw Aurora-only assumptions in the major mechanic surfaces</p>
+<ul><li>stage flow, scoring, challenge cadence, and presentation are all sourced from</li></ul>
+<p>the Aurora pack</p>
+<ul><li>service wiring is already split behind platform service seams</li><li><code>00-boot.js</code> can load a single selected <code>gamePack</code> instead of assuming Aurora</li></ul>
+<p>implicitly</p>
+<p>That means the first serious &quot;Aurora running on the platform&quot; attempt should happen after the current contract work extends through:</p>
+<ol><li>capture / rescue helpers</li><li>score / challenge award helpers</li><li>one thin runtime boot path that selects and installs the Aurora pack</li></ol>
+<p>At that point we should make Aurora launch through the pack-selected runtime, even if it is still the only available game. That gives us the baseline proof before we try a <code>Galaxian</code>-like sibling.</p>
+<p>Current status:</p>
+<ul><li>the installed pack registry and selection path now exist</li><li>the active installed pack now drives core helper paths for:<ul><li>challenge cadence</li><li>stage presentation</li><li>formation/challenge layout</li><li>frame accent theme</li><li>enemy scoring</li></ul></li><li>the Platinum shell now exposes the active platform/pack pairing visibly in</li></ul>
+<p>the dev runtime surfaces</p>
+<ul><li>the explicit platform-only proof harness is green:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/check-platinum-pack-boot.js</code></li></ul></li></ul>
+<p>That means Aurora is now dev-playable on Platinum through the selected-pack path, not just partially hosted by platform-oriented helpers.</p>
+<p>The next public-facing milestone should be narrower than &quot;new game gameplay&quot;:</p>
+<ul><li>rerelease Aurora clearly as a Platinum-hosted title</li><li>preserve the existing Aurora play contract</li><li>let the picker preview future titles with explicit non-playable splash states</li></ul>
+<p>That front-door path is now beginning to move into pack ownership too:</p>
+<ul><li>the installed pack now owns:<ul><li>marquee title</li><li>wait-mode title/subtitle</li><li>start prompt copy</li><li>attract-line copy</li><li>utility-line copy</li><li>front-door frame accent</li><li>available shell theme variants</li></ul></li></ul>
+<ul><li>the shell now supports:<ul><li>a visible left-rail <code>Choose Game</code> control</li><li>installed-pack switching in wait mode</li><li>preview-only sibling packs that can restyle the cabinet before gameplay is wired</li></ul></li></ul>
+<ul><li>the shell-theme path now leaves room for:<ul><li>per-pack dynamic cabinet framing</li><li>game-branded frame graphics</li><li>future per-user theme preference by game pack</li></ul></li></ul>
+<p>This keeps the next future steps aligned:</p>
+<ul><li>splash page</li><li>game picker</li><li>one-time notices</li><li>curated quotes</li></ul>
+<p>Near-term shell requirement for the rerelease milestone:</p>
+<ul><li>the shell should expose a Platinum identity button with hover copy:<ul><li><code>Platinum Arcade Game Platform</code></li></ul></li><li>clicking it should open a dismissable Platinum splash in the play area</li><li>the game picker should support a dismissable <code>Coming Soon</code> splash for future</li></ul>
+<p>titles rather than pretending they already boot</p>
+<ul><li>the first named future-title preview should be:<ul><li><code>Galaxy Guardians</code></li></ul></li></ul>
+<p>All of those should be platform-hosted surfaces with pack-owned branding and copy rather than Aurora-only literals.</p>
+<h4>Aurora Platform Proof Checklist</h4>
+<p>Before we treat a non-Aurora gameplay slice as the next major proof, Aurora itself should satisfy the following checklist as the first clearly hosted pack.</p>
+<h5>1.0.2 Fidelity Baseline</h5>
+<p>Aurora running on the platform must still preserve the player-visible contract of the shipped <code>1.0.2</code> line:</p>
+<ul><li>movement, firing, and ship-loss flow still feel the same</li><li>scoring and challenge progression still behave the same</li><li>capture / rescue and dual-fighter flow still behave the same</li><li>feedback, account, leaderboard, and replay surfaces still behave the same</li><li>hotfix smoke checks and targeted gameplay harnesses remain green</li></ul>
+<p>This is the player-proof half of the milestone. The platform does not count if Aurora only works after changing the expected <code>1.0.2</code> experience by accident.</p>
+<h5>Explicit Pack-Owned Boot Path</h5>
+<p>Aurora must start through the normal installed-pack path:</p>
+<ul><li>the selected pack is installed intentionally, not as an implicit fallback</li><li>wait mode, start flow, and transition flow all resolve through the active</li></ul>
+<p>pack helpers</p>
+<ul><li>the shell treats Aurora as the active loaded pack, not as special-case app</li></ul>
+<p>root state</p>
+<p>This is the architectural-proof half of the milestone.</p>
+<h5>Pack-Owned Presentation</h5>
+<p>The active pack should own the presentation identity for the experience:</p>
+<ul><li>browser title</li><li>marquee title</li><li>wait-mode title/subtitle/call to action</li><li>frame and cabinet chrome</li><li>stage presentation bands and front-door copy</li><li>future splash copy, notices, and approved quote surfaces</li></ul>
+<h5>Pack-Owned Gameplay Configuration</h5>
+<p>The active pack should supply the major gameplay configuration inputs:</p>
+<ul><li>stage cadence</li><li>formation layouts</li><li>challenge layout and challenge cadence</li><li>scoring tables</li><li>stage theme progression</li><li>capability flags</li><li>entity defaults through shared entity helpers</li></ul>
+<h5>Platform-Owned Shell And Services</h5>
+<p>The platform should own the cross-game infrastructure without depending on Aurora-specific behavior:</p>
+<ul><li>picker and shell theme surfaces</li><li>refresh / notice / reminder surfaces</li><li>replay / telemetry / artifact flow</li><li>auth / leaderboard / feedback adapter boundaries</li><li>input normalization and shell layout behavior</li><li>generic Platinum shell defaults in the bootstrap HTML</li></ul>
+<h5>Remaining Aurora-Specific Assumptions To Remove Or Gate</h5>
+<p>The current codebase is close, but these still represent &quot;Aurora is special&quot; assumptions that should be reduced or intentionally gated:</p>
+<ul><li>Aurora-specific fallback text and literals still exist in a few shell paths:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>debug and harness globals are still partly in transition:<ul><li>Platinum-facing aliases should be preferred</li><li>Aurora-named globals currently remain as legacy mirrors so existing harness</li></ul></li></ul>
+<p>flows do not break during the transition</p>
+<ul><li>storage and cache prefixes are still Aurora-branded:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js</code></li><li>Platinum-prefixed aliases are now supported alongside the legacy names, but</li></ul></li></ul>
+<p>the final migration/cutover policy is still a later concern</p>
+<p>These are no longer giant gameplay blockers, which is a sign of progress. They are now mostly shell/bootstrap/debug/storage cleanup items. They still matter, but they no longer block calling Aurora the first dev-playable Platinum pack.</p>
+<h5>Exit Condition</h5>
+<p>Aurora counts as &quot;running on the platform&quot; when:</p>
+<ol><li>the <code>1.0.2</code> player contract is still preserved</li><li>the selected installed pack is the normal runtime path</li><li>shell identity and framing are pack-owned</li><li>gameplay configuration resolves through the pack and shared entity contract</li><li>the remaining Aurora-only assumptions are reduced to debug names or clearly</li></ol>
+<p>intentional legacy compatibility shims</p>
+<p>Once that is true, a minimal <code>Galaxian</code> gameplay slice becomes the right next proof instead of a premature mixed experiment.</p>
+<h4>Post-Rerelease Next Steps</h4>
+<p>Once Aurora is rereleased cleanly on Platinum, the next sensible order is:</p>
+<ol><li>fix standing Aurora gameplay/product bugs without platform ambiguity:</li></ol>
+<ul><li>bonus-stage numbering</li><li>extra-ship visibility/audio</li><li>dual-ship last-life edge cases</li></ul>
+<ol><li>finish the Platinum shell surfaces:</li></ol>
+<ul><li>notices</li><li>approved quote rotation</li><li>AI quote viewer</li><li>future-game coming-soon splash surfaces</li></ul>
+<ol><li>then start the first dev-playable sibling slice using the established</li></ol>
+<p>harness separation model</p>
+<h3>Reference Mechanics Lens</h3>
+<p>Future platform work needs to be informed by the real gameplay differences between close sibling games, not just by visual similarity.</p>
+<h4>Aurora / Galaga-Family Shape</h4>
+<p>Aurora currently proves this family well:</p>
+<ul><li>enemies begin in a staged formation</li><li>enemies break formation into scripted dives</li><li>the player moves freely along the bottom lane</li><li>rescue/capture and dual-fighter play are optional advanced mechanics</li><li>challenge waves and special squad bonuses are part of progression</li></ul>
+<p>This is the right baseline for the current runtime extraction work.</p>
+<h4>Galaxian-Like Shape</h4>
+<p>Galaxian is the nearest sibling we should plan around first:</p>
+<ul><li>staged formation play still matters</li><li>independent enemy dives still matter</li><li>flagship/escort relationships still matter</li><li>scoring and attack timing differ, but the overall combat grammar is close</li><li>there is no need to force capture/rescue if the game does not use it</li></ul>
+<p>This makes <code>Galaxian</code> a good second proof because it should reuse the runtime while forcing us to keep optional mechanics truly optional.</p>
+<h4>Space Invaders-Like Shape</h4>
+<p>Space Invaders is still a useful reference, but it should not define the first platform contract:</p>
+<ul><li>enemies behave as a marching grid rather than as independent divers</li><li>pressure comes from synchronized descent and projectile tempo</li><li>shields/barricades are core playfield mechanics</li><li>the player-combat rhythm is simpler and more constrained</li><li>capture/rescue, escort patterns, and return-to-formation flow do not apply</li></ul>
+<p>This means <code>Space Invaders</code> should be treated as:</p>
+<ul><li>a design reference for broad fixed-screen shooter comparison</li><li>not the first target for a shared <code>gamePack</code> contract</li></ul>
+<h4>Representative Mechanics Set</h4>
+<p>For platform-shaping purposes, the most useful reference games are:</p>
+<ul><li>direct family targets<ul><li><code>Galaxian</code></li><li><code>Galaga</code></li><li><code>Gaplus</code> / <code>Galaga 3</code></li><li><code>Galaga &#39;88</code></li></ul></li><li>nearby comparison games<ul><li><code>Phoenix</code></li><li><code>Pleiads</code></li><li><code>Moon Cresta</code></li><li><code>Terra Cresta</code></li></ul></li><li>contrast cases<ul><li><code>Space Invaders</code></li><li><code>Gorf</code></li></ul></li></ul>
+<p>The goal is not to support all of these at once. The goal is to understand which mechanics are central to the first platform contract and which mechanics belong in later branches or capability families.</p>
+<h4>Mechanics Matrix</h4>
+<p>Use this matrix as the design lens when deciding what belongs in the first shared runtime.</p>
+<ul><li><code>Galaxian</code><ul><li>formation rack:<ul><li>yes</li></ul></li><li>independent dive attacks:<ul><li>yes</li></ul></li><li>escort / flagship relationships:<ul><li>yes</li></ul></li><li>capture / rescue:<ul><li>no</li></ul></li><li>dual-fighter play:<ul><li>no</li></ul></li><li>challenge stages:<ul><li>no</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>first sibling target</li></ul></li></ul></li></ul>
+<ul><li><code>Galaga</code><ul><li>formation rack:<ul><li>yes</li></ul></li><li>independent dive attacks:<ul><li>yes</li></ul></li><li>escort / flagship relationships:<ul><li>yes</li></ul></li><li>capture / rescue:<ul><li>yes</li></ul></li><li>dual-fighter play:<ul><li>yes</li></ul></li><li>challenge stages:<ul><li>yes</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>core proof family</li></ul></li></ul></li></ul>
+<ul><li><code>Gaplus</code> / <code>Galaga 3</code><ul><li>formation rack:<ul><li>yes</li></ul></li><li>independent dive attacks:<ul><li>yes</li></ul></li><li>escort / flagship relationships:<ul><li>reduced / more varied</li></ul></li><li>capture / rescue:<ul><li>no in the Galaga sense</li></ul></li><li>dual-fighter play:<ul><li>altered upgrade/assist mechanics instead</li></ul></li><li>challenge stages:<ul><li>yes</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>family stretch target once core contract is stable</li></ul></li></ul></li></ul>
+<ul><li><code>Galaga &#39;88</code><ul><li>formation rack:<ul><li>yes</li></ul></li><li>independent dive attacks:<ul><li>yes</li></ul></li><li>escort / flagship relationships:<ul><li>yes, with richer progression</li></ul></li><li>capture / rescue:<ul><li>yes</li></ul></li><li>dual-fighter play:<ul><li>yes</li></ul></li><li>challenge stages:<ul><li>yes</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>advanced family target after baseline proof</li></ul></li></ul></li></ul>
+<ul><li><code>Phoenix</code><ul><li>formation rack:<ul><li>partial / staged waves rather than pure Galaxian rack behavior</li></ul></li><li>independent dive attacks:<ul><li>some, but not the same family grammar</li></ul></li><li>escort / flagship relationships:<ul><li>limited</li></ul></li><li>capture / rescue:<ul><li>no</li></ul></li><li>dual-fighter play:<ul><li>no</li></ul></li><li>challenge stages:<ul><li>no</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>nearby comparison only</li></ul></li></ul></li></ul>
+<ul><li><code>Moon Cresta</code> / <code>Terra Cresta</code><ul><li>formation rack:<ul><li>mixed</li></ul></li><li>independent dive attacks:<ul><li>yes</li></ul></li><li>escort / flagship relationships:<ul><li>not central</li></ul></li><li>capture / rescue:<ul><li>no</li></ul></li><li>dual-fighter play:<ul><li>no, but ship-combination / transform mechanics matter</li></ul></li><li>challenge stages:<ul><li>limited or different in shape</li></ul></li><li>shield / barricade play:<ul><li>no</li></ul></li><li>platform fit:<ul><li>useful contrast for upgrade/combine mechanics, not first target</li></ul></li></ul></li></ul>
+<ul><li><code>Space Invaders</code><ul><li>formation rack:<ul><li>no, marching grid instead</li></ul></li><li>independent dive attacks:<ul><li>no</li></ul></li><li>escort / flagship relationships:<ul><li>no</li></ul></li><li>capture / rescue:<ul><li>no</li></ul></li><li>dual-fighter play:<ul><li>no</li></ul></li><li>challenge stages:<ul><li>no</li></ul></li><li>shield / barricade play:<ul><li>yes</li></ul></li><li>platform fit:<ul><li>separate fixed-screen branch later, not first contract</li></ul></li></ul></li></ul>
+<h4>Platform Implications</h4>
+<p>This points to a practical first-platform boundary:</p>
+<ul><li>first-class in the initial shared contract<ul><li>formation-rack staging</li><li>independent dive attacks</li><li>escort / squad behavior</li><li>stage-band progression</li><li>optional challenge stages</li></ul></li><li>optional capability modules<ul><li>capture / rescue</li><li>dual-fighter mode</li><li>upgrade / combine mechanics</li></ul></li><li>explicitly out of first-scope contract<ul><li>marching-grid invasion logic</li><li>shield / barricade systems</li><li>broader multi-genre shooter assumptions</li></ul></li></ul>
+<p>That keeps the first platform honest:</p>
+<ul><li>broad enough for <code>Aurora</code>, <code>Galaxian</code>, and the closer Galaga-family lineage</li><li>narrow enough that <code>Space Invaders</code> does not distort the core contract too</li></ul>
+<p>early</p>
+<h4>Stage Identity And Branded Progression</h4>
+<p>The platform should not assume stages are only gameplay-number increments with flat cosmetic swaps. At least for Aurora-family games, stage identity should be able to affect the feel of play.</p>
+<p>That means the first <code>gamePack</code> contract should leave room for:</p>
+<ul><li>branded stage themes<ul><li>distinct iconography</li><li>background treatments</li><li>frame and shell accents</li></ul></li><li>branded challenge-stage presentation<ul><li>themed challenge intros</li><li>challenge-specific formation and attack styling</li></ul></li><li>character-driven boss variants<ul><li>named or recognizable boss archetypes</li><li>boss-specific visuals</li><li>boss-specific behavior patterns</li></ul></li><li>progression-linked presentation shifts<ul><li>more complex formations later in a run</li><li>richer or more aggressive challenge stages later in a run</li><li>staged escalation in background and shell identity</li></ul></li></ul>
+<p>Aurora-specific examples we should plan for now:</p>
+<ul><li>moving <code>aurora borealis</code> background treatment</li><li>stage/frame branding that evolves during progression</li><li>challenge waves that become visually and mechanically richer</li><li><code>Super Bosses</code> or <code>Partners</code> with character-provided iconology and distinct</li></ul>
+<p>attack behavior</p>
+<p>The rule here is:</p>
+<ul><li>stage presentation is not only skin</li><li>stage presentation can be part of the gameplay contract</li></ul>
+<p>So the future <code>gamePack</code> needs to support both:</p>
+<ul><li>mechanics definitions</li><li>progression-aware presentation definitions</li></ul>
+<h4>Audio Identity And Event Vocabulary</h4>
+<p>The platform should treat sound as part of the game contract, not as a late polish pass. For this family of games, audio is tightly connected to:</p>
+<ul><li>game-state transitions</li><li>attack pressure</li><li>challenge-stage identity</li><li>boss/archetype presence</li><li>score and rescue feedback</li></ul>
+<p>The shared runtime should therefore own an event vocabulary for audio, while the actual palette and styling should belong to the <code>gamePack</code>.</p>
+<p>Shared audio events should include at least:</p>
+<ul><li>credit / start</li><li>formation march / ambient cadence</li><li>player shot</li><li>enemy shot</li><li>enemy hit</li><li>boss hit</li><li>boss destroyed</li><li>ship lost</li><li>capture beam start</li><li>fighter captured</li><li>capture broken</li><li>fighter released</li><li>rescue join</li><li>stage transition</li><li>challenge intro</li><li>challenge clear</li><li>bonus / special squad bonus</li><li>extra life</li><li>game over</li><li>UI tick / confirm / error</li></ul>
+<p>The design rules should be:</p>
+<ul><li>each game pack defines its own audio palette and event mapping</li><li>sounds should be clearly inspired by original arcade lineage</li><li>sounds should generally not be direct copies of the originals</li><li>stage bands, challenge phases, boss archetypes, and branded worlds should be</li></ul>
+<p>allowed to alter the sound palette during a run</p>
+<p>That means the future <code>gamePack</code> should own:</p>
+<ul><li>an <code>audioProfile</code><ul><li>synth or sample family</li><li>event-to-sound mapping</li><li>stage-band or theme variants</li><li>boss/archetype variants</li><li>UI palette</li></ul></li><li>optional <code>audioThemes</code><ul><li>intro theme</li><li>challenge theme</li><li>stage progression themes</li><li>branded world or chapter treatments</li></ul></li></ul>
+<p>For Aurora specifically, this leaves room for:</p>
+<ul><li>an <code>aurora borealis</code> stage audio identity</li><li>distinct <code>Super Boss</code> / <code>Partner</code> sonic signatures</li><li>richer challenge-stage transitions as the run escalates</li></ul>
+<p>For sibling games, this should remain pack-owned:</p>
+<ul><li><code>Galaga</code> / Aurora-like packs can emphasize rescue, challenge, and escort cues</li><li><code>Galaxian</code>-like packs can emphasize spare, early-arcade attack and loss cues</li><li>later games can vary by world, chapter, or boss family without changing the</li></ul>
+<p>shared runtime vocabulary</p>
+<p>Reference inspiration sources for this family include:</p>
+<ul><li><a href="https://www.101soundboards.com/boards/28843-galaga-soundboard">Galaga Soundboard</a></li><li><a href="https://www.101soundboards.com/boards/643652-galaxian-video-game-music">Galaxian - Video Game Music</a></li><li><a href="https://freesound.org/s/261173/">Freesound - Galaxian Arcade Game.wav by portwain</a></li></ul>
+<p>These are useful as event and mood references, not as a mandate to replicate the exact sounds verbatim.</p>
+<p>For future sibling-pack work, the <code>Galaxian Arcade Game.wav</code> reference is particularly useful because it captures early-arcade pacing and cabinet feel in a way that can inform:</p>
+<ul><li>sparse attack-pressure cues</li><li>early-arcade loss and hit cadence</li><li>ambient attract or shell presence</li><li>UI and menu-era texture for a <code>Galaxian</code>-like front door</li></ul>
+<p>The current published Freesound entry for that file is <code>CC0</code>, which makes it a good long-term reference and prototyping source for future <code>Galaxian</code>-family audio design.</p>
+<h4>Front Door And Game Selection</h4>
+<p>The platform should also assume that the game does not always boot directly into a single title. Over time we want a better first-impression surface and a way to select between multiple playable experiences.</p>
+<p>That means the shared shell should eventually support:</p>
+<ul><li>a high-quality slash / launch page before entering a run</li><li>a game picker surface once multiple game packs exist</li><li>a shell-level button that can reopen that picker from inside the cabinet</li><li>room for one-time notices, feature reminders, and release explanations</li></ul>
+<p>For now, Aurora remains the only primary game entry. But the platform should avoid hard-coding a forever single-game front door.</p>
+<h4>Curated Quote Content</h4>
+<p>The front door, attract surfaces, and future notice system should also be able to host curated approved quote content without hard-coding those lines into the game runtime.</p>
+<p>That means the platform should eventually support:</p>
+<ul><li>quote/content ingestion from an approved external JSON source</li><li>surface-aware filtering:<ul><li>splash page</li><li>wait mode</li><li>stage transition</li><li>notice panel</li><li>game picker</li></ul></li><li>pack-aware filtering so each game can opt into the right tone and theme</li><li>dismissal/cooldown behavior so quotes stay occasional and intentional</li></ul>
+<p>This content should live alongside the future splash/game-picker system, not as combat-time UI clutter.</p>
+<p>Canonical quote/content ingest rule:</p>
+<ul><li>consume only the approved export documented by:<ul><li><a href="https://github.com/sgwoods/sci-fi-ai-dystopian-project/blob/main/APPROVED_QUOTES_INTERFACE.md">APPROVED_QUOTES_INTERFACE.md</a></li></ul></li><li>do not ingest from editorial workflow folders such as:<ul><li><code>data/review/</code></li><li><code>data/candidates/</code></li><li><code>data/discovery/</code></li></ul></li></ul>
+<p>Near-term Platinum shell quote rules:</p>
+<ul><li>do not mix approved AI dystopian quotes directly into the main splash-title</li></ul>
+<p>treatment</p>
+<ul><li>rotate a single approved quote through wait mode before the high-score panel</li></ul>
+<p>rotation resumes</p>
+<ul><li>show a single approved quote during pause, beneath the <code>Press P to resume</code></li></ul>
+<p>guidance with enough spacing to keep the resume prompt readable</p>
+<ul><li>add a lower-left dock <code>AI</code> button that opens a dedicated quote-browser panel</li><li>the <code>AI</code> panel should use the same shell-panel format as guide/scores and</li></ul>
+<p>support scrolling plus a link out to the Sci-Fi AI Dystopian project page in a new tab</p>
+<h3>First Game-Pack Shape</h3>
+<p>The first concrete <code>gamePack</code> should be Aurora itself, expressed in a way that could later host a Galaxian-like sibling without pretending both games are the same.</p>
+<h4>Aurora Game-Pack Responsibilities</h4>
+<ul><li>provide formation and stage-band definitions</li><li>provide enemy family and attack-script definitions</li><li>provide scoring tables and award hooks</li><li>provide optional mechanics:<ul><li>capture/rescue</li><li>dual-fighter join flow</li><li>challenge stage rules</li></ul></li><li>provide progression-aware stage presentation definitions:<ul><li>stage themes</li><li>background motion treatments</li><li>frame/shell accent variants</li><li>boss iconography sets</li></ul></li><li>provide Aurora-specific board rendering hooks</li></ul>
+<h4>First Shared Capability Flags</h4>
+<p>The first contract should use capability flags instead of assuming every game implements every mechanic.</p>
+<ul><li><code>usesFormationRack</code></li><li><code>usesIndependentDiveAttacks</code></li><li><code>usesEscortPatterns</code></li><li><code>usesChallengeStages</code></li><li><code>usesCaptureRescue</code></li><li><code>usesDualFighterMode</code></li><li><code>usesStaticShields</code></li><li><code>usesStageThemeProgression</code></li><li><code>usesBossArchetypeVariants</code></li></ul>
+<p>This should let us express:</p>
+<ul><li>Aurora:<ul><li>formation rack, dives, escorts, challenge stages, capture/rescue, dual</li></ul></li></ul>
+<p>fighter, evolving stage themes, boss variants</p>
+<ul><li>Galaxian-like:<ul><li>formation rack, dives, escorts</li></ul></li><li>Space Invaders-like:<ul><li>no independent dives, no escort patterns, yes static shields</li></ul></li></ul>
+<h4>What The Next Refactor Should Prove</h4>
+<p>Before we claim platform readiness, the code should prove that:</p>
+<ul><li>stage flow can be supplied from a <code>gamePack</code></li><li>scoring tables can be supplied from a <code>gamePack</code></li><li>optional mechanics are enabled through capabilities, not hardwired runtime</li></ul>
+<p>assumptions</p>
+<ul><li>the shell and services do not need Aurora-specific knowledge to boot the</li></ul>
+<p>game</p>
+<h3>First Non-Aurora Pack Target</h3>
+<p>The first serious sibling target should be a minimal <code>Galaxian</code>-like pack. This is close enough to stress the contract honestly, but different enough to show where Aurora assumptions still leak through.</p>
+<h4>Minimal Galaxian-Like Pack Expectations</h4>
+<p>A first non-Aurora pack should be able to define:</p>
+<ul><li>metadata<ul><li><code>gameKey</code></li><li><code>title</code></li><li><code>versionLine</code></li></ul></li><li>stage cadence<ul><li>regular formation stages only</li><li>no required challenge stage cadence</li></ul></li><li>formations<ul><li>formation-rack layout</li><li>entry order</li><li>stage-to-stage spacing changes</li></ul></li><li>enemy families<ul><li>baseline attacker family</li><li>stronger mid-tier family</li><li>flagship / boss family</li></ul></li><li>attack behavior<ul><li>independent dive attacks</li><li>flagship-led escort attacks</li><li>no capture beam requirement</li></ul></li><li>scoring tables<ul><li>formation kill values</li><li>dive kill values</li><li>flagship escort bonus values</li></ul></li><li>presentation<ul><li>its own marquee/title treatment</li><li>its own board sprite families</li><li>optional stage-theme progression without Aurora-specific branding</li></ul></li></ul>
+<h4>Minimal Galaxian-Like Capability Profile</h4>
+<p>The first sibling pack should look roughly like this:</p>
+<ul><li><code>usesFormationRack</code><ul><li>yes</li></ul></li><li><code>usesIndependentDiveAttacks</code><ul><li>yes</li></ul></li><li><code>usesEscortPatterns</code><ul><li>yes</li></ul></li><li><code>usesChallengeStages</code><ul><li>no</li></ul></li><li><code>usesCaptureRescue</code><ul><li>no</li></ul></li><li><code>usesDualFighterMode</code><ul><li>no</li></ul></li><li><code>usesStageThemeProgression</code><ul><li>optional</li></ul></li><li><code>usesBossArchetypeVariants</code><ul><li>optional</li></ul></li><li><code>usesStaticShields</code><ul><li>no</li></ul></li></ul>
+<h4>First Real Galaxian Gameplay Slice</h4>
+<p>Before we attempt a fuller sibling game, the first honest gameplay slice should stay narrow and intentionally incomplete.</p>
+<p>That first slice should include:</p>
+<ul><li>front door and shell identity<ul><li>marquee/title</li><li>frame theme</li><li>picker presence</li></ul></li><li>stage 1 formation start<ul><li>pack-owned formation layout</li><li>entry sequencing</li></ul></li><li>enemy families<ul><li>baseline attacker</li><li>stronger attacker</li><li>flagship / escort leader</li></ul></li><li>attack behavior<ul><li>independent dives</li><li>flagship-led escort dives</li></ul></li><li>scoring<ul><li>formation kill values</li><li>dive kill values</li><li>flagship/escort bonus values</li></ul></li><li>run flow<ul><li>start</li><li>life loss</li><li>game over</li><li>results/high-score summary</li></ul></li></ul>
+<p>That first slice should explicitly exclude:</p>
+<ul><li>capture / rescue</li><li>dual-fighter join logic</li><li>challenge stages</li><li>Aurora-style boss archetype escalation</li><li>Aurora-specific stage-theme progression</li></ul>
+<p>The point of this slice is not feature parity. The point is to prove that a non-Aurora pack can own a real playable combat loop through the shared runtime without inheriting Aurora-only mechanics by accident.</p>
+<p>That makes it a clean test of the family core without the richer Aurora/Galaga mechanics.</p>
+<h4>Current Aurora Assumptions A Galaxian-Like Pack Would Still Trip Over</h4>
+<p>These are the most important remaining leaks in the current runtime:</p>
+<ul><li>enemy data shape still assumes Aurora/Galaga-era fields such as:<ul><li><code>carry</code></li><li><code>beam</code></li><li><code>beamT</code></li><li>rescue-return state</li></ul></li><li>gameplay flow still has challenge-stage assumptions woven into update and</li></ul>
+<p>transition logic</p>
+<ul><li>player lifecycle still carries capture/rescue-specific state in the core</li></ul>
+<p>player model</p>
+<ul><li>scoring helpers still assume Galaga-family special cases such as:<ul><li>captured-fighter destruction</li><li>rescue join awards</li><li>challenge-perfect awards</li></ul></li><li>renderer still understands Aurora family names and Aurora-specific palette</li></ul>
+<p>identity directly</p>
+<ul><li>stage presentation currently supports pack-owned themes, but the shell still</li></ul>
+<p>assumes Aurora is the only loaded title</p>
+<h4>What A Galaxian Proof Should Force Us To Clean Up</h4>
+<p>Before we can honestly claim a second pack is viable, the code should prove all of these:</p>
+<ul><li>capture/rescue can be completely disabled without leaving dead runtime state</li><li>challenge-stage cadence can be absent without special-case workarounds</li><li>enemy family naming can be supplied by the pack without Aurora-specific</li></ul>
+<p>palette assumptions</p>
+<ul><li>stage transitions and banners can be supplied by the pack without assuming</li></ul>
+<p>Aurora copy</p>
+<ul><li>scoring can be loaded from the pack without carrying unused Aurora award</li></ul>
+<p>branches</p>
+<ul><li>board rendering can consume pack-owned presentation metadata instead of only</li></ul>
+<p>Aurora identity</p>
+<h4>Immediate Refactor Priority After This</h4>
+<p>The next contract-first priorities should therefore be:</p>
+<ul><li>separate the enemy/entity runtime model into:<ul><li>core shared fields</li><li>optional capability-owned fields</li></ul></li><li>separate stage/challenge transition orchestration from challenge-specific</li></ul>
+<p>rules</p>
+<ul><li>move more scoring branches behind capability gates</li><li>make board rendering choose palettes and sprite families through pack-owned</li></ul>
+<p>presentation data rather than hardcoded Aurora family names</p>
+<p>If we can do those four things, a minimal <code>Galaxian</code>-like pack becomes a real engineering target instead of only an architectural idea.</p>
+<h3>Platform Extraction Order</h3>
+<p>The platform path should be incremental. Aurora remains the proof project while we extract stable seams out of the current one-off runtime.</p>
+<h4>Release-Line Mapping</h4>
+<p>Use the extraction phases as release guidance, not just architecture guidance.</p>
+<ul><li><code>1.1.x</code><ul><li>stabilize Aurora into explicit layers</li><li>extract shared monorepo modules without redesigning gameplay</li></ul></li><li><code>1.2.x</code><ul><li>generalize shared services and add the first operator/control-centre</li></ul></li></ul>
+<p>surfaces</p>
+<ul><li>later <code>1.x</code><ul><li>prove reuse with one close sibling game</li><li>add optional shared media/publishing on top of stable identity and service</li></ul></li></ul>
+<p>seams</p>
+<h4>Phase 1: Stabilize Aurora Into Explicit Layers</h4>
+<p>Do this before creating generalized packages.</p>
+<p>Separate the current runtime mentally and structurally into:</p>
+<ul><li>shared runtime core<ul><li>loop</li><li>timing</li><li>input primitives</li><li>scene/state transitions</li><li>deterministic event vocabulary</li></ul></li><li>shared shell<ul><li>cabinet frame</li><li>HUD slots</li><li>popup/layout system</li><li>build/update surfaces</li></ul></li><li>shared play services<ul><li>score submission boundary</li><li>identity boundary</li><li>feedback boundary</li><li>replay persistence boundary</li></ul></li><li>Aurora game pack<ul><li>formations</li><li>enemy families</li><li>scoring tables</li><li>stage cadence</li><li>capture/rescue rules</li><li>challenge rules</li><li>sprites/theme</li></ul></li></ul>
+<h4>Phase 2: Extract Shared Modules Inside The Monorepo</h4>
+<p>Keep one repo and extract modules only after Aurora already runs cleanly across the layer seams above.</p>
+<p>Target internal package/module boundaries:</p>
+<ul><li><code>packages/arcade-runtime</code></li><li><code>packages/arcade-shell</code></li><li><code>packages/arcade-replay</code></li><li><code>packages/arcade-services</code></li><li><code>games/aurora</code></li></ul>
+<p>Important rule:</p>
+<ul><li>first extraction should be mostly relocation plus interface cleanup</li><li>do not redesign behavior during the extraction itself</li></ul>
+<h4>Phase 3: Make Aurora Rules Data-Driven Enough To Reuse</h4>
+<p>Once Aurora is stable on the extracted runtime, move Aurora-specific rules toward a <code>gamePack</code> or <code>gameDef</code> contract.</p>
+<p>Expected configurable areas:</p>
+<ul><li>formation definitions</li><li>enemy-family definitions</li><li>attack scripts</li><li>scoring tables</li><li>stage progression bands</li><li>optional mechanic flags<ul><li>capture/rescue</li><li>challenge stages</li><li>special squadrons</li><li>dual-fighter mode</li></ul></li></ul>
+<p>Important rule:</p>
+<ul><li>do not force every future game to implement every optional mechanic</li></ul>
+<h4>Phase 4: Generalize Shared Services</h4>
+<p>Only after runtime seams stabilize:</p>
+<ul><li>make identity game-agnostic</li><li>make scores keyed by:<ul><li><code>gameKey</code></li><li><code>version</code></li><li><code>playerId</code></li><li><code>runId</code></li></ul></li><li>keep replay metadata independent of Aurora-specific assumptions</li><li>move feedback toward a platform-owned API rather than a game-specific form</li></ul>
+<p>Expected first shared-service targets:</p>
+<ul><li>pilot identity</li><li>scoreboard and run records</li><li>feedback intake</li><li>environment-aware backend boundaries</li></ul>
+<h4>Phase 5: Add Operator / Control Centre</h4>
+<p>The first shared operational surface should come after the runtime and service seams are real.</p>
+<p>First control-centre scope:</p>
+<ul><li>score moderation</li><li>player account admin</li><li>replay/video publish status</li><li>release/lane status</li></ul>
+<h4>Phase 6: Prove Reuse With A Second Game</h4>
+<p>The first proof is not “many games.” The first proof is:</p>
+<ul><li>Aurora cleanly running on the shared runtime</li></ul>
+<p>The second proof should be:</p>
+<ul><li>one close sibling fixed-screen shooter game pack</li></ul>
+<p>Recommended first sibling:</p>
+<ul><li>Galaxian-like before Space Invaders</li></ul>
+<p>That keeps the runtime honest without forcing broad abstraction too early.</p>
+<h3>What Not To Generalize Too Early</h3>
+<p>Avoid premature platform work in these areas:</p>
+<ul><li>generic physics engine</li><li>broad multi-genre engine abstractions</li><li>repo splitting</li><li>full admin platform before service seams are stable</li><li>multiplayer/live-service assumptions</li></ul>
+<p>The rule is simple:</p>
+<ul><li>extract only the seams that Aurora already proves are real</li></ul>
+<h3>Platform Defaults</h3>
+<p>Until the platform work is more mature, keep these defaults:</p>
+<ul><li>one monorepo</li><li>one primary proof game:<ul><li>Aurora</li></ul></li><li>static-first client hosting</li><li>managed services where they reduce operational burden</li><li>reusable runtime and service seams proven by Aurora before they are made</li></ul>
+<p>generic</p>
         </div>
       </div>
     </section>
@@ -1639,6 +2168,12 @@ npm run publish:production</code></pre>
 <ul><li>These are architecture/presentation references, not original-Galaga rules</li></ul>
 <p>sources.</p>
 <ul><li>Current external reference:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/external-galaga5/README.md</code></li></ul></li><li>Use case:<ul><li>borrow ideas about structure or presentation when useful</li><li>do not treat them as fidelity evidence</li></ul></li></ul>
+<h4>Future Galaxian Sibling Archive</h4>
+<ul><li>This project now also keeps a growing sibling-reference archive for future</li></ul>
+<p>Platinum <code>Galaxian</code>-family work:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaxian-mechanics/README.md</code></li></ul><ul><li>Naming rule:<ul><li><code>Galaxian</code><ul><li>the original reference lineage</li></ul></li><li><code>Galaxy Guardians</code><ul><li>the future game project that may draw from those references</li></ul></li></ul></li><li>Current status:<ul><li>planning-grade developer reference</li><li>not yet canonical arcade-rule evidence</li></ul></li><li>Use case:<ul><li>collect likely scoring, dive, escort, and formation rules for the future</li></ul></li></ul>
+<p>sibling pack</p>
+<ul><li>clearly mark what still needs promotion to stronger source-backed evidence</li></ul>
 <h3>What To Add Next</h3>
 <p>High-value future baseline additions:</p>
 <ol><li>Emulator-derived captures and timing notes</li><li>Curated reference clips by system:</li></ol>
@@ -1717,17 +2252,24 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_POLICY.md</code> during build.</p>
         <div class="markdown">
           <h3>Version Format</h3>
-<ul><li>We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.</li><li>Pre-production development format:<ul><li><code>MAJOR.MINOR.PATCH-prerelease</code></li></ul></li><li>Production format:<ul><li><code>MAJOR.MINOR.PATCH</code></li></ul></li><li>Production beta format:<ul><li><code>MAJOR.MINOR.PATCH-beta.&lt;number&gt;</code></li></ul></li><li>Current build label format adds build metadata to the surface version:<ul><li><code>surface-version+build.&lt;number&gt;.sha.&lt;shortcommit&gt;</code></li></ul></li><li>Dirty local builds append:<ul><li><code>.dirty</code></li></ul></li><li>After <code>1.0.0</code>, production hotfixes should bump <code>PATCH</code>:<ul><li><code>1.0.1</code></li><li><code>1.0.2</code></li><li>and so on</li></ul></li></ul>
+<ul><li>We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.</li><li>Pre-production development format:<ul><li><code>MAJOR.MINOR.PATCH-prerelease</code></li></ul></li><li>Production format:<ul><li><code>MAJOR.MINOR.PATCH</code></li></ul></li><li>Production beta format:<ul><li><code>MAJOR.MINOR.PATCH-beta.&lt;number&gt;</code></li></ul></li><li>Current build label format adds build metadata to the surface version:<ul><li><code>surface-version+build.&lt;number&gt;.sha.&lt;shortcommit&gt;</code></li></ul></li><li>Dirty local builds append:<ul><li><code>.dirty</code></li></ul></li><li>After <code>1.0.0</code>, production hotfixes should bump <code>PATCH</code>:<ul><li><code>1.0.1</code></li><li><code>1.0.2</code></li><li>and so on</li></ul></li><li>After <code>1.0.0</code>, any production promotion that changes shipped user-visible</li></ul>
+<p>behavior should bump <code>PATCH</code>, even if the change is a small hotfix.</p>
+<ul><li>Use <code>MINOR</code> for meaningful public platform milestones even when the core</li></ul>
+<p>Aurora gameplay contract intentionally stays close to the previous shipped baseline. The Platinum platform launch is the reference case:</p>
+<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul><ul><li>Build metadata still changes on every publish, but build metadata alone is</li></ul>
+<p>not the public hotfix number.</p>
 <p>Examples:</p>
-<ul><li>pre-production:<ul><li><code>0.5.0-alpha.1+build.115.sha.b0d812c</code></li></ul></li><li>production:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>production beta:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li></ul>
+<ul><li>local <code>localhost</code>:<ul><li><code>1.2.0+build.363.sha.67c60e2.dirty</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>1.2.0+build.363.sha.67c60e2</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.2.0-beta.1+build.363.sha.67c60e2.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.2.0+build.363.sha.67c60e2</code></li></ul></li></ul>
 <h3>Meaning</h3>
 <ul><li><code>MAJOR</code><ul><li>reserve <code>1.x</code> for a public-quality release where the scoped product goal is</li></ul></li></ul>
 <p>stable and shippable</p>
 <ul><li>current scoped goal:<ul><li>a polished four-stage slice (Stages <code>1</code>-<code>4</code>) rather than full long-form</li></ul></li></ul>
 <p>Galaga expansion</p>
-<ul><li><code>MINOR</code><ul><li>use for meaningful product milestones</li><li>examples:<ul><li>major gameplay fidelity improvement</li><li>large systems addition</li><li>new stage/content breadth milestone</li><li>public playtest readiness</li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>bug fixes</li><li>tuning passes</li><li>UI polish</li><li>harness/reporting improvements</li></ul></li></ul></li><li><code>prerelease</code><ul><li><code>alpha</code>: active system building, rules changes, frequent balance changes</li><li><code>beta</code>: feature-complete enough for broader testing, still tuning quality and regressions</li><li><code>rc</code>: release candidate, only bug fixes and polish before a stable cut</li></ul></li></ul>
+<ul><li><code>MINOR</code><ul><li>use for meaningful product milestones</li><li>examples:<ul><li>Platinum platform release milestones</li><li>large systems additions</li><li>new stage/content breadth milestones</li><li>public lane or platform hosting expansions</li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>bug fixes</li><li>tuning passes</li><li>UI polish</li><li>harness/reporting improvements</li></ul></li></ul></li><li><code>prerelease</code><ul><li><code>alpha</code>: active system building, rules changes, frequent balance changes</li><li><code>beta</code>: feature-complete enough for broader testing, still tuning quality and regressions</li><li><code>rc</code>: release candidate, only bug fixes and polish before a stable cut</li></ul></li></ul>
 <h3>Hosted Release Lanes</h3>
-<ul><li><code>production</code><ul><li>published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>this is the official shared build, even while SemVer remains prerelease before <code>1.0</code></li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>this is a distinct public checkpoint lane for less-frequent milestone playtesting</li></ul></li><li><code>pre-production</code><ul><li>day-to-day development happens in:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>this is the active engineering line and not the canonical shared play URL</li></ul></li></ul>
+<ul><li><code>localhost</code><ul><li>local engineering and debugging lane</li><li>typically served from:<ul><li><code>http://127.0.0.1:8000/</code></li></ul></li></ul></li><li><code>dev</code><ul><li>manually published integration preview at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/dev/</code></li></ul></li><li>this is the hosted mirror of the current local <code>localhost</code> candidate once</li></ul></li></ul>
+<p>it is stable enough to share</p>
+<ul><li><code>production</code><ul><li>published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>this is the official shared build</li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>this is a distinct public checkpoint lane for less-frequent milestone playtesting</li></ul></li><li><code>pre-production source</code><ul><li>day-to-day development happens in:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li></ul></li></ul>
 <h3>Repository Roles</h3>
 <ul><li><code>Codex-Test1</code><ul><li>development repo</li><li>active day-to-day engineering, tuning, issues, and harness work</li></ul></li><li><code>Aurora-Galactica</code><ul><li>public release repo</li><li>promoted checkpoints intended for broader sharing and less frequent change</li></ul></li></ul>
 <h3>Beta Promotion Workflow</h3>
@@ -1737,6 +2279,8 @@ npm run publish:production</code></pre>
 <ul><li><code>npm run build</code></li></ul>
 <ol><li>Test the generated dev build in:</li></ol>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li><li>recommended local service startup:<ul><li><code>npm run local:resume</code></li></ul></li></ul>
+<ol><li>Optionally publish the current local candidate into hosted <code>/dev</code>:</li></ol>
+<ul><li><code>npm run publish:dev</code></li></ul>
 <ol><li>Promote the current dev build into the beta lane:</li></ol>
 <ul><li><code>npm run promote:beta</code></li></ul>
 <ol><li>Review the generated output in:</li></ol>
@@ -1750,7 +2294,7 @@ npm run publish:production</code></pre>
 <p>serves the promoted checkpoint</p>
 <p>The beta lane is intentionally a snapshot of selected generated artifacts under <code>dist/</code>, not a separate branch or a second build pipeline. <code>Codex-Test1</code> remains the engineering source of truth; <code>Aurora-Galactica</code> is the public release surface for both production and beta.</p>
 <h3>Score/Data Lane Policy</h3>
-<ul><li><code>production</code><ul><li>full online Supabase path</li><li>shared leaderboard reads enabled</li><li>score submission enabled</li><li>pilot account/auth/profile actions enabled</li></ul></li><li><code>beta</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li><li><code>pre-production</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li></ul>
+<ul><li><code>production</code><ul><li>full online Supabase path</li><li>shared leaderboard reads enabled</li><li>score submission enabled</li><li>pilot account/auth/profile actions enabled</li></ul></li><li><code>beta</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li><li><code>localhost</code> and hosted <code>/dev</code><ul><li>production-score read-only mirror by default</li><li>score submission disabled</li><li>pilot account/auth/profile writes disabled</li><li>local device scores still save normally</li></ul></li></ul>
 <p>This is the current launch-safe answer to <code>#76</code>: non-production lanes no longer use the same default write path as production, even though they can still mirror production leaderboard reads.</p>
 <p>Optional test-pilot override for non-production:</p>
 <ul><li><code>TEST_ACCOUNT_EMAIL</code><ul><li>enables one specific beta/dev pilot account for auth and write-flow testing</li></ul></li><li><code>TEST_ACCOUNT_USER_ID</code><ul><li>excludes that pilot&#39;s scores from shared leaderboard reads</li></ul></li><li>when configured:<ul><li>beta/dev may authenticate only that test pilot</li><li>score submission is enabled only while that pilot is signed in</li><li>production continues to reject that pilot account for normal use</li></ul></li></ul>
@@ -1809,14 +2353,14 @@ npm run publish:beta
 npm run approve:beta
 npm run publish:production</code></pre>
 <p>Hotfix smoke suite contents:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code><ul><li>verifies playable left/right movement distance, expected key mapping, and no repeated input resets during active movement</li></ul></li><li><code>node tools/harness/check-popup-surfaces.js</code><ul><li>verifies settings/help/pilot/score/feedback surfaces still open and fit correctly after UI-adjacent hotfixes</li></ul></li><li><code>node tools/harness/check-feedback-submit-path.js</code><ul><li>verifies direct feedback success and fallback diagnostics are still intact</li></ul></li><li><code>node tools/harness/check-remote-score-submit.js</code><ul><li>verifies the main game-over remote score path still behaves correctly on success and failure</li></ul></li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code><ul><li>verifies playable left/right movement distance, expected key mapping, and no repeated input resets during active movement</li></ul></li><li><code>node tools/harness/check-popup-surfaces.js</code><ul><li>verifies settings/help/pilot/score/feedback surfaces still open and fit correctly after UI-adjacent hotfixes</li></ul></li><li><code>node tools/harness/check-feedback-submit-path.js</code><ul><li>verifies direct feedback success and fallback diagnostics are still intact</li></ul></li><li><code>node tools/harness/check-remote-score-submit.js</code><ul><li>verifies leaderboard submission still works online and still degrades cleanly to local-only on failure</li></ul></li></ul>
 <h4>True 1.0 Launch Baseline Reset</h4>
 <ul><li><code>#130</code> is a required pre-<code>1.0</code> release operation.</li><li>Before the true <code>1.0</code> production launch, reset the shared production</li></ul>
 <p>leaderboard so the official public scoreboard starts from zero.</p>
 <ul><li>Use a dry run first:<ul><li><code>SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:inspect:production</code></li></ul></li><li>Then execute the reset when the launch candidate is approved:<ul><li><code>SUPABASE_SERVICE_ROLE_KEY=... npm run leaderboard:reset:production</code></li></ul></li><li>This operation deletes rows from the production <code>scores</code> table.</li><li>It does not delete pilot accounts.</li><li>It requires operator-only Supabase service-role access and should be treated</li></ul>
 <p>as an explicit release step, not a routine browser-side admin action.</p>
 <p>Tracked hardening item:</p>
-<ul><li><code>#113</code><ul><li>enforce dev -&gt; beta -&gt; approve -&gt; production as the only supported publish chain</li><li>production preflight fails if the current production publish is not sourced from the approved beta candidate</li></ul></li></ul>
+<ul><li><code>#113</code><ul><li>enforce localhost -&gt; hosted <code>/dev</code> -&gt; hosted <code>/beta</code> -&gt; approve -&gt; hosted <code>/production</code> as the only supported publish chain</li><li>production preflight fails if the current production publish is not sourced from the approved beta candidate</li></ul></li></ul>
 <h3>Public Project Status Sync Workflow</h3>
 <ol><li>Build the current dev output and promote the stable production artifact:</li></ol>
 <ul><li><code>npm run build</code></li><li><code>npm run promote:production</code></li></ul>
@@ -1829,6 +2373,10 @@ npm run publish:production</code></pre>
 <ul><li>Every build gets a build number, even when there is no major/minor release bump.</li><li>Local default:<ul><li>git commit count</li></ul></li><li>CI/Pages default:<ul><li>GitHub Actions run number if available</li></ul></li></ul>
 <p>This gives every build a unique identity without forcing a SemVer bump for every commit.</p>
 <h3>Bump Guidance</h3>
+<ul><li>After <code>1.0.0</code>, use this production rule:<ul><li>every user-visible production fix or improvement gets the next <code>PATCH</code></li></ul></li></ul>
+<p>version</p>
+<ul><li>examples:<ul><li><code>1.0.1</code></li><li><code>1.0.2</code></li><li><code>1.0.3</code></li></ul></li><li>do not keep shipping visible production changes forever under the same</li></ul>
+<p>public version with only <code>+build...</code> changing</p>
 <ul><li>Bump <code>PATCH</code> when:<ul><li>we make a contained improvement that should be visible or testable</li><li>the user-facing build is worth distinguishing from the last one</li></ul></li><li>Bump <code>MINOR</code> when:<ul><li>a milestone is completed or clearly crossed</li><li>the overall player experience has materially advanced</li><li>the roadmap target shifts from one product phase to the next</li></ul></li><li>Bump prerelease indicator when:<ul><li>we move from <code>alpha</code> to <code>beta</code></li><li>or from <code>beta</code> to <code>rc</code></li></ul></li><li>Bump <code>MAJOR</code> only when:<ul><li>we intentionally declare a stable release baseline</li></ul></li></ul>
 <h3>Recommendation Policy For Codex</h3>
 <ul><li>Recommend a <code>PATCH</code> bump after:<ul><li>a player-visible gameplay/presentation improvement lands cleanly</li><li>or a release-worthy bug fix changes behavior</li></ul></li><li>Recommend a <code>MINOR</code> bump after:<ul><li>a roadmap milestone closes</li><li>or a meaningful cluster of issues is completed together</li></ul></li><li>Do not recommend a version bump for:<ul><li>purely exploratory work</li><li>failed tuning experiments</li><li>internal-only diagnostic changes unless they materially affect shipped behavior</li></ul></li></ul>
@@ -1916,8 +2464,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Movement reset hotfix</strong><br>
-          Build: 1.0.2+build.290.sha.831a2c6
+          Latest release note: <strong>Platinum Release 1</strong><br>
+          Build: 1.2.0+build.364.sha.106adfd
         </p>
       </aside>
     </main>
