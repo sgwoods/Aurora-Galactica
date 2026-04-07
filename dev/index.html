@@ -544,9 +544,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane development</span>
-    <span id="settingsVersion">Version 1.2.0+build.367.sha.42935be</span>
-    <span id="settingsRelease">Apr 07 2026, 10:12 AM EDT</span>
-    <span id="settingsState">main@42935be clean</span>
+    <span id="settingsVersion">Version 1.2.0+build.370.sha.905a1f9</span>
+    <span id="settingsRelease">Apr 07 2026, 4:01 PM EDT</span>
+    <span id="settingsState">main@905a1f9 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -807,8 +807,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
-  <span id="buildStampVersion">Version 1.2.0+build.367.sha.42935be</span>
-  <span id="buildStampRelease">Apr 07 2026, 10:12 AM EDT</span>
+  <span id="buildStampVersion">Version 1.2.0+build.370.sha.905a1f9</span>
+  <span id="buildStampRelease">Apr 07 2026, 4:01 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1383,7 +1383,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.0',label:'1.2.0+build.367.sha.42935be',commit:'42935be7557afca72c8367ef68075c32df93f44f',branch:'main',dirty:false,released:'Apr 07 2026, 10:12 AM EDT',state:'main@42935be clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.0',label:'1.2.0+build.370.sha.905a1f9',commit:'905a1f9b839680ccc1f45c3368417d6e7699e2e3',branch:'main',dirty:false,released:'Apr 07 2026, 4:01 PM EDT',state:'main@905a1f9 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1559,6 +1559,21 @@ const stageTune=(s,ch)=>{
  return typeof tune==='function'?tune(s):tune;
 };
 const stageFlightTune=s=>stageRuleSet(s).flight;
+function challengeStagesBefore(stage){
+ const n=Math.max(1, stage|0);
+ const cadence=currentGamePack()?.stageCadence||{};
+ const first=Math.max(1, cadence.challengeFirstStage||3);
+ const every=Math.max(1, cadence.challengeEvery||4);
+ if(n<=first)return 0;
+ return 1+Math.floor((n-1-first)/every);
+}
+function displayStageNumber(stage,challenge=isChallengeStage(stage)){
+ const n=Math.max(1, stage|0);
+ return Math.max(1, n-challengeStagesBefore(n)-(challenge?1:0));
+}
+function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
+ return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
+}
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
 function useDeterministicHarnessClock(){
@@ -1600,9 +1615,9 @@ function hitMissRatio(stats){
  if(!stats?.shots)return 0;
  return Math.round((stats.hits/stats.shots)*100);
 }
-function buildResultsHtml(stats,score,stage){
+function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${String(stage).padStart(2,'0')}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString()};
@@ -1626,7 +1641,7 @@ function saveGameOverInitials(){
 }
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
- if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage);
+ if(gameOverState.phase==='results')return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge);
  const board=leaderboardRowsForView();
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
@@ -1647,10 +1662,11 @@ function buildAttractScoreboardHtml(){
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
-function buildGameOverState(score,stage){
+function buildGameOverState(score,stage,challenge=0){
  const pilotInitials=(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'').padEnd(3,'-').slice(0,3);
  const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
- const res=recordScore(score,stage,lockedPilotInitials?pilotInitials:'YOU');
+ const shownStage=displayStageNumber(stage,challenge);
+ const res=recordScore(score,shownStage,lockedPilotInitials?pilotInitials:'YOU');
  const editing=!!res.rank&&!lockedPilotInitials;
  return{
   entryId:res.entry.id,
@@ -1658,6 +1674,8 @@ function buildGameOverState(score,stage){
   phase:'results',
   score:score|0,
   stage:stage|0,
+  challenge:!!challenge,
+  shownStage,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
   initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
@@ -3381,7 +3399,7 @@ function gameOver(){
  if(typeof syncPauseUi==='function')syncPauseUi();
  if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
  stopRunRecording();
- gameOverState=buildGameOverState(S.score,S.stage);
+ gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
  sfx.over();
@@ -5808,11 +5826,12 @@ function currentGamePackStagePresentation(stage,challenge){
   if(stage>=candidate.fromStage)theme=candidate;
   else break;
  }
+ const shownStage=formatDisplayedStage(stage,challenge);
  return Object.assign({},theme,{
-  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
-  stageLabel:`STAGE ${stage}`,
-  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${stage}`,
-  transitionSub:challenge?`STAGE ${stage}`:'NEXT PHASE'
+  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
+  stageLabel:challenge?'BONUS STAGE':`STAGE ${shownStage}`,
+  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
+  transitionSub:challenge?'BONUS STAGE':'NEXT PHASE'
  });
 }
 
@@ -6781,7 +6800,7 @@ function draw(){
 
 // Source: src/js/21-render-board.js
 // Aurora-specific board rendering, sprites, and hitbox helpers.
-window.__platinumRenderDebug=window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
+window.__platinumRenderDebug=window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[],captureTetherVisible:false,capturedGhostVisible:false,renderTick:0};
 window.__auroraRenderDebug=window.__platinumRenderDebug;
 const FAMILY_PIXELS={
  scorpion:[[1,0],[5,0],[0,2],[6,2]],
@@ -6837,11 +6856,16 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,colA,colB,P.ship.b,'#ff4658',P.ship.c);
 }
 
+function endOfRunOverlayActive(){
+ return !started&&!!gameOverState;
+}
+
 function drawEnemy(e){
  const ps=2;
  const flap=Math.sin(e.tm*11+e.ph)>.12,hot=e.dive===1||e.dive===4;
  const pal=enemyPalette(e,flap,hot);
- const carrying=enemyIsCarryingFighter(e);
+ const carryVisible=!endOfRunOverlayActive();
+ const carrying=carryVisible&&enemyIsCarryingFighter(e);
  const carryTarget=carrying?carriedFighterTarget(e):null;
  const carryOffset=carrying?carriedFighterOffset(e):null;
  ctx.save();
@@ -6911,8 +6935,16 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
 }
 
 function drawCaptureTether(){
+ if(endOfRunOverlayActive()){
+  window.__platinumRenderDebug.captureTetherVisible=false;
+  return;
+ }
  const p=S.p,b=p.capBoss;
- if(!p.captured||!b||b.hp<=0)return;
+ if(!p.captured||!b||b.hp<=0){
+  window.__platinumRenderDebug.captureTetherVisible=false;
+  return;
+ }
+ window.__platinumRenderDebug.captureTetherVisible=true;
  const bx=Math.round(b.x),by=Math.round(b.y+12),px=Math.round(p.x),py=Math.round(p.y-8);
  const g=ctx.createLinearGradient(bx,by,px,py);
  g.addColorStop(0,'rgba(155,246,255,.78)');
@@ -7093,7 +7125,10 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.setTransform(DPR*scale,0,0,DPR*scale,(ox+dx*.25)*DPR,(oy+dy*.25)*DPR);
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ window.__platinumRenderDebug.renderTick=(window.__platinumRenderDebug.renderTick||0)+1;
  window.__platinumRenderDebug.carryDraws.length=0;
+ window.__platinumRenderDebug.captureTetherVisible=false;
+ window.__platinumRenderDebug.capturedGhostVisible=false;
  ctx.save();
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
@@ -7137,10 +7172,14 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  drawCaptureTether();
  drawCarryDebugOverlay();
  const p=S.p;
+ const suppressCaptureOverlay=endOfRunOverlayActive();
  if((!p.pending||p.spawn<=.3)&&!p.spawn){
   if(!(p.inv>0&&Math.floor(p.inv*14)%2))drawPlayerBody(p.x,p.y,p.dual,0);
  }
- if(p.captured)drawPlayerBody(p.x,p.y,0,1);
+ if(p.captured&&!suppressCaptureOverlay){
+  window.__platinumRenderDebug.capturedGhostVisible=true;
+  drawPlayerBody(p.x,p.y,0,1);
+ }
  drawReserveShips(S.lives);
  drawBadges(S.stage);
  drawPostFx();
@@ -7531,6 +7570,16 @@ window.__galagaHarness__={
    description:fbDescription?.value||'',
    accountSummary:accountSummary?.textContent||'',
    leaderboardStatus:leaderboardStatusEl?.textContent||''
+  };
+ },
+ gameOverView(){
+  return{
+   html:gameOverHtml||'',
+   phase:gameOverState?.phase||'',
+   stage:+(gameOverState?.stage||0),
+   shownStage:+(gameOverState?.shownStage||0),
+   challenge:!!gameOverState?.challenge,
+   rank:+(gameOverState?.rank||0)
   };
  },
  export(){exportSession({silent:1})},
