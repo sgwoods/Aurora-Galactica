@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aurora Galactica And Platinum Project Guide</title>
+  <title>Platinum Platform Guide</title>
   <style>
 :root{
       --bg:#06111b;
@@ -393,13 +393,13 @@
       <div class="main">
         <section class="hero">
           <div class="heroTop">
-            <span class="eyebrow">Project Guide</span>
-            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
-            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Beta Build</a>
+            <span class="eyebrow">Platinum Guide</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Production Build</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/dev/">Hosted Dev</a>
           </div>
-          <h1>Aurora Galactica And Platinum Project Guide</h1>
-          <p>A current, hosted map of the project: what Platinum is, what Aurora owns, how the release lanes work, what is automated, and which maintained docs are the source of truth.</p>
-          <div class="goal"><strong>Current goal:</strong> Keep Platinum Release 1 stable, close the small Aurora trust-fix cluster, and keep the platform, applications, hosted docs, and release lanes aligned as one disciplined system.</div>
+          <h1>Platinum Platform Guide</h1>
+          <p>A first-class hosted guide to Platinum: why it exists, what it owns, how applications use it, where the seams still need work, and what should improve as the second game firms up.</p>
+          <div class="goal"><strong>Guide focus:</strong> Keep Platinum Release 1 stable while strengthening the platform and application boundary, keeping the hosted documentation set aligned, and preparing the smallest useful second-application proof.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
@@ -420,117 +420,139 @@
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
-            <a class="button" href="platinum-guide.html">Open Platinum guide</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
         </section>
         
-    <section class="section" id="snapshot">
+    <section class="section" id="purpose">
       <div class="sectionHeader">
-        <h2>Project Snapshot</h2>
-        <p>The short current-state read.</p>
+        <h2>Platform Purpose</h2>
+        <p>What Platinum is supposed to solve.</p>
       </div>
       <div class="cardGrid">
 
     <article class="card">
-      <h3>What Shipped</h3>
-      <p>`1.2.0 - Platinum Release 1` shipped Aurora Galactica as the first playable game on Platinum, established hosted `/dev`, kept hosted `/beta` and hosted `/production` explicit, and made the shell, picker, and shared docs part of the product rather than internal scaffolding.</p>
+      <h3>Shared Host</h3>
+      <p>Platinum is the reusable browser-arcade host. It owns the shell, hosted lanes, release identity, pack selection path, shared services, and the platform-side documentation and release discipline that should not be reinvented per game.</p>
     </article>
   
 
     <article class="card">
-      <h3>What The Platform Owns</h3>
-      <p>Platinum owns the shell, release framing, hosted lanes, pack selection path, shared services, and the first-class hosted documentation surfaces that explain the platform and release model.</p>
+      <h3>Not The Game</h3>
+      <p>Platinum should not quietly absorb Aurora gameplay rules. Scoring, stage progression, capture and rescue, challenge cadence, enemy behavior, and game-specific content remain application responsibilities.</p>
     </article>
   
 
     <article class="card">
-      <h3>What The Application Owns</h3>
-      <p>Aurora owns Aurora gameplay: scoring, stage flow, challenge cadence, capture and rescue, dual-fighter behavior, enemy behavior, and game-specific content.</p>
-    </article>
-  
-
-    <article class="card">
-      <h3>Current Focus</h3>
-      <p>The main work is now post-release discipline: small Aurora trust fixes, a stronger platform-versus-application documentation split, and keeping localhost, hosted `/dev`, hosted `/beta`, and hosted `/production` aligned.</p>
+      <h3>Current Proof</h3>
+      <p>The platform is now real because it ships one playable application, hosts a preview-only sibling application, carries a full hosted lane model, and has dedicated platform-only checks instead of only Aurora gameplay checks.</p>
     </article>
   
 </div>
     </section>
   
 
-    <section class="section" id="release-ladder">
+    <section class="section" id="structure">
       <div class="sectionHeader">
-        <h2>Release Ladder</h2>
-        <p>How work is expected to move through the system.</p>
+        <h2>Structure</h2>
+        <p>The main platform responsibilities today.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Shell And Presentation</h3>
+      <p>Platinum owns the cabinet frame, marquee housing, rails, lower band, overlay framing, and reusable shell frame themes.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Runtime And Hosting</h3>
+      <p>Platinum owns pack selection, preview-only application behavior, shell start behavior, wait-mode hosting, and shared runtime control surfaces.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Shared Services</h3>
+      <p>Auth, leaderboard policy, feedback transport, and replay/session plumbing are shared platform services so applications do not each build their own service stack.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Shared Contracts</h3>
+      <p>Platinum depends on a game-pack contract for identity, shell preferences, capability flags, content surfaces, and entity compatibility. The contract is real now but should become more explicit as the second game firms up.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="applications">
+      <div class="sectionHeader">
+        <h2>Applications On Platinum</h2>
+        <p>What currently runs on the platform and how to think about ownership.</p>
       </div>
       <ul class="bulletList">
 
-    <li>local `localhost` is the active engineering lane and the source of the current candidate.</li>
+    <li>`Aurora Galactica` is the first shipped playable application on Platinum.</li>
   
 
-    <li>hosted `/dev` is the shared integration preview of the current stable local candidate.</li>
+    <li>`Galaxy Guardians` is currently a preview-only sibling application shell.</li>
   
 
-    <li>hosted `/beta` is the reviewed release-candidate lane.</li>
+    <li>Applications own gameplay rules, scoring, progression, and game-specific content.</li>
   
 
-    <li>hosted `/production` is the public promise and should move only from an approved hosted `/beta` candidate.</li>
+    <li>Platinum owns the shell, lanes, release tooling, docs discipline, and shared services.</li>
   
 
-    <li>A meaningful `x.y` release should now include a complete documentation pass before hosted `/production` promotion.</li>
+    <li>The best next platform proof is a small playable second-application slice, not a rushed second public launch.</li>
   
 </ul>
     </section>
   
 
-    <section class="section" id="platform-vs-applications">
+    <section class="section" id="boundary-notes">
       <div class="sectionHeader">
-        <h2>Platform Versus Applications</h2>
-        <p>The architectural split we need to preserve.</p>
-      </div>
-      <div class="cardGrid">
-
-    <article class="card">
-      <h3>Platinum</h3>
-      <p>Platinum owns shared shell framing, runtime hosting, pack selection, shared services, release tooling, and the hosted documentation and release surfaces that apply to more than one game.</p>
-    </article>
-  
-
-    <article class="card">
-      <h3>Aurora Galactica</h3>
-      <p>Aurora is the first shipped application on Platinum. It owns game rules, challenge and scoring behavior, capture and rescue, and Aurora-specific content and gameplay harnesses.</p>
-    </article>
-  
-
-    <article class="card">
-      <h3>Galaxy Guardians</h3>
-      <p>Galaxy Guardians is currently a preview-only sibling application shell. Its job right now is to prove the pack-selection and identity path without pretending the gameplay is already there.</p>
-    </article>
-  
-</div>
-    </section>
-  
-
-    <section class="section" id="automation">
-      <div class="sectionHeader">
-        <h2>Automation-First Gating</h2>
-        <p>The release process should prefer automation over memory or manual estimation whenever practical.</p>
+        <h2>Remaining Boundary Notes</h2>
+        <p>The platform separation is real, but these seams still need to be managed deliberately.</p>
       </div>
       <ul class="bulletList">
 
-    <li>Build and publish preflight should fail if the hosted docs set is incomplete.</li>
+    <li>Some storage, debug, and compatibility names are still Aurora-shaped even when the underlying behavior is now platform-owned.</li>
   
 
-    <li>Gameplay, shell, and platform boot behavior should be covered by focused harnesses whenever the behavior is stable enough to automate.</li>
+    <li>The pack contract is practical in code but still needs stronger versioning and clearer required-versus-optional capability rules.</li>
   
 
-    <li>Hosted lane verification should confirm live labels and, when relevant, live input behavior.</li>
+    <li>Some shell copy and application copy still live too close together, which can blur ownership.</li>
   
 
-    <li>Manual review should mostly be reserved for feel, visual quality, and presentation clarity where automation is still weaker.</li>
+    <li>The second application is still preview-only, so the platform contract has one full gameplay implementation and one partial proof rather than two complete applications.</li>
+  
+</ul>
+    </section>
+  
+
+    <section class="section" id="future">
+      <div class="sectionHeader">
+        <h2>Platform Future Areas Of Improvement</h2>
+        <p>The most important next platform improvements as the project matures.</p>
+      </div>
+      <ul class="bulletList">
+
+    <li>Formalize the game-pack schema and capability validation.</li>
+  
+
+    <li>Make storage and migration policy more explicit and less name-driven.</li>
+  
+
+    <li>Keep platform docs and application docs separate and make the docs pass a real release gate for every meaningful x.y release.</li>
+  
+
+    <li>Prove the platform with the smallest useful playable second application before expanding into a much larger multi-game roadmap.</li>
   
 </ul>
     </section>
@@ -539,223 +561,53 @@
     <section class="section" id="docs-index">
       <div class="sectionHeader">
         <h2>Documentation Index</h2>
-        <p>The best entry points depending on the question you are trying to answer.</p>
+        <p>The best next links depending on what question you are asking.</p>
       </div>
       <div class="linkGrid">
 
     <article class="linkCard">
-      <a href="platinum-guide.html">Hosted Platinum Guide</a>
-      <p>First-class hosted platform guide covering Platinum purpose, ownership, structure, boundary notes, and future areas of improvement.</p>
+      <a href="project-guide.html">Project Guide</a>
+      <p>Project-wide release, workflow, documentation, and source-of-truth guide.</p>
     </article>
   
 
     <article class="linkCard">
-      <a href="player-guide.html">Hosted Player Guide</a>
-      <p>Player-facing guide used by the in-game help surface.</p>
+      <a href="player-guide.html">Player Guide</a>
+      <p>Player-facing controls and in-game usage guide.</p>
     </article>
   
 
     <article class="linkCard">
-      <a href="release-dashboard.html">Hosted Release Dashboard</a>
+      <a href="release-dashboard.html">Release Dashboard</a>
       <p>Current milestone and release-train status.</p>
     </article>
   
 
     <article class="linkCard">
-      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/PLATINUM.md">Platinum Platform Source</a>
-      <p>Canonical platform source document.</p>
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/PLATINUM_ARCHITECTURE_OVERVIEW.md">Platinum Overview Diagrams</a>
+      <p>Maintained diagrams and ownership visuals.</p>
     </article>
   
 
     <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/APPLICATIONS_ON_PLATINUM.md">Applications On Platinum</a>
-      <p>Application-layer responsibilities and remaining platform/application seam notes.</p>
+      <p>Application-layer responsibilities and remaining boundary notes.</p>
     </article>
   
 
     <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md">Testing And Release Gates</a>
-      <p>Automation-first release gate policy and lane expectations.</p>
-    </article>
-  
-
-    <article class="linkCard">
-      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/ARCHITECTURE.md">Architecture</a>
-      <p>Repo-level technical layout and implementation map.</p>
-    </article>
-  
-
-    <article class="linkCard">
-      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_READINESS_REVIEW.md">Release Readiness Review</a>
-      <p>Current release-readiness and documentation-discipline review artifact.</p>
+      <p>Automation-first release discipline and documentation gate expectations.</p>
     </article>
   
 </div>
     </section>
   
-
-    <section class="section" id="next">
-      <div class="sectionHeader">
-        <h2>Likely Next Steps</h2>
-        <p>The work that most naturally follows the current shipped state.</p>
-      </div>
-      <ul class="bulletList">
-
-    <li>Bundle the small Aurora trust fixes into the `1.2.1` patch line.</li>
-  
-
-    <li>Keep Platinum shell and docs discipline boring and reliable.</li>
-  
-
-    <li>Strengthen the platform/application contract before the second application becomes fully playable.</li>
-  
-
-    <li>Use the smallest useful `Galaxy Guardians` gameplay slice to prove the platform seam rather than rushing a second public launch.</li>
-  
-</ul>
-    </section>
-  
         
-    <section class="section" id="readme-doc">
-      <div class="sectionHeader">
-        <h2>README Source</h2>
-        <p>Top-level repo overview, live URLs, local run instructions, and major documentation links.</p>
-      </div>
-      <div class="docWrap">
-        <p class="docMeta">Generated from <code>README.md</code> during build.</p>
-        <div class="markdown">
-          <p><code>Aurora Galactica</code> is the first shipped playable application on the <code>Platinum</code> browser-arcade platform.</p>
-<p><img alt="Platinum Hero" src="reference-artifacts/diagrams/platinum/platinum-hero.svg"></p>
-<h3>What This Repo Contains</h3>
-<p>This repo is the engineering source of truth for:</p>
-<ul><li>the <code>Platinum</code> platform</li><li>the <code>Aurora Galactica</code> application</li><li>the hosted documentation set</li><li>the build, promote, publish, and verification scripts for the release lanes</li></ul>
-<p>Think about the product in two layers:</p>
-<ul><li><code>Platinum</code><ul><li>shared shell, hosted lanes, pack selection, shared services, release tooling, and first-class hosted documentation</li></ul></li><li><code>Aurora Galactica</code><ul><li>gameplay rules, stage flow, scoring, capture and rescue, challenge behavior, and Aurora-specific content</li></ul></li></ul>
-<h3>Live Lanes</h3>
-<ul><li>local <code>localhost</code>:<ul><li><code>http://127.0.0.1:8000/</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/dev/</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>local log viewer:<ul><li><code>http://127.0.0.1:4311/</code></li></ul></li></ul>
-<h3>First-Class Hosted Documentation</h3>
-<p>The hosted documentation set should now move with the release lanes.</p>
-<p>Primary hosted docs on hosted <code>/production</code>:</p>
-<ul><li>project guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/project-guide.html</code></li></ul></li><li>Platinum guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html</code></li></ul></li><li>player guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/player-guide.html</code></li></ul></li><li>release dashboard:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html</code></li></ul></li></ul>
-<p>Equivalent docs should also exist on hosted <code>/dev</code> and hosted <code>/beta</code>.</p>
-<h3>Canonical Source Docs</h3>
-<p>Best platform overview:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul>
-<p>Best application-boundary doc:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
-<p>Best repo technical map:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul>
-<p>Best release and testing gate doc:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul>
-<p>Release planning and readiness docs:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul>
-<h3>Current Release State</h3>
-<p>Current public milestone:</p>
-<ul><li><code>1.2.0 - Platinum Release 1</code></li></ul>
-<p>What that means:</p>
-<ul><li>Aurora now ships as the first playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
-<p>Immediate follow-through after <code>1.2.0</code>:</p>
-<ul><li>keep the fast-follow Aurora trust-fix bundle tight</li><li>keep the documentation set aligned across source and hosted pages</li><li>strengthen the platform versus application boundary before the second game becomes truly playable</li></ul>
-<h3>Run Locally</h3>
-<ol><li>Build the current local candidate:</li></ol>
-<pre><code data-lang="bash">cd /Users/stevenwoods/Documents/Codex-Test1
-npm run build</code></pre>
-<ol><li>Start the local game and log viewer together:</li></ol>
-<pre><code data-lang="bash">npm run local:resume</code></pre>
-<ol><li>Open:</li></ol>
-<ul><li><code>http://127.0.0.1:8000/</code></li><li><code>http://127.0.0.1:4311/</code></li></ul>
-<p>To stop the tracked local services cleanly:</p>
-<pre><code data-lang="bash">npm run local:stop</code></pre>
-<h3>Release Ladder</h3>
-<p>The expected release ladder is:</p>
-<ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
-<p>The intention is:</p>
-<ul><li>local <code>localhost</code> for active engineering</li><li>hosted <code>/dev</code> for integrated hosted review</li><li>hosted <code>/beta</code> for release-candidate validation</li><li>hosted <code>/production</code> for the public stable promise</li></ul>
-<h3>Release Discipline</h3>
-<p>For every meaningful <code>x.y</code> release, we now want a full documentation pass to be part of the real gate between hosted <code>/beta</code> and hosted <code>/production</code>.</p>
-<p>That means refreshing:</p>
-<ul><li>release notes</li><li>release dashboard</li><li>README and planning docs</li><li>platform and application docs</li><li>testing and release-gate docs</li><li>hosted project, Platinum, and player guides</li></ul>
-<p>See:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul>
-<h3>Related Visuals</h3>
-<p><img alt="Platinum Platform Stack" src="reference-artifacts/diagrams/platinum/platinum-platform-stack.svg"></p>
-<p><img alt="Platinum vs Game Packs" src="reference-artifacts/diagrams/platinum/platinum-pack-separation.svg"></p>
-<p><img alt="Aurora Pack Card" src="reference-artifacts/diagrams/platinum/aurora-pack-card.svg"></p>
-<p><img alt="Galaxy Guardians Pack Card" src="reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg"></p>
-        </div>
-      </div>
-    </section>
-  
-
-    <section class="section" id="plan-doc">
-      <div class="sectionHeader">
-        <h2>Plan Source</h2>
-        <p>Current working plan and active follow-up bundles.</p>
-      </div>
-      <div class="docWrap">
-        <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
-        <div class="markdown">
-          <h3>Current State</h3>
-<ul><li><code>1.2.0 - Platinum Release 1</code> is live on hosted <code>/production</code></li><li><code>Platinum</code> is now a real shipped host platform rather than an internal refactor story</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lane model is now explicit:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the major missing discipline that slipped past the original <code>1.2.0</code> promotion was a full documentation pass and first-class hosted platform docs</li><li>that is now being corrected and formalized as a real release gate</li></ul>
-<h3>Active Workstreams</h3>
-<h4>1. Documentation Hardening</h4>
-<ul><li>make Platinum a first-class hosted documentation surface</li><li>keep platform docs and application docs separate</li><li>keep project, platform, player, and release docs aligned on every meaningful <code>x.y</code> release</li><li>make missing docs a real publish-preflight failure instead of a soft reminder</li></ul>
-<h4>2. <code>1.2.1</code> Aurora Trust Fixes</h4>
-<ul><li><code>#143</code> dual-fighter surviving-ship rule</li><li><code>#140</code> challenge-stage bonus-stage numbering</li><li><code>#142</code> carried/captured-fighter game-over presentation</li></ul>
-<h4>3. Platform Boundary Cleanup</h4>
-<ul><li>keep pack contract thinking explicit</li><li>keep remaining Aurora-shaped compatibility residue visible</li><li>avoid letting shell copy and application copy drift back into a blur</li></ul>
-<h4>4. Second-Application Proof</h4>
-<ul><li>keep <code>Galaxy Guardians</code> preview-only until a minimal playable slice is real</li><li>prove the platform with a narrow second-application gameplay slice rather than a rushed public launch</li></ul>
-<h3>Immediate Priorities</h3>
-<ol><li>complete the documentation refresh and publish-path hardening</li><li>close the small Aurora trust-fix bundle for <code>1.2.1</code></li><li>keep hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> aligned with the source docs and release metadata</li><li>then deepen the second-application proof deliberately</li></ol>
-        </div>
-      </div>
-    </section>
-  
-
-    <section class="section" id="roadmap-doc">
-      <div class="sectionHeader">
-        <h2>Roadmap Source</h2>
-        <p>Milestones, release lines, and what belongs to platform work versus later application expansion.</p>
-      </div>
-      <div class="docWrap">
-        <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
-        <div class="markdown">
-          <h3>Current Release Line</h3>
-<ul><li>shipped public line:<ul><li><code>1.2.0</code></li></ul></li><li>release name:<ul><li><code>Platinum Release 1</code></li></ul></li></ul>
-<h3>Where We Are</h3>
-<p>The major platform milestone is now shipped.</p>
-<p>That means the roadmap is no longer centered on &quot;can we separate Platinum from Aurora at all.&quot; It is centered on:</p>
-<ul><li>keeping the shipped platform credible</li><li>keeping Aurora stable as the first application on Platinum</li><li>preparing the smallest useful second-application proof</li></ul>
-<h3>Near-Term Roadmap</h3>
-<h4><code>1.2.1</code> Aurora Trust Fixes</h4>
-<p>Scope:</p>
-<ul><li>dual-fighter surviving-ship correctness</li><li>challenge-stage bonus-stage numbering</li><li>carried/captured-fighter game-over presentation</li></ul>
-<p>Why this bundle:</p>
-<ul><li>all are small player-visible trust fixes</li><li>all fit naturally into a focused patch line</li><li>none require reopening broad gameplay churn</li></ul>
-<h4><code>1.2.x</code> Documentation And Platform Discipline</h4>
-<p>Scope:</p>
-<ul><li>first-class hosted Platinum guide</li><li>explicit platform versus application docs</li><li>updated project guide, release dashboard, and readiness docs</li><li>stronger docs gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ul>
-<p>Why this matters:</p>
-<ul><li>the release process should not let a major platform step ship without a matching docs pass again</li></ul>
-<h3>Next Platform Milestone</h3>
-<h4>Second-Application Proof</h4>
-<p>Target:</p>
-<ul><li>a small playable <code>Galaxy Guardians</code> slice in dev only</li></ul>
-<p>Minimum useful proof:</p>
-<ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game-over flow</li></ul>
-<p>This is the right next platform test because it proves the seam without forcing an immediate second public game release.</p>
-<h3>Longer-Term Platform Improvement Areas</h3>
-<ul><li>stronger pack schema and capability validation</li><li>clearer storage and migration policy</li><li>cleaner platform/application naming residue cleanup</li><li>continued automation-first gating across hosted lanes and docs surfaces</li></ul>
-        </div>
-      </div>
-    </section>
-  
-
     <section class="section" id="platinum-doc">
       <div class="sectionHeader">
-        <h2>Platinum Source</h2>
-        <p>Canonical platform purpose, ownership, usage, and future-area notes.</p>
+        <h2>Platinum Platform Source</h2>
+        <p>Canonical platform purpose, ownership, usage, boundary notes, and future improvement areas.</p>
       </div>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>PLATINUM.md</code> during build.</p>
@@ -844,10 +696,70 @@ npm run build</code></pre>
     </section>
   
 
+    <section class="section" id="platinum-overview-doc">
+      <div class="sectionHeader">
+        <h2>Platinum Overview Source</h2>
+        <p>Maintained diagrams and short ownership summary for Platinum and the game packs it hosts.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>PLATINUM_ARCHITECTURE_OVERVIEW.md</code> during build.</p>
+        <div class="markdown">
+          <p>This document is the maintained short visual overview of how <code>Platinum</code> relates to the applications it hosts.</p>
+<p>Use it for the fast answer to:</p>
+<ul><li>what Platinum is</li><li>what Platinum owns</li><li>what applications own</li><li>where the current migration stands</li></ul>
+<p>For the canonical full platform guide, use:</p>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul>
+<h3>Diagram</h3>
+<pre><code data-lang="mermaid">flowchart TB
+    subgraph &quot;Platinum Platform&quot;
+        P1[&quot;Cabinet Shell and Layout\n- marquee\n- side rails\n- build stamp\n- popup framing&quot;]
+        P2[&quot;Runtime and Input\n- boot path\n- active pack selection\n- pause and wait mode\n- fullscreen and scaling&quot;]
+        P3[&quot;Shared Services\n- auth and session adapters\n- leaderboard policy\n- feedback transport\n- replay plumbing&quot;]
+        P4[&quot;Platform Harnesses\n- pack boot proof\n- shell and popup checks\n- dock button checks\n- lane and publish checks&quot;]
+        P5[&quot;Shared Contracts\n- gamePack\n- shell themes\n- entity contract\n- content surfaces&quot;]
+    end
+
+    subgraph &quot;Aurora Galactica Application&quot;
+        A1[&quot;Application Identity\n- title\n- front-door copy\n- shell accents\n- stage branding&quot;]
+        A2[&quot;Gameplay Rules\n- formations\n- stage flow\n- challenge cadence\n- scoring&quot;]
+        A3[&quot;Aurora Mechanics\n- capture and rescue\n- dual fighter\n- boss and escort behavior\n- challenge-stage motion&quot;]
+        A4[&quot;Aurora Assets and Content\n- sprites\n- audio identity\n- stage text\n- game-owned polish&quot;]
+        A5[&quot;Aurora Harnesses\n- challenge profile\n- capture lifecycle\n- scoring and outcome checks&quot;]
+    end
+
+    subgraph &quot;Future Applications&quot;
+        G1[&quot;Galaxy Guardians\n- future sibling title\n- currently preview only&quot;]
+        G2[&quot;Other Future Packs\n- their own rules\n- their own content\n- their own harnesses&quot;]
+    end
+
+    P5 --&gt; A1
+    P5 --&gt; A2
+    P5 --&gt; A3
+    P5 --&gt; A4
+    P5 --&gt; G1
+    P5 --&gt; G2
+
+    P1 --&gt; A1
+    P2 --&gt; A2
+    P3 --&gt; A5
+    P4 --&gt; A5
+
+    G1 -. hosted by .-&gt; P2
+    G2 -. hosted by .-&gt; P2</code></pre>
+<h3>Current Read</h3>
+<p>Today the architecture is in this state:</p>
+<ul><li><code>Platinum</code> is real and visible in the shipped product</li><li><code>Aurora Galactica</code> is the first playable application on Platinum</li><li><code>Galaxy Guardians</code> exists as a preview-only sibling application shell</li><li>hosted docs now need to describe the platform separately from the applications it hosts</li></ul>
+<h3>Related Docs</h3>
+<ul><li>canonical platform guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application-layer guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing discipline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
+        </div>
+      </div>
+    </section>
+  
+
     <section class="section" id="applications-doc">
       <div class="sectionHeader">
-        <h2>Applications Source</h2>
-        <p>Current application layer and remaining boundary notes.</p>
+        <h2>Applications On Platinum Source</h2>
+        <p>Application-layer responsibilities, current packs, and remaining platform-application seam notes.</p>
       </div>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>APPLICATIONS_ON_PLATINUM.md</code> during build.</p>
@@ -915,7 +827,7 @@ npm run build</code></pre>
     <section class="section" id="architecture-doc">
       <div class="sectionHeader">
         <h2>Architecture Source</h2>
-        <p>Technical layout and implementation map.</p>
+        <p>Repo-level technical layout and implementation map.</p>
       </div>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>ARCHITECTURE.md</code> during build.</p>
@@ -968,7 +880,7 @@ npm run build</code></pre>
     <section class="section" id="testing-doc">
       <div class="sectionHeader">
         <h2>Testing And Release Gates Source</h2>
-        <p>Automation-first release discipline and documentation pass expectations.</p>
+        <p>Automation-first lane gating and documentation pass expectations.</p>
       </div>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>TESTING_AND_RELEASE_GATES.md</code> during build.</p>
@@ -1025,156 +937,243 @@ npm run build</code></pre>
     </section>
   
 
-    <section class="section" id="external-services-doc">
+    <section class="section" id="launch-art-doc">
       <div class="sectionHeader">
-        <h2>External Services Source</h2>
-        <p>Runtime dependencies, hosting, feedback transport, and local-only systems.</p>
+        <h2>Launch Art Direction Source</h2>
+        <p>Current Platinum launch framing and shell treatment notes.</p>
       </div>
       <div class="docWrap">
-        <p class="docMeta">Generated from <code>EXTERNAL_SERVICES.md</code> during build.</p>
+        <p class="docMeta">Generated from <code>PLATINUM_LAUNCH_ART_DIRECTION.md</code> during build.</p>
         <div class="markdown">
-          <p>This document is the current source of truth for external services used by Aurora Galactica, what they are used for, and what is local-only instead.</p>
-<h3>Runtime Services</h3>
-<h4>Supabase</h4>
-<ul><li>Service:<ul><li><code>https://iddyodcknmxupavnuuwg.supabase.co</code></li></ul></li><li>Used for:<ul><li>pilot account sign-up and sign-in</li><li>authenticated pilot profile data</li><li>shared leaderboard data</li><li>validated score views</li><li>player-specific score views such as <code>mine</code></li></ul></li><li>Main runtime code:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-supabase.js</code></li></ul></li><li>Build token source:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li></ul>
-<h4>Web3Forms</h4>
-<ul><li>Service:<ul><li><code>https://api.web3forms.com/submit</code></li></ul></li><li>Used for:<ul><li>in-game bug reports</li><li>in-game feature requests</li></ul></li><li>Main runtime code:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li></ul>
-<h3>Hosting And Delivery</h3>
-<h4>GitHub Pages</h4>
-<ul><li>Production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>Beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>Also hosts:<ul><li>player guide</li><li>project guide</li><li>release dashboard</li></ul></li><li>Used for:<ul><li>public delivery of the playable game and public documentation surfaces</li></ul></li><li>Main policy docs:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
-<h3>Development And Release Tooling</h3>
-<h4>GitHub</h4>
-<ul><li>Repositories:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li><li><code>https://github.com/sgwoods/Aurora-Galactica</code></li></ul></li><li>Used for:<ul><li>source control</li><li>issue tracking</li><li>release publishing</li><li>public artifact hosting workflow</li></ul></li><li>Also used by:<ul><li>the local log viewer issue-creation flow through <code>gh</code></li></ul></li></ul>
-<h4>GitHub API</h4>
-<ul><li>Used by:<ul><li>public sync verification</li><li>public project-page sync tooling</li></ul></li><li>Main scripts:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/verify-public-sync.js</code></li></ul></li></ul>
-<h3>Local-Only Or Browser-Native Systems</h3>
-<p>These are not external services.</p>
-<h4>Browser Storage</h4>
-<ul><li>Used for:<ul><li>local high scores</li><li>local settings</li><li>local replay catalog</li></ul></li><li>Backed by:<ul><li><code>localStorage</code></li><li><code>IndexedDB</code></li></ul></li></ul>
-<h4>Browser Recording</h4>
-<ul><li>Used for:<ul><li>native local replay capture</li></ul></li><li>Backed by:<ul><li><code>MediaRecorder</code></li></ul></li></ul>
-<h4>Local Dev Services</h4>
-<ul><li>Local game server:<ul><li><code>http://localhost:8000</code></li></ul></li><li>Local log viewer:<ul><li><code>http://127.0.0.1:4311/</code></li></ul></li><li>Used for:<ul><li>development</li><li>artifact review</li><li>harness/video debugging</li></ul></li><li>These are not production dependencies.</li></ul>
-<h3>Practical Summary</h3>
-<h4>Player-Facing External Runtime Dependencies</h4>
-<ul><li>Supabase</li><li>Web3Forms</li></ul>
-<h4>Hosting Dependencies</h4>
-<ul><li>GitHub Pages</li></ul>
-<h4>Developer And Release Dependencies</h4>
-<ul><li>GitHub</li><li>GitHub API</li></ul>
-<h4>Not External</h4>
-<ul><li>replay storage</li><li>replay capture</li><li>local dev server</li><li>local log viewer</li></ul>
+          <h3>Purpose</h3>
+<p>This document defines the launch visual direction for the <code>Platinum</code> platform shell that hosts <code>Aurora Galactica</code> for the first public Platinum-framed release.</p>
+<p>The goal is not to redesign Aurora itself. The goal is to make the platform frame feel intentional, premium, reusable across future games, and visually calmer than the current busy cabinet treatment.</p>
+<h3>Recommended Direction</h3>
+<p>Use <code>Platinum Command</code> as the release frame direction.</p>
+<p>Short definition:</p>
+<ul><li>premium sci-fi cabinet host</li><li>deep navy / graphite structure</li><li>cyan / ice-blue technical accents</li><li>restrained metallic highlights</li><li>minimal warm accent usage</li><li>quieter side rails so the game remains primary</li></ul>
+<h3>Design Principles</h3>
+<h4>1. Platform Supports The Game</h4>
+<p>The shell should clearly belong to <code>Platinum</code>, but it should not visually compete with the active game.</p>
+<p>That means:</p>
+<ul><li>Aurora marquee and playfield remain the primary focal points</li><li>Platinum frame establishes confidence and identity around them</li><li>shell decoration should reinforce structure, not demand attention</li></ul>
+<h4>2. Calm The Frame</h4>
+<p>The current frame has too many simultaneous motifs:</p>
+<ul><li>diagonal stripes</li><li>glow blooms</li><li>star points</li><li>high-contrast decorative fields</li></ul>
+<p>For launch, reduce that density so the shell feels:</p>
+<ul><li>more premium</li><li>less noisy</li><li>more reusable across different games</li></ul>
+<h4>3. Make Platinum Read As A Product</h4>
+<p>The platform should feel like a named host system, not just themed wallpaper.</p>
+<p>That means:</p>
+<ul><li>clearer materials and hierarchy</li><li>more consistent cyan/silver host language</li><li>less arbitrary color competition in non-game shell regions</li></ul>
+<h3>Palette</h3>
+<h4>Core Platform Palette</h4>
+<ul><li><code>Platinum Night</code>: <code>#0a1222</code></li><li><code>Deep Graphite Blue</code>: <code>#111c31</code></li><li><code>Control Navy</code>: <code>#182743</code></li><li><code>Platinum Cyan</code>: <code>#7ad7ff</code></li><li><code>Ice Highlight</code>: <code>#d8f2ff</code></li><li><code>Soft Steel</code>: <code>#c9d7e6</code></li></ul>
+<h4>Restricted Accent Palette</h4>
+<p>Use sparingly:</p>
+<ul><li><code>Signal Gold</code>: <code>#ffd86d</code></li><li><code>Signal Amber</code>: <code>#d8a542</code></li></ul>
+<p>Reserve warm accents for:</p>
+<ul><li>selected / active buttons</li><li>state emphasis</li><li>occasional trim punctuation</li></ul>
+<h4>Game-Owned Color Space</h4>
+<p>Aurora can keep its stronger game colors:</p>
+<ul><li>orange / red marquee lettering</li><li>stage accent shifts</li><li>challenge / boss progression accents</li></ul>
+<p>Those belong to the game identity, not the base Platinum frame.</p>
+<h3>Shell Region Treatments</h3>
+<h4>Top Marquee Housing</h4>
+<p>Launch direction:</p>
+<ul><li>cleaner panel seams</li><li>fewer decorative textures behind the marquee</li><li>subtle technical glow near housing edges</li><li>marquee housing should feel engineered rather than ornamental</li></ul>
+<h4>Left Utility Rail</h4>
+<p>Launch direction:</p>
+<ul><li>simplify the base texture</li><li>reduce large warm glow circles</li><li>reduce loud diagonal repeats</li><li>introduce subtle panel segmentation</li><li>let the dock buttons and Platinum badge become the focal elements</li></ul>
+<h4>Right Action Rail</h4>
+<p>Launch direction:</p>
+<ul><li>match the left rail in calmer material language</li><li>reduce background contrast</li><li>keep button affordances strong</li><li>use cyan/silver structural edges instead of layered glow clutter</li></ul>
+<h4>Bottom Status Band</h4>
+<p>Launch direction:</p>
+<ul><li>flatter, more deliberate material treatment</li><li>subtle grid / instrument-panel cues</li><li>restrained lighting</li><li>cleaner separation from playfield</li></ul>
+<h4>Playfield Surround</h4>
+<p>Launch direction:</p>
+<ul><li>keep clean</li><li>preserve game-stage accenting</li><li>do not overload with Platinum texture</li></ul>
+<h3>Overlay Style Rules</h3>
+<p>All major overlays should share one Platinum design language:</p>
+<ul><li>large framed panel</li><li>consistent border treatment</li><li>clean close button placement</li><li>integrated sub-sections</li><li>clear hierarchy for titles, status, and actions</li></ul>
+<p>The trophy/high-score screen should behave like:</p>
+<ul><li>one large overlay surface</li><li>not two disconnected cards</li><li>not a floating utility widget</li></ul>
+<p>Dock behavior rule:</p>
+<ul><li>selecting one dock overlay closes the others by default</li></ul>
+<h3>What To Tone Down From The Current Frame</h3>
+<p>Reduce or simplify:</p>
+<ul><li>large circular glow blooms in the side rails</li><li>repeated diagonal stripe dominance</li><li>mixed warm/cool accents in the base shell</li><li>ornamental brightness behind the marquee</li></ul>
+<p>Keep or strengthen:</p>
+<ul><li>structural shell boundaries</li><li>cyan technical line-work</li><li>premium dark base materials</li><li>strong game-button readability</li><li>the Platinum badge as a quiet brand anchor</li></ul>
+<h3>Recommended Theme Token Model</h3>
+<p>The platform-owned shell frame theme should continue to expose:</p>
+<ul><li>shell top background</li><li>shell side background</li><li>shell bottom background</li><li>shell panel border</li><li>shell outer line</li><li>shell glow</li><li>marquee housing background</li><li>marquee border</li><li>marquee glow</li><li>left rail background</li><li>right rail background</li><li>rail border</li><li>rail inner border</li><li>rail inner glow</li></ul>
+<h3>Programmatic Graphics To Generate Later</h3>
+<p>Once the direction is approved, generate platform-owned visual elements for:</p>
+<ol><li><code>Platinum Release</code> marquee housing refinement</li><li>left utility rail texture</li><li>right action rail texture</li><li>bottom command/status band texture</li><li>updated Platinum badge treatment if needed</li></ol>
+<p>These should be:</p>
+<ul><li>platform-owned assets</li><li>not Aurora-owned assets</li><li>reusable by future packs</li></ul>
+<h3>Immediate Implementation Guidance</h3>
+<p>For the next refinement pass:</p>
+<ol><li>reduce side-rail pattern intensity by roughly <code>30-40%</code></li><li>reduce large warm glow blooms in the rails</li><li>make the bottom band flatter and more command-like</li><li>make the top housing slightly more premium and less busy</li><li>preserve the Aurora marquee and game-stage identity inside that calmer host</li></ol>
+<h3>Release Position</h3>
+<p>For launch, the shell should communicate:</p>
+<ul><li><code>Platinum</code> is the platform</li><li><code>Aurora Galactica</code> is the current flagship hosted game</li><li>future sibling games can live inside the same host shell language</li></ul>
         </div>
       </div>
     </section>
   
 
-    <section class="section" id="release-policy-doc">
+    <section class="section" id="review-doc">
       <div class="sectionHeader">
-        <h2>Release Policy Source</h2>
-        <p>Versioning, lane model, and release recommendation rules.</p>
+        <h2>Lueck Review Source</h2>
+        <p>Forward-looking Platinum review with remaining design pressure points and next structural concerns.</p>
       </div>
       <div class="docWrap">
-        <p class="docMeta">Generated from <code>RELEASE_POLICY.md</code> during build.</p>
+        <p class="docMeta">Generated from <code>PLATINUM_LUECK_REVIEW.md</code> during build.</p>
         <div class="markdown">
-          <h3>Version Format</h3>
-<p>We use a SemVer-style public version plus build metadata.</p>
+          <p>This is a forward-looking architecture review of <code>Platinum</code> after the first real Aurora-on-Platinum migration work.</p>
+<p>The point of this review is not just to praise progress. It is to be clear about:</p>
+<ul><li>what is now structurally solid</li><li>what is still transitional</li><li>what should be designed deliberately before future games and future host</li></ul>
+<p>surfaces expand the scope</p>
+<h3>Current Read</h3>
+<p><code>Platinum</code> is no longer just an internal cleanup story.</p>
+<p>It is now a real host platform with:</p>
+<ul><li>a visible shell identity</li><li>an explicit pack-selection path</li><li>shared service seams</li><li>shared harness categories</li><li>one real playable game pack:<ul><li><code>Aurora Galactica</code></li></ul></li></ul>
+<p>That is meaningful progress.</p>
+<p>The architecture is now beyond:</p>
+<ul><li>“Aurora with some extracted files”</li></ul>
+<p>and into:</p>
+<ul><li>“an early shared platform carrying one real game”</li></ul>
+<h3>What Looks Covered Well</h3>
+<h4>1. Platform identity is now explicit</h4>
+<p>This was important.</p>
+<p><code>Platinum</code> is now visible in:</p>
+<ul><li>docs</li><li>shell surfaces</li><li>picker flow</li><li>splash flow</li><li>platform-only harnesses</li></ul>
+<p>That gives the project a cleaner mental model:</p>
+<ul><li>platform</li><li>game pack</li><li>future pack</li></ul>
+<p>instead of one monolithic product blob.</p>
+<h4>2. Platform and game responsibilities are separating cleanly</h4>
+<p>This is one of the strongest areas now.</p>
+<p><code>Platinum</code> owns:</p>
+<ul><li>shell and framing</li><li>runtime and pack boot/install</li><li>service adapters</li><li>publish/readiness checks</li><li>platform-only harnesses</li></ul>
+<p><code>Aurora</code> owns:</p>
+<ul><li>gameplay rules</li><li>stage and challenge design</li><li>scoring</li><li>capture/rescue mechanics</li><li>game-specific content</li></ul>
+<p>That is the right direction, and it is now reflected in code, docs, and tests.</p>
+<h4>3. Harness separation is becoming real</h4>
+<p>This is a very strong improvement.</p>
+<p>We now have clearer categories for:</p>
+<ul><li>platform-only harnesses</li><li>game-pack harnesses</li><li>seam/contract harnesses</li><li>motion/outcome checks</li></ul>
+<p>That matters because future games should be able to stress Platinum without dragging all Aurora assumptions along for the ride.</p>
+<h4>4. Platinum can already host a future title preview safely</h4>
+<p>The current <code>Galaxy Guardians</code> shell preview is useful.</p>
+<p>It proves:</p>
+<ul><li>pack selection</li><li>shell identity swapping</li><li>coming-soon treatment</li><li>future-title framing</li></ul>
+<p>without pretending gameplay exists before it does.</p>
+<p>That is exactly the kind of staged proof a platform needs.</p>
+<h3>What Is Still Transitional</h3>
+<h4>1. The pack contract is real, but still not formal enough</h4>
+<p>We now have a meaningful pack shape in practice, but not yet a strongly versioned, explicit contract that can evolve safely.</p>
+<p>What is still missing:</p>
+<ul><li>clearer versioned <code>gamePack</code> schema thinking</li><li>stronger required-vs-optional capability definitions</li><li>more intentional forward-compatibility planning for pack data</li></ul>
+<p>This will matter much more once a second playable pack exists.</p>
+<h4>2. Some compatibility shims are still Aurora-shaped</h4>
+<p>This is acceptable for now, but it should stay visible.</p>
 <p>Examples:</p>
-<ul><li>local <code>localhost</code>:<ul><li><code>1.2.0+build.364.sha.106adfd.dirty</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>1.2.0+build.364.sha.106adfd</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.2.0-beta.1+build.364.sha.106adfd.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.2.0+build.364.sha.106adfd</code></li></ul></li></ul>
-<h3>Meaning</h3>
-<ul><li><code>MAJOR</code><ul><li>reserve for true product-era breaks or major repositioning</li></ul></li><li><code>MINOR</code><ul><li>use for meaningful public milestones</li><li>example:<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li></ul></li></ul>
-<h3>Hosted Release Lanes</h3>
-<p>The intended lane model is:</p>
-<ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
-<p>Meaning:</p>
-<ul><li>local <code>localhost</code><ul><li>active engineering lane</li></ul></li><li>hosted <code>/dev</code><ul><li>shared hosted integration preview</li></ul></li><li>hosted <code>/beta</code><ul><li>reviewed release candidate</li></ul></li><li>hosted <code>/production</code><ul><li>public stable promise</li></ul></li></ul>
-<h3>Major <code>x.y</code> Documentation Gate</h3>
-<p>For every meaningful <code>x.y</code> release, the gate between hosted <code>/beta</code> and hosted <code>/production</code> should include a complete documentation refresh.</p>
-<p>That refresh should cover at least:</p>
-<ul><li><code>release-notes.json</code></li><li><code>release-dashboard.json</code></li><li><code>README.md</code></li><li><code>PLAN.md</code></li><li><code>PRODUCT_ROADMAP.md</code></li><li><code>ARCHITECTURE.md</code></li><li><code>PLATINUM.md</code></li><li><code>APPLICATIONS_ON_PLATINUM.md</code></li><li><code>TESTING_AND_RELEASE_GATES.md</code></li><li><code>RELEASE_READINESS_REVIEW.md</code></li><li>hosted <code>project-guide.html</code></li><li>hosted <code>platinum-guide.html</code></li><li>hosted <code>player-guide.html</code></li></ul>
-<p>This should be treated as a real release artifact pass, not optional cleanup.</p>
-<h3>Promotion Workflow</h3>
-<ol><li>build the local <code>localhost</code> candidate</li><li>verify local <code>localhost</code> gates</li><li>publish hosted <code>/dev</code> for integrated hosted review</li><li>promote hosted <code>/beta</code></li><li>verify hosted <code>/beta</code></li><li>complete any required docs pass for the release line</li><li>approve hosted <code>/beta</code></li><li>promote and publish hosted <code>/production</code></li></ol>
-<h3>Policy Intention</h3>
-<p>The goal is not to create ceremony for its own sake.</p>
-<p>The goal is to make sure:</p>
-<ul><li>automation catches what it can</li><li>hosted lanes are explicit</li><li>docs and release surfaces stay aligned with the product we actually ship</li></ul>
-        </div>
-      </div>
-    </section>
-  
-
-    <section class="section" id="readiness-doc">
-      <div class="sectionHeader">
-        <h2>Release Readiness Source</h2>
-        <p>Release-readiness and documentation-discipline review artifact.</p>
-      </div>
-      <div class="docWrap">
-        <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
-        <div class="markdown">
-          <h3>Current Read</h3>
-<p><code>1.2.0 - Platinum Release 1</code> is already live on hosted <code>/production</code>.</p>
-<p>That means this document is now serving two jobs:</p>
-<ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
-<h3>What Is Now True</h3>
-<ul><li><code>Platinum</code> is a real shipped platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lanes exist for local <code>localhost</code>, hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code></li><li>the current release ladder is proven end-to-end</li><li>the hosted documentation set now needs to be treated as part of the release surface rather than a nice-to-have side artifact</li></ul>
-<h3>Documentation Lesson From <code>1.2.0</code></h3>
-<p>The major miss in the original <code>1.2.0</code> promotion was not broad product failure.</p>
-<p>It was that the documentation pass was not strong enough or explicit enough.</p>
-<p>The correction is:</p>
-<ul><li>make the Platinum guide a first-class hosted page</li><li>keep platform docs and application docs separate</li><li>require the hosted docs set in publish preflight</li><li>require a complete docs refresh for meaningful <code>x.y</code> releases before hosted <code>/production</code> promotion</li></ul>
-<h3>Current Documentation Contract</h3>
-<p>Hosted docs that should exist per lane:</p>
-<ul><li><code>project-guide.html</code></li><li><code>platinum-guide.html</code></li><li><code>player-guide.html</code></li><li><code>release-dashboard.html</code></li><li><code>release-notes.json</code></li><li><code>build-info.json</code></li></ul>
-<p>Core maintained source docs behind that hosted set:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/player-guide.json</code></li></ul>
-<h3>Current Release Risk View</h3>
-<p>Main remaining risks are now smaller and more operational than architectural:</p>
-<ul><li>small Aurora trust-fix issues in the <code>1.2.x</code> patch line</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li></ul>
-<h3>Recommended Rule Going Forward</h3>
-<p>For every meaningful <code>x.y</code> release:</p>
-<ol><li>finish the code candidate</li><li>verify local <code>localhost</code></li><li>verify hosted <code>/dev</code></li><li>promote and verify hosted <code>/beta</code></li><li>complete the full documentation refresh</li><li>approve hosted <code>/beta</code></li><li>only then publish hosted <code>/production</code></li></ol>
+<ul><li>storage aliases</li><li>some debug globals</li><li>some replay/account naming</li></ul>
+<p>These are not blockers, but they are signs that the migration is not fully finished yet.</p>
+<h4>3. Designer-owned data is still only partially extracted</h4>
+<p>We have good planning here, but not enough implementation yet.</p>
+<p>Especially important future areas:</p>
+<ul><li>stage catalogs</li><li>boss archetype catalogs</li><li>themed challenge definitions</li><li>game text/content surfaces</li><li>audio event mapping</li><li>per-game admin/designer panels</li></ul>
+<p>Right now the direction is clear, but the operational designer model is still emerging.</p>
+<h3>What Needs To Be Considered Soon</h3>
+<h4>1. Versioned pack evolution</h4>
+<p>As soon as <code>Galaxy Guardians</code> becomes playable, pack evolution becomes a real problem.</p>
+<p>We should plan for:</p>
+<ul><li>contract additions without breaking old packs</li><li>deprecating pack fields safely</li><li>validating pack metadata at load time</li><li>keeping harnesses aligned with pack capability changes</li></ul>
+<p>This is where Lueck’s migration concern becomes very relevant.</p>
+<h4>2. Storage and migration safety</h4>
+<p>The current compatibility approach is pragmatic and appropriate.</p>
+<p>But if Platinum becomes the long-term identity, we should eventually decide:</p>
+<ul><li>what remains aliased forever</li><li>what migrates once</li><li>what is intentionally never migrated</li></ul>
+<p>That should be treated as product/data migration work, not just rename work.</p>
+<h4>3. Multi-host future thinking</h4>
+<p>Even if the immediate plan stays browser-first, Platinum should avoid making that assumption too deeply permanent.</p>
+<p>Future host surfaces might include:</p>
+<ul><li>hosted browser production</li><li>local/offline cabinet mode</li><li>desktop wrapper</li><li>curated exhibition or kiosk mode</li></ul>
+<p>That does not mean building them now.</p>
+<p>It means keeping these seams healthy:</p>
+<ul><li>input abstraction</li><li>file/storage abstraction</li><li>service/network abstraction</li><li>shell/layout abstraction</li></ul>
+<h3>What We Should Address Later, Not Now</h3>
+<h4>1. True multi-platform runtime support</h4>
+<p>Do not overreach here yet.</p>
+<p>Right now Platinum should stay:</p>
+<ul><li>browser-first</li><li>Pages-friendly</li><li>lightweight</li></ul>
+<p>The right move is to preserve the possibility of broader host platforms later, not to build them prematurely.</p>
+<h4>2. Heavy operator tooling inside Platinum core</h4>
+<p>Admin, artifact, and designer panels are important.</p>
+<p>But they should remain:</p>
+<ul><li>game-owned where appropriate</li><li>or platform-adjacent tools</li></ul>
+<p>They should not bloat the core runtime path casually.</p>
+<h3>Forward-Looking Recommendations</h3>
+<h4>Immediate</h4>
+<ol><li>complete the Aurora-on-Platinum rerelease baseline cleanly</li><li>keep the shell and platform harnesses green</li><li>close the most visible Aurora trust/clarity issues after the rerelease pass</li></ol>
+<h4>Next</h4>
+<ol><li>make the first truly playable <code>Galaxy Guardians</code> slice</li><li>validate that the pack contract can support a simpler Galaxian-style ruleset</li><li>keep all new game-specific authoring in game-owned definitions, not</li></ol>
+<p>Platinum internals</p>
+<h4>Soon after</h4>
+<ol><li>add stronger pack-schema validation</li><li>add more explicit migration/versioning strategy for pack and storage</li><li>deepen the designer/admin surfaces without mixing them into the core</li></ol>
+<p>Platinum runtime</p>
+<h4>After Aurora is stable again</h4>
+<ol><li>run a brief retrospective on how a materially different Aurora gameplay</li></ol>
+<p>shape was able to survive this long while Platinum shell checks still looked healthy</p>
+<ol><li>document which testing layers were missing or too weak:</li></ol>
+<ul><li>production-vs-dev artifact comparison</li><li>deterministic persona repeatability</li><li>stage carryover parity</li><li>outcome-distribution gating</li></ul>
+<ol><li>promote the strongest new gates into normal release-readiness, so future</li></ol>
+<p>platform or game-pack work cannot drift this far before we notice</p>
+<h3>Bottom Line</h3>
+<p><code>Platinum</code> is in a healthy early-platform state.</p>
+<p>It is not “finished,” but it is real.</p>
+<p>The right next move is not another abstract refactor. It is:</p>
+<ul><li>stabilize the first shipped pack on the platform</li><li>then prove the platform with a second playable pack</li><li>while protecting the seam between platform and game with stronger contracts,</li></ul>
+<p>harnesses, and migration thinking</p>
         </div>
       </div>
     </section>
   
       </div>
       <aside class="toc">
-        <h2>Guide Index</h2>
-        <p>This page is generated during the normal build so the hosted guide can stay aligned with the current repo state and release focus.</p>
+        <h2>Platinum Index</h2>
+        <p>This page is generated during the normal build so the hosted platform guide stays aligned with the maintained platform docs and release posture.</p>
         <ul>
           
-    <li><a href="#snapshot">Project Snapshot</a></li>
+    <li><a href="#purpose">Platform Purpose</a></li>
   
 
-    <li><a href="#release-ladder">Release Ladder</a></li>
+    <li><a href="#structure">Structure</a></li>
   
 
-    <li><a href="#platform-vs-applications">Platform Versus Applications</a></li>
+    <li><a href="#applications">Applications On Platinum</a></li>
   
 
-    <li><a href="#automation">Automation-First Gating</a></li>
+    <li><a href="#boundary-notes">Remaining Boundary Notes</a></li>
+  
+
+    <li><a href="#future">Platform Future Areas Of Improvement</a></li>
   
 
     <li><a href="#docs-index">Documentation Index</a></li>
   
 
-    <li><a href="#next">Likely Next Steps</a></li>
+    <li><a href="#platinum-doc">Platinum Platform Source</a></li>
   
 
-    <li><a href="#readme-doc">README Source</a></li>
+    <li><a href="#platinum-overview-doc">Platinum Overview Source</a></li>
   
 
-    <li><a href="#plan-doc">Plan Source</a></li>
-  
-
-    <li><a href="#roadmap-doc">Roadmap Source</a></li>
-  
-
-    <li><a href="#platinum-doc">Platinum Source</a></li>
-  
-
-    <li><a href="#applications-doc">Applications Source</a></li>
+    <li><a href="#applications-doc">Applications On Platinum Source</a></li>
   
 
     <li><a href="#architecture-doc">Architecture Source</a></li>
@@ -1183,13 +1182,10 @@ npm run build</code></pre>
     <li><a href="#testing-doc">Testing And Release Gates Source</a></li>
   
 
-    <li><a href="#external-services-doc">External Services Source</a></li>
+    <li><a href="#launch-art-doc">Launch Art Direction Source</a></li>
   
 
-    <li><a href="#release-policy-doc">Release Policy Source</a></li>
-  
-
-    <li><a href="#readiness-doc">Release Readiness Source</a></li>
+    <li><a href="#review-doc">Lueck Review Source</a></li>
   
         </ul>
         <p class="footer">
