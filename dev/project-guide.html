@@ -403,11 +403,11 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.0.2+build.362.sha.df94e24</span>
+              <span class="metaValue">1.2.0+build.363.sha.67c60e2</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.0.2</span>
+              <span class="metaValue">1.2.0</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Movement regression hotfix</span>
+              <span class="metaValue">Platinum Release 1</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -864,8 +864,8 @@
 <ul><li>development repo:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>public release repo:<ul><li><code>https://github.com/sgwoods/Aurora-Galactica</code></li></ul></li><li>external runtime and tooling services:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/EXTERNAL_SERVICES.md</code></li></ul></li></ul>
 <h3>Live</h3>
 <p>After GitHub Pages deploys, play at:</p>
-<ul><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li></ul>
-<p>The root Aurora build is the official public production lane, even while the product is still prerelease in SemVer terms. The <code>/beta/</code> lane is a manually promoted public checkpoint used for less-frequent milestone playtesting. Day-to-day engineering work continues in <code>Codex-Test1</code> as the pre-production development line where Platinum platform work and Aurora pack work are both evolving together.</p>
+<ul><li>hosted <code>/dev</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/dev/</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li></ul>
+<p>The root Aurora build is the official hosted <code>/production</code> lane. Hosted <code>/beta</code> is the release-candidate checkpoint, and hosted <code>/dev</code> is the shared integration preview of the current local <code>localhost</code> candidate. Day-to-day engineering work continues in <code>Codex-Test1</code>, where Platinum platform work and Aurora pack work evolve together before promotion.</p>
 <p>Current score/data policy:</p>
 <ul><li>production:<ul><li>live shared leaderboard reads and writes</li><li>pilot account actions enabled</li></ul></li><li>beta and local pre-production:<ul><li>production leaderboard reads only</li><li>score submission disabled by default</li><li>pilot account/profile writes disabled unless a configured non-production test pilot is signed in</li><li>local device scores still save normally</li></ul></li></ul>
 <p>Optional non-production test pilot configuration:</p>
@@ -896,7 +896,7 @@
 <ul><li><code>Aurora Galactica</code><ul><li>owns Aurora gameplay rules, stage cadence, challenge structure, rescue</li></ul></li></ul>
 <p>behavior, scoring tables, and Aurora-branded presentation</p>
 <p>The next major platform milestone is:</p>
-<ul><li>rerelease Aurora as the existing public game on explicitly branded Platinum</li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> baseline</li><li>use the game picker to preview future titles without pretending they are</li></ul>
+<ul><li>ship <code>1.2.0 — Platinum Release 1</code></li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> baseline</li><li>use the game picker to preview future titles without pretending they are</li></ul>
 <p>playable before they are ready</p>
 <h4>What Is Next On Platform Work</h4>
 <p>The immediate platform sequence is now:</p>
@@ -1228,11 +1228,11 @@ npm run publish:production</code></pre>
 <h4>Post-Launch View</h4>
 <p><code>1.0.2</code> is now live.</p>
 <p>Current release checkpoint:</p>
-<ul><li>beta:<ul><li><code>1.0.2-beta.1+build.290.sha.831a2c6.beta</code></li></ul></li><li>production:<ul><li><code>1.0.2+build.290.sha.831a2c6</code></li></ul></li><li>production promotion path was used successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff was completed</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
+<ul><li>local <code>localhost</code>:<ul><li><code>1.2.0</code> candidate in active integration</li></ul></li><li>hosted <code>/dev</code>:<ul><li>current integrated Platinum candidate once published</li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.0.2-beta.1+build.290.sha.831a2c6.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.0.2+build.290.sha.831a2c6</code></li></ul></li><li>production promotion path was used successfully:<ul><li><code>publish:beta -&gt; approve:beta -&gt; publish:production</code></li></ul></li><li>final release-readiness signoff was completed</li><li>public build metadata no longer exposes non-production test-pilot identity</li></ul>
 <p>fields</p>
 <ul><li>the production leaderboard baseline reset for <code>#130</code> is complete</li><li>the first post-launch hotfix line is now established:<ul><li>production-visible fixes after <code>1.0.0</code> bump <code>PATCH</code></li><li>build metadata still identifies the exact artifact</li></ul></li></ul>
 <p>Current coding priority:</p>
-<ol><li>keep Aurora <code>1.0.2</code> stable in production</li><li>complete the Platinum rerelease milestone for the existing Aurora game</li><li>close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable</li><li>use <code>1.1.x</code> for architectural stabilization and early shared-runtime extraction</li><li>use <code>1.2.x</code> for platform-owned services and operator-facing infrastructure</li><li>begin the Aurora-specific <code>Game Designer</code> planning phase using:</li></ol>
+<ol><li>keep Aurora <code>1.0.2</code> stable in production</li><li>complete the Platinum rerelease milestone for the existing Aurora game</li><li>close the most visible Aurora trust/clarity follow-ups after the platform rerelease baseline is stable</li><li>use <code>1.2.0</code> for the Platinum platform release milestone</li><li>use <code>1.2.x</code> patch releases for Aurora-on-Platinum stabilization after launch</li><li>begin the Aurora-specific <code>Game Designer</code> planning phase using:</li></ol>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md</code></li></ul>
 <h4>Current platform next steps</h4>
 <p>The immediate Platinum path is:</p>
@@ -1370,8 +1370,8 @@ npm run publish:production</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Release Train</h3>
-<ul><li>Current line:<ul><li><code>1.1.x</code> planning</li></ul></li><li>Current phase:<ul><li><code>post-launch stabilization and Platinum rerelease planning</code></li></ul></li><li>Goal of this phase:<ul><li>keep the shipped four-stage Aurora arcade slice stable while turning the</li></ul></li></ul>
-<p>broader identity, admin, and media work into a staged <code>1.1.x</code> / <code>1.2.x</code> Platinum platform program</p>
+<ul><li>Current line:<ul><li><code>1.2.0</code></li></ul></li><li>Current phase:<ul><li><code>Platinum Release 1 promotion</code></li></ul></li><li>Goal of this phase:<ul><li>keep the shipped four-stage Aurora arcade slice stable while promoting the</li></ul></li></ul>
+<p>first public Platinum-hosted release and keeping the <code>localhost</code> -&gt; hosted <code>/dev</code> -&gt; hosted <code>/beta</code> -&gt; hosted <code>/production</code> lane model disciplined</p>
 <h3>Immediate Platform Milestone: Aurora Rerelease On Platinum</h3>
 <p>Target outcome:</p>
 <ul><li>Aurora remains the same shipped game in play feel and trust terms</li><li>Platinum becomes visible as the host platform rather than only an internal</li></ul>
@@ -1405,7 +1405,7 @@ npm run publish:production</code></pre>
 <ul><li>platform shell identity and copy cleanup</li><li>picker / splash / notice surfaces</li><li>Aurora-on-Platinum proof harnesses</li><li>public-facing wording that distinguishes host platform vs active game</li><li><code>#140</code> bonus-stage numbering so challenge stages read like bonus</li></ul>
 <p>opportunities instead of ordinary numbered progression</p>
 <p>Suggested versioning:</p>
-<ul><li><code>1.1.x</code></li></ul>
+<ul><li><code>1.2.0</code></li></ul>
 <h3>Immediate Target: 1.0 Four-Stage Slice</h3>
 <p>Definition:</p>
 <ul><li>Stage <code>1</code></li><li>Stage <code>2</code></li><li>Stage <code>3</code> challenging stage</li><li>Stage <code>4</code></li></ul>
@@ -1548,10 +1548,11 @@ npm run publish:production</code></pre>
 <ul><li>major gameplay, render, replay, service, and entity seams have already been</li></ul>
 <p>extracted into explicit modules</p>
 <p>What is not done yet:</p>
-<ul><li>public rerelease framing still needs to make Platinum versus Aurora clearer</li><li>some shell/bootstrap/debug/storage compatibility shims are still Aurora-named</li><li>future-game shell previews still need more intentional splash/coming-soon</li></ul>
-<p>treatment</p>
+<ul><li>the final public <code>1.2.0</code> promotion still needs hosted <code>/beta</code> and hosted</li></ul>
+<p><code>/production</code> verification</p>
+<ul><li>some shell/bootstrap/debug/storage compatibility shims are still Aurora-named</li><li>future-game shell previews can still be polished further</li></ul>
 <p>This means the current work is no longer &quot;extract modules until something looks like a platform.&quot; The current work is:</p>
-<ol><li>finish the Aurora-on-Platinum rerelease baseline</li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> contract</li><li>only then start the first truly playable sibling game slice</li></ol>
+<ol><li>finish the <code>1.2.0</code> Platinum Release 1 promotion path</li><li>keep Aurora behavior aligned with the shipped <code>1.0.2</code> contract</li><li>only then start the first truly playable sibling game slice</li></ol>
 <p>The next game-owned design phase should use:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/AURORA_GAME_DESIGNER_VIEW.md</code></li></ul>
 <p>as the planning baseline for expanding Aurora stages, challenge-stage themes, boss personality, and game-owned content definitions without re-entangling those decisions with Platinum core platform work.</p>
@@ -1572,7 +1573,7 @@ npm run publish:production</code></pre>
 <h4>Local Build</h4>
 <ul><li>Build script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li><li>Generates:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li></ul></li><li>Production promotion:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js</code></li></ul></li><li>Produces:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/production/build-info.json</code></li></ul></li><li>Local ready-state helper:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/dev/local-resume.js</code></li><li>starts the local <code>dist/dev</code> game server and the log viewer together for machine handoff/debugging</li></ul></li></ul>
 <h4>Pages Deploy</h4>
-<ul><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml</code></li></ul></li><li>CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate <code>Aurora-Galactica</code> repo.</li><li>In practice:<ul><li><code>Codex-Test1</code> produces generated artifacts in <code>dist/</code></li><li><code>Aurora-Galactica</code> is the public artifact host for:<ul><li><code>/</code></li><li><code>/beta/</code></li></ul></li><li>lane publishing is now scripted through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>publish readiness is checked through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li></ul></li></ul>
+<ul><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/pages.yml</code></li></ul></li><li>CI rebuilds the dev repo’s generated outputs, but the publicly shared Aurora production and beta lanes are published from the separate <code>Aurora-Galactica</code> repo.</li><li>In practice:<ul><li><code>Codex-Test1</code> produces generated artifacts in <code>dist/</code></li><li><code>Aurora-Galactica</code> is the public artifact host for:<ul><li><code>/dev/</code></li><li><code>/</code></li><li><code>/beta/</code></li></ul></li><li>lane publishing is now scripted through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>publish readiness is checked through:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li></ul></li></ul>
 <h4>Public Project Pages Sync</h4>
 <ul><li>Sync script:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/sync-public-pages.js</code></li></ul></li><li>Workflow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/.github/workflows/sync-public-pages.yml</code></li></ul></li><li>This syncs project/status surfaces to <code>sgwoods/public</code>.</li><li>It does not publish the playable game.</li></ul>
 <h3>Testing / Evidence Flow</h3>
@@ -2253,7 +2254,9 @@ npm run publish:production</code></pre>
           <h3>Version Format</h3>
 <ul><li>We use Semantic Versioning across three release surfaces while the game is still evolving toward a stable arcade-quality release.</li><li>Pre-production development format:<ul><li><code>MAJOR.MINOR.PATCH-prerelease</code></li></ul></li><li>Production format:<ul><li><code>MAJOR.MINOR.PATCH</code></li></ul></li><li>Production beta format:<ul><li><code>MAJOR.MINOR.PATCH-beta.&lt;number&gt;</code></li></ul></li><li>Current build label format adds build metadata to the surface version:<ul><li><code>surface-version+build.&lt;number&gt;.sha.&lt;shortcommit&gt;</code></li></ul></li><li>Dirty local builds append:<ul><li><code>.dirty</code></li></ul></li><li>After <code>1.0.0</code>, production hotfixes should bump <code>PATCH</code>:<ul><li><code>1.0.1</code></li><li><code>1.0.2</code></li><li>and so on</li></ul></li><li>After <code>1.0.0</code>, any production promotion that changes shipped user-visible</li></ul>
 <p>behavior should bump <code>PATCH</code>, even if the change is a small hotfix.</p>
-<ul><li>Build metadata still changes on every publish, but build metadata alone is</li></ul>
+<ul><li>Use <code>MINOR</code> for meaningful public platform milestones even when the core</li></ul>
+<p>Aurora gameplay contract intentionally stays close to the previous shipped baseline. The Platinum platform launch is the reference case:</p>
+<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul><ul><li>Build metadata still changes on every publish, but build metadata alone is</li></ul>
 <p>not the public hotfix number.</p>
 <p>Examples:</p>
 <ul><li>pre-production:<ul><li><code>0.5.0-alpha.1+build.115.sha.b0d812c</code></li></ul></li><li>production:<ul><li><code>0.5.0+build.9.sha.457df28</code></li></ul></li><li>production beta:<ul><li><code>0.5.0-beta.1+build.9.sha.457df28.beta</code></li></ul></li></ul>
@@ -2262,9 +2265,11 @@ npm run publish:production</code></pre>
 <p>stable and shippable</p>
 <ul><li>current scoped goal:<ul><li>a polished four-stage slice (Stages <code>1</code>-<code>4</code>) rather than full long-form</li></ul></li></ul>
 <p>Galaga expansion</p>
-<ul><li><code>MINOR</code><ul><li>use for meaningful product milestones</li><li>examples:<ul><li>major gameplay fidelity improvement</li><li>large systems addition</li><li>new stage/content breadth milestone</li><li>public playtest readiness</li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>bug fixes</li><li>tuning passes</li><li>UI polish</li><li>harness/reporting improvements</li></ul></li></ul></li><li><code>prerelease</code><ul><li><code>alpha</code>: active system building, rules changes, frequent balance changes</li><li><code>beta</code>: feature-complete enough for broader testing, still tuning quality and regressions</li><li><code>rc</code>: release candidate, only bug fixes and polish before a stable cut</li></ul></li></ul>
+<ul><li><code>MINOR</code><ul><li>use for meaningful product milestones</li><li>examples:<ul><li>Platinum platform release milestones</li><li>large systems additions</li><li>new stage/content breadth milestones</li><li>public lane or platform hosting expansions</li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>bug fixes</li><li>tuning passes</li><li>UI polish</li><li>harness/reporting improvements</li></ul></li></ul></li><li><code>prerelease</code><ul><li><code>alpha</code>: active system building, rules changes, frequent balance changes</li><li><code>beta</code>: feature-complete enough for broader testing, still tuning quality and regressions</li><li><code>rc</code>: release candidate, only bug fixes and polish before a stable cut</li></ul></li></ul>
 <h3>Hosted Release Lanes</h3>
-<ul><li><code>production</code><ul><li>published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>this is the official shared build, even while SemVer remains prerelease before <code>1.0</code></li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>this is a distinct public checkpoint lane for less-frequent milestone playtesting</li></ul></li><li><code>pre-production</code><ul><li>day-to-day development happens in:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li><li>this is the active engineering line and not the canonical shared play URL</li></ul></li></ul>
+<ul><li><code>localhost</code><ul><li>local engineering and debugging lane</li><li>typically served from:<ul><li><code>http://127.0.0.1:8000/</code></li></ul></li></ul></li><li><code>dev</code><ul><li>manually published integration preview at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/dev/</code></li></ul></li><li>this is the hosted mirror of the current local <code>localhost</code> candidate once</li></ul></li></ul>
+<p>it is stable enough to share</p>
+<ul><li><code>production</code><ul><li>published at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>this is the official shared build</li></ul></li><li><code>beta</code><ul><li>manually promoted at:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>this is a distinct public checkpoint lane for less-frequent milestone playtesting</li></ul></li><li><code>pre-production source</code><ul><li>day-to-day development happens in:<ul><li><code>https://github.com/sgwoods/Codex-Test1</code></li></ul></li></ul></li></ul>
 <h3>Repository Roles</h3>
 <ul><li><code>Codex-Test1</code><ul><li>development repo</li><li>active day-to-day engineering, tuning, issues, and harness work</li></ul></li><li><code>Aurora-Galactica</code><ul><li>public release repo</li><li>promoted checkpoints intended for broader sharing and less frequent change</li></ul></li></ul>
 <h3>Beta Promotion Workflow</h3>
@@ -2274,6 +2279,8 @@ npm run publish:production</code></pre>
 <ul><li><code>npm run build</code></li></ul>
 <ol><li>Test the generated dev build in:</li></ol>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/</code></li><li>recommended local service startup:<ul><li><code>npm run local:resume</code></li></ul></li></ul>
+<ol><li>Optionally publish the current local candidate into hosted <code>/dev</code>:</li></ol>
+<ul><li><code>npm run publish:dev</code></li></ul>
 <ol><li>Promote the current dev build into the beta lane:</li></ol>
 <ul><li><code>npm run promote:beta</code></li></ul>
 <ol><li>Review the generated output in:</li></ol>
@@ -2457,8 +2464,8 @@ npm run publish:production</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Movement regression hotfix</strong><br>
-          Build: 1.0.2+build.362.sha.df94e24
+          Latest release note: <strong>Platinum Release 1</strong><br>
+          Build: 1.2.0+build.363.sha.67c60e2
         </p>
       </aside>
     </main>
