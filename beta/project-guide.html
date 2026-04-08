@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.0-beta.1+build.371.sha.095663b.beta</span>
+              <span class="metaValue">1.2.0-beta.1+build.372.sha.89e3d4a.beta</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -778,7 +778,7 @@ npm run build</code></pre>
 <h3>Platform Structure</h3>
 <h4>Shell and presentation</h4>
 <p>Platinum owns the outer cabinet treatment:</p>
-<ul><li>marquee housing</li><li>left and right rails</li><li>lower status band</li><li>popup framing</li><li>shell frame themes</li><li>platform identity marks</li></ul>
+<ul><li>marquee housing</li><li>left and right rails</li><li>lower status band</li><li>popup framing</li><li>shell frame themes</li><li>platform identity marks</li><li>platform-owned startup and wait-mode shell copy</li><li>release-cycle shell messaging that can span more than one application</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/styles.css</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul>
 <h4>Runtime and pack hosting</h4>
@@ -794,7 +794,7 @@ npm run build</code></pre>
 <h4>Shared contracts</h4>
 <p>Platinum currently depends on a shared application contract that is real in practice even though it still needs further formalization.</p>
 <p>The main contract areas are:</p>
-<ul><li>game-pack identity</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>content surfaces shown by the shell</li></ul>
+<ul><li>game-pack identity</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
 <p>See also:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul>
 <h3>Applications On Platinum</h3>
@@ -814,7 +814,7 @@ npm run build</code></pre>
 <h3>Remaining Platform And Application Boundary Issues</h3>
 <p>The separation is real, but not perfect yet.</p>
 <p>Current remaining seams to keep visible:</p>
-<ul><li>some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned</li><li>some debug globals and legacy naming still reflect the older single-game architecture</li><li>the game-pack contract is practical but not yet strongly versioned</li><li>some shell copy and application copy still share the same source surfaces more than they should</li><li>the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations</li></ul>
+<ul><li>some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned</li><li>some debug globals and legacy naming still reflect the older single-game architecture</li><li>the game-pack contract is practical but not yet strongly versioned</li><li>some shell copy and application copy still need stronger structural validation so release-time regressions are caught automatically</li><li>the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations</li></ul>
 <p>These are not reasons to collapse the separation again.</p>
 <p>They are reasons to keep the seam explicit while we strengthen it.</p>
 <h3>Platform Future Areas Of Improvement And Notes</h3>
@@ -871,19 +871,19 @@ npm run build</code></pre>
 <p>That is intentional.</p>
 <h3>Application Responsibilities</h3>
 <p>A Platinum application should own:</p>
-<ul><li>gameplay rules</li><li>scoring and stage progression</li><li>game-specific presentation and content</li><li>its own harnesses for game behavior</li><li>optional shell preferences that remain within the platform shell contract</li></ul>
+<ul><li>gameplay rules</li><li>scoring and stage progression</li><li>game-specific presentation and content</li><li>application identity on the front door such as title and feature line</li><li>its own harnesses for game behavior</li><li>optional shell preferences that remain within the platform shell contract</li></ul>
 <p>A Platinum application should not own:</p>
-<ul><li>the release ladder</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li></ul>
+<ul><li>the release ladder</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li><li>startup and wait-mode shell copy that promotes the platform or other applications</li></ul>
 <h3>Current Boundary Notes</h3>
 <p>The boundary is real, but these coupling areas still deserve attention:</p>
 <h4>Preview pack persistence</h4>
 <p>Preview-only applications must not become a durable trap state.</p>
 <p>Current expected behavior:</p>
 <ul><li>preview application can be opened</li><li>shell can show its promo surface</li><li><code>Enter</code> should fall back to a playable application when preview-only content cannot start gameplay</li></ul>
-<h4>Shared copy surfaces</h4>
-<p>Some shell copy and application copy still live near each other in ways that can make ownership unclear.</p>
-<p>The direction should be:</p>
-<ul><li>platform copy explains the host, lanes, and shared docs</li><li>application copy explains gameplay, scoring, and identity</li></ul>
+<h4>Front-door copy ownership</h4>
+<p>The shell front door now needs a firmer split than it had during the single-game era.</p>
+<p>The direction is:</p>
+<ul><li>platform copy explains the host, hosted lanes, docs, and cross-application surfaces</li><li>application copy explains gameplay, identity, and game-specific flavor</li><li>preview-only applications may override platform copy only when the override is still about preview status rather than gameplay rules</li></ul>
 <h4>Shared naming residue</h4>
 <p>Some older names remain Aurora-shaped even when they are now functionally part of the platform.</p>
 <p>These should be treated as transitional, not as permission to blur the boundary again.</p>
@@ -992,12 +992,18 @@ npm run build</code></pre>
 <ul><li><code>release-notes.json</code></li><li><code>release-dashboard.json</code></li><li><code>README.md</code></li><li><code>PLAN.md</code></li><li><code>PRODUCT_ROADMAP.md</code></li><li><code>RELEASE_POLICY.md</code></li><li><code>RELEASE_READINESS_REVIEW.md</code></li><li><code>ARCHITECTURE.md</code></li><li><code>PLATINUM.md</code></li><li><code>APPLICATIONS_ON_PLATINUM.md</code></li><li>this testing and release gate document</li><li>hosted <code>project-guide.html</code></li><li>hosted <code>platinum-guide.html</code></li><li>hosted <code>player-guide.html</code></li></ul>
 <p>This was not enforced strongly enough before <code>1.2.0</code> reached hosted <code>/production</code>.</p>
 <p>From now on, it should be treated as part of the release contract.</p>
+<h3>Front-Door Copy Gate</h3>
+<p>Startup, initiation, and wait-mode copy is part of the release surface.</p>
+<p>For any candidate where front-door copy changes, we should verify:</p>
+<ul><li>platform-owned shell copy still appears on the front door</li><li>stale release placeholders are gone</li><li>application-owned identity copy still appears correctly</li><li>platform splash copy remains aligned with the current Platinum docs</li></ul>
+<p>The current automated front-door copy gate is:</p>
+<ul><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <h4>Hosted <code>/dev</code></h4>
 <p>Hosted <code>/dev</code> exists to catch &quot;worked locally but not when hosted&quot; problems.</p>
 <p>Before promoting a candidate from hosted <code>/dev</code> to hosted <code>/beta</code>, we should have:</p>
@@ -1194,7 +1200,7 @@ npm run build</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Platinum Release 1</strong><br>
-          Build: 1.2.0-beta.1+build.371.sha.095663b.beta
+          Build: 1.2.0-beta.1+build.372.sha.89e3d4a.beta
         </p>
       </aside>
     </main>
