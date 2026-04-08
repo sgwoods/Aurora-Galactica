@@ -544,9 +544,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane development</span>
-    <span id="settingsVersion">Version 1.2.0+build.370.sha.905a1f9</span>
-    <span id="settingsRelease">Apr 07 2026, 4:20 PM EDT</span>
-    <span id="settingsState">main@905a1f9 clean</span>
+    <span id="settingsVersion">Version 1.2.0+build.371.sha.095663b</span>
+    <span id="settingsRelease">Apr 07 2026, 8:45 PM EDT</span>
+    <span id="settingsState">main@095663b clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -807,8 +807,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
-  <span id="buildStampVersion">Version 1.2.0+build.370.sha.905a1f9</span>
-  <span id="buildStampRelease">Apr 07 2026, 4:20 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.0+build.371.sha.095663b</span>
+  <span id="buildStampRelease">Apr 07 2026, 8:45 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1383,7 +1383,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.0',label:'1.2.0+build.370.sha.905a1f9',commit:'905a1f9b839680ccc1f45c3368417d6e7699e2e3',branch:'main',dirty:false,released:'Apr 07 2026, 4:20 PM EDT',state:'main@905a1f9 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.0',label:'1.2.0+build.371.sha.095663b',commit:'095663b5dd613eef7bb50fe05ab37b49de528389',branch:'main',dirty:false,released:'Apr 07 2026, 8:45 PM EDT',state:'main@095663b clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -7670,6 +7670,10 @@ window.__galagaHarness__={
  },
  renderState(){
   return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
+ },
+ redraw(){
+  if(typeof draw==='function')draw();
+  return this.renderState();
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
