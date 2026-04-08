@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.1+build.373.sha.a019a96</span>
+              <span class="metaValue">1.2.1+build.375.sha.ea36379</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 7, 2026</span>
+              <span class="metaValue">April 8, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -651,11 +651,11 @@
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul>
 <h3>Current Release State</h3>
 <p>Current public milestone:</p>
-<ul><li><code>1.2.0 - Platinum Release 1</code></li></ul>
+<ul><li><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code></li></ul>
 <p>What that means:</p>
 <ul><li>Aurora now ships as the first playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
-<p>Immediate follow-through after <code>1.2.0</code>:</p>
-<ul><li>keep the fast-follow Aurora trust-fix bundle tight</li><li>keep the documentation set aligned across source and hosted pages</li><li>strengthen the platform versus application boundary before the second game becomes truly playable</li></ul>
+<p>Immediate follow-through after <code>1.2.1</code>:</p>
+<ul><li>keep the next Aurora polish and correctness bundle tight</li><li>keep the documentation set aligned across source and hosted pages</li><li>strengthen the platform versus application boundary before the second game becomes truly playable</li></ul>
 <h3>Run Locally</h3>
 <ol><li>Build the current local candidate:</li></ol>
 <pre><code data-lang="bash">cd /Users/stevenwoods/Documents/Codex-Test1
@@ -1119,7 +1119,7 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p><code>1.2.0 - Platinum Release 1</code> is already live on hosted <code>/production</code>.</p>
+<p><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code> is now live on hosted <code>/production</code>.</p>
 <p>That means this document is now serving two jobs:</p>
 <ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
 <h3>What Is Now True</h3>
@@ -1137,11 +1137,11 @@ npm run build</code></pre>
 <h3>Current Release Risk View</h3>
 <p>Main remaining risks are now smaller and more operational than architectural:</p>
 <ul><li>small Aurora trust-fix issues in the <code>1.2.x</code> patch line</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li></ul>
-<h3>Current <code>1.2.1</code> Candidate Shape</h3>
-<p>The current <code>1.2.1</code> patch candidate is intended to be narrow and Aurora-scoped.</p>
-<p>It currently bundles:</p>
+<h3>What <code>1.2.1</code> Shipped</h3>
+<p><code>1.2.1</code> shipped as a narrow and Aurora-scoped fast-follow patch.</p>
+<p>It bundles:</p>
 <ul><li>dual-fighter surviving-ship correctness</li><li>challenge stages treated as bonus stages in visible numbering</li><li>suppression of carry/capture visuals under game-over/results</li><li>broader carry-state overlay coverage</li><li>clearer ownership of startup and wait-mode shell copy between Platinum and the hosted applications</li></ul>
-<p>The goal is to promote these as a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.</p>
+<p>This was the intended shape: a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.</p>
 <h3>Recommended Rule Going Forward</h3>
 <p>For every meaningful <code>x.y</code> release:</p>
 <ol><li>finish the code candidate</li><li>verify local <code>localhost</code></li><li>verify hosted <code>/dev</code></li><li>promote and verify hosted <code>/beta</code></li><li>complete the full documentation refresh</li><li>approve hosted <code>/beta</code></li><li>only then publish hosted <code>/production</code></li></ol>
@@ -1205,7 +1205,7 @@ npm run build</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora trust-fix and copy-boundary patch</strong><br>
-          Build: 1.2.1+build.373.sha.a019a96
+          Build: 1.2.1+build.375.sha.ea36379
         </p>
       </aside>
     </main>
