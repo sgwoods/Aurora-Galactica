@@ -548,9 +548,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane development</span>
-    <span id="settingsVersion">Version 1.2.1+build.376.sha.25a3e0f</span>
-    <span id="settingsRelease">Apr 08 2026, 1:48 PM EDT</span>
-    <span id="settingsState">main@25a3e0f clean</span>
+    <span id="settingsVersion">Version 1.2.1+build.377.sha.e9a82b8</span>
+    <span id="settingsRelease">Apr 09 2026, 9:20 AM EDT</span>
+    <span id="settingsState">main@e9a82b8 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -811,8 +811,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
-  <span id="buildStampVersion">Version 1.2.1+build.376.sha.25a3e0f</span>
-  <span id="buildStampRelease">Apr 08 2026, 1:48 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.1+build.377.sha.e9a82b8</span>
+  <span id="buildStampRelease">Apr 09 2026, 9:20 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1387,7 +1387,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.1',label:'1.2.1+build.376.sha.25a3e0f',commit:'25a3e0fc2025ddc56ecada4a0f5fd86cdb693f0c',branch:'main',dirty:false,released:'Apr 08 2026, 1:48 PM EDT',state:'main@25a3e0f clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.1',label:'1.2.1+build.377.sha.e9a82b8',commit:'e9a82b8aa3192b90d8137b16ff11f300846b1845',branch:'main',dirty:false,released:'Apr 09 2026, 9:20 AM EDT',state:'main@e9a82b8 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1704,6 +1704,7 @@ function startAttractDemo(opts={}){
  const record=opts.record!==false;
  stopRunRecording();
  autoExportedSessionId='';
+ if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  resetSession('attract_demo');
  resetActiveInputState('attract_demo');
  gameOverHtml='';gameOverState=null;
@@ -3342,6 +3343,7 @@ function start(){
   showToast('This pack is a shell preview only for now.');
   return;
  }
+ if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
  if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');
@@ -5305,9 +5307,10 @@ async function submitScoreRemote(entry){
 }
 function submitGameOverScore(){
  if(!gameOverState||gameOverState.editing||gameOverState.remoteSubmitted||LEADERBOARD.submitBusy)return;
+ const targetState=gameOverState;
  const entry=resolveGameOverScoreEntry();
  if(!entry)return;
- gameOverState.remoteSubmitted='pending';
+ targetState.remoteSubmitted='pending';
  LEADERBOARD.submitBusy=1;
  if(typeof recordSystemIssue==='function'){
   recordSystemIssue('score_submit_queued','Queued game-over score for remote submit',{
@@ -5317,9 +5320,9 @@ function submitGameOverScore(){
   },{level:'info'});
  }
  submitScoreRemote(entry)
-  .then(ok=>{gameOverState.remoteSubmitted=ok?1:0;})
+  .then(ok=>{targetState.remoteSubmitted=ok?1:0;})
   .catch(err=>{
-   gameOverState.remoteSubmitted=0;
+   targetState.remoteSubmitted=0;
    if(typeof recordSystemIssue==='function'){
     recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
      score:+entry.score|0,
@@ -8361,9 +8364,67 @@ window.__galagaHarness__={
 };
 
 setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
+let runtimeLoopFault=null;
+let runtimeLoopCrashInject='';
+function clearRuntimeLoopFault(){
+ runtimeLoopFault=null;
+}
+window.clearRuntimeLoopFault=clearRuntimeLoopFault;
+function armRuntimeLoopCrash(phase='draw'){
+ runtimeLoopCrashInject=String(phase||'draw');
+ return runtimeLoopCrashInject;
+}
+window.armRuntimeLoopCrash=armRuntimeLoopCrash;
+function describeLoopError(error){
+ const name=String(error?.name||'Error');
+ const message=String(error?.message||error||'Unknown runtime loop failure');
+ return `${name}: ${message}`;
+}
+function captureLoopError(phase,error){
+ const detail={
+  phase:String(phase||'frame'),
+  errorName:String(error?.name||'Error'),
+  errorMessage:String(error?.message||error||'Unknown runtime loop failure'),
+  stage:S.stage,
+  score:S.score,
+  lives:Math.max(0,S.lives+1),
+  started:!!started,
+  paused:!!paused,
+  simT:+(+S.simT||0).toFixed(3),
+  stageClock:+(+S.stageClock||0).toFixed(3)
+ };
+ if(error?.stack)detail.stack=String(error.stack).split('\n').slice(0,8).join('\n');
+ const signature=`${detail.phase}|${detail.errorName}|${detail.errorMessage}`;
+ if(runtimeLoopFault?.signature===signature)return runtimeLoopFault;
+ runtimeLoopFault={signature,detail};
+ paused=1;
+ if(typeof syncPauseUi==='function')syncPauseUi();
+ S.alertT=Math.max(S.alertT||0,3);
+ S.alertTxt='RUNTIME ISSUE DETECTED';
+ msg.textContent='Runtime issue detected. Press X to export diagnostics.';
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('runtime_loop_crash',describeLoopError(error),detail,{
+   level:'error',
+   suggestBugReport:1,
+   summary:'Runtime loop crashed',
+   description:'The active run hit an unexpected runtime error and was paused. Export diagnostics with X and attach the session/video if it happens again.',
+   prompt:'Runtime issue detected. Press X to export diagnostics or open feedback.'
+  });
+ }
+ try{
+  if(typeof showToast==='function')showToast('Runtime issue detected. Press X to export diagnostics.');
+ }catch{}
+ return runtimeLoopFault;
+}
 function loop(ts){
  const dt=Math.min(.033,(ts-t0)/1000||0);
  t0=ts;
+ if(runtimeLoopFault){
+  requestAnimationFrame(loop);
+  return;
+ }
+ let phase='frame';
+ try{
  if(harnessClockControlled){
   harnessFrameAccum=0;
   requestAnimationFrame(loop);
@@ -8372,14 +8433,32 @@ function loop(ts){
   const step=1/60;
   harnessFrameAccum=Math.min(.1,harnessFrameAccum+dt);
   while(harnessFrameAccum>=step){
+   phase='update';
+   if(runtimeLoopCrashInject==='update'){
+    runtimeLoopCrashInject='';
+    throw new Error('Harness forced update crash');
+   }
    update(step);
    harnessFrameAccum-=step;
   }
  }else{
   harnessFrameAccum=0;
+  phase='update';
+  if(runtimeLoopCrashInject==='update'){
+   runtimeLoopCrashInject='';
+   throw new Error('Harness forced update crash');
+  }
   update(dt);
  }
+ phase='draw';
+ if(runtimeLoopCrashInject==='draw'){
+  runtimeLoopCrashInject='';
+  throw new Error('Harness forced draw crash');
+ }
  draw();
+ }catch(error){
+ captureLoopError(phase,error);
+ }
  requestAnimationFrame(loop);
 }
 resetSession();
