@@ -548,9 +548,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane development</span>
-    <span id="settingsVersion">Version 1.2.2+build.381.sha.0a5330c</span>
-    <span id="settingsRelease">Apr 09 2026, 7:36 PM EDT</span>
-    <span id="settingsState">main@0a5330c clean</span>
+    <span id="settingsVersion">Version 1.2.2+build.382.sha.ce59bb0</span>
+    <span id="settingsRelease">Apr 09 2026, 7:54 PM EDT</span>
+    <span id="settingsState">main@ce59bb0 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -811,8 +811,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
-  <span id="buildStampVersion">Version 1.2.2+build.381.sha.0a5330c</span>
-  <span id="buildStampRelease">Apr 09 2026, 7:36 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.2+build.382.sha.ce59bb0</span>
+  <span id="buildStampRelease">Apr 09 2026, 7:54 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1387,7 +1387,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.2',label:'1.2.2+build.381.sha.0a5330c',commit:'0a5330cd6a0fc4b4e339ed95672abbaab65b0010',branch:'main',dirty:false,released:'Apr 09 2026, 7:36 PM EDT',state:'main@0a5330c clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.2',label:'1.2.2+build.382.sha.ce59bb0',commit:'ce59bb0af6c75f711ecb04f26c9fc0a4f712e3b7',branch:'main',dirty:false,released:'Apr 09 2026, 7:54 PM EDT',state:'main@ce59bb0 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1485,6 +1485,11 @@ const sfx={
  boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
  beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
  rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
+ extend(){
+  this.seq([659,880,1175],.055,'triangle',.014,55,4300);
+  this.play(1568,.11,'square',.008,-60,.004,5200,.05);
+  this.play(2093,.08,'triangle',.006,-40,.003,5600,.11);
+ },
  over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
  march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
  uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
@@ -1536,7 +1541,7 @@ const P={
  }
 };
 
-const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,
+const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
@@ -1715,7 +1720,7 @@ function startAttractDemo(opts={}){
  ATTRACT.phase='demo';
  ATTRACT.timer=11.5;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
@@ -3363,7 +3368,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
@@ -4611,11 +4616,13 @@ function awardExtendShips(beforeScore,afterScore){
  const totalShips=Math.max(0,S.lives+1);
  const title=awarded===1?'BONUS SHIP AWARDED':`${awarded} BONUS SHIPS AWARDED`;
  S.alertTxt=`${title}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
- S.alertT=Math.max(S.alertT,1.45);
+ S.alertT=Math.max(S.alertT,1.75);
  S.bannerTxt=awarded===1?'BONUS SHIP':'BONUS SHIPS';
  S.bannerSub=`SCORE ${formatScore(lastThreshold)}\n${totalShips===1?'ONE SHIP READY':`${totalShips} SHIPS READY`}`;
  S.bannerMode='extendAward';
- S.banner=Math.max(S.banner,1.15);
+ S.banner=Math.max(S.banner,1.45);
+ S.extendFlashT=Math.max(S.extendFlashT,1.9);
+ S.extendFlashShips=Math.max(1,awarded|0);
  logEvent('extend_awarded',{
   stage:S.stage,
   score:afterScore,
@@ -4624,7 +4631,7 @@ function awardExtendShips(beforeScore,afterScore){
   totalShips,
   nextThreshold:threshold||0
  });
- sfx.join();
+ sfx.extend();
  return awarded;
 }
 
@@ -4990,7 +4997,7 @@ function update(dt){
   return
  }
  for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
- p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);
+ p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);S.extendFlashT=Math.max(0,S.extendFlashT-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
    logEvent('challenge_transition_timer_elapsed',{
@@ -6670,6 +6677,10 @@ function gameplayMessageState(){
    return {mode:'board',html:buildBoardMessageHtml({title:'FIGHTER RELEASED',lines:['RETURNING TO SHIP']}),topRatio:.48};
   case 'rescueBeat':
    return {mode:'board',html:buildBoardMessageHtml({title:'DUAL FIGHTER',lines:['JOINED']}),topRatio:.48};
+  case 'extendAward':{
+   const parts=collectMessageLines(S.bannerSub);
+   return {mode:'board',html:buildBoardMessageHtml({title:S.bannerTxt,score:parts[0]||'',lines:parts.slice(1)}),topRatio:.46};
+  }
   case 'challenge':
    return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
   case 'challengeResult':{
@@ -7234,10 +7245,25 @@ function drawBadges(stage){
 function drawReserveShips(lives){
  let reserve=Math.max(0,lives|0);
  let x=DISPLAY_SHELL.reserveLeft,y=PLAY_H-DISPLAY_SHELL.reserveBottom;
+ const flashActive=(+S.extendFlashT||0)>0;
+ const highlightCount=flashActive?Math.max(0,+S.extendFlashShips||0):0;
+ const totalReserve=reserve;
+ const pulse=flashActive?.72+Math.sin((performance.now()/1000)*16)*.28:0;
  while(reserve>0){
+  const idxFromRight=reserve-1;
+  const highlight=flashActive&&idxFromRight<highlightCount&&idxFromRight<totalReserve;
   ctx.save();
   ctx.translate(x,y);
-  drawMiniShip(.82,'#f4f8ff','#ff3347');
+  if(highlight){
+   ctx.globalAlpha=.78+.22*pulse;
+   ctx.fillStyle=`rgba(255,229,122,${(0.12+.16*pulse).toFixed(3)})`;
+   ctx.beginPath();
+   ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
+   ctx.fill();
+   drawMiniShip(.88,'#fff6d2','#ffd34d');
+  }else{
+   drawMiniShip(.82,'#f4f8ff','#ff3347');
+  }
   ctx.restore();
   reserve--;
   x+=18;
@@ -7648,11 +7674,14 @@ window.__galagaHarness__={
  awardScore(cfg={}){
   const points=Math.max(0,+cfg.points||0);
   if(points>0)awardScorePoints(points);
-  return{
+ return{
    score:S.score,
    lives:Math.max(0,S.lives+1),
    nextExtendScore:+(S.nextExtendScore||0),
    extendAwards:+(S.extendAwards||0),
+   extendFlashT:+(+S.extendFlashT||0).toFixed(3),
+   extendFlashShips:+(S.extendFlashShips||0),
+   bannerMode:S.bannerMode||'',
    alertTxt:S.alertTxt||'',
    bannerTxt:S.bannerTxt||'',
    bannerSub:S.bannerSub||''
@@ -7760,7 +7789,7 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0)}}},
+ state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}}},
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {
