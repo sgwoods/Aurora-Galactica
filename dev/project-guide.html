@@ -403,11 +403,11 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.1+build.379.sha.10cccd6</span>
+              <span class="metaValue">1.2.2+build.380.sha.87f6b6f</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.2.1</span>
+              <span class="metaValue">1.2.2</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Aurora trust-fix and copy-boundary patch</span>
+              <span class="metaValue">Runtime freeze hardening patch</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -651,7 +651,7 @@
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul>
 <h3>Current Release State</h3>
 <p>Current public milestone:</p>
-<ul><li><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code></li></ul>
+<ul><li><code>1.2.2 - Runtime freeze hardening patch</code> candidate</li><li><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code></li></ul>
 <p>What that means:</p>
 <ul><li>Aurora now ships as the first playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
 <p>Immediate follow-through after <code>1.2.1</code>:</p>
@@ -1181,7 +1181,8 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code> is now live on hosted <code>/production</code>.</p>
+<p><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code> is currently live on hosted <code>/production</code>.</p>
+<p><code>1.2.2 - Runtime freeze hardening patch</code> is the current hosted <code>/beta</code> candidate for promotion.</p>
 <p>That means this document is now serving two jobs:</p>
 <ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
 <h3>What Is Now True</h3>
@@ -1198,7 +1199,13 @@ npm run build</code></pre>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/player-guide.json</code></li></ul>
 <h3>Current Release Risk View</h3>
 <p>Main remaining risks are now smaller and more operational than architectural:</p>
-<ul><li>small Aurora trust-fix issues in the <code>1.2.x</code> patch line</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li></ul>
+<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li></ul>
+<h3>What <code>1.2.2</code> Is Intended To Ship</h3>
+<p><code>1.2.2</code> is a narrow runtime-stability patch.</p>
+<p>It bundles:</p>
+<ul><li>runtime loop hardening so one-frame update or draw exceptions no longer silently dead-frame the run</li><li>visible export guidance when a runtime fault is trapped</li><li>a fix for restart-time async score-submit crashes</li><li>a targeted late-run ship-loss soak gate for beta-to-production promotion</li></ul>
+<p>This is the right shape for the patch:</p>
+<ul><li>small surface area</li><li>high trust value</li><li>better diagnostics if the remaining underlying freeze trigger still exists</li></ul>
 <h3>What <code>1.2.1</code> Shipped</h3>
 <p><code>1.2.1</code> shipped as a narrow and Aurora-scoped fast-follow patch.</p>
 <p>It bundles:</p>
@@ -1266,8 +1273,8 @@ npm run build</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Aurora trust-fix and copy-boundary patch</strong><br>
-          Build: 1.2.1+build.379.sha.10cccd6
+          Latest release note: <strong>Runtime freeze hardening patch</strong><br>
+          Build: 1.2.2+build.380.sha.87f6b6f
         </p>
       </aside>
     </main>
