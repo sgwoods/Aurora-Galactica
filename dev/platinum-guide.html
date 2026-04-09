@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.1+build.377.sha.e9a82b8</span>
+              <span class="metaValue">1.2.1+build.379.sha.10cccd6</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Release Line</span>
@@ -910,20 +910,81 @@
 <ul><li>platform-owned shell copy still appears on the front door</li><li>stale release placeholders are gone</li><li>application-owned identity copy still appears correctly</li><li>platform splash copy remains aligned with the current Platinum docs</li></ul>
 <p>The current automated front-door copy gate is:</p>
 <ul><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
+<h3>Harness Classification</h3>
+<p>To keep development fluid while still protecting release quality, harnesses should be thought of in three buckets:</p>
+<ol><li><code>platform</code></li></ol>
+<ul><li>protects <code>Platinum</code> shell behavior</li><li>protects hosted lane surfaces and release framing</li><li>should not require deep application gameplay validation unless the platform</li></ul>
+<p>change could affect gameplay hosting</p>
+<p>Typical examples:</p>
+<ul><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li></ul>
+<ol><li><code>application</code></li></ol>
+<ul><li>protects game-specific rules and progression</li><li>should stay contained to the application layer whenever possible</li></ul>
+<p>Typical examples:</p>
+<ul><li><code>node tools/harness/check-dual-final-life-survivor.js</code></li><li><code>node tools/harness/check-challenge-bonus-stage-numbering.js</code></li><li><code>node tools/harness/check-extra-ship-awards.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul>
+<ol><li><code>boundary</code></li></ol>
+<ul><li>protects the seam between platform and applications</li><li>answers:<ul><li>did a game change leak into platform behavior?</li><li>did a platform change alter game behavior unintentionally?</li></ul></li></ul>
+<p>Typical examples:</p>
+<ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
+<p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
+<h3>Gate Profiles By Change Type</h3>
+<p>We want:</p>
+<ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
+<p>The way to do that is to choose a gate profile based on the type of change.</p>
+<h4>Profile A: Application-only change</h4>
+<p>Use this when the change is primarily inside a hosted game such as <code>Aurora</code> and should not alter <code>Platinum</code> platform behavior.</p>
+<p>Examples:</p>
+<ul><li>scoring changes</li><li>life and death rules</li><li>stage sequencing</li><li>capture/carry gameplay fixes</li><li>enemy behavior tuning</li></ul>
+<p>Required:</p>
+<ul><li>targeted application harnesses for the changed behavior</li><li>one adjacent regression check for the same gameplay family</li><li>at least one boundary check proving the application change did not leak into</li></ul>
+<p>the platform</p>
+<p>Typical boundary checks:</p>
+<ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li></ul>
+<h4>Profile B: Platform-only change</h4>
+<p>Use this when the change is primarily in <code>Platinum</code> hosting behavior and should not alter application gameplay rules.</p>
+<p>Examples:</p>
+<ul><li>shell layout</li><li>popup framework</li><li>dock behavior</li><li>front-door platform surfaces</li><li>hosted docs and lane surfaces</li></ul>
+<p>Required:</p>
+<ul><li>platform harnesses for the changed area</li><li>one quick application smoke or boot check proving the platform still hosts</li></ul>
+<p>games correctly</p>
+<p>Typical application containment checks:</p>
+<ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li></ul>
+<h4>Profile C: Boundary change</h4>
+<p>Use this when the change explicitly crosses between platform and application responsibility.</p>
+<p>Examples:</p>
+<ul><li>startup / wait-mode copy ownership</li><li>game picker launch / preview behavior</li><li>pack contracts</li><li>shell surfaces that combine platform and app-owned data</li></ul>
+<p>Required:</p>
+<ul><li>at least one platform check</li><li>at least one application check</li><li>one or more explicit boundary checks</li></ul>
+<p>This is the highest-leakage-risk category and should be treated accordingly.</p>
+<h4>Profile D: Release / pipeline change</h4>
+<p>Use this when the change affects build, publish, release metadata, hosted docs, or lane verification rather than gameplay or shell behavior directly.</p>
+<p>Examples:</p>
+<ul><li>publish tooling</li><li>production metadata rewrite</li><li>asset copy policy</li><li>documentation gate enforcement</li></ul>
+<p>Required:</p>
+<ul><li>publish preflight</li><li>live lane verification</li><li>asset and metadata validation</li><li>docs presence checks where relevant</li></ul>
+<p>This profile should not automatically pull in deep gameplay suites unless the change also affects gameplay delivery.</p>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
+<p>Selection rule:</p>
+<ul><li>choose the smallest harness set that matches the active gate profile</li><li>avoid dragging platform-wide or gameplay-wide suites into every change unless</li></ul>
+<p>the change actually crosses those boundaries</p>
 <h4>Hosted <code>/dev</code></h4>
 <p>Hosted <code>/dev</code> exists to catch &quot;worked locally but not when hosted&quot; problems.</p>
 <p>Before promoting a candidate from hosted <code>/dev</code> to hosted <code>/beta</code>, we should have:</p>
 <ul><li>a clean local <code>check-publish-ready --lane dev</code></li><li>hosted <code>/dev</code> publish success</li><li>hosted <code>/dev</code> label verification</li><li>a short hosted <code>/dev</code> review for visual and feel checks</li></ul>
+<p>Hosted <code>/dev</code> is the preferred place to catch:</p>
+<ul><li>local-versus-hosted differences</li><li>platform/application boundary drift</li><li>shell or copy regressions that are awkward to judge from local-only runs</li></ul>
 <h4>Hosted <code>/beta</code></h4>
 <p>Hosted <code>/beta</code> is the real production gate.</p>
 <p>Before moving hosted <code>/beta</code> to hosted <code>/production</code>, we expect:</p>
-<ul><li><code>node tools/build/check-publish-ready.js --lane beta</code></li><li>hosted <code>/beta</code> publish success</li><li>hosted <code>/beta</code> live label verification</li><li>hosted <code>/beta</code> live-input verification when input or gameplay start behavior could be affected</li><li>completed documentation refresh for any meaningful <code>x.y</code> release</li></ul>
+<ul><li><code>node tools/build/check-publish-ready.js --lane beta</code></li><li>hosted <code>/beta</code> publish success</li><li>hosted <code>/beta</code> live label verification</li><li>hosted <code>/beta</code> live-input verification when input or gameplay start behavior could be affected</li><li>targeted soak coverage for any open freeze or long-session stability risk</li><li>for the current late-run freeze family, that means:<ul><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul></li><li>completed documentation refresh for any meaningful <code>x.y</code> release</li></ul>
+<p>Hosted <code>/beta</code> should be strict by risk, not strict by volume:</p>
+<ul><li>application-only candidates should primarily run application and boundary</li></ul>
+<p>gates</p>
+<ul><li>platform-only candidates should primarily run platform and boundary gates</li><li>boundary candidates should run both</li><li>release/pipeline candidates should emphasize publish and lane verification</li></ul>
 <h4>Hosted <code>/production</code></h4>
 <p>Hosted <code>/production</code> should move only from an approved hosted <code>/beta</code> candidate.</p>
 <p>Required path:</p>
@@ -935,7 +996,8 @@
 <p>That requirement is now enforced by the publish preflight.</p>
 <h3>Remaining Improvement Areas</h3>
 <p>The release gate is stronger than it used to be, but there is still room to improve:</p>
-<ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only and application-only harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li></ul>
+<ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
+<p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
 <ul><li>platform guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application-layer guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>release policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>release readiness review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li></ul></li></ul>
         </div>
@@ -1196,7 +1258,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora trust-fix and copy-boundary patch</strong><br>
-          Build: 1.2.1+build.377.sha.e9a82b8
+          Build: 1.2.1+build.379.sha.10cccd6
         </p>
       </aside>
     </main>
