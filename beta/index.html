@@ -556,14 +556,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.2.2-beta.1+build.384.sha.4d059e4.beta</span>
-    <span id="settingsRelease">Apr 09 2026, 8:32 PM EDT</span>
-    <span id="settingsState">beta@4d059e4 clean</span>
+    <span id="settingsVersion">Version 1.2.3</span>
+    <span id="settingsRelease">Apr 10 2026, 8:38 AM EDT</span>
+    <span id="settingsState">beta@faa8309 clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Runtime freeze hardening and bonus-ship patch</span>
-    <span id="settingsNotesBody">Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds.</span>
+    <span id="settingsNotesTitle">Aurora score-surface polish patch</span>
+    <span id="settingsNotesBody">Polished Aurora's score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</span>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -825,8 +825,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.2.2-beta.1+build.384.sha.4d059e4.beta</span>
-  <span id="buildStampRelease">Apr 09 2026, 8:32 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.3</span>
+  <span id="buildStampRelease">Apr 10 2026, 8:38 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1038,6 +1038,10 @@ const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
 const settingsRuntime=document.getElementById('settingsRuntime');
+const settingsChannel=document.getElementById('settingsChannel');
+const settingsVersion=document.getElementById('settingsVersion');
+const settingsRelease=document.getElementById('settingsRelease');
+const settingsState=document.getElementById('settingsState');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
@@ -1402,7 +1406,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.2-beta.1',label:'1.2.2-beta.1+build.384.sha.4d059e4.beta',commit:'4d059e463af10bfe0a2ffe1f5637d326d732f3e0',branch:'beta',dirty:false,released:'Apr 09 2026, 8:32 PM EDT',state:'beta@4d059e4 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.2.3-beta.1',label:'1.2.3-beta.1+build.386.sha.faa8309.beta',commit:'faa8309eb481c40b71724448d42edebd3d299101',branch:'beta',dirty:false,released:'Apr 10 2026, 8:38 AM EDT',state:'beta@faa8309 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1804,6 +1808,10 @@ function syncSettingsUi(){
  settingsPanel.setAttribute('aria-hidden',settingsOpen?'false':'true');
  settingsBtn.classList.toggle('open',settingsOpen);
  settingsBtn.setAttribute('aria-expanded',settingsOpen?'true':'false');
+ if(settingsChannel)settingsChannel.textContent=`Lane ${String(BUILD_INFO.releaseChannel||'development').toUpperCase()}`;
+ if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
+ if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
 }
 function syncHelpUi(){
  if(!helpModal)return;
@@ -2404,7 +2412,7 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
- if(buildStampVersion)buildStampVersion.textContent=production?`Version ${BUILD_INFO.version}`:`Version ${BUILD_INFO.label}`;
+ if(buildStampVersion)buildStampVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
