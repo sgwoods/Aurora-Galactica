@@ -402,20 +402,20 @@
           <div class="goal"><strong>Guide focus:</strong> Keep Platinum Release 1 stable while strengthening the platform and application boundary, keeping the hosted documentation set aligned, and preparing the smallest useful second-application proof.</div>
           <div class="meta">
             <div class="metaCard">
-              <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.2+build.384.sha.4d059e4</span>
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">1.2.3</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.2.2</span>
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">development</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 9, 2026</span>
+              <span class="metaValue">April 10, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Runtime freeze hardening and bonus-ship patch</span>
+              <span class="metaValue">Aurora score-surface polish patch</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -988,7 +988,10 @@
 <h4>Hosted <code>/production</code></h4>
 <p>Hosted <code>/production</code> should move only from an approved hosted <code>/beta</code> candidate.</p>
 <p>Required path:</p>
-<ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li></ol>
+<ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li><li><code>npm run sync:public</code></li><li><code>npm run verify:public</code></li></ol>
+<p>The public <code>sgwoods/public</code> sync is part of the production release contract, not a manual follow-up.</p>
+<p>Production promotion must also start from a clean tree:</p>
+<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>if either condition fails, production promotion should stop</li></ul>
 <h3>First-Class Hosted Documentation Requirement</h3>
 <p>The hosted documentation set is now part of the release surface.</p>
 <p>Every hosted lane should carry:</p>
@@ -1257,8 +1260,8 @@
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Runtime freeze hardening and bonus-ship patch</strong><br>
-          Build: 1.2.2+build.384.sha.4d059e4
+          Latest release note: <strong>Aurora score-surface polish patch</strong><br>
+          Release 1.2.3 · Updated April 10, 2026
         </p>
       </aside>
     </main>
