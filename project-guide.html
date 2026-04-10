@@ -402,20 +402,20 @@
           <div class="goal"><strong>Current goal:</strong> Keep Platinum Release 1 stable, close the small Aurora trust-fix cluster, and keep the platform, applications, hosted docs, and release lanes aligned as one disciplined system.</div>
           <div class="meta">
             <div class="metaCard">
-              <span class="metaLabel">Current Build</span>
-              <span class="metaValue">1.2.2+build.381.sha.0a5330c</span>
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">1.2.3</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Release Line</span>
-              <span class="metaValue">1.2.2</span>
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">development</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 9, 2026</span>
+              <span class="metaValue">April 10, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Runtime freeze hardening and bonus-ship patch</span>
+              <span class="metaValue">Aurora score-surface polish patch</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -652,10 +652,12 @@
 <h3>Current Release State</h3>
 <p>Current public milestone:</p>
 <ul><li><code>1.2.2 - Runtime freeze hardening and bonus-ship patch</code></li><li><code>1.2.1 - Aurora trust-fix and copy-boundary patch</code></li></ul>
+<p>Current prepared candidate:</p>
+<ul><li><code>1.2.3 - Aurora score-surface polish patch</code></li></ul>
 <p>What that means:</p>
 <ul><li>Aurora now ships as the first playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
 <p>Immediate follow-through after <code>1.2.2</code>:</p>
-<ul><li>watch <code>#146</code> and keep exportable freeze diagnostics useful if late-run faults recur</li><li>keep the next Aurora polish and correctness bundle tight</li><li>keep the documentation set aligned across source and hosted pages</li><li>strengthen the platform versus application boundary before the second game becomes truly playable</li></ul>
+<ul><li>watch <code>#146</code> and keep exportable freeze diagnostics useful if late-run faults recur</li><li>review the <code>1.2.3</code> Aurora score-surface polish candidate on hosted <code>/beta</code></li><li>keep the documentation set aligned across source and hosted pages</li><li>strengthen the platform versus application boundary before the second game becomes truly playable</li></ul>
 <h3>Run Locally</h3>
 <ol><li>Build the current local candidate:</li></ol>
 <pre><code data-lang="bash">cd /Users/stevenwoods/Documents/Codex-Test1
@@ -1076,7 +1078,10 @@ npm run build</code></pre>
 <h4>Hosted <code>/production</code></h4>
 <p>Hosted <code>/production</code> should move only from an approved hosted <code>/beta</code> candidate.</p>
 <p>Required path:</p>
-<ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li></ol>
+<ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li><li><code>npm run sync:public</code></li><li><code>npm run verify:public</code></li></ol>
+<p>The public <code>sgwoods/public</code> sync is part of the production release contract, not a manual follow-up.</p>
+<p>Production promotion must also start from a clean tree:</p>
+<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>if either condition fails, production promotion should stop</li></ul>
 <h3>First-Class Hosted Documentation Requirement</h3>
 <p>The hosted documentation set is now part of the release surface.</p>
 <p>Every hosted lane should carry:</p>
@@ -1182,7 +1187,8 @@ npm run build</code></pre>
         <div class="markdown">
           <h3>Current Read</h3>
 <p><code>1.2.2 - Runtime freeze hardening and bonus-ship patch</code> is currently live on hosted <code>/production</code>.</p>
-<p>There is no newer hosted <code>/beta</code> candidate under review right now. The current post-release work is about monitoring the <code>1.2.2</code> line, keeping the hosted docs aligned, and deciding the next focused Aurora bundle deliberately.</p>
+<p><code>1.2.3 - Aurora score-surface polish patch</code> is the current hosted <code>/beta</code> candidate under review.</p>
+<p>The current post-release work is about keeping the live <code>1.2.2</code> line trustworthy while evaluating whether the narrower <code>1.2.3</code> Aurora polish bundle is ready for hosted <code>/production</code>.</p>
 <p>That means this document is now serving two jobs:</p>
 <ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
 <h3>What Is Now True</h3>
@@ -1199,7 +1205,13 @@ npm run build</code></pre>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/player-guide.json</code></li></ul>
 <h3>Current Release Risk View</h3>
 <p>Main remaining risks are now smaller and more operational than architectural:</p>
-<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li></ul>
+<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li><li>making sure score-surface polish remains readable and trustworthy before the next production promotion</li></ul>
+<h3>What <code>1.2.3</code> Contains</h3>
+<p><code>1.2.3</code> is a narrow Aurora presentation patch candidate, not a platform rewrite.</p>
+<p>It currently bundles:</p>
+<ul><li>wait-mode high-score rotation in the clearer <code>Validated -&gt; Local -&gt; All -&gt; demo</code> sequence</li><li>shorter wait/demo pacing to reach score presentation sooner</li><li>leaderboard row trust context via <code>BUILD/DATE</code></li><li>a lightweight <code>After Date</code> filter in the Aurora leaderboard panel</li></ul>
+<p>Why this candidate fits the patch line:</p>
+<ul><li>narrow surface area</li><li>Aurora-only scope</li><li>meaningful trust/readability improvement</li><li>no intentional Platinum shell contract expansion</li></ul>
 <h3>What <code>1.2.2</code> Shipped</h3>
 <p><code>1.2.2</code> shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.</p>
 <p>It bundles:</p>
@@ -1273,8 +1285,8 @@ npm run build</code></pre>
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Runtime freeze hardening and bonus-ship patch</strong><br>
-          Build: 1.2.2+build.381.sha.0a5330c
+          Latest release note: <strong>Aurora score-surface polish patch</strong><br>
+          Release 1.2.3 · Updated April 10, 2026
         </p>
       </aside>
     </main>
