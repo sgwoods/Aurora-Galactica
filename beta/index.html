@@ -548,9 +548,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsMeta">
     <span id="settingsRuntime">Platform Platinum · Pack pending</span>
     <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.2.2-beta.1+build.382.sha.ce59bb0.beta</span>
-    <span id="settingsRelease">Apr 09 2026, 7:54 PM EDT</span>
-    <span id="settingsState">beta@ce59bb0 clean</span>
+    <span id="settingsVersion">Version 1.2.2-beta.1+build.383.sha.379912d.beta</span>
+    <span id="settingsRelease">Apr 09 2026, 8:19 PM EDT</span>
+    <span id="settingsState">beta@379912d clean</span>
   </div>
   <div id="settingsNotes">
     <span id="settingsNotesLabel">Latest Note</span>
@@ -811,8 +811,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 </div>
 <div id="buildStamp">
   <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.2.2-beta.1+build.382.sha.ce59bb0.beta</span>
-  <span id="buildStampRelease">Apr 09 2026, 7:54 PM EDT</span>
+  <span id="buildStampVersion">Version 1.2.2-beta.1+build.383.sha.379912d.beta</span>
+  <span id="buildStampRelease">Apr 09 2026, 8:19 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1387,7 +1387,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.2-beta.1',label:'1.2.2-beta.1+build.382.sha.ce59bb0.beta',commit:'ce59bb0af6c75f711ecb04f26c9fc0a4f712e3b7',branch:'beta',dirty:false,released:'Apr 09 2026, 7:54 PM EDT',state:'beta@ce59bb0 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.2.2-beta.1',label:'1.2.2-beta.1+build.383.sha.379912d.beta',commit:'379912d6039ffd94bd9b1caad4eb1fb80b554cde',branch:'beta',dirty:false,released:'Apr 09 2026, 8:19 PM EDT',state:'beta@379912d clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1425,7 +1425,7 @@ let gameOverHtml='';
 let gameOverState=null;
 let harnessFrameAccum=0;
 let harnessClockControlled=0;
-const ATTRACT={active:0,phase:'',timer:0,cycle:0};
+const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=1;
@@ -1666,8 +1666,9 @@ function buildGameOverHtmlFromState(){
  return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
- const board=leaderboardRowsForView();
- const boardTitle=currentLeaderboardTitle();
+ const activeView=(ATTRACT.phase==='scores'&&ATTRACT.active)?(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'):LEADERBOARD.view;
+ const board=leaderboardRowsForView(activeView);
+ const boardTitle=currentLeaderboardTitle(activeView);
  const rows=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1}))).map((row,i)=>`<span class="scoreRank">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName">${row.initials}</span><span class="scoreValue">${formatScore(row.score)}</span><span class="scoreStage">${String(row.stage).padStart(2,' ')}</span>`).join('');
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
@@ -1700,9 +1701,14 @@ function resetAttractBackdrop(){
 function enterAttractScores(){
  ATTRACT.active=1;
  ATTRACT.phase='scores';
- ATTRACT.timer=7.5;
+ ATTRACT.scoreViews=typeof attractLeaderboardViews==='function'?attractLeaderboardViews():['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewDwell=4.5;
+ ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell;
+ ATTRACT.timer=Math.max(ATTRACT.scoreViewDwell*ATTRACT.scoreViews.length,9);
  S.attract=1;
  resetAttractBackdrop();
+ if(typeof prefetchLeaderboards==='function')prefetchLeaderboards(1);
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
 function startAttractDemo(opts={}){
@@ -1718,7 +1724,10 @@ function startAttractDemo(opts={}){
  syncPauseUi();
  ATTRACT.active=1;
  ATTRACT.phase='demo';
- ATTRACT.timer=11.5;
+ ATTRACT.timer=9.5;
+ ATTRACT.scoreViews=['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewTimer=0;
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
@@ -1733,9 +1742,13 @@ function stopAttractLoop(){
  ATTRACT.active=0;
  ATTRACT.phase='';
  ATTRACT.timer=0;
+ ATTRACT.scoreViews=['all','validated'];
+ ATTRACT.scoreViewIndex=0;
+ ATTRACT.scoreViewTimer=0;
  S.attract=0;
  syncPauseUi();
 }
+window.enterAttractScores=enterAttractScores;
 const initialBoard=loadScoreboard();
 if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
@@ -2922,8 +2935,8 @@ function renderPilotRecords(rows){
  accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
  accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
-function currentLeaderboardTitle(){
- switch(LEADERBOARD.view){
+function currentLeaderboardTitle(view=LEADERBOARD.view){
+ switch(view){
   case 'validated': return 'VALIDATED PILOTS';
   case 'mine': return LEADERBOARD.user?'MY SCORES':'MY SCORES · LOCAL';
   case 'local': return 'LOCAL DEVICE SCORES';
@@ -2947,6 +2960,9 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='local')return 'Local device scores';
  if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
+}
+function attractLeaderboardViews(){
+ return ['validated','local','all'];
 }
 function persistLeaderboardCache(view){
  if(view==='local')return;
@@ -4970,6 +4986,12 @@ function update(dt){
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
   if(ATTRACT.phase==='scores'){
+   ATTRACT.scoreViewTimer=Math.max(0,(+ATTRACT.scoreViewTimer||0)-dt);
+   if(!ATTRACT.scoreViewTimer&&ATTRACT.scoreViews.length>1){
+    ATTRACT.scoreViewIndex=(ATTRACT.scoreViewIndex+1)%ATTRACT.scoreViews.length;
+    ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell||4.5;
+    logEvent('attract_score_view',{cycle:ATTRACT.cycle,view:ATTRACT.scoreViews[ATTRACT.scoreViewIndex],index:ATTRACT.scoreViewIndex});
+   }
    for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(10+s.z*18)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
    if(!ATTRACT.timer)startAttractDemo();
    return;
@@ -7433,6 +7455,14 @@ window.__galagaHarness__={
   window.startAttractDemo({record:cfg.record!==false});
   return true;
  },
+ enterAttractScores(){
+  if(typeof window.enterAttractScores==='function')window.enterAttractScores();
+  return{
+   active:!!ATTRACT.active,
+   phase:ATTRACT.phase||'',
+   timer:+(+ATTRACT.timer||0).toFixed(3)
+  };
+ },
  exportAndReset(cfg={}){
   const label=typeof cfg==='string'?cfg:(cfg.label||'harness_export_reset');
   exportAndReturnToWaitMode(label);
@@ -7790,6 +7820,20 @@ window.__galagaHarness__={
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
  state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}}},
+ attractScoreState(){
+  const title=document.querySelector('.gameOverSub')?.textContent||'';
+  return{
+   active:!!ATTRACT.active,
+   phase:ATTRACT.phase||'',
+   title,
+   view:(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'),
+   index:+(ATTRACT.scoreViewIndex||0),
+   timer:+(+ATTRACT.timer||0).toFixed(3),
+   viewTimer:+(+ATTRACT.scoreViewTimer||0).toFixed(3),
+   views:[...(ATTRACT.scoreViews||[])],
+   html:msg?.innerHTML||''
+  };
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {
