@@ -992,7 +992,7 @@
 <ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li><li><code>npm run sync:public</code></li><li><code>npm run verify:public</code></li></ol>
 <p>The public <code>sgwoods/public</code> sync is part of the production release contract, not a manual follow-up.</p>
 <p>Production promotion must also start from a clean tree:</p>
-<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>if either condition fails, production promotion should stop</li></ul>
+<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the release machine must be on <code>main</code>, and local <code>main</code> must match <code>origin/main</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>the public sync step must validate the current <code>/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html</code> and the production artifact must have been rebuilt from that exact clean checkout</li><li>if either condition fails, production promotion should stop</li></ul>
 <h3>First-Class Hosted Documentation Requirement</h3>
 <p>The hosted documentation set is now part of the release surface.</p>
 <p>Every hosted lane should carry:</p>
