@@ -1153,7 +1153,8 @@ npm run build</code></pre>
           <h3>Version Format</h3>
 <p>We use a SemVer-style public version plus build metadata.</p>
 <p>Examples:</p>
-<ul><li>local <code>localhost</code>:<ul><li><code>1.2.0+build.364.sha.106adfd.dirty</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>1.2.0+build.364.sha.106adfd</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.2.0-beta.1+build.364.sha.106adfd.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.2.0+build.364.sha.106adfd</code></li></ul></li></ul>
+<ul><li>local <code>localhost</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0.dirty</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>x.y.z-beta.1+build.NNN.sha.abcdef0.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0</code></li></ul></li></ul>
+<p>These are format examples, not current live lane values.</p>
 <h3>Meaning</h3>
 <ul><li><code>MAJOR</code><ul><li>reserve for true product-era breaks or major repositioning</li></ul></li><li><code>MINOR</code><ul><li>use for meaningful public milestones</li><li>example:<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li></ul></li></ul>
 <h3>Hosted Release Lanes</h3>
@@ -1186,9 +1187,9 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p><code>1.2.2 - Runtime freeze hardening and bonus-ship patch</code> is currently live on hosted <code>/production</code>.</p>
-<p><code>1.2.3 - Aurora score-surface polish patch</code> is the current hosted <code>/beta</code> candidate under review.</p>
-<p>The current post-release work is about keeping the live <code>1.2.2</code> line trustworthy while evaluating whether the narrower <code>1.2.3</code> Aurora polish bundle is ready for hosted <code>/production</code>.</p>
+<p><code>1.2.3 - Aurora score-surface polish patch</code> is currently live on hosted <code>/production</code>.</p>
+<p>There is no newer hosted <code>/beta</code> candidate under review right now.</p>
+<p>The current post-release work is about keeping the live <code>1.2.3</code> line trustworthy, watching score-surface feedback in production, and choosing the next narrow Aurora moment-polish bundle without weakening the Platinum boundary.</p>
 <p>That means this document is now serving two jobs:</p>
 <ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
 <h3>What Is Now True</h3>
@@ -1205,12 +1206,12 @@ npm run build</code></pre>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/player-guide.json</code></li></ul>
 <h3>Current Release Risk View</h3>
 <p>Main remaining risks are now smaller and more operational than architectural:</p>
-<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li><li>making sure score-surface polish remains readable and trustworthy before the next production promotion</li></ul>
+<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li><li>making sure score-surface polish remains readable and trustworthy in live production</li></ul>
 <h3>What <code>1.2.3</code> Contains</h3>
-<p><code>1.2.3</code> is a narrow Aurora presentation patch candidate, not a platform rewrite.</p>
-<p>It currently bundles:</p>
+<p><code>1.2.3</code> shipped as a narrow Aurora presentation patch, not a platform rewrite.</p>
+<p>It bundles:</p>
 <ul><li>wait-mode high-score rotation in the clearer <code>Validated -&gt; Local -&gt; All -&gt; demo</code> sequence</li><li>shorter wait/demo pacing to reach score presentation sooner</li><li>leaderboard row trust context via <code>BUILD/DATE</code></li><li>a lightweight <code>After Date</code> filter in the Aurora leaderboard panel</li></ul>
-<p>Why this candidate fits the patch line:</p>
+<p>Why this patch fits the line:</p>
 <ul><li>narrow surface area</li><li>Aurora-only scope</li><li>meaningful trust/readability improvement</li><li>no intentional Platinum shell contract expansion</li></ul>
 <h3>What <code>1.2.2</code> Shipped</h3>
 <p><code>1.2.2</code> shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.</p>
