@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Application Guide</title>
+  <style>
+:root{
+      --bg:#06111b;
+      --bg2:#10253b;
+      --bg3:#14354f;
+      --card:rgba(7,19,31,0.78);
+      --card2:rgba(255,255,255,0.05);
+      --line:rgba(144,210,255,0.18);
+      --text:#eef8ff;
+      --muted:#a1c7e0;
+      --soft:#84adc9;
+      --accent:#69e2a7;
+      --accent2:#7ac3ff;
+      --shadow:0 18px 40px rgba(0,0,0,0.28);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(105,226,167,0.16), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(122,195,255,0.2), transparent 28%),
+        linear-gradient(160deg,var(--bg),var(--bg2) 55%,var(--bg3));
+      min-height:100vh;
+    }
+    a{color:#d8f7ff}
+    .shell{
+      max-width:1280px;
+      margin:0 auto;
+      padding:34px 18px 72px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 280px;
+      gap:24px;
+      align-items:start;
+    }
+    .main{min-width:0}
+    .hero,.section,.toc{
+      border:1px solid rgba(177,222,255,0.16);
+      border-radius:28px;
+      background:
+        linear-gradient(160deg, rgba(12,34,54,0.88), rgba(7,19,31,0.72)),
+        radial-gradient(circle at 20% 0%, rgba(103,230,168,0.12), transparent 32%);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:34px 32px 28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      color:#d7ecff;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-0.04em;
+    }
+    .hero p{
+      max-width:900px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.65;
+      margin:0 0 16px;
+    }
+    .goal{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e7f6ff;
+      font-size:16px;
+      line-height:1.55;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .metaCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .metaLabel{
+      display:block;
+      color:#8fb3cc;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .metaValue{
+      font-size:18px;
+      font-weight:600;
+    }
+    .heroLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 16px;
+      border-radius:999px;
+      background:rgba(122,195,255,0.16);
+      border:1px solid rgba(122,195,255,0.3);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:.04em;
+    }
+    .section{
+      margin-top:20px;
+      padding:28px 26px 24px;
+    }
+    .sectionHeader{
+      margin-bottom:18px;
+      padding-bottom:14px;
+      border-bottom:1px solid var(--line);
+    }
+    .sectionHeader h2{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:-0.03em;
+    }
+    .sectionHeader p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .cardGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .card,.linkCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .card h3,.linkCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .card p,.linkCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+    .bulletList li{
+      position:relative;
+      padding:14px 16px 14px 42px;
+      border-radius:18px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList li::before{
+      content:"";
+      position:absolute;
+      left:16px;
+      top:18px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(122,195,255,0.08);
+    }
+    .linkGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .linkCard a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      margin-bottom:10px;
+      text-decoration:none;
+    }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
+    .docWrap{
+      padding:20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .docMeta{
+      margin:0 0 14px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .markdown h3,.markdown h4,.markdown h5{
+      margin:24px 0 10px;
+      letter-spacing:-0.02em;
+      color:#f2fbff;
+    }
+    .markdown h3{font-size:24px}
+    .markdown h4{font-size:20px}
+    .markdown h5{font-size:17px}
+    .markdown p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .markdown ul,.markdown ol{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      padding-left:22px;
+    }
+    .markdown li{
+      margin:0 0 8px;
+      line-height:1.65;
+    }
+    .markdown pre{
+      margin:0 0 16px;
+      padding:14px 16px;
+      overflow:auto;
+      border-radius:16px;
+      background:rgba(3,10,16,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f6ff;
+    }
+    .markdown pre code{
+      color:inherit;
+      font-size:13px;
+    }
+    .markdown img{
+      display:block;
+      max-width:100%;
+      margin:0 0 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      position:sticky;
+      top:20px;
+      padding:22px 20px 18px;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+    .toc p{
+      margin:0 0 14px;
+      color:var(--soft);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .toc ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      gap:10px;
+    }
+    .toc li a{
+      display:block;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      text-decoration:none;
+      color:#e9f7ff;
+      font-size:14px;
+      line-height:1.4;
+    }
+    .footer{
+      margin-top:18px;
+      color:#8db0c8;
+      font-size:13px;
+      line-height:1.6;
+    }
+    code{
+      font-family:"SFMono-Regular",Consolas,monospace;
+      color:#edf7ff;
+      font-size:.95em;
+    }
+    @media (max-width: 980px){
+      .shell{grid-template-columns:1fr}
+      .toc{position:static; order:-1}
+    }
+    @media (max-width: 720px){
+      .shell{padding:20px 14px 54px}
+      .hero,.section,.toc{padding:22px 20px}
+      .hero p{font-size:17px}
+    }
+.previewNote{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      color:var(--soft);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .audioAction{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:106px;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(105,226,167,0.34);
+      background:rgba(105,226,167,0.14);
+      color:var(--text);
+      font:inherit;
+      font-size:13px;
+      letter-spacing:.04em;
+      cursor:pointer;
+    }
+    .audioAction:hover{
+      background:rgba(105,226,167,0.2);
+    }
+    .audioStatus{
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(6,15,24,0.72);
+      border:1px solid rgba(122,195,255,0.18);
+      color:#d9f6ff;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .audioStatus.error{
+      border-color:rgba(255,128,128,0.3);
+      color:#ffd8d8;
+    }
+    .toneTag,.swatchTag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      font-size:12px;
+      color:#eef8ff;
+      margin:0 8px 8px 0;
+    }
+    .toneTag code,.swatchTag code{
+      background:none;
+      padding:0;
+      color:inherit;
+    }
+    .swatch{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.35);
+      box-shadow:0 0 0 4px rgba(255,255,255,0.04);
+    }
+    .visualGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+    }
+    .visualCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .visualCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+    .visualCard p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .visualMeta{
+      display:grid;
+      gap:8px;
+      font-size:13px;
+      color:var(--soft);
+    }
+    .visualMeta strong{
+      color:#eff7ff;
+      font-weight:600;
+    }
+    .previewFrame{
+      position:absolute;
+      width:1px;
+      height:1px;
+      opacity:0;
+      pointer-events:none;
+      border:0;
+      inset:auto auto 0 0;
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Aurora Application Guide</span>
+            <a class="homeLink" href="index.html">Open current lane build</a>
+            <a class="homeLink" href="project-guide.html">Project guide</a>
+          </div>
+          <h1>Aurora Application Guide</h1>
+          <p>A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing graphics controls that shape the live game presentation.</p>
+          <div class="goal"><strong>Guide focus:</strong> Keep Aurora&#39;s atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum.</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">1.2.3</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">development</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">April 10, 2026</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">Aurora score-surface polish patch</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="platinum-guide.html">Open Platinum guide</a>
+            <a class="button" href="player-guide.html">Open player guide</a>
+          </div>
+          <div class="previewNote">
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora cues through the real in-game audio engine instead of a separate mock player. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+          </div>
+          <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
+        </section>
+
+        <section class="section" id="audio-catalog">
+          <div class="sectionHeader">
+            <h2>Audio Catalog</h2>
+            <p>Every currently documented Aurora sound context, grouped by where it appears in the application and playable directly from this page.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Context</th>
+                  <th>Cue</th>
+                  <th>Phase</th>
+                  <th>Theme</th>
+                  <th>Description</th>
+                  <th>Preview</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Front Door</strong><br><span class="docMeta">Navigation Tick</span></td>
+      <td><code>uiTick</code></td>
+      <td><code>frontDoor</code></td>
+      <td><code>aurora-crown</code></td>
+      <td>Subtle front-door navigation tick for Aurora-owned shell identity surfaces.</td>
+      <td><button class="audioAction" type="button" data-audio-index="0">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Front Door</strong><br><span class="docMeta">Confirm</span></td>
+      <td><code>uiConfirm</code></td>
+      <td><code>frontDoor</code></td>
+      <td><code>aurora-crown</code></td>
+      <td>Confirmation cue for front-door and shell-level Aurora selections.</td>
+      <td><button class="audioAction" type="button" data-audio-index="1">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Wait Mode</strong><br><span class="docMeta">Score Rotation Enter</span></td>
+      <td><code>attractEnter</code></td>
+      <td><code>wait</code></td>
+      <td><code>aurora-crown</code></td>
+      <td>Entry sting when Aurora transitions into the score-focused wait-mode surface.</td>
+      <td><button class="audioAction" type="button" data-audio-index="2">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Wait Mode</strong><br><span class="docMeta">Score Rotation Pulse</span></td>
+      <td><code>attractPulse</code></td>
+      <td><code>wait</code></td>
+      <td><code>aurora-crown</code></td>
+      <td>Recurring pulse that keeps the score rotation alive without sounding like gameplay.</td>
+      <td><button class="audioAction" type="button" data-audio-index="3">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Demo</strong><br><span class="docMeta">Demo Entry</span></td>
+      <td><code>attractEnter</code></td>
+      <td><code>demo</code></td>
+      <td><code>aurora-crown</code></td>
+      <td>Bridge from the Aurora shell identity into autoplay demo mode.</td>
+      <td><button class="audioAction" type="button" data-audio-index="4">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Demo</strong><br><span class="docMeta">Demo Pulse</span></td>
+      <td><code>attractPulse</code></td>
+      <td><code>demo</code></td>
+      <td><code>classic-arcade</code></td>
+      <td>Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.</td>
+      <td><button class="audioAction" type="button" data-audio-index="5">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage Start</strong><br><span class="docMeta">Stage 1 Start</span></td>
+      <td><code>gameStart</code></td>
+      <td><code>stage</code></td>
+      <td><code>classic-arcade</code></td>
+      <td>Opening cue for classic early-stage Aurora presentation.</td>
+      <td><button class="audioAction" type="button" data-audio-index="6">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage Start</strong><br><span class="docMeta">Aurora Surge Start</span></td>
+      <td><code>gameStart</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Opening cue for the later Aurora surge/borealis stage family.</td>
+      <td><button class="audioAction" type="button" data-audio-index="7">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Gameplay Loop</strong><br><span class="docMeta">Formation Pulse Classic</span></td>
+      <td><code>stagePulse</code></td>
+      <td><code>stage</code></td>
+      <td><code>classic-arcade</code></td>
+      <td>Formation march/pulse for classic early-stage cadence.</td>
+      <td><button class="audioAction" type="button" data-audio-index="8">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Gameplay Loop</strong><br><span class="docMeta">Formation Pulse Aurora</span></td>
+      <td><code>stagePulse</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Formation pulse for the Aurora-themed later-stage family.</td>
+      <td><button class="audioAction" type="button" data-audio-index="9">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Player Shot Classic</span></td>
+      <td><code>playerShot</code></td>
+      <td><code>stage</code></td>
+      <td><code>classic-arcade</code></td>
+      <td>Early-stage player shot reference aligned to the classic arcade mix.</td>
+      <td><button class="audioAction" type="button" data-audio-index="10">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Player Shot Aurora</span></td>
+      <td><code>playerShot</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Later-stage Aurora shot variant with a slightly sleeker synth edge.</td>
+      <td><button class="audioAction" type="button" data-audio-index="11">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Enemy Shot Classic</span></td>
+      <td><code>enemyShot</code></td>
+      <td><code>stage</code></td>
+      <td><code>classic-arcade</code></td>
+      <td>Enemy projectile cue for classic stages.</td>
+      <td><button class="audioAction" type="button" data-audio-index="12">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Enemy Shot Aurora</span></td>
+      <td><code>enemyShot</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Enemy projectile cue for Aurora-leaning later stages.</td>
+      <td><button class="audioAction" type="button" data-audio-index="13">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Enemy Hit</span></td>
+      <td><code>enemyHit</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Standard enemy hit cue used across Aurora combat.</td>
+      <td><button class="audioAction" type="button" data-audio-index="14">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Boss Hit</span></td>
+      <td><code>bossHit</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Heavier impact cue for boss and stronger target hits.</td>
+      <td><button class="audioAction" type="button" data-audio-index="15">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Enemy Boom</span></td>
+      <td><code>enemyBoom</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Standard enemy destruction cue.</td>
+      <td><button class="audioAction" type="button" data-audio-index="16">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Combat</strong><br><span class="docMeta">Boss Boom</span></td>
+      <td><code>bossBoom</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Larger destruction cue for boss enemies and rogue fighter losses.</td>
+      <td><button class="audioAction" type="button" data-audio-index="17">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Capture / Rescue</strong><br><span class="docMeta">Capture Beam</span></td>
+      <td><code>captureBeam</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Beam/deploy cue for the capture sequence.</td>
+      <td><button class="audioAction" type="button" data-audio-index="18">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Capture / Rescue</strong><br><span class="docMeta">Capture Retreat</span></td>
+      <td><code>captureRetreat</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Recovery cue when the capture sequence resolves and retreats.</td>
+      <td><button class="audioAction" type="button" data-audio-index="19">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Capture / Rescue</strong><br><span class="docMeta">Rescue Join</span></td>
+      <td><code>rescueJoin</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Join cue for dual-fighter reunification and rescue success.</td>
+      <td><button class="audioAction" type="button" data-audio-index="20">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Scoring</strong><br><span class="docMeta">Bonus Ship Award</span></td>
+      <td><code>extendAward</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Extra-ship award cue used when Aurora score extends trigger.</td>
+      <td><button class="audioAction" type="button" data-audio-index="21">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Player State</strong><br><span class="docMeta">Ship Loss</span></td>
+      <td><code>playerHit</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Player ship destruction cue during live play.</td>
+      <td><button class="audioAction" type="button" data-audio-index="22">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Transitions</strong><br><span class="docMeta">Stage Transition</span></td>
+      <td><code>stageTransition</code></td>
+      <td><code>stage</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Transition cue between standard stages.</td>
+      <td><button class="audioAction" type="button" data-audio-index="23">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Transitions</strong><br><span class="docMeta">Challenge Transition</span></td>
+      <td><code>challengeTransition</code></td>
+      <td><code>challenge</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>Transition cue into challenge/bonus stage presentation.</td>
+      <td><button class="audioAction" type="button" data-audio-index="24">Play Sound</button></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Results</strong><br><span class="docMeta">Game Over</span></td>
+      <td><code>gameOver</code></td>
+      <td><code>results</code></td>
+      <td><code>aurora-surge</code></td>
+      <td>End-of-run cue used by Aurora results/game-over flow.</td>
+      <td><button class="audioAction" type="button" data-audio-index="25">Play Sound</button></td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="visual-themes">
+          <div class="sectionHeader">
+            <h2>Visual Themes</h2>
+            <p>The main atmosphere families that Aurora currently uses for front-door identity, classic play, and later-stage Aurora presentation.</p>
+          </div>
+          <div class="visualGrid">
+            
+    <article class="visualCard">
+      <h3>Classic Arcade</h3>
+      <p>The closest Aurora gets to the original Galaga look: bright, readable stars on a black field with classic cadence and no aurora ribbon wash.</p>
+      <div>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffffff"></span><code>#ffffff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#8bb8ff"></span><code>#8bb8ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#1e52ff"></span><code>#1e52ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#fff36a"></span><code>#fff36a</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ff3b33"></span><code>#ff3b33</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#db38ff"></span><code>#db38ff</code></span>
+        
+      </div>
+      <div class="visualMeta">
+        <div><strong>Theme Id:</strong> <code>classic-arcade</code></div>
+        <div><strong>Group:</strong> Classic</div>
+        <div><strong>Audio Theme:</strong> <code>classic-arcade</code></div>
+        <div><strong>Backgrounds:</strong> frontDoor classic-stars · wait classic-stars · demo classic-stars · stage classic-stars · challenge classic-stars</div>
+        <div><strong>Starfield:</strong> <code>classic-arcade-stars</code> · 108 stars</div>
+        <div><strong>Alpha:</strong> 0.52 to 0.96</div>
+        <div><strong>Speed:</strong> 11 to 27</div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Aurora Hint</h3>
+      <p>Bridge theme where the classic field remains visible but the Aurora wash starts to become part of the stage identity.</p>
+      <div>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#f7f9ff"></span><code>#f7f9ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#8fd7ff"></span><code>#8fd7ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#72e18c"></span><code>#72e18c</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#f0c766"></span><code>#f0c766</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#d27cff"></span><code>#d27cff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ff8b7a"></span><code>#ff8b7a</code></span>
+        
+      </div>
+      <div class="visualMeta">
+        <div><strong>Theme Id:</strong> <code>aurora-hint</code></div>
+        <div><strong>Group:</strong> Aurora</div>
+        <div><strong>Audio Theme:</strong> <code>aurora-rise</code></div>
+        <div><strong>Backgrounds:</strong> frontDoor aurora-borealis · wait aurora-borealis · demo aurora-hint · stage aurora-hint · challenge aurora-hint</div>
+        <div><strong>Starfield:</strong> <code>aurora-hint-stars</code> · 92 stars</div>
+        <div><strong>Alpha:</strong> 0.34 to 0.70</div>
+        <div><strong>Speed:</strong> 8 to 20</div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Aurora Borealis</h3>
+      <p>Full Aurora stage theme with softer stars under a stronger ribbon treatment and the main later-stage audio palette.</p>
+      <div>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#f7fbff"></span><code>#f7fbff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#9edfff"></span><code>#9edfff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#6bf5bf"></span><code>#6bf5bf</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffe27a"></span><code>#ffe27a</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#cf92ff"></span><code>#cf92ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffb5cf"></span><code>#ffb5cf</code></span>
+        
+      </div>
+      <div class="visualMeta">
+        <div><strong>Theme Id:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Group:</strong> Aurora</div>
+        <div><strong>Audio Theme:</strong> <code>aurora-surge</code></div>
+        <div><strong>Backgrounds:</strong> frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis</div>
+        <div><strong>Starfield:</strong> <code>aurora-borealis-stars</code> · 88 stars</div>
+        <div><strong>Alpha:</strong> 0.28 to 0.64</div>
+        <div><strong>Speed:</strong> 8 to 18</div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Aurora Crown</h3>
+      <p>Aurora-owned shell/front-door theme used to establish the application identity before gameplay falls back toward classic or surge contexts.</p>
+      <div>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffffff"></span><code>#ffffff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#aef1ff"></span><code>#aef1ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#8dffd5"></span><code>#8dffd5</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffe38f"></span><code>#ffe38f</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#d5a0ff"></span><code>#d5a0ff</code></span>
+        
+          <span class="swatchTag"><span class="swatch" style="background:#ffc7d8"></span><code>#ffc7d8</code></span>
+        
+      </div>
+      <div class="visualMeta">
+        <div><strong>Theme Id:</strong> <code>aurora-crown</code></div>
+        <div><strong>Group:</strong> Aurora</div>
+        <div><strong>Audio Theme:</strong> <code>aurora-crown</code></div>
+        <div><strong>Backgrounds:</strong> frontDoor aurora-borealis · wait aurora-borealis · demo aurora-borealis · stage aurora-borealis · challenge aurora-borealis</div>
+        <div><strong>Starfield:</strong> <code>aurora-crown-stars</code> · 84 stars</div>
+        <div><strong>Alpha:</strong> 0.30 to 0.68</div>
+        <div><strong>Speed:</strong> 8 to 18</div>
+      </div>
+    </article>
+  
+          </div>
+        </section>
+
+        <section class="section" id="visual-contexts">
+          <div class="sectionHeader">
+            <h2>Graphics Contexts</h2>
+            <p>How the visual themes are actually applied across front door, wait mode, standard stages, and challenge stages.</p>
+          </div>
+          <div class="visualGrid">
+            
+    <article class="visualCard">
+      <h3>Front Door Atmosphere</h3>
+      <p>The front door keeps Aurora-owned identity with a fuller ribbon field and crown audio theme while still living inside the Platinum shell.</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>frontDoor</code></div>
+        <div><strong>Theme:</strong> <code>aurora-crown</code></div>
+        <div><strong>Background Mode:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Frame Accent:</strong> <code>classic-blue</code></div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Wait Mode Surface</h3>
+      <p>Score rotation/wait mode shares the Aurora front-door family so the shell remains coherent between idle states.</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>wait</code></div>
+        <div><strong>Theme:</strong> <code>aurora-crown</code></div>
+        <div><strong>Background Mode:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Frame Accent:</strong> <code>classic-blue</code></div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Stage 1 Classic Gameplay</h3>
+      <p>Stage 1 keeps the classic stars look as the gameplay baseline, with the brighter starfield tuned against Galaga references.</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>stage</code></div>
+        <div><strong>Theme:</strong> <code>classic-arcade</code></div>
+        <div><strong>Background Mode:</strong> <code>classic-stars</code></div>
+        <div><strong>Frame Accent:</strong> <code>classic-blue</code></div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Stage 8 Aurora Surge</h3>
+      <p>Later stages shift into the stronger Aurora visual family with softer star density and ribbon emphasis.</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>stage</code></div>
+        <div><strong>Theme:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Background Mode:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Frame Accent:</strong> <code>aurora-crown</code></div>
+      </div>
+    </article>
+  
+
+    <article class="visualCard">
+      <h3>Challenge / Bonus Stage</h3>
+      <p>Challenge stages keep the configured Aurora background family rather than reverting to a special hardcoded board.</p>
+      <div class="visualMeta">
+        <div><strong>Phase:</strong> <code>challenge</code></div>
+        <div><strong>Theme:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Background Mode:</strong> <code>aurora-borealis</code></div>
+        <div><strong>Frame Accent:</strong> <code>aurora-crown</code></div>
+      </div>
+    </article>
+  
+          </div>
+        </section>
+
+        <section class="section" id="ship-catalog">
+          <div class="sectionHeader">
+            <h2>Ship And Enemy Catalog</h2>
+            <p>The player ship, dual-fighter state, base enemy types, and challenge-family presentations that currently make up Aurora's live board.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Ship / Type</th>
+                  <th>Families / Presentation</th>
+                  <th>Where It Appears</th>
+                  <th>Gameplay Context</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Player Fighter</strong><br><span class="docMeta">player</span></td>
+      <td>player ship</td>
+      <td>Every standard and challenge stage as the main player ship.</td>
+      <td>Primary player-controlled ship. Can be captured, rescued, and rejoined into dual-fighter mode.</td>
+      <td>The visual baseline for reserve pips, ship loss, rescue, and extra-ship award feedback.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Dual Fighter</strong><br><span class="docMeta">player state</span></td>
+      <td>joined player pair</td>
+      <td>After a successful rescue join during normal Aurora play.</td>
+      <td>A paired player state rather than a separate enemy or pack. Central to Aurora&#39;s rescue and trust-fix behavior.</td>
+      <td>Should be documented separately because it changes shot spread, survival logic, and recovery expectations.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bee Line</strong><br><span class="docMeta">enemy</span></td>
+      <td>classic, scorpion, stingray, galboss</td>
+      <td>Lower-pressure enemy line across standard stages, with family reskins tied to stage bands.</td>
+      <td>Fast, lighter-value formation and dive enemy. Forms part of the classic opening pressure and remains present through later bands.</td>
+      <td>Uses `type: bee` in gameplay state and changes family art with stage-band progression.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Butterfly Line</strong><br><span class="docMeta">enemy</span></td>
+      <td>classic, scorpion, stingray, galboss</td>
+      <td>Main non-boss formation rows across standard stages.</td>
+      <td>Mid-tier enemy line with higher scoring and more visible board presence than bees.</td>
+      <td>Uses `type: but` in gameplay state and shares family progression with the stage band.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Boss / Super Boss</strong><br><span class="docMeta">enemy</span></td>
+      <td>classic, stingray, galboss</td>
+      <td>Top formation row in standard stages, with later themed boss families and archetypes.</td>
+      <td>Higher-health enemy that can dive solo or with escorts and is central to capture/rescue flow.</td>
+      <td>Uses `type: boss`, starts with extra health, and picks up named archetypes like `command-core`, `super-boss-scorpion`, `partner-wing-stingray`, `council-boss`, and `super-partner-pair` through stage presentation.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Rogue Fighter</strong><br><span class="docMeta">enemy</span></td>
+      <td>rogue</td>
+      <td>When a captured fighter is converted into an enemy state.</td>
+      <td>High-value special case enemy tied directly to the capture lifecycle.</td>
+      <td>Uses `type: rogue` and its own dedicated family/visual treatment rather than the standard band families.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge Dragonfly Family</strong><br><span class="docMeta">challenge enemy family</span></td>
+      <td>dragonfly</td>
+      <td>Challenge stages from stage 11 onward until the mosquito family takes over.</td>
+      <td>Challenge-only presentation family used to make bonus-stage waves feel distinct from the normal rack.</td>
+      <td>Not a separate gameplay `type`; it is a challenge-family skin applied to challenge enemies.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge Mosquito Family</strong><br><span class="docMeta">challenge enemy family</span></td>
+      <td>mosquito</td>
+      <td>Late challenge stages from stage 19 onward.</td>
+      <td>Late challenge-family visual used for stronger bonus-stage identity deeper into the Aurora progression.</td>
+      <td>Like dragonfly, this is a challenge-family presentation layer rather than a new base gameplay type.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="stage-families">
+          <div class="sectionHeader">
+            <h2>Stage Family Progression</h2>
+            <p>How Aurora changes the visible enemy families and named boss archetypes as stage bands advance.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage Band</th>
+                  <th>Families In Use</th>
+                  <th>Boss Archetype</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>quiet-skies</strong><br><span class="docMeta">from stage 1</span></td>
+      <td>bee classic · but classic · boss classic · challenge classic</td>
+      <td><code>command-core</code></td>
+      <td>Classic opening Aurora band. Closest to original Galaga feel in stars, enemy look, and cadence.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>scorpion-dawn</strong><br><span class="docMeta">from stage 4</span></td>
+      <td>bee scorpion · but scorpion · boss classic · challenge classic</td>
+      <td><code>super-boss-scorpion</code></td>
+      <td>First Aurora-flavored band. Adds scorpion family visuals while keeping the challenge family conservative.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>stingray-surge</strong><br><span class="docMeta">from stage 8</span></td>
+      <td>bee stingray · but stingray · boss stingray · challenge dragonfly</td>
+      <td><code>partner-wing-stingray</code></td>
+      <td>Main later-stage Aurora band where both background and audio identity shift clearly away from the classic opening.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>galboss-veil</strong><br><span class="docMeta">from stage 12</span></td>
+      <td>bee galboss · but galboss · boss galboss · challenge dragonfly</td>
+      <td><code>council-boss</code></td>
+      <td>Heavier late-stage band with the galboss family and stronger aurora presentation.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>crown-aurora</strong><br><span class="docMeta">from stage 16</span></td>
+      <td>bee galboss · but galboss · boss galboss · challenge mosquito</td>
+      <td><code>super-partner-pair</code></td>
+      <td>Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="graphics-controls">
+          <div class="sectionHeader">
+            <h2>Developer Graphics Controls</h2>
+            <p>The current developer-facing graphics controls that let us tune and compare Aurora presentation without changing the application-owned audio resolution.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Control</th>
+                  <th>Values</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Graphics Theme</strong></td>
+      <td>auto, classic-arcade, aurora-hint, aurora-borealis, aurora-crown</td>
+      <td>Developer override for the visual atmosphere family. It changes rendered backgrounds and starfield profiles without changing the resolved audio theme.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Starfield Intensity</strong></td>
+      <td>0.5 to 1.8</td>
+      <td>Multiplier applied to star brightness so we can tune classic visibility against reference material without rewriting the base theme.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Starfield Speed</strong></td>
+      <td>0.5 to 1.8</td>
+      <td>Multiplier applied to live starfield speed so we can compare Aurora against classic Galaga movement references.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="guide-links">
+          <div class="sectionHeader">
+            <h2>Related Guides</h2>
+            <p>Cross-links to the rest of the generated documentation and the maintained reference baseline.</p>
+          </div>
+          <div class="linkGrid">
+            
+    <article class="linkCard">
+      <h3><a href="project-guide.html">Hosted Project Guide</a></h3>
+      <p>Overall project, release, and platform/application boundary guide.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <h3><a href="platinum-guide.html">Hosted Platinum Guide</a></h3>
+      <p>Platform-owned structure, responsibilities, and release lane model.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <h3><a href="player-guide.html">Hosted Player Guide</a></h3>
+      <p>Current user-facing play and controls guide.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <h3><a href="https://github.com/sgwoods/Codex-Test1/blob/main/REFERENCE_BASELINE.md">Galaga Reference Baseline</a></h3>
+      <p>Catalog of visual and motion references used for Aurora tuning, including the stage-play reference video stills.</p>
+    </article>
+  
+          </div>
+        </section>
+      </div>
+      <aside class="toc">
+        <h2>Application Index</h2>
+        <p>This page is generated during the normal build so the Aurora application guide stays aligned with the current lane build and the maintained application documentation manifest.</p>
+        <ul>
+          
+    <li><a href="#audio-catalog">Audio Catalog</a></li>
+  
+
+    <li><a href="#visual-themes">Visual Themes</a></li>
+  
+
+    <li><a href="#visual-contexts">Graphics Contexts</a></li>
+  
+
+    <li><a href="#ship-catalog">Ship And Enemy Catalog</a></li>
+  
+
+    <li><a href="#stage-families">Stage Family Progression</a></li>
+  
+
+    <li><a href="#graphics-controls">Graphics Controls</a></li>
+  
+
+    <li><a href="#guide-links">Related Guides</a></li>
+  
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>Aurora score-surface polish patch</strong><br>
+          Release 1.2.3 · Updated April 10, 2026
+        </p>
+      </aside>
+    </main>
+    <iframe id="audioPreviewFrame" class="previewFrame" title="Aurora audio preview frame" src="index.html?docsPreview=1"></iframe>
+    <script id="applicationGuideData" type="application/json">{"audioContexts":[{"id":"front-door-tick","context":"Front Door","label":"Navigation Tick","cue":"uiTick","phase":"frontDoor","audioTheme":"aurora-crown","description":"Subtle front-door navigation tick for Aurora-owned shell identity surfaces.","preview":{"cue":"uiTick","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"front-door-confirm","context":"Front Door","label":"Confirm","cue":"uiConfirm","phase":"frontDoor","audioTheme":"aurora-crown","description":"Confirmation cue for front-door and shell-level Aurora selections.","preview":{"cue":"uiConfirm","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"wait-enter","context":"Wait Mode","label":"Score Rotation Enter","cue":"attractEnter","phase":"wait","audioTheme":"aurora-crown","description":"Entry sting when Aurora transitions into the score-focused wait-mode surface.","preview":{"cue":"attractEnter","phase":"wait","atmosphereTheme":"aurora-crown"}},{"id":"wait-pulse","context":"Wait Mode","label":"Score Rotation Pulse","cue":"attractPulse","phase":"wait","audioTheme":"aurora-crown","description":"Recurring pulse that keeps the score rotation alive without sounding like gameplay.","preview":{"cue":"attractPulse","phase":"wait","atmosphereTheme":"aurora-crown","variant":0}},{"id":"demo-enter","context":"Demo","label":"Demo Entry","cue":"attractEnter","phase":"demo","audioTheme":"aurora-crown","description":"Bridge from the Aurora shell identity into autoplay demo mode.","preview":{"cue":"attractEnter","phase":"demo","atmosphereTheme":"aurora-crown"}},{"id":"demo-pulse","context":"Demo","label":"Demo Pulse","cue":"attractPulse","phase":"demo","audioTheme":"classic-arcade","description":"Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.","preview":{"cue":"attractPulse","phase":"demo","atmosphereTheme":"classic-arcade","variant":0}},{"id":"stage-start-classic","context":"Stage Start","label":"Stage 1 Start","cue":"gameStart","phase":"stage","audioTheme":"classic-arcade","description":"Opening cue for classic early-stage Aurora presentation.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"stage-start-aurora","context":"Stage Start","label":"Aurora Surge Start","cue":"gameStart","phase":"stage","audioTheme":"aurora-surge","description":"Opening cue for the later Aurora surge/borealis stage family.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-pulse-classic","context":"Gameplay Loop","label":"Formation Pulse Classic","cue":"stagePulse","phase":"stage","audioTheme":"classic-arcade","description":"Formation march/pulse for classic early-stage cadence.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"classic-arcade","variant":0}},{"id":"formation-pulse-aurora","context":"Gameplay Loop","label":"Formation Pulse Aurora","cue":"stagePulse","phase":"stage","audioTheme":"aurora-surge","description":"Formation pulse for the Aurora-themed later-stage family.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"aurora-borealis","variant":0}},{"id":"player-shot-classic","context":"Combat","label":"Player Shot Classic","cue":"playerShot","phase":"stage","audioTheme":"classic-arcade","description":"Early-stage player shot reference aligned to the classic arcade mix.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"player-shot-aurora","context":"Combat","label":"Player Shot Aurora","cue":"playerShot","phase":"stage","audioTheme":"aurora-surge","description":"Later-stage Aurora shot variant with a slightly sleeker synth edge.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-shot-classic","context":"Combat","label":"Enemy Shot Classic","cue":"enemyShot","phase":"stage","audioTheme":"classic-arcade","description":"Enemy projectile cue for classic stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"enemy-shot-aurora","context":"Combat","label":"Enemy Shot Aurora","cue":"enemyShot","phase":"stage","audioTheme":"aurora-surge","description":"Enemy projectile cue for Aurora-leaning later stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-hit-aurora","context":"Combat","label":"Enemy Hit","cue":"enemyHit","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy hit cue used across Aurora combat.","preview":{"cue":"enemyHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-hit-aurora","context":"Combat","label":"Boss Hit","cue":"bossHit","phase":"stage","audioTheme":"aurora-surge","description":"Heavier impact cue for boss and stronger target hits.","preview":{"cue":"bossHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-boom-aurora","context":"Combat","label":"Enemy Boom","cue":"enemyBoom","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy destruction cue.","preview":{"cue":"enemyBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-boom-aurora","context":"Combat","label":"Boss Boom","cue":"bossBoom","phase":"stage","audioTheme":"aurora-surge","description":"Larger destruction cue for boss enemies and rogue fighter losses.","preview":{"cue":"bossBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-beam","context":"Capture / Rescue","label":"Capture Beam","cue":"captureBeam","phase":"stage","audioTheme":"aurora-surge","description":"Beam/deploy cue for the capture sequence.","preview":{"cue":"captureBeam","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-retreat","context":"Capture / Rescue","label":"Capture Retreat","cue":"captureRetreat","phase":"stage","audioTheme":"aurora-surge","description":"Recovery cue when the capture sequence resolves and retreats.","preview":{"cue":"captureRetreat","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"rescue-join","context":"Capture / Rescue","label":"Rescue Join","cue":"rescueJoin","phase":"stage","audioTheme":"aurora-surge","description":"Join cue for dual-fighter reunification and rescue success.","preview":{"cue":"rescueJoin","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"extend-award","context":"Scoring","label":"Bonus Ship Award","cue":"extendAward","phase":"stage","audioTheme":"aurora-surge","description":"Extra-ship award cue used when Aurora score extends trigger.","preview":{"cue":"extendAward","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"player-hit","context":"Player State","label":"Ship Loss","cue":"playerHit","phase":"stage","audioTheme":"aurora-surge","description":"Player ship destruction cue during live play.","preview":{"cue":"playerHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"stage-transition","context":"Transitions","label":"Stage Transition","cue":"stageTransition","phase":"stage","audioTheme":"aurora-surge","description":"Transition cue between standard stages.","preview":{"cue":"stageTransition","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"challenge-transition","context":"Transitions","label":"Challenge Transition","cue":"challengeTransition","phase":"challenge","audioTheme":"aurora-surge","description":"Transition cue into challenge/bonus stage presentation.","preview":{"cue":"challengeTransition","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"game-over","context":"Results","label":"Game Over","cue":"gameOver","phase":"results","audioTheme":"aurora-surge","description":"End-of-run cue used by Aurora results/game-over flow.","preview":{"cue":"gameOver","phase":"results","atmosphereTheme":"aurora-borealis"}}]}</script>
+    <script>
+      (function(){
+        const data = JSON.parse(document.getElementById('applicationGuideData').textContent || '{}');
+        const frame = document.getElementById('audioPreviewFrame');
+        const status = document.getElementById('audioPreviewStatus');
+        let ready = false;
+        function setStatus(text, isError){
+          status.textContent = text;
+          status.classList.toggle('error', !!isError);
+        }
+        function previewApi(){
+          const win = frame && frame.contentWindow;
+          return win && win.__auroraDocsPreview ? win.__auroraDocsPreview : null;
+        }
+        function markReady(){
+          ready = !!previewApi();
+          if(ready) setStatus('Preview frame ready. Sound buttons will play Aurora cues through the current lane build.');
+          else setStatus('Preview frame loaded, but the audio preview bridge is not ready yet.', true);
+        }
+        frame.addEventListener('load', markReady);
+        window.addEventListener('load', function(){ setTimeout(markReady, 300); });
+        document.addEventListener('click', function(event){
+          const button = event.target.closest('[data-audio-index]');
+          if(!button) return;
+          const index = Number(button.getAttribute('data-audio-index'));
+          const entry = (data.audioContexts || [])[index];
+          if(!entry) return;
+          const api = previewApi();
+          if(!api || typeof api.playCue !== 'function'){
+            setStatus('Preview frame is not ready yet. Let the page finish loading and try again.', true);
+            return;
+          }
+          try{
+            api.playCue(entry.preview || {});
+            setStatus('Played ' + (entry.label || entry.cue || 'preview') + ' from the Aurora application guide.');
+          }catch(err){
+            setStatus('Audio preview failed: ' + (err && err.message ? err.message : String(err)), true);
+          }
+        });
+      })();
+    </script>
+</body>
+</html>

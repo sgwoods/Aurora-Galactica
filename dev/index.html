@@ -615,8 +615,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 10 2026, 2:08 PM EDT</span>
-      <span id="settingsState">main@4dac126 clean</span>
+      <span id="settingsRelease">Apr 10 2026, 2:50 PM EDT</span>
+      <span id="settingsState">main@3cd02aa clean</span>
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
@@ -885,7 +885,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 10 2026, 2:08 PM EDT</span>
+  <span id="buildStampRelease">Apr 10 2026, 2:50 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1106,6 +1106,7 @@ const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
+const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
@@ -1465,7 +1466,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.391.sha.4dac126',commit:'4dac12653ef20ce8515e9e7582f3b56a7a614013',branch:'main',dirty:false,released:'Apr 10 2026, 2:08 PM EDT',state:'main@4dac126 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.392.sha.3cd02aa',commit:'3cd02aa8b848df002e1ff6441b7547409c079628',branch:'main',dirty:false,released:'Apr 10 2026, 2:50 PM EDT',state:'main@3cd02aa clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1503,7 +1504,7 @@ let gameOverHtml='';
 let gameOverState=null;
 let harnessFrameAccum=0;
 let harnessClockControlled=0;
-const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5};
+const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5,audioPulseTimer:0,audioPulseIndex:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=1;
@@ -1605,26 +1606,28 @@ const sfx={
   return cue;
  },
  playCue(name,opts={}){
+  if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;
   const cue=this.cueDef(name,opts);
   if(!cue)return;
-  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600);
+  const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
-   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0);
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
   }
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
-   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0);
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
   }
  },
- play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
+ play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
   o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
   o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
  },
- noise(d=.08,v=.02,hp=900,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
+ noise(d=.08,v=.02,hp=900,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
   src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
- seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92)},
+ seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600,allowIdle=0){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92,allowIdle)},
  start(){this.playCue('gameStart',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
  shot(){this.playCue('playerShot',{phase:S.challenge?'challenge':'stage'})},
  enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
@@ -1641,7 +1644,70 @@ const sfx={
  uiConfirm(){this.playCue('uiConfirm',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
  captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
  join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
- transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})}
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
+ attractEnter(phase='demo'){
+  const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
+  this.playCue('attractEnter',{
+   phase,
+   allowIdle:1,
+   atmosphereTheme:(phase==='wait'||phase==='demo')?frontDoorTheme:''
+  });
+ },
+ attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
+};
+
+window.__auroraDocsPreview=window.__platinumDocsPreview={
+ ready(){
+  return typeof currentGamePackAudioCue==='function';
+ },
+ playCue(payload={}){
+  const cue=String(payload.cue||'').trim();
+  if(!cue)throw new Error('Missing cue for Aurora docs preview.');
+  if(typeof installGamePack==='function'&&typeof currentGamePackKey==='function'&&currentGamePackKey()!=='aurora-galactica'){
+   installGamePack('aurora-galactica',{persist:false});
+  }
+  try{
+   AC();
+   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
+  }catch{}
+  const phase=String(payload.phase||'stage').trim()||'stage';
+  const atmosphereTheme=String(payload.atmosphereTheme||'').trim();
+  const attractPhase=payload.attractPhase!==undefined
+   ? String(payload.attractPhase||'')
+   : phase==='wait'?'scores':phase==='demo'?'demo':'';
+  const frontDoor=payload.frontDoor!==undefined?!!payload.frontDoor:phase==='frontDoor';
+  const challenge=!!payload.challenge;
+  const variant=Number.isFinite(+payload.variant)?(+payload.variant|0):0;
+  const pack=typeof currentGamePack==='function'?currentGamePack():null;
+  const stagePresentation=payload.stagePresentation||(
+   atmosphereTheme
+    ? {
+      atmosphereTheme,
+      backgroundMode:typeof resolvePackAtmosphereBackground==='function'
+       ? resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:phase==='frontDoor'?'frontDoor':phase})
+       : ''
+     }
+    : null
+  );
+  sfx.playCue(cue,{
+   phase,
+   atmosphereTheme,
+   stagePresentation,
+   challenge,
+   variant,
+   frontDoor,
+   attractPhase,
+   allowIdle:1,
+   docsPreview:1
+  });
+  return Object.freeze({
+   cue,
+   phase,
+   atmosphereTheme:atmosphereTheme||stagePresentation?.atmosphereTheme||'',
+   challenge,
+   variant
+  });
+ }
 };
 
 const P={
@@ -1920,10 +1986,13 @@ function enterAttractScores(){
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewDwell=4.5;
  ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell;
+ ATTRACT.audioPulseTimer=.95;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.timer=Math.max(ATTRACT.scoreViewDwell*ATTRACT.scoreViews.length,9);
  S.attract=1;
  resetAttractBackdrop();
  if(typeof prefetchLeaderboards==='function')prefetchLeaderboards(1);
+ sfx.attractEnter('wait');
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
 function startAttractDemo(opts={}){
@@ -1943,12 +2012,15 @@ function startAttractDemo(opts={}){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=.8;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
  Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle,record});
+ sfx.attractEnter('demo');
  if(record)startRunRecording();
  spawnStage();
 }
@@ -1960,6 +2032,8 @@ function stopAttractLoop(){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=0;
+ ATTRACT.audioPulseIndex=0;
  S.attract=0;
  syncPauseUi();
 }
@@ -5317,6 +5391,12 @@ function update(dt){
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
+  ATTRACT.audioPulseTimer=Math.max(0,(+ATTRACT.audioPulseTimer||0)-dt);
+  if(!ATTRACT.audioPulseTimer){
+   const phase=ATTRACT.phase==='scores'?'wait':'demo';
+   sfx.attractPulse(phase,ATTRACT.audioPulseIndex++);
+   ATTRACT.audioPulseTimer=phase==='wait'?2.6:2.15;
+  }
   if(ATTRACT.phase==='scores'){
    ATTRACT.scoreViewTimer=Math.max(0,(+ATTRACT.scoreViewTimer||0)-dt);
    if(!ATTRACT.scoreViewTimer&&ATTRACT.scoreViews.length>1){
@@ -6216,15 +6296,46 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    }),
    stageTransition:Object.freeze({seq:[440,554,659],step:.06,wave:'triangle',volume:.011,slide:24,lpHz:3400,tones:Object.freeze([{freq:880,duration:.09,wave:'square',volume:.005,slide:-80,lpHz:4300,delay:.1}])}),
    challengeTransition:Object.freeze({seq:[392,523,659,784],step:.055,wave:'triangle',volume:.012,slide:40,lpHz:3600,tones:Object.freeze([{freq:988,duration:.12,wave:'square',volume:.006,slide:-70,lpHz:4600,delay:.12}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[392,523,659],step:.065,wave:'triangle',volume:.01,slide:18,lpHz:3200,allowIdle:1}),
+     demo:Object.freeze({seq:[330,440,523],step:.072,wave:'triangle',volume:.009,slide:14,lpHz:3000,allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.055,wave:'triangle',volume:.006,slide:8,lpHz:2600},{freq:494,duration:.036,wave:'square',volume:.0028,slide:-10,lpHz:3800,delay:.018}])}),
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.055,wave:'triangle',volume:.006,slide:8,lpHz:2600},{freq:523,duration:.036,wave:'square',volume:.0028,slide:-10,lpHz:3800,delay:.018}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.06,wave:'triangle',volume:.0055,slide:10,lpHz:2400},{freq:440,duration:.038,wave:'square',volume:.0026,slide:-12,lpHz:3600,delay:.018}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.06,wave:'triangle',volume:.0055,slide:10,lpHz:2400},{freq:494,duration:.038,wave:'square',volume:.0026,slide:-12,lpHz:3600,delay:.018}])})
+      ])
+     })
+    })
+   }),
    uiTick:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'square',volume:.004,slide:-110,detune:.001,lpHz:5400},{freq:1320,duration:.016,wave:'triangle',volume:.0025,slide:-70,detune:.001,lpHz:5200,delay:.004}])}),
    uiConfirm:Object.freeze({seq:[660,880],step:.04,wave:'triangle',volume:.008,slide:30,lpHz:4200})
   })
  }),
  'aurora-rise':Object.freeze({
-  id:'aurora-rise',
+ id:'aurora-rise',
   label:'Aurora Rise',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[440,587,784],step:.07,wave:'triangle',volume:.018,slide:68,lpHz:3200,tones:Object.freeze([{freq:988,duration:.16,wave:'sine',volume:.008,slide:40,lpHz:3800,delay:.06}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:980,duration:.03,wave:'triangle',volume:.006,slide:-520,lpHz:5200},{freq:1468,duration:.018,wave:'sine',volume:.003,slide:-260,lpHz:5600,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:298,duration:.08,wave:'triangle',volume:.008,slide:-110,lpHz:2600},{freq:220,duration:.055,wave:'sine',volume:.0038,slide:-70,lpHz:2300,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:202,duration:.055,wave:'triangle',volume:.012,slide:-150,lpHz:2800},{freq:138,duration:.11,wave:'sawtooth',volume:.012,slide:-170,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1500,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:288,duration:.065,wave:'triangle',volume:.014,slide:-108,lpHz:3200},{freq:196,duration:.13,wave:'sine',volume:.009,slide:-74,lpHz:2500,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1800,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:466,duration:.03,wave:'triangle',volume:.008,slide:-280,lpHz:3600},{freq:320,duration:.05,wave:'triangle',volume:.005,slide:-160,lpHz:3000,delay:.014},{freq:220,duration:.085,wave:'sine',volume:.005,slide:-60,lpHz:1900,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:392,duration:.03,wave:'triangle',volume:.01,slide:-260,lpHz:3900},{freq:262,duration:.052,wave:'triangle',volume:.007,slide:-170,lpHz:3200,delay:.014},{freq:176,duration:.11,wave:'sine',volume:.008,slide:-70,lpHz:2100,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1300,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:110,duration:.34,wave:'sawtooth',volume:.016,slide:52,detune:.014,lpHz:2600},{freq:165,duration:.28,wave:'sine',volume:.007,slide:32,detune:.01,lpHz:2200,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1800,delay:.03}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:330,duration:.065,wave:'sine',volume:.008,slide:18,lpHz:2400},{freq:494,duration:.06,wave:'triangle',volume:.006,slide:24,lpHz:3200,delay:.02},{freq:659,duration:.045,wave:'triangle',volume:.0035,slide:16,lpHz:4200,delay:.04}])}),
@@ -6238,15 +6349,60 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    extendAward:Object.freeze({seq:[784,1047,1318],step:.06,wave:'triangle',volume:.014,slide:48,lpHz:4600,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:22,lpHz:5200,delay:.08}])}),
    rescueJoin:Object.freeze({seq:[523,659,880,1175],step:.052,wave:'triangle',volume:.013,slide:46,lpHz:4300,tones:Object.freeze([{freq:1568,duration:.1,wave:'sine',volume:.006,slide:28,lpHz:5000,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[262,330,415,523],step:.062,wave:'triangle',volume:.011,slide:14,lpHz:2400,tones:Object.freeze([{freq:698,duration:.16,wave:'sawtooth',volume:.005,slide:-60,lpHz:3000,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[523,698,932],step:.075,wave:'triangle',volume:.011,slide:26,lpHz:3600,tones:Object.freeze([{freq:1245,duration:.09,wave:'sine',volume:.0045,slide:18,lpHz:4200,delay:.12}]),allowIdle:1}),
+     demo:Object.freeze({seq:[392,523,698],step:.08,wave:'triangle',volume:.01,slide:20,lpHz:3200,tones:Object.freeze([{freq:988,duration:.085,wave:'sine',volume:.0042,slide:16,lpHz:3800,delay:.11}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.06,wave:'sine',volume:.0058,slide:10,lpHz:2300},{freq:523,duration:.042,wave:'triangle',volume:.0031,slide:14,lpHz:3200,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.06,wave:'sine',volume:.0058,slide:10,lpHz:2300},{freq:587,duration:.042,wave:'triangle',volume:.0031,slide:14,lpHz:3200,delay:.022}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.062,wave:'sine',volume:.0054,slide:8,lpHz:2200},{freq:494,duration:.04,wave:'triangle',volume:.0028,slide:12,lpHz:3000,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.062,wave:'sine',volume:.0054,slide:8,lpHz:2200},{freq:440,duration:.04,wave:'triangle',volume:.0028,slide:12,lpHz:3000,delay:.022}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:860,duration:.024,wave:'triangle',volume:.0038,slide:-80,lpHz:4600},{freq:1180,duration:.016,wave:'sine',volume:.0024,slide:-50,lpHz:5200,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:760,duration:.026,wave:'triangle',volume:.0038,slide:-70,lpHz:4300},{freq:1047,duration:.016,wave:'sine',volume:.0022,slide:-40,lpHz:4800,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:900,duration:.024,wave:'triangle',volume:.0042,slide:-90,lpHz:5000},{freq:1260,duration:.016,wave:'sine',volume:.0026,slide:-55,lpHz:5400,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[784,1047],step:.045,wave:'triangle',volume:.008,slide:24,lpHz:4300}),
+     wait:Object.freeze({seq:[698,932],step:.045,wave:'triangle',volume:.008,slide:22,lpHz:4200}),
+     stage:Object.freeze({seq:[784,1175],step:.042,wave:'triangle',volume:.0085,slide:26,lpHz:4500})
+    })
+   }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:220,duration:.13,wave:'triangle',volume:.02,slide:-220,lpHz:2200},{freq:165,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1800,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:980,delay:.02}])}),
    gameOver:Object.freeze({seq:[262,220,196,165],step:.115,wave:'triangle',volume:.016,slide:-55,lpHz:2100,tones:Object.freeze([{freq:131,duration:.34,wave:'sawtooth',volume:.015,slide:-100,lpHz:1700,delay:.024}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1000,delay:.1}])})
   })
  }),
  'aurora-surge':Object.freeze({
-  id:'aurora-surge',
+ id:'aurora-surge',
   label:'Aurora Surge',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[523,659,880],step:.065,wave:'triangle',volume:.019,slide:62,lpHz:3600,tones:Object.freeze([{freq:1318,duration:.15,wave:'sine',volume:.008,slide:34,lpHz:4300,delay:.06}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1080,duration:.028,wave:'triangle',volume:.0064,slide:-560,lpHz:5600},{freq:1610,duration:.017,wave:'sine',volume:.0032,slide:-240,lpHz:6200,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:320,duration:.078,wave:'triangle',volume:.0086,slide:-118,lpHz:2800},{freq:236,duration:.054,wave:'sine',volume:.0038,slide:-72,lpHz:2400,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:220,duration:.055,wave:'triangle',volume:.0125,slide:-160,lpHz:3000},{freq:148,duration:.105,wave:'sawtooth',volume:.0125,slide:-184,lpHz:2200,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1560,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:300,duration:.064,wave:'triangle',volume:.0145,slide:-112,lpHz:3400},{freq:208,duration:.126,wave:'sine',volume:.0095,slide:-76,lpHz:2600,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1840,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:494,duration:.03,wave:'triangle',volume:.0088,slide:-290,lpHz:3900},{freq:340,duration:.05,wave:'triangle',volume:.0054,slide:-170,lpHz:3200,delay:.014},{freq:228,duration:.085,wave:'sine',volume:.0052,slide:-62,lpHz:2000,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:410,duration:.03,wave:'triangle',volume:.0105,slide:-270,lpHz:4100},{freq:276,duration:.054,wave:'triangle',volume:.0072,slide:-176,lpHz:3400,delay:.014},{freq:184,duration:.112,wave:'sine',volume:.0082,slide:-72,lpHz:2200,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1320,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:118,duration:.34,wave:'sawtooth',volume:.0165,slide:54,detune:.014,lpHz:2750},{freq:176,duration:.28,wave:'sine',volume:.0074,slide:34,detune:.01,lpHz:2300,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1820,delay:.03}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:392,duration:.06,wave:'triangle',volume:.01,slide:24,lpHz:2800},{freq:587,duration:.048,wave:'sine',volume:.0042,slide:22,lpHz:3600,delay:.018},{freq:880,duration:.04,wave:'triangle',volume:.0032,slide:20,lpHz:4700,delay:.036}])}),
@@ -6260,15 +6416,60 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
    rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[330,392,494,587],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:784,duration:.18,wave:'sawtooth',volume:.005,slide:-70,lpHz:3200,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[659,880,1175],step:.072,wave:'triangle',volume:.0115,slide:28,lpHz:3900,tones:Object.freeze([{freq:1568,duration:.09,wave:'sine',volume:.0048,slide:18,lpHz:4600,delay:.12}]),allowIdle:1}),
+     demo:Object.freeze({seq:[494,659,880],step:.078,wave:'triangle',volume:.0104,slide:22,lpHz:3500,tones:Object.freeze([{freq:1175,duration:.085,wave:'sine',volume:.0044,slide:14,lpHz:4100,delay:.11}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.06,wave:'sine',volume:.006,slide:10,lpHz:2400},{freq:659,duration:.042,wave:'triangle',volume:.0032,slide:15,lpHz:3400,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:440,duration:.06,wave:'sine',volume:.006,slide:10,lpHz:2400},{freq:698,duration:.042,wave:'triangle',volume:.0032,slide:15,lpHz:3400,delay:.022}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.062,wave:'sine',volume:.0056,slide:9,lpHz:2300},{freq:587,duration:.04,wave:'triangle',volume:.003,slide:13,lpHz:3200,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.062,wave:'sine',volume:.0056,slide:9,lpHz:2300},{freq:523,duration:.04,wave:'triangle',volume:.003,slide:13,lpHz:3200,delay:.022}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'triangle',volume:.004,slide:-84,lpHz:4900},{freq:1320,duration:.016,wave:'sine',volume:.0025,slide:-48,lpHz:5600,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:820,duration:.026,wave:'triangle',volume:.004,slide:-76,lpHz:4700},{freq:1175,duration:.016,wave:'sine',volume:.0024,slide:-44,lpHz:5400,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:980,duration:.024,wave:'triangle',volume:.0044,slide:-96,lpHz:5300},{freq:1468,duration:.016,wave:'sine',volume:.0027,slide:-56,lpHz:5900,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[880,1175],step:.044,wave:'triangle',volume:.0084,slide:26,lpHz:4500}),
+     wait:Object.freeze({seq:[784,1047],step:.044,wave:'triangle',volume:.0084,slide:24,lpHz:4400}),
+     stage:Object.freeze({seq:[880,1318],step:.042,wave:'triangle',volume:.009,slide:28,lpHz:4700})
+    })
+   }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:247,duration:.12,wave:'triangle',volume:.02,slide:-230,lpHz:2400},{freq:185,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1900,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
    gameOver:Object.freeze({seq:[330,262,220,175],step:.11,wave:'triangle',volume:.016,slide:-60,lpHz:2200,tones:Object.freeze([{freq:139,duration:.34,wave:'sawtooth',volume:.014,slide:-100,lpHz:1750,delay:.024}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1000,delay:.1}])})
   })
  }),
  'aurora-crown':Object.freeze({
-  id:'aurora-crown',
+ id:'aurora-crown',
   label:'Aurora Crown',
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[587,784,1047],step:.06,wave:'triangle',volume:.02,slide:56,lpHz:3900,tones:Object.freeze([{freq:1568,duration:.16,wave:'sine',volume:.008,slide:24,lpHz:4600,delay:.06}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1160,duration:.028,wave:'triangle',volume:.0066,slide:-590,lpHz:5900},{freq:1720,duration:.017,wave:'sine',volume:.0033,slide:-250,lpHz:6400,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.078,wave:'triangle',volume:.0088,slide:-120,lpHz:2900},{freq:250,duration:.054,wave:'sine',volume:.0039,slide:-74,lpHz:2500,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:234,duration:.055,wave:'triangle',volume:.0128,slide:-165,lpHz:3100},{freq:156,duration:.105,wave:'sawtooth',volume:.0128,slide:-188,lpHz:2250,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1580,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.064,wave:'triangle',volume:.0148,slide:-114,lpHz:3500},{freq:220,duration:.128,wave:'sine',volume:.0096,slide:-76,lpHz:2680,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1860,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.03,wave:'triangle',volume:.009,slide:-300,lpHz:4100},{freq:356,duration:.05,wave:'triangle',volume:.0055,slide:-176,lpHz:3300,delay:.014},{freq:240,duration:.086,wave:'sine',volume:.0054,slide:-64,lpHz:2060,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:432,duration:.03,wave:'triangle',volume:.0108,slide:-278,lpHz:4300},{freq:290,duration:.054,wave:'triangle',volume:.0074,slide:-178,lpHz:3500,delay:.014},{freq:196,duration:.114,wave:'sine',volume:.0084,slide:-74,lpHz:2260,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1340,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:126,duration:.34,wave:'sawtooth',volume:.0168,slide:56,detune:.014,lpHz:2850},{freq:188,duration:.28,wave:'sine',volume:.0076,slide:34,detune:.01,lpHz:2380,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1840,delay:.03}])}),
    stagePulse:Object.freeze({
     variants:Object.freeze([
      Object.freeze({tones:Object.freeze([{freq:440,duration:.06,wave:'triangle',volume:.01,slide:24,lpHz:3000},{freq:698,duration:.05,wave:'sine',volume:.0045,slide:22,lpHz:3800,delay:.018},{freq:1047,duration:.04,wave:'triangle',volume:.0035,slide:16,lpHz:4900,delay:.036}])}),
@@ -6282,6 +6483,44 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    extendAward:Object.freeze({seq:[988,1318,1760],step:.055,wave:'triangle',volume:.015,slide:52,lpHz:5000,tones:Object.freeze([{freq:2349,duration:.1,wave:'sine',volume:.007,slide:14,lpHz:5800,delay:.08}])}),
    rescueJoin:Object.freeze({seq:[784,988,1318,1760],step:.05,wave:'triangle',volume:.014,slide:46,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.006,slide:18,lpHz:5400,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[392,466,587,698],step:.058,wave:'triangle',volume:.012,slide:16,lpHz:2800,tones:Object.freeze([{freq:932,duration:.18,wave:'sawtooth',volume:.005,slide:-65,lpHz:3400,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[784,1047,1397],step:.07,wave:'triangle',volume:.012,slide:30,lpHz:4200,tones:Object.freeze([{freq:1865,duration:.09,wave:'sine',volume:.0049,slide:18,lpHz:4900,delay:.12}]),allowIdle:1}),
+     demo:Object.freeze({seq:[587,784,1047],step:.076,wave:'triangle',volume:.0108,slide:24,lpHz:3700,tones:Object.freeze([{freq:1397,duration:.085,wave:'sine',volume:.0045,slide:14,lpHz:4300,delay:.11}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:440,duration:.06,wave:'sine',volume:.0062,slide:10,lpHz:2500},{freq:740,duration:.042,wave:'triangle',volume:.0033,slide:15,lpHz:3500,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:494,duration:.06,wave:'sine',volume:.0062,slide:10,lpHz:2500},{freq:784,duration:.042,wave:'triangle',volume:.0033,slide:15,lpHz:3500,delay:.022}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.062,wave:'sine',volume:.0058,slide:9,lpHz:2400},{freq:659,duration:.04,wave:'triangle',volume:.0031,slide:13,lpHz:3300,delay:.022}])}),
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.062,wave:'sine',volume:.0058,slide:9,lpHz:2400},{freq:587,duration:.04,wave:'triangle',volume:.0031,slide:13,lpHz:3300,delay:.022}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:980,duration:.024,wave:'triangle',volume:.0041,slide:-88,lpHz:5100},{freq:1397,duration:.016,wave:'sine',volume:.0025,slide:-52,lpHz:5800,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:880,duration:.026,wave:'triangle',volume:.0041,slide:-80,lpHz:4900},{freq:1245,duration:.016,wave:'sine',volume:.0024,slide:-46,lpHz:5600,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:1047,duration:.024,wave:'triangle',volume:.0045,slide:-98,lpHz:5500},{freq:1568,duration:.016,wave:'sine',volume:.0028,slide:-58,lpHz:6100,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[988,1318],step:.044,wave:'triangle',volume:.0086,slide:26,lpHz:4700}),
+     wait:Object.freeze({seq:[880,1175],step:.044,wave:'triangle',volume:.0086,slide:24,lpHz:4600}),
+     stage:Object.freeze({seq:[988,1480],step:.042,wave:'triangle',volume:.0092,slide:28,lpHz:4900})
+    })
+   }),
    playerHit:Object.freeze({tones:Object.freeze([{freq:262,duration:.12,wave:'triangle',volume:.02,slide:-220,lpHz:2500},{freq:196,duration:.22,wave:'sawtooth',volume:.018,slide:-235,lpHz:1950,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
    gameOver:Object.freeze({seq:[349,294,247,196],step:.11,wave:'triangle',volume:.016,slide:-58,lpHz:2300,tones:Object.freeze([{freq:156,duration:.34,wave:'sawtooth',volume:.014,slide:-96,lpHz:1820,delay:.024}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1000,delay:.1}])})
   })
@@ -6601,8 +6840,8 @@ function currentGamePackResolvedAtmosphere(opts={}){
  );
  const atmosphereThemeId=String(
   opts.atmosphereTheme
-  || (opts.frontDoor?pack.frontDoor?.atmosphereTheme:'')
-  || opts.stagePresentation?.atmosphereTheme
+  || ((phase==='frontDoor'||phase==='wait')?pack.frontDoor?.atmosphereTheme:'')
+  || ((phase==='demo'||phase==='stage'||phase==='challenge')?opts.stagePresentation?.atmosphereTheme:'')
   || pack.frontDoor?.atmosphereTheme
   || 'classic-arcade'
  );
@@ -6626,10 +6865,23 @@ function currentGamePackAudioTheme(id=''){
 
 function currentGamePackAudioCue(cueName,opts={}){
  const atmosphere=currentGamePackResolvedAtmosphere(opts);
+ const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const theme=currentGamePackAudioTheme(atmosphere.audioTheme);
  const fallback=currentGamePackAudioTheme('classic-arcade');
- return (theme?.cues&&theme.cues[cueName])
-  || (fallback?.cues&&fallback.cues[cueName])
+ const resolveCue=(sourceTheme)=>{
+  const base=sourceTheme?.cues?.[cueName];
+  if(!base)return null;
+  if(base.byPhase){
+   return base.byPhase[phase]
+    || base.byPhase.stage
+    || base.byPhase.demo
+    || base.byPhase.wait
+    || null;
+  }
+  return base;
+ };
+ return resolveCue(theme)
+  || resolveCue(fallback)
   || null;
 }
 
@@ -8594,6 +8846,15 @@ window.__galagaHarness__={
    empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
    cells
   };
+ },
+ audioHistory(limit=12){
+  const history=(window.__platinumAudioDebug||window.__auroraAudioDebug)?.history||[];
+  return history.slice(Math.max(0,history.length-Math.max(1,+limit||12)));
+ },
+ triggerAudioCue(name,opts={}){
+  if(!name)return null;
+  if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  return (window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null;
  },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
