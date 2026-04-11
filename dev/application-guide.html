@@ -504,7 +504,7 @@
           </div>
           <h1>Aurora Application Guide</h1>
           <p>A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing presentation controls that shape the live game presentation.</p>
-          <div class="goal"><strong>Guide focus:</strong> Keep Aurora&#39;s atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and treat the current `galaga-original-reference` runtime option as a synthetic approximation rather than true asset playback.</div>
+          <div class="goal"><strong>Guide focus:</strong> Keep Aurora&#39;s atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and distinguish clearly between Aurora&#39;s own synthetic mix, the Galaga-style synthetic approximation, and the new runtime reference-audio mode that plays actual extracted Galaga clips.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
@@ -530,7 +530,7 @@
             <a class="button" href="player-guide.html">Open player guide</a>
           </div>
         <div class="previewNote">
-            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora and Galaga-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora, Galaga synth, and Galaga reference-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
           </div>
           <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
         </section>
@@ -918,7 +918,8 @@
           </div>
           <div class="buttonRow" style="margin-bottom:16px;">
             <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>
-            <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Set</button>
+            <button class="audioAction" type="button" data-compare-set="galaga">Play Galaga Synth Set</button>
+            <button class="audioAction" type="button" data-compare-set="galaga-assets">Play Runtime Ref Set</button>
             <button class="audioAction" type="button" data-compare-set="reference">Play Reference Set</button>
             <button class="audioAction" type="button" data-compare-set="ab">Compare Full Set</button>
             <button class="audioAction" type="button" data-compare-set="triple">Compare All Three</button>
@@ -944,7 +945,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="triple">Compare All Three</button>
@@ -964,7 +966,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="triple">Compare All Three</button>
@@ -984,7 +987,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="triple">Compare All Three</button>
@@ -1004,7 +1008,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="triple">Compare All Three</button>
@@ -1024,7 +1029,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="triple">Compare All Three</button>
@@ -1044,7 +1050,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="triple">Compare All Three</button>
@@ -1064,7 +1071,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="triple">Compare All Three</button>
@@ -1084,7 +1092,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="triple">Compare All Three</button>
@@ -1104,7 +1113,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="triple">Compare All Three</button>
@@ -1124,7 +1134,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="triple">Compare All Three</button>
@@ -1144,7 +1155,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="triple">Compare All Three</button>
@@ -1164,7 +1176,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="triple">Compare All Three</button>
@@ -1184,7 +1197,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="triple">Compare All Three</button>
@@ -1204,7 +1218,8 @@
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="galaga">Play Galaga Synth</button>
+          <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="galaga-assets">Play Runtime Ref</button>
           <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="reference">Play Reference</button>
           <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="triple">Compare All Three</button>
@@ -1589,8 +1604,8 @@
                 
     <tr>
       <td><strong>Audio Theme</strong></td>
-      <td>auto, aurora-application, galaga-original-reference</td>
-      <td>Developer override for phase-resolved audio routing. `aurora-application` uses Aurora&#39;s current synthetic application mix. `galaga-original-reference` currently uses a separate synthetic classic-leaning cue family for gameplay/challenge/results; it does not yet play actual extracted Galaga assets in the live game.</td>
+      <td>auto, aurora-application, galaga-original-reference, galaga-reference-assets</td>
+      <td>Developer override for phase-resolved audio routing. `aurora-application` uses Aurora&#39;s current synthetic application mix. `galaga-original-reference` uses the synthetic classic-leaning approximation. `galaga-reference-assets` plays the extracted Galaga reference clips for the mapped gameplay/challenge/results moments.</td>
     </tr>
   
 
@@ -1722,6 +1737,7 @@
         function payloadForTheme(entry, themeKey){
           const payload = Object.assign({}, entry.preview || {});
           if(themeKey === 'galaga') payload.audioTheme = 'galaga-original-reference';
+          if(themeKey === 'galaga-assets') payload.audioTheme = 'galaga-reference-assets';
           return payload;
         }
         function playEntry(entry, themeKey){
@@ -1808,7 +1824,7 @@
                 ? 'Playing full labeled reference clip set.'
                 : mode === 'triple'
                   ? 'Playing Aurora, Galaga, and labeled reference clips for the full set.'
-                  : 'Playing ' + (mode === 'aurora' ? 'Aurora' : 'Galaga') + ' comparison set.'
+                  : 'Playing ' + (mode === 'aurora' ? 'Aurora' : mode === 'galaga-assets' ? 'Galaga runtime reference' : 'Galaga synth') + ' comparison set.'
           );
         }
         function markReady(){
