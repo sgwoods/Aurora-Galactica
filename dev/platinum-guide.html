@@ -962,9 +962,12 @@
 <h4>Profile D: Release / pipeline change</h4>
 <p>Use this when the change affects build, publish, release metadata, hosted docs, or lane verification rather than gameplay or shell behavior directly.</p>
 <p>Examples:</p>
-<ul><li>publish tooling</li><li>production metadata rewrite</li><li>asset copy policy</li><li>documentation gate enforcement</li></ul>
+<ul><li>publish tooling</li><li>production metadata rewrite</li><li>asset copy policy</li><li>documentation gate enforcement</li><li>runtime-loaded media under <code>assets/</code></li><li>top-level public project page sync freshness</li></ul>
 <p>Required:</p>
 <ul><li>publish preflight</li><li>live lane verification</li><li>asset and metadata validation</li><li>docs presence checks where relevant</li></ul>
+<p>For this profile, asset validation should include runtime-loaded files, not just shell-visible images. If a lane uses files under <code>assets/</code> at runtime, publish and verify should treat those files as part of the release contract.</p>
+<p>For production, the release contract also includes the top-level <code>sgwoods/public</code> Aurora project page. A production release is not complete if the public page still shows stale release/build/focus content after the publish and sync steps.</p>
+<p>If public sync must be rerun after production is already live, it should run from current clean <code>main</code> and a current tokenized public template, while also proving that local <code>dist/production</code> still matches the live production lane exactly. That keeps the public page current without silently inventing a new &quot;production&quot; build that has not actually been released.</p>
 <p>This profile should not automatically pull in deep gameplay suites unless the change also affects gameplay delivery.</p>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
@@ -980,7 +983,8 @@
 <p>Before promoting a candidate from hosted <code>/dev</code> to hosted <code>/beta</code>, we should have:</p>
 <ul><li>a clean local <code>check-publish-ready --lane dev</code></li><li>hosted <code>/dev</code> publish success</li><li>hosted <code>/dev</code> label verification</li><li>a short hosted <code>/dev</code> review for visual and feel checks</li></ul>
 <p>Hosted <code>/dev</code> is the preferred place to catch:</p>
-<ul><li>local-versus-hosted differences</li><li>platform/application boundary drift</li><li>shell or copy regressions that are awkward to judge from local-only runs</li></ul>
+<ul><li>local-versus-hosted differences</li><li>platform/application boundary drift</li><li>shell or copy regressions that are awkward to judge from local-only runs</li><li>missing runtime-loaded assets that do not show up until the hosted lane is</li></ul>
+<p>exercised</p>
 <h4>Hosted <code>/beta</code></h4>
 <p>Hosted <code>/beta</code> is the real production gate.</p>
 <p>Before moving hosted <code>/beta</code> to hosted <code>/production</code>, we expect:</p>
