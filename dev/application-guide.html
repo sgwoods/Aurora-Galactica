@@ -504,7 +504,7 @@
           </div>
           <h1>Aurora Application Guide</h1>
           <p>A generated application reference for Aurora Galactica: audio cues by context, visual atmosphere themes, and the developer-facing presentation controls that shape the live game presentation.</p>
-          <div class="goal"><strong>Guide focus:</strong> Keep Aurora&#39;s atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, and treat the original Galaga labeled-sound catalog as a gameplay-phase reference theme family (`galaga-original-reference`) for future selectable audio work.</div>
+          <div class="goal"><strong>Guide focus:</strong> Keep Aurora&#39;s atmosphere, sound, and presentation coherent as one application-owned system while preserving a clean boundary with Platinum, use the Galaga cue matrix to map real reference clips against Aurora states, and treat the current `galaga-original-reference` runtime option as a synthetic approximation rather than true asset playback.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
@@ -529,8 +529,8 @@
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
           </div>
-          <div class="previewNote">
-            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora cues through the real in-game audio engine instead of a separate mock player. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
+        <div class="previewNote">
+            Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora and Galaga-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
           </div>
           <div id="audioPreviewStatus" class="audioStatus" aria-live="polite">Preview frame loading. Audio buttons will use the current lane build as soon as it is ready.</div>
         </section>
@@ -914,7 +914,7 @@
         <section class="section" id="theme-comparison">
           <div class="sectionHeader">
             <h2>Theme Comparison</h2>
-            <p>Compare the same gameplay moments side by side. Aurora uses the application-owned mix, while Galaga uses the dedicated reference family for the same cue and phase.</p>
+            <p>Compare the same gameplay moments side by side. Aurora uses the application-owned mix, Galaga uses the current synthetic classic-leaning runtime family for the same cue and phase, and Reference plays the actual extracted Galaga clip we currently treat as the best mapping target.</p>
           </div>
           <div class="buttonRow" style="margin-bottom:16px;">
             <button class="audioAction" type="button" data-compare-set="aurora">Play Aurora Set</button>
@@ -936,7 +936,11 @@
                 
     <tr>
       <td><strong>Demo Pulse</strong></td>
-      <td>Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.</td>
+      <td>
+        <div>Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Synthetic Galaga runtime cue vs actual indexed reference clip.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="aurora">Play Aurora</button>
@@ -945,78 +949,158 @@
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="demo-pulse" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Opening Theme</div>
+        <div class="docMeta">Ambience / Convoy</div>
       </td>
     </tr>
   
 
     <tr>
       <td><strong>Stage Start</strong></td>
-      <td>Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.</td>
+      <td>
+        <div>Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Best current stage-start mapping from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+      </td>
       <td>
         <div class="buttonRow">
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-aurora" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-aurora" data-theme-play="galaga">Play Galaga</button>
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-aurora" data-theme-play="reference">Play Reference</button>
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-aurora" data-theme-play="ab">Compare A/B</button>
-          <button class="audioAction" type="button" data-compare-entry-id="stage-start-aurora" data-theme-play="triple">Compare All Three</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Level Flag V1</div>
+        <div class="docMeta">Start</div>
       </td>
     </tr>
   
 
     <tr>
       <td><strong>Formation Pulse</strong></td>
-      <td>Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.</td>
+      <td>
+        <div>Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Strongest current reference for the board cadence bed.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
       <td>
         <div class="buttonRow">
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-aurora" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-aurora" data-theme-play="galaga">Play Galaga</button>
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-aurora" data-theme-play="reference">Play Reference</button>
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-aurora" data-theme-play="ab">Compare A/B</button>
-          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-aurora" data-theme-play="triple">Compare All Three</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="formation-pulse-classic" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Sample Gameplay</div>
+        <div class="docMeta">Ambience / Convoy</div>
       </td>
     </tr>
   
 
     <tr>
-      <td><strong>Player Shot</strong></td>
-      <td>Compare shot energy and how clearly the player weapon reads in the mix.</td>
+      <td><strong>Capture Beam</strong></td>
+      <td>
+        <div>Compare whether the beam deploy moment reads clearly as tractor-beam danger.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Strong direct mapping.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
       <td>
         <div class="buttonRow">
-          <button class="audioAction" type="button" data-compare-entry-id="player-shot-aurora" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="player-shot-aurora" data-theme-play="galaga">Play Galaga</button>
-          <button class="audioAction" type="button" data-compare-entry-id="player-shot-aurora" data-theme-play="reference">Play Reference</button>
-          <button class="audioAction" type="button" data-compare-entry-id="player-shot-aurora" data-theme-play="ab">Compare A/B</button>
-          <button class="audioAction" type="button" data-compare-entry-id="player-shot-aurora" data-theme-play="triple">Compare All Three</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-beam" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Sample Gameplay</div>
+        <div class="docMeta">Tractor Beam</div>
       </td>
     </tr>
   
 
     <tr>
-      <td><strong>Enemy Shot</strong></td>
-      <td>Compare threat clarity and whether the enemy projectile cue has enough arcade bite.</td>
+      <td><strong>Fighter Captured</strong></td>
+      <td>
+        <div>Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
       <td>
         <div class="buttonRow">
-          <button class="audioAction" type="button" data-compare-entry-id="enemy-shot-aurora" data-theme-play="aurora">Play Aurora</button>
-          <button class="audioAction" type="button" data-compare-entry-id="enemy-shot-aurora" data-theme-play="galaga">Play Galaga</button>
-          <button class="audioAction" type="button" data-compare-entry-id="enemy-shot-aurora" data-theme-play="reference">Play Reference</button>
-          <button class="audioAction" type="button" data-compare-entry-id="enemy-shot-aurora" data-theme-play="ab">Compare A/B</button>
-          <button class="audioAction" type="button" data-compare-entry-id="enemy-shot-aurora" data-theme-play="triple">Compare All Three</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="capture-success" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Sample Gameplay</div>
+        <div class="docMeta">Fighter Captured</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Captured Fighter Destroyed</strong></td>
+      <td>
+        <div>Compare the regret/penalty moment when the carried fighter is destroyed.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="captured-fighter-destroyed" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Captured Fighter Destroyed</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Rescue Join</strong></td>
+      <td>
+        <div>Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Strong direct mapping.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="rescue-join" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Fighter Rescued (Double Ship)</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Ship Loss</strong></td>
+      <td>
+        <div>Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Strong direct mapping.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="player-hit" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Death</div>
       </td>
     </tr>
   
 
     <tr>
       <td><strong>Challenge Transition</strong></td>
-      <td>Compare how ceremonial and distinct the bonus-stage announcement feels.</td>
+      <td>
+        <div>Compare how distinct and ceremonial the challenge-stage announcement feels.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Strong direct mapping.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="aurora">Play Aurora</button>
@@ -1025,14 +1109,98 @@
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="ab">Compare A/B</button>
           <button class="audioAction" type="button" data-compare-entry-id="challenge-transition" data-theme-play="triple">Compare All Three</button>
         </div>
-        <div class="docMeta">Bonus Stage Results</div>
+        <div class="docMeta">Challenging Stage</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge Results</strong></td>
+      <td>
+        <div>Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-results" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Challenging Stage Results</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge Perfect</strong></td>
+      <td>
+        <div>Compare whether a perfect challenge result feels more celebratory than the standard results cue.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="challenge-perfect" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Challenging Stage Perfect</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>High Score 1st</strong></td>
+      <td>
+        <div>Compare whether first place entry feels distinct and more important than a lower board placement.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-first" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Name Entry (1st)</div>
+      </td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>High Score 2nd-10th</strong></td>
+      <td>
+        <div>Compare whether non-first leaderboard entry feels positive but smaller than first place.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> New Aurora cue slot added from the cue matrix.</div>
+        <div class="docMeta"><strong>Confidence:</strong> high</div>
+      </td>
+      <td>
+        <div class="buttonRow">
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="aurora">Play Aurora</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="galaga">Play Galaga</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="reference">Play Reference</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="ab">Compare A/B</button>
+          <button class="audioAction" type="button" data-compare-entry-id="high-score-other" data-theme-play="triple">Compare All Three</button>
+        </div>
+        <div class="docMeta">Name Entry (2nd-5th)</div>
       </td>
     </tr>
   
 
     <tr>
       <td><strong>Game Over</strong></td>
-      <td>Compare whether the ending cue feels final, readable, and emotionally complete.</td>
+      <td>
+        <div>Compare whether the ending cue feels final and emotionally complete enough.</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Best current end-state reference; still broader than Aurora&#39;s single slot.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+      </td>
       <td>
         <div class="buttonRow">
           <button class="audioAction" type="button" data-compare-entry-id="game-over" data-theme-play="aurora">Play Aurora</button>
@@ -1422,7 +1590,7 @@
     <tr>
       <td><strong>Audio Theme</strong></td>
       <td>auto, aurora-application, galaga-original-reference</td>
-      <td>Developer override for phase-resolved audio routing. The Galaga reference option keeps Aurora shell identity in front-door and wait surfaces while pushing gameplay, challenge, and results toward the classic-reference audio family.</td>
+      <td>Developer override for phase-resolved audio routing. `aurora-application` uses Aurora&#39;s current synthetic application mix. `galaga-original-reference` currently uses a separate synthetic classic-leaning cue family for gameplay/challenge/results; it does not yet play actual extracted Galaga assets in the live game.</td>
     </tr>
   
 
@@ -1481,6 +1649,12 @@
       <p>Catalog of visual, motion, and audio references used for Aurora tuning, including stage-play stills and the labeled Galaga sound reference video.</p>
     </article>
   
+
+    <article class="linkCard">
+      <h3><a href="https://github.com/sgwoods/Codex-Test1/blob/main/reference-artifacts/analyses/galaga-audio-cue-matrix/README.md">Galaga Audio Cue Matrix</a></h3>
+      <p>Canonical mapping from Aurora cue slots to the strongest current Galaga reference clips, including missing game-owned slots.</p>
+    </article>
+  
           </div>
         </section>
       </div>
@@ -1520,7 +1694,7 @@
       </aside>
     </main>
     <iframe id="audioPreviewFrame" class="previewFrame" title="Aurora audio preview frame" src="index.html?docsPreview=1"></iframe>
-    <script id="applicationGuideData" type="application/json">{"audioContexts":[{"id":"front-door-tick","context":"Front Door","label":"Navigation Tick","cue":"uiTick","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Light Aurora shell tick, not gameplay urgency.","description":"Subtle front-door navigation tick for Aurora-owned shell identity surfaces.","preview":{"cue":"uiTick","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"front-door-confirm","context":"Front Door","label":"Confirm","cue":"uiConfirm","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Short confirm flourish with a polished shell feel.","description":"Confirmation cue for front-door and shell-level Aurora selections.","preview":{"cue":"uiConfirm","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"wait-enter","context":"Wait Mode","label":"Score Rotation Enter","cue":"attractEnter","phase":"wait","audioTheme":"aurora-crown","listenFor":"A small rising motif that feels like the board is waking up.","description":"Entry sting when Aurora transitions into the score-focused wait-mode surface.","preview":{"cue":"attractEnter","phase":"wait","atmosphereTheme":"aurora-crown"}},{"id":"wait-pulse","context":"Wait Mode","label":"Score Rotation Pulse","cue":"attractPulse","phase":"wait","audioTheme":"aurora-crown","listenFor":"Gentle repeating pulse that stays ambient rather than mechanical.","description":"Recurring pulse that keeps the score rotation alive without sounding like gameplay.","preview":{"cue":"attractPulse","phase":"wait","atmosphereTheme":"aurora-crown","variant":0}},{"id":"demo-enter","context":"Demo","label":"Demo Entry","cue":"attractEnter","phase":"demo","audioTheme":"aurora-crown","listenFor":"Aurora identity at the handoff from shell to autoplay.","description":"Bridge from the Aurora shell identity into autoplay demo mode.","preview":{"cue":"attractEnter","phase":"demo","atmosphereTheme":"aurora-crown"}},{"id":"demo-pulse","context":"Demo","label":"Demo Pulse","cue":"attractPulse","phase":"demo","audioTheme":"classic-arcade","listenFor":"Classic arcade cadence once motion on the board begins.","description":"Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.","preview":{"cue":"attractPulse","phase":"demo","atmosphereTheme":"classic-arcade","variant":0}},{"id":"stage-start-classic","context":"Stage Start","label":"Stage 1 Start","cue":"gameStart","phase":"stage","audioTheme":"classic-arcade","listenFor":"A crisp arcade rise that feels close to classic stage-start energy.","description":"Opening cue for classic early-stage Aurora presentation.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"stage-start-aurora","context":"Stage Start","label":"Aurora Surge Start","cue":"gameStart","phase":"stage","audioTheme":"aurora-surge","listenFor":"A brighter upward flourish that feels more expansive than the classic set.","description":"Opening cue for the later Aurora surge/borealis stage family.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-pulse-classic","context":"Gameplay Loop","label":"Formation Pulse Classic","cue":"stagePulse","phase":"stage","audioTheme":"classic-arcade","listenFor":"Clear march-like pulse that supports classic board pressure.","description":"Formation march/pulse for classic early-stage cadence.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"classic-arcade","variant":0}},{"id":"formation-pulse-aurora","context":"Gameplay Loop","label":"Formation Pulse Aurora","cue":"stagePulse","phase":"stage","audioTheme":"aurora-surge","listenFor":"A more glassy pulse that still reads as rhythm, not ambience.","description":"Formation pulse for the Aurora-themed later-stage family.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"aurora-borealis","variant":0}},{"id":"player-shot-classic","context":"Combat","label":"Player Shot Classic","cue":"playerShot","phase":"stage","audioTheme":"classic-arcade","description":"Early-stage player shot reference aligned to the classic arcade mix.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"player-shot-aurora","context":"Combat","label":"Player Shot Aurora","cue":"playerShot","phase":"stage","audioTheme":"aurora-surge","description":"Later-stage Aurora shot variant with a slightly sleeker synth edge.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-shot-classic","context":"Combat","label":"Enemy Shot Classic","cue":"enemyShot","phase":"stage","audioTheme":"classic-arcade","description":"Enemy projectile cue for classic stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"enemy-shot-aurora","context":"Combat","label":"Enemy Shot Aurora","cue":"enemyShot","phase":"stage","audioTheme":"aurora-surge","description":"Enemy projectile cue for Aurora-leaning later stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-hit-aurora","context":"Combat","label":"Enemy Hit","cue":"enemyHit","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy hit cue used across Aurora combat.","preview":{"cue":"enemyHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-hit-aurora","context":"Combat","label":"Boss Hit","cue":"bossHit","phase":"stage","audioTheme":"aurora-surge","description":"Heavier impact cue for boss and stronger target hits.","preview":{"cue":"bossHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-boom-aurora","context":"Combat","label":"Enemy Boom","cue":"enemyBoom","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy destruction cue.","preview":{"cue":"enemyBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-boom-aurora","context":"Combat","label":"Boss Boom","cue":"bossBoom","phase":"stage","audioTheme":"aurora-surge","description":"Larger destruction cue for boss enemies and rogue fighter losses.","preview":{"cue":"bossBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-beam","context":"Capture / Rescue","label":"Capture Beam","cue":"captureBeam","phase":"stage","audioTheme":"aurora-surge","description":"Beam/deploy cue for the capture sequence.","preview":{"cue":"captureBeam","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-retreat","context":"Capture / Rescue","label":"Capture Retreat","cue":"captureRetreat","phase":"stage","audioTheme":"aurora-surge","description":"Recovery cue when the capture sequence resolves and retreats.","preview":{"cue":"captureRetreat","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-success","context":"Capture / Rescue","label":"Fighter Captured","cue":"captureSuccess","phase":"stage","audioTheme":"aurora-surge","listenFor":"A clear loss-state handoff before the boss retreats with the captured ship.","description":"Distinct cue for the exact moment the player's fighter is fully captured.","preview":{"cue":"captureSuccess","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"captured-fighter-destroyed","context":"Capture / Rescue","label":"Captured Fighter Destroyed","cue":"capturedFighterDestroyed","phase":"stage","audioTheme":"aurora-surge","listenFor":"A sharp, regrettable destruction cue distinct from ordinary enemy hits.","description":"Cue used when the carried/captured fighter itself is destroyed for points.","preview":{"cue":"capturedFighterDestroyed","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"rescue-join","context":"Capture / Rescue","label":"Rescue Join","cue":"rescueJoin","phase":"stage","audioTheme":"aurora-surge","description":"Join cue for dual-fighter reunification and rescue success.","preview":{"cue":"rescueJoin","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"extend-award","context":"Scoring","label":"Bonus Ship Award","cue":"extendAward","phase":"stage","audioTheme":"aurora-surge","description":"Extra-ship award cue used when Aurora score extends trigger.","preview":{"cue":"extendAward","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"player-hit","context":"Player State","label":"Ship Loss","cue":"playerHit","phase":"stage","audioTheme":"aurora-surge","description":"Player ship destruction cue during live play.","preview":{"cue":"playerHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"stage-transition","context":"Transitions","label":"Stage Transition","cue":"stageTransition","phase":"stage","audioTheme":"aurora-surge","listenFor":"A short rising handoff with more melodic identity than a simple beep.","description":"Transition cue between standard stages.","preview":{"cue":"stageTransition","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"challenge-transition","context":"Transitions","label":"Challenge Transition","cue":"challengeTransition","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A distinct bonus-stage announcement with more lift and ceremony.","description":"Transition cue into challenge/bonus stage presentation.","preview":{"cue":"challengeTransition","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-results","context":"Challenge Results","label":"Challenge Results","cue":"challengeResults","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A clean wrap-up phrase that feels like challenge scoring has concluded.","description":"Result cue for challenge-stage completion when the run was not perfect.","preview":{"cue":"challengeResults","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-perfect","context":"Challenge Results","label":"Challenge Perfect","cue":"challengePerfect","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A more celebratory result than the standard challenge wrap-up.","description":"Distinct challenge-stage result cue for perfect clears.","preview":{"cue":"challengePerfect","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"game-over","context":"Results","label":"Game Over","cue":"gameOver","phase":"results","audioTheme":"aurora-surge","listenFor":"A readable downward ending phrase, not just an impact effect.","description":"End-of-run cue used by Aurora results/game-over flow.","preview":{"cue":"gameOver","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-first","context":"Results","label":"High Score 1st","cue":"highScoreFirst","phase":"results","audioTheme":"aurora-surge","listenFor":"A stronger celebratory placement cue for first place entry.","description":"Rank-specific scoreboard cue when a run enters first place.","preview":{"cue":"highScoreFirst","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-other","context":"Results","label":"High Score 2nd-10th","cue":"highScoreOther","phase":"results","audioTheme":"aurora-surge","listenFor":"A positive but smaller placement cue for non-first leaderboard entries.","description":"Rank-specific scoreboard cue when a run enters the board outside first place.","preview":{"cue":"highScoreOther","phase":"results","atmosphereTheme":"aurora-borealis"}}],"comparisonSets":[{"id":"demo-pulse-compare","label":"Demo Pulse","entryId":"demo-pulse","focus":"Compare how autoplay cadence and board motion feel under Aurora versus Galaga-reference audio.","referenceLabel":"Opening Theme","referenceClip":"assets/reference-audio/galaga-opening-theme.m4a"},{"id":"stage-start-compare","label":"Stage Start","entryId":"stage-start-aurora","focus":"Compare whether the opening announcement feels like an exciting arcade start or just a functional cue.","referenceLabel":"Level Flag V1","referenceClip":"assets/reference-audio/galaga-level-flag-v1.m4a"},{"id":"formation-pulse-compare","label":"Formation Pulse","entryId":"formation-pulse-aurora","focus":"Compare ongoing board pressure, march feel, and whether the cue feels musical enough during live play.","referenceLabel":"Sample Gameplay","referenceClip":"assets/reference-audio/galaga-sample-gameplay.m4a"},{"id":"player-shot-compare","label":"Player Shot","entryId":"player-shot-aurora","focus":"Compare shot energy and how clearly the player weapon reads in the mix.","referenceLabel":"Sample Gameplay","referenceClip":"assets/reference-audio/galaga-sample-gameplay.m4a"},{"id":"enemy-shot-compare","label":"Enemy Shot","entryId":"enemy-shot-aurora","focus":"Compare threat clarity and whether the enemy projectile cue has enough arcade bite.","referenceLabel":"Sample Gameplay","referenceClip":"assets/reference-audio/galaga-sample-gameplay.m4a"},{"id":"challenge-transition-compare","label":"Challenge Transition","entryId":"challenge-transition","focus":"Compare how ceremonial and distinct the bonus-stage announcement feels.","referenceLabel":"Bonus Stage Results","referenceClip":"assets/reference-audio/galaga-bonus-stage-results.m4a"},{"id":"game-over-compare","label":"Game Over","entryId":"game-over","focus":"Compare whether the ending cue feels final, readable, and emotionally complete.","referenceLabel":"Last Ship Destroyed Ambience","referenceClip":"assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a"}]}</script>
+    <script id="applicationGuideData" type="application/json">{"audioContexts":[{"id":"front-door-tick","context":"Front Door","label":"Navigation Tick","cue":"uiTick","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Light Aurora shell tick, not gameplay urgency.","description":"Subtle front-door navigation tick for Aurora-owned shell identity surfaces.","preview":{"cue":"uiTick","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"front-door-confirm","context":"Front Door","label":"Confirm","cue":"uiConfirm","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Short confirm flourish with a polished shell feel.","description":"Confirmation cue for front-door and shell-level Aurora selections.","preview":{"cue":"uiConfirm","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"wait-enter","context":"Wait Mode","label":"Score Rotation Enter","cue":"attractEnter","phase":"wait","audioTheme":"aurora-crown","listenFor":"A small rising motif that feels like the board is waking up.","description":"Entry sting when Aurora transitions into the score-focused wait-mode surface.","preview":{"cue":"attractEnter","phase":"wait","atmosphereTheme":"aurora-crown"}},{"id":"wait-pulse","context":"Wait Mode","label":"Score Rotation Pulse","cue":"attractPulse","phase":"wait","audioTheme":"aurora-crown","listenFor":"Gentle repeating pulse that stays ambient rather than mechanical.","description":"Recurring pulse that keeps the score rotation alive without sounding like gameplay.","preview":{"cue":"attractPulse","phase":"wait","atmosphereTheme":"aurora-crown","variant":0}},{"id":"demo-enter","context":"Demo","label":"Demo Entry","cue":"attractEnter","phase":"demo","audioTheme":"aurora-crown","listenFor":"Aurora identity at the handoff from shell to autoplay.","description":"Bridge from the Aurora shell identity into autoplay demo mode.","preview":{"cue":"attractEnter","phase":"demo","atmosphereTheme":"aurora-crown"}},{"id":"demo-pulse","context":"Demo","label":"Demo Pulse","cue":"attractPulse","phase":"demo","audioTheme":"classic-arcade","listenFor":"Classic arcade cadence once motion on the board begins.","description":"Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.","preview":{"cue":"attractPulse","phase":"demo","atmosphereTheme":"classic-arcade","variant":0}},{"id":"stage-start-classic","context":"Stage Start","label":"Stage 1 Start","cue":"gameStart","phase":"stage","audioTheme":"classic-arcade","listenFor":"A crisp arcade rise that feels close to classic stage-start energy.","description":"Opening cue for classic early-stage Aurora presentation.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"stage-start-aurora","context":"Stage Start","label":"Aurora Surge Start","cue":"gameStart","phase":"stage","audioTheme":"aurora-surge","listenFor":"A brighter upward flourish that feels more expansive than the classic set.","description":"Opening cue for the later Aurora surge/borealis stage family.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-pulse-classic","context":"Gameplay Loop","label":"Formation Pulse Classic","cue":"stagePulse","phase":"stage","audioTheme":"classic-arcade","listenFor":"Clear march-like pulse that supports classic board pressure.","description":"Formation march/pulse for classic early-stage cadence.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"classic-arcade","variant":0}},{"id":"formation-pulse-aurora","context":"Gameplay Loop","label":"Formation Pulse Aurora","cue":"stagePulse","phase":"stage","audioTheme":"aurora-surge","listenFor":"A more glassy pulse that still reads as rhythm, not ambience.","description":"Formation pulse for the Aurora-themed later-stage family.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"aurora-borealis","variant":0}},{"id":"player-shot-classic","context":"Combat","label":"Player Shot Classic","cue":"playerShot","phase":"stage","audioTheme":"classic-arcade","description":"Early-stage player shot reference aligned to the classic arcade mix.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"player-shot-aurora","context":"Combat","label":"Player Shot Aurora","cue":"playerShot","phase":"stage","audioTheme":"aurora-surge","description":"Later-stage Aurora shot variant with a slightly sleeker synth edge.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-shot-classic","context":"Combat","label":"Enemy Shot Classic","cue":"enemyShot","phase":"stage","audioTheme":"classic-arcade","description":"Enemy projectile cue for classic stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"enemy-shot-aurora","context":"Combat","label":"Enemy Shot Aurora","cue":"enemyShot","phase":"stage","audioTheme":"aurora-surge","description":"Enemy projectile cue for Aurora-leaning later stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-hit-aurora","context":"Combat","label":"Enemy Hit","cue":"enemyHit","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy hit cue used across Aurora combat.","preview":{"cue":"enemyHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-hit-aurora","context":"Combat","label":"Boss Hit","cue":"bossHit","phase":"stage","audioTheme":"aurora-surge","description":"Heavier impact cue for boss and stronger target hits.","preview":{"cue":"bossHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-boom-aurora","context":"Combat","label":"Enemy Boom","cue":"enemyBoom","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy destruction cue.","preview":{"cue":"enemyBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-boom-aurora","context":"Combat","label":"Boss Boom","cue":"bossBoom","phase":"stage","audioTheme":"aurora-surge","description":"Larger destruction cue for boss enemies and rogue fighter losses.","preview":{"cue":"bossBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-beam","context":"Capture / Rescue","label":"Capture Beam","cue":"captureBeam","phase":"stage","audioTheme":"aurora-surge","description":"Beam/deploy cue for the capture sequence.","preview":{"cue":"captureBeam","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-retreat","context":"Capture / Rescue","label":"Capture Retreat","cue":"captureRetreat","phase":"stage","audioTheme":"aurora-surge","description":"Recovery cue when the capture sequence resolves and retreats.","preview":{"cue":"captureRetreat","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-success","context":"Capture / Rescue","label":"Fighter Captured","cue":"captureSuccess","phase":"stage","audioTheme":"aurora-surge","listenFor":"A clear loss-state handoff before the boss retreats with the captured ship.","description":"Distinct cue for the exact moment the player's fighter is fully captured.","preview":{"cue":"captureSuccess","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"captured-fighter-destroyed","context":"Capture / Rescue","label":"Captured Fighter Destroyed","cue":"capturedFighterDestroyed","phase":"stage","audioTheme":"aurora-surge","listenFor":"A sharp, regrettable destruction cue distinct from ordinary enemy hits.","description":"Cue used when the carried/captured fighter itself is destroyed for points.","preview":{"cue":"capturedFighterDestroyed","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"rescue-join","context":"Capture / Rescue","label":"Rescue Join","cue":"rescueJoin","phase":"stage","audioTheme":"aurora-surge","description":"Join cue for dual-fighter reunification and rescue success.","preview":{"cue":"rescueJoin","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"extend-award","context":"Scoring","label":"Bonus Ship Award","cue":"extendAward","phase":"stage","audioTheme":"aurora-surge","description":"Extra-ship award cue used when Aurora score extends trigger.","preview":{"cue":"extendAward","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"player-hit","context":"Player State","label":"Ship Loss","cue":"playerHit","phase":"stage","audioTheme":"aurora-surge","description":"Player ship destruction cue during live play.","preview":{"cue":"playerHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"stage-transition","context":"Transitions","label":"Stage Transition","cue":"stageTransition","phase":"stage","audioTheme":"aurora-surge","listenFor":"A short rising handoff with more melodic identity than a simple beep.","description":"Transition cue between standard stages.","preview":{"cue":"stageTransition","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"challenge-transition","context":"Transitions","label":"Challenge Transition","cue":"challengeTransition","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A distinct bonus-stage announcement with more lift and ceremony.","description":"Transition cue into challenge/bonus stage presentation.","preview":{"cue":"challengeTransition","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-results","context":"Challenge Results","label":"Challenge Results","cue":"challengeResults","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A clean wrap-up phrase that feels like challenge scoring has concluded.","description":"Result cue for challenge-stage completion when the run was not perfect.","preview":{"cue":"challengeResults","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-perfect","context":"Challenge Results","label":"Challenge Perfect","cue":"challengePerfect","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A more celebratory result than the standard challenge wrap-up.","description":"Distinct challenge-stage result cue for perfect clears.","preview":{"cue":"challengePerfect","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"game-over","context":"Results","label":"Game Over","cue":"gameOver","phase":"results","audioTheme":"aurora-surge","listenFor":"A readable downward ending phrase, not just an impact effect.","description":"End-of-run cue used by Aurora results/game-over flow.","preview":{"cue":"gameOver","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-first","context":"Results","label":"High Score 1st","cue":"highScoreFirst","phase":"results","audioTheme":"aurora-surge","listenFor":"A stronger celebratory placement cue for first place entry.","description":"Rank-specific scoreboard cue when a run enters first place.","preview":{"cue":"highScoreFirst","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-other","context":"Results","label":"High Score 2nd-10th","cue":"highScoreOther","phase":"results","audioTheme":"aurora-surge","listenFor":"A positive but smaller placement cue for non-first leaderboard entries.","description":"Rank-specific scoreboard cue when a run enters the board outside first place.","preview":{"cue":"highScoreOther","phase":"results","atmosphereTheme":"aurora-borealis"}}],"comparisonSets":[{"id":"demo-pulse-compare","label":"Demo Pulse","entryId":"demo-pulse","focus":"Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","mappingStatus":"Synthetic Galaga runtime cue vs actual indexed reference clip.","mappingConfidence":"high"},{"id":"stage-start-compare","label":"Stage Start","entryId":"stage-start-classic","focus":"Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.","referenceLabel":"Start","referenceClip":"assets/reference-audio/galaga3-start.m4a","mappingStatus":"Best current stage-start mapping from the cue matrix.","mappingConfidence":"medium"},{"id":"formation-pulse-compare","label":"Formation Pulse","entryId":"formation-pulse-classic","focus":"Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","mappingStatus":"Strongest current reference for the board cadence bed.","mappingConfidence":"high"},{"id":"capture-beam-compare","label":"Capture Beam","entryId":"capture-beam","focus":"Compare whether the beam deploy moment reads clearly as tractor-beam danger.","referenceLabel":"Tractor Beam","referenceClip":"assets/reference-audio/galaga3-tractor-beam.m4a","mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"capture-success-compare","label":"Fighter Captured","entryId":"capture-success","focus":"Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.","referenceLabel":"Fighter Captured","referenceClip":"assets/reference-audio/galaga3-fighter-captured.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"captured-fighter-destroyed-compare","label":"Captured Fighter Destroyed","entryId":"captured-fighter-destroyed","focus":"Compare the regret/penalty moment when the carried fighter is destroyed.","referenceLabel":"Captured Fighter Destroyed","referenceClip":"assets/reference-audio/galaga3-captured-fighter-destroyed.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"rescue-join-compare","label":"Rescue Join","entryId":"rescue-join","focus":"Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.","referenceLabel":"Fighter Rescued (Double Ship)","referenceClip":"assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a","mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"ship-loss-compare","label":"Ship Loss","entryId":"player-hit","focus":"Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.","referenceLabel":"Death","referenceClip":"assets/reference-audio/galaga3-death.m4a","mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-transition-compare","label":"Challenge Transition","entryId":"challenge-transition","focus":"Compare how distinct and ceremonial the challenge-stage announcement feels.","referenceLabel":"Challenging Stage","referenceClip":"assets/reference-audio/galaga3-challenging-stage.m4a","mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-results-compare","label":"Challenge Results","entryId":"challenge-results","focus":"Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.","referenceLabel":"Challenging Stage Results","referenceClip":"assets/reference-audio/galaga2-challenging-stage-results.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"challenge-perfect-compare","label":"Challenge Perfect","entryId":"challenge-perfect","focus":"Compare whether a perfect challenge result feels more celebratory than the standard results cue.","referenceLabel":"Challenging Stage Perfect","referenceClip":"assets/reference-audio/galaga2-challenging-stage-perfect.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-first-compare","label":"High Score 1st","entryId":"high-score-first","focus":"Compare whether first place entry feels distinct and more important than a lower board placement.","referenceLabel":"Name Entry (1st)","referenceClip":"assets/reference-audio/galaga3-name-entry-1st.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-other-compare","label":"High Score 2nd-10th","entryId":"high-score-other","focus":"Compare whether non-first leaderboard entry feels positive but smaller than first place.","referenceLabel":"Name Entry (2nd-5th)","referenceClip":"assets/reference-audio/galaga3-name-entry-2nd-5th.m4a","mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"game-over-compare","label":"Game Over","entryId":"game-over","focus":"Compare whether the ending cue feels final and emotionally complete enough.","referenceLabel":"Last Ship Destroyed Ambience","referenceClip":"assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a","mappingStatus":"Best current end-state reference; still broader than Aurora's single slot.","mappingConfidence":"medium"}]}</script>
     <script>
       (function(){
         const data = JSON.parse(document.getElementById('applicationGuideData').textContent || '{}');
