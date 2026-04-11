@@ -178,6 +178,9 @@ mask:
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
 #settingsChannel{color:rgba(126,242,255,.82);text-transform:uppercase}
+#settingsAudioDebug{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
+#settingsAudioDebugLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
+#settingsAudioDebugBody{font-size:10px;line-height:1.35;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotes{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
@@ -548,6 +551,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
+    <button id="playAudioTestBtn" type="button" aria-label="Play audio test cue">🎵 Play Audio Test</button>
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
   <div id="settingsSections">
@@ -624,8 +628,12 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 11 2026, 10:47 AM EDT</span>
-      <span id="settingsState">main@016a206 clean</span>
+      <span id="settingsRelease">Apr 11 2026, 11:28 AM EDT</span>
+      <span id="settingsState">main@e8931d4 clean</span>
+    </div>
+    <div id="settingsAudioDebug">
+      <span id="settingsAudioDebugLabel">Audio Test Status</span>
+      <span id="settingsAudioDebugBody">No audio test has been played in this session.</span>
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
@@ -894,7 +902,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 11 2026, 10:47 AM EDT</span>
+  <span id="buildStampRelease">Apr 11 2026, 11:28 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1100,7 +1108,7 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
 const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
@@ -1110,6 +1118,7 @@ const settingsChannel=document.getElementById('settingsChannel');
 const settingsVersion=document.getElementById('settingsVersion');
 const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
+const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
@@ -1475,7 +1484,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.410.sha.016a206',commit:'016a2063367499d8eb5cfbc15e78a7a6356ff6ca',branch:'main',dirty:false,released:'Apr 11 2026, 10:47 AM EDT',state:'main@016a206 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.411.sha.e8931d4',commit:'e8931d459ce7d10b532d3bf504fe56301586d0e0',branch:'main',dirty:false,released:'Apr 11 2026, 11:28 AM EDT',state:'main@e8931d4 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -2308,6 +2317,41 @@ function syncSettingsUi(){
  if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
+ syncAudioDebugUi();
+}
+function syncAudioDebugUi(){
+ if(!settingsAudioDebugBody)return;
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ const lastCue=debug?.lastCue;
+ const ref=debug?.reference;
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ const parts=[
+  `Theme: ${selection}`,
+  lastCue?.cue?`last cue ${lastCue.cue} (${lastCue.audioTheme||'no-theme'})`:'no cue yet'
+ ];
+ if(ref){
+  if(ref.lastRequested)parts.push(`requested ${ref.lastRequested.split('/').pop()}`);
+  if(ref.lastLoaded)parts.push(`loaded ${ref.lastLoaded.split('/').pop()}`);
+  if(ref.lastStarted)parts.push(`started ${ref.lastStarted.split('/').pop()}`);
+  if(ref.lastError)parts.push(`error ${ref.lastError}`);
+  if(Number.isFinite(+ref.activeCount))parts.push(`active ${+ref.activeCount}`);
+ }
+ settingsAudioDebugBody.textContent=parts.join(' · ');
+}
+function playCurrentAudioThemeTest(){
+ unlockAudioFromInteraction();
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(selection);
+ if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function'){
+  sfx.playCue('gameStart',{
+   phase:'stage',
+   atmosphereTheme:'aurora-borealis',
+   allowIdle:1
+  });
+  setTimeout(()=>syncAudioDebugUi(),80);
+  setTimeout(()=>syncAudioDebugUi(),500);
+  setTimeout(()=>syncAudioDebugUi(),1200);
+ }
 }
 function syncHelpUi(){
  if(!helpModal)return;
@@ -2659,6 +2703,7 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
+if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
