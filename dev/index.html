@@ -628,8 +628,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 11 2026, 12:03 PM EDT</span>
-      <span id="settingsState">main@0549c6f clean</span>
+      <span id="settingsRelease">Apr 11 2026, 2:03 PM EDT</span>
+      <span id="settingsState">main@e2a5f5d clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -902,7 +902,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 11 2026, 12:03 PM EDT</span>
+  <span id="buildStampRelease">Apr 11 2026, 2:03 PM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1518,7 +1518,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.415.sha.0549c6f',commit:'0549c6f40dd107e86111873a8fe6839ffeb32863',branch:'main',dirty:false,released:'Apr 11 2026, 12:03 PM EDT',state:'main@0549c6f clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.417.sha.e2a5f5d',commit:'e2a5f5d654bfd37d53f1886e17b9349d4e02d95a',branch:'main',dirty:false,released:'Apr 11 2026, 2:03 PM EDT',state:'main@e2a5f5d clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1641,6 +1641,19 @@ const sfx={
   if(window.__platinumAudioDebug.history.length>24)window.__platinumAudioDebug.history.shift();
   return entry;
  },
+ logCueEvent(entry=null){
+  if(!entry||typeof logEvent!=='function')return;
+  logEvent('audio_cue',{
+   cue:entry.cue,
+   atmosphereId:entry.atmosphereId,
+   audioTheme:entry.audioTheme,
+   phase:entry.phase,
+   variant:entry.variant,
+   referenceClip:entry.referenceClip||'',
+   challenge:!!entry.challenge,
+   stage:+(entry.stage||0)
+  });
+ },
  cueDef(name,opts={}){
   const atmosphere=opts.resolvedAtmosphere||this.resolveAtmosphere(opts);
   const cue=typeof currentGamePackAudioCue==='function'
@@ -1669,14 +1682,17 @@ const sfx={
   const cue=this.cueDef(name,opts);
   if(!cue)return;
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  const cueEntry=window.__platinumAudioDebug.lastCue||null;
   if(cue.referenceClip){
    this.playReferenceClip(cue.referenceClip,{
     allowIdle,
     volume:cue.referenceVolume,
-    cooldownMs:cue.cooldownMs
+    cooldownMs:cue.cooldownMs,
+    cueEntry
    });
    return;
   }
+  this.logCueEvent(cueEntry);
   if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
   if(Array.isArray(cue.tones))for(const tone of cue.tones){
    this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
@@ -1694,6 +1710,7 @@ const sfx={
   if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
   this.referenceCooldowns[clip]=now;
   window.__platinumAudioDebug.reference.lastRequested=clip;
+  this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer||audioMuted)return;
@@ -5610,7 +5627,11 @@ function queueStageTransition(mode='normal'){
  });
  if(usesRuntimeGalagaReferenceAudio()){
   S.transitionCueKind=nextIsChallenge?1:0;
-  S.transitionCueT=mode==='challengeResult'?(nextIsChallenge?0.36:0.22):(nextIsChallenge?0.32:0.18);
+  // Galaga's challenge-stage announcement wants to land near the setup
+  // handoff, not at the beginning of the whole transition window.
+  S.transitionCueT=mode==='challengeResult'
+   ? (nextIsChallenge?Math.max(.25,S.nextStageT-.62):.22)
+   : (nextIsChallenge?Math.max(.25,S.nextStageT-.58):.18);
  }else sfx.transition(nextIsChallenge?1:0);
 }
 
@@ -9695,6 +9716,62 @@ window.__galagaHarness__={
     bannerMode:S.bannerMode,
     bannerTxt:S.bannerTxt
    }
+  };
+ },
+ setupStageTransitionProbe(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+ S.stage=Math.max(1,+cfg.stage||2);
+  S.pendingStage=S.stage+1;
+  S.forceChallenge=!!cfg.forceChallenge;
+  S.nextStageT=0;
+  S.postChallengeT=0;
+  S.challenge=!!cfg.challenge;
+  S.challengeTransitionStallLogged=0;
+  S.lastChallengeClearT=null;
+  S.banner=0;
+  S.bannerTxt='';
+  S.bannerSub='';
+  S.bannerMode='';
+  S.alertT=0;
+  S.alertTxt='';
+  S.shake=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.e.length=0;
+  const p=S.p;
+  p.x=PLAY_W/2;
+  p.y=PLAY_H-VIS.playerBottom;
+  p.vx=0;
+  p.cd=0;
+  p.inv=0;
+  p.spawn=0;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  queueStageTransition(String(cfg.mode||'normal'));
+  logEvent('harness_stage_transition_probe_setup',{
+   stage:S.stage,
+   nextStage:S.pendingStage,
+   nextStageIsChallenge:isChallengeStage(S.pendingStage),
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3),
+   mode:String(cfg.mode||'normal')
+  });
+  return {
+   stage:S.stage,
+   pendingStage:S.pendingStage,
+   challenge:!!S.challenge,
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3)
   };
  },
  setAutoVideo(v){
