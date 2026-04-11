@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 10, 2026</span>
+              <span class="metaValue">April 11, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -923,7 +923,8 @@
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-dual-final-life-survivor.js</code></li><li><code>node tools/harness/check-challenge-bonus-stage-numbering.js</code></li><li><code>node tools/harness/check-extra-ship-awards.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul>
 <ol><li><code>boundary</code></li></ol>
-<ul><li>protects the seam between platform and applications</li><li>answers:<ul><li>did a game change leak into platform behavior?</li><li>did a platform change alter game behavior unintentionally?</li></ul></li></ul>
+<ul><li>protects the seam between platform and applications</li><li>answers:<ul><li>did a game change leak into platform behavior?</li><li>did a platform change alter game behavior unintentionally?</li></ul></li><li>future fidelity/trueness work should deepen game-owned state and cue models</li></ul>
+<p>without moving game-specific rules, audiovisual mapping, or reference logic into <code>Platinum</code></p>
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
@@ -938,6 +939,8 @@
 <p>Required:</p>
 <ul><li>targeted application harnesses for the changed behavior</li><li>one adjacent regression check for the same gameplay family</li><li>at least one boundary check proving the application change did not leak into</li></ul>
 <p>the platform</p>
+<ul><li>for fidelity work, prefer expanding application-owned state/cue granularity</li></ul>
+<p>instead of adding platform-owned exceptions for one game</p>
 <p>Typical boundary checks:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li></ul>
 <h4>Profile B: Platform-only change</h4>
@@ -1262,7 +1265,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 10, 2026
+          Release 1.2.3 · Updated April 11, 2026
         </p>
       </aside>
     </main>
