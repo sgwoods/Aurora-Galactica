@@ -628,8 +628,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 11 2026, 5:28 PM EDT</span>
-      <span id="settingsState">main@0c339e6 clean</span>
+      <span id="settingsRelease">Apr 12 2026, 8:13 AM EDT</span>
+      <span id="settingsState">main@9a399f8 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -902,7 +902,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 11 2026, 5:28 PM EDT</span>
+  <span id="buildStampRelease">Apr 12 2026, 8:13 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1518,7 +1518,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.422.sha.0c339e6',commit:'0c339e68b30cc93898cf606de08e8b120730f616',branch:'main',dirty:false,released:'Apr 11 2026, 5:28 PM EDT',state:'main@0c339e6 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.424.sha.9a399f8',commit:'9a399f859e0f76b7a9bd505e3f026f4390c6e074',branch:'main',dirty:false,released:'Apr 12 2026, 8:13 AM EDT',state:'main@9a399f8 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1632,6 +1632,8 @@ const sfx={
    phase:atmosphere?.phase||opts.phase||'stage',
    variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
    referenceClip:String(cue?.referenceClip||'').trim(),
+   referenceClipStart:Number.isFinite(+cue?.clipStart)?+cue.clipStart:0,
+   referenceClipDuration:Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:0,
    stage:+(S.stage||0),
    challenge:!!S.challenge,
    at:+(performance.now()/1000).toFixed(3)
@@ -1650,6 +1652,8 @@ const sfx={
    phase:entry.phase,
    variant:entry.variant,
    referenceClip:entry.referenceClip||'',
+   referenceClipStart:Number.isFinite(+entry.referenceClipStart)?+entry.referenceClipStart:0,
+    referenceClipDuration:Number.isFinite(+entry.referenceClipDuration)?+entry.referenceClipDuration:0,
    challenge:!!entry.challenge,
    stage:+(entry.stage||0)
   });
@@ -1684,10 +1688,13 @@ const sfx={
   const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
   const cueEntry=window.__platinumAudioDebug.lastCue||null;
   if(cue.referenceClip){
+   if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
    this.playReferenceClip(cue.referenceClip,{
     allowIdle,
     volume:cue.referenceVolume,
     cooldownMs:cue.cooldownMs,
+    clipStart:cue.clipStart,
+    clipDuration:cue.clipDuration,
     cueEntry
    });
    return;
@@ -1725,6 +1732,8 @@ const sfx={
   window.__platinumAudioDebug.reference.lastRequested=clip;
   this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
   const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
+  const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
+  const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
   this.loadReferenceBuffer(clip).then(buffer=>{
    if(!buffer||audioMuted)return;
    try{
@@ -1736,9 +1745,13 @@ const sfx={
     source.buffer=buffer;
     source.__cue=String(opts?.cueEntry?.cue||'').trim();
     source.__clip=clip;
+    source.__clipStart=clipStart;
+    source.__clipDuration=clipDuration;
       source.connect(gain);
       gain.connect(this.bus);
-      source.start();
+      if(clipDuration>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
+      else if(clipStart>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
+      else source.start();
       this.referenceActive.push(source);
       window.__platinumAudioDebug.reference.lastStarted=clip;
       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
@@ -4080,8 +4093,9 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  spawnStage();msg.textContent='';
  if(usesRuntimeGalagaReferenceAudio()){
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
-  S.startCueT=.72;
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,1.55);
+  S.startCueT=.62;
+  S.seqT=Math.max(+S.seqT||0,3.05);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
  }else sfx.start();
  c?.focus?.();
 }
@@ -5522,7 +5536,7 @@ function finalizeChallengeClear(){
   S.challengeResultPerfect=perfect>0?1:0;
   S.challengeResultCueT=0.34;
   // Let the result phrase own the beat before any ambient cadence returns.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+.9);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+1.15);
  }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,
@@ -5629,7 +5643,7 @@ function spawnChallenge(){
 function spawnStage(){
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.62:1.42):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.85:3.05):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
@@ -5643,7 +5657,7 @@ function queueStageTransition(mode='normal'){
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
- S.nextStageT=mode==='challengeResult'?(nextIsChallenge?2.5:2.05):(nextIsChallenge?3.35:2.85);
+ S.nextStageT=mode==='challengeResult'?(nextIsChallenge?3.05:2.5):(nextIsChallenge?3.75:3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
@@ -5665,10 +5679,10 @@ function queueStageTransition(mode='normal'){
   // Galaga's challenge-stage announcement wants to land near the setup
   // handoff, not at the beginning of the whole transition window.
   S.transitionCueT=mode==='challengeResult'
-   ? (nextIsChallenge?Math.max(.45,S.nextStageT-1.18):Math.max(.34,S.nextStageT-.88))
-   : (nextIsChallenge?Math.max(.55,S.nextStageT-1.24):Math.max(.42,S.nextStageT-.96));
+   ? (nextIsChallenge?Math.max(.55,S.nextStageT-1.42):Math.max(.45,S.nextStageT-1.1))
+   : (nextIsChallenge?Math.max(.7,S.nextStageT-1.52):Math.max(.55,S.nextStageT-1.18));
   // Keep the periodic convoy pulse from stacking on transition clips.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?.92:.72));
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?1.1:.9));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 
@@ -6613,16 +6627,34 @@ function referenceAudioCue(referenceClip, opts={}){
  return Object.freeze(Object.assign({
   referenceClip,
   referenceVolume:1,
-  cooldownMs:0
+  cooldownMs:0,
+  clipStart:0,
+  clipDuration:0,
+  stopCueNames:Object.freeze([])
  }, opts||{}));
 }
 
 const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
- gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{cooldownMs:2400}),
+ gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{
+  cooldownMs:2400,
+  clipStart:.08,
+  clipDuration:2.1,
+  stopCueNames:Object.freeze(['attractEnter','attractPulse','stagePulse'])
+ }),
  stagePulse:Object.freeze({
   byPhase:Object.freeze({
-   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
-   stage:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95}),
+   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{
+    cooldownMs:1250,
+    referenceVolume:.95,
+    clipStart:.18,
+    clipDuration:.82
+   }),
+   stage:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{
+    cooldownMs:1250,
+    referenceVolume:.95,
+    clipStart:.18,
+    clipDuration:.82
+   }),
    challenge:Object.freeze({referenceClip:'',cooldownMs:0})
  })
 }),
@@ -6640,10 +6672,30 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
  playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800}),
  capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
- challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{cooldownMs:2600}),
- challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{cooldownMs:2400}),
- challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{cooldownMs:2400}),
- stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{cooldownMs:1800}),
+ challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{
+  cooldownMs:2600,
+  clipStart:0,
+  clipDuration:1.05,
+  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect','stageTransition'])
+ }),
+ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
+  cooldownMs:2400,
+  clipStart:0,
+  clipDuration:1.55,
+  stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
+ }),
+ challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{
+  cooldownMs:2400,
+  clipStart:0,
+  clipDuration:1.7,
+  stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
+ }),
+ stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{
+  cooldownMs:1800,
+  clipStart:0,
+  clipDuration:.86,
+  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+ }),
  attractEnter:Object.freeze({
   byPhase:Object.freeze({
    demo:referenceAudioCue('assets/reference-audio/galaga-opening-theme.m4a',{cooldownMs:3200})
@@ -9322,6 +9374,11 @@ window.__galagaHarness__={
   if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
   const cue=sfx.cueDef(String(name),opts||{});
   if(!cue)return .9;
+  if(cue.referenceClip){
+   const clipped=Math.max(0,+cue.clipDuration||0);
+   if(clipped>0)return Math.max(.08,Math.min(12,clipped+.04));
+   return 4;
+  }
   let endT=.12;
   if(Array.isArray(cue.seq)&&cue.seq.length){
    const step=Math.max(.01,+cue.step||.05);
