@@ -425,18 +425,22 @@ mask:
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
 #leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
-#buildStamp{position:fixed;z-index:18;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:248px;min-height:40px;padding:8px 18px 7px;border:1px solid rgba(136,245,255,.18);background:
+#buildStamp{position:fixed;z-index:18;pointer-events:none;display:flex;align-items:stretch;justify-content:flex-start;min-width:248px;min-height:40px;padding:8px 18px 8px;border:1px solid rgba(136,245,255,.18);background:
  linear-gradient(180deg,rgba(11,20,42,.94),rgba(7,12,27,.9)),
  repeating-linear-gradient(150deg,rgba(58,76,255,.12) 0 16px,transparent 16px 34px);
-box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:center;text-shadow:0 0 6px rgba(0,0,0,.92)}
+box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:left;text-shadow:0 0 6px rgba(0,0,0,.92)}
 #buildStamp::before,#buildStamp::after{content:"";position:absolute;pointer-events:none}
 #buildStamp::before{inset:8px;border:1px solid rgba(255,255,255,.05)}
 #buildStamp::after{left:14px;right:14px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,229,122,.22),transparent)}
+#buildStampBody{display:flex;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding-right:18px}
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
+#buildStampDismissBtn{position:absolute;right:10px;top:8px;width:18px;height:18px;border:1px solid rgba(136,245,255,.26);background:rgba(8,18,35,.68);color:rgba(223,247,255,.86);font:700 14px/1 "Courier New",Consolas,monospace;pointer-events:auto;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+#buildStampDismissBtn:hover,#buildStampDismissBtn:focus-visible{outline:none;border-color:rgba(255,216,109,.76);color:#ffe39a;background:rgba(38,26,8,.84)}
 #buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
 #buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
+#buildStamp.dismissed{display:none!important}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
@@ -467,7 +471,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
- #buildStamp{align-items:flex-start}
+ #buildStamp{align-items:stretch}
+ #buildStampBody{padding-right:22px}
  #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}
@@ -628,8 +633,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 12 2026, 9:55 AM EDT</span>
-      <span id="settingsState">main@497674f clean</span>
+      <span id="settingsRelease">Apr 12 2026, 10:36 AM EDT</span>
+      <span id="settingsState">main@9d7b2a8 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -900,10 +905,13 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
 </div>
 <div id="buildStamp">
-  <span id="buildStampChannel">Lane development</span>
-  <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 12 2026, 9:55 AM EDT</span>
-  <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
+  <button type="button" id="buildStampDismissBtn" aria-label="Hide build stamp until refresh" title="Hide until refresh">×</button>
+  <div id="buildStampBody">
+    <span id="buildStampChannel">Lane development</span>
+    <span id="buildStampVersion">Version 1.2.3</span>
+    <span id="buildStampRelease">Apr 12 2026, 10:36 AM EDT</span>
+    <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
+  </div>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -1120,6 +1128,7 @@ const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampDismissBtn=document.getElementById('buildStampDismissBtn');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
@@ -1346,6 +1355,7 @@ const PLATFORM_STORAGE_KEYS={
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let buildStampDismissed=0;
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1518,7 +1528,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.431.sha.497674f',commit:'497674ffccf504678268c9d00b05548b3da90c02',branch:'main',dirty:false,released:'Apr 12 2026, 9:55 AM EDT',state:'main@497674f clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.432.sha.9d7b2a8',commit:'9d7b2a836fe4f73767508f36858fec1818d22b20',branch:'main',dirty:false,released:'Apr 12 2026, 10:36 AM EDT',state:'main@9d7b2a8 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -2853,6 +2863,10 @@ feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeed
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
+if(buildStampDismissBtn)buildStampDismissBtn.addEventListener('click',()=>{
+ buildStampDismissed=1;
+ if(buildStamp)buildStamp.classList.add('dismissed');
+});
 addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
@@ -3072,6 +3086,7 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
+ buildStamp.classList.toggle('dismissed',!!buildStampDismissed);
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
@@ -3080,6 +3095,7 @@ function syncBuildStampUi(){
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
   if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
@@ -3096,6 +3112,7 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
+ if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
@@ -8450,10 +8467,10 @@ function syncCabinetShellLayout({
   renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
-  const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
-  const compactStampH=56;
+  const stampW=Math.min(560,Math.max(420,Math.floor(viewW*.46)));
+  const compactStampH=62;
   const stampH=buildStamp.offsetHeight||compactStampH;
-  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
+  const anchorTop=shellY+shellH-Math.max(44,Math.floor(shellPadB*.5));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
   buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
