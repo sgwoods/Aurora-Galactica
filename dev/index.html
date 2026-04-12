@@ -628,8 +628,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 12 2026, 9:01 AM EDT</span>
-      <span id="settingsState">main@a777fba clean</span>
+      <span id="settingsRelease">Apr 12 2026, 9:21 AM EDT</span>
+      <span id="settingsState">main@8905991 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -902,7 +902,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 12 2026, 9:01 AM EDT</span>
+  <span id="buildStampRelease">Apr 12 2026, 9:21 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1518,7 +1518,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.427.sha.a777fba',commit:'a777fbad68ab2beeb07b13e1cc3fe8198dca546f',branch:'main',dirty:false,released:'Apr 12 2026, 9:01 AM EDT',state:'main@a777fba clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.428.sha.8905991',commit:'89059917744af25c176b467a369f5c9db2de55de',branch:'main',dirty:false,released:'Apr 12 2026, 9:21 AM EDT',state:'main@8905991 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -4102,12 +4102,16 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  startRunRecording();
  spawnStage();msg.textContent='';
  if(usesRuntimeGalagaReferenceAudio()){
+  const openingTiming=(!cfg.challenge&&cfg.stage===1&&typeof currentGamePackReferenceTiming==='function')
+   ? currentGamePackReferenceTiming('stage1Opening')
+   : null;
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
-  S.startCueT=.62;
-  if(!cfg.challenge&&cfg.stage===1){
-   S.formationCueT=2.92;
-   S.seqT=Math.max(+S.seqT||0,4.55);
-   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,4.7);
+  sfx.start();
+  S.startCueT=0;
+  if(openingTiming){
+   S.formationCueT=openingTiming.formationArrivalDelay;
+   S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
+   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
   }else{
    S.seqT=Math.max(+S.seqT||0,3.05);
    S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
@@ -5587,7 +5591,10 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const baseEntryDelay=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1?3.85:0;
+ const openingTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('stage1Opening')
+  : null;
+ const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -6644,6 +6651,16 @@ const AURORA_ATMOSPHERE_THEMES=Object.freeze({
  })
 });
 
+const AURORA_REFERENCE_TIMINGS=Object.freeze({
+ stage1Opening:Object.freeze({
+  startPreambleDelay:0,
+  startPhraseDuration:4,
+  formationArrivalDelay:4.18,
+  firstEnemyArrivalDelay:5.35,
+  firstPulseDelay:6.15
+ })
+});
+
 function referenceAudioCue(referenceClip, opts={}){
  return Object.freeze(Object.assign({
   referenceClip,
@@ -6659,7 +6676,7 @@ const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
  gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{
   cooldownMs:2400,
   clipStart:.08,
-  clipDuration:2.1,
+  clipDuration:0,
   stopCueNames:Object.freeze(['attractEnter','attractPulse','stagePulse'])
  }),
  formationArrival:referenceAudioCue('assets/reference-audio/galaga3-level-underscore.m4a',{
@@ -7425,6 +7442,10 @@ function currentGamePackAudioCue(cueName,opts={}){
   || null;
 }
 
+function currentGamePackReferenceTiming(key=''){
+ return AURORA_REFERENCE_TIMINGS[String(key||'').trim()]||null;
+}
+
 function currentGamePackFormationLayout(stage){
  const layouts=currentGamePack().formationLayouts;
  let layout=layouts[0];
@@ -7637,6 +7658,7 @@ window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
 window.currentGamePackAudioTheme=currentGamePackAudioTheme;
 window.currentGamePackAudioCue=currentGamePackAudioCue;
+window.currentGamePackReferenceTiming=currentGamePackReferenceTiming;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
 window.selectedShellThemeForPack=selectedShellThemeForPack;
