@@ -628,8 +628,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 12 2026, 9:21 AM EDT</span>
-      <span id="settingsState">main@8905991 clean</span>
+      <span id="settingsRelease">Apr 12 2026, 9:55 AM EDT</span>
+      <span id="settingsState">main@497674f clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -902,7 +902,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp">
   <span id="buildStampChannel">Lane development</span>
   <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 12 2026, 9:21 AM EDT</span>
+  <span id="buildStampRelease">Apr 12 2026, 9:55 AM EDT</span>
   <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
 </div>
 <script>
@@ -1518,7 +1518,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.428.sha.8905991',commit:'89059917744af25c176b467a369f5c9db2de55de',branch:'main',dirty:false,released:'Apr 12 2026, 9:21 AM EDT',state:'main@8905991 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.431.sha.497674f',commit:'497674ffccf504678268c9d00b05548b3da90c02',branch:'main',dirty:false,released:'Apr 12 2026, 9:55 AM EDT',state:'main@497674f clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1947,7 +1947,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
@@ -2223,7 +2223,7 @@ function startAttractDemo(opts={}){
  ATTRACT.audioPulseTimer=.8;
  ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
@@ -2298,6 +2298,43 @@ function currentAudioOverrides(){
 }
 function usesRuntimeGalagaReferenceAudio(){
  return currentAudioOverrides().audioTheme==='galaga-reference-assets';
+}
+const REFERENCE_TRANSITION_SENSITIVE_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit',
+ 'bossBoom',
+ 'stageTransition',
+ 'challengeTransition',
+ 'challengeResults',
+ 'challengePerfect'
+]);
+const REFERENCE_BOSS_MOMENT_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit'
+]);
+function stopReferenceCueSet(names=[]){
+ if(!usesRuntimeGalagaReferenceAudio()||typeof sfx==='undefined'||typeof sfx.stopCueNames!=='function')return;
+ sfx.stopCueNames(names);
+}
+function holdReferenceGameplayCadence(seconds=0){
+ if(!usesRuntimeGalagaReferenceAudio())return;
+ S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
+}
+function clearReferenceTransitionCueWindow(extra=[]){
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+}
+function clearReferenceBossMomentCueWindow(){
+ stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
+ const timing=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
+ holdReferenceGameplayCadence(timing?.deathCadenceHold??.72);
 }
 function resolvedAudioAtmosphere(opts={}){
  const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
@@ -4012,6 +4049,7 @@ function updatePlayerBullets(dt){
     if(e.hp<=0){
      awardKill(e,e.dive);
      if(e.t==='boss'){
+      clearReferenceBossMomentCueWindow();
       S.shake=Math.max(S.shake,.6);
       ex(e.x,e.y,28,'#fff5a6');
       ex(e.x,e.y,18,'#ff8cd7');
@@ -4022,7 +4060,14 @@ function updatePlayerBullets(dt){
     else{
      logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
      if(e.t==='boss'&&hpBefore>e.hp){
-      ex(e.x,e.y,8,'#fff4a8');
+      const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
+      stopReferenceCueSet(['attackCharge','enemyShot','enemyHit']);
+      holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+      e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
+      S.shake=Math.max(S.shake,.22);
+      ex(e.x,e.y,20,'#fff4a8');
+      ex(e.x,e.y,10,'#ff8cd7');
+      ex(e.x,e.y,6,'#d8f2ff');
       sfx.bossHit();
      }else sfx.hit();
     }
@@ -4092,7 +4137,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
@@ -4686,6 +4731,9 @@ function pickScriptEnemy(type,c){
 
 function startDive(e,p,opts={}){
  if(!e)return;
+ const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('enemyDiveCharge')
+  : null;
  e.low=0;
  if(opts.capture&&e.t==='boss'&&canCapture()){
   e.dive=4;
@@ -4703,12 +4751,15 @@ function startDive(e,p,opts={}){
  const jitter=stage1Scripted?18:26;
  const vyRnd=stage1Scripted?5:(S.stage<=2?8:12);
  e.dive=1;
- e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
- e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
- e.shot=e.t==='boss'?2:1;
- logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
- sfx.attackCharge();
- if(opts.escort&&e.t==='boss')assignEscorts(e);
+  e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
+  e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
+  e.shot=e.t==='boss'?2:1;
+  e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+  e.chargeCueT=chargeTiming?.cueDelay??0;
+  e.chargeCueStartY=e.y;
+  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
+  if(!e.chargeCuePending)sfx.attackCharge();
+  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
 
 function runStage1Script(dt,p,T){
@@ -4852,6 +4903,17 @@ function updateEnemy(e,dt,t,T,p){
   e.vy+=diveAccel(S.stage)*fm.diveAccel*dt;
   e.x+=e.vx*dt+Math.sin(e.tm*7+e.ph)*13*fm.weave*dt;
   e.y+=e.vy*dt;
+  if(e.chargeCuePending){
+   e.chargeCueT=Math.max(0,(+e.chargeCueT||0)-dt);
+   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+    ? currentGamePackReferenceTiming('enemyDiveCharge')
+    : null;
+   const minTravelY=chargeTiming?.minTravelY??0;
+   if(e.chargeCueT<=0&&(e.y-(+e.chargeCueStartY||0))>=minTravelY){
+    e.chargeCuePending=0;
+    sfx.attackCharge();
+   }
+  }
   if(!e.low&&e.y>=PLAY_H*.62){
    e.low=1;
    logEvent('enemy_lower_field',Object.assign({stage:S.stage,y:+e.y.toFixed(2),stageClock:+S.stageClock.toFixed(3),playerLane:playLane(p.x)},enemyRef(e)));
@@ -4866,6 +4928,7 @@ function updateEnemy(e,dt,t,T,p){
    e.y=-26;
    e.vx=e.vy=0;
    e.dive=3;
+   e.chargeCuePending=0;
    e.low=0;
    e.beam=0;
    e.esc=0;
@@ -4889,6 +4952,9 @@ function updateEnemy(e,dt,t,T,p){
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
  if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+   ? currentGamePackReferenceTiming('enemyDiveCharge')
+   : null;
   if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){
    e.dive=4;
    e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);
@@ -4907,8 +4973,11 @@ function updateEnemy(e,dt,t,T,p){
    e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
    e.shot=e.t==='boss'?2:1;
+   e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+   e.chargeCueT=chargeTiming?.cueDelay??0;
+   e.chargeCueStartY=e.y;
    logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
-   sfx.attackCharge();
+   if(!e.chargeCuePending)sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
@@ -5552,11 +5621,14 @@ function finalizeChallengeClear(){
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=1.45;
  if(usesRuntimeGalagaReferenceAudio()){
-  sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition']);
+  const challengeResultsTiming=typeof currentGamePackReferenceTiming==='function'
+   ? currentGamePackReferenceTiming('challengeResults')
+   : null;
+  clearReferenceTransitionCueWindow();
   S.challengeResultPerfect=perfect>0?1:0;
-  S.challengeResultCueT=0.34;
+  S.challengeResultCueT=challengeResultsTiming?.resultCueDelay??0.34;
   // Let the result phrase own the beat before any ambient cadence returns.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.postChallengeT+1.15);
+  holdReferenceGameplayCadence(S.postChallengeT+(challengeResultsTiming?.cadenceHoldAfterSpawn||1.15));
  }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,
@@ -5591,10 +5663,12 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const openingTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&S.stage===1&&typeof currentGamePackReferenceTiming==='function'
-  ? currentGamePackReferenceTiming('stage1Opening')
+ const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const openingTiming=usesReference&&S.stage===1?currentGamePackReferenceTiming('stage1Opening'):null;
+ const transitionTiming=usesReference&&S.stage>1
+  ? currentGamePackReferenceTiming(S.transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
   : null;
- const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||0;
+ const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||transitionTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -5633,6 +5707,10 @@ function spawnFormation(){
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout();
+ const challengeTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const baseEntryDelay=challengeTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  const total=layout.groups*layout.enemiesPerGroup;
  const upperBandY=PLAY_H*layout.upperBandRatio;
@@ -5658,16 +5736,23 @@ function spawnChallenge(){
    group:wave,
    sweep:wave%2?-1:1,
    upperBandY,
-   spawn:wave*layout.waveDelay+slot*layout.slotDelay
+   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
 function spawnStage(){
+ const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesRuntimeGalagaReferenceAudio()?(S.challenge?1.85:3.05):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1
+  ? currentGamePackReferenceTiming(transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+  : null;
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
+ S.transitionMode='';
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
@@ -5680,8 +5765,17 @@ function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
+ const challengeEntryTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const challengeResultsTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
- S.nextStageT=mode==='challengeResult'?(nextIsChallenge?3.05:2.5):(nextIsChallenge?3.75:3.2);
+ S.transitionMode=mode;
+ S.nextStageT=mode==='challengeResult'
+  ? (nextIsChallenge?(challengeResultsTiming?.nextChallengeWindow||3.05):(challengeResultsTiming?.nextStageWindow||2.5))
+  : (nextIsChallenge?(challengeEntryTiming?.transitionWindow||3.75):3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
@@ -5698,15 +5792,16 @@ function queueStageTransition(mode='normal'){
   enemies:S.e.filter(e=>e.hp>0).length
  });
  if(usesRuntimeGalagaReferenceAudio()){
-  sfx.stopCueNames(['stagePulse','challengeResults','challengePerfect']);
-  S.transitionCueKind=nextIsChallenge?1:0;
-  // Galaga's challenge-stage announcement wants to land near the setup
-  // handoff, not at the beginning of the whole transition window.
+  clearReferenceTransitionCueWindow();
+ S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
-   ? (nextIsChallenge?Math.max(.55,S.nextStageT-1.42):Math.max(.45,S.nextStageT-1.1))
-   : (nextIsChallenge?Math.max(.7,S.nextStageT-1.52):Math.max(.55,S.nextStageT-1.18));
-  // Keep the periodic convoy pulse from stacking on transition clips.
-  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,S.nextStageT+(nextIsChallenge?1.1:.9));
+   ? (nextIsChallenge
+      ? Math.max(.55,S.nextStageT-(challengeResultsTiming?.nextChallengeCueLeadBeforeSpawn||1.42))
+      : Math.max(.45,S.nextStageT-(challengeResultsTiming?.nextCueLeadBeforeSpawn||1.1)))
+   : (nextIsChallenge
+      ? Math.max(.7,S.nextStageT-(challengeEntryTiming?.cueLeadBeforeSpawn||1.52))
+      : Math.max(.55,S.nextStageT-1.18));
+  holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?(challengeEntryTiming?.cadenceHoldAfterSpawn||1.1):(challengeResultsTiming?.cadenceHoldAfterSpawn||.9)));
  }else sfx.transition(nextIsChallenge?1:0);
 }
 
@@ -6658,6 +6753,35 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
   formationArrivalDelay:4.18,
   firstEnemyArrivalDelay:5.35,
   firstPulseDelay:6.15
+ }),
+ stageEntry:Object.freeze({
+  firstEnemyArrivalDelay:.82,
+  firstPulseDelay:1.9
+ }),
+ postChallengeStageEntry:Object.freeze({
+  firstEnemyArrivalDelay:1.08,
+  firstPulseDelay:2.35
+ }),
+ challengeEntry:Object.freeze({
+  transitionWindow:4.35,
+  cueLeadBeforeSpawn:1.72,
+  firstEnemyArrivalDelay:.96,
+  cadenceHoldAfterSpawn:1.28
+ }),
+ challengeResults:Object.freeze({
+  resultCueDelay:.34,
+  nextStageWindow:4.55,
+  nextCueLeadBeforeSpawn:1.62,
+  cadenceHoldAfterSpawn:1.24
+ }),
+ enemyDiveCharge:Object.freeze({
+  cueDelay:.12,
+  minTravelY:9
+ }),
+ bossMoments:Object.freeze({
+  hitCadenceHold:.28,
+  deathCadenceHold:.96,
+  hitFlashDuration:.46
  })
 });
 
@@ -7707,6 +7831,9 @@ function enemyCoreState({
   targetX:0,
   targetY:0,
   shot:0,
+  chargeCuePending:0,
+  chargeCueT:0,
+  chargeCueStartY:0,
   spawn,
   spawnPlan:spawn,
   en:0,
@@ -7859,6 +7986,9 @@ function makePackChallengeEnemyState({
   targetX:0,
   targetY:0,
   shot:0,
+  chargeCuePending:0,
+  chargeCueT:0,
+  chargeCueStartY:0,
   spawn,
   spawnPlan:spawn,
   en:0,
@@ -8500,9 +8630,24 @@ function drawEnemy(e){
  else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
  else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
  if(e.hitT>0){
-  ctx.globalAlpha=Math.min(.9,e.hitT/.34);
-  ctx.fillStyle=e.t==='boss'?'rgba(255,248,196,.86)':'rgba(255,255,255,.72)';
-  ctx.fillRect(-12,-10,24,20);
+  const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
+  ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
+  if(e.t==='boss'){
+   ctx.fillStyle='#fff8c4';
+   ctx.fillRect(-17,-13,34,26);
+   ctx.fillStyle='#ffffff';
+   ctx.fillRect(-12,-3,24,6);
+   ctx.fillRect(-3,-10,6,20);
+   ctx.fillStyle='#ff92d8';
+   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-1,-7,2,14);
+   ctx.strokeStyle='#e2f7ff';
+   ctx.lineWidth=1;
+   ctx.strokeRect(-18.5,-14.5,37,29);
+  }else{
+   ctx.fillStyle='rgba(255,255,255,.72)';
+   ctx.fillRect(-12,-10,24,20);
+  }
   ctx.globalAlpha=1;
  }
  if(enemyHasActiveBeam(e)){
@@ -9651,12 +9796,31 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
   if(!boss)return false;
   const hpBefore=boss.hp;
+  const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
   boss.hp--;
-  boss.hitT=.34;
+  boss.hitT=bossTiming?.hitFlashDuration??.46;
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
-  ex(boss.x,boss.y,8,'#fff4a8');
+  holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+  S.shake=Math.max(S.shake,.22);
+  ex(boss.x,boss.y,20,'#fff4a8');
+  ex(boss.x,boss.y,10,'#ff8cd7');
+  ex(boss.x,boss.y,6,'#d8f2ff');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
+  return true;
+ },
+ triggerBossDeath(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  boss.hp=0;
+  awardKill(boss,boss.dive);
+  clearReferenceBossMomentCueWindow();
+  S.shake=Math.max(S.shake,.6);
+  ex(boss.x,boss.y,28,'#fff5a6');
+  ex(boss.x,boss.y,18,'#ff8cd7');
+  ex(boss.x,boss.y,12,'#d8f2ff');
+  sfx.boom('boss');
+  logEvent('harness_trigger_boss_death',{boss:boss.id,dive:boss.dive,stage:S.stage});
   return true;
  },
  triggerSquadronBossKill(){
@@ -10147,6 +10311,17 @@ window.__galagaHarness__={
   for(const e of S.e)if(e.id!==boss.id)e.hp=0;
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
   logEvent('harness_boss_first_hit_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
+  return true;
+ },
+ setupBossDeathTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||1);S.stageClock=0;S.simT=0;S.seq=0;S.seqT=0;S.audioPulseHoldT=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=1;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=1;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
+  logEvent('harness_boss_death_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
   return true;
  }
 };
