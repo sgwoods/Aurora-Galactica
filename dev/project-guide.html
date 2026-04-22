@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 12, 2026</span>
+              <span class="metaValue">April 22, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -653,7 +653,7 @@
 <p>Best repo technical map:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul>
 <p>Best release and testing gate doc:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md</code></li></ul>
 <p>Release planning and readiness docs:</p>
 <ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li></ul>
 <h3>Current Release State</h3>
@@ -719,6 +719,11 @@ npm run build</code></pre>
 <ul><li>evaluate <code>AudioLDM 2</code> as an offline content-generation tool for themed sound-effect variation</li><li>keep this explicitly outside <code>Platinum</code> runtime responsibilities</li><li>test whether a small reference-guided workflow can produce useful Aurora-family variants from classic arcade cue roles</li><li>first pilot targets should be higher-salience atmospheric/event cues rather than the smallest micro-effects</li><li>if the workflow is simple enough and the results are good enough, treat it as a reusable tool for future hosted games as well</li></ul>
 <h3>Immediate Priorities</h3>
 <ol><li>complete the documentation refresh and publish-path hardening</li><li>close the small Aurora trust-fix bundle for <code>1.2.1</code></li><li>keep hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> aligned with the source docs and release metadata</li><li>then deepen the second-application proof deliberately</li><li>prototype reference-guided audio-generation tooling only after the current Aurora cue-state review surface is trustworthy enough to judge results clearly</li></ol>
+<h3>Current Operating Plan</h3>
+<p>The principles are now translated into a concrete execution plan in:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md</code></li></ul>
+<p>That document should be used as the working bridge between:</p>
+<ul><li>development principles</li><li>bug-fix discipline</li><li>reference-artifact generation</li><li>persona and progression evidence</li><li>release-candidate assembly</li></ul>
         </div>
       </div>
     </section>
@@ -1001,12 +1006,25 @@ npm run build</code></pre>
           <p>This document describes the expected release discipline for <code>Platinum</code> and the applications it hosts.</p>
 <p>The rule is simple:</p>
 <ul><li>automate the gate whenever we reasonably can</li><li>use manual review for feel and presentation only where automation is weak</li></ul>
+<h3>Bug-Fix Discipline</h3>
+<p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
+<p>Default rule:</p>
+<ol><li>identify the bug family:</li></ol>
+<ul><li>platform</li><li>application</li><li>boundary</li><li>release / pipeline</li></ul>
+<ol><li>add or update a targeted automated check when the behavior is stable enough</li></ol>
+<p>to measure</p>
+<ol><li>if automation is not yet practical, record the manual gate explicitly and</li></ol>
+<p>leave a clear follow-up path toward automation</p>
+<p>This is how we stay agile without relying on memory-only fixes.</p>
+<p>See also:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md</code></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
 <ul><li>active engineering lane</li><li>source of the current local candidate</li></ul>
 <ol><li>hosted <code>/dev</code></li></ol>
-<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li></ul>
+<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li><li>should only be replaced when the new candidate is intentionally better than</li></ul>
+<p>the currently published hosted <code>/dev</code></p>
 <ol><li>hosted <code>/beta</code></li></ol>
 <ul><li>reviewed release-candidate lane</li><li>should be more disciplined than hosted <code>/dev</code></li></ul>
 <ol><li>hosted <code>/production</code></li></ol>
@@ -1040,6 +1058,8 @@ npm run build</code></pre>
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
+<p>Harness work should also follow the project reference program:</p>
+<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Gate Profiles By Change Type</h3>
 <p>We want:</p>
 <ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
@@ -1081,6 +1101,16 @@ npm run build</code></pre>
 <p>For production, the release contract also includes the top-level <code>sgwoods/public</code> Aurora project page. A production release is not complete if the public page still shows stale release/build/focus content after the publish and sync steps.</p>
 <p>If public sync must be rerun after production is already live, it should run from current clean <code>main</code> and a current tokenized public template, while also proving that local <code>dist/production</code> still matches the live production lane exactly. That keeps the public page current without silently inventing a new &quot;production&quot; build that has not actually been released.</p>
 <p>This profile should not automatically pull in deep gameplay suites unless the change also affects gameplay delivery.</p>
+<h3>Lane-Specific Rigor</h3>
+<p>Use the lane purpose to decide how rigorous the gate set must be.</p>
+<h4>Local <code>localhost</code></h4>
+<ul><li>targeted checks only</li><li>adjacent regression check</li><li>manual inspection where needed</li></ul>
+<h4>Hosted <code>/dev</code></h4>
+<ul><li>enough confidence to justify replacing the current live hosted <code>/dev</code></li><li>targeted checks for changed areas</li><li>at least one boundary or containment check</li><li>live verify after publish</li><li>manual comparison against the current published hosted <code>/dev</code></li></ul>
+<h4>Hosted <code>/beta</code></h4>
+<ul><li>stronger gate set than hosted <code>/dev</code></li><li>candidate should be intentionally assembled and stable</li><li>live verify after publish</li><li>review of release-facing deltas</li><li>docs refresh where required for the release family</li></ul>
+<h4>Hosted <code>/production</code></h4>
+<ul><li>approved hosted <code>/beta</code> only</li><li>full production preflight</li><li>live verify</li><li>top-level public project page sync and verify</li></ul>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
@@ -1192,17 +1222,43 @@ npm run build</code></pre>
 <ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
 <p>Meaning:</p>
 <ul><li>local <code>localhost</code><ul><li>active engineering lane</li></ul></li><li>hosted <code>/dev</code><ul><li>shared hosted integration preview</li></ul></li><li>hosted <code>/beta</code><ul><li>reviewed release candidate</li></ul></li><li>hosted <code>/production</code><ul><li>public stable promise</li></ul></li></ul>
+<p>See also:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/RELEASE_LANE_MODEL.md</code></li></ul>
+<h3>Replacement Rule For Hosted <code>/dev</code></h3>
+<p>Hosted <code>/dev</code> is already a published integration surface.</p>
+<p>That means a new hosted <code>/dev</code> publish should not happen just because a branch contains additional work.</p>
+<p>Before replacing hosted <code>/dev</code>, we should be able to answer:</p>
+<ol><li>what is concretely better than the current published hosted <code>/dev</code></li><li>what supporting gate evidence backs that claim</li><li>what known issues remain and why they are acceptable for <code>/dev</code></li></ol>
+<p>This is the core professionalism rule for the next release phase.</p>
 <h3>Major <code>x.y</code> Documentation Gate</h3>
 <p>For every meaningful <code>x.y</code> release, the gate between hosted <code>/beta</code> and hosted <code>/production</code> should include a complete documentation refresh.</p>
 <p>That refresh should cover at least:</p>
-<ul><li><code>release-notes.json</code></li><li><code>release-dashboard.json</code></li><li><code>README.md</code></li><li><code>PLAN.md</code></li><li><code>PRODUCT_ROADMAP.md</code></li><li><code>ARCHITECTURE.md</code></li><li><code>PLATINUM.md</code></li><li><code>APPLICATIONS_ON_PLATINUM.md</code></li><li><code>TESTING_AND_RELEASE_GATES.md</code></li><li><code>RELEASE_READINESS_REVIEW.md</code></li><li>hosted <code>project-guide.html</code></li><li>hosted <code>platinum-guide.html</code></li><li>hosted <code>player-guide.html</code></li></ul>
+<ul><li><code>release-notes.json</code></li><li><code>release-dashboard.json</code></li><li><code>QUALITY_RELEASE_SCORECARD.md</code></li><li><code>README.md</code></li><li><code>PLAN.md</code></li><li><code>PRODUCT_ROADMAP.md</code></li><li><code>ARCHITECTURE.md</code></li><li><code>PLATINUM.md</code></li><li><code>APPLICATIONS_ON_PLATINUM.md</code></li><li><code>TESTING_AND_RELEASE_GATES.md</code></li><li><code>RELEASE_READINESS_REVIEW.md</code></li><li>hosted <code>project-guide.html</code></li><li>hosted <code>platinum-guide.html</code></li><li>hosted <code>player-guide.html</code></li></ul>
 <p>This should be treated as a real release artifact pass, not optional cleanup.</p>
+<h3>Core Artifact Commit Rule</h3>
+<p>We should assume that any core artifact used to produce, validate, explain, or approve a release must be committed at some stage of the process.</p>
+<p>Core artifacts include:</p>
+<ul><li>source code used in the lane being published</li><li>release scripts and harness scripts</li><li>reference profiles and correspondence check definitions</li><li>scorecards, release notes, dashboards, and readiness docs</li><li>curated reference inputs that the project depends on for tuning or review</li></ul>
+<p>Generated artifacts do not all need to live in git, but they must not be ephemeral in practice.</p>
+<p>Rule:</p>
+<ul><li>the definitions, inputs, and documentation for a release must be committed</li><li>generated outputs may stay uncommitted only when they are reproducible from</li></ul>
+<p>committed code and committed reference inputs</p>
+<ul><li>if a generated artifact is being relied on as a durable release record, it</li></ul>
+<p>should itself be committed or copied into a committed summary document</p>
+<p>This is the rule that keeps release knowledge out of chat-only or machine-only state.</p>
 <h3>Promotion Workflow</h3>
-<ol><li>build the local <code>localhost</code> candidate</li><li>verify local <code>localhost</code> gates</li><li>publish hosted <code>/dev</code> for integrated hosted review</li><li>promote hosted <code>/beta</code></li><li>verify hosted <code>/beta</code></li><li>complete any required docs pass for the release line</li><li>approve hosted <code>/beta</code></li><li>promote and publish hosted <code>/production</code></li></ol>
+<ol><li>build the local <code>localhost</code> candidate</li><li>verify local <code>localhost</code> gates</li><li>refresh the quality score and scorecard for the candidate</li><li>publish hosted <code>/dev</code> for integrated hosted review</li><li>promote hosted <code>/beta</code></li><li>verify hosted <code>/beta</code></li><li>complete any required docs pass for the release line</li><li>approve hosted <code>/beta</code></li><li>promote and publish hosted <code>/production</code></li></ol>
+<h3>Hosted <code>/dev</code> History Rule</h3>
+<p>By default, we should move hosted <code>/dev</code> forward in place rather than maintain a separate public archive lane for every <code>/dev</code> build.</p>
+<p>We already preserve <code>/dev</code> history through:</p>
+<ul><li>git commits and branches</li><li>build metadata</li><li>release notes and dashboards</li><li>the quality scorecard</li><li>committed docs explaining why a new <code>/dev</code> replaced the prior one</li></ul>
+<p>Create a dedicated <code>/dev</code> archive only when:</p>
+<ul><li>a milestone build needs to stay publicly inspectable</li><li>a comparison build is needed for a major tuning effort</li><li>a recovery or incident review needs a preserved hosted snapshot</li></ul>
+<p>Otherwise, move <code>/dev</code> forward and keep the record in git and committed release artifacts.</p>
 <h3>Policy Intention</h3>
 <p>The goal is not to create ceremony for its own sake.</p>
 <p>The goal is to make sure:</p>
-<ul><li>automation catches what it can</li><li>hosted lanes are explicit</li><li>docs and release surfaces stay aligned with the product we actually ship</li></ul>
+<ul><li>automation catches what it can</li><li>hosted lanes are explicit</li><li>docs and release surfaces stay aligned with the product we actually ship</li><li>the quality score becomes part of release notes, not just a local experiment</li></ul>
         </div>
       </div>
     </section>
@@ -1320,7 +1376,7 @@ npm run build</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 12, 2026
+          Release 1.2.3 · Updated April 22, 2026
         </p>
       </aside>
     </main>

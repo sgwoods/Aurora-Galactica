@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 12, 2026</span>
+              <span class="metaValue">April 22, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -889,12 +889,25 @@
           <p>This document describes the expected release discipline for <code>Platinum</code> and the applications it hosts.</p>
 <p>The rule is simple:</p>
 <ul><li>automate the gate whenever we reasonably can</li><li>use manual review for feel and presentation only where automation is weak</li></ul>
+<h3>Bug-Fix Discipline</h3>
+<p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
+<p>Default rule:</p>
+<ol><li>identify the bug family:</li></ol>
+<ul><li>platform</li><li>application</li><li>boundary</li><li>release / pipeline</li></ul>
+<ol><li>add or update a targeted automated check when the behavior is stable enough</li></ol>
+<p>to measure</p>
+<ol><li>if automation is not yet practical, record the manual gate explicitly and</li></ol>
+<p>leave a clear follow-up path toward automation</p>
+<p>This is how we stay agile without relying on memory-only fixes.</p>
+<p>See also:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md</code></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
 <ul><li>active engineering lane</li><li>source of the current local candidate</li></ul>
 <ol><li>hosted <code>/dev</code></li></ol>
-<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li></ul>
+<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li><li>should only be replaced when the new candidate is intentionally better than</li></ul>
+<p>the currently published hosted <code>/dev</code></p>
 <ol><li>hosted <code>/beta</code></li></ol>
 <ul><li>reviewed release-candidate lane</li><li>should be more disciplined than hosted <code>/dev</code></li></ul>
 <ol><li>hosted <code>/production</code></li></ol>
@@ -928,6 +941,8 @@
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
+<p>Harness work should also follow the project reference program:</p>
+<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Gate Profiles By Change Type</h3>
 <p>We want:</p>
 <ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
@@ -969,6 +984,16 @@
 <p>For production, the release contract also includes the top-level <code>sgwoods/public</code> Aurora project page. A production release is not complete if the public page still shows stale release/build/focus content after the publish and sync steps.</p>
 <p>If public sync must be rerun after production is already live, it should run from current clean <code>main</code> and a current tokenized public template, while also proving that local <code>dist/production</code> still matches the live production lane exactly. That keeps the public page current without silently inventing a new &quot;production&quot; build that has not actually been released.</p>
 <p>This profile should not automatically pull in deep gameplay suites unless the change also affects gameplay delivery.</p>
+<h3>Lane-Specific Rigor</h3>
+<p>Use the lane purpose to decide how rigorous the gate set must be.</p>
+<h4>Local <code>localhost</code></h4>
+<ul><li>targeted checks only</li><li>adjacent regression check</li><li>manual inspection where needed</li></ul>
+<h4>Hosted <code>/dev</code></h4>
+<ul><li>enough confidence to justify replacing the current live hosted <code>/dev</code></li><li>targeted checks for changed areas</li><li>at least one boundary or containment check</li><li>live verify after publish</li><li>manual comparison against the current published hosted <code>/dev</code></li></ul>
+<h4>Hosted <code>/beta</code></h4>
+<ul><li>stronger gate set than hosted <code>/dev</code></li><li>candidate should be intentionally assembled and stable</li><li>live verify after publish</li><li>review of release-facing deltas</li><li>docs refresh where required for the release family</li></ul>
+<h4>Hosted <code>/production</code></h4>
+<ul><li>approved hosted <code>/beta</code> only</li><li>full production preflight</li><li>live verify</li><li>top-level public project page sync and verify</li></ul>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
@@ -1269,7 +1294,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 12, 2026
+          Release 1.2.3 · Updated April 22, 2026
         </p>
       </aside>
     </main>
