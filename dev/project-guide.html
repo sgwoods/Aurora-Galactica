@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 22, 2026</span>
+              <span class="metaValue">April 23, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -705,20 +705,30 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<ul><li><code>1.2.0 - Platinum Release 1</code> is live on hosted <code>/production</code></li><li><code>Platinum</code> is now a real shipped host platform rather than an internal refactor story</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lane model is now explicit:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the major missing discipline that slipped past the original <code>1.2.0</code> promotion was a full documentation pass and first-class hosted platform docs</li><li>that is now being corrected and formalized as a real release gate</li></ul>
+<ul><li>hosted <code>/dev</code> is now current with the active integration branch:<ul><li><code>1.2.3+build.463.sha.e7ec04f</code></li></ul></li><li>hosted <code>/beta</code> remains on:<ul><li><code>1.2.3-beta.1+build.388.sha.13c8421.beta</code></li></ul></li><li>hosted <code>/production</code> remains on:<ul><li><code>1.2.3+build.388.sha.13c8421</code></li></ul></li><li><code>Platinum</code> is now a real shipped host platform rather than an internal refactor story</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lane model is now explicit:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the major missing discipline that slipped past the original <code>1.2.0</code> promotion was a full documentation pass and first-class hosted platform docs</li><li>that is now being corrected and formalized as a real release gate</li></ul>
 <h3>Active Workstreams</h3>
-<h4>1. Documentation Hardening</h4>
+<h4>1. Fidelity Improvement From The New <code>/dev</code> Baseline</h4>
+<ul><li>improve the weakest quality-score categories first:<ul><li>stage-1 timing fidelity</li><li>challenge-stage timing fidelity</li><li>audio identity and cue alignment</li></ul></li><li>use hosted <code>/dev</code> as the current formal integration base while this work</li></ul>
+<p>advances</p>
+<h4>2. Documentation Hardening</h4>
 <ul><li>make Platinum a first-class hosted documentation surface</li><li>keep platform docs and application docs separate</li><li>keep project, platform, player, and release docs aligned on every meaningful <code>x.y</code> release</li><li>make missing docs a real publish-preflight failure instead of a soft reminder</li></ul>
-<h4>2. <code>1.2.1</code> Aurora Trust Fixes</h4>
+<h4>3. <code>1.2.1</code> Aurora Trust Fixes</h4>
 <ul><li><code>#143</code> dual-fighter surviving-ship rule</li><li><code>#140</code> challenge-stage bonus-stage numbering</li><li><code>#142</code> carried/captured-fighter game-over presentation</li></ul>
-<h4>3. Platform Boundary Cleanup</h4>
+<h4>4. Platform Boundary Cleanup</h4>
 <ul><li>keep pack contract thinking explicit</li><li>keep remaining Aurora-shaped compatibility residue visible</li><li>avoid letting shell copy and application copy drift back into a blur</li></ul>
-<h4>4. Second-Application Proof</h4>
+<h4>5. Second-Application Proof</h4>
 <ul><li>keep <code>Galaxy Guardians</code> preview-only until a minimal playable slice is real</li><li>prove the platform with a narrow second-application gameplay slice rather than a rushed public launch</li></ul>
-<h4>5. Audio Generation Tooling Exploration</h4>
+<h4>6. Audio Generation Tooling Exploration</h4>
 <ul><li>evaluate <code>AudioLDM 2</code> as an offline content-generation tool for themed sound-effect variation</li><li>keep this explicitly outside <code>Platinum</code> runtime responsibilities</li><li>test whether a small reference-guided workflow can produce useful Aurora-family variants from classic arcade cue roles</li><li>first pilot targets should be higher-salience atmospheric/event cues rather than the smallest micro-effects</li><li>if the workflow is simple enough and the results are good enough, treat it as a reusable tool for future hosted games as well</li></ul>
 <h3>Immediate Priorities</h3>
-<ol><li>complete the documentation refresh and publish-path hardening</li><li>close the small Aurora trust-fix bundle for <code>1.2.1</code></li><li>keep hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> aligned with the source docs and release metadata</li><li>then deepen the second-application proof deliberately</li><li>prototype reference-guided audio-generation tooling only after the current Aurora cue-state review surface is trustworthy enough to judge results clearly</li></ol>
+<ol><li>use the refreshed hosted <code>/dev</code> as the stable integration base</li><li>improve stage-1 timing, challenge timing, and audio fidelity from that base</li><li>keep hosted <code>/beta</code> and hosted <code>/production</code> stable until a real next candidate is assembled</li><li>then shape the next hosted <code>/beta</code> deliberately from the improved <code>/dev</code> line</li><li>deepen the second-application proof deliberately after the current Aurora fidelity cycle is in better shape</li></ol>
+<h3>Release Direction</h3>
+<ul><li>the next serious Aurora candidate should come from the current hosted <code>/dev</code></li></ul>
+<p>line, not from promoting the older hosted <code>/beta</code> line in place</p>
+<ul><li>hosted <code>/beta</code> and hosted <code>/production</code> are still the same shipped code line,</li></ul>
+<p>so promoting the current beta would not meaningfully advance production</p>
+<ul><li>the next meaningful public milestone should likely be a <code>MINOR</code> release in</li></ul>
+<p>the <code>1.3.0</code> family after the current fidelity cycle improves timing and audio</p>
 <h3>Current Operating Plan</h3>
 <p>The principles are now translated into a concrete execution plan in:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md</code></li></ul>
@@ -1216,7 +1226,9 @@ npm run build</code></pre>
 <ul><li>local <code>localhost</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0.dirty</code></li></ul></li><li>hosted <code>/dev</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>x.y.z-beta.1+build.NNN.sha.abcdef0.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>x.y.z+build.NNN.sha.abcdef0</code></li></ul></li></ul>
 <p>These are format examples, not current live lane values.</p>
 <h3>Meaning</h3>
-<ul><li><code>MAJOR</code><ul><li>reserve for true product-era breaks or major repositioning</li></ul></li><li><code>MINOR</code><ul><li>use for meaningful public milestones</li><li>example:<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul></li></ul></li><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li></ul></li></ul>
+<ul><li><code>MAJOR</code><ul><li>reserve for true product-era breaks or major repositioning</li></ul></li><li><code>MINOR</code><ul><li>use for meaningful public milestones</li><li>example:<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul></li><li>current planning read:<ul><li>the next serious Aurora quality/fidelity release should likely be a</li></ul></li></ul></li></ul>
+<p><code>MINOR</code> step such as <code>1.3.0</code>, not a new <code>MAJOR</code></p>
+<ul><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li></ul></li></ul>
 <h3>Hosted Release Lanes</h3>
 <p>The intended lane model is:</p>
 <ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
@@ -1230,6 +1242,15 @@ npm run build</code></pre>
 <p>Before replacing hosted <code>/dev</code>, we should be able to answer:</p>
 <ol><li>what is concretely better than the current published hosted <code>/dev</code></li><li>what supporting gate evidence backs that claim</li><li>what known issues remain and why they are acceptable for <code>/dev</code></li></ol>
 <p>This is the core professionalism rule for the next release phase.</p>
+<h3>Current Promotion Reality</h3>
+<p>As of April 22, 2026:</p>
+<ul><li>hosted <code>/dev</code> is the real forward line</li><li>hosted <code>/beta</code> and hosted <code>/production</code> are still the same shipped code line</li></ul>
+<p>at <code>13c8421</code></p>
+<p>That means:</p>
+<ul><li>there is no meaningful value in promoting the current hosted <code>/beta</code> to</li></ul>
+<p>hosted <code>/production</code></p>
+<ul><li>the next release cycle should work from the current hosted <code>/dev</code> line</li><li>the next serious candidate should be a new hosted <code>/beta</code> built from the</li></ul>
+<p>improved <code>/dev</code> line, not a delayed approval of the older beta/prod family</p>
 <h3>Major <code>x.y</code> Documentation Gate</h3>
 <p>For every meaningful <code>x.y</code> release, the gate between hosted <code>/beta</code> and hosted <code>/production</code> should include a complete documentation refresh.</p>
 <p>That refresh should cover at least:</p>
@@ -1376,7 +1397,7 @@ npm run build</code></pre>
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 22, 2026
+          Release 1.2.3 · Updated April 23, 2026
         </p>
       </aside>
     </main>
