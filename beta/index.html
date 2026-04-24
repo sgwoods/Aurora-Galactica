@@ -141,8 +141,8 @@ mask:
 #msg.startScreen .startSub{color:#ffd86d}
 @keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes blinkPrompt{0%,54%{opacity:1}55%,100%{opacity:.18}}
-#settingsPanel{position:fixed;z-index:30;width:248px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);padding:16px 18px;display:none;box-shadow:0 16px 36px rgba(0,0,0,.34);backdrop-filter:blur(4px);color:#eaf6ff;overflow:auto}
-#settingsPanel.open{display:block}
+#settingsPanel{position:fixed;z-index:30;display:none;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));border:1px solid rgba(136,245,255,.24);padding:16px 18px;box-shadow:0 16px 36px rgba(0,0,0,.34);backdrop-filter:blur(4px);color:#eaf6ff;overflow:auto}
+#settingsPanel.open{display:flex}
 #settingsPanel h3{margin:0}
 #settingsPanelClose,#feedbackClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:32px;height:32px;font:700 20px/1 "Courier New",Consolas,monospace;cursor:pointer}
 .framePopupHead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:1;padding-bottom:10px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.92))}
@@ -155,17 +155,32 @@ mask:
 #openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
 #recordBtn[disabled]{opacity:.45;cursor:default}
-#testPanel{border-top:1px solid rgba(145,255,179,.16);padding-top:12px}
-#testPanel h4{margin:0 0 8px;font-size:13px;color:#d8ffe4;letter-spacing:.05em}
-#testPanel label{display:block;margin:6px 0 3px;font-size:12px;color:#b7efd0}
-#testPanel input{width:100%;box-sizing:border-box;border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7;padding:6px;font:13px/1.2 "Courier New",Consolas,monospace}
+#settingsSections{display:flex;flex-direction:column;gap:12px;min-height:0}
+.settingsSection{display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid rgba(136,245,255,.14)}
+.settingsSection h4{margin:0;font-size:13px;letter-spacing:.05em}
+#graphicsPanel h4{color:#ffe39a}
+#testPanel h4{color:#d8ffe4}
+.settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+.settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
+.settingsFieldCompact{max-width:240px}
+#graphicsPanel label,#testPanel label{display:block;font-size:12px}
+#graphicsPanel label{color:#ffe6ae}
+#testPanel label{color:#b7efd0}
+#graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
+#graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
+#testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 #testStage,#testShips{max-width:240px}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
-#testHint{margin-top:8px;font-size:11px;color:#9fd0af;line-height:1.25}
+#testHint,.settingsHint{font-size:11px;line-height:1.25}
+#testHint{margin-top:8px;color:#9fd0af}
+.settingsHint{color:#d7c38b}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
 #settingsChannel{color:rgba(126,242,255,.82);text-transform:uppercase}
+#settingsAudioDebug{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
+#settingsAudioDebugLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
+#settingsAudioDebugBody{font-size:10px;line-height:1.35;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
 #settingsNotes{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:3px}
 #settingsNotesLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.58);letter-spacing:.06em;text-transform:uppercase}
 #settingsNotesTitle{font-size:11px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere;word-break:break-word}
@@ -410,18 +425,22 @@ mask:
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
 #leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
-#buildStamp{position:fixed;z-index:18;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:248px;min-height:40px;padding:8px 18px 7px;border:1px solid rgba(136,245,255,.18);background:
+#buildStamp{position:fixed;z-index:18;pointer-events:none;display:flex;align-items:stretch;justify-content:flex-start;min-width:248px;min-height:40px;padding:8px 18px 8px;border:1px solid rgba(136,245,255,.18);background:
  linear-gradient(180deg,rgba(11,20,42,.94),rgba(7,12,27,.9)),
  repeating-linear-gradient(150deg,rgba(58,76,255,.12) 0 16px,transparent 16px 34px);
-box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:center;text-shadow:0 0 6px rgba(0,0,0,.92)}
+box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:left;text-shadow:0 0 6px rgba(0,0,0,.92)}
 #buildStamp::before,#buildStamp::after{content:"";position:absolute;pointer-events:none}
 #buildStamp::before{inset:8px;border:1px solid rgba(255,255,255,.05)}
 #buildStamp::after{left:14px;right:14px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,229,122,.22),transparent)}
+#buildStampBody{display:flex;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding-right:18px}
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
+#buildStampDismissBtn{position:absolute;right:10px;top:8px;width:18px;height:18px;border:1px solid rgba(136,245,255,.26);background:rgba(8,18,35,.68);color:rgba(223,247,255,.86);font:700 14px/1 "Courier New",Consolas,monospace;pointer-events:auto;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+#buildStampDismissBtn:hover,#buildStampDismissBtn:focus-visible{outline:none;border-color:rgba(255,216,109,.76);color:#ffe39a;background:rgba(38,26,8,.84)}
 #buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
 #buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
+#buildStamp.dismissed{display:none!important}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
 #buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
@@ -443,6 +462,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #accountDockLabel,#accountDockStatus{display:none}
  #settingsPanel{bottom:126px!important}
  #settingsActions{grid-template-columns:1fr}
+ #settingsFieldGrid{grid-template-columns:1fr}
  #statusPanels{align-items:stretch;bottom:126px!important}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#buildStamp{width:100%;max-width:none}
  #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}
@@ -451,7 +471,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #leaderboardViewsHead{align-items:flex-start}
  #leaderboardViewButtons{justify-content:flex-start}
  #leaderboardStatus,#buildStamp{text-align:left}
- #buildStamp{align-items:flex-start}
+ #buildStamp{align-items:stretch}
+ #buildStampBody{padding-right:22px}
  #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}
@@ -535,35 +556,95 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
+    <button id="playAudioTestBtn" type="button" aria-label="Play audio test cue">🎵 Play Audio Test</button>
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
-  <div id="testPanel">
-    <h4>Developer Start State</h4>
-    <label for="testStage">Start Stage</label>
-    <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
-    <label for="testShips">Starting Ships</label>
-    <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
-    <label for="testExtendFirst">First Bonus Ship Score</label>
-    <input id="testExtendFirst" type="number" min="0" max="999999" step="1000" value="20000" />
-    <label for="testExtendRecurring">Recurring Bonus Ship Score</label>
-    <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
-    <div id="testRow">
-      <input id="testChallenge" type="checkbox" />
-      <label for="testChallenge">Force challenge opening</label>
+  <div id="settingsSections">
+    <div id="graphicsPanel" class="settingsSection">
+      <h4>Graphics Options</h4>
+      <div class="settingsFieldGrid">
+        <div class="settingsField">
+          <label for="audioTheme">Audio Theme</label>
+          <select id="audioTheme">
+            <option value="auto">Auto</option>
+            <option value="aurora-application">Aurora Application Mix</option>
+            <option value="galaga-original-reference">Galaga Synth Approximation</option>
+            <option value="galaga-reference-assets">Galaga Reference Audio</option>
+          </select>
+        </div>
+        <div class="settingsField">
+          <label for="graphicsTheme">Graphics Theme</label>
+          <select id="graphicsTheme">
+            <option value="auto">Auto</option>
+            <option value="classic-arcade">Classic Arcade</option>
+            <option value="aurora-hint">Aurora Hint</option>
+            <option value="aurora-borealis">Aurora Borealis</option>
+            <option value="aurora-crown">Aurora Crown</option>
+          </select>
+        </div>
+        <div class="settingsField">
+          <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
+          <select id="graphicsStarfieldIntensity">
+            <option value="0.75">Soft</option>
+            <option value="1" selected>Reference</option>
+            <option value="1.25">Bright</option>
+            <option value="1.5">Vivid</option>
+          </select>
+        </div>
+        <div class="settingsField">
+          <label for="graphicsStarfieldSpeed">Starfield Speed</label>
+          <select id="graphicsStarfieldSpeed">
+            <option value="0.8">Calm</option>
+            <option value="1" selected>Reference</option>
+            <option value="1.15">Arcade</option>
+            <option value="1.3">Fast</option>
+          </select>
+        </div>
+      </div>
+      <div class="settingsHint">Graphics options apply live so we can tune look and feel without restarting the run.</div>
     </div>
-    <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
-  </div>
-  <div id="settingsMeta">
-    <span id="settingsRuntime">Platform Platinum · Pack pending</span>
-    <span id="settingsChannel">Lane production beta</span>
-    <span id="settingsVersion">Version 1.2.3</span>
-    <span id="settingsRelease">Apr 10 2026, 8:56 AM EDT</span>
-    <span id="settingsState">beta@13c8421 clean</span>
-  </div>
-  <div id="settingsNotes">
-    <span id="settingsNotesLabel">Latest Note</span>
-    <span id="settingsNotesTitle">Aurora score-surface polish patch</span>
-    <span id="settingsNotesBody">Polished Aurora's score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</span>
+    <div id="testPanel" class="settingsSection">
+      <h4>Developer Start State</h4>
+      <div class="settingsFieldGrid">
+        <div class="settingsField settingsFieldCompact">
+          <label for="testStage">Start Stage</label>
+          <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+        </div>
+        <div class="settingsField settingsFieldCompact">
+          <label for="testShips">Starting Ships</label>
+          <input id="testShips" type="number" min="1" max="9" step="1" value="3" />
+        </div>
+        <div class="settingsField">
+          <label for="testExtendFirst">First Bonus Ship Score</label>
+          <input id="testExtendFirst" type="number" min="0" max="999999" step="1000" value="20000" />
+        </div>
+        <div class="settingsField">
+          <label for="testExtendRecurring">Recurring Bonus Ship Score</label>
+          <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
+        </div>
+      </div>
+      <div id="testRow">
+        <input id="testChallenge" type="checkbox" />
+        <label for="testChallenge">Force challenge opening</label>
+      </div>
+      <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
+    </div>
+    <div id="settingsMeta">
+      <span id="settingsRuntime">Platform Platinum · Pack pending</span>
+      <span id="settingsChannel">Lane production beta</span>
+      <span id="settingsVersion">Version 1.2.3</span>
+      <span id="settingsRelease">Apr 24 2026, 5:43 PM EDT</span>
+      <span id="settingsState">beta@baa1726 clean</span>
+    </div>
+    <div id="settingsAudioDebug">
+      <span id="settingsAudioDebugLabel">Audio Test Status</span>
+      <span id="settingsAudioDebugBody">No audio test has been played in this session.</span>
+    </div>
+    <div id="settingsNotes">
+      <span id="settingsNotesLabel">Latest Note</span>
+      <span id="settingsNotesTitle">Aurora score-surface polish patch</span>
+      <span id="settingsNotesBody">Polished Aurora's score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</span>
+    </div>
   </div>
 </div>
 <div id="helpModal" aria-hidden="true">
@@ -824,10 +905,13 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
 </div>
 <div id="buildStamp">
-  <span id="buildStampChannel">Lane production beta</span>
-  <span id="buildStampVersion">Version 1.2.3</span>
-  <span id="buildStampRelease">Apr 10 2026, 8:56 AM EDT</span>
-  <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
+  <button type="button" id="buildStampDismissBtn" aria-label="Hide build stamp until refresh" title="Hide until refresh">×</button>
+  <div id="buildStampBody">
+    <span id="buildStampChannel">Lane production beta</span>
+    <span id="buildStampVersion">Version 1.2.3</span>
+    <span id="buildStampRelease">Apr 24 2026, 5:43 PM EDT</span>
+    <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
+  </div>
 </div>
 <script>
 /* Generated from @supabase/supabase-js */
@@ -1032,8 +1116,8 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -1042,11 +1126,14 @@ const settingsChannel=document.getElementById('settingsChannel');
 const settingsVersion=document.getElementById('settingsVersion');
 const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
+const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
+const buildStampDismissBtn=document.getElementById('buildStampDismissBtn');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
+const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
@@ -1268,6 +1355,7 @@ const PLATFORM_STORAGE_KEYS={
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let buildStampDismissed=0;
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1353,6 +1441,39 @@ function getSystemDiagnosticsReport(limit=20){
   sessionEvents:recentSessionDiagnostics(limit)
  };
 }
+function getSystemStatusReport(limit=40){
+ const count=Math.max(1,Math.min(SYSTEM_LOG_LIMIT,+limit||40));
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug||{};
+ const audioReference=debug.reference||{};
+ return{
+  generatedAt:new Date().toISOString(),
+  build:BUILD_INFO,
+  location:location.href,
+  game:{
+   stage:S.stage,
+   score:S.score,
+   lives:Math.max(0,S.lives+1),
+   started:!!started,
+   paused:!!paused,
+   challenge:!!S.challenge,
+   attract:!!ATTRACT.active
+  },
+  audioDebug:{
+   theme:(typeof currentAudioOverrides==='function'&&currentAudioOverrides().audioTheme)||'auto',
+   lastCue:debug.lastCue||null,
+   reference:{
+    lastRequested:audioReference.lastRequested||'',
+    lastLoaded:audioReference.lastLoaded||'',
+    lastStarted:audioReference.lastStarted||'',
+    lastError:audioReference.lastError||'',
+    activeCount:Number.isFinite(+audioReference.activeCount)?+audioReference.activeCount:0
+   },
+   statusLine:String(window.__auroraAudioStatusLine||'').trim()
+  },
+  systemLog:recentSystemLogEntries(count),
+  sessionEvents:recentSessionDiagnostics(Math.min(40,count))
+ };
+}
 function recordSystemIssue(action,message,data={},opts={}){
  const entry={
   at:new Date().toISOString(),
@@ -1386,6 +1507,7 @@ function recordSystemIssue(action,message,data={},opts={}){
 }
 window.recordSystemIssue=recordSystemIssue;
 window.getSystemDiagnosticsReport=getSystemDiagnosticsReport;
+window.getSystemStatusReport=getSystemStatusReport;
 window.recentSystemLogEntries=recentSystemLogEntries;
 function randUnit(){
  if(!RNG_SEED)return Math.random();
@@ -1406,7 +1528,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3-beta.1',label:'1.2.3-beta.1+build.388.sha.13c8421.beta',commit:'13c8421211aecc72ea936eca6fc0793fd40b1267',branch:'beta',dirty:false,released:'Apr 10 2026, 8:56 AM EDT',state:'beta@13c8421 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.2.3-beta.1',label:'1.2.3-beta.1+build.484.sha.baa1726.beta',commit:'baa17264f350ba9737d2ca719919f80739a85c80',branch:'beta',dirty:false,released:'Apr 24 2026, 5:43 PM EDT',state:'beta@baa1726 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1444,7 +1566,7 @@ let gameOverHtml='';
 let gameOverState=null;
 let harnessFrameAccum=0;
 let harnessClockControlled=0;
-const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5};
+const ATTRACT={active:0,phase:'',timer:0,cycle:0,scoreViews:['all','validated'],scoreViewIndex:0,scoreViewTimer:0,scoreViewDwell:4.5,audioPulseTimer:0,audioPulseIndex:0};
 const CHALLENGE_GROUP_BONUS=[1000,1000,1000,2000,2000,2000,3000,3000,3000];
 const VIDEO_REC={enabled:readPref(RECORD_PREF_KEY)!=='0',active:0,rec:null,stream:null,chunks:[],mime:'',sessionId:'',file:'',afterStop:[],stopMeta:null};
 const VIDEO_REC_INCLUDE_AUDIO=1;
@@ -1483,52 +1605,326 @@ const AC=()=>{
  sfx.bus.connect(sfx.tap);
  return A;
 };
+window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
+if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDebug.history=[];
+if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0};
+window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
- a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,
- play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
+ a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
+ resolveAtmosphere(opts={}){
+  const attractPhase=opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
+  const frontDoor=opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract);
+  const challenge=opts.challenge!==undefined?!!opts.challenge:!!S.challenge;
+  const phase=String(opts.phase||'').trim()||(
+   frontDoor?'frontDoor'
+    : attractPhase==='scores'?'wait'
+    : attractPhase==='demo'?'demo'
+    : challenge?'challenge'
+    : 'stage'
+  );
+  if(typeof resolvedAudioAtmosphere==='function'){
+   return resolvedAudioAtmosphere({
+    stagePresentation:opts.stagePresentation||S.stagePresentation,
+    atmosphereTheme:opts.atmosphereTheme||'',
+    phase,
+    challenge,
+    frontDoor,
+    attractPhase
+   });
+  }
+  return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
+ },
+ recordCue(name,atmosphere,opts={},cue=null){
+  const entry=Object.freeze({
+   cue:String(name||''),
+   atmosphereId:atmosphere?.id||'classic-arcade',
+   audioTheme:atmosphere?.audioTheme||'classic-arcade',
+   phase:atmosphere?.phase||opts.phase||'stage',
+   variant:Number.isFinite(+opts.variant)?(+opts.variant|0):0,
+   referenceClip:String(cue?.referenceClip||'').trim(),
+   referenceClipStart:Number.isFinite(+cue?.clipStart)?+cue.clipStart:0,
+   referenceClipDuration:Number.isFinite(+cue?.clipDuration)?+cue.clipDuration:0,
+   stage:+(S.stage||0),
+   challenge:!!S.challenge,
+   at:+(performance.now()/1000).toFixed(3)
+  });
+  window.__platinumAudioDebug.lastCue=entry;
+  window.__platinumAudioDebug.history.push(entry);
+  if(window.__platinumAudioDebug.history.length>24)window.__platinumAudioDebug.history.shift();
+  return entry;
+ },
+ logCueEvent(entry=null){
+  if(!entry||typeof logEvent!=='function')return;
+  logEvent('audio_cue',{
+   cue:entry.cue,
+   atmosphereId:entry.atmosphereId,
+   audioTheme:entry.audioTheme,
+   phase:entry.phase,
+   variant:entry.variant,
+   referenceClip:entry.referenceClip||'',
+   referenceClipStart:Number.isFinite(+entry.referenceClipStart)?+entry.referenceClipStart:0,
+    referenceClipDuration:Number.isFinite(+entry.referenceClipDuration)?+entry.referenceClipDuration:0,
+   challenge:!!entry.challenge,
+   stage:+(entry.stage||0)
+  });
+ },
+ cueDef(name,opts={}){
+  const atmosphere=opts.resolvedAtmosphere||this.resolveAtmosphere(opts);
+  const cue=typeof currentGamePackAudioCue==='function'
+   ? currentGamePackAudioCue(name,{
+    stagePresentation:opts.stagePresentation||S.stagePresentation,
+    atmosphereTheme:atmosphere.id,
+    resolvedAtmosphere:atmosphere,
+    phase:atmosphere.phase,
+    challenge:opts.challenge!==undefined?!!opts.challenge:!!S.challenge,
+    attractPhase:opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||''),
+    frontDoor:opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract)
+   })
+   : null;
+  if(!cue){
+   this.recordCue(name,atmosphere,opts,null);
+   return null;
+  }
+  this.recordCue(name,atmosphere,opts,cue);
+  if(Array.isArray(cue.variants)&&cue.variants.length){
+   return cue.variants[Math.abs(Number.isFinite(+opts.variant)?(+opts.variant|0):0)%cue.variants.length];
+  }
+  return cue;
+ },
+ playCue(name,opts={}){
+  if(DOCS_PREVIEW_MODE&&!opts.docsPreview)return;
+  const cue=this.cueDef(name,opts);
+  if(!cue)return;
+  const allowIdle=!!cue.allowIdle||!!opts.allowIdle;
+  const cueEntry=window.__platinumAudioDebug.lastCue||null;
+  if(cue.referenceClip){
+   if(Array.isArray(cue.stopCueNames)&&cue.stopCueNames.length)this.stopCueNames(cue.stopCueNames);
+   this.playReferenceClip(cue.referenceClip,{
+    allowIdle,
+    volume:cue.referenceVolume,
+    cooldownMs:cue.cooldownMs,
+    clipStart:cue.clipStart,
+    clipDuration:cue.clipDuration,
+    cueEntry
+   });
+   return;
+  }
+  this.logCueEvent(cueEntry);
+  if(Array.isArray(cue.seq)&&cue.seq.length)this.seq(cue.seq,cue.step||.05,cue.wave||'square',cue.volume||.02,cue.slide||0,cue.lpHz||3600,allowIdle);
+  if(Array.isArray(cue.tones))for(const tone of cue.tones){
+   this.play(tone.freq||440,tone.duration||.08,tone.wave||'square',tone.volume||.02,tone.slide||0,tone.detune||0,tone.lpHz||4200,tone.delay||0,allowIdle);
+  }
+  if(Array.isArray(cue.noise))for(const burst of cue.noise){
+   this.noise(burst.duration||.08,burst.volume||.02,burst.hp||900,burst.delay||0,allowIdle);
+  }
+ },
+ stopReferenceClips(predicate=null){
+  const matches=typeof predicate==='function'?predicate:()=>true;
+  const active=[...this.referenceActive];
+  for(const source of active){
+   if(!source||!matches(source))continue;
+   try{source.stop(0);}catch{}
+  }
+ },
+ stopCueNames(names=[]){
+  const allow=new Set((names||[]).map(name=>String(name||'').trim()).filter(Boolean));
+  if(!allow.size)return;
+  this.stopReferenceClips(source=>allow.has(String(source?.__cue||'').trim()));
+ },
+ playReferenceClip(src='',opts={}){
+  const clip=String(src||'').trim();
+  if(!clip||(!(aud||opts.allowIdle)))return;
+  const now=performance.now();
+  const cooldown=Math.max(0,+opts.cooldownMs||0);
+  const lastAt=+this.referenceCooldowns[clip]||0;
+  if(cooldown&&lastAt&&(now-lastAt)<cooldown)return;
+  this.referenceCooldowns[clip]=now;
+  window.__platinumAudioDebug.reference.lastRequested=clip;
+  this.logCueEvent(opts.cueEntry||window.__platinumAudioDebug.lastCue||null);
+  const volume=Math.max(0,Math.min(1,Number.isFinite(+opts.volume)?+opts.volume:1));
+  const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
+  const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
+  this.loadReferenceBuffer(clip).then(buffer=>{
+   if(!buffer||audioMuted)return;
+   try{
+      const A=AC();
+    if(typeof A.resume==='function'&&A.state==='suspended')A.resume().catch(()=>{});
+    const source=A.createBufferSource();
+    const gain=A.createGain();
+    gain.gain.value=volume;
+    source.buffer=buffer;
+    source.__cue=String(opts?.cueEntry?.cue||'').trim();
+    source.__clip=clip;
+    source.__clipStart=clipStart;
+    source.__clipDuration=clipDuration;
+      source.connect(gain);
+      gain.connect(this.bus);
+      if(clipDuration>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)),Math.min(clipDuration,Math.max(.01,buffer.duration-clipStart)));
+      else if(clipStart>0)source.start(0,Math.min(clipStart,Math.max(0,buffer.duration-.01)));
+      else source.start();
+      this.referenceActive.push(source);
+      window.__platinumAudioDebug.reference.lastStarted=clip;
+      window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      if(this.referenceActive.length>24)this.referenceActive.splice(0,this.referenceActive.length-24);
+      const cleanup=()=>{
+       this.referenceActive=this.referenceActive.filter(entry=>entry!==source);
+       window.__platinumAudioDebug.reference.activeCount=this.referenceActive.length;
+      };
+      source.addEventListener('ended',cleanup,{once:true});
+    }catch{}
+  }).catch(()=>{});
+ },
+ loadReferenceBuffer(src=''){
+  const clip=String(src||'').trim();
+  if(!clip)return Promise.resolve(null);
+  if(this.referenceBuffers[clip])return this.referenceBuffers[clip];
+  const url=new URL(clip,location.href).toString();
+  this.referenceBuffers[clip]=fetch(url)
+   .then(response=>{
+    if(!response.ok)throw new Error(`Failed to load reference audio: ${response.status}`);
+   return response.arrayBuffer();
+  })
+  .then(bytes=>AC().decodeAudioData(bytes.slice(0)))
+  .then(buffer=>{
+   if(buffer)window.__platinumAudioDebug.reference.lastLoaded=clip;
+   return buffer;
+  })
+  .catch(err=>{
+    delete this.referenceBuffers[clip];
+    window.__platinumAudioDebug.reference.lastError=`${clip}: ${String(err&&err.message||err)}`;
+    recordSystemIssue('reference_audio_load_failed',`Reference audio failed to load for ${clip}`,{clip,error:String(err&&err.message||err)},{level:'warn'});
+    return null;
+  });
+  return this.referenceBuffers[clip];
+ },
+ primeReferenceTheme(themeId=''){
+  if(String(themeId||'').trim()!=='galaga-reference-assets')return;
+  [
+   'assets/reference-audio/galaga3-start.m4a',
+   'assets/reference-audio/galaga3-ambience-convoy.m4a',
+   'assets/reference-audio/galaga3-attack-charger.m4a',
+   'assets/reference-audio/galaga3-tractor-beam.m4a',
+   'assets/reference-audio/galaga3-fighter-captured.m4a',
+   'assets/reference-audio/galaga3-death.m4a',
+   'assets/reference-audio/galaga3-challenging-stage.m4a',
+   'assets/reference-audio/galaga2-challenging-stage-results.m4a',
+   'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+   'assets/reference-audio/galaga3-level-underscore.m4a',
+   'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a'
+  ].forEach(clip=>{this.loadReferenceBuffer(clip).catch(()=>{});});
+ },
+ play(f=440,d=.08,t='square',v=.03,sl=0,det=0,lpHz=4200,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,o=A.createOscillator(),o2=A.createOscillator(),g=A.createGain(),lp=A.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=lpHz;g.gain.setValueAtTime(.0001,tm);g.gain.exponentialRampToValueAtTime(v,tm+.008);g.gain.exponentialRampToValueAtTime(.0001,tm+d);
   o.type=t;o.frequency.setValueAtTime(f,tm);o.frequency.linearRampToValueAtTime(Math.max(25,f+sl),tm+d);
   o2.type=t==='square'?'triangle':'square';o2.frequency.setValueAtTime(f*(1+det),tm);o2.frequency.linearRampToValueAtTime(Math.max(25,(f+sl)*(1+det)),tm+d);
   o.connect(lp);o2.connect(lp);lp.connect(g);g.connect(this.bus);o.start(tm);o2.start(tm);o.stop(tm+d+.03);o2.stop(tm+d+.03);
  },
- noise(d=.08,v=.02,hp=900,at=0){if(!aud)return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
+ noise(d=.08,v=.02,hp=900,at=0,allowIdle=0){if(!(aud||allowIdle))return;const A=AC(),tm=A.currentTime+at,b=this.n||(this.n=(()=>{const n=A.sampleRate*.35,buf=A.createBuffer(1,n,A.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=auxRandUnit()*2-1;return buf})()),src=A.createBufferSource(),g=A.createGain(),f=A.createBiquadFilter();
   src.buffer=b;src.loop=true;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,tm);g.gain.exponentialRampToValueAtTime(.0001,tm+d);src.connect(f);f.connect(g);g.connect(this.bus);src.start(tm);src.stop(tm+d+.01);
  },
- seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92)},
- start(){this.seq([523,659,784],.055,'square',.02,24,3600);this.play(392,.18,'triangle',.018,110,.005,2500,.02)},
- shot(){this.play(1140,.028,'square',.006,-620,.006,6200);this.play(1520,.018,'square',.003,-480,-.004,6800,.006)},
- enemyShot(){this.play(338,.075,'triangle',.009,-130,.002,3000);this.play(258,.05,'square',.004,-90,.002,2600,.012)},
- hit(){this.play(228,.05,'square',.013,-180,.008,3200);this.play(146,.1,'sawtooth',.015,-220,.012,2300,.02);this.noise(.05,.006,1600,.012)},
- bossHit(){this.play(312,.06,'square',.015,-120,.004,3600);this.play(202,.12,'triangle',.012,-80,.003,2500,.014);this.noise(.04,.004,1900,.01)},
- shipHit(){this.play(228,.11,'square',.022,-300,.012,2600);this.play(176,.19,'sawtooth',.024,-320,.016,2100,.016);this.play(124,.28,'triangle',.022,-150,.009,1600,.028);this.noise(.16,.016,1120,.012);this.noise(.08,.01,760,.03)},
- boom(k='bee'){const boss=k==='boss'||k==='rogue';this.play(boss?420:520,.026,'square',boss?.011:.008,-340,.004,4200);this.play(boss?280:360,.04,'square',boss?.008:.006,-280,-.003,3600,.012);this.play(boss?180:240,boss?.11:.075,'triangle',boss?.011:.006,-90,-.004,2100,.018);if(boss)this.noise(.045,.004,1400,.016)},
- beam(){this.play(92,.34,'sawtooth',.018,48,.018,3000);this.play(138,.28,'triangle',.009,30,.01,2400,.04);this.noise(.11,.004,1900,.03)},
- rescue(){this.seq([660,880,990,1320],.05,'triangle',.016,70,4300);this.play(1760,.08,'square',.007,-90,.003,5200,.08)},
- extend(){
-  this.seq([659,880,1175],.055,'triangle',.014,55,4300);
-  this.play(1568,.11,'square',.008,-60,.004,5200,.05);
-  this.play(2093,.08,'triangle',.006,-40,.003,5600,.11);
+ seq(ns=[],step=.05,t='square',v=.02,sl=0,lpHz=3600,allowIdle=0){for(let i=0;i<ns.length;i++)if(ns[i]>0)this.play(ns[i],step,t,v,sl,0,lpHz,i*step*.92,allowIdle)},
+ start(){this.playCue('gameStart',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
+ formationArrival(){this.playCue('formationArrival',{phase:S.challenge?'challenge':'stage',challenge:!!S.challenge})},
+ shot(){this.playCue('playerShot',{phase:S.challenge?'challenge':'stage'})},
+ enemyShot(){this.playCue('enemyShot',{phase:S.challenge?'challenge':'stage'})},
+ hit(){this.playCue('enemyHit',{phase:S.challenge?'challenge':'stage'})},
+ bossHit(){this.playCue('bossHit',{phase:S.challenge?'challenge':'stage'})},
+ shipHit(){this.playCue('playerHit',{phase:S.challenge?'challenge':'stage'})},
+ boom(k='bee'){this.playCue(k==='boss'||k==='rogue'?'bossBoom':'enemyBoom',{phase:S.challenge?'challenge':'stage'})},
+ beam(){this.playCue('captureBeam',{phase:S.challenge?'challenge':'stage'})},
+ captureSuccess(){this.playCue('captureSuccess',{phase:S.challenge?'challenge':'stage'})},
+ rescue(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
+ extend(){this.playCue('extendAward',{phase:'stage'})},
+ over(){this.playCue('gameOver',{phase:'results'})},
+ capturedFighterDestroyed(){this.playCue('capturedFighterDestroyed',{phase:S.challenge?'challenge':'stage'})},
+ challengeResult(perfect=0){this.playCue(perfect?'challengePerfect':'challengeResults',{phase:'challenge',challenge:1})},
+ march(i=0){this.playCue('stagePulse',{phase:S.challenge?'challenge':'stage',variant:i})},
+ attackCharge(){this.playCue('attackCharge',{phase:S.challenge?'challenge':'stage'})},
+ uiTick(){this.playCue('uiTick',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
+ uiConfirm(){this.playCue('uiConfirm',{phase:(!started&&!S.attract)?'frontDoor':((typeof ATTRACT!=='undefined'&&ATTRACT.phase==='scores')?'wait':'stage')})},
+ captureRetreat(){this.playCue('captureRetreat',{phase:S.challenge?'challenge':'stage'})},
+ join(){this.playCue('rescueJoin',{phase:S.challenge?'challenge':'stage'})},
+ highScore(rank=0){this.playCue(rank===1?'highScoreFirst':'highScoreOther',{phase:'results'})},
+ transition(challenge=0){this.playCue(challenge?'challengeTransition':'stageTransition',{phase:challenge?'challenge':'stage',challenge:!!challenge})},
+ attractEnter(phase='demo'){
+  const frontDoorTheme=currentGamePack()?.frontDoor?.atmosphereTheme||'';
+  this.playCue('attractEnter',{
+   phase,
+   allowIdle:1,
+   atmosphereTheme:(phase==='wait'||phase==='demo')?frontDoorTheme:''
+  });
  },
- over(){this.seq([294,262,220,196],.11,'triangle',.017,-45,2300);this.play(147,.32,'sawtooth',.016,-120,.01,1900,.018);this.noise(.09,.004,1100,.1)},
- march(i=0){const p=[[392,523,659],[330,440,523],[440,587,698],[294,392,523]][i%4];this.play(p[0],.055,'triangle',.009,-16,.002,2800);this.play(p[1],.04,'square',.004,-12,-.002,4000,.016);this.play(p[2],.03,'square',.0024,-18,.002,4600,.032)},
- uiTick(){this.play(920,.024,'square',.004,-110,.001,5400);this.play(1320,.016,'triangle',.0025,-70,.001,5200,.004)},
- uiConfirm(){this.seq([660,880],.04,'triangle',.008,30,4200)},
- captureRetreat(){
-  this.seq([247,294,370,494],.06,'triangle',.012,18,2600);
-  this.play(620,.18,'square',.006,-70,.08,3400);
+ attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
+};
+
+function unlockAudioFromInteraction(){
+ aud=1;
+ try{
+  AC();
+  if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
+ }catch{}
+}
+
+window.__auroraDocsPreview=window.__platinumDocsPreview={
+ ready(){
+  return typeof currentGamePackAudioCue==='function';
  },
- join(){
-  this.seq([523,659,784,1047],.05,'triangle',.013,42,4200);
-  this.play(1318,.09,'square',.006,-80,.08,5000);
- },
- transition(challenge=0){
-  if(challenge){
-   this.seq([392,523,659,784],.055,'triangle',.012,40,3600);
-   this.play(988,.12,'square',.006,-70,.12,4600);
-  }else{
-   this.seq([440,554,659],.06,'triangle',.011,24,3400);
-   this.play(880,.09,'square',.005,-80,.1,4300);
+ playCue(payload={}){
+  const cue=String(payload.cue||'').trim();
+  if(!cue)throw new Error('Missing cue for Aurora docs preview.');
+  if(typeof installGamePack==='function'&&typeof currentGamePackKey==='function'&&currentGamePackKey()!=='aurora-galactica'){
+   installGamePack('aurora-galactica',{persist:false});
   }
+  unlockAudioFromInteraction();
+  const phase=String(payload.phase||'stage').trim()||'stage';
+  const atmosphereTheme=String(payload.atmosphereTheme||'').trim();
+  const attractPhase=payload.attractPhase!==undefined
+   ? String(payload.attractPhase||'')
+   : phase==='wait'?'scores':phase==='demo'?'demo':'';
+  const frontDoor=payload.frontDoor!==undefined?!!payload.frontDoor:phase==='frontDoor';
+  const challenge=!!payload.challenge;
+  const variant=Number.isFinite(+payload.variant)?(+payload.variant|0):0;
+  const audioTheme=String(payload.audioTheme||'').trim();
+  const pack=typeof currentGamePack==='function'?currentGamePack():null;
+  const stagePresentation=payload.stagePresentation||(
+   atmosphereTheme
+    ? {
+      atmosphereTheme,
+      backgroundMode:typeof resolvePackAtmosphereBackground==='function'
+       ? resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:phase==='frontDoor'?'frontDoor':phase})
+       : ''
+     }
+    : null
+  );
+  const resolvedAtmosphere=audioTheme
+   ? Object.freeze({
+      id:atmosphereTheme||stagePresentation?.atmosphereTheme||'classic-arcade',
+      phase,
+      audioTheme,
+      backgroundMode:stagePresentation?.backgroundMode||'',
+      group:'docs-preview'
+     })
+   : null;
+  sfx.playCue(cue,{
+   phase,
+   atmosphereTheme,
+   stagePresentation,
+   resolvedAtmosphere,
+   challenge,
+   variant,
+   frontDoor,
+   attractPhase,
+   allowIdle:1,
+   docsPreview:1
+  });
+  return Object.freeze({
+   cue,
+   phase,
+   atmosphereTheme:atmosphereTheme||stagePresentation?.atmosphereTheme||'',
+   audioTheme:audioTheme||resolvedAtmosphere?.audioTheme||'',
+   challenge,
+   variant
+  });
  }
 };
 
@@ -1561,8 +1957,92 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
+
+const DEFAULT_STARFIELD_PROFILE=Object.freeze({
+ id:'classic-arcade-stars',
+ count:108,
+ sizeMin:.95,
+ sizeMax:1.55,
+ alphaMin:.52,
+ alphaMax:.96,
+ twinkleMin:.88,
+ twinkleAmp:.2,
+ speedMin:9,
+ speedMax:23,
+ palette:Object.freeze(['#ffffff','#d8ecff','#8bb8ff','#1e52ff','#fff36a','#ffb21f','#9cff71','#ff3b33','#db38ff','#3fe7ff','#d7a4ff'])
+});
+
+function resolvedStarfieldProfile(opts={}){
+ const atmosphere=typeof resolvedVisualAtmosphere==='function'
+  ? resolvedVisualAtmosphere({
+   stagePresentation:opts.stagePresentation||S.stagePresentation,
+   atmosphereTheme:opts.atmosphereTheme||'',
+   phase:opts.phase||'',
+   challenge:opts.challenge!==undefined?!!opts.challenge:!!S.challenge,
+   frontDoor:opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract),
+   attractPhase:opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'')
+  })
+  : null;
+ const graphics=currentGraphicsOverrides();
+ const intensityScale=sanitizeStarfieldMultiplier(graphics.starfieldIntensity,1);
+ const speedScale=sanitizeStarfieldMultiplier(graphics.starfieldSpeed,1);
+ const profile=Object.assign({},DEFAULT_STARFIELD_PROFILE,atmosphere?.starfield||{});
+ profile.alphaMin=Math.min(1,Math.max(.08,profile.alphaMin*intensityScale));
+ profile.alphaMax=Math.min(1,Math.max(profile.alphaMin,profile.alphaMax*intensityScale));
+ profile.speedMin=Math.max(2,profile.speedMin*speedScale);
+ profile.speedMax=Math.max(profile.speedMin,profile.speedMax*speedScale);
+ profile.intensityScale=intensityScale;
+ profile.speedScale=speedScale;
+ return profile;
+}
+
+function syncStarfieldProfile(opts={}){
+ const profile=resolvedStarfieldProfile(opts);
+ const sig=JSON.stringify({
+  id:profile.id||'classic-arcade-stars',
+  count:+(profile.count||DEFAULT_STARFIELD_PROFILE.count),
+  sizeMin:+(profile.sizeMin||DEFAULT_STARFIELD_PROFILE.sizeMin),
+  sizeMax:+(profile.sizeMax||DEFAULT_STARFIELD_PROFILE.sizeMax),
+  alphaMin:+(profile.alphaMin||DEFAULT_STARFIELD_PROFILE.alphaMin),
+  alphaMax:+(profile.alphaMax||DEFAULT_STARFIELD_PROFILE.alphaMax),
+  twinkleMin:+(profile.twinkleMin||DEFAULT_STARFIELD_PROFILE.twinkleMin),
+  twinkleAmp:+(profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp),
+  speedMin:+(profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin),
+  speedMax:+(profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax),
+  intensityScale:+(profile.intensityScale||1),
+  speedScale:+(profile.speedScale||1),
+  palette:[...(profile.palette||DEFAULT_STARFIELD_PROFILE.palette)]
+ });
+ if(S.starfieldSig===sig&&S.st.length===profile.count)return profile;
+ S.starfieldSig=sig;
+ S.st.length=0;
+ const palette=(profile.palette&&profile.palette.length)?profile.palette:DEFAULT_STARFIELD_PROFILE.palette;
+ const count=Math.max(24,+profile.count||DEFAULT_STARFIELD_PROFILE.count);
+ const sizeMin=Math.max(.5,+profile.sizeMin||DEFAULT_STARFIELD_PROFILE.sizeMin);
+ const sizeMax=Math.max(sizeMin,+profile.sizeMax||DEFAULT_STARFIELD_PROFILE.sizeMax);
+ const alphaMin=Math.max(.08,Math.min(.98,+profile.alphaMin||DEFAULT_STARFIELD_PROFILE.alphaMin));
+ const alphaMax=Math.max(alphaMin,Math.min(1,+profile.alphaMax||DEFAULT_STARFIELD_PROFILE.alphaMax));
+ const twinkleMin=Math.max(.2,Math.min(1,+profile.twinkleMin||DEFAULT_STARFIELD_PROFILE.twinkleMin));
+ const twinkleAmp=Math.max(0,Math.min(.5,+profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp));
+ const speedMin=Math.max(2,+profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin);
+ const speedMax=Math.max(speedMin,+profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax);
+ for(let i=0;i<count;i++){
+  S.st.push({
+   x:auxRnd(PLAY_W),
+   y:auxRnd(PLAY_H),
+   s:auxRnd(sizeMax,sizeMin),
+   c:palette[(auxRandUnit()*palette.length)|0],
+   tw:auxRnd(6.28),
+   alpha:auxRnd(alphaMax,alphaMin),
+   twMin:auxRnd(Math.min(1,twinkleMin+.04),Math.max(.18,twinkleMin-.04)),
+   twAmp:auxRnd(Math.min(.4,twinkleAmp+.04),Math.max(.04,twinkleAmp-.04)),
+   vy:auxRnd(speedMax,speedMin)
+  });
+ }
+ return profile;
+}
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
 const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
@@ -1603,7 +2083,13 @@ function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
  return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
 }
 const shotCap=()=>S.t?S.t.shotCap:0;
-const recTime=()=>REC?+((performance.now()-REC.t0)/1000).toFixed(3):0;
+const recTime=()=>{
+ if(!REC)return 0;
+ if(isHarnessClockControlled()||useDeterministicHarnessClock()){
+  return +(+S.simT||0).toFixed(3);
+ }
+ return +((performance.now()-REC.t0)/1000).toFixed(3);
+};
 function useDeterministicHarnessClock(){
  return !!(window.__platinumHarnessPersona||window.__auroraHarnessPersona);
 }
@@ -1724,10 +2210,13 @@ function enterAttractScores(){
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewDwell=4.5;
  ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell;
+ ATTRACT.audioPulseTimer=.95;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.timer=Math.max(ATTRACT.scoreViewDwell*ATTRACT.scoreViews.length,9);
  S.attract=1;
  resetAttractBackdrop();
  if(typeof prefetchLeaderboards==='function')prefetchLeaderboards(1);
+ sfx.attractEnter('wait');
  logEvent('attract_scores',{cycle:ATTRACT.cycle});
 }
 function startAttractDemo(opts={}){
@@ -1747,12 +2236,15 @@ function startAttractDemo(opts={}){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=.8;
+ ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
  logEvent('attract_demo_start',{cycle:ATTRACT.cycle,record});
+ sfx.attractEnter('demo');
  if(record)startRunRecording();
  spawnStage();
 }
@@ -1764,6 +2256,8 @@ function stopAttractLoop(){
  ATTRACT.scoreViews=['all','validated'];
  ATTRACT.scoreViewIndex=0;
  ATTRACT.scoreViewTimer=0;
+ ATTRACT.audioPulseTimer=0;
+ ATTRACT.audioPulseIndex=0;
  S.attract=0;
  syncPauseUi();
 }
@@ -1773,19 +2267,169 @@ if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
  writePref(BEST_SCORE_KEY,String(S.best));
 }
+const DEFAULT_TEST_CFG=Object.freeze({
+ stage:1,
+ ships:3,
+ extendFirst:20000,
+ extendRecurring:70000,
+ challenge:false,
+ audioTheme:'auto',
+ graphicsTheme:'auto',
+ starfieldIntensity:1,
+ starfieldSpeed:1
+});
+let testCfgCache=null;
+function sanitizeAudioThemeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:'auto';
+}
+function sanitizeGraphicsThemeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ if(next==='auto')return 'auto';
+ if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
+ const resolved=currentGamePackAtmosphereTheme(next);
+ return resolved?.id===next?next:'auto';
+}
+function sanitizeStarfieldMultiplier(value,fallback=1){
+ const next=+value;
+ if(!Number.isFinite(next))return fallback;
+ return Math.round(cl(next,.5,1.8)*100)/100;
+}
+function applyTestCfgToControls(cfg){
+ if(testStage)testStage.value=cfg.stage;
+ if(testShips)testShips.value=cfg.ships;
+ if(testExtendFirst)testExtendFirst.value=cfg.extendFirst;
+ if(testExtendRecurring)testExtendRecurring.value=cfg.extendRecurring;
+ if(testChallenge)testChallenge.checked=cfg.challenge;
+ if(audioTheme)audioTheme.value=cfg.audioTheme;
+ if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
+ if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
+ if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+}
+function currentAudioOverrides(){
+ const cfg=testCfgCache||loadTestCfg();
+ return{
+  audioTheme:sanitizeAudioThemeValue(cfg.audioTheme)
+ };
+}
+function usesReferenceTimingModel(){
+ return typeof currentGamePackReferenceTiming==='function';
+}
+function usesRuntimeGalagaReferenceAudio(){
+ return currentAudioOverrides().audioTheme==='galaga-reference-assets';
+}
+const REFERENCE_TRANSITION_SENSITIVE_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit',
+ 'bossBoom',
+ 'stageTransition',
+ 'challengeTransition',
+ 'challengeResults',
+ 'challengePerfect'
+]);
+const REFERENCE_BOSS_MOMENT_CUES=Object.freeze([
+ 'stagePulse',
+ 'attackCharge',
+ 'enemyShot',
+ 'enemyHit',
+ 'enemyBoom',
+ 'bossHit'
+]);
+function stopReferenceCueSet(names=[]){
+ if(!usesRuntimeGalagaReferenceAudio()||typeof sfx==='undefined'||typeof sfx.stopCueNames!=='function')return;
+ sfx.stopCueNames(names);
+}
+function holdReferenceGameplayCadence(seconds=0){
+ S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
+}
+function clearReferenceTransitionCueWindow(extra=[]){
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+}
+function clearReferenceBossMomentCueWindow(){
+ stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
+ const timing=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
+ holdReferenceGameplayCadence(timing?.deathCadenceHold??.72);
+}
+function resolvedAudioAtmosphere(opts={}){
+ const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
+  ? currentGamePackResolvedAtmosphere(opts)
+  : Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase:String(opts.phase||'stage').trim()||'stage'});
+ const selection=currentAudioOverrides().audioTheme;
+ if(selection==='auto'||selection==='aurora-application')return atmosphere;
+ const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
+ const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';
+ const overrideTheme=selection==='galaga-reference-assets'
+  ? 'galaga-reference-assets'
+  : 'galaga-original-reference';
+ return Object.freeze(Object.assign({},atmosphere,{
+  audioTheme:useGalagaReference?overrideTheme:(atmosphere?.audioTheme||'aurora-crown'),
+  audioThemeOverride:selection
+ }));
+}
+function currentGraphicsOverrides(){
+ const cfg=testCfgCache||loadTestCfg();
+ return{
+  graphicsTheme:sanitizeGraphicsThemeValue(cfg.graphicsTheme),
+  starfieldIntensity:sanitizeStarfieldMultiplier(cfg.starfieldIntensity,1),
+  starfieldSpeed:sanitizeStarfieldMultiplier(cfg.starfieldSpeed,1)
+ };
+}
+function resolvedVisualAtmosphere(opts={}){
+ const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
+  ? currentGamePackResolvedAtmosphere(opts)
+  : null;
+ const graphics=currentGraphicsOverrides();
+ if(graphics.graphicsTheme==='auto'||typeof currentGamePackAtmosphereTheme!=='function')return atmosphere;
+ const theme=currentGamePackAtmosphereTheme(graphics.graphicsTheme);
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const phase=String(
+  atmosphere?.phase
+  || opts.phase
+  || (opts.frontDoor?'frontDoor':'')
+  || (opts.challenge?'challenge':'')
+  || (opts.attractPhase==='scores'?'wait':'')
+  || (opts.attractPhase==='demo'?'demo':'')
+  || 'stage'
+ ).trim()||'stage';
+ return Object.freeze({
+  id:theme.id,
+  label:theme.label||theme.id,
+  group:theme.group||'default',
+  phase,
+  backgroundMode:typeof resolvePackAtmosphereBackground==='function'
+   ? resolvePackAtmosphereBackground({pack,atmosphereTheme:theme.id,phase})
+   : atmosphere?.backgroundMode||'classic-stars',
+  audioTheme:atmosphere?.audioTheme||theme.audioTheme||'classic-arcade',
+  starfield:theme.starfield||atmosphere?.starfield||null,
+  baseThemeId:atmosphere?.id||'',
+  overrideThemeId:theme.id
+ });
+}
 function loadTestCfg(){
+ if(testCfgCache)return Object.assign({},testCfgCache);
  try{
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
   const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:20000;
   const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:70000;
-  return{
+  testCfgCache={
    stage:cl(+raw.stage||1,1,99)|0,
    ships:cl(+raw.ships||3,1,9)|0,
    extendFirst,
    extendRecurring,
-   challenge:!!raw.challenge
+   challenge:!!raw.challenge,
+   audioTheme:sanitizeAudioThemeValue(raw.audioTheme),
+   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme),
+   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,1),
+   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,1)
   };
- }catch{return{stage:1,ships:3,extendFirst:20000,extendRecurring:70000,challenge:0}}
+ }catch{
+  testCfgCache=Object.assign({},DEFAULT_TEST_CFG);
+ }
+ return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
  const cfg={
@@ -1793,15 +2437,17 @@ function saveTestCfg(){
   ships:cl(+testShips.value||3,1,9)|0,
   extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
   extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-  challenge:!!testChallenge.checked
+  challenge:!!testChallenge.checked,
+  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||'auto'),
+  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||'auto'),
+  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1),
+  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)
  };
- testStage.value=cfg.stage;
- testShips.value=cfg.ships;
- testExtendFirst.value=cfg.extendFirst;
- testExtendRecurring.value=cfg.extendRecurring;
- testChallenge.checked=cfg.challenge;
+ testCfgCache=cfg;
+ applyTestCfgToControls(cfg);
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
- return cfg;
+ if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
+ return Object.assign({},cfg);
 }
 function syncSettingsUi(){
  settingsPanel.classList.toggle('open',settingsOpen);
@@ -1812,6 +2458,51 @@ function syncSettingsUi(){
  if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
+ syncAudioDebugUi();
+}
+function syncAudioDebugUi(){
+ if(!settingsAudioDebugBody)return;
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ const lastCue=debug?.lastCue;
+ const ref=debug?.reference;
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ const parts=[
+  `Theme: ${selection}`,
+  lastCue?.cue?`last cue ${lastCue.cue} (${lastCue.audioTheme||'no-theme'})`:'no cue yet'
+ ];
+ if(ref){
+  if(ref.lastRequested)parts.push(`requested ${ref.lastRequested.split('/').pop()}`);
+  if(ref.lastLoaded)parts.push(`loaded ${ref.lastLoaded.split('/').pop()}`);
+  if(ref.lastStarted)parts.push(`started ${ref.lastStarted.split('/').pop()}`);
+  if(ref.lastError)parts.push(`error ${ref.lastError}`);
+  if(Number.isFinite(+ref.activeCount))parts.push(`active ${+ref.activeCount}`);
+ }
+ const text=parts.join(' · ');
+ settingsAudioDebugBody.textContent=text;
+ window.__auroraAudioStatusLine=text;
+}
+function playCurrentAudioThemeTest(){
+ unlockAudioFromInteraction();
+ const selection=currentAudioOverrides().audioTheme||'auto';
+ const beforeRef=(window.__platinumAudioDebug||window.__auroraAudioDebug||{}).reference||{};
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('audio_test_requested','Developer audio test requested',{
+   audioTheme:selection,
+   priorRequested:beforeRef.lastRequested||'',
+   priorError:beforeRef.lastError||''
+  },{level:'info'});
+ }
+ if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(selection);
+ if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function'){
+  sfx.playCue('gameStart',{
+   phase:'stage',
+   atmosphereTheme:'aurora-borealis',
+   allowIdle:1
+  });
+  setTimeout(()=>syncAudioDebugUi(),80);
+  setTimeout(()=>syncAudioDebugUi(),500);
+  setTimeout(()=>syncAudioDebugUi(),1200);
+ }
 }
 function syncHelpUi(){
  if(!helpModal)return;
@@ -1857,11 +2548,7 @@ function syncGamePreviewUi(){
 }
 function syncTestUi(){
  const cfg=loadTestCfg();
- testStage.value=cfg.stage;
- testShips.value=cfg.ships;
- testExtendFirst.value=cfg.extendFirst;
- testExtendRecurring.value=cfg.extendRecurring;
- testChallenge.checked=cfg.challenge;
+ applyTestCfgToControls(cfg);
  syncAudioUi();
  syncPauseUi();
  syncSettingsUi();
@@ -2072,6 +2759,7 @@ async function submitFeedback(ev){
   game_state:{stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),started:!!started,paused:!!paused,challenge:!!S.challenge,attract:!!ATTRACT.active}
  };
  const diagnostics=getSystemDiagnosticsReport(20);
+ const systemStatus=getSystemStatusReport(40);
  const kind=type==='feature_request'?'Feature Request':'Bug Report';
  const subject=`[${kind}] ${title}`;
  const lines=[
@@ -2088,6 +2776,9 @@ async function submitFeedback(ev){
   `Paused: ${paused?1:0}`,
   `Challenge: ${S.challenge?1:0}`,
   `User-Agent: ${navigator.userAgent}`,
+  '',
+  'System status:',
+  JSON.stringify(systemStatus,null,2),
   '',
   ...formatDiagnosticsLines('Recent system log',diagnostics.systemLog),
   '',
@@ -2115,6 +2806,7 @@ async function submitFeedback(ev){
   fields.set('user_agent',navigator.userAgent);
   fields.set('system_log',JSON.stringify(diagnostics.systemLog));
   fields.set('recent_session_events',JSON.stringify(diagnostics.sessionEvents));
+  fields.set('system_status_report',JSON.stringify(systemStatus));
   fields.set('message',lines.join('\n'));
   await sendFeedbackDirect(fields);
   feedbackLastSubmit=now;
@@ -2136,10 +2828,7 @@ function rs(){
  DPR=window.devicePixelRatio||1;
  c.width=innerWidth*DPR;c.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
  ctx.imageSmoothingEnabled=false;
- if(!S.st.length){
-  const cols=['#f7f9ff','#8bb8ff','#72e18c','#f0c766','#d27cff','#ff8b7a'];
-  for(let i=0;i<156;i++)S.st.push({x:auxRnd(PLAY_W),y:auxRnd(PLAY_H),z:auxRnd(.88,.16),s:auxRnd(1.05,.45),c:cols[(auxRandUnit()*cols.length)|0],tw:auxRnd(6.28)});
- }
+ syncStarfieldProfile();
  VIS.gx=17;VIS.gy=14;VIS.playerBottom=20;VIS.beamLen=300;VIS.formTop=28;
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
@@ -2170,8 +2859,9 @@ recordBtn.addEventListener('click',()=>{
  showToast(VIDEO_REC.enabled?'Auto video enabled':'Auto video disabled');
  syncRecordUi();
 });
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge])el.addEventListener('change',saveTestCfg);
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])el.addEventListener('input',saveTestCfg);
+if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
@@ -2181,6 +2871,11 @@ feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeed
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
 if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
+if(buildStampDismissBtn)buildStampDismissBtn.addEventListener('click',()=>{
+ buildStampDismissed=1;
+ if(buildStamp)buildStamp.classList.add('dismissed');
+});
+addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){
  if(!target||typeof target.closest!=='function')return false;
  return !!target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
@@ -2222,6 +2917,7 @@ addEventListener('keydown',e=>{
     e.preventDefault();
     gameOverState.phase='scoreboard';
     if(!gameOverState.editing)submitGameOverScore();
+    if(gameOverState.rank)sfx.highScore(gameOverState.rank);
     gameOverHtml=buildGameOverHtmlFromState();
    }
    return;
@@ -2290,7 +2986,7 @@ addEventListener('keydown',e=>{
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
- if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code)){aud=1;AC().resume?.();}
+ if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
 addEventListener('keyup',e=>{
  keys[e.code]=0;
@@ -2380,6 +3076,13 @@ function syncPauseUi(){
 function toggleGameplayPause(){
  if(!started)return;
  paused=!paused;
+ try{
+  const A=sfx?.a;
+  if(A&&typeof A.suspend==='function'&&typeof A.resume==='function'){
+   if(paused&&A.state==='running')A.suspend().catch(()=>{});
+   else if(!paused&&A.state==='suspended')A.resume().catch(()=>{});
+  }
+ }catch{}
  if(!paused&&settingsOpen)closeSettings();
  syncPauseUi();
 }
@@ -2391,6 +3094,7 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
+ buildStamp.classList.toggle('dismissed',!!buildStampDismissed);
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
@@ -2399,12 +3103,15 @@ function syncBuildStampUi(){
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
+  if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
   if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
  buildStamp.classList.remove('replay');
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
  const production=channel==='production';
+ const showCommit=channel==='development'||channel==='production beta';
+ const shortCommit=String(BUILD_INFO.commit||'').trim();
  let runtimeLabel='Platinum';
  try{
   if(typeof currentPlatformPackLabel==='function')runtimeLabel=currentPlatformPackLabel();
@@ -2412,7 +3119,8 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('updateAvailable',!!BUILD_UPDATE.available);
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
- if(buildStampVersion)buildStampVersion.textContent=`Version ${BUILD_INFO.version}`;
+ if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
+ if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
@@ -2426,10 +3134,9 @@ function markHostedBuildSeen(){
  writePref(BUILD_SEEN_KEY,BUILD_INFO.label);
 }
 function applySeenBuildReminder(){
- const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
- const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
- const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
+  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
+  const seenLabel=String(readPref(BUILD_SEEN_KEY)||'').trim();
+  const testHint=BUILD_REFRESH_HINT&&channel==='production beta';
  if(testHint){
   BUILD_UPDATE.available=1;
   BUILD_UPDATE.label=BUILD_INFO.label;
@@ -2451,7 +3158,6 @@ function applySeenBuildReminder(){
 async function checkForHostedBuildUpdate(){
  if(BUILD_UPDATE.checking||location.protocol==='file:')return;
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
  if(BUILD_REFRESH_HINT&&channel==='production beta')return;
  BUILD_UPDATE.checking=1;
  try{
@@ -2476,7 +3182,6 @@ async function checkForHostedBuildUpdate(){
 }
 function startHostedBuildUpdateChecks(){
  const channel=String(BUILD_INFO.releaseChannel||'').toLowerCase();
- if(!['production','production beta'].includes(channel))return;
  clearInterval(BUILD_UPDATE.timer);
  applySeenBuildReminder();
  markHostedBuildSeen();
@@ -2506,6 +3211,10 @@ function resetSession(reason='boot'){
  REC={id:`ngt-${Date.now()}-${sessionN}`,build:BUILD,reason,createdAt:new Date().toISOString(),url:location.href,viewport:{w:innerWidth,h:innerHeight,dpr:window.devicePixelRatio||1},userAgent:navigator.userAgent,events:[],snapshots:[]};
  REC.t0=performance.now();
  recShotT=0;
+ if(typeof sfx!=='undefined'&&sfx){
+  if(typeof sfx.stopReferenceClips==='function')sfx.stopReferenceClips();
+  if(sfx.referenceCooldowns)sfx.referenceCooldowns=Object.create(null);
+ }
  if(RNG_SEED)REC.seed=RNG_SEED;
 }
 function logEvent(type,data={}){
@@ -2599,10 +3308,14 @@ function exportSession(opts={}){
  if(opts.auto&&autoExportedSessionId===REC.id)return;
  logSnapshot('export');
  const out=JSON.stringify({session:Object.assign({},REC,{duration:recTime(),eventCount:REC.events.length,snapshotCount:REC.snapshots.length})},null,2);
- const file=`neo-galaga-session-${REC.id}.json`;
- downloadBlob(new Blob([out],{type:'application/json'}),file);
+ const fileBase=`neo-galaga-session-${REC.id}`;
+ downloadBlob(new Blob([out],{type:'application/json'}),`${fileBase}.json`);
+ if(typeof getSystemStatusReport==='function'){
+  const systemOut=JSON.stringify(getSystemStatusReport(40),null,2);
+  downloadBlob(new Blob([systemOut],{type:'application/json'}),`${fileBase}-system-status.json`);
+ }
  if(opts.auto)autoExportedSessionId=REC.id;
- if(!opts.silent)showToast('Session log downloaded');
+ if(!opts.silent)showToast('Session log and system status downloaded');
 }
 function downloadBlob(blob,file){
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -3328,51 +4041,80 @@ function shoot(){
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
  logEvent('player_shot',{dual:!!p.dual,shots:p.dual?2:1,x:+p.x.toFixed(2),y:+y.toFixed(2),shotXs:shotXs.map(v=>+v.toFixed(2)),spread:p.dual?+(shotXs[1]-shotXs[0]).toFixed(2):0,activeBullets:S.pb.length,captureWindow});
+ for(let i=S.pb.length-1;i>=0;i--){
+  const b=S.pb[i];
+  if(!shotXs.includes(b.x)||Math.abs((+b.y||0)-y)>.001)continue;
+  resolvePlayerBulletHit(i,playerBulletSegment(b,b.y));
+ }
  sfx.shot();
 }
 
-function playerBulletSegment(b){
+function playerBulletSegment(b,previousY=null){
  const x=+b.x||0,y=+b.y||0;
- return {x,top:y-16,bottom:y+2};
+ const py=Number.isFinite(+previousY)?+previousY:y;
+ return {x,top:Math.min(py,y)-16,bottom:Math.max(py,y)+2};
 }
 
 function segmentHitsTarget(seg,targetX,targetY,targetW,targetH){
  return Math.abs(seg.x-targetX)<targetW && seg.bottom>targetY-targetH && seg.top<targetY+targetH;
 }
 
-function updatePlayerBullets(dt){
- for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i];b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
-  const seg=playerBulletSegment(b);
-  for(const e of S.e){
-   if(e.hp<=0)continue;
-   const cf=carriedFighterTarget(e);
-   // Check the carried fighter before the boss body so manual scoring can
-   // distinguish "shot the rescued fighter" from "killed the boss."
-   if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
-    S.stats.hits++;
-    S.pb.splice(i,1);
-    destroyCarriedFighter(e);
-    break;
-   }
-   const h=enemyHitbox(e);
-   if(e.carry&&seg.top>=e.y+8)continue;
-   if(segmentHitsTarget(seg,e.x,e.y,h.w,h.h)){
-    S.stats.hits++;
-    S.pb.splice(i,1);
-    const hpBefore=e.hp;
-    e.hp--;
-    e.hitT=.34;
-    if(e.hp<=0){awardKill(e,e.dive);ex(e.x,e.y,16,e.t==='boss'?'#ff8cd7':e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');sfx.boom(e.t);}
-    else{
-     logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
-     if(e.t==='boss'&&hpBefore>e.hp){
-      ex(e.x,e.y,8,'#fff4a8');
-      sfx.bossHit();
-     }else sfx.hit();
-    }
-    break;
-   }
+function resolvePlayerBulletHit(i,seg){
+ if(i<0||i>=S.pb.length)return false;
+ for(const e of S.e){
+  if(e.hp<=0)continue;
+  const cf=carriedFighterTarget(e);
+  // Check the carried fighter before the boss body so manual scoring can
+  // distinguish "shot the rescued fighter" from "killed the boss."
+  if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
+   S.stats.hits++;
+   S.pb.splice(i,1);
+   destroyCarriedFighter(e);
+   return true;
   }
+  const h=enemyHitbox(e);
+  if(e.carry&&seg.top>=e.y+8)continue;
+  if(segmentHitsTarget(seg,e.x,e.y,h.w,h.h)){
+   S.stats.hits++;
+   S.pb.splice(i,1);
+   const hpBefore=e.hp;
+   e.hp--;
+   e.hitT=.34;
+   if(e.hp<=0){
+    awardKill(e,e.dive);
+    if(e.t==='boss'){
+     clearReferenceBossMomentCueWindow();
+     S.shake=Math.max(S.shake,.6);
+     ex(e.x,e.y,28,'#fff5a6');
+     ex(e.x,e.y,18,'#ff8cd7');
+     ex(e.x,e.y,12,'#d8f2ff');
+    }else ex(e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
+    sfx.boom(e.t);
+   }
+   else{
+    logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:e.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+    if(e.t==='boss'&&hpBefore>e.hp){
+     const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
+     stopReferenceCueSet(['attackCharge','enemyShot','enemyHit']);
+     holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+     e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
+     S.shake=Math.max(S.shake,.22);
+     ex(e.x,e.y,20,'#fff4a8');
+     ex(e.x,e.y,10,'#ff8cd7');
+     ex(e.x,e.y,6,'#d8f2ff');
+     sfx.bossHit();
+    }else sfx.hit();
+   }
+   return true;
+  }
+ }
+ return false;
+}
+
+function updatePlayerBullets(dt){
+ for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i],previousY=+b.y||0;b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
+  const seg=playerBulletSegment(b,previousY);
+  resolvePlayerBulletHit(i,seg);
  }
 }
 
@@ -3436,7 +4178,7 @@ function start(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,lastChallengeClearT:null,challengeTransitionStallLogged:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
@@ -3444,7 +4186,23 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
- spawnStage();msg.textContent='';sfx.start();
+ spawnStage();msg.textContent='';
+ const openingTiming=(!cfg.challenge&&cfg.stage===1&&usesReferenceTimingModel())
+  ? currentGamePackReferenceTiming('stage1Opening')
+  : null;
+ if(usesRuntimeGalagaReferenceAudio()){
+  sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
+ }
+ sfx.start();
+ S.startCueT=0;
+ if(openingTiming){
+  S.formationCueT=openingTiming.formationArrivalDelay;
+  S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
+ }else if(usesRuntimeGalagaReferenceAudio()){
+  S.seqT=Math.max(+S.seqT||0,3.05);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
+ }
  c?.focus?.();
 }
 
@@ -3535,7 +4293,7 @@ function attractMoveAxis(p){
 const HARNESS_PERSONAS={
  novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
  advanced:{name:'advanced',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:220,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
- expert:{name:'expert',moveMul:.92,urgentDx:40,urgentLook:188,deadZone:6,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:64,diveBias:560,carryBias:320,bossBias:160,activeBias:120,heightBias:1.08,distanceBias:.9},
+ expert:{name:'expert',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:290,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
  professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 
@@ -3563,8 +4321,9 @@ function compareHarnessTargets(a,b,p,cfg){
 
 function logProfessionalDecision(p,cfg,reason,extra={}){
  if(cfg?.name!=='professional')return;
- if(p.hDebugT>0)return;
- p.hDebugT=.75;
+ const detailedReason=reason&&reason!=='tick';
+ if(!detailedReason&&p.hDebugT>0)return;
+ if(!detailedReason)p.hDebugT=.75;
  logEvent('harness_professional_decision',Object.assign({
   stage:S.stage,
   score:S.score,
@@ -3611,11 +4370,39 @@ function harnessSelectTarget(p,cfg){
  return S.e.filter(e=>e.hp>0).sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||null;
 }
 
+function harnessLowerFieldThreat(p,cfg){
+ if(!cfg?.lowerDiveEvadeDx||!cfg?.lowerDiveEvadeY)return null;
+ if(S.challenge)return null;
+ const playerLane=playLane(p.x);
+ const earlyStage=(S.stage|0)<=(cfg.cautiousUntilStage||0);
+  return S.e
+  .filter(e=>{
+   if(!(e.hp>0&&e.dive&&e.y<p.y))return 0;
+   const laneGap=Math.abs(playLane(e.x)-playerLane);
+   if(earlyStage&&e.y>=cfg.lowerDiveEvadeY&&laneGap<=(cfg.lowerDiveEvadeLaneGap??1)){
+    return Math.abs(e.x-p.x)<cfg.lowerDiveEvadeDx+(e.t==='boss'?6:0);
+   }
+   if(cfg.diveEmergencyY&&cfg.diveEmergencyDx&&e.y>=cfg.diveEmergencyY&&laneGap===0){
+    return Math.abs(e.x-p.x)<cfg.diveEmergencyDx+(e.t==='boss'?4:0);
+   }
+   return 0;
+  })
+  .sort((a,b)=>{
+   if(b.y!==a.y)return b.y-a.y;
+   return Math.abs(a.x-p.x)-Math.abs(b.x-p.x);
+  })[0]||null;
+}
+
 function harnessMoveAxis(p,cfg){
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&p.y-b.y<cfg.urgentLook&&Math.abs(b.x-p.x)<cfg.urgentDx).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
   const away=urgent.x>=p.x?-1:1;
+  if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
+ }
+ const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
+ if(lowerFieldThreat){
+  const away=lowerFieldThreat.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
  const target=harnessSelectTarget(p,cfg);
@@ -3630,6 +4417,7 @@ function runHarnessPlayer(dt,p,cfg){
  p.hNoShotT=(p.hNoShotT||0)+dt;
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
+ const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
  const axis=harnessMoveAxis(p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
@@ -3643,6 +4431,17 @@ function runHarnessPlayer(dt,p,cfg){
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
  });
+ if(lowerFieldThreat){
+  logProfessionalDecision(p,cfg,'lower_field_evade',{
+   attackables:attackables.length,
+   axis,
+   threatId:lowerFieldThreat.id,
+   threatType:lowerFieldThreat.t,
+   threatX:+lowerFieldThreat.x.toFixed(2),
+   threatY:+lowerFieldThreat.y.toFixed(2),
+   threatLane:playLane(lowerFieldThreat.x)
+  });
+ }
  if(!target){
   logProfessionalDecision(p,cfg,'no_target',{attackables:attackables.length});
   return;
@@ -4014,6 +4813,9 @@ function pickScriptEnemy(type,c){
 
 function startDive(e,p,opts={}){
  if(!e)return;
+ const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+  ? currentGamePackReferenceTiming('enemyDiveCharge')
+  : null;
  e.low=0;
  if(opts.capture&&e.t==='boss'&&canCapture()){
   e.dive=4;
@@ -4031,11 +4833,15 @@ function startDive(e,p,opts={}){
  const jitter=stage1Scripted?18:26;
  const vyRnd=stage1Scripted?5:(S.stage<=2?8:12);
  e.dive=1;
- e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
- e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
- e.shot=e.t==='boss'?2:1;
- logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
- if(opts.escort&&e.t==='boss')assignEscorts(e);
+  e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
+  e.vy=scriptedDiveVy(S.stage)+rnd(vyRnd,-vyRnd);
+  e.shot=e.t==='boss'?2:1;
+  e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+  e.chargeCueT=chargeTiming?.cueDelay??0;
+  e.chargeCueStartY=e.y;
+  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
+  if(!e.chargeCuePending)sfx.attackCharge();
+  if(opts.escort&&e.t==='boss')assignEscorts(e);
 }
 
 function runStage1Script(dt,p,T){
@@ -4179,6 +4985,17 @@ function updateEnemy(e,dt,t,T,p){
   e.vy+=diveAccel(S.stage)*fm.diveAccel*dt;
   e.x+=e.vx*dt+Math.sin(e.tm*7+e.ph)*13*fm.weave*dt;
   e.y+=e.vy*dt;
+  if(e.chargeCuePending){
+   e.chargeCueT=Math.max(0,(+e.chargeCueT||0)-dt);
+   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+    ? currentGamePackReferenceTiming('enemyDiveCharge')
+    : null;
+   const minTravelY=chargeTiming?.minTravelY??0;
+   if(e.chargeCueT<=0&&(e.y-(+e.chargeCueStartY||0))>=minTravelY){
+    e.chargeCuePending=0;
+    sfx.attackCharge();
+   }
+  }
   if(!e.low&&e.y>=PLAY_H*.62){
    e.low=1;
    logEvent('enemy_lower_field',Object.assign({stage:S.stage,y:+e.y.toFixed(2),stageClock:+S.stageClock.toFixed(3),playerLane:playLane(p.x)},enemyRef(e)));
@@ -4193,6 +5010,7 @@ function updateEnemy(e,dt,t,T,p){
    e.y=-26;
    e.vx=e.vy=0;
    e.dive=3;
+   e.chargeCuePending=0;
    e.low=0;
    e.beam=0;
    e.esc=0;
@@ -4216,6 +5034,9 @@ function updateEnemy(e,dt,t,T,p){
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
  if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+   ? currentGamePackReferenceTiming('enemyDiveCharge')
+   : null;
   if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){
    e.dive=4;
    e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);
@@ -4234,7 +5055,11 @@ function updateEnemy(e,dt,t,T,p){
    e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
    e.shot=e.t==='boss'?2:1;
+   e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
+   e.chargeCueT=chargeTiming?.cueDelay??0;
+   e.chargeCueStartY=e.y;
    logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
+   if(!e.chargeCuePending)sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
@@ -4581,6 +5406,7 @@ function finishCapture(){
   timeSinceCaptureStart:S.lastCaptureStartT==null?null:+(S.stageClock-S.lastCaptureStartT).toFixed(3)
  },enemyRef(e)));
  logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});
+ sfx.captureSuccess();
  sfx.captureRetreat();
  if(S.lives<0)gameOver();
 }
@@ -4743,6 +5569,7 @@ function destroyCarriedFighter(e){
  S.bannerMode='captureLoss';
  S.banner=1.05;
  ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
+ sfx.capturedFighterDestroyed();
  sfx.hit();
  return points;
 }
@@ -4874,7 +5701,17 @@ function finalizeChallengeClear(){
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=1.1;
+ S.postChallengeT=1.45;
+ if(usesReferenceTimingModel()){
+  const challengeResultsTiming=usesReferenceTimingModel()
+   ? currentGamePackReferenceTiming('challengeResults')
+   : null;
+  clearReferenceTransitionCueWindow();
+  S.challengeResultPerfect=perfect>0?1:0;
+  S.challengeResultCueT=challengeResultsTiming?.resultCueDelay??0.34;
+  // Let the result phrase own the beat before any ambient cadence returns.
+  holdReferenceGameplayCadence(S.postChallengeT+(challengeResultsTiming?.cadenceHoldAfterSpawn||1.15));
+ }else sfx.challengeResult(perfect>0);
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,
@@ -4908,6 +5745,12 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
+ const openingTiming=usesReference&&S.stage===1?currentGamePackReferenceTiming('stage1Opening'):null;
+ const transitionTiming=usesReference&&S.stage>1&&S.transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
+  : null;
+ const baseEntryDelay=transitionTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -4922,7 +5765,7 @@ function spawnFormation(){
    ty:oy+r*gy,
    profile
   });
-  e.spawn=S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03;
+  e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){
@@ -4946,6 +5789,10 @@ function spawnFormation(){
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout();
+ const challengeTiming=usesReferenceTimingModel()&&!S.attract
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const baseEntryDelay=challengeTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  const total=layout.groups*layout.enemiesPerGroup;
  const upperBandY=PLAY_H*layout.upperBandRatio;
@@ -4971,16 +5818,23 @@ function spawnChallenge(){
    group:wave,
    sweep:wave%2?-1:1,
    upperBandY,
-   spawn:wave*layout.waveDelay+slot*layout.slotDelay
+   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
 function spawnStage(){
+ const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
+ const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1&&transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
+  : null;
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
+ S.transitionMode='';
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
@@ -4993,8 +5847,17 @@ function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
+ const challengeEntryTiming=usesReferenceTimingModel()
+  ? currentGamePackReferenceTiming('challengeEntry')
+  : null;
+ const challengeResultsTiming=usesReferenceTimingModel()
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
- S.nextStageT=mode==='challengeResult'?(nextIsChallenge?1.8:1.25):(nextIsChallenge?2.8:2.2);
+ S.transitionMode=mode;
+ S.nextStageT=mode==='challengeResult'
+  ? (nextIsChallenge?(challengeResultsTiming?.nextChallengeWindow||3.05):(challengeResultsTiming?.nextStageWindow||2.5))
+  : (nextIsChallenge?(challengeEntryTiming?.transitionWindow||3.75):3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
  S.bannerMode='stageTransition';
@@ -5010,7 +5873,18 @@ function queueStageTransition(mode='normal'){
   challenge:!!S.challenge,
   enemies:S.e.filter(e=>e.hp>0).length
  });
- sfx.transition(nextIsChallenge?1:0);
+ if(usesReferenceTimingModel()){
+  clearReferenceTransitionCueWindow();
+  S.transitionCueKind=nextIsChallenge?1:0;
+  S.transitionCueT=mode==='challengeResult'
+   ? (nextIsChallenge
+      ? Math.max(.55,S.nextStageT-(challengeResultsTiming?.nextChallengeCueLeadBeforeSpawn||1.42))
+      : Math.max(.45,S.nextStageT-(challengeResultsTiming?.nextCueLeadBeforeSpawn||1.1)))
+   : (nextIsChallenge
+      ? Math.max(.7,S.nextStageT-(challengeEntryTiming?.cueLeadBeforeSpawn||1.52))
+      : Math.max(.55,S.nextStageT-1.18));
+  holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?(challengeEntryTiming?.cadenceHoldAfterSpawn||1.1):(challengeResultsTiming?.cadenceHoldAfterSpawn||.9)));
+}else sfx.transition(nextIsChallenge?1:0);
 }
 
 function startSequence(mode,duration,title,subtitle=''){
@@ -5043,12 +5917,41 @@ function update(dt){
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
+ S.audioPulseHoldT=Math.max(0,(+S.audioPulseHoldT||0)-dt);
+ if(S.startCueT>0){
+  S.startCueT=Math.max(0,S.startCueT-dt);
+  if(!S.startCueT)sfx.start();
+ }
+ if(S.formationCueT>0){
+  S.formationCueT=Math.max(0,S.formationCueT-dt);
+  if(!S.formationCueT)sfx.formationArrival();
+ }
  if(!S.sequenceT&&S.sequenceMode){S.sequenceMode='';if(S.bannerMode==='captureBeat'||S.bannerMode==='rescueBeat')S.bannerMode='';}
  S.stageClock+=dt;
+ if(S.transitionCueT>0){
+  S.transitionCueT=Math.max(0,S.transitionCueT-dt);
+  if(!S.transitionCueT){
+   sfx.transition(S.transitionCueKind?1:0);
+   S.transitionCueKind=0;
+  }
+ }
+ if(S.challengeResultCueT>0){
+  S.challengeResultCueT=Math.max(0,S.challengeResultCueT-dt);
+  if(!S.challengeResultCueT){
+   sfx.challengeResult(S.challengeResultPerfect?1:0);
+   S.challengeResultPerfect=0;
+  }
+ }
  const simT=advanceGameplayClock(dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
+  ATTRACT.audioPulseTimer=Math.max(0,(+ATTRACT.audioPulseTimer||0)-dt);
+  if(!ATTRACT.audioPulseTimer){
+   const phase=ATTRACT.phase==='scores'?'wait':'demo';
+   sfx.attractPulse(phase,ATTRACT.audioPulseIndex++);
+   ATTRACT.audioPulseTimer=phase==='wait'?2.6:2.15;
+  }
   if(ATTRACT.phase==='scores'){
    ATTRACT.scoreViewTimer=Math.max(0,(+ATTRACT.scoreViewTimer||0)-dt);
    if(!ATTRACT.scoreViewTimer&&ATTRACT.scoreViews.length>1){
@@ -5056,7 +5959,7 @@ function update(dt){
     ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell||4.5;
     logEvent('attract_score_view',{cycle:ATTRACT.cycle,view:ATTRACT.scoreViews[ATTRACT.scoreViewIndex],index:ATTRACT.scoreViewIndex});
    }
-   for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(10+s.z*18)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
+   for(const s of S.st){s.tw+=dt*(1.2+(s.twAmp||.16)*4);s.y+=(s.vy||12)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
    if(!ATTRACT.timer)startAttractDemo();
    return;
   }
@@ -5082,7 +5985,7 @@ function update(dt){
  }else S.nextStageT=remaining;
   return
  }
- for(const s of S.st){s.tw+=dt*(1.6+s.z*.9);s.y+=(14+s.z*22+S.stage*.5)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
+ for(const s of S.st){s.tw+=dt*(1.2+(s.twAmp||.16)*4);s.y+=((s.vy||14)+S.stage*.12)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);S.extendFlashT=Math.max(0,S.extendFlashT-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
@@ -5152,7 +6055,12 @@ function update(dt){
   }
  }
 
- const t=simT;S.seqT-=dt;if(S.seqT<=0&&!S.challenge){S.seqT=.38;sfx.march(S.seq++)}
+ const t=simT;
+ S.seqT=Math.max(0,S.seqT-dt);
+ if(!S.challenge&&!S.audioPulseHoldT&&S.seqT<=0){
+  S.seqT=.38;
+  sfx.march(S.seq++);
+ }
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;
@@ -5813,12 +6721,581 @@ const AURORA_STAGE_BAND_PROFILES=Object.freeze([
  {name:'galboss',beeFamily:'galboss',butFamily:'galboss',bossFamily:'galboss',challengeFamily:'mosquito',pulseX:.9,pulseY:.72,entryX:.88,entryY:.76,weave:.9,steer:.9,jitter:.92,diveVy:1.02,diveAccel:.98}
 ]);
 
+const AURORA_ATMOSPHERE_THEMES=Object.freeze({
+ 'classic-arcade':Object.freeze({
+  id:'classic-arcade',
+  label:'Classic Arcade',
+  group:'classic',
+  starfield:Object.freeze({
+   id:'classic-arcade-stars',
+   count:108,
+   sizeMin:.95,
+   sizeMax:1.55,
+   alphaMin:.52,
+   alphaMax:.96,
+   twinkleMin:.88,
+   twinkleAmp:.2,
+   speedMin:11,
+   speedMax:27,
+   palette:Object.freeze(['#ffffff','#d8ecff','#8bb8ff','#1e52ff','#fff36a','#ffb21f','#9cff71','#ff3b33','#db38ff','#3fe7ff','#d7a4ff'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'classic-stars',
+   wait:'classic-stars',
+   demo:'classic-stars',
+   stage:'classic-stars',
+   challenge:'classic-stars'
+  }),
+  audioTheme:'classic-arcade'
+ }),
+ 'aurora-hint':Object.freeze({
+  id:'aurora-hint',
+  label:'Aurora Hint',
+  group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-hint-stars',
+   count:92,
+   sizeMin:.88,
+   sizeMax:1.35,
+   alphaMin:.34,
+   alphaMax:.7,
+   twinkleMin:.84,
+   twinkleAmp:.16,
+   speedMin:8,
+   speedMax:20,
+   palette:Object.freeze(['#f7f9ff','#8fd7ff','#72e18c','#f0c766','#d27cff','#ff8b7a','#3fe7ff','#c8ffcf'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'aurora-borealis',
+   wait:'aurora-borealis',
+   demo:'aurora-hint',
+   stage:'aurora-hint',
+   challenge:'aurora-hint'
+  }),
+  audioTheme:'aurora-rise'
+ }),
+ 'aurora-borealis':Object.freeze({
+  id:'aurora-borealis',
+  label:'Aurora Borealis',
+  group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-borealis-stars',
+   count:88,
+   sizeMin:.88,
+   sizeMax:1.28,
+   alphaMin:.28,
+   alphaMax:.64,
+   twinkleMin:.82,
+   twinkleAmp:.14,
+   speedMin:8,
+   speedMax:18,
+   palette:Object.freeze(['#f7fbff','#9edfff','#6bf5bf','#ffe27a','#cf92ff','#38dfff','#ffb5cf'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'aurora-borealis',
+   wait:'aurora-borealis',
+   demo:'aurora-borealis',
+   stage:'aurora-borealis',
+   challenge:'aurora-borealis'
+  }),
+  audioTheme:'aurora-surge'
+ }),
+ 'aurora-crown':Object.freeze({
+  id:'aurora-crown',
+  label:'Aurora Crown',
+  group:'aurora',
+  starfield:Object.freeze({
+   id:'aurora-crown-stars',
+   count:84,
+   sizeMin:.9,
+   sizeMax:1.26,
+   alphaMin:.3,
+   alphaMax:.68,
+   twinkleMin:.84,
+   twinkleAmp:.15,
+   speedMin:8,
+   speedMax:18,
+   palette:Object.freeze(['#ffffff','#aef1ff','#8dffd5','#ffe38f','#d5a0ff','#3fe7ff','#ffc7d8'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'aurora-borealis',
+   wait:'aurora-borealis',
+   demo:'aurora-borealis',
+   stage:'aurora-borealis',
+   challenge:'aurora-borealis'
+  }),
+  audioTheme:'aurora-crown'
+ })
+});
+
+const AURORA_REFERENCE_TIMINGS=Object.freeze({
+ stage1Opening:Object.freeze({
+  startPreambleDelay:0,
+  startPhraseDuration:4,
+  formationArrivalDelay:4.18,
+  firstEnemyArrivalDelay:5.35,
+  firstPulseDelay:6.15
+ }),
+ stageEntry:Object.freeze({
+  firstEnemyArrivalDelay:.82,
+  firstPulseDelay:1.9
+ }),
+ postChallengeStageEntry:Object.freeze({
+  firstEnemyArrivalDelay:1.08,
+  firstPulseDelay:2.35
+ }),
+ challengeEntry:Object.freeze({
+  transitionWindow:2.8,
+  cueLeadBeforeSpawn:0.58,
+  firstEnemyArrivalDelay:.96,
+  cadenceHoldAfterSpawn:1.28
+ }),
+ challengeResults:Object.freeze({
+  resultCueDelay:.34,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
+  cadenceHoldAfterSpawn:1.24
+ }),
+ enemyDiveCharge:Object.freeze({
+  cueDelay:.12,
+  minTravelY:9
+ }),
+ bossMoments:Object.freeze({
+  hitCadenceHold:.28,
+  deathCadenceHold:.96,
+  hitFlashDuration:.46
+ })
+});
+
+function referenceAudioCue(referenceClip, opts={}){
+ return Object.freeze(Object.assign({
+  referenceClip,
+  referenceVolume:1,
+  cooldownMs:0,
+  clipStart:0,
+  clipDuration:0,
+  stopCueNames:Object.freeze([])
+ }, opts||{}));
+}
+
+const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
+ gameStart:referenceAudioCue('assets/reference-audio/galaga2-game-start.m4a',{
+  cooldownMs:2400,
+  clipStart:.08,
+  clipDuration:0,
+  stopCueNames:Object.freeze(['attractEnter','attractPulse','stagePulse'])
+ }),
+ formationArrival:referenceAudioCue('assets/reference-audio/galaga3-level-underscore.m4a',{
+  cooldownMs:1800,
+  clipStart:0,
+  clipDuration:.82,
+  referenceVolume:1.02,
+  stopCueNames:Object.freeze(['stagePulse'])
+ }),
+ stagePulse:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{
+    cooldownMs:1250,
+    referenceVolume:.95,
+    clipStart:.18,
+    clipDuration:.82
+   }),
+   stage:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{
+    cooldownMs:1250,
+    referenceVolume:.95,
+    clipStart:.18,
+    clipDuration:.82
+   }),
+   challenge:Object.freeze({referenceClip:'',cooldownMs:0})
+ })
+}),
+playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160}),
+enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.88}),
+attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94}),
+enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
+ bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.04}),
+ enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.18}),
+ captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),
+ captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400}),
+ captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
+ rescueJoin:referenceAudioCue('assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',{cooldownMs:1800}),
+ extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
+ playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800}),
+ capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
+ challengeTransition:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage.m4a',{
+  cooldownMs:2600,
+  clipStart:0,
+  clipDuration:1.05,
+  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect','stageTransition'])
+ }),
+ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
+  cooldownMs:2400,
+  clipStart:0,
+  clipDuration:1.55,
+  stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
+ }),
+ challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{
+  cooldownMs:2400,
+  clipStart:0,
+  clipDuration:1.7,
+  stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
+ }),
+ stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{
+  cooldownMs:1800,
+  clipStart:0,
+  clipDuration:.86,
+  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+ }),
+ attractEnter:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga-opening-theme.m4a',{cooldownMs:3200})
+  })
+ }),
+ attractPulse:Object.freeze({
+  byPhase:Object.freeze({
+   demo:referenceAudioCue('assets/reference-audio/galaga3-ambience-convoy.m4a',{cooldownMs:1800,referenceVolume:.95})
+  })
+ }),
+ gameOver:referenceAudioCue('assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',{cooldownMs:3600}),
+ highScoreFirst:referenceAudioCue('assets/reference-audio/galaga3-name-entry-1st.m4a',{cooldownMs:2000}),
+ highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
+});
+
+const AURORA_AUDIO_THEMES=Object.freeze({
+ 'classic-arcade':Object.freeze({
+  id:'classic-arcade',
+  label:'Classic Arcade',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[392,494,523,659,784,988],step:.044,wave:'square',volume:.0205,slide:28,lpHz:3600,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0046,slide:10,detune:.003,lpHz:1800,delay:0},{freq:392,duration:.082,wave:'triangle',volume:.0094,slide:24,detune:.004,lpHz:2500,delay:0},{freq:523,duration:.082,wave:'triangle',volume:.0096,slide:30,detune:.004,lpHz:2600,delay:.044},{freq:784,duration:.11,wave:'square',volume:.0056,slide:16,detune:.002,lpHz:3600,delay:.132},{freq:988,duration:.2,wave:'triangle',volume:.0168,slide:92,detune:.005,lpHz:2850,delay:.176},{freq:1318,duration:.11,wave:'triangle',volume:.0058,slide:44,detune:.003,lpHz:4400,delay:.22}])}),
+   formationArrival:Object.freeze({seq:[330,440,587],step:.052,wave:'triangle',volume:.0112,slide:20,lpHz:3600,tones:Object.freeze([{freq:784,duration:.1,wave:'square',volume:.0048,slide:-22,lpHz:4200,delay:.104}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1140,duration:.028,wave:'square',volume:.006,slide:-620,detune:.006,lpHz:6200},{freq:1520,duration:.018,wave:'square',volume:.003,slide:-480,detune:-.004,lpHz:6800,delay:.006}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.075,wave:'triangle',volume:.009,slide:-130,detune:.002,lpHz:3000},{freq:258,duration:.05,wave:'square',volume:.004,slide:-90,detune:.002,lpHz:2600,delay:.012}])}),
+   playerHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.11,wave:'square',volume:.022,slide:-300,detune:.012,lpHz:2600},{freq:176,duration:.19,wave:'sawtooth',volume:.024,slide:-320,detune:.016,lpHz:2100,delay:.016},{freq:124,duration:.28,wave:'triangle',volume:.022,slide:-150,detune:.009,lpHz:1600,delay:.028}]),noise:Object.freeze([{duration:.16,volume:.016,hp:1120,delay:.012},{duration:.08,volume:.01,hp:760,delay:.03}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:228,duration:.05,wave:'square',volume:.013,slide:-180,detune:.008,lpHz:3200},{freq:146,duration:.1,wave:'sawtooth',volume:.015,slide:-220,detune:.012,lpHz:2300,delay:.02}]),noise:Object.freeze([{duration:.05,volume:.006,hp:1600,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:312,duration:.06,wave:'square',volume:.015,slide:-120,detune:.004,lpHz:3600},{freq:202,duration:.12,wave:'triangle',volume:.012,slide:-80,detune:.003,lpHz:2500,delay:.014}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1900,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.026,wave:'square',volume:.008,slide:-340,detune:.004,lpHz:4200},{freq:360,duration:.04,wave:'square',volume:.006,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:240,duration:.075,wave:'triangle',volume:.006,slide:-90,detune:-.004,lpHz:2100,delay:.018}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.026,wave:'square',volume:.011,slide:-340,detune:.004,lpHz:4200},{freq:280,duration:.04,wave:'square',volume:.008,slide:-280,detune:-.003,lpHz:3600,delay:.012},{freq:180,duration:.11,wave:'triangle',volume:.011,slide:-90,detune:-.004,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.004,hp:1400,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:92,duration:.34,wave:'sawtooth',volume:.018,slide:48,detune:.018,lpHz:3000},{freq:138,duration:.28,wave:'triangle',volume:.009,slide:30,detune:.01,lpHz:2400,delay:.04}]),noise:Object.freeze([{duration:.11,volume:.004,hp:1900,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[370,330,294,247],step:.055,wave:'square',volume:.0125,slide:-18,lpHz:2600,tones:Object.freeze([{freq:185,duration:.14,wave:'triangle',volume:.0058,slide:-40,lpHz:2200,delay:.11}])}),
+   captureRetreat:Object.freeze({seq:[247,294,370,494],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:620,duration:.18,wave:'square',volume:.006,slide:-70,detune:.08,lpHz:3400,delay:.06}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:310,duration:.04,wave:'square',volume:.012,slide:-260,detune:.004,lpHz:3400},{freq:188,duration:.09,wave:'triangle',volume:.009,slide:-140,detune:-.003,lpHz:2200,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.006,hp:1550,delay:.01}])}),
+   rescueJoin:Object.freeze({seq:[523,659,784,1047],step:.05,wave:'triangle',volume:.013,slide:42,lpHz:4200,tones:Object.freeze([{freq:1318,duration:.09,wave:'square',volume:.006,slide:-80,detune:.08,lpHz:5000,delay:.08}])}),
+   extendAward:Object.freeze({seq:[659,880,1175],step:.055,wave:'triangle',volume:.014,slide:55,lpHz:4300,tones:Object.freeze([{freq:1568,duration:.11,wave:'square',volume:.008,slide:-60,detune:.004,lpHz:5200,delay:.05},{freq:2093,duration:.08,wave:'triangle',volume:.006,slide:-40,detune:.003,lpHz:5600,delay:.11}])}),
+   challengeResults:Object.freeze({seq:[392,523,659,784],step:.06,wave:'triangle',volume:.0132,slide:22,lpHz:3600,tones:Object.freeze([{freq:988,duration:.12,wave:'triangle',volume:.0054,slide:10,lpHz:4300,delay:.18}])}),
+   challengePerfect:Object.freeze({seq:[659,880,1175,1568,2093],step:.052,wave:'triangle',volume:.015,slide:40,lpHz:4300,tones:Object.freeze([{freq:2637,duration:.14,wave:'triangle',volume:.0068,slide:18,lpHz:5200,delay:.208}])}),
+   gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.088,wave:'triangle',volume:.017,slide:-56,lpHz:2300,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0062,slide:-28,detune:.006,lpHz:2800,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.0068,slide:-42,detune:.004,lpHz:2100,delay:.176},{freq:110,duration:.42,wave:'sawtooth',volume:.0158,slide:-112,detune:.01,lpHz:1820,delay:.27}]),noise:Object.freeze([{duration:.1,volume:.0044,hp:1100,delay:.12}])}),
+   highScoreFirst:Object.freeze({seq:[523,659,880,1175,1568],step:.05,wave:'triangle',volume:.0148,slide:36,lpHz:4300,tones:Object.freeze([{freq:2093,duration:.12,wave:'triangle',volume:.0062,slide:18,lpHz:5200,delay:.19}])}),
+   highScoreOther:Object.freeze({seq:[392,523,659,880],step:.056,wave:'triangle',volume:.0126,slide:24,lpHz:3900,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0048,slide:12,lpHz:4700,delay:.16}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.082,wave:'square',volume:.0028,slide:8,detune:.002,lpHz:1700},{freq:392,duration:.07,wave:'triangle',volume:.0102,slide:-12,detune:.002,lpHz:2900},{freq:523,duration:.052,wave:'square',volume:.0048,slide:-10,detune:-.002,lpHz:4050,delay:.016},{freq:659,duration:.04,wave:'square',volume:.0032,slide:-14,detune:.002,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:165,duration:.082,wave:'square',volume:.0028,slide:8,detune:.002,lpHz:1700},{freq:330,duration:.07,wave:'triangle',volume:.0102,slide:-12,detune:.002,lpHz:2900},{freq:440,duration:.052,wave:'square',volume:.0048,slide:-10,detune:-.002,lpHz:4050,delay:.016},{freq:523,duration:.04,wave:'square',volume:.0032,slide:-14,detune:.002,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.082,wave:'square',volume:.0028,slide:8,detune:.002,lpHz:1700},{freq:440,duration:.07,wave:'triangle',volume:.0102,slide:-12,detune:.002,lpHz:2900},{freq:587,duration:.052,wave:'square',volume:.0048,slide:-10,detune:-.002,lpHz:4050,delay:.016},{freq:698,duration:.04,wave:'square',volume:.0032,slide:-14,detune:.002,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:147,duration:.082,wave:'square',volume:.0028,slide:8,detune:.002,lpHz:1700},{freq:294,duration:.07,wave:'triangle',volume:.0102,slide:-12,detune:.002,lpHz:2900},{freq:392,duration:.052,wave:'square',volume:.0048,slide:-10,detune:-.002,lpHz:4050,delay:.016},{freq:523,duration:.04,wave:'square',volume:.0032,slide:-14,detune:.002,lpHz:4700,delay:.034}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[330,440,587,784,988],step:.05,wave:'triangle',volume:.0118,slide:26,lpHz:3500,tones:Object.freeze([{freq:196,duration:.16,wave:'square',volume:.0034,slide:8,lpHz:1700,delay:0},{freq:659,duration:.082,wave:'square',volume:.0052,slide:-30,lpHz:4100,delay:.05},{freq:988,duration:.13,wave:'triangle',volume:.0061,slide:-44,lpHz:4500,delay:.15}])}),
+   challengeTransition:Object.freeze({seq:[523,659,784,988,1318,1568],step:.046,wave:'triangle',volume:.0134,slide:40,lpHz:3720,tones:Object.freeze([{freq:262,duration:.18,wave:'square',volume:.0034,slide:10,lpHz:1800,delay:0},{freq:784,duration:.082,wave:'square',volume:.0052,slide:-14,lpHz:4400,delay:.046},{freq:1568,duration:.15,wave:'triangle',volume:.0066,slide:-42,lpHz:4800,delay:.184}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[330,392,523,659,784],step:.056,wave:'triangle',volume:.0108,slide:18,lpHz:3240,tones:Object.freeze([{freq:165,duration:.16,wave:'square',volume:.0032,slide:6,lpHz:1800,delay:0},{freq:784,duration:.09,wave:'square',volume:.0042,slide:-18,lpHz:4100,delay:.164},{freq:988,duration:.08,wave:'triangle',volume:.0042,slide:-8,lpHz:4500,delay:.224}]),allowIdle:1}),
+     demo:Object.freeze({seq:[294,392,494,659,784],step:.062,wave:'triangle',volume:.0096,slide:16,lpHz:3040,tones:Object.freeze([{freq:147,duration:.16,wave:'square',volume:.003,slide:6,lpHz:1750,delay:0},{freq:784,duration:.084,wave:'square',volume:.0038,slide:-20,lpHz:3900,delay:.186},{freq:988,duration:.072,wave:'triangle',volume:.0038,slide:-10,lpHz:4300,delay:.246}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.064,wave:'triangle',volume:.0066,slide:8,lpHz:2600},{freq:494,duration:.042,wave:'square',volume:.0032,slide:-10,lpHz:3800,delay:.018},{freq:659,duration:.03,wave:'triangle',volume:.0023,slide:-6,lpHz:4500,delay:.038}])}),
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.064,wave:'triangle',volume:.0066,slide:8,lpHz:2600},{freq:523,duration:.042,wave:'square',volume:.0032,slide:-10,lpHz:3800,delay:.018},{freq:659,duration:.03,wave:'triangle',volume:.0023,slide:-6,lpHz:4500,delay:.038}])})
+       ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.068,wave:'triangle',volume:.0058,slide:10,lpHz:2400},{freq:440,duration:.042,wave:'square',volume:.0029,slide:-12,lpHz:3600,delay:.018},{freq:587,duration:.03,wave:'triangle',volume:.0021,slide:-8,lpHz:4200,delay:.04}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.068,wave:'triangle',volume:.0058,slide:10,lpHz:2400},{freq:494,duration:.042,wave:'square',volume:.0029,slide:-12,lpHz:3600,delay:.018},{freq:659,duration:.03,wave:'triangle',volume:.0021,slide:-8,lpHz:4200,delay:.04}])})
+       ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'square',volume:.004,slide:-110,detune:.001,lpHz:5400},{freq:1320,duration:.016,wave:'triangle',volume:.0025,slide:-70,detune:.001,lpHz:5200,delay:.004}])}),
+   uiConfirm:Object.freeze({seq:[660,880],step:.04,wave:'triangle',volume:.008,slide:30,lpHz:4200})
+  })
+ }),
+ 'aurora-rise':Object.freeze({
+ id:'aurora-rise',
+  label:'Aurora Rise',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[392,523,698,932,1175],step:.054,wave:'triangle',volume:.0186,slide:66,lpHz:3260,tones:Object.freeze([{freq:196,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1760,delay:0},{freq:988,duration:.076,wave:'sine',volume:.0052,slide:12,lpHz:3600,delay:0},{freq:1397,duration:.11,wave:'sine',volume:.0056,slide:18,lpHz:3920,delay:.162},{freq:1760,duration:.17,wave:'sine',volume:.0078,slide:34,lpHz:4200,delay:.216}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:980,duration:.03,wave:'triangle',volume:.006,slide:-520,lpHz:5200},{freq:1468,duration:.018,wave:'sine',volume:.003,slide:-260,lpHz:5600,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:298,duration:.08,wave:'triangle',volume:.008,slide:-110,lpHz:2600},{freq:220,duration:.055,wave:'sine',volume:.0038,slide:-70,lpHz:2300,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:202,duration:.055,wave:'triangle',volume:.012,slide:-150,lpHz:2800},{freq:138,duration:.11,wave:'sawtooth',volume:.012,slide:-170,lpHz:2100,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1500,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:288,duration:.065,wave:'triangle',volume:.014,slide:-108,lpHz:3200},{freq:196,duration:.13,wave:'sine',volume:.009,slide:-74,lpHz:2500,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1800,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:466,duration:.03,wave:'triangle',volume:.008,slide:-280,lpHz:3600},{freq:320,duration:.05,wave:'triangle',volume:.005,slide:-160,lpHz:3000,delay:.014},{freq:220,duration:.085,wave:'sine',volume:.005,slide:-60,lpHz:1900,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:392,duration:.03,wave:'triangle',volume:.01,slide:-260,lpHz:3900},{freq:262,duration:.052,wave:'triangle',volume:.007,slide:-170,lpHz:3200,delay:.014},{freq:176,duration:.11,wave:'sine',volume:.008,slide:-70,lpHz:2100,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1300,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:110,duration:.34,wave:'sawtooth',volume:.016,slide:52,detune:.014,lpHz:2600},{freq:165,duration:.28,wave:'sine',volume:.007,slide:32,detune:.01,lpHz:2200,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1800,delay:.03}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:165,duration:.09,wave:'triangle',volume:.0026,slide:10,lpHz:1700},{freq:330,duration:.07,wave:'sine',volume:.0086,slide:18,lpHz:2400},{freq:494,duration:.062,wave:'triangle',volume:.0064,slide:22,lpHz:3200,delay:.02},{freq:659,duration:.05,wave:'triangle',volume:.004,slide:14,lpHz:4200,delay:.042}])}),
+     Object.freeze({tones:Object.freeze([{freq:174.5,duration:.09,wave:'triangle',volume:.0026,slide:10,lpHz:1700},{freq:349,duration:.07,wave:'sine',volume:.0086,slide:18,lpHz:2400},{freq:523,duration:.062,wave:'triangle',volume:.0064,slide:22,lpHz:3200,delay:.02},{freq:698,duration:.05,wave:'triangle',volume:.004,slide:14,lpHz:4200,delay:.042}])}),
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.09,wave:'triangle',volume:.0026,slide:10,lpHz:1700},{freq:392,duration:.07,wave:'sine',volume:.0086,slide:18,lpHz:2400},{freq:587,duration:.062,wave:'triangle',volume:.0064,slide:22,lpHz:3200,delay:.02},{freq:784,duration:.05,wave:'triangle',volume:.004,slide:14,lpHz:4200,delay:.042}])}),
+     Object.freeze({tones:Object.freeze([{freq:165,duration:.09,wave:'triangle',volume:.0026,slide:10,lpHz:1700},{freq:330,duration:.07,wave:'sine',volume:.0086,slide:18,lpHz:2400},{freq:523,duration:.062,wave:'triangle',volume:.0064,slide:22,lpHz:3200,delay:.02},{freq:880,duration:.05,wave:'triangle',volume:.004,slide:14,lpHz:4200,delay:.042}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[440,587,784,1047,1318],step:.054,wave:'triangle',volume:.0124,slide:40,lpHz:3640,tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0032,slide:8,lpHz:1800,delay:0},{freq:988,duration:.076,wave:'sine',volume:.0042,slide:14,lpHz:4100,delay:.054},{freq:1397,duration:.12,wave:'sine',volume:.0062,slide:28,lpHz:4500,delay:.162}])}),
+   challengeTransition:Object.freeze({seq:[523,698,932,1175,1568,2093],step:.05,wave:'triangle',volume:.0136,slide:48,lpHz:3860,tones:Object.freeze([{freq:262,duration:.17,wave:'triangle',volume:.0032,slide:10,lpHz:1850,delay:0},{freq:1175,duration:.075,wave:'sine',volume:.0044,slide:16,lpHz:4300,delay:.05},{freq:1760,duration:.13,wave:'sine',volume:.0066,slide:24,lpHz:4800,delay:.19}])}),
+   extendAward:Object.freeze({seq:[784,1047,1318],step:.06,wave:'triangle',volume:.014,slide:48,lpHz:4600,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:22,lpHz:5200,delay:.08}])}),
+   rescueJoin:Object.freeze({seq:[523,659,880,1175],step:.052,wave:'triangle',volume:.013,slide:46,lpHz:4300,tones:Object.freeze([{freq:1568,duration:.1,wave:'sine',volume:.006,slide:28,lpHz:5000,delay:.08}])}),
+   captureRetreat:Object.freeze({seq:[262,330,415,523],step:.062,wave:'triangle',volume:.011,slide:14,lpHz:2400,tones:Object.freeze([{freq:698,duration:.16,wave:'sawtooth',volume:.005,slide:-60,lpHz:3000,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[440,523,698,932,1245],step:.064,wave:'triangle',volume:.0114,slide:26,lpHz:3620,tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.003,slide:6,lpHz:1820,delay:0},{freq:1245,duration:.088,wave:'sine',volume:.0044,slide:12,lpHz:4200,delay:.064},{freq:1568,duration:.082,wave:'sine',volume:.004,slide:18,lpHz:4500,delay:.208}]),allowIdle:1}),
+     demo:Object.freeze({seq:[392,494,659,880,1175],step:.07,wave:'triangle',volume:.0102,slide:20,lpHz:3240,tones:Object.freeze([{freq:196,duration:.16,wave:'triangle',volume:.0028,slide:6,lpHz:1760,delay:0},{freq:988,duration:.082,wave:'sine',volume:.004,slide:12,lpHz:3800,delay:.074},{freq:1318,duration:.074,wave:'sine',volume:.0038,slide:16,lpHz:4200,delay:.224}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.066,wave:'sine',volume:.0062,slide:10,lpHz:2300},{freq:523,duration:.044,wave:'triangle',volume:.0034,slide:14,lpHz:3200,delay:.022},{freq:784,duration:.032,wave:'sine',volume:.0022,slide:10,lpHz:4200,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.066,wave:'sine',volume:.0062,slide:10,lpHz:2300},{freq:587,duration:.044,wave:'triangle',volume:.0034,slide:14,lpHz:3200,delay:.022},{freq:880,duration:.032,wave:'sine',volume:.0022,slide:10,lpHz:4200,delay:.042}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.068,wave:'sine',volume:.0058,slide:8,lpHz:2200},{freq:494,duration:.042,wave:'triangle',volume:.0031,slide:12,lpHz:3000,delay:.022},{freq:740,duration:.03,wave:'sine',volume:.0021,slide:10,lpHz:3900,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.068,wave:'sine',volume:.0058,slide:8,lpHz:2200},{freq:440,duration:.042,wave:'triangle',volume:.0031,slide:12,lpHz:3000,delay:.022},{freq:659,duration:.03,wave:'sine',volume:.0021,slide:10,lpHz:3900,delay:.042}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:860,duration:.024,wave:'triangle',volume:.0038,slide:-80,lpHz:4600},{freq:1180,duration:.016,wave:'sine',volume:.0024,slide:-50,lpHz:5200,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:760,duration:.026,wave:'triangle',volume:.0038,slide:-70,lpHz:4300},{freq:1047,duration:.016,wave:'sine',volume:.0022,slide:-40,lpHz:4800,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:900,duration:.024,wave:'triangle',volume:.0042,slide:-90,lpHz:5000},{freq:1260,duration:.016,wave:'sine',volume:.0026,slide:-55,lpHz:5400,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[784,1047],step:.045,wave:'triangle',volume:.008,slide:24,lpHz:4300}),
+     wait:Object.freeze({seq:[698,932],step:.045,wave:'triangle',volume:.008,slide:22,lpHz:4200}),
+     stage:Object.freeze({seq:[784,1175],step:.042,wave:'triangle',volume:.0085,slide:26,lpHz:4500})
+    })
+   }),
+   playerHit:Object.freeze({tones:Object.freeze([{freq:220,duration:.13,wave:'triangle',volume:.02,slide:-220,lpHz:2200},{freq:165,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1800,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:980,delay:.02}])}),
+   gameOver:Object.freeze({seq:[330,262,220,196,165,131],step:.092,wave:'triangle',volume:.0162,slide:-58,lpHz:2120,tones:Object.freeze([{freq:175,duration:.12,wave:'triangle',volume:.0058,slide:-22,lpHz:2300,delay:.01},{freq:131,duration:.18,wave:'triangle',volume:.0062,slide:-28,lpHz:1860,delay:.182},{freq:98,duration:.4,wave:'sawtooth',volume:.0148,slide:-96,lpHz:1660,delay:.27}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])})
+  })
+ }),
+ 'aurora-surge':Object.freeze({
+ id:'aurora-surge',
+  label:'Aurora Surge',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[440,587,784,1047,1318],step:.05,wave:'triangle',volume:.0194,slide:60,lpHz:3660,tones:Object.freeze([{freq:220,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1820,delay:0},{freq:1175,duration:.076,wave:'sine',volume:.0048,slide:12,lpHz:4100,delay:0},{freq:1568,duration:.118,wave:'sine',volume:.0062,slide:24,lpHz:4400,delay:.15},{freq:1976,duration:.17,wave:'sine',volume:.0082,slide:30,lpHz:4700,delay:.2}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1080,duration:.028,wave:'triangle',volume:.0064,slide:-560,lpHz:5600},{freq:1610,duration:.017,wave:'sine',volume:.0032,slide:-240,lpHz:6200,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:320,duration:.078,wave:'triangle',volume:.0086,slide:-118,lpHz:2800},{freq:236,duration:.054,wave:'sine',volume:.0038,slide:-72,lpHz:2400,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:220,duration:.055,wave:'triangle',volume:.0125,slide:-160,lpHz:3000},{freq:148,duration:.105,wave:'sawtooth',volume:.0125,slide:-184,lpHz:2200,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1560,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:300,duration:.064,wave:'triangle',volume:.0145,slide:-112,lpHz:3400},{freq:208,duration:.126,wave:'sine',volume:.0095,slide:-76,lpHz:2600,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1840,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:494,duration:.03,wave:'triangle',volume:.0088,slide:-290,lpHz:3900},{freq:340,duration:.05,wave:'triangle',volume:.0054,slide:-170,lpHz:3200,delay:.014},{freq:228,duration:.085,wave:'sine',volume:.0052,slide:-62,lpHz:2000,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:410,duration:.03,wave:'triangle',volume:.0105,slide:-270,lpHz:4100},{freq:276,duration:.054,wave:'triangle',volume:.0072,slide:-176,lpHz:3400,delay:.014},{freq:184,duration:.112,wave:'sine',volume:.0082,slide:-72,lpHz:2200,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1320,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:118,duration:.34,wave:'sawtooth',volume:.0165,slide:54,detune:.014,lpHz:2750},{freq:176,duration:.28,wave:'sine',volume:.0074,slide:34,detune:.01,lpHz:2300,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1820,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[415,370,330,294],step:.054,wave:'triangle',volume:.0126,slide:-16,lpHz:2800,tones:Object.freeze([{freq:220,duration:.14,wave:'sine',volume:.0056,slide:-36,lpHz:2400,delay:.108}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:392,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:587,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:880,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:440,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:659,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:988,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:392,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:659,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:1047,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.092,wave:'triangle',volume:.0028,slide:10,lpHz:1760},{freq:440,duration:.068,wave:'triangle',volume:.0106,slide:22,lpHz:2800},{freq:698,duration:.052,wave:'sine',volume:.0048,slide:18,lpHz:3600,delay:.018},{freq:1175,duration:.042,wave:'triangle',volume:.0038,slide:14,lpHz:4700,delay:.038}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[523,659,880,1175,1568],step:.05,wave:'triangle',volume:.0134,slide:50,lpHz:4040,tones:Object.freeze([{freq:262,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1860,delay:0},{freq:1318,duration:.074,wave:'sine',volume:.0044,slide:12,lpHz:4600,delay:.05},{freq:1760,duration:.12,wave:'sine',volume:.0065,slide:22,lpHz:5000,delay:.16}])}),
+   challengeTransition:Object.freeze({seq:[587,784,1047,1318,1760,2349],step:.047,wave:'triangle',volume:.0142,slide:54,lpHz:4240,tones:Object.freeze([{freq:294,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1900,delay:0},{freq:1397,duration:.072,wave:'sine',volume:.0046,slide:14,lpHz:4700,delay:.047},{freq:2093,duration:.13,wave:'sine',volume:.007,slide:20,lpHz:5200,delay:.188}])}),
+   extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:340,duration:.042,wave:'triangle',volume:.0118,slide:-250,lpHz:3500},{freq:208,duration:.092,wave:'sine',volume:.0088,slide:-130,lpHz:2360,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0056,hp:1500,delay:.01}])}),
+   challengeResults:Object.freeze({seq:[440,587,784,988],step:.058,wave:'triangle',volume:.0134,slide:24,lpHz:3800,tones:Object.freeze([{freq:1245,duration:.12,wave:'sine',volume:.0054,slide:12,lpHz:4500,delay:.174}])}),
+   challengePerfect:Object.freeze({seq:[698,932,1175,1568,2093],step:.05,wave:'triangle',volume:.0152,slide:42,lpHz:4500,tones:Object.freeze([{freq:2637,duration:.14,wave:'sine',volume:.0068,slide:18,lpHz:5400,delay:.2}])}),
+   rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
+   captureRetreat:Object.freeze({seq:[330,392,494,587],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:784,duration:.18,wave:'sawtooth',volume:.005,slide:-70,lpHz:3200,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[523,659,880,1175,1568],step:.06,wave:'triangle',volume:.012,slide:28,lpHz:3920,tones:Object.freeze([{freq:262,duration:.16,wave:'triangle',volume:.003,slide:6,lpHz:1900,delay:0},{freq:1397,duration:.082,wave:'sine',volume:.0045,slide:12,lpHz:4400,delay:.06},{freq:1760,duration:.082,wave:'sine',volume:.0042,slide:16,lpHz:4700,delay:.198}]),allowIdle:1}),
+     demo:Object.freeze({seq:[440,587,784,1047,1318],step:.066,wave:'triangle',volume:.0106,slide:22,lpHz:3540,tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0028,slide:6,lpHz:1820,delay:0},{freq:1175,duration:.078,wave:'sine',volume:.0042,slide:12,lpHz:4100,delay:.07},{freq:1568,duration:.072,wave:'sine',volume:.004,slide:14,lpHz:4500,delay:.214}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.066,wave:'sine',volume:.0064,slide:10,lpHz:2400},{freq:659,duration:.044,wave:'triangle',volume:.0035,slide:15,lpHz:3400,delay:.022},{freq:988,duration:.032,wave:'sine',volume:.0023,slide:12,lpHz:4300,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:440,duration:.066,wave:'sine',volume:.0064,slide:10,lpHz:2400},{freq:698,duration:.044,wave:'triangle',volume:.0035,slide:15,lpHz:3400,delay:.022},{freq:1047,duration:.032,wave:'sine',volume:.0023,slide:12,lpHz:4300,delay:.042}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.068,wave:'sine',volume:.006,slide:9,lpHz:2300},{freq:587,duration:.042,wave:'triangle',volume:.0032,slide:13,lpHz:3200,delay:.022},{freq:880,duration:.03,wave:'sine',volume:.0022,slide:11,lpHz:4000,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.068,wave:'sine',volume:.006,slide:9,lpHz:2300},{freq:523,duration:.042,wave:'triangle',volume:.0032,slide:13,lpHz:3200,delay:.022},{freq:784,duration:.03,wave:'sine',volume:.0022,slide:11,lpHz:4000,delay:.042}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'triangle',volume:.004,slide:-84,lpHz:4900},{freq:1320,duration:.016,wave:'sine',volume:.0025,slide:-48,lpHz:5600,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:820,duration:.026,wave:'triangle',volume:.004,slide:-76,lpHz:4700},{freq:1175,duration:.016,wave:'sine',volume:.0024,slide:-44,lpHz:5400,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:980,duration:.024,wave:'triangle',volume:.0044,slide:-96,lpHz:5300},{freq:1468,duration:.016,wave:'sine',volume:.0027,slide:-56,lpHz:5900,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[880,1175],step:.044,wave:'triangle',volume:.0084,slide:26,lpHz:4500}),
+     wait:Object.freeze({seq:[784,1047],step:.044,wave:'triangle',volume:.0084,slide:24,lpHz:4400}),
+     stage:Object.freeze({seq:[880,1318],step:.042,wave:'triangle',volume:.009,slide:28,lpHz:4700})
+    })
+   }),
+   playerHit:Object.freeze({tones:Object.freeze([{freq:247,duration:.12,wave:'triangle',volume:.02,slide:-230,lpHz:2400},{freq:185,duration:.22,wave:'sawtooth',volume:.018,slide:-240,lpHz:1900,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
+   gameOver:Object.freeze({seq:[392,330,262,220,175,147],step:.09,wave:'triangle',volume:.016,slide:-60,lpHz:2220,tones:Object.freeze([{freq:196,duration:.11,wave:'triangle',volume:.0054,slide:-20,lpHz:2500,delay:.01},{freq:147,duration:.18,wave:'triangle',volume:.006,slide:-28,lpHz:1950,delay:.18},{freq:110,duration:.4,wave:'sawtooth',volume:.0144,slide:-94,lpHz:1720,delay:.264}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])}),
+   highScoreFirst:Object.freeze({seq:[659,880,1175,1568,2093],step:.048,wave:'triangle',volume:.0152,slide:38,lpHz:4500,tones:Object.freeze([{freq:2794,duration:.12,wave:'sine',volume:.0064,slide:16,lpHz:5400,delay:.192}])}),
+   highScoreOther:Object.freeze({seq:[523,698,932,1175],step:.054,wave:'triangle',volume:.0132,slide:24,lpHz:4100,tones:Object.freeze([{freq:1568,duration:.1,wave:'sine',volume:.0048,slide:10,lpHz:4900,delay:.168}])})
+  })
+ }),
+ 'aurora-crown':Object.freeze({
+ id:'aurora-crown',
+  label:'Aurora Crown',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[523,698,932,1245,1568],step:.048,wave:'triangle',volume:.0202,slide:56,lpHz:3940,tones:Object.freeze([{freq:262,duration:.18,wave:'triangle',volume:.0038,slide:8,lpHz:1900,delay:0},{freq:1397,duration:.078,wave:'sine',volume:.0048,slide:12,lpHz:4500,delay:0},{freq:1865,duration:.12,wave:'sine',volume:.0062,slide:18,lpHz:4700,delay:.144},{freq:2349,duration:.18,wave:'sine',volume:.0084,slide:24,lpHz:5200,delay:.192}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1160,duration:.028,wave:'triangle',volume:.0066,slide:-590,lpHz:5900},{freq:1720,duration:.017,wave:'sine',volume:.0033,slide:-250,lpHz:6400,delay:.005}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:338,duration:.078,wave:'triangle',volume:.0088,slide:-120,lpHz:2900},{freq:250,duration:.054,wave:'sine',volume:.0039,slide:-74,lpHz:2500,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:234,duration:.055,wave:'triangle',volume:.0128,slide:-165,lpHz:3100},{freq:156,duration:.105,wave:'sawtooth',volume:.0128,slide:-188,lpHz:2250,delay:.018}]),noise:Object.freeze([{duration:.045,volume:.005,hp:1580,delay:.012}])}),
+   bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.064,wave:'triangle',volume:.0148,slide:-114,lpHz:3500},{freq:220,duration:.128,wave:'sine',volume:.0096,slide:-76,lpHz:2680,delay:.016}]),noise:Object.freeze([{duration:.04,volume:.004,hp:1860,delay:.01}])}),
+   enemyBoom:Object.freeze({tones:Object.freeze([{freq:520,duration:.03,wave:'triangle',volume:.009,slide:-300,lpHz:4100},{freq:356,duration:.05,wave:'triangle',volume:.0055,slide:-176,lpHz:3300,delay:.014},{freq:240,duration:.086,wave:'sine',volume:.0054,slide:-64,lpHz:2060,delay:.024}])}),
+   bossBoom:Object.freeze({tones:Object.freeze([{freq:432,duration:.03,wave:'triangle',volume:.0108,slide:-278,lpHz:4300},{freq:290,duration:.054,wave:'triangle',volume:.0074,slide:-178,lpHz:3500,delay:.014},{freq:196,duration:.114,wave:'sine',volume:.0084,slide:-74,lpHz:2260,delay:.024}]),noise:Object.freeze([{duration:.05,volume:.004,hp:1340,delay:.016}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:126,duration:.34,wave:'sawtooth',volume:.0168,slide:56,detune:.014,lpHz:2850},{freq:188,duration:.28,wave:'sine',volume:.0076,slide:34,detune:.01,lpHz:2380,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1840,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[466,415,370,330],step:.052,wave:'triangle',volume:.0128,slide:-14,lpHz:2920,tones:Object.freeze([{freq:247,duration:.14,wave:'sine',volume:.0058,slide:-30,lpHz:2500,delay:.106}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.094,wave:'triangle',volume:.0028,slide:10,lpHz:1820},{freq:440,duration:.07,wave:'triangle',volume:.0108,slide:22,lpHz:3000},{freq:698,duration:.054,wave:'sine',volume:.0049,slide:18,lpHz:3800,delay:.018},{freq:1047,duration:.044,wave:'triangle',volume:.0039,slide:14,lpHz:4900,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:247,duration:.094,wave:'triangle',volume:.0028,slide:10,lpHz:1820},{freq:494,duration:.07,wave:'triangle',volume:.0108,slide:22,lpHz:3000},{freq:740,duration:.054,wave:'sine',volume:.0049,slide:18,lpHz:3800,delay:.018},{freq:1175,duration:.044,wave:'triangle',volume:.0039,slide:14,lpHz:4900,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:262,duration:.094,wave:'triangle',volume:.0028,slide:10,lpHz:1820},{freq:523,duration:.07,wave:'triangle',volume:.0108,slide:22,lpHz:3000},{freq:784,duration:.054,wave:'sine',volume:.0049,slide:18,lpHz:3800,delay:.018},{freq:1318,duration:.044,wave:'triangle',volume:.0039,slide:14,lpHz:4900,delay:.038}])}),
+     Object.freeze({tones:Object.freeze([{freq:294,duration:.094,wave:'triangle',volume:.0028,slide:10,lpHz:1820},{freq:587,duration:.07,wave:'triangle',volume:.0108,slide:22,lpHz:3000},{freq:880,duration:.054,wave:'sine',volume:.0049,slide:18,lpHz:3800,delay:.018},{freq:1397,duration:.044,wave:'triangle',volume:.0039,slide:14,lpHz:4900,delay:.038}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[587,784,1047,1397,1760],step:.048,wave:'triangle',volume:.014,slide:50,lpHz:4340,tones:Object.freeze([{freq:294,duration:.17,wave:'triangle',volume:.0034,slide:10,lpHz:1960,delay:0},{freq:1568,duration:.072,wave:'sine',volume:.0046,slide:12,lpHz:4900,delay:.048},{freq:2093,duration:.12,wave:'sine',volume:.0068,slide:18,lpHz:5300,delay:.15}])}),
+   challengeTransition:Object.freeze({seq:[659,880,1175,1568,2093,2794],step:.044,wave:'triangle',volume:.0148,slide:52,lpHz:4540,tones:Object.freeze([{freq:330,duration:.17,wave:'triangle',volume:.0036,slide:10,lpHz:2040,delay:0},{freq:1760,duration:.07,wave:'sine',volume:.0048,slide:14,lpHz:5000,delay:.044},{freq:2349,duration:.13,wave:'sine',volume:.0072,slide:18,lpHz:5700,delay:.176}])}),
+   extendAward:Object.freeze({seq:[988,1318,1760],step:.055,wave:'triangle',volume:.015,slide:52,lpHz:5000,tones:Object.freeze([{freq:2349,duration:.1,wave:'sine',volume:.007,slide:14,lpHz:5800,delay:.08}])}),
+   rescueJoin:Object.freeze({seq:[784,988,1318,1760],step:.05,wave:'triangle',volume:.014,slide:46,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.006,slide:18,lpHz:5400,delay:.08}])}),
+   captureRetreat:Object.freeze({seq:[392,466,587,698],step:.058,wave:'triangle',volume:.012,slide:16,lpHz:2800,tones:Object.freeze([{freq:932,duration:.18,wave:'sawtooth',volume:.005,slide:-65,lpHz:3400,delay:.08}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({seq:[659,784,1047,1397,1760],step:.058,wave:'triangle',volume:.0122,slide:28,lpHz:4240,tones:Object.freeze([{freq:330,duration:.16,wave:'triangle',volume:.0031,slide:6,lpHz:2040,delay:0},{freq:1661,duration:.08,wave:'sine',volume:.0045,slide:12,lpHz:4700,delay:.058},{freq:2093,duration:.08,wave:'sine',volume:.0043,slide:16,lpHz:5000,delay:.19}]),allowIdle:1}),
+     demo:Object.freeze({seq:[523,698,932,1245,1568],step:.064,wave:'triangle',volume:.0108,slide:22,lpHz:3740,tones:Object.freeze([{freq:262,duration:.16,wave:'triangle',volume:.0029,slide:6,lpHz:1940,delay:0},{freq:1397,duration:.078,wave:'sine',volume:.0042,slide:12,lpHz:4300,delay:.07},{freq:1865,duration:.072,wave:'sine',volume:.004,slide:14,lpHz:4700,delay:.204}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     wait:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:440,duration:.066,wave:'sine',volume:.0066,slide:10,lpHz:2500},{freq:740,duration:.044,wave:'triangle',volume:.0035,slide:15,lpHz:3500,delay:.022},{freq:1110,duration:.032,wave:'sine',volume:.0024,slide:10,lpHz:4500,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:494,duration:.066,wave:'sine',volume:.0066,slide:10,lpHz:2500},{freq:784,duration:.044,wave:'triangle',volume:.0035,slide:15,lpHz:3500,delay:.022},{freq:1175,duration:.032,wave:'sine',volume:.0024,slide:10,lpHz:4500,delay:.042}])})
+      ])
+     }),
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:392,duration:.068,wave:'sine',volume:.006,slide:9,lpHz:2400},{freq:659,duration:.042,wave:'triangle',volume:.0033,slide:13,lpHz:3300,delay:.022},{freq:988,duration:.03,wave:'sine',volume:.0022,slide:10,lpHz:4200,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:349,duration:.068,wave:'sine',volume:.006,slide:9,lpHz:2400},{freq:587,duration:.042,wave:'triangle',volume:.0033,slide:13,lpHz:3300,delay:.022},{freq:880,duration:.03,wave:'sine',volume:.0022,slide:10,lpHz:4200,delay:.042}])})
+      ])
+     })
+    })
+   }),
+   uiTick:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({tones:Object.freeze([{freq:980,duration:.024,wave:'triangle',volume:.0041,slide:-88,lpHz:5100},{freq:1397,duration:.016,wave:'sine',volume:.0025,slide:-52,lpHz:5800,delay:.004}])}),
+     wait:Object.freeze({tones:Object.freeze([{freq:880,duration:.026,wave:'triangle',volume:.0041,slide:-80,lpHz:4900},{freq:1245,duration:.016,wave:'sine',volume:.0024,slide:-46,lpHz:5600,delay:.005}])}),
+     stage:Object.freeze({tones:Object.freeze([{freq:1047,duration:.024,wave:'triangle',volume:.0045,slide:-98,lpHz:5500},{freq:1568,duration:.016,wave:'sine',volume:.0028,slide:-58,lpHz:6100,delay:.004}])})
+    })
+   }),
+   uiConfirm:Object.freeze({
+    byPhase:Object.freeze({
+     frontDoor:Object.freeze({seq:[988,1318],step:.044,wave:'triangle',volume:.0086,slide:26,lpHz:4700}),
+     wait:Object.freeze({seq:[880,1175],step:.044,wave:'triangle',volume:.0086,slide:24,lpHz:4600}),
+     stage:Object.freeze({seq:[988,1480],step:.042,wave:'triangle',volume:.0092,slide:28,lpHz:4900})
+    })
+   }),
+   playerHit:Object.freeze({tones:Object.freeze([{freq:262,duration:.12,wave:'triangle',volume:.02,slide:-220,lpHz:2500},{freq:196,duration:.22,wave:'sawtooth',volume:.018,slide:-235,lpHz:1950,delay:.018}]),noise:Object.freeze([{duration:.12,volume:.012,hp:1020,delay:.02}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:356,duration:.042,wave:'triangle',volume:.012,slide:-250,lpHz:3600},{freq:220,duration:.094,wave:'sine',volume:.009,slide:-130,lpHz:2440,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0058,hp:1540,delay:.01}])}),
+   challengeResults:Object.freeze({seq:[494,659,880,1175],step:.056,wave:'triangle',volume:.0138,slide:24,lpHz:3960,tones:Object.freeze([{freq:1480,duration:.12,wave:'sine',volume:.0056,slide:12,lpHz:4700,delay:.17}])}),
+   challengePerfect:Object.freeze({seq:[784,1047,1397,1865,2349],step:.048,wave:'triangle',volume:.0156,slide:42,lpHz:4700,tones:Object.freeze([{freq:3136,duration:.14,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.192}])}),
+   gameOver:Object.freeze({seq:[440,349,294,247,196,156],step:.088,wave:'triangle',volume:.0162,slide:-56,lpHz:2320,tones:Object.freeze([{freq:220,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:2600,delay:.01},{freq:165,duration:.18,wave:'triangle',volume:.0062,slide:-26,lpHz:2060,delay:.176},{freq:124,duration:.4,wave:'sawtooth',volume:.0146,slide:-92,lpHz:1780,delay:.258}]),noise:Object.freeze([{duration:.1,volume:.0042,hp:1000,delay:.11}])}),
+   highScoreFirst:Object.freeze({seq:[784,1047,1397,1865,2349],step:.046,wave:'triangle',volume:.0154,slide:38,lpHz:4700,tones:Object.freeze([{freq:3136,duration:.12,wave:'sine',volume:.0066,slide:16,lpHz:5700,delay:.186}])}),
+   highScoreOther:Object.freeze({seq:[587,784,1047,1397],step:.052,wave:'triangle',volume:.0134,slide:24,lpHz:4300,tones:Object.freeze([{freq:1865,duration:.1,wave:'sine',volume:.005,slide:10,lpHz:5100,delay:.164}])})
+ })
+ }),
+ 'galaga-original-reference':Object.freeze({
+ id:'galaga-original-reference',
+  label:'Galaga Original Reference',
+  cues:Object.freeze({
+   gameStart:Object.freeze({seq:[392,523,659,784,1047],step:.041,wave:'square',volume:.024,slide:20,lpHz:3200,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0052,slide:6,lpHz:1700,delay:0},{freq:392,duration:.08,wave:'square',volume:.0102,slide:10,lpHz:2500,delay:0},{freq:523,duration:.08,wave:'square',volume:.0108,slide:10,lpHz:2800,delay:.041},{freq:784,duration:.1,wave:'triangle',volume:.0072,slide:20,lpHz:3600,delay:.123},{freq:1047,duration:.22,wave:'triangle',volume:.018,slide:62,lpHz:3900,delay:.164}])}),
+   formationArrival:Object.freeze({seq:[392,523,698],step:.05,wave:'square',volume:.0122,slide:22,lpHz:3400,tones:Object.freeze([{freq:1047,duration:.11,wave:'triangle',volume:.0054,slide:-18,lpHz:4300,delay:.1}])}),
+   playerShot:Object.freeze({tones:Object.freeze([{freq:1240,duration:.038,wave:'square',volume:.0092,slide:-760,detune:.002,lpHz:6600},{freq:1660,duration:.022,wave:'square',volume:.0046,slide:-560,detune:-.003,lpHz:7200,delay:.006}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:306,duration:.09,wave:'square',volume:.0112,slide:-170,detune:.002,lpHz:2800},{freq:228,duration:.06,wave:'triangle',volume:.0054,slide:-120,detune:.001,lpHz:2300,delay:.014}])}),
+   enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.058,wave:'square',volume:.014,slide:-240,detune:.004,lpHz:3400},{freq:154,duration:.11,wave:'sawtooth',volume:.016,slide:-220,detune:.008,lpHz:2300,delay:.018}]),noise:Object.freeze([{duration:.05,volume:.0066,hp:1700,delay:.012}])}),
+   captureBeam:Object.freeze({tones:Object.freeze([{freq:98,duration:.34,wave:'sawtooth',volume:.019,slide:54,detune:.014,lpHz:2800},{freq:147,duration:.28,wave:'triangle',volume:.0088,slide:32,detune:.01,lpHz:2400,delay:.04}]),noise:Object.freeze([{duration:.1,volume:.004,hp:1820,delay:.03}])}),
+   captureSuccess:Object.freeze({seq:[415,370,330,277],step:.052,wave:'square',volume:.0132,slide:-18,lpHz:2800,tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0062,slide:-44,lpHz:2360,delay:.104}])}),
+   capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:330,duration:.044,wave:'square',volume:.0134,slide:-270,detune:.004,lpHz:3500},{freq:196,duration:.096,wave:'triangle',volume:.0096,slide:-150,detune:-.002,lpHz:2320,delay:.014}]),noise:Object.freeze([{duration:.052,volume:.0062,hp:1560,delay:.01}])}),
+   stagePulse:Object.freeze({
+    variants:Object.freeze([
+     Object.freeze({tones:Object.freeze([{freq:196,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:392,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:523,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:659,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:165,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:330,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:440,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:523,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:220,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:440,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:587,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:698,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])}),
+     Object.freeze({tones:Object.freeze([{freq:147,duration:.09,wave:'square',volume:.0032,slide:8,lpHz:1600},{freq:294,duration:.074,wave:'square',volume:.0118,slide:-14,lpHz:2800},{freq:392,duration:.054,wave:'square',volume:.0062,slide:-12,lpHz:3900,delay:.016},{freq:523,duration:.042,wave:'triangle',volume:.0038,slide:-10,lpHz:4700,delay:.034}])})
+    ])
+   }),
+   stageTransition:Object.freeze({seq:[330,440,587,784,988],step:.046,wave:'square',volume:.0136,slide:20,lpHz:3400,tones:Object.freeze([{freq:196,duration:.17,wave:'square',volume:.0038,slide:8,lpHz:1700,delay:0},{freq:659,duration:.08,wave:'square',volume:.0058,slide:-24,lpHz:4200,delay:.046},{freq:988,duration:.14,wave:'triangle',volume:.0066,slide:-34,lpHz:4600,delay:.138}])}),
+   challengeTransition:Object.freeze({seq:[523,659,784,988,1318,1760],step:.042,wave:'square',volume:.0152,slide:28,lpHz:3600,tones:Object.freeze([{freq:262,duration:.18,wave:'square',volume:.0038,slide:10,lpHz:1760,delay:0},{freq:784,duration:.082,wave:'square',volume:.0062,slide:-14,lpHz:4400,delay:.042},{freq:1568,duration:.16,wave:'triangle',volume:.0076,slide:-38,lpHz:4900,delay:.168}])}),
+   challengeResults:Object.freeze({seq:[392,523,659,784],step:.058,wave:'square',volume:.0138,slide:18,lpHz:3500,tones:Object.freeze([{freq:988,duration:.13,wave:'triangle',volume:.0058,slide:10,lpHz:4300,delay:.176}])}),
+   challengePerfect:Object.freeze({seq:[659,880,1175,1568,2093],step:.048,wave:'square',volume:.016,slide:30,lpHz:3900,tones:Object.freeze([{freq:2637,duration:.15,wave:'triangle',volume:.0072,slide:16,lpHz:5000,delay:.192}])}),
+   attractEnter:Object.freeze({
+    byPhase:Object.freeze({
+     demo:Object.freeze({seq:[294,392,494,659,784],step:.056,wave:'square',volume:.0108,slide:14,lpHz:3100,tones:Object.freeze([{freq:147,duration:.15,wave:'square',volume:.0032,slide:6,lpHz:1680,delay:0},{freq:784,duration:.086,wave:'square',volume:.0044,slide:-18,lpHz:3900,delay:.168},{freq:988,duration:.074,wave:'triangle',volume:.0044,slide:-8,lpHz:4300,delay:.224}]),allowIdle:1})
+    })
+   }),
+   attractPulse:Object.freeze({
+    byPhase:Object.freeze({
+     demo:Object.freeze({
+      allowIdle:1,
+      variants:Object.freeze([
+       Object.freeze({tones:Object.freeze([{freq:294,duration:.07,wave:'square',volume:.0062,slide:8,lpHz:2400},{freq:440,duration:.044,wave:'square',volume:.0034,slide:-12,lpHz:3600,delay:.02},{freq:587,duration:.032,wave:'triangle',volume:.0024,slide:-8,lpHz:4300,delay:.042}])}),
+       Object.freeze({tones:Object.freeze([{freq:330,duration:.07,wave:'square',volume:.0062,slide:8,lpHz:2400},{freq:494,duration:.044,wave:'square',volume:.0034,slide:-12,lpHz:3600,delay:.02},{freq:659,duration:.032,wave:'triangle',volume:.0024,slide:-8,lpHz:4300,delay:.042}])})
+      ])
+     })
+    })
+   }),
+   gameOver:Object.freeze({seq:[330,294,262,220,196,165],step:.084,wave:'square',volume:.018,slide:-60,lpHz:2200,tones:Object.freeze([{freq:165,duration:.12,wave:'square',volume:.0068,slide:-24,lpHz:2500,delay:.01},{freq:124,duration:.2,wave:'triangle',volume:.0072,slide:-34,lpHz:1900,delay:.17},{freq:98,duration:.44,wave:'sawtooth',volume:.0162,slide:-120,lpHz:1720,delay:.254}]),noise:Object.freeze([{duration:.11,volume:.0048,hp:1040,delay:.12}])}),
+   highScoreFirst:Object.freeze({seq:[523,659,880,1175,1568],step:.046,wave:'square',volume:.0158,slide:26,lpHz:3800,tones:Object.freeze([{freq:2093,duration:.12,wave:'triangle',volume:.0068,slide:14,lpHz:5000,delay:.184}])}),
+  highScoreOther:Object.freeze({seq:[392,523,659,880],step:.052,wave:'square',volume:.0138,slide:20,lpHz:3500,tones:Object.freeze([{freq:1175,duration:.1,wave:'triangle',volume:.0052,slide:10,lpHz:4600,delay:.16}])})
+  })
+ }),
+ 'galaga-reference-assets':Object.freeze({
+  id:'galaga-reference-assets',
+  label:'Galaga Reference Audio',
+  cues:GALAGA_REFERENCE_AUDIO_CUES
+ })
+});
+
 const AURORA_STAGE_THEME_PROGRESSION=Object.freeze([
- {fromStage:1,id:'quiet-skies',frameAccent:'classic-blue',backgroundMode:'starfield',challengeBrand:'classic',bossArchetype:'command-core'},
- {fromStage:4,id:'scorpion-dawn',frameAccent:'amber-blue',backgroundMode:'aurora-hint',challengeBrand:'scorpion',bossArchetype:'super-boss-scorpion'},
- {fromStage:8,id:'stingray-surge',frameAccent:'teal-gold',backgroundMode:'aurora-borealis',challengeBrand:'stingray',bossArchetype:'partner-wing-stingray'},
- {fromStage:12,id:'galboss-veil',frameAccent:'violet-gold',backgroundMode:'aurora-borealis',challengeBrand:'galboss',bossArchetype:'council-boss'},
- {fromStage:16,id:'crown-aurora',frameAccent:'aurora-crown',backgroundMode:'aurora-borealis',challengeBrand:'crown',bossArchetype:'super-partner-pair'}
+ {fromStage:1,id:'quiet-skies',frameAccent:'classic-blue',atmosphereTheme:'classic-arcade',challengeBrand:'classic',bossArchetype:'command-core'},
+ {fromStage:4,id:'scorpion-dawn',frameAccent:'amber-blue',atmosphereTheme:'aurora-hint',challengeBrand:'scorpion',bossArchetype:'super-boss-scorpion'},
+ {fromStage:8,id:'stingray-surge',frameAccent:'teal-gold',atmosphereTheme:'aurora-borealis',challengeBrand:'stingray',bossArchetype:'partner-wing-stingray'},
+ {fromStage:12,id:'galboss-veil',frameAccent:'violet-gold',atmosphereTheme:'aurora-borealis',challengeBrand:'galboss',bossArchetype:'council-boss'},
+ {fromStage:16,id:'crown-aurora',frameAccent:'aurora-crown',atmosphereTheme:'aurora-crown',challengeBrand:'crown',bossArchetype:'super-partner-pair'}
 ]);
 
 const AURORA_FORMATION_LAYOUTS=Object.freeze([
@@ -5925,9 +7402,10 @@ const AURORA_GAME_PACK=Object.freeze({
  frontDoor:Object.freeze({
   marqueeTitle:'Aurora Galactica',
   title:'AURORA GALACTICA',
-  featureLine:'AURORA BOREALIS STAGES   SUPER BOSSES   PARTNER WINGS',
+ featureLine:'AURORA BOREALIS STAGES   SUPER BOSSES   PARTNER WINGS',
   shellFrameTheme:'platinum-release',
-  frameAccent:'classic-blue'
+  frameAccent:'classic-blue',
+  atmosphereTheme:'aurora-crown'
  }),
  platformFrontDoor:Object.freeze({
   noticeHint:'PLATINUM RELEASE 1   GALAXY GUARDIANS PREVIEW AVAILABLE IN CHOOSE GAME'
@@ -5948,6 +7426,8 @@ const AURORA_GAME_PACK=Object.freeze({
   usesStageThemeProgression:1,
   usesBossArchetypeVariants:1
  }),
+ atmosphereThemes:AURORA_ATMOSPHERE_THEMES,
+ audioThemes:AURORA_AUDIO_THEMES,
  stageCadence:AURORA_STAGE_CADENCE,
  stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
  formationLayouts:AURORA_FORMATION_LAYOUTS,
@@ -5969,7 +7449,8 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   title:'GALAXY GUARDIANS',
   featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   ARCADE PRESSURE',
   shellFrameTheme:'guardians-preview',
-  frameAccent:'signal-crimson'
+  frameAccent:'signal-crimson',
+  atmosphereTheme:'classic-arcade'
  }),
  platformFrontDoor:Object.freeze({
   noticeHint:'Galaxy Guardians is a shell preview for the next Platinum application.',
@@ -5991,12 +7472,14 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   usesStageThemeProgression:0,
   usesBossArchetypeVariants:0
  }),
+ atmosphereThemes:AURORA_ATMOSPHERE_THEMES,
+ audioThemes:AURORA_AUDIO_THEMES,
  stageCadence:AURORA_STAGE_CADENCE,
  stageBandProfiles:AURORA_STAGE_BAND_PROFILES,
  formationLayouts:AURORA_FORMATION_LAYOUTS,
  challengeLayout:AURORA_CHALLENGE_LAYOUT,
  stageThemeProgression:Object.freeze([
-  {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',backgroundMode:'starfield',challengeBrand:'signal',bossArchetype:'flagship'}
+  {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',atmosphereTheme:'classic-arcade',challengeBrand:'signal',bossArchetype:'flagship'}
  ]),
  frameAccents:AURORA_FRAME_ACCENTS,
  scoring:AURORA_SCORING_RULES
@@ -6077,12 +7560,96 @@ function currentGamePackStagePresentation(stage,challenge){
   else break;
  }
  const shownStage=formatDisplayedStage(stage,challenge);
+ const atmosphereTheme=theme?.atmosphereTheme||theme?.backgroundMode||pack.frontDoor?.atmosphereTheme||'classic-arcade';
  return Object.assign({},theme,{
+  atmosphereTheme,
+  backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:challenge?'challenge':'stage'}),
   challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
   stageLabel:challenge?'BONUS STAGE':`STAGE ${shownStage}`,
   transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
   transitionSub:challenge?'BONUS STAGE':'NEXT PHASE'
  });
+}
+
+function currentGamePackAtmosphereTheme(id=''){
+ const themes=currentGamePack().atmosphereThemes||{};
+ const nextId=String(id||'').trim()||currentGamePack().frontDoor?.atmosphereTheme||'classic-arcade';
+ return themes[nextId]||themes['classic-arcade']||Object.values(themes)[0]||Object.freeze({
+  id:'classic-arcade',
+  label:'Classic Arcade',
+  group:'default',
+  backgrounds:Object.freeze({frontDoor:'classic-stars',wait:'classic-stars',demo:'classic-stars',stage:'classic-stars',challenge:'classic-stars'}),
+  audioTheme:'classic-arcade'
+ });
+}
+
+function resolvePackAtmosphereBackground({pack=currentGamePack(),atmosphereTheme='',phase='stage'}={}){
+ const theme=(pack?.atmosphereThemes&&pack.atmosphereThemes[atmosphereTheme])||currentGamePackAtmosphereTheme(atmosphereTheme);
+ return theme?.backgrounds?.[phase]
+  || theme?.backgrounds?.stage
+  || theme?.backgrounds?.demo
+  || 'classic-stars';
+}
+
+function currentGamePackResolvedAtmosphere(opts={}){
+ const pack=currentGamePack();
+ const attractPhase=opts.attractPhase||((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
+ const phase=String(opts.phase||'').trim()||(
+  opts.frontDoor?'frontDoor'
+   : attractPhase==='scores'?'wait'
+   : attractPhase==='demo'?'demo'
+   : opts.challenge?'challenge'
+   : 'stage'
+ );
+ const atmosphereThemeId=String(
+  opts.atmosphereTheme
+  || ((phase==='frontDoor'||phase==='wait')?pack.frontDoor?.atmosphereTheme:'')
+  || ((phase==='demo'||phase==='stage'||phase==='challenge')?opts.stagePresentation?.atmosphereTheme:'')
+  || pack.frontDoor?.atmosphereTheme
+  || 'classic-arcade'
+ );
+ const theme=currentGamePackAtmosphereTheme(atmosphereThemeId);
+ return Object.freeze({
+  id:theme.id,
+  label:theme.label||theme.id,
+  group:theme.group||'default',
+  phase,
+  backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme:theme.id,phase}),
+  audioTheme:theme.audioTheme||'classic-arcade',
+  starfield:theme.starfield||null
+ });
+}
+
+function currentGamePackAudioTheme(id=''){
+ const themes=currentGamePack().audioThemes||{};
+ const nextId=String(id||'').trim()||'classic-arcade';
+ return themes[nextId]||themes['classic-arcade']||Object.values(themes)[0]||Object.freeze({id:'classic-arcade',cues:Object.freeze({})});
+}
+
+function currentGamePackAudioCue(cueName,opts={}){
+ const atmosphere=opts.resolvedAtmosphere||currentGamePackResolvedAtmosphere(opts);
+ const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
+ const theme=currentGamePackAudioTheme(atmosphere.audioTheme);
+ const fallback=currentGamePackAudioTheme('classic-arcade');
+ const resolveCue=(sourceTheme)=>{
+  const base=sourceTheme?.cues?.[cueName];
+  if(!base)return null;
+  if(base.byPhase){
+   return base.byPhase[phase]
+    || base.byPhase.stage
+    || base.byPhase.demo
+    || base.byPhase.wait
+    || null;
+  }
+  return base;
+ };
+ return resolveCue(theme)
+  || resolveCue(fallback)
+  || null;
+}
+
+function currentGamePackReferenceTiming(key=''){
+ return AURORA_REFERENCE_TIMINGS[String(key||'').trim()]||null;
 }
 
 function currentGamePackFormationLayout(stage){
@@ -6143,6 +7710,7 @@ function currentGamePackFrontDoor(){
   utilityLine:appFrontDoor.utilityLine||platformCopy.utilityLine||'<span class="k">F</span> FULLSCREEN   <span class="k">U</span> ULTRA SCALE   <span class="k">⚙</span> DEV TOOLS',
   noticeHint:appFrontDoor.noticeHint||platformCopy.noticeHint||'',
   pickerHint:appFrontDoor.pickerHint||platformCopy.pickerHint||'',
+  atmosphereTheme:appFrontDoor.atmosphereTheme||'classic-arcade',
   shellFrameTheme:appFrontDoor.shellFrameTheme||'platinum-release',
   frameAccent:appFrontDoor.frameAccent||'classic-blue',
   quotePlaceholder:Object.freeze({
@@ -6292,6 +7860,11 @@ window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
+window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
+window.currentGamePackAudioTheme=currentGamePackAudioTheme;
+window.currentGamePackAudioCue=currentGamePackAudioCue;
+window.currentGamePackReferenceTiming=currentGamePackReferenceTiming;
 window.currentPlatformPackLabel=currentPlatformPackLabel;
 window.currentGamePackShellThemes=currentGamePackShellThemes;
 window.selectedShellThemeForPack=selectedShellThemeForPack;
@@ -6340,6 +7913,9 @@ function enemyCoreState({
   targetX:0,
   targetY:0,
   shot:0,
+  chargeCuePending:0,
+  chargeCueT:0,
+  chargeCueStartY:0,
   spawn,
   spawnPlan:spawn,
   en:0,
@@ -6492,6 +8068,9 @@ function makePackChallengeEnemyState({
   targetX:0,
   targetY:0,
   shot:0,
+  chargeCuePending:0,
+  chargeCueT:0,
+  chargeCueStartY:0,
   spawn,
   spawnPlan:spawn,
   en:0,
@@ -6893,9 +8472,9 @@ function syncCabinetShellLayout({
   }
  }
  if(renderSettingsPanel){
-  const settingsW=Math.min(Math.max(420,Math.floor(viewW*.58)),680);
+  const settingsW=Math.min(Math.max(560,Math.floor(viewW*.9)),940);
   const top=Math.floor(oy+12);
-  const maxHeight=Math.max(220,Math.floor(viewH-24));
+  const maxHeight=Math.max(240,Math.min(Math.floor(viewH-24),760));
   renderSettingsPanel.style.width=`${settingsW}px`;
   renderSettingsPanel.style.left=`${Math.floor(ox+viewW/2-settingsW/2)}px`;
   renderSettingsPanel.style.right='auto';
@@ -6953,10 +8532,10 @@ function syncCabinetShellLayout({
   renderGamePickerPanel.style.maxHeight=`${Math.max(260,Math.min(Math.floor(viewH-24),760))}px`;
  }
  if(buildStamp){
-  const stampW=Math.min(320,Math.max(248,Math.floor(viewW*.32)));
-  const compactStampH=56;
+  const stampW=Math.min(560,Math.max(420,Math.floor(viewW*.46)));
+  const compactStampH=62;
   const stampH=buildStamp.offsetHeight||compactStampH;
-  const anchorTop=shellY+shellH-Math.max(66,Math.floor(shellPadB*.78));
+  const anchorTop=shellY+shellH-Math.max(44,Math.floor(shellPadB*.5));
   buildStamp.style.width=`${stampW}px`;
   buildStamp.style.left=`${Math.max(14,Math.floor(ox+viewW/2-stampW/2))}px`;
   buildStamp.style.top=`${anchorTop-Math.max(0,stampH-compactStampH)}px`;
@@ -7097,7 +8676,7 @@ function enemyDims(e){
 }
 
 function enemyHitbox(e){
- const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.08:(S.scriptMode?0.18:0.22)):0.22);
+ const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.08:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
  return{w:d.w*scale,h:d.h*scale};
 }
 
@@ -7133,9 +8712,24 @@ function drawEnemy(e){
  else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
  else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
  if(e.hitT>0){
-  ctx.globalAlpha=Math.min(.9,e.hitT/.34);
-  ctx.fillStyle=e.t==='boss'?'rgba(255,248,196,.86)':'rgba(255,255,255,.72)';
-  ctx.fillRect(-12,-10,24,20);
+  const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
+  ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
+  if(e.t==='boss'){
+   ctx.fillStyle='#fff8c4';
+   ctx.fillRect(-17,-13,34,26);
+   ctx.fillStyle='#ffffff';
+   ctx.fillRect(-12,-3,24,6);
+   ctx.fillRect(-3,-10,6,20);
+   ctx.fillStyle='#ff92d8';
+   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-1,-7,2,14);
+   ctx.strokeStyle='#e2f7ff';
+   ctx.lineWidth=1;
+   ctx.strokeRect(-18.5,-14.5,37,29);
+  }else{
+   ctx.fillStyle='rgba(255,255,255,.72)';
+   ctx.fillRect(-12,-10,24,20);
+  }
   ctx.globalAlpha=1;
  }
  if(enemyHasActiveBeam(e)){
@@ -7358,9 +8952,21 @@ function drawReserveShips(lives){
 
 function drawPostFx(){}
 
+function resolvedBoardAtmosphere(){
+ if(typeof resolvedVisualAtmosphere==='function'){
+  return resolvedVisualAtmosphere({
+   stagePresentation:S.stagePresentation,
+   challenge:!!S.challenge,
+   attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+   frontDoor:!started&&!S.attract
+  });
+ }
+ return Object.freeze({backgroundMode:S.stagePresentation?.backgroundMode||'classic-stars'});
+}
+
 function drawStageBackdrop(){
- const mode=S.stagePresentation?.backgroundMode||'starfield';
- if(mode==='starfield')return;
+ const mode=resolvedBoardAtmosphere().backgroundMode||S.stagePresentation?.backgroundMode||'classic-stars';
+ if(mode==='classic-stars'||mode==='starfield')return;
  const time=performance.now()/1000;
  if(mode==='aurora-hint'||mode==='aurora-borealis'){
   const alpha=mode==='aurora-borealis'?.22:.12;
@@ -7405,13 +9011,25 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
  ctx.clip();
+ const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({
+  stagePresentation:S.stagePresentation,
+  challenge:!!S.challenge,
+  attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+  frontDoor:!started&&!S.attract
+ }):null;
  for(const s of S.st){
-  ctx.globalAlpha=.04+s.z*.22*(.3+Math.sin(s.tw)*.58);
+  const pulse=(s.twMin||.88)+Math.sin(s.tw)*(s.twAmp||.16);
+  ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
   ctx.fillStyle=s.c;
   ctx.fillRect(s.x,s.y,s.s,s.s);
  }
  ctx.globalAlpha=1;
  drawStageBackdrop();
+ window.__platinumRenderDebug.backgroundMode=resolvedBoardAtmosphere().backgroundMode||'classic-stars';
+ window.__platinumRenderDebug.starfieldProfile=starfield?.id||'classic-arcade-stars';
+ window.__platinumRenderDebug.starfieldCount=S.st.length;
+ window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
+ window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.flash){
@@ -7473,13 +9091,17 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   testShips.value=cl(+cfg.ships||3,1,9)|0;
   testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
   testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
   testChallenge.checked=!!cfg.challenge;
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
+  if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
+  if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
+  if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);
   saveTestCfg();
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
@@ -7518,6 +9140,16 @@ window.__galagaHarness__={
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-attract');
   window.startAttractDemo({record:cfg.record!==false});
   return true;
+ },
+ showFrontDoor(){
+  started=0;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+  if(typeof syncPauseUi==='function')syncPauseUi();
+  return this.state();
  },
  enterAttractScores(){
   if(typeof window.enterAttractScores==='function')window.enterAttractScores();
@@ -7901,7 +9533,87 @@ window.__galagaHarness__={
  },
  export(){exportSession({silent:1})},
  snapshot(){return snapshot()},
- state(){return{started,paused,stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,recording:!!VIDEO_REC.active,seed:RNG_SEED,simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}}},
+ state(){
+  const atmosphere=typeof resolvedAudioAtmosphere==='function'
+   ? resolvedAudioAtmosphere({
+    stagePresentation:S.stagePresentation,
+    challenge:!!S.challenge,
+    attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+    frontDoor:!started&&!S.attract
+   })
+  : null;
+  const visualAtmosphere=typeof resolvedVisualAtmosphere==='function'
+   ? resolvedVisualAtmosphere({
+    stagePresentation:S.stagePresentation,
+    challenge:!!S.challenge,
+    attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
+    frontDoor:!started&&!S.attract
+   })
+   : atmosphere;
+  const graphics=currentGraphicsOverrides?.()||null;
+  return{
+   started,
+   paused,
+   stage:S.stage,
+   score:S.score,
+   lives:Math.max(0,S.lives+1),
+   challenge:!!S.challenge,
+   recording:!!VIDEO_REC.active,
+   seed:RNG_SEED,
+   simT:+(+S.simT||0).toFixed(3),
+   stageClock:+(+S.stageClock||0).toFixed(3),
+   persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,
+   atmosphere:atmosphere?{
+    id:atmosphere.id||'',
+    group:atmosphere.group||'',
+    phase:atmosphere.phase||'',
+    backgroundMode:atmosphere.backgroundMode||'',
+    audioTheme:atmosphere.audioTheme||'',
+    starfield:atmosphere.starfield?{
+     id:atmosphere.starfield.id||'',
+     count:+(atmosphere.starfield.count||0),
+     alphaMin:+(atmosphere.starfield.alphaMin||0),
+     alphaMax:+(atmosphere.starfield.alphaMax||0)
+    }:null
+   }:null,
+   visualAtmosphere:visualAtmosphere?{
+    id:visualAtmosphere.id||'',
+    group:visualAtmosphere.group||'',
+    phase:visualAtmosphere.phase||'',
+    backgroundMode:visualAtmosphere.backgroundMode||'',
+    audioTheme:visualAtmosphere.audioTheme||'',
+    overrideThemeId:visualAtmosphere.overrideThemeId||'',
+    starfield:visualAtmosphere.starfield?{
+     id:visualAtmosphere.starfield.id||'',
+     count:+(visualAtmosphere.starfield.count||0),
+     alphaMin:+(visualAtmosphere.starfield.alphaMin||0),
+     alphaMax:+(visualAtmosphere.starfield.alphaMax||0)
+    }:null
+   }:null,
+   stagePresentation:S.stagePresentation?{
+    id:S.stagePresentation.id||'',
+    atmosphereTheme:S.stagePresentation.atmosphereTheme||'',
+    backgroundMode:S.stagePresentation.backgroundMode||''
+   }:null,
+   audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null,
+   renderDebug:{
+    backgroundMode:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.backgroundMode||'',
+    starfieldProfile:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldProfile||'',
+    starfieldCount:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldCount||0),
+    starfieldIntensityScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldIntensityScale||0),
+    starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0)
+   },
+  graphics:graphics?{
+    graphicsTheme:graphics.graphicsTheme||'auto',
+    starfieldIntensity:+(graphics.starfieldIntensity||1),
+    starfieldSpeed:+(graphics.starfieldSpeed||1)
+   }:null,
+   audio:typeof currentAudioOverrides==='function'?{
+    audioTheme:currentAudioOverrides().audioTheme||'auto'
+   }:null,
+   extend:{first:+(S.extendFirst||0),recurring:+(S.extendRecurring||0),next:+(S.nextExtendScore||0),awards:+(S.extendAwards||0),flashT:+(+S.extendFlashT||0).toFixed(3),flashShips:+(S.extendFlashShips||0)}
+  };
+ },
  attractScoreState(){
   const title=document.querySelector('.gameOverSub')?.textContent||'';
   return{
@@ -7927,6 +9639,82 @@ window.__galagaHarness__={
    empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
    cells
   };
+ },
+ audioHistory(limit=12){
+  const history=(window.__platinumAudioDebug||window.__auroraAudioDebug)?.history||[];
+  return history.slice(Math.max(0,history.length-Math.max(1,+limit||12)));
+ },
+ triggerAudioCue(name,opts={}){
+  if(!name)return null;
+  if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  return (window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null;
+ },
+ estimateAudioCueDuration(name,opts={}){
+  if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return .9;
+  const cue=sfx.cueDef(String(name),opts||{});
+  if(!cue)return .9;
+  if(cue.referenceClip){
+   const clipped=Math.max(0,+cue.clipDuration||0);
+   if(clipped>0)return Math.max(.08,Math.min(12,clipped+.04));
+   return 4;
+  }
+  let endT=.12;
+  if(Array.isArray(cue.seq)&&cue.seq.length){
+   const step=Math.max(.01,+cue.step||.05);
+   endT=Math.max(endT,((cue.seq.length-1)*step*.92)+step+.06);
+  }
+  if(Array.isArray(cue.tones))for(const tone of cue.tones){
+   endT=Math.max(endT,Math.max(0,+tone.delay||0)+Math.max(.01,+tone.duration||.08)+.06);
+  }
+  if(Array.isArray(cue.noise))for(const burst of cue.noise){
+   endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
+  }
+  return Math.max(.8,Math.min(4,endT+.12));
+ },
+ async captureAudioCue(name,opts={}){
+  if(!name)return null;
+  if(typeof window.MediaRecorder!=='function'||typeof sfx==='undefined'||!sfx.tap?.stream){
+   return { ok:false, error:'Audio capture is not supported in this runtime.' };
+  }
+  try{
+   AC();
+   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')await sfx.a.resume().catch(()=>{});
+  }catch{}
+  const mimeCandidates=['audio/webm;codecs=opus','audio/webm'];
+  const mimeType=mimeCandidates.find(type=>!window.MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(type))||'';
+  const chunks=[];
+  const recorder=mimeType?new MediaRecorder(sfx.tap.stream,{mimeType}):new MediaRecorder(sfx.tap.stream);
+  const captureMs=Math.max(250,Math.round(1000*(opts.captureSeconds||this.estimateAudioCueDuration(name,opts))));
+  const done=new Promise(resolve=>{
+   recorder.ondataavailable=e=>{ if(e?.data?.size)chunks.push(e.data); };
+   recorder.onerror=e=>resolve({ ok:false, error:e?.error?.message||'MediaRecorder failed.' });
+   recorder.onstop=async()=>{
+    try{
+     const blob=new Blob(chunks,{type:recorder.mimeType||mimeType||'audio/webm'});
+     const buffer=await blob.arrayBuffer();
+     const bytes=new Uint8Array(buffer);
+     let binary='';
+     const chunkSize=0x8000;
+     for(let i=0;i<bytes.length;i+=chunkSize){
+      binary+=String.fromCharCode(...bytes.subarray(i,i+chunkSize));
+     }
+     resolve({
+      ok:true,
+      mimeType:blob.type||recorder.mimeType||mimeType||'audio/webm',
+      captureMs,
+      base64:btoa(binary),
+      audioCue:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+     });
+    }catch(err){
+     resolve({ ok:false, error:err?.message||String(err) });
+    }
+   };
+  });
+  recorder.start();
+  if(typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});
+  await new Promise(resolve=>setTimeout(resolve,captureMs));
+  if(recorder.state!=='inactive')recorder.stop();
+  return done;
  },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
@@ -8090,12 +9878,31 @@ window.__galagaHarness__={
   const boss=S.e.find(e=>e.hp>1&&e.t==='boss');
   if(!boss)return false;
   const hpBefore=boss.hp;
+  const bossTiming=typeof currentGamePackReferenceTiming==='function'?currentGamePackReferenceTiming('bossMoments'):null;
   boss.hp--;
-  boss.hitT=.34;
+  boss.hitT=bossTiming?.hitFlashDuration??.46;
   logEvent('enemy_damaged',Object.assign({stage:S.stage,hpBefore,hpAfter:boss.hp,playerBullets:S.pb.length,enemyBullets:S.eb.length,harness:1},enemyRef(boss)));
-  ex(boss.x,boss.y,8,'#fff4a8');
+  holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
+  S.shake=Math.max(S.shake,.22);
+  ex(boss.x,boss.y,20,'#fff4a8');
+  ex(boss.x,boss.y,10,'#ff8cd7');
+  ex(boss.x,boss.y,6,'#d8f2ff');
   sfx.bossHit();
   logEvent('harness_trigger_boss_first_hit',{boss:boss.id,hpBefore,hpAfter:boss.hp});
+  return true;
+ },
+ triggerBossDeath(){
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  boss.hp=0;
+  awardKill(boss,boss.dive);
+  clearReferenceBossMomentCueWindow();
+  S.shake=Math.max(S.shake,.6);
+  ex(boss.x,boss.y,28,'#fff5a6');
+  ex(boss.x,boss.y,18,'#ff8cd7');
+  ex(boss.x,boss.y,12,'#d8f2ff');
+  sfx.boom('boss');
+  logEvent('harness_trigger_boss_death',{boss:boss.id,dive:boss.dive,stage:S.stage});
   return true;
  },
  triggerSquadronBossKill(){
@@ -8314,6 +10121,62 @@ window.__galagaHarness__={
    }
   };
  },
+ setupStageTransitionProbe(cfg={}){
+  started=1;
+  paused=0;
+  ATTRACT.active=0;
+  ATTRACT.phase='';
+  ATTRACT.timer=0;
+  S.attract=0;
+ S.stage=Math.max(1,+cfg.stage||2);
+  S.pendingStage=S.stage+1;
+  S.forceChallenge=!!cfg.forceChallenge;
+  S.nextStageT=0;
+  S.postChallengeT=0;
+  S.challenge=!!cfg.challenge;
+  S.challengeTransitionStallLogged=0;
+  S.lastChallengeClearT=null;
+  S.banner=0;
+  S.bannerTxt='';
+  S.bannerSub='';
+  S.bannerMode='';
+  S.alertT=0;
+  S.alertTxt='';
+  S.shake=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.e.length=0;
+  const p=S.p;
+  p.x=PLAY_W/2;
+  p.y=PLAY_H-VIS.playerBottom;
+  p.vx=0;
+  p.cd=0;
+  p.inv=0;
+  p.spawn=0;
+  p.dual=0;
+  p.captured=0;
+  p.pending=0;
+  p.returning=0;
+  p.capBoss=null;
+  p.capT=0;
+  queueStageTransition(String(cfg.mode||'normal'));
+  logEvent('harness_stage_transition_probe_setup',{
+   stage:S.stage,
+   nextStage:S.pendingStage,
+   nextStageIsChallenge:isChallengeStage(S.pendingStage),
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3),
+   mode:String(cfg.mode||'normal')
+  });
+  return {
+   stage:S.stage,
+   pendingStage:S.pendingStage,
+   challenge:!!S.challenge,
+   nextStageT:+S.nextStageT.toFixed(3),
+   transitionCueT:+S.transitionCueT.toFixed(3)
+  };
+ },
  setAutoVideo(v){
   VIDEO_REC.enabled=!!v;
   localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
@@ -8322,10 +10185,14 @@ window.__galagaHarness__={
  setTest(cfg={}){
   const currentCfg=loadTestCfg();
   testStage.value=cl(+cfg.stage||1,1,99)|0;
-  testShips.value=cl(+cfg.ships||3,1,9)|0;
-  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
-  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
-  testChallenge.checked=!!cfg.challenge;
+ testShips.value=cl(+cfg.ships||3,1,9)|0;
+ testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
+ testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
+ testChallenge.checked=!!cfg.challenge;
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
+  if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
+  if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
+  if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);
   saveTestCfg();
  },
  spawnRescuePod(cfg={}){
@@ -8526,6 +10393,17 @@ window.__galagaHarness__={
   for(const e of S.e)if(e.id!==boss.id)e.hp=0;
   boss.hp=2;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=0;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
   logEvent('harness_boss_first_hit_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
+  return true;
+ },
+ setupBossDeathTest(cfg={}){
+  const p=S.p;
+  const boss=S.e.find(e=>e.hp>0&&e.t==='boss');
+  if(!boss)return false;
+  p.x=cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18);p.y=PLAY_H-VIS.playerBottom;p.dual=0;p.captured=0;p.pending=0;p.spawn=0;p.capBoss=null;p.capT=0;p.inv=0;
+  S.cap=null;S.pb.length=0;S.eb.length=0;S.att=0;S.recoverT=0;S.attackGapT=0;S.stage=Math.max(1,+cfg.stage||1);S.stageClock=0;S.simT=0;S.seq=0;S.seqT=0;S.audioPulseHoldT=0;
+  for(const e of S.e)if(e.id!==boss.id)e.hp=0;
+  boss.hp=1;boss.max=2;boss.form=1;boss.dive=0;boss.carry=0;boss.beam=0;boss.beamT=0;boss.low=0;boss.esc=0;boss.squadId=1;boss.x=cl(+cfg.bossX||p.x,28,PLAY_W-28);boss.y=+cfg.bossY||112;boss.vx=0;boss.vy=0;boss.hitT=0;
+  logEvent('harness_boss_death_setup',{boss:boss.id,playerX:+p.x.toFixed(2),bossX:+boss.x.toFixed(2),bossY:+boss.y.toFixed(2),stage:S.stage});
   return true;
  }
 };
