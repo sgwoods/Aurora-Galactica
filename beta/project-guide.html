@@ -705,11 +705,11 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<ul><li>hosted <code>/dev</code> is now current with the active integration branch:<ul><li><code>1.2.3+build.470.sha.e4732eb</code></li></ul></li><li>hosted <code>/beta</code> remains on:<ul><li><code>1.2.3-beta.1+build.388.sha.13c8421.beta</code></li></ul></li><li>hosted <code>/production</code> remains on:<ul><li><code>1.2.3+build.388.sha.13c8421</code></li></ul></li><li><code>Platinum</code> is now a real shipped host platform rather than an internal refactor story</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lane model is now explicit:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the major missing discipline that slipped past the original <code>1.2.0</code> promotion was a full documentation pass and first-class hosted platform docs</li><li>that is now being corrected and formalized as a real release gate</li></ul>
+<ul><li>hosted <code>/dev</code> is now current with the active integration branch:<ul><li><code>1.2.3+build.470.sha.e4732eb</code></li></ul></li><li>hosted <code>/beta</code> is now current with the promoted forward candidate:<ul><li><code>1.2.3-beta.1+build.484.sha.baa1726.beta</code></li></ul></li><li>hosted <code>/production</code> remains on:<ul><li><code>1.2.3+build.388.sha.13c8421</code></li></ul></li><li><code>Platinum</code> is now a real shipped host platform rather than an internal refactor story</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lane model is now explicit:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the major missing discipline that slipped past the original <code>1.2.0</code> promotion was a full documentation pass and first-class hosted platform docs</li><li>that is now being corrected and formalized as a real release gate</li></ul>
 <h3>Active Workstreams</h3>
-<h4>1. Fidelity Improvement From The New <code>/dev</code> Baseline</h4>
-<ul><li>improve the weakest quality-score categories first:<ul><li>stage-1 timing fidelity</li><li>challenge-stage timing fidelity</li><li>audio identity and cue alignment</li></ul></li><li>use hosted <code>/dev</code> as the current formal integration base while this work</li></ul>
-<p>advances</p>
+<h4>1. Production Readiness From The New <code>/beta</code> Baseline</h4>
+<ul><li>prepare the current live beta for production promotion</li><li>keep documentation, analysis artifacts, and release evidence current</li><li>complete the approval and production-publish sequence from the approved beta</li></ul>
+<p>state</p>
 <h4>2. Documentation Hardening</h4>
 <ul><li>make Platinum a first-class hosted documentation surface</li><li>keep platform docs and application docs separate</li><li>keep project, platform, player, and release docs aligned on every meaningful <code>x.y</code> release</li><li>make missing docs a real publish-preflight failure instead of a soft reminder</li></ul>
 <h4>3. <code>1.2.1</code> Aurora Trust Fixes</h4>
@@ -721,7 +721,10 @@ npm run build</code></pre>
 <h4>6. Audio Generation Tooling Exploration</h4>
 <ul><li>evaluate <code>AudioLDM 2</code> as an offline content-generation tool for themed sound-effect variation</li><li>keep this explicitly outside <code>Platinum</code> runtime responsibilities</li><li>test whether a small reference-guided workflow can produce useful Aurora-family variants from classic arcade cue roles</li><li>first pilot targets should be higher-salience atmospheric/event cues rather than the smallest micro-effects</li><li>if the workflow is simple enough and the results are good enough, treat it as a reusable tool for future hosted games as well</li></ul>
 <h3>Immediate Priorities</h3>
-<ol><li>use the refreshed hosted <code>/dev</code> as the stable integration base</li><li>improve stage-1 timing, challenge timing, and audio fidelity from that base</li><li>keep hosted <code>/beta</code> and hosted <code>/production</code> stable until a real next candidate is assembled</li><li>then shape the next hosted <code>/beta</code> deliberately from the improved <code>/dev</code> line</li><li>deepen the second-application proof deliberately after the current Aurora fidelity cycle is in better shape</li></ol>
+<ol><li>use the current hosted <code>/beta</code> as the production candidate</li><li>complete the beta-to-production documentation and approval pass</li><li>promote hosted <code>/production</code> from the approved beta candidate</li><li>then continue the next minor-cycle polish from the refreshed production and</li></ol>
+<p><code>/dev</code> baselines</p>
+<ol><li>deepen the second-application proof deliberately after the current Aurora</li></ol>
+<p>release is stabilized</p>
 <h3>Release Direction</h3>
 <ul><li>the next serious Aurora candidate should come from the current hosted <code>/dev</code></li></ul>
 <p>line, not from promoting the older hosted <code>/beta</code> line in place</p>
@@ -730,14 +733,12 @@ npm run build</code></pre>
 <ul><li>the next meaningful public milestone should likely be a <code>MINOR</code> release in</li></ul>
 <p>the <code>1.3.0</code> family after the current fidelity cycle improves timing and audio</p>
 <h3>Beta Planning</h3>
-<ul><li>the next hosted <code>/beta</code> should be cut from the current forward <code>/dev</code> line,</li></ul>
-<p>not by advancing the old <code>13c8421</code> beta/prod line in place</p>
-<ul><li>the current <code>/dev</code> line now includes the audio cue alignment improvements and</li></ul>
-<p>the reference-audio session reset fix</p>
-<ul><li>the next <code>/beta</code> should follow one more focused broader timing/fidelity pass</li></ul>
-<p>plus a refreshed quality score and scorecard</p>
+<ul><li>the current hosted <code>/beta</code> has now been cut from the forward line</li><li>the next immediate release move is production promotion from that approved</li></ul>
+<p>beta candidate</p>
+<ul><li>the next beta after that should belong to the next minor-cycle candidate</li></ul>
+<p>family, not to the just-published current beta</p>
 <p>See also:</p>
-<ul><li><code>/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/BETA_CANDIDATE_PLAN.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md</code></li></ul>
 <h3>Current Operating Plan</h3>
 <p>The principles are now translated into a concrete execution plan in:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md</code></li></ul>
@@ -757,18 +758,33 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Release Line</h3>
-<ul><li>shipped public line:<ul><li><code>1.2.0</code></li></ul></li><li>release name:<ul><li><code>Platinum Release 1</code></li></ul></li></ul>
+<ul><li>shipped public line:<ul><li><code>1.2.3</code></li></ul></li><li>release name:<ul><li><code>Aurora score-surface polish patch</code></li></ul></li></ul>
+<p>Current beta candidate:</p>
+<ul><li><code>1.2.3-beta.1+build.484.sha.baa1726.beta</code></li></ul>
 <h3>Where We Are</h3>
-<p>The major platform milestone is now shipped.</p>
+<p>The first major platform milestone is now shipped.</p>
 <p>That means the roadmap is no longer centered on &quot;can we separate Platinum from Aurora at all.&quot; It is centered on:</p>
-<ul><li>keeping the shipped platform credible</li><li>keeping Aurora stable as the first application on Platinum</li><li>preparing the smallest useful second-application proof</li></ul>
+<ul><li>keeping the shipped platform credible</li><li>keeping Aurora stable as the first application on Platinum</li><li>preparing the smallest useful second-application proof</li><li>promoting the current materially improved beta to production</li></ul>
 <h3>Near-Term Roadmap</h3>
-<h4><code>1.2.1</code> Aurora Trust Fixes</h4>
+<h4>Current Production Promotion</h4>
+<p>Scope:</p>
+<ul><li>approve the current hosted beta candidate</li><li>promote it to hosted production from the approved artifact set</li><li>verify the public release surfaces and synced docs</li></ul>
+<p>Why this bundle:</p>
+<ul><li>production is materially stale relative to beta</li><li>the current beta already carries the latest timing, movement, audio, and</li></ul>
+<p>release-discipline work</p>
+<ul><li>this closes the current release cycle cleanly before the next minor cycle</li></ul>
+<h4><code>1.3.0</code> Aurora And Platinum Minor</h4>
+<p>Scope:</p>
+<ul><li>further audio identity polish</li><li>continued Platinum/Aurora boundary cleanup</li><li>richer reference-video ingestion and event-log extraction</li><li>stronger persona annotation and eventual player-versus-persona scaffolding</li></ul>
+<p>Why this bundle:</p>
+<ul><li>it keeps the next public step focused on measurable fidelity and platform</li></ul>
+<p>maturity rather than a rushed second-game launch</p>
+<h4>Historical <code>1.2.1</code> Aurora Trust Fixes</h4>
 <p>Scope:</p>
 <ul><li>dual-fighter surviving-ship correctness</li><li>challenge-stage bonus-stage numbering</li><li>carried/captured-fighter game-over presentation</li></ul>
 <p>Why this bundle:</p>
 <ul><li>all are small player-visible trust fixes</li><li>all fit naturally into a focused patch line</li><li>none require reopening broad gameplay churn</li></ul>
-<h4><code>1.2.x</code> Documentation And Platform Discipline</h4>
+<h4>Historical <code>1.2.x</code> Documentation And Platform Discipline</h4>
 <p>Scope:</p>
 <ul><li>first-class hosted Platinum guide</li><li>explicit platform versus application docs</li><li>updated project guide, release dashboard, and readiness docs</li><li>stronger docs gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ul>
 <p>Why this matters:</p>
@@ -781,7 +797,7 @@ npm run build</code></pre>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game-over flow</li></ul>
 <p>This is the right next platform test because it proves the seam without forcing an immediate second public game release.</p>
 <h3>Longer-Term Platform Improvement Areas</h3>
-<ul><li>stronger pack schema and capability validation</li><li>clearer storage and migration policy</li><li>cleaner platform/application naming residue cleanup</li><li>continued automation-first gating across hosted lanes and docs surfaces</li></ul>
+<ul><li>stronger pack schema and capability validation</li><li>clearer storage and migration policy</li><li>cleaner platform/application naming residue cleanup</li><li>continued automation-first gating across hosted lanes and docs surfaces</li><li>same-control compliance across multiple shipped games</li><li>persona-opponent support and simulation-trained persona experimentation</li></ul>
         </div>
       </div>
     </section>
@@ -846,7 +862,7 @@ npm run build</code></pre>
 <p>The main contract areas are:</p>
 <ul><li>game-pack identity</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
 <p>See also:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>Applications On Platinum</h3>
 <p>Platinum should be thought of as the host layer.</p>
 <p>Applications on Platinum are the games.</p>
@@ -957,6 +973,8 @@ npm run build</code></pre>
 <h4>Shared naming residue</h4>
 <p>Some older names remain Aurora-shaped even when they are now functionally part of the platform.</p>
 <p>These should be treated as transitional, not as permission to blur the boundary again.</p>
+<p>The current code-review snapshot for this seam is also captured in:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>How Future Applications Should Arrive</h3>
 <p>A new Platinum application should ideally arrive in stages:</p>
 <ol><li>shell preview</li></ol>
@@ -1324,46 +1342,52 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p><code>1.2.3 - Aurora score-surface polish patch</code> is currently live on hosted <code>/production</code>.</p>
-<p>There is no newer hosted <code>/beta</code> candidate under review right now.</p>
-<p>The current post-release work is about keeping the live <code>1.2.3</code> line trustworthy, watching score-surface feedback in production, and choosing the next narrow Aurora moment-polish bundle without weakening the Platinum boundary.</p>
-<p>That means this document is now serving two jobs:</p>
-<ol><li>record the current release-readiness posture of the shipped line</li><li>record the process lesson that a full major-release documentation pass must be treated as part of the gate between hosted <code>/beta</code> and hosted <code>/production</code></li></ol>
+<p>Hosted <code>/beta</code> is now live on the forward Aurora line:</p>
+<ul><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.484.sha.baa1726.beta</code></li><li>verified live on April 24, 2026</li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.388.sha.13c8421</code></li></ul></li></ul>
+<p>That means Aurora is no longer in a pre-beta planning posture. It is now in a beta-to-production readiness posture.</p>
 <h3>What Is Now True</h3>
-<ul><li><code>Platinum</code> is a real shipped platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lanes exist for local <code>localhost</code>, hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code></li><li>the current release ladder is proven end-to-end</li><li>the hosted documentation set now needs to be treated as part of the release surface rather than a nice-to-have side artifact</li></ul>
-<h3>Documentation Lesson From <code>1.2.0</code></h3>
-<p>The major miss in the original <code>1.2.0</code> promotion was not broad product failure.</p>
-<p>It was that the documentation pass was not strong enough or explicit enough.</p>
-<p>The correction is:</p>
-<ul><li>make the Platinum guide a first-class hosted page</li><li>keep platform docs and application docs separate</li><li>require the hosted docs set in publish preflight</li><li>require a complete docs refresh for meaningful <code>x.y</code> releases before hosted <code>/production</code> promotion</li></ul>
-<h3>Current Documentation Contract</h3>
-<p>Hosted docs that should exist per lane:</p>
-<ul><li><code>project-guide.html</code></li><li><code>platinum-guide.html</code></li><li><code>player-guide.html</code></li><li><code>release-dashboard.html</code></li><li><code>release-notes.json</code></li><li><code>build-info.json</code></li></ul>
-<p>Core maintained source docs behind that hosted set:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/README.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/release-notes.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/project-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/platinum-guide.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/player-guide.json</code></li></ul>
-<h3>Current Release Risk View</h3>
-<p>Main remaining risks are now smaller and more operational than architectural:</p>
-<ul><li>late-run runtime exceptions that can still exist even though the loop now traps and surfaces them</li><li>keeping docs and hosted lanes aligned after source changes</li><li>strengthening the platform/application boundary as the second game becomes more real</li><li>making sure score-surface polish remains readable and trustworthy in live production</li></ul>
-<h3>What <code>1.2.3</code> Contains</h3>
-<p><code>1.2.3</code> shipped as a narrow Aurora presentation patch, not a platform rewrite.</p>
-<p>It bundles:</p>
-<ul><li>wait-mode high-score rotation in the clearer <code>Validated -&gt; Local -&gt; All -&gt; demo</code> sequence</li><li>shorter wait/demo pacing to reach score presentation sooner</li><li>leaderboard row trust context via <code>BUILD/DATE</code></li><li>a lightweight <code>After Date</code> filter in the Aurora leaderboard panel</li></ul>
-<p>Why this patch fits the line:</p>
-<ul><li>narrow surface area</li><li>Aurora-only scope</li><li>meaningful trust/readability improvement</li><li>no intentional Platinum shell contract expansion</li></ul>
-<h3>What <code>1.2.2</code> Shipped</h3>
-<p><code>1.2.2</code> shipped as a narrow runtime-stability patch with one additional Aurora-scoped gameplay rule improvement.</p>
-<p>It bundles:</p>
-<ul><li>runtime loop hardening so one-frame update or draw exceptions no longer silently dead-frame the run</li><li>visible export guidance when a runtime fault is trapped</li><li>a fix for restart-time async score-submit crashes</li><li>a targeted late-run ship-loss soak gate for beta-to-production promotion</li><li>score-based Aurora bonus-ship awards with configurable first and recurring thresholds in Developer Tools</li></ul>
-<p>This is the right shape for the patch:</p>
-<ul><li>small surface area</li><li>high trust value</li><li>better diagnostics if the remaining underlying freeze trigger still exists</li><li>the bonus-ship rule stays Aurora-scoped rather than leaking into Platinum</li></ul>
-<h3>What <code>1.2.1</code> Shipped</h3>
-<p><code>1.2.1</code> shipped as a narrow and Aurora-scoped fast-follow patch.</p>
-<p>It bundles:</p>
-<ul><li>dual-fighter surviving-ship correctness</li><li>challenge stages treated as bonus stages in visible numbering</li><li>suppression of carry/capture visuals under game-over/results</li><li>broader carry-state overlay coverage</li><li>clearer ownership of startup and wait-mode shell copy between Platinum and the hosted applications</li></ul>
-<p>This was the intended shape: a trustworthy fast-follow patch without reopening broad gameplay tuning or platform-shell redesign.</p>
-<h3>Recommended Rule Going Forward</h3>
-<p>For every meaningful <code>x.y</code> release:</p>
-<ol><li>finish the code candidate</li><li>verify local <code>localhost</code></li><li>verify hosted <code>/dev</code></li><li>promote and verify hosted <code>/beta</code></li><li>complete the full documentation refresh</li><li>approve hosted <code>/beta</code></li><li>only then publish hosted <code>/production</code></li></ol>
+<ul><li><code>Platinum</code> is a real shipped browser-arcade host platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now clearly</li></ul>
+<p>separated in both code and docs</p>
+<ul><li>hosted <code>/beta</code> is materially ahead of hosted <code>/production</code></li><li>the current beta candidate is backed by committed test and analysis artifacts,</li></ul>
+<p>not just local notes</p>
+<h3>Current Beta Candidate</h3>
+<p>Current live beta:</p>
+<ul><li>label:<ul><li><code>1.2.3-beta.1+build.484.sha.baa1726.beta</code></li></ul></li><li>source commit:<ul><li><code>baa1726</code></li></ul></li><li>release channel:<ul><li><code>production beta</code></li></ul></li></ul>
+<p>Current quality position for that candidate:</p>
+<ul><li>overall quality score:<ul><li><code>8.8/10</code></li></ul></li><li>strongest category:<ul><li>combat responsiveness</li></ul></li><li>weakest category:<ul><li>audio identity and cue alignment at <code>6.1/10</code></li></ul></li></ul>
+<h3>Evidence Supporting Production Consideration</h3>
+<p>The current beta candidate is supported by these committed evidence sources:</p>
+<ul><li>quality rollup:<ul><li><code>/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65</code></li></ul></li><li>movement correspondence:<ul><li><code>/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65</code></li></ul></li><li>audio cue alignment:<ul><li><code>/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65</code></li></ul></li><li>audio identity comparison:<ul><li><code>/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2</code></li></ul></li><li>reference video alignment:<ul><li><code>/Users/steven/Documents/Codex-Test1/reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65</code></li></ul></li></ul>
+<p>The current candidate also has direct verification evidence:</p>
+<ul><li><code>npm run build</code></li><li><code>npm run harness:check:close-shot-hit</code></li><li><code>npm run harness:check:persona-stage2-safety</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li><li><code>npm run publish:beta</code></li><li>hosted <code>/beta</code> live verification against <code>build-info.json</code></li></ul>
+<h3>Code Review And Boundary Read</h3>
+<p>The current production decision should treat the code boundary as strong enough for Aurora production, but not &quot;finished forever.&quot;</p>
+<p>The dedicated boundary review is captured in:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
+<p>Current read from that review:</p>
+<ul><li>shared service ownership is reasonably clean</li><li>pack selection and shell ownership are meaningfully separated from Aurora</li></ul>
+<p>rules</p>
+<ul><li>two non-blocking boundary seams remain visible:<ul><li>platform-owned storage keys still use some Aurora-shaped compatibility names</li><li>the preview <code>Galaxy Guardians</code> pack still borrows Aurora-owned gameplay data</li></ul></li></ul>
+<p>for shell-preview purposes</p>
+<p>These are not blockers for promoting the current Aurora beta to production, but they should remain explicit in the next release cycle.</p>
+<h3>Documentation Contract For Production</h3>
+<p>Production promotion is not complete unless these are current and committed:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLAN.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/PRODUCT_ROADMAP.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/GO_FORWARD_EXECUTION_PLAN.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/QUALITY_RELEASE_SCORECARD.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/BETA_TO_PRODUCTION_PLAN.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/release-dashboard.json</code></li><li><code>/Users/steven/Documents/Codex-Test1/release-notes.json</code></li></ul>
+<p>Hosted docs that should match the shipped production line:</p>
+<ul><li><code>project-guide.html</code></li><li><code>application-guide.html</code></li><li><code>platinum-guide.html</code></li><li><code>player-guide.html</code></li><li><code>release-dashboard.html</code></li><li><code>release-notes.json</code></li><li><code>build-info.json</code></li></ul>
+<h3>Remaining Steps Before Production</h3>
+<p>The current beta is close to production, but these steps still remain:</p>
+<ol><li>explicitly approve hosted <code>/beta</code></li><li>stage <code>dist/production</code> from the approved beta candidate</li><li>rerun production publish preflight against that staged production artifact</li><li>publish hosted <code>/production</code></li><li>verify hosted <code>/production</code></li><li>verify the synced public project page</li><li>capture the production release summary and the next-cycle plan in committed</li></ol>
+<p>docs</p>
+<p>One direct reminder from current preflight:</p>
+<ul><li><code>npm run publish:check:production</code> currently fails until <code>dist/production</code> is</li></ul>
+<p>refreshed from the approved beta line</p>
+<p>That is expected at this stage and should be treated as a release-order check, not as a product regression.</p>
+<h3>Recommendation</h3>
+<p>Recommendation: prepare a production push as soon as practical from the current live beta, provided we complete the approval and production-promotion sequence from the same committed source state.</p>
+<p>The strongest argument for doing that soon is:</p>
+<ul><li>hosted <code>/production</code> is stale relative to the current forward line</li><li>hosted <code>/beta</code> is now materially better documented and better evidenced</li><li>the main remaining gaps are quality-improvement opportunities for the next</li></ul>
+<p>cycle, not obvious correctness blockers for the current Aurora release</p>
         </div>
       </div>
     </section>
