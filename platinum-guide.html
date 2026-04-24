@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 10, 2026</span>
+              <span class="metaValue">April 24, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -421,6 +421,7 @@
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -619,7 +620,8 @@
 <h3>Purpose</h3>
 <p>Platinum exists to separate the reusable arcade host from the specific games it runs.</p>
 <p>That means Platinum should own the things that ought to be consistent across multiple games:</p>
-<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li></ul>
+<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
+<p>the same core input model</p>
 <p>At the same time, Platinum should stay out of application-specific rules.</p>
 <p>It should not own:</p>
 <ul><li>Aurora scoring rules</li><li>Aurora capture and rescue behavior</li><li>Aurora challenge-stage structure</li><li>Aurora-specific copy, stage identity, or boss personality</li></ul>
@@ -648,7 +650,7 @@
 <p>The main contract areas are:</p>
 <ul><li>game-pack identity</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
 <p>See also:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul>
+<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>Applications On Platinum</h3>
 <p>Platinum should be thought of as the host layer.</p>
 <p>Applications on Platinum are the games.</p>
@@ -660,7 +662,7 @@
 <p>When we work on the repo, the right question is usually:</p>
 <ul><li>is this platform work</li><li>or application work</li></ul>
 <p>Treat a change as Platinum work when it affects:</p>
-<ul><li>more than one pack</li><li>the hosted lane model</li><li>shell framing</li><li>shared services</li><li>release tooling</li><li>shared docs and project pages</li><li>pack-loading or pack-contract behavior</li></ul>
+<ul><li>more than one pack</li><li>the hosted lane model</li><li>shell framing</li><li>shared services</li><li>release tooling</li><li>shared docs and project pages</li><li>pack-loading or pack-contract behavior</li><li>same-control compliance across multiple hosted games</li><li>persona-vs-player orchestration that should work for more than one pack</li></ul>
 <p>Treat a change as application work when it affects:</p>
 <ul><li>Aurora rules and scoring</li><li>Aurora enemy behavior</li><li>Aurora stage flow</li><li>Aurora presentation that is not part of the shared shell</li><li>future <code>Galaxy Guardians</code> rules and content</li></ul>
 <h3>Remaining Platform And Application Boundary Issues</h3>
@@ -675,9 +677,29 @@
 <p>We should move from an implicit pack shape to a more explicit, versionable contract.</p>
 <p>Desired outcome:</p>
 <ul><li>clearer required fields</li><li>clearer optional capability flags</li><li>forward-compatible pack evolution</li><li>earlier validation failures during boot</li></ul>
+<h4>1b. Multi-game ingestion workflow</h4>
+<p>We should get better at ingesting a second classic game lineage by turning preserved footage, manuals, timing libraries, and comparison artifacts into a repeatable pack-construction workflow.</p>
+<p>Desired outcome:</p>
+<ul><li>a new game can be analyzed in all major aspects with minimal user</li></ul>
+<p>intervention once the reference corpus exists</p>
+<ul><li>Platinum can propose its own extension points where needed instead of</li></ul>
+<p>forcing every new mechanic into Aurora-shaped structures</p>
+<ul><li>the second game grows from a durable reference program rather than from</li></ul>
+<p>ad hoc interpretation</p>
 <h4>2. Storage and migration policy</h4>
 <p>We should decide more intentionally what is:</p>
 <ul><li>permanently aliased</li><li>migrated once</li><li>never migrated</li><li>clearly platform-owned versus application-owned data</li></ul>
+<h4>3. Shared control compliance</h4>
+<p>As additional games come online, Platinum should protect a common player-input contract:</p>
+<ul><li>same basic move / fire semantics</li><li>pack-specific variation only where it is intentional and documented</li><li>harness coverage for any platform-level input differences</li></ul>
+<p>This matters both for human players and for future persona-driven play.</p>
+<h4>4. Persona and simulated opponents</h4>
+<p>Platinum should eventually support more than passive replay personas.</p>
+<p>Desired outcome:</p>
+<ul><li>game packs can expose enough action/state annotation for richer personas</li><li>a player can compete against curated persona styles as a <code>Player 2</code>-like</li></ul>
+<p>experience</p>
+<ul><li>future learn-by-playing personas can train through simulation while still</li></ul>
+<p>respecting platform contracts and pack-specific rules</p>
 <h4>3. Platform-first documentation discipline</h4>
 <p>Every meaningful <code>x.y</code> release should have:</p>
 <ul><li>refreshed release notes</li><li>refreshed roadmap and readiness docs</li><li>refreshed hosted project guide</li><li>refreshed hosted Platinum guide</li><li>clear testing and gating status</li><li>explicit notes on any remaining platform/application coupling</li></ul>
@@ -799,6 +821,8 @@
 <h4>Shared naming residue</h4>
 <p>Some older names remain Aurora-shaped even when they are now functionally part of the platform.</p>
 <p>These should be treated as transitional, not as permission to blur the boundary again.</p>
+<p>The current code-review snapshot for this seam is also captured in:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>How Future Applications Should Arrive</h3>
 <p>A new Platinum application should ideally arrive in stages:</p>
 <ol><li>shell preview</li></ol>
@@ -888,12 +912,25 @@
           <p>This document describes the expected release discipline for <code>Platinum</code> and the applications it hosts.</p>
 <p>The rule is simple:</p>
 <ul><li>automate the gate whenever we reasonably can</li><li>use manual review for feel and presentation only where automation is weak</li></ul>
+<h3>Bug-Fix Discipline</h3>
+<p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
+<p>Default rule:</p>
+<ol><li>identify the bug family:</li></ol>
+<ul><li>platform</li><li>application</li><li>boundary</li><li>release / pipeline</li></ul>
+<ol><li>add or update a targeted automated check when the behavior is stable enough</li></ol>
+<p>to measure</p>
+<ol><li>if automation is not yet practical, record the manual gate explicitly and</li></ol>
+<p>leave a clear follow-up path toward automation</p>
+<p>This is how we stay agile without relying on memory-only fixes.</p>
+<p>See also:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md</code></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
 <ul><li>active engineering lane</li><li>source of the current local candidate</li></ul>
 <ol><li>hosted <code>/dev</code></li></ol>
-<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li></ul>
+<ul><li>shared integration preview</li><li>hosted mirror of the current stable local candidate</li><li>should only be replaced when the new candidate is intentionally better than</li></ul>
+<p>the currently published hosted <code>/dev</code></p>
 <ol><li>hosted <code>/beta</code></li></ol>
 <ul><li>reviewed release-candidate lane</li><li>should be more disciplined than hosted <code>/dev</code></li></ul>
 <ol><li>hosted <code>/production</code></li></ol>
@@ -922,10 +959,13 @@
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-dual-final-life-survivor.js</code></li><li><code>node tools/harness/check-challenge-bonus-stage-numbering.js</code></li><li><code>node tools/harness/check-extra-ship-awards.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul>
 <ol><li><code>boundary</code></li></ol>
-<ul><li>protects the seam between platform and applications</li><li>answers:<ul><li>did a game change leak into platform behavior?</li><li>did a platform change alter game behavior unintentionally?</li></ul></li></ul>
+<ul><li>protects the seam between platform and applications</li><li>answers:<ul><li>did a game change leak into platform behavior?</li><li>did a platform change alter game behavior unintentionally?</li></ul></li><li>future fidelity/trueness work should deepen game-owned state and cue models</li></ul>
+<p>without moving game-specific rules, audiovisual mapping, or reference logic into <code>Platinum</code></p>
 <p>Typical examples:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
+<p>Harness work should also follow the project reference program:</p>
+<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Gate Profiles By Change Type</h3>
 <p>We want:</p>
 <ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
@@ -937,6 +977,8 @@
 <p>Required:</p>
 <ul><li>targeted application harnesses for the changed behavior</li><li>one adjacent regression check for the same gameplay family</li><li>at least one boundary check proving the application change did not leak into</li></ul>
 <p>the platform</p>
+<ul><li>for fidelity work, prefer expanding application-owned state/cue granularity</li></ul>
+<p>instead of adding platform-owned exceptions for one game</p>
 <p>Typical boundary checks:</p>
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li></ul>
 <h4>Profile B: Platform-only change</h4>
@@ -958,10 +1000,23 @@
 <h4>Profile D: Release / pipeline change</h4>
 <p>Use this when the change affects build, publish, release metadata, hosted docs, or lane verification rather than gameplay or shell behavior directly.</p>
 <p>Examples:</p>
-<ul><li>publish tooling</li><li>production metadata rewrite</li><li>asset copy policy</li><li>documentation gate enforcement</li></ul>
+<ul><li>publish tooling</li><li>production metadata rewrite</li><li>asset copy policy</li><li>documentation gate enforcement</li><li>runtime-loaded media under <code>assets/</code></li><li>top-level public project page sync freshness</li></ul>
 <p>Required:</p>
 <ul><li>publish preflight</li><li>live lane verification</li><li>asset and metadata validation</li><li>docs presence checks where relevant</li></ul>
+<p>For this profile, asset validation should include runtime-loaded files, not just shell-visible images. If a lane uses files under <code>assets/</code> at runtime, publish and verify should treat those files as part of the release contract.</p>
+<p>For production, the release contract also includes the top-level <code>sgwoods/public</code> Aurora project page. A production release is not complete if the public page still shows stale release/build/focus content after the publish and sync steps.</p>
+<p>If public sync must be rerun after production is already live, it should run from current clean <code>main</code> and a current tokenized public template, while also proving that local <code>dist/production</code> still matches the live production lane exactly. That keeps the public page current without silently inventing a new &quot;production&quot; build that has not actually been released.</p>
 <p>This profile should not automatically pull in deep gameplay suites unless the change also affects gameplay delivery.</p>
+<h3>Lane-Specific Rigor</h3>
+<p>Use the lane purpose to decide how rigorous the gate set must be.</p>
+<h4>Local <code>localhost</code></h4>
+<ul><li>targeted checks only</li><li>adjacent regression check</li><li>manual inspection where needed</li></ul>
+<h4>Hosted <code>/dev</code></h4>
+<ul><li>enough confidence to justify replacing the current live hosted <code>/dev</code></li><li>targeted checks for changed areas</li><li>at least one boundary or containment check</li><li>live verify after publish</li><li>manual comparison against the current published hosted <code>/dev</code></li></ul>
+<h4>Hosted <code>/beta</code></h4>
+<ul><li>stronger gate set than hosted <code>/dev</code></li><li>candidate should be intentionally assembled and stable</li><li>live verify after publish</li><li>review of release-facing deltas</li><li>docs refresh where required for the release family</li></ul>
+<h4>Hosted <code>/production</code></h4>
+<ul><li>approved hosted <code>/beta</code> only</li><li>full production preflight</li><li>live verify</li><li>top-level public project page sync and verify</li></ul>
 <h3>Required Automated Gates</h3>
 <h4>Local <code>localhost</code></h4>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
@@ -976,7 +1031,8 @@
 <p>Before promoting a candidate from hosted <code>/dev</code> to hosted <code>/beta</code>, we should have:</p>
 <ul><li>a clean local <code>check-publish-ready --lane dev</code></li><li>hosted <code>/dev</code> publish success</li><li>hosted <code>/dev</code> label verification</li><li>a short hosted <code>/dev</code> review for visual and feel checks</li></ul>
 <p>Hosted <code>/dev</code> is the preferred place to catch:</p>
-<ul><li>local-versus-hosted differences</li><li>platform/application boundary drift</li><li>shell or copy regressions that are awkward to judge from local-only runs</li></ul>
+<ul><li>local-versus-hosted differences</li><li>platform/application boundary drift</li><li>shell or copy regressions that are awkward to judge from local-only runs</li><li>missing runtime-loaded assets that do not show up until the hosted lane is</li></ul>
+<p>exercised</p>
 <h4>Hosted <code>/beta</code></h4>
 <p>Hosted <code>/beta</code> is the real production gate.</p>
 <p>Before moving hosted <code>/beta</code> to hosted <code>/production</code>, we expect:</p>
@@ -991,7 +1047,7 @@
 <ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li><li><code>npm run sync:public</code></li><li><code>npm run verify:public</code></li></ol>
 <p>The public <code>sgwoods/public</code> sync is part of the production release contract, not a manual follow-up.</p>
 <p>Production promotion must also start from a clean tree:</p>
-<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>if either condition fails, production promotion should stop</li></ul>
+<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the release machine must be on <code>main</code>, and local <code>main</code> must match <code>origin/main</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>the public sync step must validate the current <code>/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html</code> and the production artifact must have been rebuilt from that exact clean checkout</li><li>if either condition fails, production promotion should stop</li></ul>
 <h3>First-Class Hosted Documentation Requirement</h3>
 <p>The hosted documentation set is now part of the release surface.</p>
 <p>Every hosted lane should carry:</p>
@@ -1261,7 +1317,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 10, 2026
+          Release 1.2.3 · Updated April 24, 2026
         </p>
       </aside>
     </main>
