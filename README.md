@@ -85,7 +85,10 @@ For local development and the canonical documentation set, start from:
 Recommended startup path there:
 
 ```bash
-git clone https://github.com/sgwoods/Codex-Test1.git
-cd Codex-Test1
-npm run machine:bootstrap
+mkdir -p "$HOME/Development"
+cd "$HOME/Development"
+curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
 ```
+
+If you want to use a machine-specific iCloud-backed parent folder instead,
+`cd` there first and run the same installer command.
