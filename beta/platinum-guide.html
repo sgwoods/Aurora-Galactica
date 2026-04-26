@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 24, 2026</span>
+              <span class="metaValue">April 26, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -628,36 +628,39 @@
 <h3>What Platinum Is Today</h3>
 <p>Today Platinum is a real shipped platform, not a speculative refactor.</p>
 <p>Current proof points:</p>
-<ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-only application shell on top of the same platform</li><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li></ul>
+<ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-only second-game sneak peek on top of the same platform</li><li>the second-game preview content is now pack-owned instead of hardcoded into</li></ul>
+<p>the shell surface</p>
+<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li></ul>
 <h3>Platform Structure</h3>
 <h4>Shell and presentation</h4>
 <p>Platinum owns the outer cabinet treatment:</p>
 <ul><li>marquee housing</li><li>left and right rails</li><li>lower status band</li><li>popup framing</li><li>shell frame themes</li><li>platform identity marks</li><li>platform-owned startup and wait-mode shell copy</li><li>release-cycle shell messaging that can span more than one application</li></ul>
 <p>This is implemented primarily through:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/index.template.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/styles.css</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/src/index.template.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/styles.css</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul>
 <h4>Runtime and pack hosting</h4>
 <p>Platinum owns the pack selection and boot contract:</p>
 <ul><li>active pack selection</li><li>preview-only pack behavior</li><li>start behavior from the shell</li><li>wait-mode hosting rules</li><li>fullscreen and scaling shell behavior</li></ul>
 <p>This is implemented primarily through:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
 <ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li></ul>
 <p>This is implemented primarily through:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>
 <p>Platinum currently depends on a shared application contract that is real in practice even though it still needs further formalization.</p>
 <p>The main contract areas are:</p>
 <ul><li>game-pack identity</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
 <p>See also:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>Applications On Platinum</h3>
 <p>Platinum should be thought of as the host layer.</p>
 <p>Applications on Platinum are the games.</p>
 <p>Current application set:</p>
-<ul><li><code>Aurora Galactica</code><ul><li>first shipped playable application</li><li>owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content</li></ul></li><li><code>Galaxy Guardians</code><ul><li>current preview-only application shell</li><li>useful for proving the pack-selection path and future identity surfaces without pretending gameplay exists yet</li></ul></li></ul>
+<ul><li><code>Aurora Galactica</code><ul><li>first shipped playable application</li><li>owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content</li></ul></li><li><code>Galaxy Guardians</code><ul><li>current preview-only application shell</li><li>useful for proving the pack-selection path, preview-modal contract, alternate</li></ul></li></ul>
+<p>shell identity, and safe launch fallback without pretending gameplay exists yet</p>
 <p>The application-side separation is documented in:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
 <h3>How To Use Platinum In Practice</h3>
 <p>When we work on the repo, the right question is usually:</p>
 <ul><li>is this platform work</li><li>or application work</li></ul>
@@ -705,14 +708,18 @@
 <ul><li>refreshed release notes</li><li>refreshed roadmap and readiness docs</li><li>refreshed hosted project guide</li><li>refreshed hosted Platinum guide</li><li>clear testing and gating status</li><li>explicit notes on any remaining platform/application coupling</li></ul>
 <h4>4. Cleaner multi-application proof</h4>
 <p>The best next platform proof is not a huge second-game launch.</p>
-<p>It is a small but playable second application slice that proves:</p>
+<p>The current first step is a pack-owned <code>Galaxy Guardians</code> sneak peek that proves:</p>
+<ul><li>the picker can expose a second application</li><li>preview content can live in the pack contract</li><li>the shell can show alternate identity and status without persisting a</li></ul>
+<p>preview-only trap state</p>
+<ul><li>launch fallback can return players to the playable Aurora cabinet</li></ul>
+<p>The next step is a small but playable second application slice that proves:</p>
 <ul><li>the pack contract is real</li><li>platform services stay shared</li><li>application rules remain application-owned</li><li>platform docs still describe reality after a second game exists</li></ul>
 <h3>Hosted Documentation Surfaces</h3>
 <p>The main hosted documentation surfaces are now:</p>
 <ul><li>hosted <code>/production</code> project guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/project-guide.html</code></li></ul></li><li>hosted <code>/production</code> Platinum guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html</code></li></ul></li><li>hosted <code>/production</code> player guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/player-guide.html</code></li></ul></li><li>hosted <code>/production</code> release dashboard:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html</code></li></ul></li></ul>
 <p>Equivalent hosted docs should exist on hosted <code>/dev</code> and hosted <code>/beta</code> as part of the normal release flow.</p>
 <h3>Related Docs</h3>
-<ul><li>maintained platform overview and diagrams:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>application-side separation and usage:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing gate discipline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking architecture review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
+<ul><li>maintained platform overview and diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>application-side separation and usage:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing gate discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking architecture review:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -730,7 +737,7 @@
 <p>Use it for the fast answer to:</p>
 <ul><li>what Platinum is</li><li>what Platinum owns</li><li>what applications own</li><li>where the current migration stands</li></ul>
 <p>For the canonical full platform guide, use:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul>
 <h3>Diagram</h3>
 <pre><code data-lang="mermaid">flowchart TB
     subgraph &quot;Platinum Platform&quot;
@@ -772,7 +779,7 @@
 <p>Today the architecture is in this state:</p>
 <ul><li><code>Platinum</code> is real and visible in the shipped product</li><li><code>Aurora Galactica</code> is the first playable application on Platinum</li><li><code>Galaxy Guardians</code> exists as a preview-only sibling application shell</li><li>hosted docs now need to describe the platform separately from the applications it hosts</li></ul>
 <h3>Related Docs</h3>
-<ul><li>canonical platform guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application-layer guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing discipline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
+<ul><li>canonical platform guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application-layer guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking review:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -797,9 +804,9 @@
 <p>Aurora should remain the reference application when we ask:</p>
 <ul><li>does the platform still host a real shipped game cleanly</li><li>can application-specific rules evolve without breaking the shell or release lanes</li></ul>
 <h4>Galaxy Guardians</h4>
-<p><code>Galaxy Guardians</code> is currently a preview-only application shell.</p>
+<p><code>Galaxy Guardians</code> is currently a preview-only application shell and second-game sneak peek.</p>
 <p>Right now it proves:</p>
-<ul><li>application selection</li><li>preview-only behavior inside the platform</li><li>alternate identity and framing</li><li>future second-game positioning</li></ul>
+<ul><li>application selection</li><li>preview-only behavior inside the platform</li><li>alternate identity and framing</li><li>future second-game positioning</li><li>pack-owned preview content for the picker and preview modal</li><li>safe fallback to <code>Aurora Galactica</code> when a player tries to launch gameplay</li></ul>
 <p>It does not yet prove:</p>
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li></ul>
 <p>That is intentional.</p>
@@ -834,15 +841,21 @@
 <ol><li>polished public release path</li></ol>
 <ul><li>only after the application is truly ready</li></ul>
 <h3>Current Application Outlook</h3>
-<h4>Aurora fast-follow work</h4>
-<p>Near-term application work for Aurora belongs in the <code>1.2.x</code> patch line:</p>
-<ul><li>dual-fighter surviving-ship correctness</li><li>challenge-stage bonus-stage numbering</li><li>carried/captured-fighter game-over presentation</li><li>smaller readability and polish improvements</li></ul>
+<h4>Aurora next application work</h4>
+<p>Near-term Aurora application work should now focus on:</p>
+<ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes such as boss/capture/carry edge cases</li><li>replay and pilot-surface improvements</li><li>shell and overlay polish that remains application-owned</li></ul>
 <h4>Galaxy Guardians next proof</h4>
+<p>The current sneak peek is intentionally still non-playable. It should be used to keep the Platinum pack contract honest while the second game is still being specified.</p>
 <p>The best next application proof is a dev-only playable slice that includes:</p>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>That is enough to test the platform without prematurely shipping a second game.</p>
+<p>Before that slice starts, capture the reference evidence needed for a Galaxian- style ruleset:</p>
+<ul><li>preserved gameplay clips</li><li>formation-entry and dive timing notes</li><li>flagship and escort behavior notes</li><li>scoring table and single-shot constraints</li><li>a small harness plan for the first scout-wave slice</li></ul>
+<p>Use the reusable ingestion process in:</p>
+<ul><li><code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code></li></ul>
+<p>That means the first scout-wave slice should be traceable through source manifest, clipped window, event log, semantic model, correspondence target, and harness evidence. The point is to learn <code>Galaxy Guardians</code> and also prove the method we will reuse for later games.</p>
 <h3>Related Docs</h3>
-<ul><li>platform overview and ownership:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing discipline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
+<ul><li>platform overview and ownership:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -860,9 +873,9 @@
 <p>Use it when the question is:</p>
 <ul><li>where in the codebase does something live</li><li>what is platform-owned versus application-owned in implementation terms</li><li>how do builds, hosted docs, and lane promotion work</li><li>where do harnesses and review tools fit into the system</li></ul>
 <p>For the canonical platform document, start with:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul>
 <p>For the application-layer view, use:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
 <h3>Current State</h3>
 <p>This repo is now post-<code>1.2.0</code>, not pre-launch.</p>
 <p>What is already true:</p>
@@ -871,31 +884,31 @@
 <ul><li>some naming and compatibility residue is still Aurora-shaped</li><li>the game-pack contract is still practical rather than strongly versioned</li><li>the second application is still preview-only rather than fully playable</li></ul>
 <h3>Runtime Layout</h3>
 <h4>Platform-oriented files</h4>
-<ul><li>shell, metadata, build identity, shared UI state:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>runtime shell helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>replay and session plumbing:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul></li><li>shared service policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/03-platform-services.js</code></li></ul></li><li>shared leaderboard and account UI helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li></ul></li><li>shared auth/session helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/12-auth-session.js</code></li></ul></li><li>shared pack selection:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul></li><li>shared shell rendering:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/19-render-shell.js</code></li></ul></li><li>harness hooks and deterministic controls:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
+<ul><li>shell, metadata, build identity, shared UI state:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>runtime shell helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>replay and session plumbing:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul></li><li>shared service policy:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li></ul></li><li>shared leaderboard and account UI helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li></ul></li><li>shared auth/session helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li></ul></li><li>shared pack selection:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul></li><li>shared shell rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js</code></li></ul></li><li>harness hooks and deterministic controls:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
 <h4>Aurora application files</h4>
-<ul><li>Aurora player flow and lifecycle:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-flow.js</code></li></ul></li><li>Aurora combat and bullet behavior:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/05-player-combat.js</code></li></ul></li><li>Aurora enemy behavior:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/06-enemy-behavior.js</code></li></ul></li><li>Aurora capture and rescue:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/07-capture-rescue.js</code></li></ul></li><li>Aurora scoring and bonus helpers:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/08-score-awards.js</code></li></ul></li><li>Aurora stage flow:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/09-stage-flow.js</code></li></ul></li><li>Aurora gameplay orchestration:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Aurora pack metadata:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li></ul></li><li>shared entity model used by packs:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul></li><li>Aurora render orchestration:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Aurora board and sprite rendering:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/src/js/21-render-board.js</code></li></ul></li></ul>
+<ul><li>Aurora player flow and lifecycle:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-flow.js</code></li></ul></li><li>Aurora combat and bullet behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-combat.js</code></li></ul></li><li>Aurora enemy behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/06-enemy-behavior.js</code></li></ul></li><li>Aurora capture and rescue:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/07-capture-rescue.js</code></li></ul></li><li>Aurora scoring and bonus helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/08-score-awards.js</code></li></ul></li><li>Aurora stage flow:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/09-stage-flow.js</code></li></ul></li><li>Aurora gameplay orchestration:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Aurora pack metadata:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li></ul></li><li>shared entity model used by packs:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul></li><li>Aurora render orchestration:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Aurora board and sprite rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js</code></li></ul></li></ul>
 <h3>Build And Hosted Docs Flow</h3>
 <p>Build script:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul>
 <p>Generated local <code>localhost</code> artifacts:</p>
-<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/project-guide.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/platinum-guide.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/player-guide.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-dashboard.html</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/build-info.json</code></li><li><code>/Users/stevenwoods/Documents/Codex-Test1/dist/dev/release-notes.json</code></li></ul>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/index.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/project-guide.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/platinum-guide.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/player-guide.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/release-dashboard.html</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/build-info.json</code></li><li><code>/Users/steven/Documents/Codex-Test1/dist/dev/release-notes.json</code></li></ul>
 <p>Promotion scripts:</p>
-<ul><li>promote hosted <code>/beta</code> candidate:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-beta.js</code></li></ul></li><li>promote hosted <code>/production</code> candidate:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/promote-production.js</code></li></ul></li></ul>
+<ul><li>promote hosted <code>/beta</code> candidate:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/promote-beta.js</code></li></ul></li><li>promote hosted <code>/production</code> candidate:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/promote-production.js</code></li></ul></li></ul>
 <p>Publish and verification scripts:</p>
-<ul><li>publish lane:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>lane preflight:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li><li>live lane verification:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/build/verify-live-lane.js</code></li></ul></li></ul>
+<ul><li>publish lane:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/publish-lane.js</code></li></ul></li><li>lane preflight:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/check-publish-ready.js</code></li></ul></li><li>live lane verification:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/verify-live-lane.js</code></li></ul></li></ul>
 <h3>Hosted Lane Contract</h3>
 <p>The intended hosted lane contract is:</p>
 <ul><li>hosted <code>/dev</code><ul><li>current integrated candidate</li></ul></li><li>hosted <code>/beta</code><ul><li>release candidate under review</li></ul></li><li>hosted <code>/production</code><ul><li>approved public build</li></ul></li></ul>
 <p>The hosted documentation set should exist on each lane as part of that contract.</p>
 <h3>Harness And Evidence Flow</h3>
 <p>Core harness tools:</p>
-<ul><li>scenario runner:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>batch runner:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>run analysis:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li></ul>
+<ul><li>scenario runner:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>batch runner:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>run analysis:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li></ul>
 <p>Harness families should now be thought of in categories:</p>
 <ul><li>platform-only harnesses</li><li>application/gameplay harnesses</li><li>seam and contract harnesses</li><li>migration and compatibility harnesses</li></ul>
 <p>The intended release rule is automation-first:</p>
 <ul><li>automate when the behavior is stable enough to measure</li><li>use manual review mainly for feel and visual quality</li></ul>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>testing and release discipline:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>testing and release discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -912,6 +925,13 @@
           <p>This document describes the expected release discipline for <code>Platinum</code> and the applications it hosts.</p>
 <p>The rule is simple:</p>
 <ul><li>automate the gate whenever we reasonably can</li><li>use manual review for feel and presentation only where automation is weak</li></ul>
+<h3>Machine And Authority Gate</h3>
+<p>Aurora now assumes:</p>
+<ul><li><code>main</code> is the only integration branch</li><li>one machine holds release authority at a time</li><li>hosted <code>/beta</code> and hosted <code>/production</code> may only be published from that</li></ul>
+<p>authority machine</p>
+<p>The practical startup and readiness commands are now:</p>
+<ul><li><code>npm run machine:bootstrap</code></li><li><code>npm run machine:doctor</code></li><li><code>npm run machine:status</code></li><li><code>npm run release:show-authority</code></li></ul>
+<p>This means machine readiness and release authority are now part of release discipline, not just local convention.</p>
 <h3>Bug-Fix Discipline</h3>
 <p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
 <p>Default rule:</p>
@@ -923,7 +943,7 @@
 <p>leave a clear follow-up path toward automation</p>
 <p>This is how we stay agile without relying on memory-only fixes.</p>
 <p>See also:</p>
-<ul><li><code>/Users/steven/Documents/Codex-Test1/DEVELOPMENT_PRINCIPLES.md</code></li></ul>
+<ul><li><a href="DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
@@ -935,6 +955,8 @@
 <ul><li>reviewed release-candidate lane</li><li>should be more disciplined than hosted <code>/dev</code></li></ul>
 <ol><li>hosted <code>/production</code></li></ol>
 <ul><li>official public promise</li><li>should only move from an approved hosted <code>/beta</code> candidate</li></ul>
+<p>See also:</p>
+<ul><li><a href="MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="release-authority.json">release-authority.json</a></li></ul>
 <h3>Documentation Gate For Major <code>x.y</code> Releases</h3>
 <p>For every meaningful <code>x.y</code> release, we should complete a full documentation pass between hosted <code>/beta</code> and hosted <code>/production</code>.</p>
 <p>That pass should refresh:</p>
@@ -1047,7 +1069,7 @@
 <ol><li><code>npm run approve:beta</code></li><li><code>npm run promote:production</code></li><li><code>node tools/build/check-publish-ready.js --lane production</code></li><li>hosted <code>/production</code> publish</li><li>hosted <code>/production</code> label verification</li><li><code>npm run sync:public</code></li><li><code>npm run verify:public</code></li></ol>
 <p>The public <code>sgwoods/public</code> sync is part of the production release contract, not a manual follow-up.</p>
 <p>Production promotion must also start from a clean tree:</p>
-<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the release machine must be on <code>main</code>, and local <code>main</code> must match <code>origin/main</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>the public sync step must validate the current <code>/Users/stevenwoods/Documents/Codex-Test1/src/public/aurora-galactica.template.html</code> and the production artifact must have been rebuilt from that exact clean checkout</li><li>if either condition fails, production promotion should stop</li></ul>
+<ul><li>the local source tree must be clean before <code>promote:production</code></li><li>the release machine must be on <code>main</code>, and local <code>main</code> must match <code>origin/main</code></li><li>the approved beta candidate must not have been promoted from a dirty source state</li><li>the public sync step must validate the current <code>src/public/aurora-galactica.template.html</code> template and the production artifact must have been rebuilt from that exact clean checkout</li><li>if either condition fails, production promotion should stop</li></ul>
 <h3>First-Class Hosted Documentation Requirement</h3>
 <p>The hosted documentation set is now part of the release surface.</p>
 <p>Every hosted lane should carry:</p>
@@ -1058,7 +1080,7 @@
 <ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application-layer guide:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>release policy:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li><li>release readiness review:<ul><li><code>/Users/stevenwoods/Documents/Codex-Test1/RELEASE_READINESS_REVIEW.md</code></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><a href="PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1317,7 +1339,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Aurora score-surface polish patch</strong><br>
-          Release 1.2.3 · Updated April 24, 2026
+          Release 1.2.3 · Updated April 26, 2026
         </p>
       </aside>
     </main>
