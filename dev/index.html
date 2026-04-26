@@ -668,8 +668,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 26 2026, 3:52 PM EDT</span>
-      <span id="settingsState">main@8d09c44 clean</span>
+      <span id="settingsRelease">Apr 26 2026, 4:27 PM EDT</span>
+      <span id="settingsState">main@b171f86 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -954,7 +954,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">Lane development</span>
     <span id="buildStampVersion">Version 1.2.3</span>
-    <span id="buildStampRelease">Apr 26 2026, 3:52 PM EDT</span>
+    <span id="buildStampRelease">Apr 26 2026, 4:27 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1586,7 +1586,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.529.sha.8d09c44',commit:'8d09c4463bfb2aacfb65422095331e4d5e2c3293',branch:'main',dirty:false,released:'Apr 26 2026, 3:52 PM EDT',state:'main@8d09c44 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.530.sha.b171f86',commit:'b171f8687200e2733e364c370a78496f8c17378a',branch:'main',dirty:false,released:'Apr 26 2026, 4:27 PM EDT',state:'main@b171f86 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -2266,7 +2266,7 @@ function buildAttractScoreboardHtml(){
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage,challenge=0){
- const pilotInitials=(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'').padEnd(3,'-').slice(0,3);
+ const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
  const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
  const res=recordScore(score,shownStage,lockedPilotInitials?pilotInitials:'YOU');
@@ -3721,6 +3721,10 @@ function normalizeRemoteScoreRow(row){
 }
 function preferredInitialsFromUser(user=LEADERBOARD.user){
  return sanitizeInitials(LEADERBOARD.profile?.display_initials||user?.user_metadata?.display_initials||deriveInitialsFromEmail(user?.email||'')||'').slice(0,3);
+}
+function lockedPilotInitials(){
+ if(!LEADERBOARD?.user)return '';
+ return sanitizeInitials(pilotDisplayId()||'').slice(0,3);
 }
 function openMailFallback(subject,lines){
  const override=window.__platinumOpenMailFallbackOverride||window.__auroraOpenMailFallbackOverride;
@@ -9814,7 +9818,9 @@ window.__galagaHarness__={
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
-   rank:+(gameOverState?.rank||0)
+   rank:+(gameOverState?.rank||0),
+   editing:!!gameOverState?.editing,
+   initials:Array.isArray(gameOverState?.initials)?gameOverState.initials.join(''):''
   };
  },
  export(){exportSession({silent:1})},
