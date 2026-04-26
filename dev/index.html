@@ -170,6 +170,14 @@ mask:
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 #testStage,#testShips{max-width:240px}
+#rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
+#rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
+#rootModeHint{color:#9fd0af}
+#rootModeStatus{color:#d8ffe4}
+#testPanel.locked .settingsFieldGrid,
+#testPanel.locked #testRow,
+#testPanel.locked #testHint{opacity:.52}
+#testPanel.locked input:disabled{cursor:not-allowed}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
@@ -217,6 +225,11 @@ mask:
 #platformSplashCopy,#gamePreviewCopy{display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:#e8f4ff}
 .platformSplashEyebrow{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#7ef2ff}
 #gamePreviewBanner{display:inline-flex;align-self:flex-start;padding:4px 8px;border:1px solid rgba(255,216,109,.64);background:rgba(60,44,8,.76);font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:#ffe39a}
+#gamePreviewHighlights{display:grid;gap:6px}
+#gamePreviewHighlights span{display:block;border-left:2px solid rgba(255,216,109,.72);padding:5px 8px;background:rgba(255,216,109,.08);color:#f9fbff}
+#gamePreviewMilestones{display:grid;gap:6px;margin-top:2px}
+.gamePreviewMilestone{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(136,245,255,.14);background:rgba(8,18,35,.62);padding:7px 9px;font:400 11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff}
+.gamePreviewMilestone b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#ffe39a}
 #feedbackPanel h2{margin:0;font-size:20px;letter-spacing:.03em}
 #feedbackPanel label{display:block;margin:8px 0 5px;font-size:14px;color:#bfefff}
 #feedbackForm{display:flex;flex-direction:column;min-height:0}
@@ -230,29 +243,36 @@ mask:
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
 #pickerDock{position:absolute;left:12px;top:12px;right:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
-#gamePickerDockBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:118px;padding:10px 8px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
-#gamePickerDockBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
-#gamePickerDockBtn.active,#gamePickerDockBtn.open{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#gamePickerDockLabel{display:block;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
-#gamePickerDockStatus{display:block;font:700 12px/1.1 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
-#platformDock{position:absolute;left:12px;right:12px;bottom:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
-#platformSplashBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:78px;padding:10px 8px;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
-#platformSplashBtn:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
-#platformSplashBtn.open,#platformSplashBtn.active{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#platformSplashDockIcon{display:block;width:min(100%,58px);height:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(116,230,255,.28))}
-#platformSplashDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;text-transform:uppercase}
+#gamePickerDockBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:118px;padding:6px 4px;border:1px solid transparent;background:transparent;color:#f4fbff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:color .14s,transform .14s,filter .14s}
+#gamePickerDockBtn:hover{color:#ffe39a;transform:translateY(-1px);filter:drop-shadow(0 0 14px rgba(126,242,255,.24))}
+#gamePickerDockBtn.active,#gamePickerDockBtn.open{color:#ffe39a;filter:drop-shadow(0 0 18px rgba(255,216,109,.24))}
+#gamePickerDockIcon{display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1;transform:none;filter:drop-shadow(0 0 12px rgba(126,242,255,.28))}
+#gamePickerDockLabel{display:block;font:700 11px/.96 "Courier New",Consolas,monospace;letter-spacing:.14em;text-align:center;text-transform:uppercase;text-shadow:0 0 10px rgba(126,242,255,.18)}
+#platformDock{position:absolute;left:0;right:0;bottom:88px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
+#platformSplashBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:auto;min-height:0;padding:0;border:0;background:transparent;color:#dff7ff;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:transform .14s,filter .14s}
+#platformSplashBtn:hover{transform:translateY(-1px);filter:drop-shadow(0 0 18px rgba(126,242,255,.24))}
+#platformSplashBtn.open,#platformSplashBtn.active{filter:drop-shadow(0 0 18px rgba(255,216,109,.24))}
+#platformSplashDockIcon{display:block;width:118px;height:118px;max-width:none;max-height:none;border-radius:50%;clip-path:circle(50% at 50% 50%);object-fit:cover;filter:drop-shadow(0 0 16px rgba(116,230,255,.3))}
 #statusDock{position:absolute;left:12px;top:12px;right:12px;bottom:12px;z-index:20;display:flex;flex-direction:column;align-items:center;gap:12px}
 #statusDock{pointer-events:auto}
 #dockQuickTools{display:flex;flex-direction:column;justify-content:flex-start;gap:18px;width:100%;height:100%}
 #dockQuickTools .dockToolGroup{display:flex;flex-direction:column;gap:8px}
 #dockQuickTools .dockToolGroupPilot{margin-bottom:28px}
 #dockQuickTools .dockToolGroupUtility{margin-top:auto}
-#dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:1px solid rgba(136,245,255,.28);background:rgba(8,18,35,.78);color:#dff7ff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:blur(3px);transition:background .14s,border-color .14s,transform .14s}
-#dockQuickTools button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.82);transform:translateY(-1px)}
-#dockQuickTools button.active,#dockQuickTools button.open{background:rgba(19,43,84,.94);border-color:rgba(255,216,109,.72);color:#ffe39a}
-#dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none}
-#dockQuickTools button:disabled:hover{background:rgba(8,18,35,.78);border-color:rgba(136,245,255,.28)}
-#dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;transform:translateY(-1px)}
+#dockQuickTools button{display:flex;align-items:center;justify-content:center;gap:0;min-height:46px;padding:0;border:0;background:transparent;color:#f4fbff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:color .14s,transform .14s,filter .14s,opacity .14s;position:relative}
+#dockQuickTools button:hover,#dockQuickTools button:focus-visible{color:#ffe39a;transform:translateY(-1px);filter:drop-shadow(0 0 14px rgba(126,242,255,.24));outline:none}
+#dockQuickTools button.active,#dockQuickTools button.open{color:#ffe39a;filter:drop-shadow(0 0 18px rgba(255,216,109,.24))}
+#dockQuickTools button:disabled{opacity:.45;cursor:default;transform:none;filter:none}
+#dockQuickTools button:disabled:hover,#dockQuickTools button:disabled:focus-visible{color:#f4fbff;transform:none;filter:none}
+#dockQuickTools .dockToolGroupPrimary button,
+#dockQuickTools .dockToolGroupUtility button{min-height:60px}
+#dockQuickTools .dockToolGroupPrimary button::after,
+#dockQuickTools .dockToolGroupUtility button::after{content:attr(data-action-tip);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);padding:5px 8px;border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.92);color:#dff7ff;font:700 10px/1.1 "Courier New",Consolas,monospace;letter-spacing:.04em;white-space:nowrap;opacity:0;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.28);transition:opacity .12s,transform .12s}
+#dockQuickTools .dockToolGroupPrimary button:hover::after,
+#dockQuickTools .dockToolGroupPrimary button:focus-visible::after,
+#dockQuickTools .dockToolGroupUtility button:hover::after,
+#dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
+#dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
@@ -260,13 +280,13 @@ mask:
 #accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
-#muteToggleBtn[data-muted="true"]{border-color:rgba(255,216,109,.72);background:rgba(60,44,8,.72);color:#ffe39a}
-#accountPanel{display:none;flex-direction:column;gap:12px;width:min(100%,620px);padding:16px 18px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.35 "Courier New",Consolas,monospace}
+#muteToggleBtn[data-muted="true"]{color:#ffe39a}
+#accountPanel{display:none;flex-direction:column;gap:10px;width:min(100%,620px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.32 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
 #accountPanelHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 #accountPanelHero{display:flex;align-items:flex-start;gap:12px;min-width:0}
-#accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:96px;height:96px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
-#accountPanelPortrait{font-size:64px;line-height:1;filter:grayscale(1);opacity:.68}
+#accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+#accountPanelPortrait{font-size:54px;line-height:1;filter:grayscale(1);opacity:.68}
 #accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
 #accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
@@ -274,23 +294,32 @@ mask:
 #accountPanelSub{margin-top:4px;font:400 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.1em;color:#dff7ff}
 #accountPilotCallsign{font:700 14px/1.1 "Courier New",Consolas,monospace;letter-spacing:.08em;color:#ffe39a;text-transform:uppercase}
 #accountPilotStatus{font-size:11px;line-height:1.3;color:rgba(223,247,255,.76)}
+#accountPanelHeroActions{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+#accountGuideBtn{border:1px solid rgba(255,216,109,.42);background:rgba(60,44,8,.72);color:#ffe39a;padding:6px 9px;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;cursor:pointer}
+#accountGuideBtn:hover,#accountGuideBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
 #accountPanelClose{border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.72);color:#dff7ff;width:28px;height:28px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountIdentityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.accountIdentityCard,.accountSection{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
+.accountIdentityCard,.accountSection{display:flex;flex-direction:column;gap:5px;padding:8px 9px;border:1px solid rgba(136,245,255,.18);background:rgba(5,10,20,.72)}
 .accountIdentityLabel,.accountSectionTitle{font:700 11px/1.1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#7ef2ff}
 #accountPanel label{font-size:11px;line-height:1.2;color:rgba(218,236,255,.72)}
 #accountPanel input{width:100%;border:1px solid rgba(136,245,255,.18);background:#050a14;color:#f4f7ff;padding:7px 8px;font:13px/1.25 "Courier New",Consolas,monospace;box-sizing:border-box}
 #accountCredentials{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields[hidden]{display:none}
+#accountPanel .accountPasswordRow{display:flex;align-items:stretch;gap:8px}
+#accountPanel .accountPasswordRow input{flex:1}
+.accountPasswordToggle{flex:0 0 auto;min-width:42px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;padding:0 10px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
+.accountPasswordToggle:hover,.accountPasswordToggle:focus-visible{outline:none;border-color:rgba(255,216,109,.72);color:#ffe39a;background:rgba(19,43,84,.9)}
+.accountPasswordToggle[disabled]{opacity:.45;cursor:default}
+.accountPasswordToggle[disabled]:hover,.accountPasswordToggle[disabled]:focus-visible{border-color:rgba(136,245,255,.24);color:#dff7ff;background:rgba(8,18,35,.78)}
 #accountActions,#accountInitialsRow{display:flex;gap:8px}
 #accountActions{flex-wrap:wrap}
 #accountActions button,#accountInitialsRow button{border:1px solid #3d85b0;background:#0d1c36;color:#e5f9ff;padding:7px 10px;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}
 #accountActions button[disabled],#accountInitialsRow button[disabled]{opacity:.5;cursor:default}
 #accountInitialsRow input{width:90px;text-transform:uppercase}
 #accountInitialsDisplay{padding:8px 10px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82);font:700 13px/1.25 "Courier New",Consolas,monospace;color:#f4fbff}
-#accountSummary{font-size:11px;line-height:1.35;color:#dff7ff}
-#accountIdentityEmail,#accountIdentityUserId{font-size:11px;line-height:1.35;color:#dff7ff;overflow-wrap:anywhere}
+#accountSummary{font-size:11px;line-height:1.28;color:#dff7ff}
+#accountIdentityEmail,#accountIdentityUserId{font-size:11px;line-height:1.28;color:#dff7ff;overflow-wrap:anywhere}
 #accountFlightStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .accountStatCard{display:flex;flex-direction:column;gap:2px;padding:8px;border:1px solid rgba(136,245,255,.14);background:rgba(10,18,34,.82)}
 .accountStatLabel{font-size:10px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:rgba(223,247,255,.62)}
@@ -307,7 +336,7 @@ mask:
 .accountRecordReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;padding:5px 8px;cursor:pointer}
 .accountRecordReplayBtn:hover,.accountRecordReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
 .accountRecordStamp{font-size:10px;line-height:1.2;color:#ffe39a;text-align:right}
-.accountRecordEmpty{font-size:11px;line-height:1.35;color:rgba(223,247,255,.68)}
+.accountRecordEmpty{font-size:11px;line-height:1.28;color:rgba(223,247,255,.68)}
 #accountCredentials[hidden],
 #accountEmailLabel[hidden],
 #accountPasswordLabel[hidden],
@@ -425,25 +454,24 @@ mask:
 #leaderboardViewButtons button.active{border-color:rgba(255,216,109,.72);color:#ffd86d;background:rgba(60,44,8,.72)}
 #leaderboardViewButtons button[disabled]{opacity:.5;cursor:default}
 #leaderboardStatus{color:rgba(218,236,255,.68);text-align:right;max-width:170px;line-height:1.3}
-#buildStamp{position:fixed;z-index:18;pointer-events:none;display:flex;align-items:stretch;justify-content:flex-start;min-width:248px;min-height:40px;padding:8px 18px 8px;border:1px solid rgba(136,245,255,.18);background:
+#buildStamp{position:fixed;z-index:18;pointer-events:auto;display:flex;align-items:stretch;justify-content:flex-start;min-width:248px;max-width:min(calc(100vw - 240px),780px);min-height:40px;padding:8px 18px 8px;border:1px solid rgba(136,245,255,.18);background:
  linear-gradient(180deg,rgba(11,20,42,.94),rgba(7,12,27,.9)),
  repeating-linear-gradient(150deg,rgba(58,76,255,.12) 0 16px,transparent 16px 34px);
-box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:left;text-shadow:0 0 6px rgba(0,0,0,.92)}
+box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,255,.03);font:700 10px/1.25 "Courier New",Consolas,monospace;letter-spacing:.06em;color:#dff7ff;text-align:left;text-shadow:0 0 6px rgba(0,0,0,.92);cursor:pointer}
+#buildStamp:hover,#buildStamp:focus-visible{outline:none;border-color:rgba(255,216,109,.72);box-shadow:inset 0 0 0 1px rgba(255,229,122,.12),0 0 16px rgba(255,216,109,.18)}
 #buildStamp::before,#buildStamp::after{content:"";position:absolute;pointer-events:none}
 #buildStamp::before{inset:8px;border:1px solid rgba(255,255,255,.05)}
 #buildStamp::after{left:14px;right:14px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,229,122,.22),transparent)}
-#buildStampBody{display:flex;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding-right:18px}
+#buildStampBody{display:flex;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding-right:0}
 #buildStampChannel,#buildStampVersion,#buildStampRelease{display:block;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
 #buildStampChannel{color:#7ef2ff;text-transform:uppercase}
 #buildStampVersion,#buildStampRelease{color:#dff7ff;font-weight:400}
-#buildStampDismissBtn{position:absolute;right:10px;top:8px;width:18px;height:18px;border:1px solid rgba(136,245,255,.26);background:rgba(8,18,35,.68);color:rgba(223,247,255,.86);font:700 14px/1 "Courier New",Consolas,monospace;pointer-events:auto;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
-#buildStampDismissBtn:hover,#buildStampDismissBtn:focus-visible{outline:none;border-color:rgba(255,216,109,.76);color:#ffe39a;background:rgba(38,26,8,.84)}
+#buildStampVersion{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #buildStampRefreshBtn{display:none;margin-top:5px;padding:4px 10px;border:1px solid rgba(255,216,109,.68);background:rgba(60,44,8,.82);color:#ffe39a;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;cursor:pointer}
 #buildStampRefreshBtn:hover,#buildStampRefreshBtn:focus-visible{outline:none;border-color:#fff0b2;color:#fff0b2;background:rgba(88,63,10,.9)}
-#buildStamp.dismissed{display:none!important}
 #buildStamp.production #buildStampChannel,#buildStamp.production #buildStampRelease{display:none}
 #buildStamp.production #buildStampVersion{font-size:12px;letter-spacing:.08em;color:#f0f5ff}
-#buildStamp.replay{pointer-events:none;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
+#buildStamp.replay{pointer-events:none;cursor:default;border-color:rgba(255,216,109,.28);background:linear-gradient(180deg,rgba(11,20,42,.96),rgba(7,12,27,.94))}
 #buildStamp.replay #buildStampChannel{color:#ffe39a}
 #buildStamp.replay #buildStampVersion,#buildStamp.replay #buildStampRelease{color:#eef7ff}
 #buildStamp.updateAvailable{pointer-events:auto;border-color:rgba(255,216,109,.55);box-shadow:inset 0 0 0 1px rgba(255,229,122,.1),0 0 16px rgba(255,216,109,.14)}
@@ -506,13 +534,11 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <button id="gamePickerDockBtn" type="button" aria-expanded="false" aria-controls="gamePickerModal" aria-label="Choose game" title="Choose Game">
       <span id="gamePickerDockIcon" class="dockIcon" aria-hidden="true">🚀</span>
       <span id="gamePickerDockLabel">CHOOSE GAME</span>
-      <span id="gamePickerDockStatus">shell ready</span>
     </button>
   </div>
   <div id="platformDock">
     <button id="platformSplashBtn" type="button" aria-expanded="false" aria-controls="platformSplashModal" aria-label="Open Platinum platform splash" title="Platinum Arcade Game Platform">
       <img id="platformSplashDockIcon" src="assets/platinum-platform-mark.png" alt="" aria-hidden="true" />
-      <span id="platformSplashDockLabel">PLATINUM</span>
     </button>
   </div>
 </div>
@@ -527,16 +553,16 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         </button>
       </div>
       <div class="dockToolGroup dockToolGroupPrimary">
-        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Game Guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
-        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Controls"><span class="dockIcon" aria-hidden="true">🕹</span></button>
-        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Recent Replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
-        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="High Scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
-        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report Bug"><span class="dockIcon" aria-hidden="true">🐞</span></button>
+        <button id="guideDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open game guide" title="Open game guide" data-action-tip="Open game guide"><span class="dockIcon" aria-hidden="true">ℹ</span></button>
+        <button id="controlsDockBtn" type="button" aria-expanded="false" aria-controls="helpModal" aria-label="Open controls help" title="Open controls help" data-action-tip="Open controls help"><span class="dockIcon" aria-hidden="true">🕹</span></button>
+        <button id="movieDockBtn" type="button" aria-expanded="false" aria-controls="moviePanel" aria-label="Open recent replays" title="Open recent replays" data-action-tip="Open recent replays"><span class="dockIcon" aria-hidden="true">🎞</span></button>
+        <button id="leaderboardDockBtn" type="button" aria-expanded="false" aria-controls="leaderboardPanel" aria-label="Open high scores" title="Open high scores" data-action-tip="Open high scores"><span class="dockIcon" aria-hidden="true">🏆</span></button>
+        <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report a bug or send feedback" data-action-tip="Report a bug or send feedback"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
-        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
-        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
-        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Developer Tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
+        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio" data-action-tip="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
+        <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game" data-action-tip="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
+        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open developer tools" data-action-tip="Open developer tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
       </div>
     </div>
   </div>
@@ -569,7 +595,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
             <option value="auto">Auto</option>
             <option value="aurora-application">Aurora Application Mix</option>
             <option value="galaga-original-reference">Galaga Synth Approximation</option>
-            <option value="galaga-reference-assets">Galaga Reference Audio</option>
+            <option value="galaga-reference-assets" selected>Galaga Reference Audio</option>
           </select>
         </div>
         <div class="settingsField">
@@ -578,7 +604,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
             <option value="auto">Auto</option>
             <option value="classic-arcade">Classic Arcade</option>
             <option value="aurora-hint">Aurora Hint</option>
-            <option value="aurora-borealis">Aurora Borealis</option>
+            <option value="aurora-borealis" selected>Aurora Borealis</option>
             <option value="aurora-crown">Aurora Crown</option>
           </select>
         </div>
@@ -586,8 +612,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
           <select id="graphicsStarfieldIntensity">
             <option value="0.75">Soft</option>
-            <option value="1" selected>Reference</option>
-            <option value="1.25">Bright</option>
+            <option value="1">Reference</option>
+            <option value="1.25" selected>Bright</option>
             <option value="1.5">Vivid</option>
           </select>
         </div>
@@ -605,6 +631,12 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="testPanel" class="settingsSection">
       <h4>Developer Start State</h4>
+      <div id="rootModeRow" class="settingsField settingsFieldCompact" hidden>
+        <label for="rootMode">Root</label>
+        <input id="rootMode" type="text" value="" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        <div id="rootModeHint">Production keeps start-state and test controls locked unless Root mode is enabled.</div>
+        <div id="rootModeStatus">Start-state controls locked to shipped defaults.</div>
+      </div>
       <div class="settingsFieldGrid">
         <div class="settingsField settingsFieldCompact">
           <label for="testStage">Start Stage</label>
@@ -633,8 +665,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 23 2026, 3:15 PM EDT</span>
-      <span id="settingsState">codex/document-project-principles@e4732eb clean</span>
+      <span id="settingsRelease">Apr 26 2026, 3:33 PM EDT</span>
+      <span id="settingsState">main@d2dcf02 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -766,17 +798,19 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="gamePreviewPanel" role="dialog" aria-modal="true" aria-labelledby="gamePreviewTitle">
     <div id="gamePreviewHead" class="framePopupHead">
       <div>
-        <span id="gamePreviewBanner">COMING SOON</span>
+        <span id="gamePreviewBanner">SNEAK PEEK</span>
         <h2 id="gamePreviewTitle">Galaxy Guardians</h2>
-        <div id="gamePreviewSubtitle" class="framePopupSub">NEXT GAME PROJECT ON PLATINUM</div>
+        <div id="gamePreviewSubtitle" class="framePopupSub">SECOND GAME PREVIEW ON PLATINUM</div>
       </div>
       <button type="button" id="gamePreviewClose" aria-label="Close game preview">×</button>
     </div>
     <div id="gamePreviewBody">
-      <img id="gamePreviewImage" src="assets/galaxy-guardians-coming-soon.svg" alt="Galaxy Guardians coming soon splash art" />
+      <img id="gamePreviewImage" src="assets/galaxy-guardians-coming-soon.svg" alt="Galaxy Guardians sneak peek splash art" />
       <div id="gamePreviewCopy">
-        <p id="gamePreviewSummary">Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. The shell preview is live now; gameplay arrives later.</p>
-        <p id="gamePreviewDetail">Aurora Galactica remains the current playable cabinet while we finish the rerelease framing and platform surfaces.</p>
+        <p id="gamePreviewSummary">Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.</p>
+        <p id="gamePreviewDetail">Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.</p>
+        <div id="gamePreviewHighlights"></div>
+        <div id="gamePreviewMilestones"></div>
       </div>
     </div>
   </div>
@@ -819,9 +853,12 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         </div>
         <div id="accountPanelHeroText">
         <span id="accountPanelTitle">PILOT INFORMATION</span>
-        <span id="accountPanelSub">IDENTITY, RECORDS, AND FLIGHT HISTORY</span>
+        <span id="accountPanelSub">QUICK PILOT REFERENCE</span>
           <span id="accountPilotCallsign">PILOT OFFLINE</span>
           <span id="accountPilotStatus">Sign in to board a pilot identity.</span>
+          <div id="accountPanelHeroActions">
+            <button id="accountGuideBtn" type="button">Open Player Guide</button>
+          </div>
         </div>
       </div>
       <button type="button" id="accountPanelClose" aria-label="Close pilot panel">×</button>
@@ -843,10 +880,16 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <label id="accountEmailLabel" for="accountEmail">Email</label>
         <input id="accountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
         <label id="accountPasswordLabel" for="accountPassword">Password</label>
-        <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <div class="accountPasswordRow">
+          <input id="accountPassword" type="password" placeholder="Password" autocomplete="current-password" />
+          <button id="accountPasswordToggle" class="accountPasswordToggle" type="button" aria-label="Show password" title="Show password">👁</button>
+        </div>
         <div id="accountRecoveryFields" hidden>
           <label for="accountPasswordConfirm">Confirm New Password</label>
-          <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+          <div class="accountPasswordRow">
+            <input id="accountPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password" />
+            <button id="accountPasswordConfirmToggle" class="accountPasswordToggle" type="button" aria-label="Show confirmation password" title="Show confirmation password">👁</button>
+          </div>
         </div>
       </div>
       <div id="accountActions">
@@ -904,12 +947,11 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
   </div>
 </div>
-<div id="buildStamp">
-  <button type="button" id="buildStampDismissBtn" aria-label="Hide build stamp until refresh" title="Hide until refresh">×</button>
+<div id="buildStamp" role="button" tabindex="0" aria-label="Open project guide and release notes" title="Open project guide and release notes">
   <div id="buildStampBody">
     <span id="buildStampChannel">Lane development</span>
     <span id="buildStampVersion">Version 1.2.3</span>
-    <span id="buildStampRelease">Apr 23 2026, 3:15 PM EDT</span>
+    <span id="buildStampRelease">Apr 26 2026, 3:33 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1106,6 +1148,14 @@ const platformSplashClose=document.getElementById('platformSplashClose');
 const gamePreviewModal=document.getElementById('gamePreviewModal');
 const gamePreviewPanel=document.getElementById('gamePreviewPanel');
 const gamePreviewClose=document.getElementById('gamePreviewClose');
+const gamePreviewBanner=document.getElementById('gamePreviewBanner');
+const gamePreviewTitle=document.getElementById('gamePreviewTitle');
+const gamePreviewSubtitle=document.getElementById('gamePreviewSubtitle');
+const gamePreviewImage=document.getElementById('gamePreviewImage');
+const gamePreviewSummary=document.getElementById('gamePreviewSummary');
+const gamePreviewDetail=document.getElementById('gamePreviewDetail');
+const gamePreviewHighlights=document.getElementById('gamePreviewHighlights');
+const gamePreviewMilestones=document.getElementById('gamePreviewMilestones');
 const openViewerBtn=document.getElementById('openViewerBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
@@ -1116,8 +1166,8 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -1128,12 +1178,15 @@ const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
-const buildStampDismissBtn=document.getElementById('buildStampDismissBtn');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const helpGuideActions=document.getElementById('helpGuideActions');
 let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
+const INITIAL_BUILD_CHANNEL='development';
+const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+const ROOT_UNLOCK_CODE='n00b';
+let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
 window.__auroraCarryDebug=window.__platinumCarryDebug;
 const PLATFORM_NAME='Platinum';
@@ -1355,7 +1408,6 @@ const PLATFORM_STORAGE_KEYS={
 };
 const SYSTEM_LOG_LIMIT=80;
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
-let buildStampDismissed=0;
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1528,7 +1580,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.470.sha.e4732eb',commit:'e4732ebc6b28099aaf0fbd8328dbb0a84584cd90',branch:'codex/document-project-principles',dirty:false,released:'Apr 23 2026, 3:15 PM EDT',state:'codex/document-project-principles@e4732eb clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.527.sha.d2dcf02',commit:'d2dcf0265202d13ca3c09ebbcdd71d9c53a5822e',branch:'main',dirty:false,released:'Apr 26 2026, 3:33 PM EDT',state:'main@d2dcf02 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1957,7 +2009,7 @@ const P={
 };
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
+ p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
  scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
@@ -2142,15 +2194,17 @@ function recordScore(score,stage,initials='YOU'){
  saveScoreboard(top);
  S.best=top[0]?.score||0;
  writePref(BEST_SCORE_KEY,String(S.best));
+ if(typeof syncAccountUi==='function')syncAccountUi();
  return{entry,board:top,rank:top.findIndex(x=>x.id===entry.id)+1};
 }
 function saveGameOverInitials(){
  if(!gameOverState?.entryId)return;
  const board=loadScoreboard();
  const row=board.find(x=>x.id===gameOverState.entryId);
-  if(row){
+ if(row){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
   saveScoreboard(board);
+  if(typeof syncAccountUi==='function')syncAccountUi();
  }
 }
 function buildGameOverHtmlFromState(){
@@ -2201,7 +2255,7 @@ function buildGameOverState(score,stage,challenge=0){
 function resetAttractBackdrop(){
  S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.alertT=0;S.alertTxt='';S.banner=0;S.bannerTxt='';S.bannerMode='';S.bannerSub='';
  for(const e of S.e)e.hp=0;
- S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.hNoShotT=0;S.p.hDebugT=0;S.p.demoTargetId=null;S.p.demoTargetT=0;
+ S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;S.p.vx=0;S.p.cd=0;S.p.inv=0;S.p.dual=0;S.p.captured=0;S.p.returning=0;S.p.pending=0;S.p.spawn=0;S.p.capBoss=null;S.p.capT=0;S.p.inputResetHoldT=0;S.p.hNoShotT=0;S.p.hDebugT=0;S.p.demoTargetId=null;S.p.demoTargetT=0;
 }
 function enterAttractScores(){
  ATTRACT.active=1;
@@ -2273,22 +2327,39 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
  challenge:false,
- audioTheme:'auto',
- graphicsTheme:'auto',
- starfieldIntensity:1,
+ audioTheme:'galaga-reference-assets',
+ graphicsTheme:'aurora-borealis',
+ starfieldIntensity:1.25,
  starfieldSpeed:1
 });
 let testCfgCache=null;
+function productionRootModeEnabled(){
+ return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
+}
+function productionStartStateLocked(){
+ return PRODUCTION_RELEASE_LANE&&!productionRootModeEnabled();
+}
+function effectiveStartStateCfg(cfg){
+ const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
+ if(!productionStartStateLocked())return base;
+ return Object.assign(base,{
+  stage:DEFAULT_TEST_CFG.stage,
+  ships:DEFAULT_TEST_CFG.ships,
+  extendFirst:DEFAULT_TEST_CFG.extendFirst,
+  extendRecurring:DEFAULT_TEST_CFG.extendRecurring,
+  challenge:DEFAULT_TEST_CFG.challenge
+ });
+}
 function sanitizeAudioThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
- return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:'auto';
+ return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:DEFAULT_TEST_CFG.audioTheme;
 }
 function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
  if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
  const resolved=currentGamePackAtmosphereTheme(next);
- return resolved?.id===next?next:'auto';
+ return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
 }
 function sanitizeStarfieldMultiplier(value,fallback=1){
  const next=+value;
@@ -2296,21 +2367,40 @@ function sanitizeStarfieldMultiplier(value,fallback=1){
  return Math.round(cl(next,.5,1.8)*100)/100;
 }
 function applyTestCfgToControls(cfg){
- if(testStage)testStage.value=cfg.stage;
- if(testShips)testShips.value=cfg.ships;
- if(testExtendFirst)testExtendFirst.value=cfg.extendFirst;
- if(testExtendRecurring)testExtendRecurring.value=cfg.extendRecurring;
- if(testChallenge)testChallenge.checked=cfg.challenge;
+ const startCfg=effectiveStartStateCfg(cfg);
+ if(testStage)testStage.value=startCfg.stage;
+ if(testShips)testShips.value=startCfg.ships;
+ if(testExtendFirst)testExtendFirst.value=startCfg.extendFirst;
+ if(testExtendRecurring)testExtendRecurring.value=startCfg.extendRecurring;
+ if(testChallenge)testChallenge.checked=startCfg.challenge;
  if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+}
+function syncDeveloperToolsUi(){
+ const locked=productionStartStateLocked();
+ if(rootModeRow)rootModeRow.hidden=!PRODUCTION_RELEASE_LANE;
+ if(rootModeStatus)rootModeStatus.textContent=locked
+  ? 'Start-state controls locked to shipped defaults.'
+  : 'Root mode active. Start-state controls restored.';
+ if(testPanel)testPanel.classList.toggle('locked',locked);
+ for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
+  if(el)el.disabled=locked;
+ }
+ if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
+ if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
 }
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
   audioTheme:sanitizeAudioThemeValue(cfg.audioTheme)
  };
+}
+function usesReferenceTimingModel(){
+ return typeof currentGamePackReferenceTiming==='function';
 }
 function usesRuntimeGalagaReferenceAudio(){
  return currentAudioOverrides().audioTheme==='galaga-reference-assets';
@@ -2341,7 +2431,6 @@ function stopReferenceCueSet(names=[]){
  sfx.stopCueNames(names);
 }
 function holdReferenceGameplayCadence(seconds=0){
- if(!usesRuntimeGalagaReferenceAudio())return;
  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
 }
 function clearReferenceTransitionCueWindow(extra=[]){
@@ -2411,18 +2500,18 @@ function loadTestCfg(){
  if(testCfgCache)return Object.assign({},testCfgCache);
  try{
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
-  const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:20000;
-  const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:70000;
+  const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:DEFAULT_TEST_CFG.extendFirst;
+  const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:DEFAULT_TEST_CFG.extendRecurring;
   testCfgCache={
-   stage:cl(+raw.stage||1,1,99)|0,
-   ships:cl(+raw.ships||3,1,9)|0,
+   stage:cl(+raw.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+   ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
    extendFirst,
    extendRecurring,
    challenge:!!raw.challenge,
-   audioTheme:sanitizeAudioThemeValue(raw.audioTheme),
-   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme),
-   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,1),
-   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,1)
+   audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
+   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
+   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
   };
  }catch{
   testCfgCache=Object.assign({},DEFAULT_TEST_CFG);
@@ -2430,19 +2519,36 @@ function loadTestCfg(){
  return Object.assign({},testCfgCache);
 }
 function saveTestCfg(){
+ const currentCfg=testCfgCache||loadTestCfg();
+ const startCfg=productionStartStateLocked()
+  ? {
+    stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+    ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
+    extendFirst:cl(Math.max(0,+currentCfg.extendFirst||0),0,999999)|0,
+    extendRecurring:cl(Math.max(0,+currentCfg.extendRecurring||0),0,999999)|0,
+    challenge:!!currentCfg.challenge
+   }
+  : {
+    stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
+    ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
+    extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
+    extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
+    challenge:!!testChallenge.checked
+   };
  const cfg={
-  stage:cl(+testStage.value||1,1,99)|0,
-  ships:cl(+testShips.value||3,1,9)|0,
-  extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
-  extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-  challenge:!!testChallenge.checked,
-  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||'auto'),
-  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||'auto'),
-  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1),
-  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)
+  stage:startCfg.stage,
+  ships:startCfg.ships,
+  extendFirst:startCfg.extendFirst,
+  extendRecurring:startCfg.extendRecurring,
+  challenge:startCfg.challenge,
+  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme),
+  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
+  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
+  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
  };
  testCfgCache=cfg;
  applyTestCfgToControls(cfg);
+ syncDeveloperToolsUi();
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
  return Object.assign({},cfg);
@@ -2456,6 +2562,7 @@ function syncSettingsUi(){
  if(settingsVersion)settingsVersion.textContent=`Version ${BUILD_INFO.version}`;
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
+ syncDeveloperToolsUi();
  syncAudioDebugUi();
 }
 function syncAudioDebugUi(){
@@ -2543,6 +2650,35 @@ function syncGamePreviewUi(){
  if(!gamePreviewModal)return;
  gamePreviewModal.classList.toggle('open',gamePreviewOpen);
  gamePreviewModal.setAttribute('aria-hidden',gamePreviewOpen?'false':'true');
+ if(!gamePreviewOpen)return;
+ const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
+ if(!preview)return;
+ if(gamePreviewBanner)gamePreviewBanner.textContent=preview.banner||'PREVIEW';
+ if(gamePreviewTitle)gamePreviewTitle.textContent=preview.title||'Game Preview';
+ if(gamePreviewSubtitle)gamePreviewSubtitle.textContent=preview.subtitle||'PACK PREVIEW ON PLATINUM';
+ if(gamePreviewImage){
+  if(preview.image){
+   gamePreviewImage.src=preview.image;
+   gamePreviewImage.hidden=false;
+  }else gamePreviewImage.hidden=true;
+  gamePreviewImage.alt=preview.imageAlt||`${preview.title||'Game'} preview art`;
+ }
+ if(gamePreviewSummary)gamePreviewSummary.textContent=preview.summary||'Preview-only Platinum application.';
+ if(gamePreviewDetail)gamePreviewDetail.textContent=preview.detail||'Aurora Galactica remains the current playable cabinet.';
+ if(gamePreviewHighlights){
+  const highlights=Array.isArray(preview.highlights)?preview.highlights:[];
+  gamePreviewHighlights.innerHTML=highlights.map(item=>`<span>${String(item).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}</span>`).join('');
+  gamePreviewHighlights.hidden=!highlights.length;
+ }
+ if(gamePreviewMilestones){
+  const milestones=Array.isArray(preview.milestones)?preview.milestones:[];
+  gamePreviewMilestones.innerHTML=milestones.map(item=>{
+   const label=String(item?.label||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+   const state=String(item?.state||'planned').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+   return `<div class="gamePreviewMilestone"><span>${label}</span><b>${state}</b></div>`;
+  }).join('');
+  gamePreviewMilestones.hidden=!milestones.length;
+ }
 }
 function syncTestUi(){
  const cfg=loadTestCfg();
@@ -2654,10 +2790,11 @@ function closeGamePreview(force=0){
 }
 function restorePlayableGamePackForLaunch(){
  if(typeof currentGamePackPlayable!=='function'||currentGamePackPlayable())return 0;
+ const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
  if(typeof installGamePack==='function')installGamePack(DEFAULT_GAME_PACK_KEY,{persist:1});
  closeGamePreview(1);
  if(typeof draw==='function')draw();
- showToast('Galaxy Guardians is preview-only. Launching Aurora Galactica.');
+ showToast(preview?.launchFallbackToast||'Preview pack is not playable yet. Launching Aurora Galactica.');
  return 1;
 }
 function closeHelp(force=0){
@@ -2860,6 +2997,12 @@ recordBtn.addEventListener('click',()=>{
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
+if(rootMode)rootMode.addEventListener('input',()=>{
+ developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;
+ testCfgCache=null;
+ applyTestCfgToControls(loadTestCfg());
+ syncDeveloperToolsUi();
+});
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
@@ -2868,10 +3011,21 @@ if(helpModal)helpModal.addEventListener('click',e=>{if(e.target===helpModal)clos
 feedbackModal.addEventListener('click',e=>{if(e.target===feedbackModal)closeFeedback();});
 settingsPanel.addEventListener('click',e=>e.stopPropagation());
 feedbackForm.addEventListener('submit',submitFeedback);
-if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',()=>location.reload());
-if(buildStampDismissBtn)buildStampDismissBtn.addEventListener('click',()=>{
- buildStampDismissed=1;
- if(buildStamp)buildStamp.classList.add('dismissed');
+if(buildStamp){
+ buildStamp.addEventListener('click',e=>{
+  if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
+  openProjectGuide();
+ });
+ buildStamp.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  if(e.target&&typeof e.target.closest==='function'&&e.target.closest('#buildStampRefreshBtn'))return;
+  e.preventDefault();
+  openProjectGuide();
+ });
+}
+if(buildStampRefreshBtn)buildStampRefreshBtn.addEventListener('click',e=>{
+ e.stopPropagation();
+ location.reload();
 });
 addEventListener('pointerdown',()=>unlockAudioFromInteraction(),{passive:true});
 function keyboardTargetIsEditable(target){
@@ -3034,7 +3188,12 @@ function resetActiveInputState(reason='manual'){
  const hadMotion=!!(S?.p&&Math.abs(+S.p.vx||0)>0);
  keys={};
  keyState={};
- if(S?.p&&Number.isFinite(+S.p.vx))S.p.vx=0;
+ if(S?.p&&Number.isFinite(+S.p.vx)){
+  S.p.vx=0;
+  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'){
+   S.p.inputResetHoldT=Math.max(+S.p.inputResetHoldT||0,.24);
+  }
+ }
  if(reason)logEvent('input_state_reset',{reason,hadKeys:!!hadKeys,hadState:!!hadState,hadMotion});
 }
 function closeDockOverlays(except=''){
@@ -3053,7 +3212,8 @@ function syncAudioUi(){
  muteToggleBtn.dataset.muted=audioMuted?'true':'false';
  muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
  muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
- muteToggleBtn.title=audioMuted?'Game audio muted':'Game audio on';
+ muteToggleBtn.title=audioMuted?'Unmute game audio':'Mute game audio';
+ muteToggleBtn.dataset.actionTip=audioMuted?'Unmute game audio':'Mute game audio';
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
  if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
@@ -3067,6 +3227,7 @@ function syncPauseUi(){
  pauseToggleBtn.setAttribute('aria-pressed',active?'true':'false');
  pauseToggleBtn.setAttribute('aria-label',active?'Resume game':'Pause game');
  pauseToggleBtn.title=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
+ pauseToggleBtn.dataset.actionTip=!canPause?'Pause available during active play':(active?'Resume game':'Pause game');
  const icon=pauseToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=active?'▶':'⏸';
  pauseToggleBtn.classList.toggle('active',active);
@@ -3092,7 +3253,6 @@ function setAudioMuted(next,opts={}){
 }
 function syncBuildStampUi(){
  if(!buildStamp)return;
- buildStamp.classList.toggle('dismissed',!!buildStampDismissed);
  const override=window.__platinumBuildStampOverride??window.__auroraBuildStampOverride;
  if(override){
   buildStamp.classList.remove('production');
@@ -3101,7 +3261,6 @@ function syncBuildStampUi(){
   if(buildStampChannel)buildStampChannel.textContent=override.channel||'';
   if(buildStampVersion)buildStampVersion.textContent=override.version||'';
   if(buildStampRelease)buildStampRelease.textContent=override.release||'';
-  if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
   if(buildStampRefreshBtn)buildStampRefreshBtn.hidden=1;
   return;
  }
@@ -3118,7 +3277,6 @@ function syncBuildStampUi(){
  buildStamp.classList.toggle('production',production);
  if(buildStampChannel)buildStampChannel.textContent=production?runtimeLabel:`${runtimeLabel} · ${BUILD_INFO.releaseChannel}`;
  if(buildStampVersion)buildStampVersion.textContent=showCommit&&shortCommit?`Version ${BUILD_INFO.version} (${shortCommit})`:`Version ${BUILD_INFO.version}`;
- if(buildStampDismissBtn)buildStampDismissBtn.hidden=0;
  if(buildStampRelease){
   buildStampRelease.textContent=BUILD_UPDATE.available
    ? (BUILD_UPDATE.mode==='seen'
@@ -3583,7 +3741,7 @@ function friendlyAuthError(action,error){
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
-  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flight history yet. Finish a run to start building this pilot record.</div>';
+  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flights logged yet. Finish a run to start this pilot record.</div>';
   return;
  }
  const latest=[...rows]
@@ -3605,7 +3763,7 @@ function renderPilotFlightStats(rows,signedIn){
 function renderPilotRecords(rows){
  if(!accountRecordsTop5)return;
  if(!rows.length){
-  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs will appear here once this pilot has logged a game.</div>';
+  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs appear here after this pilot logs a game.</div>';
   return;
  }
  const topRows=[...rows]
@@ -3742,13 +3900,32 @@ function leaderboardRowIncludedByDate(row){
  return Number.isFinite(stamp)&&stamp>=threshold;
 }
 function formatLeaderboardRowMeta(row){
- const build=String(row?.build||'').trim()||'legacy';
+ const buildRaw=String(row?.build||'').trim();
+ const buildCore=(buildRaw.split('+')[0]||'').trim();
+ const build=buildCore||buildRaw||'legacy';
  const stamp=resolveRowTimestamp(row)||row?.at||'';
  const parsed=Date.parse(stamp);
  const dateLabel=Number.isFinite(parsed)
   ? new Intl.DateTimeFormat(undefined,{month:'short',day:'2-digit',year:'2-digit'}).format(parsed)
   : '--';
- return { build, dateLabel };
+ return { build:`Build ${build}`, dateLabel };
+}
+function syncPasswordToggleButton(input,button,label='password'){
+ if(!button)return;
+ const hidden=!input;
+ button.hidden=hidden;
+ if(hidden)return;
+ const masked=input.type!=='text';
+ button.textContent=masked?'👁':'🙈';
+ const action=masked?`Show ${label}`:`Hide ${label}`;
+ button.setAttribute('aria-label',action);
+ button.title=action;
+ button.disabled=!!input.disabled;
+}
+function toggleAccountPasswordVisibility(input,button,label='password'){
+ if(!input||input.disabled)return;
+ input.type=input.type==='password'?'text':'password';
+ syncPasswordToggleButton(input,button,label);
 }
 function syncLeaderboardFilterUi(){
  if(leaderboardFilterAfterInput&&leaderboardFilterAfterInput.value!==String(LEADERBOARD.filterAfterDate||''))leaderboardFilterAfterInput.value=String(LEADERBOARD.filterAfterDate||'');
@@ -3872,12 +4049,11 @@ function closeAccountPanel(){
  syncOverlayPause();
 }
 function toggleAccountPanel(){
- LEADERBOARD.accountPanelOpen=!LEADERBOARD.accountPanelOpen;
- if(LEADERBOARD.accountPanelOpen)LEADERBOARD.panelOpen=0;
- syncLeaderboardPanelVisibility();
- syncAccountPanelVisibility();
- syncAccountUi();
- syncOverlayPause();
+ if(LEADERBOARD.accountPanelOpen){
+  closeAccountPanel();
+  return;
+ }
+ openAccountPanel();
 }
 function buildStartAccountPrompt(){
  const configured=!!LEADERBOARD.configured;
@@ -3920,7 +4096,7 @@ function syncAccountUi(){
  const dockId=pilotDisplayId();
  const hasLockedInitials=!!signedIn;
  if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
- if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'IDENTITY, RECORDS, AND FLIGHT HISTORY';
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'QUICK PILOT REFERENCE';
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
@@ -3953,6 +4129,8 @@ function syncAccountUi(){
   accountPassword.autocomplete=recovering?'new-password':'current-password';
  }
  if(accountPasswordConfirm)accountPasswordConfirm.disabled=!configured||!remoteAuthEnabled()||pending||LEADERBOARD.authBusy||!recovering;
+ syncPasswordToggleButton(accountPassword,accountPasswordToggle,recovering?'password':'password');
+ syncPasswordToggleButton(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password');
  if(accountEmail&&testAccountEnabled()&&!signedIn&&document.activeElement!==accountEmail&&String(accountEmail.value||'').trim()===''){
   accountEmail.value=primaryTestAccountEmail();
  }
@@ -3971,8 +4149,8 @@ function syncAccountUi(){
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
   else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
-  else if(recovering)accountSummary.textContent='Recovery link accepted. Save a new password to finish signing back into this pilot account.';
-  else if(!signedIn)accountSummary.textContent='Not signed in. Anonymous scores still work.';
+  else if(recovering)accountSummary.textContent='Recovery accepted. Save a new password to finish signing back in.';
+  else if(!signedIn)accountSummary.textContent='Not signed in. Local scores still work.';
   else accountSummary.textContent=`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':' · email not yet verified'}`;
  }
  const rows=rowsForPilotProfile();
@@ -3984,7 +4162,7 @@ function syncAccountUi(){
  if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
  if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
  if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
- if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Flight history and records are synced below.':'Sign in, create a pilot, or keep playing locally and track records on this device.');
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.');
  if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
  if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
  if(accountPanel){
@@ -4181,26 +4359,26 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
- Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,vx:0});
+ Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null});
  startRunRecording();
  spawnStage();msg.textContent='';
+ const openingTiming=(!cfg.challenge&&cfg.stage===1&&usesReferenceTimingModel())
+  ? currentGamePackReferenceTiming('stage1Opening')
+  : null;
  if(usesRuntimeGalagaReferenceAudio()){
-  const openingTiming=(!cfg.challenge&&cfg.stage===1&&typeof currentGamePackReferenceTiming==='function')
-   ? currentGamePackReferenceTiming('stage1Opening')
-   : null;
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
-  sfx.start();
-  S.startCueT=0;
-  if(openingTiming){
-   S.formationCueT=openingTiming.formationArrivalDelay;
-   S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
-   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
-  }else{
-   S.seqT=Math.max(+S.seqT||0,3.05);
-   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
-  }
- }else sfx.start();
+ }
+ sfx.start();
+ S.startCueT=0;
+ if(openingTiming){
+  S.formationCueT=openingTiming.formationArrivalDelay;
+  S.seqT=Math.max(+S.seqT||0,openingTiming.firstPulseDelay);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,openingTiming.firstPulseDelay+.15);
+ }else if(usesRuntimeGalagaReferenceAudio()){
+  S.seqT=Math.max(+S.seqT||0,3.05);
+  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
+ }
  c?.focus?.();
 }
 
@@ -4488,7 +4666,12 @@ function updatePlayerControl(dt,p){
  const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
  const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
+ p.inputResetHoldT=Math.max(0,(+p.inputResetHoldT||0)-dt);
  logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
+ if(p.inputResetHoldT>0){
+  p.vx=0;
+  return;
+ }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
@@ -4534,9 +4717,11 @@ const accountCredentials=document.getElementById('accountCredentials');
 const accountEmail=document.getElementById('accountEmail');
 const accountEmailLabel=document.getElementById('accountEmailLabel');
 const accountPassword=document.getElementById('accountPassword');
+const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
+const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
 const accountLoginBtn=document.getElementById('accountLoginBtn');
 const accountResetBtn=document.getElementById('accountResetBtn');
@@ -4558,6 +4743,7 @@ const accountDockLabel=document.getElementById('accountDockLabel');
 const accountDockStatus=document.getElementById('accountDockStatus');
 const accountPilotCallsign=document.getElementById('accountPilotCallsign');
 const accountPilotStatus=document.getElementById('accountPilotStatus');
+const accountGuideBtn=document.getElementById('accountGuideBtn');
 const accountIdentityEmail=document.getElementById('accountIdentityEmail');
 const accountIdentityUserId=document.getElementById('accountIdentityUserId');
 const accountFlightStats=document.getElementById('accountFlightStats');
@@ -4636,6 +4822,18 @@ function pilotLocalReplayRows(){
    localReplay:1
   }));
 }
+function pilotLocalScoreRows(){
+ if(!LEADERBOARD.user)return [];
+ const activePilotInitials=sanitizeInitials(preferredInitialsFromUser()||'');
+ if(!activePilotInitials)return [];
+ return loadScoreboard()
+  .filter(row=>{
+   const rowInitials=sanitizeInitials(row?.initials||'');
+   if(rowInitials&&rowInitials===activePilotInitials)return true;
+   return !!(gameOverState?.entryId&&String(row?.id||'')===String(gameOverState.entryId));
+  })
+  .map(row=>Object.assign({verified:0,localScore:1},row));
+}
 function mergePilotProfileRows(remoteRows,localRows){
  const merged=remoteRows.map(row=>Object.assign({},row));
  for(const localRow of localRows){
@@ -4659,7 +4857,7 @@ function mergePilotProfileRows(remoteRows,localRows){
 function rowsForPilotProfile(){
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
-  const localRows=pilotLocalReplayRows();
+  const localRows=mergePilotProfileRows(pilotLocalScoreRows(),pilotLocalReplayRows());
   if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
  }
  return localLeaderboardRows();
@@ -4745,6 +4943,11 @@ if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
+if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
+ if(typeof openPlayersGuideWindow==='function')openPlayersGuideWindow();
+});
+if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
+if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
 async function openReplayFromPilotRecordsTarget(target){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
@@ -5700,8 +5903,8 @@ function finalizeChallengeClear(){
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=1.45;
- if(usesRuntimeGalagaReferenceAudio()){
-  const challengeResultsTiming=typeof currentGamePackReferenceTiming==='function'
+ if(usesReferenceTimingModel()){
+  const challengeResultsTiming=usesReferenceTimingModel()
    ? currentGamePackReferenceTiming('challengeResults')
    : null;
   clearReferenceTransitionCueWindow();
@@ -5743,12 +5946,12 @@ function spawnFormation(){
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
- const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
  const openingTiming=usesReference&&S.stage===1?currentGamePackReferenceTiming('stage1Opening'):null;
- const transitionTiming=usesReference&&S.stage>1
-  ? currentGamePackReferenceTiming(S.transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+ const transitionTiming=usesReference&&S.stage>1&&S.transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
- const baseEntryDelay=openingTiming?.firstEnemyArrivalDelay||transitionTiming?.firstEnemyArrivalDelay||0;
+ const baseEntryDelay=transitionTiming?.firstEnemyArrivalDelay||0;
  S.e.length=0;
  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
   let t='bee';
@@ -5787,7 +5990,7 @@ function spawnFormation(){
 function spawnChallenge(){
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout();
- const challengeTiming=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function'
+ const challengeTiming=usesReferenceTimingModel()&&!S.attract
   ? currentGamePackReferenceTiming('challengeEntry')
   : null;
  const baseEntryDelay=challengeTiming?.firstEnemyArrivalDelay||0;
@@ -5826,9 +6029,9 @@ function spawnStage(){
  const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
- const usesReference=usesRuntimeGalagaReferenceAudio()&&!S.attract&&typeof currentGamePackReferenceTiming==='function';
- const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1
-  ? currentGamePackReferenceTiming(transitionMode==='challengeResult'?'postChallengeStageEntry':'stageEntry')
+ const usesReference=usesReferenceTimingModel()&&!S.attract;
+ const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1&&transitionMode==='challengeResult'
+  ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
  S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
@@ -5845,10 +6048,10 @@ function queueStageTransition(mode='normal'){
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
- const challengeEntryTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+ const challengeEntryTiming=usesReferenceTimingModel()
   ? currentGamePackReferenceTiming('challengeEntry')
   : null;
- const challengeResultsTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
+ const challengeResultsTiming=usesReferenceTimingModel()
   ? currentGamePackReferenceTiming('challengeResults')
   : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
@@ -5871,9 +6074,9 @@ function queueStageTransition(mode='normal'){
   challenge:!!S.challenge,
   enemies:S.e.filter(e=>e.hp>0).length
  });
- if(usesRuntimeGalagaReferenceAudio()){
+ if(usesReferenceTimingModel()){
   clearReferenceTransitionCueWindow();
- S.transitionCueKind=nextIsChallenge?1:0;
+  S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge
       ? Math.max(.55,S.nextStageT-(challengeResultsTiming?.nextChallengeCueLeadBeforeSpawn||1.42))
@@ -5882,7 +6085,7 @@ function queueStageTransition(mode='normal'){
       ? Math.max(.7,S.nextStageT-(challengeEntryTiming?.cueLeadBeforeSpawn||1.52))
       : Math.max(.55,S.nextStageT-1.18));
   holdReferenceGameplayCadence(S.nextStageT+(nextIsChallenge?(challengeEntryTiming?.cadenceHoldAfterSpawn||1.1):(challengeResultsTiming?.cadenceHoldAfterSpawn||.9)));
- }else sfx.transition(nextIsChallenge?1:0);
+}else sfx.transition(nextIsChallenge?1:0);
 }
 
 function startSequence(mode,duration,title,subtitle=''){
@@ -7454,6 +7657,28 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   noticeHint:'Galaxy Guardians is a shell preview for the next Platinum application.',
   pickerHint:'CHOOSE GAME TO SWITCH BACK TO AURORA'
  }),
+ preview:Object.freeze({
+  banner:'SNEAK PEEK',
+  title:'Galaxy Guardians',
+  subtitle:'SECOND GAME PREVIEW ON PLATINUM',
+  image:'assets/galaxy-guardians-coming-soon.svg',
+  imageAlt:'Galaxy Guardians sneak peek splash art',
+  cardLine:'Sneak peek shell with pack-owned preview identity; gameplay integration remains offline.',
+  summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, and safe launch fallback while Aurora remains the playable cabinet.',
+  highlights:Object.freeze([
+   'Scout-wave formation pressure with flagship escorts',
+   'Single-shot arcade pacing and wrap-around threat planning',
+   'Shared Platinum controls, services, replay, and release shell'
+  ]),
+  milestones:Object.freeze([
+   Object.freeze({label:'Pack identity and shell preview',state:'online'}),
+   Object.freeze({label:'Reference footage and movement map',state:'next'}),
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'planned'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'planned'})
+  ]),
+  launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
+ }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
   Object.freeze({id:'platinum-release',label:'Platinum Release',shellFrameTheme:'platinum-release',frameAccent:'signal-crimson'}),
@@ -7720,6 +7945,23 @@ function currentGamePackFrontDoor(){
  });
 }
 
+function currentGamePackPreview(pack=currentGamePack()){
+ const preview=pack?.preview||{};
+ return Object.freeze({
+  banner:preview.banner||'PREVIEW',
+  title:preview.title||pack?.metadata?.title||'Game Preview',
+  subtitle:preview.subtitle||'PACK PREVIEW ON PLATINUM',
+  image:preview.image||'',
+  imageAlt:preview.imageAlt||`${preview.title||pack?.metadata?.title||'Game'} preview art`,
+  cardLine:preview.cardLine||'Preview shell while gameplay integration is still in progress.',
+  summary:preview.summary||`${pack?.metadata?.title||'This game'} is a preview-only Platinum application right now.`,
+  detail:preview.detail||'Aurora Galactica remains the current playable cabinet while this pack is being prepared.',
+  highlights:Array.isArray(preview.highlights)?preview.highlights:[],
+  milestones:Array.isArray(preview.milestones)?preview.milestones:[],
+  launchFallbackToast:preview.launchFallbackToast||`${pack?.metadata?.title||'This pack'} is preview-only. Launching Aurora Galactica.`
+ });
+}
+
 function currentPlatformPackLabel(){
  const pack=currentGamePack();
  return `${PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'}`;
@@ -7858,6 +8100,7 @@ window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
+window.currentGamePackPreview=currentGamePackPreview;
 window.currentGamePackAtmosphereTheme=currentGamePackAtmosphereTheme;
 window.currentGamePackResolvedAtmosphere=currentGamePackResolvedAtmosphere;
 window.currentGamePackAudioTheme=currentGamePackAudioTheme;
@@ -8100,15 +8343,12 @@ function describePackCaps(pack){
 
 function syncGamePickerDock(){
  if(!gamePickerDockBtn)return;
- const pack=typeof currentGamePack==='function'?currentGamePack():null;
- const frontDoor=typeof currentGamePackFrontDoor==='function'?currentGamePackFrontDoor():null;
  const active=!!gamePickerOpen;
  gamePickerDockBtn.classList.toggle('open',active);
  gamePickerDockBtn.classList.toggle('active',active);
  gamePickerDockBtn.setAttribute('aria-expanded',active?'true':'false');
  if(gamePickerDockStatus){
-  const state=typeof currentGamePackPlayable==='function'&&currentGamePackPlayable()?'online':'preview';
-  gamePickerDockStatus.textContent=frontDoor?.subtitle?`${state} • ${frontDoor.subtitle}`:`${pack?.metadata?.versionLine||'live'}`;
+  gamePickerDockStatus.textContent='';
  }
 }
 
@@ -8126,20 +8366,21 @@ function renderGamePicker(){
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
   const activePack=typeof currentGamePack==='function'?currentGamePack():null;
   const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
- gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • switch packs from wait mode':''
+ gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
  }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;
   const caps=describePackCaps(pack);
   const flagHtml=caps.length?`<div class="gamePickerCardFlags">${caps.map(label=>`<span class="gamePickerFlag">${label}</span>`).join('')}</div>`:'';
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
-  const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Shell');
+  const actionLabel=isActive?'Selected':(playable?'Select Game':'Preview Sneak Peek');
+  const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':'Shell preview only while gameplay integration is still in progress'}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
-  ? 'Return to wait mode before switching to a different game pack.'
+  ? 'Finish the current run before switching to a different game pack.'
   : 'Selecting a pack updates the marquee, frame treatment, and front-door shell immediately.';
  syncGamePickerDock();
 }
@@ -8172,8 +8413,8 @@ function closeGamePicker(force=0){
 function chooseGamePack(key=''){
  if(!key||typeof getGamePack!=='function')return;
  if(started&&key!==currentGamePackKey()){
-  if(gamePickerStatus)gamePickerStatus.textContent='Return to wait mode before switching games.';
-  showToast('Return to wait mode before switching games.');
+  if(gamePickerStatus)gamePickerStatus.textContent='Finish the current run before switching games.';
+  showToast('Finish the current run before switching games.');
   return;
  }
  const nextPack=getGamePack(key);
@@ -8237,8 +8478,8 @@ const renderGamePickerPanel=document.getElementById('gamePickerPanel');
 const renderSettingsPanel=document.getElementById('settingsPanel');
 
 const DISPLAY_SHELL=Object.freeze({
- hudInsetX:12,
- hudInsetTop:6,
+ hudInsetX:18,
+ hudInsetTop:8,
  hudInsetBottom:38,
  hudMinWidth:220,
  frameOuterInset:2,
