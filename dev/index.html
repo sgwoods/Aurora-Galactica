@@ -668,8 +668,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 26 2026, 4:27 PM EDT</span>
-      <span id="settingsState">main@b171f86 clean</span>
+      <span id="settingsRelease">Apr 26 2026, 4:53 PM EDT</span>
+      <span id="settingsState">main@76d98eb clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -954,7 +954,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">Lane development</span>
     <span id="buildStampVersion">Version 1.2.3</span>
-    <span id="buildStampRelease">Apr 26 2026, 4:27 PM EDT</span>
+    <span id="buildStampRelease">Apr 26 2026, 4:53 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1586,7 +1586,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.530.sha.b171f86',commit:'b171f8687200e2733e364c370a78496f8c17378a',branch:'main',dirty:false,released:'Apr 26 2026, 4:27 PM EDT',state:'main@b171f86 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.531.sha.76d98eb',commit:'76d98ebb23fc102dcaf219fe293ecdadbe2be298',branch:'main',dirty:false,released:'Apr 26 2026, 4:53 PM EDT',state:'main@76d98eb clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -2267,10 +2267,10 @@ function buildAttractScoreboardHtml(){
 }
 function buildGameOverState(score,stage,challenge=0){
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
- const lockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
+ const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
- const res=recordScore(score,shownStage,lockedPilotInitials?pilotInitials:'YOU');
- const editing=!!res.rank&&!lockedPilotInitials;
+ const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
+ const editing=!!res.rank&&!hasLockedPilotInitials;
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -2280,7 +2280,7 @@ function buildGameOverState(score,stage,challenge=0){
   challenge:!!challenge,
   shownStage,
   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
-  initials:(lockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
+  initials:(hasLockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
   remoteSubmitted:0
