@@ -436,10 +436,13 @@ mask:
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
+#leaderboardLatestLocalBanner{grid-column:1 / -1;display:flex;flex-direction:column;gap:3px;margin:2px 0 10px;padding:8px 10px;border:1px solid rgba(255,216,109,.24);background:rgba(60,44,8,.18)}
+.leaderboardLatestLabel{color:#ffe39a;font:700 11px/1 "Courier New",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.leaderboardLatestValue{color:#f4fbff;font:700 12px/1.25 "Courier New",Consolas,monospace}
 #leaderboardPanelEmpty{padding:14px 0;color:rgba(218,236,255,.7)}
 #leaderboardViewsMeta{display:flex;flex-direction:column;gap:4px}
 #leaderboardViews{display:none;flex-direction:column;align-items:stretch;gap:8px;width:min(100%,400px);padding:12px 14px;border:1px solid rgba(136,245,255,.22);background:rgba(7,12,24,.84);backdrop-filter:blur(3px);font:700 11px/1.2 "Courier New",Consolas,monospace;letter-spacing:.04em;color:#dff7ff;box-shadow:0 12px 28px rgba(0,0,0,.26)}
-#statusPanels.framedOverlay #leaderboardViews{width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:none;box-shadow:none}
+#statusPanels.framedOverlay #leaderboardViews{position:sticky;bottom:0;z-index:1;width:100%;max-width:none;margin-top:auto;padding:14px 0 0;border:0;border-top:1px solid rgba(136,245,255,.18);background:linear-gradient(180deg,rgba(7,12,24,0),rgba(7,12,24,.94) 16px,rgba(7,12,24,.98));box-shadow:none}
 #statusPanels.framedOverlay #leaderboardViewsHead{align-items:flex-start;justify-content:space-between}
 #statusPanels.framedOverlay #leaderboardFilterWrap{align-items:flex-end}
 #statusPanels.framedOverlay #leaderboardViewButtons{gap:10px;justify-content:flex-start}
@@ -665,8 +668,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">Apr 26 2026, 3:33 PM EDT</span>
-      <span id="settingsState">main@d2dcf02 clean</span>
+      <span id="settingsRelease">Apr 26 2026, 3:52 PM EDT</span>
+      <span id="settingsState">main@8d09c44 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -951,7 +954,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">Lane development</span>
     <span id="buildStampVersion">Version 1.2.3</span>
-    <span id="buildStampRelease">Apr 26 2026, 3:33 PM EDT</span>
+    <span id="buildStampRelease">Apr 26 2026, 3:52 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1380,6 +1383,7 @@ const RECORD_PREF_KEY=`${STORAGE_PREFIX}AutoVideo`;
 const TEST_PREF_KEY=`${STORAGE_PREFIX}TestCfg`;
 const SEED_PREF_KEY=`${STORAGE_PREFIX}HarnessSeed`;
 const SCOREBOARD_KEY=`${STORAGE_PREFIX}Top10`;
+const SCORE_HISTORY_KEY=`${STORAGE_PREFIX}ScoreHistory`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
@@ -1390,6 +1394,7 @@ const LEGACY_STORAGE_KEYS={
  [TEST_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}TestCfg`,
  [SEED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${LEGACY_STORAGE_PREFIX}Top10`,
+ [SCORE_HISTORY_KEY]:`${LEGACY_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
@@ -1401,6 +1406,7 @@ const PLATFORM_STORAGE_KEYS={
  [TEST_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}TestCfg`,
  [SEED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}HarnessSeed`,
  [SCOREBOARD_KEY]:`${PLATFORM_STORAGE_PREFIX}Top10`,
+ [SCORE_HISTORY_KEY]:`${PLATFORM_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
@@ -1580,7 +1586,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.527.sha.d2dcf02',commit:'d2dcf0265202d13ca3c09ebbcdd71d9c53a5822e',branch:'main',dirty:false,released:'Apr 26 2026, 3:33 PM EDT',state:'main@d2dcf02 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.529.sha.8d09c44',commit:'8d09c4463bfb2aacfb65422095331e4d5e2c3293',branch:'main',dirty:false,released:'Apr 26 2026, 3:52 PM EDT',state:'main@8d09c44 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -2171,6 +2177,25 @@ function loadScoreboard(){
 function saveScoreboard(list){
  writePref(SCOREBOARD_KEY,JSON.stringify(list.slice(0,10)));
 }
+function loadScoreHistory(){
+ try{
+  return JSON.parse(readPref(SCORE_HISTORY_KEY)||'[]')
+   .filter(x=>x&&Number.isFinite(+x.score))
+   .map(x=>({
+    id:String(x.id||''),
+    initials:String(x.initials||'---').toUpperCase().replace(/[^A-Z]/g,'').padEnd(3,'-').slice(0,3),
+    score:+x.score|0,
+    stage:+x.stage|0,
+    at:String(x.at||''),
+    build:String(x.build||'')
+   }))
+   .sort((a,b)=>Date.parse(b.at||0)-Date.parse(a.at||0))
+   .slice(0,50);
+ }catch{return[]}
+}
+function saveScoreHistory(list){
+ writePref(SCORE_HISTORY_KEY,JSON.stringify(list.slice(0,50)));
+}
 function formatScore(v){return String(Math.max(0,v|0)).padStart(6,'0')}
 function sanitizeInitials(txt=''){return String(txt).toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)}
 function cycleInitial(ch='A',dir=1){
@@ -2188,8 +2213,11 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
  const board=loadScoreboard();
+ const history=loadScoreHistory();
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
+ history.unshift(entry);
+ saveScoreHistory(history);
  const top=board.slice(0,10);
  saveScoreboard(top);
  S.best=top[0]?.score||0;
@@ -2205,6 +2233,12 @@ function saveGameOverInitials(){
   row.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
   saveScoreboard(board);
   if(typeof syncAccountUi==='function')syncAccountUi();
+ }
+ const history=loadScoreHistory();
+ const historyRow=history.find(x=>x.id===gameOverState.entryId);
+ if(historyRow){
+  historyRow.initials=sanitizeInitials(gameOverState.initials.join('')).padEnd(3,'-');
+  saveScoreHistory(history);
  }
 }
 function buildGameOverHtmlFromState(){
@@ -3832,9 +3866,13 @@ function currentLeaderboardTitle(view=LEADERBOARD.view){
  switch(view){
   case 'validated': return 'VALIDATED PILOTS';
   case 'mine': return LEADERBOARD.user?'MY SCORES':'MY SCORES · LOCAL';
-  case 'local': return 'LOCAL DEVICE SCORES';
+  case 'local': return 'LOCAL TOP 10 DEVICE SCORES';
   default: return 'TOP 10 PILOTS';
  }
+}
+function latestCompletedLocalScoreRow(){
+ const history=typeof loadScoreHistory==='function'?loadScoreHistory():[];
+ return history[0]||null;
 }
 function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='local')return localLeaderboardRows();
@@ -3850,7 +3888,7 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='fallback')return view==='mine'?'My Scores unavailable · showing local':'Remote unavailable · showing local';
  if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
  if(mode==='signed_out')return remoteAuthEnabled()?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
- if(mode==='local')return 'Local device scores';
+ if(mode==='local')return 'Local top 10 on this device · completed runs only';
  if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
 }
@@ -3948,7 +3986,9 @@ function renderLeaderboardPanel(){
  if(leaderboardPanelTitle)leaderboardPanelTitle.textContent='HIGH SCORES';
  if(leaderboardPanelSub)leaderboardPanelSub.textContent=currentLeaderboardTitle();
  syncLeaderboardFilterUi();
- const rows=leaderboardRowsForView(LEADERBOARD.view).filter(leaderboardRowIncludedByDate);
+  const rows=leaderboardRowsForView(LEADERBOARD.view).filter(leaderboardRowIncludedByDate);
+ const latestLocal=LEADERBOARD.view==='local'?latestCompletedLocalScoreRow():null;
+ const latestShown=!!(latestLocal&&rows.some(row=>String(row?.id||'')===String(latestLocal.id||'')));
  if(!rows.length){
   leaderboardPanelTable.innerHTML=`<div id="leaderboardPanelEmpty">${LEADERBOARD.filterAfterDate?'No scores match the current date filter.':'No scores loaded for this view yet.'}</div>`;
   return;
@@ -3971,7 +4011,13 @@ function renderLeaderboardPanel(){
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
- leaderboardPanelTable.innerHTML=body.join('');
+ const latestBanner=latestLocal&&!latestShown
+  ? `<div id="leaderboardLatestLocalBanner"><span class="leaderboardLatestLabel">Latest completed run</span><span class="leaderboardLatestValue">${latestLocal.initials} · ${formatScore(+latestLocal.score||0)} · STG ${String(+latestLocal.stage||0).padStart(2,'0')} · ${formatWhenShort(latestLocal.at)}</span></div>`
+  : '';
+ leaderboardPanelTable.innerHTML=`${latestBanner}${body.join('')}`;
+}
+function resetLeaderboardPanelScroll(){
+ if(leaderboardPanel)leaderboardPanel.scrollTop=0;
 }
 function syncLeaderboardPanelVisibility(){
  if(!leaderboardPanel)return;
@@ -3979,6 +4025,7 @@ function syncLeaderboardPanelVisibility(){
  leaderboardPanel.hidden=!show;
  leaderboardPanel.classList.toggle('visible',show);
  if(leaderboardViews)leaderboardViews.style.display=show?'flex':'none';
+ if(show)resetLeaderboardPanelScroll();
  if(leaderboardDockBtn){
   leaderboardDockBtn.classList.toggle('active',show);
   leaderboardDockBtn.setAttribute('aria-expanded',show?'true':'false');
@@ -9869,6 +9916,8 @@ window.__galagaHarness__={
  },
  leaderboardPanelState(){
   const cells=Array.from(document.querySelectorAll('#leaderboardPanelTable .scoreCell')).map(node=>node.textContent||'');
+  const activeView=document.querySelector('#leaderboardViewButtons button.active')?.dataset?.view||'';
+  const latestBanner=document.getElementById('leaderboardLatestLocalBanner')?.textContent||'';
   return{
    open:!!LEADERBOARD.panelOpen,
    status:leaderboardStatusEl?.textContent||'',
@@ -9876,7 +9925,10 @@ window.__galagaHarness__={
    title:leaderboardPanelTitle?.textContent||'',
    sub:leaderboardPanelSub?.textContent||'',
    empty:document.getElementById('leaderboardPanelEmpty')?.textContent||'',
-   cells
+   cells,
+   activeView,
+   latestBanner,
+   scrollTop:document.getElementById('leaderboardPanel')?.scrollTop||0
   };
  },
  audioHistory(limit=12){
