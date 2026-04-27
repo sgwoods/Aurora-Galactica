@@ -1,71 +1,71 @@
-# Aurora Galactica Release Host
+# Aurora Galactica On Platinum
 
 `Aurora Galactica` is the first shipped playable application on the `Platinum`
 browser-arcade platform.
 
-This repository is the **public release host** for Aurora and Platinum.
+![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
 
-It exists primarily to serve:
+## What This Repo Contains
 
-- hosted `/dev`
-- hosted `/beta`
-- hosted `/production`
-- GitHub Pages documentation and release surfaces
-- mirrored public release assets
+This repo is the engineering source of truth for:
 
-## Important Repo Split
+- the `Platinum` platform
+- the `Aurora Galactica` application
+- the hosted documentation set
+- the build, promote, publish, and verification scripts for the release lanes
 
-Aurora currently uses two public repos, and they do **not** have the same job.
+Think about the product in two layers:
 
-### Active source repo, issues, and planning
+- `Platinum`
+  - shared shell, hosted lanes, pack selection, shared services, release tooling, and first-class hosted documentation
+- `Aurora Galactica`
+  - gameplay rules, stage flow, scoring, capture and rescue, challenge behavior, and Aurora-specific content
 
-- [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+## Repository Roles
 
-Use that repo for:
+Aurora currently uses two public GitHub repos, but they do not have the same
+job:
 
-- active issues
-- planning and roadmap work
-- code changes
-- harnesses and analyses
-- release workflow and multi-machine development
+- active source repo, issue tracker, planning docs, and engineering workflow:
+  - `https://github.com/sgwoods/Codex-Test1`
+- public release host and GitHub Pages deployment surface:
+  - `https://github.com/sgwoods/Aurora-Galactica`
 
-### Public release host
+Use `sgwoods/Codex-Test1` for:
 
-- [sgwoods/Aurora-Galactica](https://github.com/sgwoods/Aurora-Galactica)
+- active issues and bug triage
+- planning, roadmap, and release workflow docs
+- coding, testing, harnesses, and release scripts
+- multi-machine development and release authority
 
-Use this repo for:
+Use `sgwoods/Aurora-Galactica` for:
 
-- public release hosting
-- GitHub Pages deployment
-- release-facing mirrored assets
+- hosted `/dev`, `/beta`, and `/production`
+- public-facing mirrored release assets
+- the public landing surface for the live game
 
 If you are looking for the active issue tracker, use:
 
-- [sgwoods/Codex-Test1/issues](https://github.com/sgwoods/Codex-Test1/issues)
+- `https://github.com/sgwoods/Codex-Test1/issues`
 
 ## Live Lanes
 
+- local `localhost`:
+  - `http://127.0.0.1:8000/`
 - hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/`
 - hosted `/beta`:
   - `https://sgwoods.github.io/Aurora-Galactica/beta/`
 - hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/`
+- local log viewer:
+  - `http://127.0.0.1:4311/`
 
-## Current Public Release Family
+## First-Class Hosted Documentation
 
-As of April 25, 2026:
+The hosted documentation set should now move with the release lanes.
 
-- hosted `/dev`:
-  - `1.2.3+build.470.sha.e4732eb`
-- hosted `/beta`:
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
-- hosted `/production`:
-  - `1.2.3+build.489.sha.f6ba6c2`
-
-## Hosted Documentation
-
-Primary public docs:
+Primary hosted docs on hosted `/production`:
 
 - project guide:
   - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
@@ -76,19 +76,133 @@ Primary public docs:
 - release dashboard:
   - `https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html`
 
-## Local Development
+Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
-For local development and the canonical documentation set, start from:
+## Canonical Source Docs
 
-- [sgwoods/Codex-Test1](https://github.com/sgwoods/Codex-Test1)
+Best platform overview:
 
-Recommended startup path there:
+- [PLATINUM.md](PLATINUM.md)
+- [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md)
+
+Best application-boundary doc:
+
+- [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md)
+
+Best repo technical map:
+
+- [ARCHITECTURE.md](ARCHITECTURE.md)
+
+Best release and testing gate doc:
+
+- [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
+- [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
+
+Release planning and readiness docs:
+
+- [PLAN.md](PLAN.md)
+- [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
+- [RELEASE_POLICY.md](RELEASE_POLICY.md)
+- [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [release-dashboard.json](release-dashboard.json)
+- [release-notes.json](release-notes.json)
+
+Best repo-role clarification:
+
+- [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
+
+## Current Release State
+
+Current live release family:
+
+- hosted `/dev`:
+  - `1.2.3+build.470.sha.e4732eb`
+- hosted `/beta`:
+  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+- hosted `/production`:
+  - `1.2.3+build.489.sha.f6ba6c2`
+
+What that means:
+
+- Aurora now ships as the first playable application on Platinum
+- hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
+- the shell, picker, and shared docs are part of the product rather than just engineering scaffolding
+
+Current go-forward focus:
+
+- keep the refreshed `1.2.3` production family stable
+- use the multi-machine bootstrap and release-authority workflow
+- improve movement fidelity against real Galaga footage
+- continue audio identity polish beyond cue timing
+- keep the platform/application boundary strong before deeper multi-game growth
+
+## Run Locally
+
+1. Build the current local candidate:
 
 ```bash
-mkdir -p "$HOME/Development"
-cd "$HOME/Development"
-curl -fsSL https://raw.githubusercontent.com/sgwoods/Codex-Test1/main/tools/dev/setup-machine.sh | bash
+cd <repo-root>
+npm run build
 ```
 
-If you want to use a machine-specific iCloud-backed parent folder instead,
-`cd` there first and run the same installer command.
+2. Start the local game and log viewer together:
+
+```bash
+npm run local:resume
+```
+
+3. Open:
+
+- `http://127.0.0.1:8000/`
+- `http://127.0.0.1:4311/`
+
+To stop the tracked local services cleanly:
+
+```bash
+npm run local:stop
+```
+
+## Release Ladder
+
+The expected release ladder is:
+
+1. local `localhost`
+2. hosted `/dev`
+3. hosted `/beta`
+4. hosted `/production`
+
+The intention is:
+
+- local `localhost` for active engineering
+- hosted `/dev` for integrated hosted review
+- hosted `/beta` for release-candidate validation
+- hosted `/production` for the public stable promise
+
+## Release Discipline
+
+For every meaningful `x.y` release, we now want a full documentation pass to be
+part of the real gate between hosted `/beta` and hosted `/production`.
+
+That means refreshing:
+
+- release notes
+- release dashboard
+- README and planning docs
+- platform and application docs
+- testing and release-gate docs
+- hosted project, Platinum, and player guides
+
+See:
+
+- [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
+- [RELEASE_POLICY.md](RELEASE_POLICY.md)
+
+## Related Visuals
+
+![Platinum Platform Stack](reference-artifacts/diagrams/platinum/platinum-platform-stack.svg)
+
+![Platinum vs Game Packs](reference-artifacts/diagrams/platinum/platinum-pack-separation.svg)
+
+![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
+
+![Galaxy Guardians Pack Card](reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg)
