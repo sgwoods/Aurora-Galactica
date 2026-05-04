@@ -745,8 +745,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane production beta</span>
       <span id="settingsVersion">Version 1.3.0</span>
-      <span id="settingsRelease">May 04 2026, 4:29 PM EDT</span>
-      <span id="settingsState">beta@16d77f0 clean</span>
+      <span id="settingsRelease">May 04 2026, 5:26 PM EDT</span>
+      <span id="settingsState">beta@230bfa5 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1044,7 +1044,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0</span>
-    <span id="buildStampRelease">May 04 2026, 4:29 PM EDT</span>
+    <span id="buildStampRelease">May 04 2026, 5:26 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1682,7 +1682,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.3.0-beta.1',label:'1.3.0-beta.1+build.569.sha.16d77f0.beta',commit:'16d77f0605709a265606c8543c1fae9c8bbfe884',branch:'beta',dirty:false,released:'May 04 2026, 4:29 PM EDT',state:'beta@16d77f0 clean',releaseChannel:'production beta'};
+const BUILD_INFO={version:'1.3.0-beta.1',label:'1.3.0-beta.1+build.571.sha.230bfa5.beta',commit:'230bfa548724ec8dd9f5baf0501b49d64f78e5a3',branch:'beta',dirty:false,released:'May 04 2026, 5:26 PM EDT',state:'beta@230bfa5 clean',releaseChannel:'production beta'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -8071,7 +8071,7 @@ const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
  escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
  flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
  wrapReturn:Object.freeze({id:'guardians-wrap-return',event:'enemy_wrap_or_return',profile:'soft-bottom-return-sweep',referenceIntent:'bottom-exit or return warning'}),
- playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the dev playable preview'}),
+ playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the non-production playable preview'}),
  gameOver:Object.freeze({id:'guardians-game-over-fall',event:'game_over',profile:'low-falling-square-stair',referenceIntent:'short game-over descent distinct from Aurora'})
 });
 
@@ -8240,9 +8240,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity and a dev-only scout-wave slice.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on development and beta lanes.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and dev-only scout-wave runtime while Aurora remains the primary public cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a non-production scout-wave runtime while Aurora remains the primary public production cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
@@ -8308,7 +8308,7 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
  promotedEventStatus:'promoted-reviewed-event-windows',
  promotedEventCount:11,
  devRuntime:'src/js/13-galaxy-guardians-runtime.js',
- devRuntimeStatus:'dev-runtime-slice-not-public-release',
+   devRuntimeStatus:'preview-runtime-slice-not-production-release',
  devRuntimeHarness:'tools/harness/check-galaxy-guardians-runtime-slice.js',
  sourceCount:3,
  sources:Object.freeze([
@@ -8377,6 +8377,11 @@ const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
  })
 });
 
+const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
+ 'development',
+ 'production beta'
+]);
+
 function createGalaxyGuardiansInitialState(opts={}){
  return Object.freeze({
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
@@ -8421,9 +8426,14 @@ const GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON=Object.freeze({
 let GALAXY_GUARDIANS_ACTIVE_DEV_STATE=null;
 
 function galaxyGuardiansDevPreviewAllowed(){
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : '';
+ const allowedChannels=Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS)
+  .map(value=>String(value).toLowerCase());
  return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development'
-  && !!GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable
+  && allowedChannels.includes(channel)
+  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable)
   && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
 }
 
@@ -8453,7 +8463,7 @@ function closeGalaxyGuardiansDevOverlays(){
 
 function startGalaxyGuardiansDevPreview(cfg={}){
  if(!galaxyGuardiansDevPreviewAllowed()){
-  showToast('Galaxy Guardians playable preview is available only in development builds.');
+  showToast('Galaxy Guardians playable preview is available only in development and beta builds.');
   return false;
  }
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
@@ -8574,10 +8584,12 @@ function summarizeGalaxyGuardiansDevPreview(){
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
- label:'Galaxy Guardians dev-only playable preview',
+ label:'Galaxy Guardians non-production playable preview',
  enabled:1,
- devOnly:1,
+ devOnly:0,
+ previewOnly:1,
  publicPlayable:0,
+ allowedReleaseChannels:Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS),
  start:startGalaxyGuardiansDevPreview,
  update:updateGalaxyGuardiansDevPreview,
  snapshot:summarizeGalaxyGuardiansDevPreview
@@ -8588,7 +8600,7 @@ window.currentGalaxyGuardiansDevPreviewState=currentGalaxyGuardiansDevPreviewSta
 window.summarizeGalaxyGuardiansDevPreview=summarizeGalaxyGuardiansDevPreview;
 
 // Source: src/js/13-galaxy-guardians-runtime.js
-// Dev-only Galaxy Guardians scout-wave runtime model.
+// Non-production Galaxy Guardians scout-wave runtime model.
 
 const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
  flagship:Object.freeze({
@@ -8632,9 +8644,11 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
 
 const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
  id:'galaxy-guardians-dev-scout-wave-runtime',
- status:'dev-runtime-slice-not-public-release',
+ status:'preview-runtime-slice-not-production-release',
  publicPlayable:0,
+ previewPlayable:1,
  devPlayable:1,
+ playablePreviewReleaseChannels:Object.freeze(['development','production beta']),
  evidenceProfile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  eventVocabulary:Object.freeze([
@@ -8795,7 +8809,9 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
   runtimeState:'dev-scout-wave',
   publicPlayable:0,
+  previewPlayable:1,
   devPlayable:1,
+  playablePreviewReleaseChannels:GALAXY_GUARDIANS_RUNTIME_PROFILE.playablePreviewReleaseChannels.slice(),
   stage:Math.max(1,+opts.stage||1),
   score:0,
   lives,
@@ -9181,7 +9197,9 @@ function summarizeGalaxyGuardiansRuntime(state){
   gameKey:state.gameKey,
   runtimeState:state.runtimeState,
   publicPlayable:state.publicPlayable,
+  previewPlayable:state.previewPlayable,
   devPlayable:state.devPlayable,
+  playablePreviewReleaseChannels:Array.from(state.playablePreviewReleaseChannels||[]),
   stage:state.stage,
   score:state.score,
   lives:state.lives,
@@ -9695,7 +9713,8 @@ window.setCurrentGamePackShellTheme=setCurrentGamePackShellTheme;
 window.installGamePack=installGamePack;
 
 // Source: src/js/13-gameplay-adapter-registry.js
-// Platinum gameplay adapter registry. Packs become playable only through an owned adapter.
+// Platinum gameplay adapter registry. Packs become playable only through an
+// owned adapter or an explicitly non-production preview adapter.
 
 const AURORA_GAMEPLAY_ADAPTER=Object.freeze({
  gameKey:AURORA_GAME_PACK.metadata.gameKey,
@@ -9742,16 +9761,18 @@ function getGameplayAdapterSkeleton(packOrKey=currentGamePack()){
  return GAMEPLAY_ADAPTER_SKELETON_REGISTRY[key]||null;
 }
 
-function developmentGameplayPreviewAllowed(){
- return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development';
-}
-
 function getDevPreviewGameplayAdapter(packOrKey=currentGamePack()){
- if(!developmentGameplayPreviewAllowed())return null;
  const key=gameplayAdapterKey(packOrKey);
  const adapter=DEV_PREVIEW_GAMEPLAY_ADAPTER_REGISTRY[key]||null;
- return adapter&&adapter.enabled&&adapter.devOnly&&typeof adapter.start==='function'?adapter:null;
+ if(!adapter||!adapter.enabled||typeof adapter.start!=='function')return null;
+ if(!(adapter.previewOnly||adapter.devOnly))return null;
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : 'development';
+ const allowedChannels=Array.isArray(adapter.allowedReleaseChannels)&&adapter.allowedReleaseChannels.length
+  ? adapter.allowedReleaseChannels.map(value=>String(value).toLowerCase())
+  : ['development'];
+ return allowedChannels.includes(channel)?adapter:null;
 }
 
 function currentGameplayAdapter(){
@@ -10100,12 +10121,12 @@ function renderGamePicker(){
   const caps=describePackCaps(pack);
   const flagHtml=caps.length?`<div class="gamePickerCardFlags">${caps.map(label=>`<span class="gamePickerFlag">${label}</span>`).join('')}</div>`:'';
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
-  const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(pack);
-  const actionLabel=isActive?'Selected':(playable?'Select Game':devPlayable?'Select Dev Preview':'Preview Sneak Peek');
+  const previewPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(pack);
+  const actionLabel=isActive?'Selected':(playable?'Select Game':previewPlayable?'Select Preview':'Preview Sneak Peek');
   const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':devPlayable?'Dev-only playable preview in this development runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in development and beta runtimes':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Finish the current run before switching to a different game pack.'
@@ -10149,7 +10170,7 @@ function chooseGamePack(key=''){
  const playable=typeof gamePackHasPlayableAdapter==='function'
   ? gamePackHasPlayableAdapter(nextPack)
   : (typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false));
- const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(nextPack);
+ const previewPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(nextPack);
  installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
@@ -10159,7 +10180,7 @@ function chooseGamePack(key=''){
   if(typeof openGamePreview==='function')openGamePreview();
  }else{
   closeGamePicker(1);
-  showToast(devPlayable?`${currentGamePack().metadata?.title||'Game pack'} dev preview selected. Press Enter to start.`:`${currentGamePack().metadata?.title||'Game pack'} selected.`);
+  showToast(previewPlayable?`${currentGamePack().metadata?.title||'Game pack'} preview selected. Press Enter to start.`:`${currentGamePack().metadata?.title||'Game pack'} selected.`);
  }
 }
 
@@ -11391,7 +11412,7 @@ window.resetGalaxyGuardiansPreviewRenderState=resetGalaxyGuardiansPreviewRenderS
 window.drawGalaxyGuardiansPreviewBoard=drawGalaxyGuardiansPreviewBoard;
 
 registerGameBoardRenderer(GALAXY_GUARDIANS_PACK.metadata.gameKey,{
- label:'Galaxy Guardians dev preview board renderer',
+ label:'Galaxy Guardians preview board renderer',
  previewOnly:true,
  canDraw(){
   const playable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
