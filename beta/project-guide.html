@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">April 26, 2026</span>
+              <span class="metaValue">May 4, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -669,14 +669,19 @@
 <ul><li><a href="REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
 <h3>Current Release State</h3>
 <p>Current live release family:</p>
-<ul><li>hosted <code>/dev</code>:<ul><li><code>1.2.3+build.470.sha.e4732eb</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.2.3-beta.1+build.489.sha.f6ba6c2.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.2.3+build.489.sha.f6ba6c2</code></li></ul></li></ul>
+<ul><li>hosted <code>/dev</code>:<ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code>:<ul><li><code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/production</code>:<ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
 <p>What that means:</p>
 <ul><li>Aurora now ships as the first playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
 <p>Current go-forward focus:</p>
-<ul><li>keep the refreshed <code>1.2.3</code> production family stable</li><li>use the multi-machine bootstrap and release-authority workflow</li><li>improve movement fidelity against real Galaga footage</li><li>continue audio identity polish beyond cue timing</li><li>keep the platform/application boundary strong before deeper multi-game growth</li></ul>
+<ul><li>keep the current <code>1.2.3</code> trust-and-pilot refresh stable</li><li>use <a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a> for the</li></ul>
+<p>current readable quality table before shaping beta work</p>
+<ul><li>use the multi-machine bootstrap and release-authority workflow</li><li>keep folding in the other machine&#39;s Galaxians-style second-game work and</li></ul>
+<p>stronger harness/reference analysis</p>
+<ul><li>improve movement fidelity against real Galaga footage</li><li>continue audio identity polish beyond cue timing</li><li>keep the platform/application boundary strong before deeper multi-game growth</li></ul>
 <h3>Run Locally</h3>
 <ol><li>Build the current local candidate:</li></ol>
 <pre><code data-lang="bash">cd &lt;repo-root&gt;
+npm run machine:ensure-browser
 npm run build</code></pre>
 <ol><li>Start the local game and log viewer together:</li></ol>
 <pre><code data-lang="bash">npm run local:resume</code></pre>
@@ -684,6 +689,7 @@ npm run build</code></pre>
 <ul><li><code>http://127.0.0.1:8000/</code></li><li><code>http://127.0.0.1:4311/</code></li></ul>
 <p>To stop the tracked local services cleanly:</p>
 <pre><code data-lang="bash">npm run local:stop</code></pre>
+<p>Automated browser harnesses use Playwright-managed Chromium, not the user&#39;s installed Google Chrome. In Codex Desktop on macOS, run browser-backed harnesses with escalated sandbox permissions so Chromium can register its macOS Mach port without triggering crash dialogs.</p>
 <h3>Release Ladder</h3>
 <p>The expected release ladder is:</p>
 <ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
@@ -714,13 +720,15 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<p>Verified April 25, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.470.sha.e4732eb</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.489.sha.f6ba6c2.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.489.sha.f6ba6c2</code></li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the next cycle</li></ul></li></ul>
+<p>Verified April 26, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the next cycle</li></ul></li></ul>
 <p>This means:</p>
-<ul><li>Aurora has completed the <code>1.2.3</code> production refresh</li><li>beta and production are aligned on the same shipped release family</li><li>dev remains the older integration surface for comparison and future refresh</li><li>the next question is no longer &quot;how do we push beta to production?&quot;</li><li>the next question is &quot;what belongs in the next polish cycle and next <code>/dev</code> refresh?&quot;</li></ul>
+<ul><li>Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh</li><li>dev, beta, and production are now aligned on the same shipped release family</li><li>the next question is no longer &quot;how do we push beta to production?&quot;</li><li>the next question is &quot;what belongs in the next <code>1.3.0</code> fidelity cycle, and</li></ul>
+<p>how do we use the parallel second-game and harness work well?&quot;</p>
 <h3>Active Workstreams</h3>
 <h4>1. Post-Production Stabilization</h4>
-<ul><li>keep the refreshed <code>1.2.3</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li></ul>
+<ul><li>keep the refreshed <code>1.2.3+build.532.sha.b959491</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a> as the</li></ul>
+<p>readable current quality map before choosing beta-shaping work</p>
 <h4>2. Multi-Machine Release Discipline</h4>
 <ul><li>make new-machine bring-up one practical bootstrap command</li><li>keep a committed one-authority release model</li><li>keep beta and production promotion blocked unless the authority contract is</li></ul>
 <p>satisfied</p>
@@ -747,23 +755,25 @@ npm run build</code></pre>
 <h4>6. Platform Boundary Cleanup</h4>
 <ul><li>keep pack contract thinking explicit</li><li>reduce remaining Aurora-shaped platform residue</li><li>improve the storage and schema seam before a second real playable game</li></ul>
 <h4>7. Second-Application Proof</h4>
-<ul><li>keep <code>Galaxy Guardians</code> preview-only until a minimal playable slice is real</li><li>prepare the longer-range <code>Galaxian</code>-style ingestion path through durable</li></ul>
-<p>reference analysis and platform extension planning</p>
+<ul><li>keep <code>Galaxy Guardians</code> preview-only until a minimal playable slice is real</li><li>actively advance the longer-range <code>Galaxian</code>-style ingestion path through</li></ul>
+<p>durable reference analysis, platform extension planning, and the other machine&#39;s parallel work</p>
 <ul><li>bring a preliminary second-game Platinum sneak peek forward before the full</li></ul>
 <p>multi-game release so the platform layer is tested by real product pressure</p>
 <h4>8. Personas And Simulated Opponents</h4>
 <ul><li>deepen action/event annotation so personas can become richer</li><li>prepare for future player-versus-persona experiences</li><li>keep &quot;learn by playing&quot; persona ideas tied to simulation and durable logs,</li></ul>
 <p>not just aspiration</p>
 <h3>Immediate Priorities</h3>
-<ol><li>treat <code>main</code> as the authoritative post-production integration line</li><li>keep the multi-machine bootstrap and release-authority workflow healthy</li><li>prioritize movement fidelity, audio identity polish, and boundary cleanup</li><li>prioritize level-by-level arcade depth as the next major product pillar</li><li>make shared gameplay-video publishing an early evidence/product capability</li><li>continue narrow trust fixes from the open issue stream</li><li>decide when the next coherent polish bundle is strong enough to refresh</li></ol>
-<p>hosted <code>/dev</code></p>
+<ol><li>treat <code>main</code> as the authoritative post-production integration line</li><li>keep the multi-machine bootstrap and release-authority workflow healthy</li><li>prioritize movement fidelity, audio identity polish, and boundary cleanup</li><li>incorporate the other machine&#39;s Galaxians-style second-game, harness, and</li></ol>
+<p>analysis progress into the main roadmap</p>
+<ol><li>prioritize level-by-level arcade depth as the next major product pillar</li><li>make shared gameplay-video publishing an early evidence/product capability</li><li>continue narrow trust fixes from the open issue stream</li></ol>
+<p>Current conformance read:</p>
+<ul><li>overall Aurora quality is <code>8.8/10</code></li><li>audio identity and cue alignment is the weakest category at <code>6.1/10</code></li><li>player movement is the next visible feel gap at <code>8.0/10</code></li><li>Galaxy Guardians 0.1 preview gates are green but pass/fail only, not part of</li></ul>
+<p>the Aurora numeric roll-up yet</p>
 <h3>Release Direction</h3>
-<ul><li>hosted <code>/beta</code> and hosted <code>/production</code> already reflect the current shipped</li></ul>
-<p><code>f6ba6c2</code> family</p>
-<ul><li>the next serious candidate should be assembled from <code>main</code> and then refreshed</li></ul>
-<p>into hosted <code>/dev</code> deliberately</p>
-<ul><li>if a very small production-safe trust patch accumulates first, use the</li></ul>
-<p>narrower <code>1.2.4</code> path defined in <a href="PATCH_1_2_4_PLAN.md">PATCH_1_2_4_PLAN.md</a></p>
+<ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> now reflect the same</li></ul>
+<p>shipped <code>b959491</code> family</p>
+<ul><li>the next serious candidate should be assembled from <code>main</code> as a real</li></ul>
+<p><code>1.3.0</code> fidelity-and-depth step, not another immediate fast-follow patch</p>
 <ul><li>the next meaningful public milestone should likely be a <code>MINOR</code> release in</li></ul>
 <p>the <code>1.3.0</code> family</p>
 <ul><li>the longer release-family phasing plan is tracked in</li></ul>
@@ -788,10 +798,10 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Shipped State</h3>
-<p>Verified April 25, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.470.sha.e4732eb</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.489.sha.f6ba6c2.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.489.sha.f6ba6c2</code></li></ul></li></ul>
+<p>Verified April 26, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
 <p>Aurora is in a post-production-refresh posture:</p>
-<ul><li>production is current</li><li>beta matches the current production family</li><li>dev is the older comparison lane</li><li><code>main</code> is the forward line for the next cycle</li></ul>
+<ul><li>production is current</li><li>beta matches the current production family</li><li>dev also matches the current production family</li><li><code>main</code> is the forward line for the next cycle</li></ul>
 <h3>Roadmap Frame</h3>
 <p>The roadmap is no longer centered on whether Platinum can host Aurora at all.</p>
 <p>It is centered on:</p>
@@ -803,12 +813,15 @@ npm run build</code></pre>
 <h3>Near-Term Release Direction</h3>
 <h4>Stabilize <code>1.2.3</code></h4>
 <p>Goals:</p>
-<ul><li>keep hosted <code>/production</code> and hosted <code>/beta</code> aligned and trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>make new-machine and two-machine development simple and safe</li></ul>
+<ul><li>keep hosted <code>/production</code>, hosted <code>/beta</code>, and hosted <code>/dev</code> aligned and</li></ul>
+<p>trustworthy after the trust-and-pilot refresh</p>
+<ul><li>keep release docs, scorecards, and committed evidence current</li><li>make new-machine and two-machine development simple and safe</li></ul>
 <h4>Shape <code>1.3.0</code></h4>
 <p>The next serious public step should likely be:</p>
 <ul><li><code>1.3.0</code></li></ul>
 <p>That release family should focus on:</p>
-<ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes</li><li>level-by-level expansion planning</li><li>challenging-stage and later-level depth</li><li>shared-video evidence and publishing foundations</li></ul>
+<ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes</li><li>level-by-level expansion planning</li><li>challenging-stage and later-level depth</li><li>shared-video evidence and publishing foundations</li><li>incorporate the other machine&#39;s Galaxians-style sibling work and stronger</li></ul>
+<p>harness/reference analysis into the main line deliberately</p>
 <h4>Long-Term Release Families</h4>
 <p>The first high-level phasing pass for the next major Aurora and Platinum milestones is tracked in:</p>
 <ul><li><a href="LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></li></ul>
@@ -823,6 +836,15 @@ npm run build</code></pre>
 <p>the <code>1.3</code> quality reset</p>
 <ul><li>make shared gameplay-video publishing an early roadmap capability</li><li>bring a preliminary second-game Platinum sneak peek forward before the full</li></ul>
 <p><code>2.0</code> multi-game release</p>
+<p>Current conformance read:</p>
+<ul><li>see <a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a></li><li>see the generated score/target roll-up in</li></ul>
+<p><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></p>
+<ul><li>overall Aurora quality is <code>8.8/10</code></li><li>audio identity and cue alignment is the weakest category at <code>6.1/10</code></li><li>player movement conformance is the next visible feel gap at <code>8.1/10</code></li><li>Guardians preview gates are green as pass/fail 0.1 evidence, but they are not</li></ul>
+<p>yet part of the Aurora numeric roll-up</p>
+<ul><li>Guardians evidence-weighted reference conformance is now <code>7.7/10</code>, while the</li></ul>
+<p>stricter playtest-weighted score is <code>6.9/10</code> after local review found audio, pace, and graphic likeness still just short of a compelling Galaxian-style preview; cue-target gates now require labeled square/noise windows, mixed-source cue candidates, component sprite targets, waveform/spectrogram previews, and the reusable Platinum audio conformance lab output, while stage-rank gates require denser later-wave pressure</p>
+<ul><li>current cluster targets are <code>9.0/10</code> for Aurora and <code>7.7/10</code> reference /</li></ul>
+<p><code>6.9/10</code> playtest for Guardians in the <code>1.3</code> Fidelity and Trust lane, rising toward <code>9.5/10</code> and <code>9.0/10</code> reference / <code>8.8/10</code> playtest by the <code>2.0</code> multi-game Platinum candidate lane</p>
 <h3>Main Investment Themes</h3>
 <h4>1. Movement and control fidelity</h4>
 <p>Target:</p>
@@ -833,7 +855,8 @@ npm run build</code></pre>
 <p>Target:</p>
 <ul><li>improve audio identity beyond cue timing</li></ul>
 <p>Why:</p>
-<ul><li>cue alignment is strong now</li><li>the remaining opportunity is personality, phrase feel, and atmosphere</li></ul>
+<ul><li>audio identity and cue alignment is the weakest measured category</li><li>the remaining opportunity is personality, phrase feel, acoustic fit, and</li></ul>
+<p>better reference-derived timing/evidence</p>
 <h4>3. Gameplay trust fixes</h4>
 <p>Target:</p>
 <ul><li>continue closing player-visible correctness bugs and edge cases</li></ul>
@@ -874,7 +897,8 @@ npm run build</code></pre>
 <p>Target:</p>
 <ul><li>turn Platinum into a durable multi-game arcade host</li></ul>
 <p>Themes:</p>
-<ul><li>stronger pack contract</li><li>cleaner storage/schema seam</li><li>same-control compliance</li><li>early second-game sneak peek before the full multi-game release</li><li>second-game proof slice</li><li>future <code>Galaxian</code> ingestion planning</li></ul>
+<ul><li>stronger pack contract</li><li>cleaner storage/schema seam</li><li>same-control compliance</li><li>early second-game sneak peek before the full multi-game release</li><li>second-game proof slice</li><li>future <code>Galaxian</code> ingestion planning</li><li>active Galaxians-style sibling proof and platform-pressure work on the other</li></ul>
+<p>development machine</p>
 <h4>10. Personas and simulated opponents</h4>
 <p>Target:</p>
 <ul><li>support richer personas and future player-versus-persona play</li></ul>
@@ -924,6 +948,20 @@ npm run build</code></pre>
 <p>At the same time, Platinum should stay out of application-specific rules.</p>
 <p>It should not own:</p>
 <ul><li>Aurora scoring rules</li><li>Aurora capture and rescue behavior</li><li>Aurora challenge-stage structure</li><li>Aurora-specific copy, stage identity, or boss personality</li></ul>
+<h3>Architectural Invariant: No Direct Game-To-Game Sharing</h3>
+<p>Games on Platinum should not share game-specific code, rule tables, state, assets, mechanics, or capabilities directly with each other.</p>
+<p>If a behavior is common to more than one game, that commonality belongs in Platinum as a named API, interface, service, capability flag, harness substrate, or versioned contract. Applications may depend on Platinum contracts; they should not depend on another application&#39;s implementation.</p>
+<p>In practical terms:</p>
+<ul><li>Aurora changes must not affect Galaxy Guardians except through intentional</li></ul>
+<p>Platinum contract changes</p>
+<ul><li>Galaxy Guardians changes must not affect Aurora except through intentional</li></ul>
+<p>Platinum contract changes</p>
+<ul><li>future games must receive reusable behavior through Platinum extension points,</li></ul>
+<p>not sideways imports from Aurora or Galaxy Guardians</p>
+<ul><li>game-owned mechanics such as capture/rescue, dual-fighter mode, challenge</li></ul>
+<p>stages, flagship escorts, alien movement, scoring, visual identity, sound cues, and event vocabulary stay inside the owning game pack</p>
+<p>The current audit for this boundary is:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md</code></li></ul>
 <h3>What Platinum Is Today</h3>
 <p>Today Platinum is a real shipped platform, not a speculative refactor.</p>
 <p>Current proof points:</p>
@@ -970,7 +1008,9 @@ npm run build</code></pre>
 <h3>Remaining Platform And Application Boundary Issues</h3>
 <p>The separation is real, but not perfect yet.</p>
 <p>Current remaining seams to keep visible:</p>
-<ul><li>some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned</li><li>some debug globals and legacy naming still reflect the older single-game architecture</li><li>the game-pack contract is practical but not yet strongly versioned</li><li>some shell copy and application copy still need stronger structural validation so release-time regressions are caught automatically</li><li>the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations</li></ul>
+<ul><li>some storage and compatibility names are still Aurora-shaped even when they are effectively platform-owned</li><li>some debug globals and legacy naming still reflect the older single-game architecture</li><li>the game-pack contract is practical but not yet strongly versioned</li><li>the current second-game preview still borrows Aurora-owned rule and theme</li></ul>
+<p>tables while it is non-playable; those must become Galaxy Guardians-owned or Platinum-owned before a playable second-game preview</p>
+<ul><li>some shell copy and application copy still need stronger structural validation so release-time regressions are caught automatically</li><li>the second application is still preview-only, so the contract is proven with one real game and one shell-only preview rather than two full implementations</li></ul>
 <p>These are not reasons to collapse the separation again.</p>
 <p>They are reasons to keep the seam explicit while we strengthen it.</p>
 <h3>Platform Future Areas Of Improvement And Notes</h3>
@@ -1018,7 +1058,7 @@ npm run build</code></pre>
 <ul><li>hosted <code>/production</code> project guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/project-guide.html</code></li></ul></li><li>hosted <code>/production</code> Platinum guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html</code></li></ul></li><li>hosted <code>/production</code> player guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/player-guide.html</code></li></ul></li><li>hosted <code>/production</code> release dashboard:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html</code></li></ul></li></ul>
 <p>Equivalent hosted docs should exist on hosted <code>/dev</code> and hosted <code>/beta</code> as part of the normal release flow.</p>
 <h3>Related Docs</h3>
-<ul><li>maintained platform overview and diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>application-side separation and usage:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing gate discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking architecture review:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
+<ul><li>maintained platform overview and diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>application-side separation and usage:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>game boundary audit:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md</code></li></ul></li><li>repo technical map:<ul><li><code>/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md</code></li></ul></li><li>release and testing gate discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li><li>launch art direction:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md</code></li></ul></li><li>forward-looking architecture review:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1045,21 +1085,48 @@ npm run build</code></pre>
 <h4>Galaxy Guardians</h4>
 <p><code>Galaxy Guardians</code> is currently a preview-only application shell and second-game sneak peek.</p>
 <p>Right now it proves:</p>
-<ul><li>application selection</li><li>preview-only behavior inside the platform</li><li>alternate identity and framing</li><li>future second-game positioning</li><li>pack-owned preview content for the picker and preview modal</li><li>safe fallback to <code>Aurora Galactica</code> when a player tries to launch gameplay</li></ul>
+<ul><li>application selection</li><li>preview-only behavior inside the platform</li><li>alternate identity and framing</li><li>future second-game positioning</li><li>pack-owned preview content for the picker and preview modal</li><li>pack-owned placeholder timing, audio, visual, cadence, layout, and scoring</li></ul>
+<p>tables that do not directly borrow Aurora tables</p>
+<ul><li>a disabled, evidence-gated gameplay adapter skeleton with its own initial</li></ul>
+<p>state shape</p>
+<ul><li>a dev-only visible preview board renderer that drives the Guardians-owned</li></ul>
+<p>scout-wave runtime, visual catalog, and audio cue catalog without registering a playable adapter</p>
+<ul><li>a development-only playable-preview adapter that routes keyboard movement,</li></ul>
+<p>single-shot fire, life loss, reset, and game-over flow into the Guardians-owned runtime while keeping the public playable adapter disabled</p>
+<ul><li>a source-manifested Galaxian reference profile with three local source videos,</li></ul>
+<p>contact sheets, and waveforms</p>
+<ul><li>safe public-pack behavior because <code>Galaxy Guardians</code> still has no public</li></ul>
+<p>registered gameplay adapter</p>
 <p>It does not yet prove:</p>
-<ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li></ul>
+<ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <h3>Application Responsibilities</h3>
 <p>A Platinum application should own:</p>
 <ul><li>gameplay rules</li><li>scoring and stage progression</li><li>game-specific presentation and content</li><li>application identity on the front door such as title and feature line</li><li>its own harnesses for game behavior</li><li>optional shell preferences that remain within the platform shell contract</li></ul>
 <p>A Platinum application should not own:</p>
 <ul><li>the release ladder</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li><li>startup and wait-mode shell copy that promotes the platform or other applications</li></ul>
+<h3>Game-To-Game Isolation Rule</h3>
+<p>Applications must not depend on each other&#39;s game-specific implementation.</p>
+<p>Aurora Galactica may not be the hidden source of Galaxy Guardians mechanics, scoring, aliens, sound cues, visual identity, event vocabulary, or gameplay harness behavior. Galaxy Guardians should likewise never become a source of Aurora behavior. If both applications need the same thing, we should raise that thing into Platinum and expose it through a deliberate platform contract.</p>
+<p>Allowed reuse:</p>
+<ul><li>Platinum shell APIs</li><li>Platinum input contracts</li><li>Platinum audio engine capabilities</li><li>Platinum event/replay/session substrate</li><li>Platinum service adapters</li><li>Platinum pack schema and capability flags</li><li>documented platform harness helpers</li></ul>
+<p>Disallowed reuse:</p>
+<ul><li>one game&#39;s scoring table inside another game</li><li>one game&#39;s enemy movement model inside another game</li><li>one game&#39;s capture, rescue, dual-fighter, challenge, flagship, escort, or</li></ul>
+<p>stage progression logic inside another game</p>
+<ul><li>one game&#39;s visual or sound identity catalog as another game&#39;s default</li><li>one game&#39;s application harnesses as proof of another game&#39;s behavior</li></ul>
+<p>See also:</p>
+<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md</code></li></ul>
 <h3>Current Boundary Notes</h3>
 <p>The boundary is real, but these coupling areas still deserve attention:</p>
+<h4>Direct game-to-game sharing risk</h4>
+<p>The current second-game preview is safe because it is not playable, and its preview pack now owns placeholder data instead of borrowing Aurora-owned tables. It also has no public gameplay adapter, so it cannot start through Aurora&#39;s gameplay implementation by accident. Its disabled adapter skeleton now cites the first source-manifested Galaxian profile and a promoted reviewed event log for the future scout-wave slice, but a playable Galaxy Guardians slice still needs frame-level timing, measured game-specific pack data, and its own registered adapter, with any true common behavior promoted into Platinum.</p>
 <h4>Preview pack persistence</h4>
-<p>Preview-only applications must not become a durable trap state.</p>
+<p>Preview-only applications must not become a durable trap state. During development a preview application may also expose an explicit dev-only playable adapter so we can test the runtime slice before public playability.</p>
 <p>Current expected behavior:</p>
-<ul><li>preview application can be opened</li><li>shell can show its promo surface</li><li><code>Enter</code> should fall back to a playable application when preview-only content cannot start gameplay</li></ul>
+<ul><li>preview application can be opened</li><li>shell can show its promo surface</li><li><code>Enter</code> should fall back to a playable application when preview-only content</li></ul>
+<p>cannot start gameplay</p>
+<ul><li><code>Enter</code> may start a dev-only preview only when the development build exposes</li></ul>
+<p>an explicit dev-preview adapter and the pack still remains publicly non-playable</p>
 <h4>Front-door copy ownership</h4>
 <p>The shell front door now needs a firmer split than it had during the single-game era.</p>
 <p>The direction is:</p>
@@ -1085,11 +1152,52 @@ npm run build</code></pre>
 <ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes such as boss/capture/carry edge cases</li><li>replay and pilot-surface improvements</li><li>shell and overlay polish that remains application-owned</li></ul>
 <h4>Galaxy Guardians next proof</h4>
 <p>The current sneak peek is intentionally still non-playable. It should be used to keep the Platinum pack contract honest while the second game is still being specified.</p>
-<p>The best next application proof is a dev-only playable slice that includes:</p>
+<p>The first dev-only runtime slice is now underway as an application-owned model, not a public adapter. It creates a Galaxian-inspired scout-wave rack, enforces single-shot firing, emits promoted event names, scores against a Guardians-owned alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring state out of the model.</p>
+<p>Galaxy Guardians also now owns its first identity catalogs rather than borrowing Aurora&#39;s look or sound names. The visual catalog names the <code>Signal Flagship</code>, <code>Signal Escort</code>, <code>Signal Scout</code>, and <code>Guardian Interceptor</code> silhouettes. The audio cue catalog names the start chirp, formation pulse, single-shot player fire, enemy shot, scout/flagship dive pressure, escort join, hit cues, wrap/return cue, and future player-loss cue. These are still synthesized starting points, but they give the 0.1 slice separate application-owned contracts before any public playability.</p>
+<p>The runtime model now has a visible dev-only preview renderer. It draws the Guardians scout-wave board, single player shot, alien silhouettes, and preview HUD from Guardians-owned runtime state and catalog IDs while keeping the pack non-playable. The compact cabinet harness verifies the renderer by checking the preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct signal palette. The renderer is now registered through a Platinum game-board renderer registry, so the top-level render loop no longer branches on a specific game by name.</p>
+<p>The next application proof is maturing the first dev-only playable slice. It now has the initial lifecycle path, but the behavior is still intentionally development-scoped until the measured 0.1 scout-wave evidence is stronger. The first aggregate 0.1 candidate gate is now source-controlled so future preview readiness claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
+<p>Current development-only playable-preview coverage:</p>
+<ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the dev-only start and</li></ul>
+<p>update adapter for <code>Galaxy Guardians</code></p>
+<ul><li><code>src/js/13-galaxy-guardians-runtime.js</code> owns the runtime state, events, player</li></ul>
+<p>shot, life-loss, reset, and game-over mechanics</p>
+<ul><li><code>src/js/13-gameplay-adapter-registry.js</code> keeps public playable adapters and</li></ul>
+<p>dev-preview adapters in separate registries</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json</code></li></ul>
+<p>persists the first cue-shape and runtime-audio coverage contract for the Guardians signal theme</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-audio-character.js</code> proves the required</li></ul>
+<p>cue names, cue IDs, cue-shape metrics, role-hit separation, and runtime cue coverage for the first playable-preview slice</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/identity-baseline-0.1.json</code></li></ul>
+<p>persists the first 0.1 visual/audio identity contract so future sprite, movement, and cue edits have a durable artifact trail</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/formation-entry-0.1.json</code></li></ul>
+<p>persists the first runtime entry/settle contract for promoted Galaxian entry events, including start, settle, rack-complete, and first-dive-after-rack bands</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-formation-entry.js</code> proves the runtime</li></ul>
+<p>starts aliens off-rack, settles them into the scout-wave rack, and prevents the first dive from starting before rack completion</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json</code></li></ul>
+<p>persists the first movement and pressure pacing contract for solo dives, flagship/escort attacks, and bottom wrap/return cycles</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/threat-scoring-0.1.json</code></li></ul>
+<p>persists the first lower-field threat and application-owned scoring contract for enemy shots, player loss, and formation/dive hit values</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json</code></li></ul>
+<p>persists the first gameplay-scale readability contract for the flagship, escort, scout, player, and role-specific hit flashes</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-visual-readability.js</code> proves the</li></ul>
+<p>Guardians visual rows stay distinct, use enough palette channels, appear during entry/formation/dive snapshots, and create owned hit flashes</p>
+<ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/candidate-0.1.json</code></li></ul>
+<p>persists the first aggregate 0.1 candidate gate for owned visual IDs, runtime cue IDs, promoted event names, public-playable boundaries, and forbidden Aurora capabilities</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-0-1-candidate.js</code> proves the aggregate</li></ul>
+<p>0.1 gate without launching a browser by deterministically forcing scout, escort, flagship, enemy-shot, wrap-return, player-loss, and game-over runtime evidence</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-identity-baseline.js</code> proves the</li></ul>
+<p>identity artifact matches the pack-owned sprite rows, audio cue catalog, audio theme cues, runtime cue map, and dev-preview audio history</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-movement-pacing.js</code> proves the runtime</li></ul>
+<p>rules match the persistent movement artifact and that flagship dives attach real escort craft in sampled runtime state</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-threat-scoring.js</code> proves the runtime</li></ul>
+<p>rules match the persistent threat/scoring artifact and that enemy-shot pressure, player loss, and owned point values are active</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-playable-preview.js</code> proves keyboard</li></ul>
+<p>fire, life loss, reset, game over, owned audio cue IDs, and public-adapter isolation</p>
 <p>That is enough to test the platform without prematurely shipping a second game.</p>
-<p>Before that slice starts, capture the reference evidence needed for a Galaxian- style ruleset:</p>
-<ul><li>preserved gameplay clips</li><li>formation-entry and dive timing notes</li><li>flagship and escort behavior notes</li><li>scoring table and single-shot constraints</li><li>a small harness plan for the first scout-wave slice</li></ul>
+<p>Before the slice becomes playable, refine the existing Galaxian evidence into runtime-ready rules:</p>
+<ul><li>frame-level formation-entry and dive timing bands</li><li>flagship and escort behavior windows</li><li>scoring table and single-shot constraints</li><li>an application-owned harness plan for the first scout-wave slice</li><li>visual/audio identity notes that are distinct from Aurora, with the current</li></ul>
+<p>catalog entries refined by frame-level and waveform evidence before public playability</p>
 <p>Use the reusable ingestion process in:</p>
 <ul><li><code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code></li></ul>
 <p>That means the first scout-wave slice should be traceable through source manifest, clipped window, event log, semantic model, correspondence target, and harness evidence. The point is to learn <code>Galaxy Guardians</code> and also prove the method we will reuse for later games.</p>
@@ -1120,12 +1228,15 @@ npm run build</code></pre>
 <p>What is already true:</p>
 <ul><li><code>Platinum</code> is a real shipped host platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lanes exist for local <code>localhost</code>, hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code></li><li>the hosted documentation set is now part of the intended release surface</li></ul>
 <p>What is still transitional:</p>
-<ul><li>some naming and compatibility residue is still Aurora-shaped</li><li>the game-pack contract is still practical rather than strongly versioned</li><li>the second application is still preview-only rather than fully playable</li></ul>
+<ul><li>some naming and compatibility residue is still Aurora-shaped</li><li>the game-pack contract is still practical rather than strongly versioned</li><li>the second application is still public-preview-only rather than fully</li></ul>
+<p>playable; it now has a development-only playable-preview adapter for local runtime proof</p>
+<ul><li>the second-game preview now owns placeholder pack data, but playable</li></ul>
+<p>second-game work still needs measured game data and a gameplay adapter rather than Aurora gameplay reuse</p>
 <h3>Runtime Layout</h3>
 <h4>Platform-oriented files</h4>
-<ul><li>shell, metadata, build identity, shared UI state:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>runtime shell helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>replay and session plumbing:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul></li><li>shared service policy:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li></ul></li><li>shared leaderboard and account UI helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li></ul></li><li>shared auth/session helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li></ul></li><li>shared pack selection:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul></li><li>shared shell rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js</code></li></ul></li><li>harness hooks and deterministic controls:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
+<ul><li>shell, metadata, build identity, shared UI state:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li><li>runtime shell helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>replay and session plumbing:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul></li><li>shared service policy:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li></ul></li><li>shared leaderboard and account UI helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li></ul></li><li>shared auth/session helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li></ul></li><li>shared pack selection:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul></li><li>shared pack registry and active-pack helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-game-pack-registry.js</code></li></ul></li><li>shared gameplay adapter registry:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-gameplay-adapter-registry.js</code></li></ul></li><li>shared shell rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/19-render-shell.js</code></li></ul></li><li>shared game-board renderer registry and dispatch:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>harness hooks and deterministic controls:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/90-harness.js</code></li></ul></li></ul>
 <h4>Aurora application files</h4>
-<ul><li>Aurora player flow and lifecycle:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-flow.js</code></li></ul></li><li>Aurora combat and bullet behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-combat.js</code></li></ul></li><li>Aurora enemy behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/06-enemy-behavior.js</code></li></ul></li><li>Aurora capture and rescue:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/07-capture-rescue.js</code></li></ul></li><li>Aurora scoring and bonus helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/08-score-awards.js</code></li></ul></li><li>Aurora stage flow:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/09-stage-flow.js</code></li></ul></li><li>Aurora gameplay orchestration:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Aurora pack metadata:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li></ul></li><li>shared entity model used by packs:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul></li><li>Aurora render orchestration:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/20-render.js</code></li></ul></li><li>Aurora board and sprite rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js</code></li></ul></li></ul>
+<ul><li>Aurora player flow and lifecycle:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-flow.js</code></li></ul></li><li>Aurora combat and bullet behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-player-combat.js</code></li></ul></li><li>Aurora enemy behavior:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/06-enemy-behavior.js</code></li></ul></li><li>Aurora capture and rescue:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/07-capture-rescue.js</code></li></ul></li><li>Aurora scoring and bonus helpers:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/08-score-awards.js</code></li></ul></li><li>Aurora stage flow:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/09-stage-flow.js</code></li></ul></li><li>Aurora gameplay orchestration:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/10-gameplay.js</code></li></ul></li><li>Aurora pack metadata:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li></ul></li><li>Galaxy Guardians preview pack metadata:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-game-pack.js</code></li></ul></li><li>Galaxy Guardians disabled gameplay adapter skeleton:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-gameplay-adapter.js</code></li></ul></li><li>Galaxy Guardians dev-only scout-wave runtime:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-galaxy-guardians-runtime.js</code></li></ul></li><li>shared entity model used by packs:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li></ul></li><li>Aurora board and sprite rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/21-render-board.js</code></li></ul></li><li>Galaxy Guardians dev-only preview board rendering:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/22-galaxy-guardians-preview-renderer.js</code></li></ul></li></ul>
 <h3>Build And Hosted Docs Flow</h3>
 <p>Build script:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul>
@@ -1144,10 +1255,38 @@ npm run build</code></pre>
 <ul><li>scenario runner:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/run-gameplay.js</code></li></ul></li><li>batch runner:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/run-batch.js</code></li></ul></li><li>run analysis:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/harness/analyze-run.js</code></li></ul></li></ul>
 <p>Harness families should now be thought of in categories:</p>
 <ul><li>platform-only harnesses</li><li>application/gameplay harnesses</li><li>seam and contract harnesses</li><li>migration and compatibility harnesses</li></ul>
+<p>Pack-boundary harness:</p>
+<ul><li><code>tools/harness/check-pack-registry-boundaries.js</code></li></ul>
+<p>verifies that the Galaxy Guardians preview pack owns separate placeholder tables, stays non-playable, and does not inherit Aurora challenge cadence, challenge layout, or reference timings.</p>
+<ul><li><code>tools/harness/check-gameplay-adapter-boundaries.js</code></li></ul>
+<p>verifies that Aurora is the only registered public gameplay adapter, Galaxy Guardians remains blocked from public playability, and the explicit development-only preview adapter starts only the Guardians-owned runtime slice.</p>
+<ul><li><code>tools/harness/check-guardians-adapter-skeleton.js</code></li></ul>
+<p>verifies that the Galaxy Guardians skeleton exists, stays disabled, exposes a single-shot scout-wave state shape, cites the promoted event log, and fails closed until measured runtime implementation exists.</p>
+<ul><li><code>tools/harness/build-galaxian-reference-profile.js</code></li></ul>
+<p>probes the local Galaxian videos and generates source manifests, contact sheets, waveforms, the initial measured profile, and the promoted reviewed event log used by the disabled Galaxy Guardians skeleton.</p>
+<ul><li><code>tools/harness/check-galaxian-reference-profile.js</code></li></ul>
+<p>verifies that the generated Galaxian profile has the expected source roles, artifacts, promoted event targets, and first-slice scout-wave baseline.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-runtime-slice.js</code></li></ul>
+<p>verifies the dev-only Galaxy Guardians scout-wave runtime model: 38-slot rack, flagship/escort/scout roles, single-shot firing, promoted event emission, Guardians-owned scoring, Guardians-owned visual/audio catalog bindings, and no Aurora capture/challenge/dual-fighter state.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-identity-baseline.js</code></li></ul>
+<p>verifies that the persistent 0.1 identity artifact in <code>reference-artifacts/analyses/galaxy-guardians-identity/</code> matches the pack-owned sprite glyphs, audio cue catalog, theme cues, runtime cue map, and dev-preview audio history.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-movement-pacing.js</code></li></ul>
+<p>verifies that the persistent movement/pacing artifact matches runtime rules and that sampled scout/flagship/escort dive behavior exposes real linked escort craft and wrap/return pressure.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-threat-scoring.js</code></li></ul>
+<p>verifies that the persistent lower-field threat/scoring artifact matches runtime rules and that enemy shots, player loss, and owned point values stay in the Galaxy Guardians application layer.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-playable-preview.js</code></li></ul>
+<p>verifies the development-only Galaxy Guardians playable-preview adapter: keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and isolation from the public playable adapter registry.</p>
+<ul><li><code>tools/harness/check-compact-cabinet-rails.js</code></li></ul>
+<p>verifies that both side-frame icon rails remain visible and inside the cabinet frame at the compact in-app browser scale, and that the Galaxy Guardians preview modal stays readable in that compact layout. It also verifies the dev-only Guardians preview renderer by checking its render mode, registered renderer key, visual catalog IDs, audio cue IDs, signal palette, Platinum harness alias, and non-playable adapter state.</p>
+<ul><li><code>tools/harness/check-framed-popout-bounds.js</code></li></ul>
+<p>verifies that frame-owned popouts stay inside the gameplay frame, that platform messages, high scores, and pilot/account popouts share the same framed footprint, and that opening another dock popout closes the current one before showing the next surface.</p>
+<ul><li><code>tools/harness/check-platinum-renderer-boundaries.js</code></li></ul>
+<p>verifies statically that platform render orchestration is game-agnostic, board renderers register themselves through the Platinum renderer registry, and the Galaxy Guardians renderer remains preview-only and adapter-gated.</p>
+<p>Application/gameplay harnesses must stay game-owned. A harness that proves Aurora capture/rescue, challenge-stage cadence, or dual-fighter behavior does not prove Galaxy Guardians behavior. Shared harness helpers belong in Platinum; game behavior assertions belong to the owning game.</p>
 <p>The intended release rule is automation-first:</p>
 <ul><li>automate when the behavior is stable enough to measure</li><li>use manual review mainly for feel and visual quality</li></ul>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>testing and release discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM.md</code></li></ul></li><li>application guide:<ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul></li><li>game boundary audit:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md</code></li></ul></li><li>platform diagrams:<ul><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_ARCHITECTURE_OVERVIEW.md</code></li></ul></li><li>testing and release discipline:<ul><li><code>/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md</code></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1169,8 +1308,9 @@ npm run build</code></pre>
 <ul><li><code>main</code> is the only integration branch</li><li>one machine holds release authority at a time</li><li>hosted <code>/beta</code> and hosted <code>/production</code> may only be published from that</li></ul>
 <p>authority machine</p>
 <p>The practical startup and readiness commands are now:</p>
-<ul><li><code>npm run machine:bootstrap</code></li><li><code>npm run machine:doctor</code></li><li><code>npm run machine:status</code></li><li><code>npm run release:show-authority</code></li></ul>
+<ul><li><code>npm run machine:bootstrap</code></li><li><code>npm run machine:ensure-browser</code></li><li><code>npm run machine:doctor</code></li><li><code>npm run machine:status</code></li><li><code>npm run release:show-authority</code></li></ul>
 <p>This means machine readiness and release authority are now part of release discipline, not just local convention.</p>
+<p>Browser-backed gates use Playwright-managed Chromium. They must not launch the user&#39;s installed Google Chrome by default. In Codex Desktop on macOS, run these browser-backed commands with escalated sandbox permissions; the harness launcher will refuse sandboxed browser starts to avoid macOS Chromium/Chrome SIGABRT crash dialogs.</p>
 <h3>Bug-Fix Discipline</h3>
 <p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
 <p>Default rule:</p>
@@ -1214,7 +1354,7 @@ npm run build</code></pre>
 <ul><li>protects <code>Platinum</code> shell behavior</li><li>protects hosted lane surfaces and release framing</li><li>should not require deep application gameplay validation unless the platform</li></ul>
 <p>change could affect gameplay hosting</p>
 <p>Typical examples:</p>
-<ul><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li></ul>
+<ul><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li></ul>
 <ol><li><code>application</code></li></ol>
 <ul><li>protects game-specific rules and progression</li><li>should stay contained to the application layer whenever possible</li></ul>
 <p>Typical examples:</p>
@@ -1250,7 +1390,23 @@ npm run build</code></pre>
 <ul><li>platform harnesses for the changed area</li><li>one quick application smoke or boot check proving the platform still hosts</li></ul>
 <p>games correctly</p>
 <p>Typical application containment checks:</p>
-<ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li></ul>
+<ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-galaxy-guardians-0-1-candidate.js</code> when the changed</li></ul>
+<p>surface touches the <code>Galaxy Guardians</code> dev-preview identity, runtime events, cue IDs, scoring, or preview/public boundary.</p>
+<ul><li><code>node tools/harness/check-galaxy-guardians-audio-character.js</code> when the</li></ul>
+<p>changed surface touches Guardians cue definitions, audio theme identity, runtime cue IDs, or role-specific hit/loss/game-over sound behavior.</p>
+<ul><li><code>node tools/harness/check-galaxy-guardians-reference-conformance.js</code> when the</li></ul>
+<p>changed surface touches Guardians reference evidence, 0.1 metric scoring, promoted Galaxian event coverage, or beta-preview readiness language.</p>
+<ul><li><code>node tools/harness/check-galaxy-guardians-formation-entry.js</code> when the changed</li></ul>
+<p>surface touches Guardians stage start, rack-entry, rack-settle, or first-dive timing.</p>
+<p>Quality/conformance reporting:</p>
+<ul><li><code>npm run harness:score:quality-conformance</code> is the current Aurora numeric</li></ul>
+<p>roll-up gate.</p>
+<ul><li>The readable current table and next-gap interpretation live in</li></ul>
+<p><a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
+<ul><li>When this roll-up changes materially, update</li></ul>
+<p><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
+<ul><li><code>node tools/harness/check-galaxy-guardians-visual-readability.js</code> when the</li></ul>
+<p>changed surface touches Guardians sprites, role palettes, preview rendering, hit feedback, or gameplay-scale visual identity.</p>
 <h4>Profile C: Boundary change</h4>
 <p>Use this when the change explicitly crosses between platform and application responsibility.</p>
 <p>Examples:</p>
@@ -1283,7 +1439,7 @@ npm run build</code></pre>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
 <p>Selection rule:</p>
 <ul><li>choose the smallest harness set that matches the active gate profile</li><li>avoid dragging platform-wide or gameplay-wide suites into every change unless</li></ul>
 <p>the change actually crosses those boundaries</p>
@@ -1432,11 +1588,11 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
 <ul><li>no replication is needed for ordinary local or topic-branch work</li><li>selective replication is appropriate for hosted <code>/dev</code></li><li>full public-package replication is expected for hosted <code>/beta</code> and hosted</li></ul>
 <p><code>/production</code></p>
 <h3>Current Promotion Reality</h3>
-<p>As of April 25, 2026:</p>
-<ul><li>hosted <code>/dev</code> remains the older integration lane at <code>1.2.3+build.470.sha.e4732eb</code></li><li>hosted <code>/beta</code> is live at <code>1.2.3-beta.1+build.489.sha.f6ba6c2.beta</code></li><li>hosted <code>/production</code> is live at <code>1.2.3+build.489.sha.f6ba6c2</code></li></ul>
+<p>As of April 26, 2026:</p>
+<ul><li>hosted <code>/dev</code> is live at <code>1.2.3+build.532.sha.b959491</code></li><li>hosted <code>/beta</code> is live at <code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li><li>hosted <code>/production</code> is live at <code>1.2.3+build.532.sha.b959491</code></li></ul>
 <p>That means:</p>
-<ul><li>the current shipped beta and production families are aligned</li><li>the next release cycle should work from <code>main</code></li><li>hosted <code>/dev</code> can move again during the next polish cycle when there is a</li></ul>
-<p>coherent improvement bundle worth sharing</p>
+<ul><li>the current shipped dev, beta, and production families are aligned</li><li>the next release cycle should work from <code>main</code></li><li>the next release cycle should let the lanes diverge again only when there is</li></ul>
+<p>a coherent improvement bundle worth sharing</p>
 <h3>Major <code>x.y</code> Documentation Gate</h3>
 <p>For every meaningful <code>x.y</code> release, the gate between hosted <code>/beta</code> and hosted <code>/production</code> should include a complete documentation refresh.</p>
 <p>That refresh should cover at least:</p>
@@ -1481,16 +1637,18 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         <div class="markdown">
           <h3>Current Read</h3>
 <p>Aurora <code>1.2.3</code> is the release currently live on hosted <code>/production</code>.</p>
-<p>Verified April 25, 2026:</p>
-<ul><li>hosted <code>/production</code><ul><li>current live label: <code>1.2.3+build.489.sha.f6ba6c2</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current live label: <code>1.2.3-beta.1+build.489.sha.f6ba6c2.beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current live label: <code>1.2.3+build.470.sha.e4732eb</code></li></ul></li></ul>
-<p>That means Aurora has completed the <code>1.2.3</code> production refresh and is now in a post-release stabilization posture for the next cycle.</p>
+<p>Verified April 26, 2026:</p>
+<ul><li>hosted <code>/production</code><ul><li>current live label: <code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current live label: <code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current live label: <code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
+<p>That means Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh and is now in a post-release stabilization posture for the next cycle.</p>
 <h3>What Is Now True</h3>
 <ul><li><code>Platinum</code> is a real shipped browser-arcade host platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are clearly</li></ul>
 <p>separated in both code and docs</p>
-<ul><li>hosted <code>/beta</code> and hosted <code>/production</code> now match</li><li>the shipped release family is backed by committed test and analysis artifacts</li></ul>
+<ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> now match</li><li>the shipped release family is backed by committed test and analysis artifacts</li></ul>
 <h3>Current Shipped Candidate Quality</h3>
-<p>Current quality position for the shipped <code>f6ba6c2</code> family:</p>
-<ul><li>overall quality score:<ul><li><code>8.8/10</code></li></ul></li><li>strongest category:<ul><li>combat responsiveness</li></ul></li><li>weakest bundled category:<ul><li>audio identity and cue alignment at <code>6.1/10</code></li></ul></li></ul>
+<p>Current quality position for the shipped <code>b959491</code> family:</p>
+<ul><li>overall quality score:<ul><li><code>8.8/10</code> from the latest full bundled rollup, with the current patch line</li></ul></li></ul>
+<p>additionally covered by focused trust, pilot, and runtime checks</p>
+<ul><li>strongest category:<ul><li>combat responsiveness</li></ul></li><li>weakest bundled category:<ul><li>audio identity and cue alignment at <code>6.1/10</code></li></ul></li></ul>
 <h3>Evidence Supporting The Shipped Release</h3>
 <p>The current shipped family is supported by these committed evidence sources:</p>
 <ul><li>quality rollup:<ul><li><code>reference-artifacts/analyses/quality-conformance/2026-04-24-e1c2c65</code></li></ul></li><li>movement correspondence:<ul><li><code>reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65</code></li></ul></li><li>audio cue alignment:<ul><li><code>reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65</code></li></ul></li><li>audio identity comparison:<ul><li><code>reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2</code></li></ul></li><li>reference video alignment:<ul><li><code>reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65</code></li></ul></li></ul>
@@ -1511,11 +1669,12 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
 <ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="GO_FORWARD_EXECUTION_PLAN.md">GO_FORWARD_EXECUTION_PLAN.md</a></li><li><a href="PLATINUM.md">PLATINUM.md</a></li><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a></li><li><a href="BETA_TO_PRODUCTION_PLAN.md">BETA_TO_PRODUCTION_PLAN.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
 <h3>Current Follow-Up Work</h3>
 <p>The production push is complete. The follow-up work now is:</p>
-<ol><li>keep the release summary and next-cycle plan current in committed docs</li><li>treat the next <code>/dev</code> refresh as a deliberate polish bundle rather than a</li></ol>
-<p>casual forward sync</p>
-<ol><li>continue the next-cycle fidelity and platform work from <code>main</code></li></ol>
+<ol><li>keep the release summary and next-cycle plan current in committed docs</li><li>treat the next public step as a real <code>1.3.0</code> fidelity candidate rather than</li></ol>
+<p>another fast-follow patch</p>
+<ol><li>continue the next-cycle fidelity and platform work from <code>main</code></li><li>fold in the other machine&#39;s Galaxians-style sibling and harness-analysis</li></ol>
+<p>work through reviewed merges</p>
 <h3>Recommendation</h3>
-<p>Recommendation: keep the refreshed <code>1.2.3+build.489.sha.f6ba6c2</code> production line stable and begin the next polish cycle from <code>main</code>.</p>
+<p>Recommendation: keep the refreshed <code>1.2.3+build.532.sha.b959491</code> production line stable and begin the next polish cycle from <code>main</code>.</p>
 <p>The strongest argument for doing that now is:</p>
 <ul><li>hosted <code>/production</code> and hosted <code>/beta</code> are aligned to the refreshed release</li></ul>
 <p>line</p>
@@ -1586,7 +1745,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         </ul>
         <p class="footer">
           Latest release note: <strong>Trust and pilot-surface refresh</strong><br>
-          Release 1.2.3 · Updated April 26, 2026
+          Release 1.2.3 · Updated May 4, 2026
         </p>
       </aside>
     </main>

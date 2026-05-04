@@ -116,11 +116,11 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - `1.2.3+build.470.sha.e4732eb`
+  - `1.2.3+build.532.sha.b959491`
 - hosted `/beta`:
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - `1.2.3-beta.1+build.532.sha.b959491.beta`
 - hosted `/production`:
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - `1.2.3+build.532.sha.b959491`
 
 What that means:
 
@@ -130,8 +130,12 @@ What that means:
 
 Current go-forward focus:
 
-- keep the refreshed `1.2.3` production family stable
+- keep the current `1.2.3` trust-and-pilot refresh stable
+- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) for the
+  current readable quality table before shaping beta work
 - use the multi-machine bootstrap and release-authority workflow
+- keep folding in the other machine's Galaxians-style second-game work and
+  stronger harness/reference analysis
 - improve movement fidelity against real Galaga footage
 - continue audio identity polish beyond cue timing
 - keep the platform/application boundary strong before deeper multi-game growth
@@ -142,6 +146,7 @@ Current go-forward focus:
 
 ```bash
 cd <repo-root>
+npm run machine:ensure-browser
 npm run build
 ```
 
@@ -161,6 +166,11 @@ To stop the tracked local services cleanly:
 ```bash
 npm run local:stop
 ```
+
+Automated browser harnesses use Playwright-managed Chromium, not the user's
+installed Google Chrome. In Codex Desktop on macOS, run browser-backed harnesses
+with escalated sandbox permissions so Chromium can register its macOS Mach port
+without triggering crash dialogs.
 
 ## Release Ladder
 
