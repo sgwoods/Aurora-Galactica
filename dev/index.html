@@ -744,9 +744,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
-      <span id="settingsVersion">Version 1.2.3</span>
-      <span id="settingsRelease">May 04 2026, 12:14 PM EDT</span>
-      <span id="settingsState">main@412f480 clean</span>
+      <span id="settingsVersion">Version 1.3.0</span>
+      <span id="settingsRelease">May 04 2026, 3:16 PM EDT</span>
+      <span id="settingsState">main@d0d3bd6 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1043,8 +1043,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.2.3</span>
-    <span id="buildStampRelease">May 04 2026, 12:14 PM EDT</span>
+    <span id="buildStampVersion">1.3.0</span>
+    <span id="buildStampRelease">May 04 2026, 3:16 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1682,7 +1682,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.2.3',label:'1.2.3+build.565.sha.412f480',commit:'412f480be119cbb821289c3855bb5460b29a8169',branch:'main',dirty:false,released:'May 04 2026, 12:14 PM EDT',state:'main@412f480 clean',releaseChannel:'development'};
+const BUILD_INFO={version:'1.3.0',label:'1.3.0+build.567.sha.d0d3bd6',commit:'d0d3bd665fa1cfbeb4f29577262fdeccf9627086',branch:'main',dirty:false,released:'May 04 2026, 3:16 PM EDT',state:'main@d0d3bd6 clean',releaseChannel:'development'};
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -1706,7 +1706,7 @@ function clearBuildRefreshHintUrl(){
 const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY='b945e5f9-b6fa-4503-a373-bfa670c48a79';
+const WEB3FORMS_ACCESS_KEY='';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
 let platformSplashOpen=0,platformSplashPrevPaused=0;
@@ -5044,10 +5044,10 @@ const accountFlightStats=document.getElementById('accountFlightStats');
 const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
-const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
-const TEST_ACCOUNT_USER_ID='69f14bed-87b3-493a-bba6-a81eb9b33b04';
-const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
-const TEST_ACCOUNT_USER_IDS=["69f14bed-87b3-493a-bba6-a81eb9b33b04"];
+const TEST_ACCOUNT_EMAIL='';
+const TEST_ACCOUNT_USER_ID='';
+const TEST_ACCOUNT_EMAILS=[];
+const TEST_ACCOUNT_USER_IDS=[];
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
@@ -8046,14 +8046,14 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   role:'player',
   silhouette:'single-shot-interceptor',
   palette:Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'}),
-  pixelRows:Object.freeze([
-   'CWWCWWC',
-   'WWWCCWW',
-   'WWWCWWW',
-   'WWWCWWW',
-   'WWWCWWW',
-   'WWCCWWW',
-   'WW...WW'
+ pixelRows:Object.freeze([
+   '...A...',
+   '..ACA..',
+   '.WCCCW.',
+   'WCC.CCW',
+   '.WCFCW.',
+   '..FFF..',
+   '.A...A.'
   ]),
   notes:'Compact single fighter tuned toward the cyan/red Galaxian player ship proportions.'
  })
@@ -10449,12 +10449,14 @@ function syncCabinetShellLayout({
    statusPanels.style.top=`${Math.floor(oy+Math.max(56,viewH*.18))}px`;
    statusPanels.style.bottom='auto';
   }else if(framedOverlayOpen){
-   const panelW=Math.max(180,Math.floor(viewW));
+   const framedMaxW=Math.max(180,Math.min(960,Math.floor(viewW)));
+   const framedMinW=Math.min(600,framedMaxW);
+   const panelW=Math.max(framedMinW,Math.min(framedMaxW,Math.floor(viewW*.78)));
    const top=Math.floor(oy);
    const maxHeight=Math.max(180,Math.floor(viewH));
    statusPanels.style.width=`${panelW}px`;
    statusPanels.style.height=`${maxHeight}px`;
-   statusPanels.style.left=`${Math.floor(ox)}px`;
+   statusPanels.style.left=`${Math.floor(ox+(viewW-panelW)/2)}px`;
    statusPanels.style.right='auto';
    statusPanels.style.top=`${top}px`;
    statusPanels.style.bottom='auto';

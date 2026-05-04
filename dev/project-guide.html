@@ -403,7 +403,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">1.2.3</span>
+              <span class="metaValue">1.3.0</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -720,11 +720,13 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<p>Verified April 26, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the next cycle</li></ul></li></ul>
+<p>Verified May 4, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.565.sha.412f480</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.565.sha.412f480.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the active <code>1.3.0</code> candidate family</li></ul></li></ul>
 <p>This means:</p>
-<ul><li>Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh</li><li>dev, beta, and production are now aligned on the same shipped release family</li><li>the next question is no longer &quot;how do we push beta to production?&quot;</li><li>the next question is &quot;what belongs in the next <code>1.3.0</code> fidelity cycle, and</li></ul>
-<p>how do we use the parallel second-game and harness work well?&quot;</p>
+<ul><li>Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh</li><li>hosted <code>/dev</code> and hosted <code>/beta</code> are now ahead of hosted <code>/production</code> on the</li></ul>
+<p>pre-<code>1.3.0</code> build-565 line</p>
+<ul><li>the active source candidate is now the <code>1.3.0</code> family</li><li>the current question is no longer &quot;should this be a <code>1.2.4</code> fast follow?&quot;</li><li>the current question is &quot;what must land for <code>1.3.0</code>, and what should be</li></ul>
+<p>deliberately picked up immediately after that release?&quot;</p>
 <h3>Active Workstreams</h3>
 <h4>1. Post-Production Stabilization</h4>
 <ul><li>keep the refreshed <code>1.2.3+build.532.sha.b959491</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a> as the</li></ul>
@@ -772,14 +774,20 @@ npm run build</code></pre>
 <h3>Release Direction</h3>
 <ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> now reflect the same</li></ul>
 <p>shipped <code>b959491</code> family</p>
-<ul><li>the next serious candidate should be assembled from <code>main</code> as a real</li></ul>
-<p><code>1.3.0</code> fidelity-and-depth step, not another immediate fast-follow patch</p>
-<ul><li>the next meaningful public milestone should likely be a <code>MINOR</code> release in</li></ul>
-<p>the <code>1.3.0</code> family</p>
+<ul><li>the active source line should now present itself as the <code>1.3.0</code> candidate</li></ul>
+<p>family</p>
+<ul><li><code>1.3.0</code> is the intentional bundle for fidelity, trust, and the first</li></ul>
+<p>significant second-game Platinum story</p>
+<ul><li>the shipped <code>1.2.3</code> family remains the stable public baseline until a formal</li></ul>
+<p><code>1.3.0</code> promotion path is completed</p>
 <ul><li>the longer release-family phasing plan is tracked in</li></ul>
 <p><a href="LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></p>
 <ul><li>the concrete first level-expansion execution plan is tracked in</li></ul>
 <p><a href="LEVEL_BY_LEVEL_EXPANSION_PLAN.md">LEVEL_BY_LEVEL_EXPANSION_PLAN.md</a></p>
+<h3>Post-1.3.0 Pickup</h3>
+<p>After <code>1.3.0</code> ships, the plan should pick up in this order:</p>
+<ol><li><code>1.4.0</code> arcade depth and platform-contract follow-through</li><li><code>1.5.0</code> shared-video evidence and flight-recorder capabilities</li><li><code>1.6.0</code> pilot-facing shell/message-to-pilot polish</li></ol>
+<p>That keeps the next cycle from collapsing back into unprioritized polish and preserves the release-family shape already captured in the roadmap docs.</p>
 <h3>Long-Term Direction</h3>
 <p>The long-term platform goal is:</p>
 <ul><li>a durable Platinum host for multiple arcade experiences</li><li>same-control compliance across those experiences</li><li>richer reference-video ingestion and analysis</li><li>stronger personas, replay annotation, and future simulated-opponent support</li></ul>
@@ -798,10 +806,10 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Shipped State</h3>
-<p>Verified April 26, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
+<p>Verified May 4, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li><code>1.2.3+build.565.sha.412f480</code></li></ul></li><li>hosted <code>/beta</code><ul><li><code>1.2.3-beta.1+build.565.sha.412f480.beta</code></li></ul></li><li>hosted <code>/production</code><ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
 <p>Aurora is in a post-production-refresh posture:</p>
-<ul><li>production is current</li><li>beta matches the current production family</li><li>dev also matches the current production family</li><li><code>main</code> is the forward line for the next cycle</li></ul>
+<ul><li>production is current</li><li>beta now matches dev on the refreshed <code>412f480</code> pre-<code>1.3.0</code> line</li><li>dev is ahead of the shipped production line while <code>production</code> remains stable</li><li><code>main</code> is the forward line for the active <code>1.3.0</code> candidate</li></ul>
 <h3>Roadmap Frame</h3>
 <p>The roadmap is no longer centered on whether Platinum can host Aurora at all.</p>
 <p>It is centered on:</p>
@@ -817,8 +825,13 @@ npm run build</code></pre>
 <p>trustworthy after the trust-and-pilot refresh</p>
 <ul><li>keep release docs, scorecards, and committed evidence current</li><li>make new-machine and two-machine development simple and safe</li></ul>
 <h4>Shape <code>1.3.0</code></h4>
-<p>The next serious public step should likely be:</p>
+<p>The active source and candidate family is now:</p>
 <ul><li><code>1.3.0</code></li></ul>
+<p>Reason:</p>
+<ul><li>a candidate that meaningfully introduces the first second-cabinet /</li></ul>
+<p>second-game Platinum story is more than a patch-sized continuation of <code>1.2.3</code>, even if <code>Galaxy Guardians</code> remains preview-only</p>
+<ul><li>the public promise changes from &quot;stronger Aurora only&quot; to &quot;stronger Aurora</li></ul>
+<p>plus the first real multi-game platform pressure&quot;</p>
 <p>That release family should focus on:</p>
 <ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes</li><li>level-by-level expansion planning</li><li>challenging-stage and later-level depth</li><li>shared-video evidence and publishing foundations</li><li>incorporate the other machine&#39;s Galaxians-style sibling work and stronger</li></ul>
 <p>harness/reference analysis into the main line deliberately</p>
@@ -830,12 +843,16 @@ npm run build</code></pre>
 <p>Current decision:</p>
 <ul><li>keep <code>1.x</code> focused on making Aurora excellent and preparing Platinum for a</li></ul>
 <p>second real game</p>
-<ul><li>reserve <code>2.0</code> for the first genuinely multi-game Platinum milestone</li><li>treat <code>1.3</code> as the next measurement-backed quality release rather than a</li></ul>
-<p>broad feature bundle</p>
+<ul><li>reserve <code>2.0</code> for the first genuinely multi-game Platinum milestone</li><li>treat <code>1.3</code> as the next measurement-backed quality release and first serious</li></ul>
+<p>second-cabinet candidate family rather than a broad feature bundle</p>
 <ul><li>promote level-by-level arcade depth to the next major product pillar after</li></ul>
 <p>the <code>1.3</code> quality reset</p>
 <ul><li>make shared gameplay-video publishing an early roadmap capability</li><li>bring a preliminary second-game Platinum sneak peek forward before the full</li></ul>
 <p><code>2.0</code> multi-game release</p>
+<h4>Pick Up After <code>1.3.0</code></h4>
+<p>Once <code>1.3.0</code> is out, the roadmap pickup should be:</p>
+<ul><li><code>1.4.0</code> for level-by-level arcade depth plus platform-contract cleanup</li><li><code>1.5.0</code> for shared-video evidence and flight-recorder publishing</li><li><code>1.6.0</code> for pilot-facing shell, message, and cabinet-surface polish</li></ul>
+<p>That sequencing should be treated as intentional carry-forward planning, not something to rediscover after the release is already shipped.</p>
 <p>Current conformance read:</p>
 <ul><li>see <a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a></li><li>see the generated score/target roll-up in</li></ul>
 <p><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></p>
@@ -1541,7 +1558,8 @@ npm run build</code></pre>
 <h3>Meaning</h3>
 <ul><li><code>MAJOR</code><ul><li>reserve for true product-era breaks or major repositioning</li></ul></li><li><code>MINOR</code><ul><li>use for meaningful public milestones</li><li>example:<ul><li><code>1.2.0</code> = <code>Platinum Release 1</code></li></ul></li><li>current planning read:<ul><li>the next serious Aurora quality/fidelity release should likely be a</li></ul></li></ul></li></ul>
 <p><code>MINOR</code> step such as <code>1.3.0</code>, not a new <code>MAJOR</code></p>
-<ul><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li></ul></li></ul>
+<ul><li><code>PATCH</code><ul><li>use for smaller compatible improvements inside the current milestone</li><li>examples:<ul><li>gameplay correctness fixes</li><li>UI polish</li><li>harness hardening</li><li>documentation and release-discipline follow-through inside the same release family</li></ul></li><li>not the right bucket when the public candidate story changes materially,</li></ul></li></ul>
+<p>such as adding a second cabinet or second-game surface that changes the release promise even if it remains preview-scoped</p>
 <h3>Hosted Release Lanes</h3>
 <p>Repository roles:</p>
 <ul><li>source of truth for engineering, issues, and planning:<ul><li><a href="https://github.com/sgwoods/Codex-Test1">sgwoods/Codex-Test1</a></li></ul></li><li>public release host and GitHub Pages deployment:<ul><li><a href="https://github.com/sgwoods/Aurora-Galactica">sgwoods/Aurora-Galactica</a></li></ul></li></ul>
@@ -1558,6 +1576,11 @@ npm run build</code></pre>
 <p>That means:</p>
 <ul><li>topic branches and ordinary development may happen from more than one machine</li><li><code>main</code> remains the only integration branch</li><li>hosted <code>/beta</code> and hosted <code>/production</code> may only be published from the</li></ul>
 <p>machine recorded in <a href="release-authority.json">release-authority.json</a></p>
+<p>Current versioning read for the next cycle:</p>
+<ul><li>the shipped <code>1.2.3</code> family remains the stable public baseline</li><li>the next coherent public candidate should not be framed as a <code>1.2.4</code></li></ul>
+<p>fast-follow patch if it includes the first serious second-cabinet / second-game story</p>
+<ul><li>treat that kind of candidate as a <code>MINOR</code> family step, currently expected to</li></ul>
+<p>be <code>1.3.0</code>, and only change the actual runtime version when we intentionally cut the candidate branch</p>
 <p>Useful commands:</p>
 <pre><code data-lang="bash">npm run release:show-authority
 npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;label&gt;&quot;</code></pre>
@@ -1636,14 +1659,14 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p>Aurora <code>1.2.3</code> is the release currently live on hosted <code>/production</code>.</p>
-<p>Verified April 26, 2026:</p>
-<ul><li>hosted <code>/production</code><ul><li>current live label: <code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current live label: <code>1.2.3-beta.1+build.532.sha.b959491.beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current live label: <code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
-<p>That means Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh and is now in a post-release stabilization posture for the next cycle.</p>
+<p>Aurora <code>1.2.3</code> remains the release currently live on hosted <code>/production</code>.</p>
+<p>Verified May 4, 2026:</p>
+<ul><li>hosted <code>/production</code><ul><li>current live label: <code>1.2.3+build.532.sha.b959491</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current live label: <code>1.2.3-beta.1+build.565.sha.412f480.beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current live label: <code>1.2.3+build.565.sha.412f480</code></li></ul></li></ul>
+<p>That means Aurora has completed the <code>1.2.3</code> trust-and-pilot production refresh, while hosted <code>/dev</code> and hosted <code>/beta</code> have already moved ahead to the pre-<code>1.3.0</code> build-565 line.</p>
 <h3>What Is Now True</h3>
 <ul><li><code>Platinum</code> is a real shipped browser-arcade host platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are clearly</li></ul>
 <p>separated in both code and docs</p>
-<ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> now match</li><li>the shipped release family is backed by committed test and analysis artifacts</li></ul>
+<ul><li>hosted <code>/dev</code> and hosted <code>/beta</code> now match each other</li><li>hosted <code>/production</code> remains the stable public baseline</li><li>the shipped release family is backed by committed test and analysis artifacts</li></ul>
 <h3>Current Shipped Candidate Quality</h3>
 <p>Current quality position for the shipped <code>b959491</code> family:</p>
 <ul><li>overall quality score:<ul><li><code>8.8/10</code> from the latest full bundled rollup, with the current patch line</li></ul></li></ul>
@@ -1745,7 +1768,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         </ul>
         <p class="footer">
           Latest release note: <strong>Trust and pilot-surface refresh</strong><br>
-          Release 1.2.3 · Updated May 4, 2026
+          Release 1.3.0 · Updated May 4, 2026
         </p>
       </aside>
     </main>
