@@ -745,8 +745,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane production beta</span>
       <span id="settingsVersion">Version 1.3.0</span>
-      <span id="settingsRelease">May 05 2026, 6:06 AM EDT</span>
-      <span id="settingsState">beta@881d26f clean</span>
+      <span id="settingsRelease">May 05 2026, 6:21 AM EDT</span>
+      <span id="settingsState">beta@0123dd0 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -754,8 +754,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">Trust and pilot-surface refresh</span>
-      <span id="settingsNotesBody">Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.</span>
+      <span id="settingsNotesTitle">Fidelity and second-cabinet release</span>
+      <span id="settingsNotesBody">Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.</span>
     </div>
   </div>
 </div>
@@ -1044,7 +1044,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0</span>
-    <span id="buildStampRelease">May 05 2026, 6:06 AM EDT</span>
+    <span id="buildStampRelease">May 05 2026, 6:21 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1682,7 +1682,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0-beta.1',label:'1.3.0-beta.1+build.573.sha.881d26f.beta',commit:'881d26f362b9c2e8b7d9d601bff86f3115a7c9af',branch:'beta',dirty:false,released:'May 05 2026, 6:06 AM EDT',state:'beta@881d26f clean',releaseChannel:'production beta',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"active-candidate","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"primary-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"non-production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"development-and-beta-only"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0-beta.1',label:'1.3.0-beta.1+build.574.sha.0123dd0.beta',commit:'0123dd03f06bcb859acb79237c75633653cde4ad',branch:'beta',dirty:false,released:'May 05 2026, 6:21 AM EDT',state:'beta@0123dd0 clean',releaseChannel:'production beta',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"active-candidate","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"primary-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"non-production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"development-and-beta-only"}]};
 function humanizeReleaseTrack(value=''){
  const raw=String(value||'').trim();
  return raw?raw.replace(/-/g,' '):'';
