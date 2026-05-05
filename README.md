@@ -116,22 +116,29 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - `1.2.3+build.470.sha.e4732eb`
+  - active `1.3.0` line
 - hosted `/beta`:
-  - `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
+  - approved `1.3.0` beta lane
 - hosted `/production`:
-  - `1.2.3+build.489.sha.f6ba6c2`
+  - shipped `1.3.0` public line
 
 What that means:
 
 - Aurora now ships as the first playable application on Platinum
+- the current production family is `1.3.0`
+- Galaxy Guardians is now part of the public Platinum story as a second-cabinet
+  sneak peek
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
 - the shell, picker, and shared docs are part of the product rather than just engineering scaffolding
 
 Current go-forward focus:
 
-- keep the refreshed `1.2.3` production family stable
+- keep the current `1.3.0` production line stable
+- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) for the
+  current readable quality table before shaping the `1.4.0` pickup
 - use the multi-machine bootstrap and release-authority workflow
+- keep folding in the other machine's Galaxians-style second-game work and
+  stronger harness/reference analysis
 - improve movement fidelity against real Galaga footage
 - continue audio identity polish beyond cue timing
 - keep the platform/application boundary strong before deeper multi-game growth
@@ -142,6 +149,7 @@ Current go-forward focus:
 
 ```bash
 cd <repo-root>
+npm run machine:ensure-browser
 npm run build
 ```
 
@@ -161,6 +169,11 @@ To stop the tracked local services cleanly:
 ```bash
 npm run local:stop
 ```
+
+Automated browser harnesses use Playwright-managed Chromium, not the user's
+installed Google Chrome. In Codex Desktop on macOS, run browser-backed harnesses
+with escalated sandbox permissions so Chromium can register its macOS Mach port
+without triggering crash dialogs.
 
 ## Release Ladder
 

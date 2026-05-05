@@ -119,6 +119,90 @@
       display:grid;
       gap:18px;
     }
+    .versionDomains{
+      margin-top:24px;
+      padding:28px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .versionDomains h2{
+      margin:0 0 8px;
+      font-size:24px;
+      letter-spacing:-0.02em;
+    }
+    .versionDomains p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .versionGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+    .versionCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(7,19,31,0.52);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .versionCard strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#cfe8fb;
+    }
+    .versionCard span{
+      display:block;
+      font-size:22px;
+      font-weight:600;
+    }
+    .versionCard small{
+      display:block;
+      margin-top:8px;
+      color:#8db0c8;
+      line-height:1.5;
+      font-size:13px;
+    }
+    .tableWrap{
+      margin-top:18px;
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(7,19,31,0.46);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+    }
+    .dataTable th{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#9fc8e3;
+      background:rgba(255,255,255,0.03);
+    }
+    .dataTable td{
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+    .dataTable tr:last-child td{
+      border-bottom:none;
+    }
     .timeline::before{
       content:"";
       position:absolute;
@@ -225,6 +309,7 @@
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
       .hero{padding:26px 22px 24px}
+      .versionDomains{padding:22px 20px}
       .step{margin-left:34px}
       .timeline::before{left:12px}
       .step::before{left:-28px}
@@ -240,26 +325,89 @@
           <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
         </div>
         <h1>Aurora Galactica</h1>
-        <p>Aurora&#39;s current release family now bundles trust fixes, pilot-score and game-over repairs, runtime hardening, dock and panel polish, and a healthier machine-portable workflow while the next Galaga-fidelity and second-game work advances in parallel.</p>
+        <p>Aurora 1.3.0 is now the live Platinum production family: the quality-and-trust reset shipped, the first second-cabinet preview is public, and the next deliberate step is 1.4.0 arcade depth with cleaner platform/application seams.</p>
         <div class="meta">
           <div class="metaCard">
             <span class="metaLabel">Target</span>
-            <span class="metaValue">1.2.3</span>
+            <span class="metaValue">1.4.0</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Focus</span>
-            <span class="metaValue">Stabilize the current 1.2.3 trust-and-pilot refresh in production, keep the multi-machine release workflow disciplined, and use the parallel Galaxians-style second-game and harness-analysis work to shape the next 1.3.0 fidelity cycle.</span>
+            <span class="metaValue">Stabilize the shipped 1.3.0 production family while beginning 1.4.0 arcade-depth and platform-contract follow-through, and keep Galaxy Guardians moving as a measured second-cabinet program rather than a rushed second launch.</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Current Release</span>
-            <span class="metaValue">1.2.3</span>
+            <span class="metaValue">1.3.0</span>
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
-            <span class="metaValue">April 26, 2026</span>
+            <span class="metaValue">May 5, 2026</span>
           </div>
         </div>
       </section>
+      <section class="versionDomains">
+      <h2>Version Domains</h2>
+      <p>The integrated release, the Platinum host, and each application now travel as separate version records so we can advance or verify them independently over time.</p>
+      <div class="versionGrid">
+        
+    <article class="versionCard">
+      <strong>Integrated Release</strong>
+      <span>1.3.0</span>
+      <small>Lane production · 1.3.0+build.574.sha.0123dd0</small>
+    </article>
+  
+
+    <article class="versionCard">
+      <strong>Platinum Platform</strong>
+      <span>1.3.0</span>
+      <small>Platinum · active candidate · platinum-1.3</small>
+    </article>
+  
+
+    <article class="versionCard">
+      <strong>Application Tracks</strong>
+      <span>2</span>
+      <small>Game-owned version records carried inside this bundle.</small>
+    </article>
+  
+      </div>
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr>
+              <th>Application</th>
+              <th>Version</th>
+              <th>Track</th>
+              <th>Runtime Status</th>
+              <th>Launch Policy</th>
+              <th>Compatibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr>
+          <td>Aurora Galactica</td>
+          <td>1.3.0</td>
+          <td>primary candidate</td>
+          <td>playable</td>
+          <td>production capable</td>
+          <td>platinum-1.3</td>
+        </tr>
+      
+
+        <tr>
+          <td>Galaxy Guardians</td>
+          <td>0.1.0 preview</td>
+          <td>playable preview</td>
+          <td>non production playable preview</td>
+          <td>development and beta only</td>
+          <td>platinum-1.3</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    </section>
       <section class="timeline">
         
     <article class="step done">
@@ -352,21 +500,30 @@
     </article>
   
 
-    <article class="step planned">
+    <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">Platform Contract Cleanup</h2>
-        <span class="badge">Up Next</span>
+        <h2 class="stepTitle">1.3.0 Fidelity And Trust</h2>
+        <span class="badge">Completed</span>
       </div>
-      <p>Strengthen pack-schema thinking, clarify remaining platform/application seams, and keep the shared docs model healthy as the second application becomes more real.</p>
+      <p>1.3.0 is now the live Platinum production family, bundling Aurora fidelity and trust work with the first public Galaxy Guardians second-cabinet preview and the first layered platform/application version contract.</p>
+    </article>
+  
+
+    <article class="step in_progress">
+      <div class="stepHeader">
+        <h2 class="stepTitle">1.4.0 Platform Contract And Arcade Depth Pickup</h2>
+        <span class="badge">In Progress</span>
+      </div>
+      <p>After shipping 1.3.0, strengthen pack-schema thinking, clarify remaining platform/application seams, and begin the first deliberate level-by-level arcade-depth release family.</p>
     </article>
   
 
     <article class="step planned">
       <div class="stepHeader">
-        <h2 class="stepTitle">Second Application Proof</h2>
+        <h2 class="stepTitle">Post-1.3.0 Second Application Proof</h2>
         <span class="badge">Up Next</span>
       </div>
-      <p>Use the active Galaxians-style sibling work and a small playable Galaxy Guardians slice to prove the platform seam before any second-game public release.</p>
+      <p>Continue the Galaxians-style sibling work after 1.3.0 so Galaxy Guardians can move from second-cabinet proof toward a more durable standalone product promise.</p>
     </article>
   
       </section>
@@ -411,7 +568,7 @@
   
         </div>
         <p class="footer">
-          Latest release note: <strong>Trust and pilot-surface refresh</strong>. Live game:
+          Latest release note: <strong>Fidelity and second-cabinet release</strong>. Live game:
           <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Aurora-Galactica/</a>
         </p>
       </section>
