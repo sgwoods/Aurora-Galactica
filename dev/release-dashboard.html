@@ -119,6 +119,90 @@
       display:grid;
       gap:18px;
     }
+    .versionDomains{
+      margin-top:24px;
+      padding:28px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .versionDomains h2{
+      margin:0 0 8px;
+      font-size:24px;
+      letter-spacing:-0.02em;
+    }
+    .versionDomains p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .versionGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+    .versionCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(7,19,31,0.52);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .versionCard strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#cfe8fb;
+    }
+    .versionCard span{
+      display:block;
+      font-size:22px;
+      font-weight:600;
+    }
+    .versionCard small{
+      display:block;
+      margin-top:8px;
+      color:#8db0c8;
+      line-height:1.5;
+      font-size:13px;
+    }
+    .tableWrap{
+      margin-top:18px;
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(7,19,31,0.46);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+    }
+    .dataTable th{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#9fc8e3;
+      background:rgba(255,255,255,0.03);
+    }
+    .dataTable td{
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+    .dataTable tr:last-child td{
+      border-bottom:none;
+    }
     .timeline::before{
       content:"";
       position:absolute;
@@ -225,6 +309,7 @@
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
       .hero{padding:26px 22px 24px}
+      .versionDomains{padding:22px 20px}
       .step{margin-left:34px}
       .timeline::before{left:12px}
       .step::before{left:-28px}
@@ -256,10 +341,73 @@
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
-            <span class="metaValue">May 4, 2026</span>
+            <span class="metaValue">May 5, 2026</span>
           </div>
         </div>
       </section>
+      <section class="versionDomains">
+      <h2>Version Domains</h2>
+      <p>The integrated release, the Platinum host, and each application now travel as separate version records so we can advance or verify them independently over time.</p>
+      <div class="versionGrid">
+        
+    <article class="versionCard">
+      <strong>Integrated Release</strong>
+      <span>1.3.0</span>
+      <small>Lane development · 1.3.0+build.573.sha.881d26f</small>
+    </article>
+  
+
+    <article class="versionCard">
+      <strong>Platinum Platform</strong>
+      <span>1.3.0</span>
+      <small>Platinum · active candidate · platinum-1.3</small>
+    </article>
+  
+
+    <article class="versionCard">
+      <strong>Application Tracks</strong>
+      <span>2</span>
+      <small>Game-owned version records carried inside this bundle.</small>
+    </article>
+  
+      </div>
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr>
+              <th>Application</th>
+              <th>Version</th>
+              <th>Track</th>
+              <th>Runtime Status</th>
+              <th>Launch Policy</th>
+              <th>Compatibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr>
+          <td>Aurora Galactica</td>
+          <td>1.3.0</td>
+          <td>primary candidate</td>
+          <td>playable</td>
+          <td>production capable</td>
+          <td>platinum-1.3</td>
+        </tr>
+      
+
+        <tr>
+          <td>Galaxy Guardians</td>
+          <td>0.1.0 preview</td>
+          <td>playable preview</td>
+          <td>non production playable preview</td>
+          <td>development and beta only</td>
+          <td>platinum-1.3</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    </section>
       <section class="timeline">
         
     <article class="step done">

@@ -745,8 +745,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.3.0</span>
-      <span id="settingsRelease">May 04 2026, 3:16 PM EDT</span>
-      <span id="settingsState">main@d0d3bd6 clean</span>
+      <span id="settingsRelease">May 05 2026, 6:00 AM EDT</span>
+      <span id="settingsState">main@881d26f clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1044,7 +1044,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0</span>
-    <span id="buildStampRelease">May 04 2026, 3:16 PM EDT</span>
+    <span id="buildStampRelease">May 05 2026, 6:00 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1682,7 +1682,34 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={version:'1.3.0',label:'1.3.0+build.567.sha.d0d3bd6',commit:'d0d3bd665fa1cfbeb4f29577262fdeccf9627086',branch:'main',dirty:false,released:'May 04 2026, 3:16 PM EDT',state:'main@d0d3bd6 clean',releaseChannel:'development'};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',label:'1.3.0+build.573.sha.881d26f',commit:'881d26f362b9c2e8b7d9d601bff86f3115a7c9af',branch:'main',dirty:false,released:'May 05 2026, 6:00 AM EDT',state:'main@881d26f clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"active-candidate","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"primary-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"non-production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"development-and-beta-only"}]};
+function humanizeReleaseTrack(value=''){
+ const raw=String(value||'').trim();
+ return raw?raw.replace(/-/g,' '):'';
+}
+function buildPlatformInfo(){
+ const platform=BUILD_INFO&&BUILD_INFO.platform&&typeof BUILD_INFO.platform==='object'?BUILD_INFO.platform:{};
+ return Object.assign({
+  key:'platinum',
+  name:PLATFORM_NAME,
+  version:BUILD_INFO.version||'--',
+  releaseTrack:'bundle-aligned',
+  compatibility:'',
+  notes:''
+ },platform||{});
+}
+function buildApplications(){
+ return Array.isArray(BUILD_INFO?.applications)?BUILD_INFO.applications:[];
+}
+function applicationReleaseRecord(gameKey='',fallback={}){
+ const target=String(gameKey||'').trim();
+ const record=buildApplications().find(app=>String(app?.gameKey||'').trim()===target);
+ return Object.assign({},fallback||{},record||{});
+}
+function applicationVersionLine(gameKey='',fallback='--'){
+ const record=applicationReleaseRecord(gameKey);
+ return String(record.versionLine||record.version||fallback);
+}
 const BUILD=BUILD_INFO.label;
 const BUILD_INFO_URL=new URL('build-info.json',location.href).toString();
 const BUILD_REFRESH_CHECK_MS=60000;
@@ -3457,7 +3484,7 @@ function shellEscapeHtml(value){
 }
 function currentPlatformMessageRows(){
  const channel=String(BUILD_INFO.releaseChannel||'development').toUpperCase();
- const runtime=typeof currentPlatformPackLabel==='function'?currentPlatformPackLabel():PLATFORM_NAME;
+ const platform=typeof buildPlatformInfo==='function'?buildPlatformInfo():{name:PLATFORM_NAME,version:BUILD_INFO.version||'--'};
  const rows=[];
  if(BUILD_UPDATE.available){
   rows.push({
@@ -3472,17 +3499,18 @@ function currentPlatformMessageRows(){
   meta:buildStampDateTimeText()
  });
  rows.push({
-  kicker:'RUNTIME',
-  main:runtime,
-  meta:'Platform-owned shell, controls, score services, replay, and message delivery.'
+  kicker:'PLATFORM',
+  main:`${platform.name||PLATFORM_NAME} ${platform.version||BUILD_INFO.version||'--'}`,
+  meta:[humanizeReleaseTrack(platform.releaseTrack||''),platform.compatibility||''].filter(Boolean).join(' · ')||'Platform-owned shell, controls, score services, replay, and message delivery.'
  });
  if(typeof currentGamePack==='function'){
   const pack=currentGamePack();
   const title=pack?.metadata?.title||pack?.metadata?.gameKey||'Active game';
-  const state=pack?.metadata?.previewOnly?'Preview pack':'Playable pack';
+  const version=typeof gamePackVersionLine==='function'?gamePackVersionLine(pack):String(pack?.metadata?.versionLine||pack?.metadata?.version||'--');
+  const state=[typeof gamePackReleaseTrackLine==='function'?gamePackReleaseTrackLine(pack):humanizeReleaseTrack(pack?.metadata?.releaseTrack||''),typeof gamePackRuntimeStatusLine==='function'?gamePackRuntimeStatusLine(pack):humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'')].filter(Boolean).join(' · ')||(pack?.metadata?.previewOnly?'Preview pack':'Playable pack');
   rows.push({
    kicker:'GAME',
-   main:title,
+   main:`${title} ${version}`,
    meta:state
   });
  }
@@ -7899,12 +7927,28 @@ const AURORA_SCORING_RULES=Object.freeze({
  ])
 });
 
+const AURORA_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('aurora-galactica',{
+ title:'Aurora Galactica',
+ version:'1.3.0',
+ versionLine:'1.3.0',
+ releaseTrack:'primary-candidate',
+ runtimeStatus:'playable',
+ platformCompatibility:buildPlatformInfo().compatibility||'',
+ launchPolicy:'production-capable'
+}));
+
 const AURORA_GAME_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'aurora-galactica',
   title:'Aurora Galactica',
-  versionLine:'1.x',
-  playable:1
+  version:AURORA_APPLICATION_RELEASE.version||'1.3.0',
+  versionLine:AURORA_APPLICATION_RELEASE.versionLine||AURORA_APPLICATION_RELEASE.version||'1.3.0',
+  releaseTrack:AURORA_APPLICATION_RELEASE.releaseTrack||'primary-candidate',
+  runtimeStatus:AURORA_APPLICATION_RELEASE.runtimeStatus||'playable',
+  platformCompatibility:AURORA_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
+  launchPolicy:AURORA_APPLICATION_RELEASE.launchPolicy||'production-capable',
+  playable:1,
+  previewOnly:0
  }),
  frontDoor:Object.freeze({
   marqueeTitle:'Aurora Galactica',
@@ -8071,7 +8115,7 @@ const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
  escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
  flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
  wrapReturn:Object.freeze({id:'guardians-wrap-return',event:'enemy_wrap_or_return',profile:'soft-bottom-return-sweep',referenceIntent:'bottom-exit or return warning'}),
- playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the dev playable preview'}),
+ playerLoss:Object.freeze({id:'guardians-player-loss',event:'player_lost',profile:'falling-square-burst',referenceIntent:'life-loss cue for the non-production playable preview'}),
  gameOver:Object.freeze({id:'guardians-game-over-fall',event:'game_over',profile:'low-falling-square-stair',referenceIntent:'short game-over descent distinct from Aurora'})
 });
 
@@ -8215,12 +8259,28 @@ const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
 });
 
+const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('galaxy-guardians-preview',{
+ title:'Galaxy Guardians',
+ version:'0.1.0-preview',
+ versionLine:'0.1.0 preview',
+ releaseTrack:'playable-preview',
+ runtimeStatus:'non-production-playable-preview',
+ platformCompatibility:buildPlatformInfo().compatibility||'',
+ launchPolicy:'development-and-beta-only'
+}));
+
 const GALAXY_GUARDIANS_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'galaxy-guardians-preview',
   title:'Galaxy Guardians',
-  versionLine:'preview',
-  playable:0
+  version:GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0-preview',
+  versionLine:GALAXY_GUARDIANS_APPLICATION_RELEASE.versionLine||GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0 preview',
+  releaseTrack:GALAXY_GUARDIANS_APPLICATION_RELEASE.releaseTrack||'playable-preview',
+  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'non-production-playable-preview',
+  platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
+  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'development-and-beta-only',
+  playable:0,
+  previewOnly:1
  }),
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
@@ -8240,9 +8300,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity and a dev-only scout-wave slice.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on development and beta lanes.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and dev-only scout-wave runtime while Aurora remains the primary public cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a non-production scout-wave runtime while Aurora remains the primary public production cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
@@ -8308,7 +8368,7 @@ const GALAXY_GUARDIANS_REFERENCE_PROFILE=Object.freeze({
  promotedEventStatus:'promoted-reviewed-event-windows',
  promotedEventCount:11,
  devRuntime:'src/js/13-galaxy-guardians-runtime.js',
- devRuntimeStatus:'dev-runtime-slice-not-public-release',
+   devRuntimeStatus:'preview-runtime-slice-not-production-release',
  devRuntimeHarness:'tools/harness/check-galaxy-guardians-runtime-slice.js',
  sourceCount:3,
  sources:Object.freeze([
@@ -8377,6 +8437,11 @@ const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
  })
 });
 
+const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
+ 'development',
+ 'production beta'
+]);
+
 function createGalaxyGuardiansInitialState(opts={}){
  return Object.freeze({
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
@@ -8421,9 +8486,14 @@ const GALAXY_GUARDIANS_GAMEPLAY_ADAPTER_SKELETON=Object.freeze({
 let GALAXY_GUARDIANS_ACTIVE_DEV_STATE=null;
 
 function galaxyGuardiansDevPreviewAllowed(){
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : '';
+ const allowedChannels=Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS)
+  .map(value=>String(value).toLowerCase());
  return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development'
-  && !!GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable
+  && allowedChannels.includes(channel)
+  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable)
   && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
 }
 
@@ -8453,7 +8523,7 @@ function closeGalaxyGuardiansDevOverlays(){
 
 function startGalaxyGuardiansDevPreview(cfg={}){
  if(!galaxyGuardiansDevPreviewAllowed()){
-  showToast('Galaxy Guardians playable preview is available only in development builds.');
+  showToast('Galaxy Guardians playable preview is available only in development and beta builds.');
   return false;
  }
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
@@ -8574,10 +8644,12 @@ function summarizeGalaxyGuardiansDevPreview(){
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
- label:'Galaxy Guardians dev-only playable preview',
+ label:'Galaxy Guardians non-production playable preview',
  enabled:1,
- devOnly:1,
+ devOnly:0,
+ previewOnly:1,
  publicPlayable:0,
+ allowedReleaseChannels:Array.from(GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS),
  start:startGalaxyGuardiansDevPreview,
  update:updateGalaxyGuardiansDevPreview,
  snapshot:summarizeGalaxyGuardiansDevPreview
@@ -8588,7 +8660,7 @@ window.currentGalaxyGuardiansDevPreviewState=currentGalaxyGuardiansDevPreviewSta
 window.summarizeGalaxyGuardiansDevPreview=summarizeGalaxyGuardiansDevPreview;
 
 // Source: src/js/13-galaxy-guardians-runtime.js
-// Dev-only Galaxy Guardians scout-wave runtime model.
+// Non-production Galaxy Guardians scout-wave runtime model.
 
 const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
  flagship:Object.freeze({
@@ -8632,9 +8704,11 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
 
 const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
  id:'galaxy-guardians-dev-scout-wave-runtime',
- status:'dev-runtime-slice-not-public-release',
+ status:'preview-runtime-slice-not-production-release',
  publicPlayable:0,
+ previewPlayable:1,
  devPlayable:1,
+ playablePreviewReleaseChannels:Object.freeze(['development','production beta']),
  evidenceProfile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  eventVocabulary:Object.freeze([
@@ -8795,7 +8869,9 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
   runtimeState:'dev-scout-wave',
   publicPlayable:0,
+  previewPlayable:1,
   devPlayable:1,
+  playablePreviewReleaseChannels:GALAXY_GUARDIANS_RUNTIME_PROFILE.playablePreviewReleaseChannels.slice(),
   stage:Math.max(1,+opts.stage||1),
   score:0,
   lives,
@@ -9181,7 +9257,9 @@ function summarizeGalaxyGuardiansRuntime(state){
   gameKey:state.gameKey,
   runtimeState:state.runtimeState,
   publicPlayable:state.publicPlayable,
+  previewPlayable:state.previewPlayable,
   devPlayable:state.devPlayable,
+  playablePreviewReleaseChannels:Array.from(state.playablePreviewReleaseChannels||[]),
   stage:state.stage,
   score:state.score,
   lives:state.lives,
@@ -9256,6 +9334,19 @@ function currentGamePackPlayable(){
 
 function packIsPlayable(pack=null){
  return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
+}
+
+function gamePackVersionLine(pack=currentGamePack()){
+ const meta=pack?.metadata||{};
+ return String(meta.versionLine||meta.version||'--');
+}
+
+function gamePackReleaseTrackLine(pack=currentGamePack()){
+ return humanizeReleaseTrack(pack?.metadata?.releaseTrack||'');
+}
+
+function gamePackRuntimeStatusLine(pack=currentGamePack()){
+ return humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'');
 }
 
 function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
@@ -9541,8 +9632,9 @@ function currentGamePackPreview(pack=currentGamePack()){
 }
 
 function currentPlatformPackLabel(){
+ const platform=typeof buildPlatformInfo==='function'?buildPlatformInfo():{name:PLATFORM_NAME,version:BUILD_INFO.version||'--'};
  const pack=currentGamePack();
- return `${PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'}`;
+ return `${platform.name||PLATFORM_NAME} · ${pack.metadata?.title||'No Pack'} · Platform ${platform.version||BUILD_INFO.version||'--'} · Game ${gamePackVersionLine(pack)}`;
 }
 
 function currentGamePackShellThemes(){
@@ -9609,7 +9701,7 @@ function syncInstalledPackShellChrome(){
  try{document.title=pack.metadata?.title||PRODUCT_NAME||document.title}catch{}
  const marquee=document.getElementById('cabinetMarqueeTitle');
   if(marquee)marquee.textContent=frontDoor.marqueeTitle;
- if(settingsRuntime)settingsRuntime.textContent=`Platform ${currentPlatformPackLabel()}`;
+ if(settingsRuntime)settingsRuntime.textContent=currentPlatformPackLabel();
  const root=document.documentElement;
  if(root&&frameTheme&&shellTheme){
   root.style.setProperty('--shell-line',shellTheme.shellLine);
@@ -9677,6 +9769,9 @@ window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
+window.gamePackVersionLine=gamePackVersionLine;
+window.gamePackReleaseTrackLine=gamePackReleaseTrackLine;
+window.gamePackRuntimeStatusLine=gamePackRuntimeStatusLine;
 window.currentGamePackFrontDoor=currentGamePackFrontDoor;
 window.currentWaitModeFrontDoor=currentWaitModeFrontDoor;
 window.currentWaitModeShowcasePack=currentWaitModeShowcasePack;
@@ -9695,7 +9790,8 @@ window.setCurrentGamePackShellTheme=setCurrentGamePackShellTheme;
 window.installGamePack=installGamePack;
 
 // Source: src/js/13-gameplay-adapter-registry.js
-// Platinum gameplay adapter registry. Packs become playable only through an owned adapter.
+// Platinum gameplay adapter registry. Packs become playable only through an
+// owned adapter or an explicitly non-production preview adapter.
 
 const AURORA_GAMEPLAY_ADAPTER=Object.freeze({
  gameKey:AURORA_GAME_PACK.metadata.gameKey,
@@ -9742,16 +9838,18 @@ function getGameplayAdapterSkeleton(packOrKey=currentGamePack()){
  return GAMEPLAY_ADAPTER_SKELETON_REGISTRY[key]||null;
 }
 
-function developmentGameplayPreviewAllowed(){
- return typeof BUILD_INFO!=='undefined'
-  && String(BUILD_INFO.releaseChannel||'development').toLowerCase()==='development';
-}
-
 function getDevPreviewGameplayAdapter(packOrKey=currentGamePack()){
- if(!developmentGameplayPreviewAllowed())return null;
  const key=gameplayAdapterKey(packOrKey);
  const adapter=DEV_PREVIEW_GAMEPLAY_ADAPTER_REGISTRY[key]||null;
- return adapter&&adapter.enabled&&adapter.devOnly&&typeof adapter.start==='function'?adapter:null;
+ if(!adapter||!adapter.enabled||typeof adapter.start!=='function')return null;
+ if(!(adapter.previewOnly||adapter.devOnly))return null;
+ const channel=typeof BUILD_INFO!=='undefined'
+  ? String(BUILD_INFO.releaseChannel||'development').toLowerCase()
+  : 'development';
+ const allowedChannels=Array.isArray(adapter.allowedReleaseChannels)&&adapter.allowedReleaseChannels.length
+  ? adapter.allowedReleaseChannels.map(value=>String(value).toLowerCase())
+  : ['development'];
+ return allowedChannels.includes(channel)?adapter:null;
 }
 
 function currentGameplayAdapter(){
@@ -10087,25 +10185,32 @@ function renderShellThemeOptions(){
  return `<div class="gamePickerThemeGroup"><span class="gamePickerThemeLabel">Shell Theme</span><div class="gamePickerThemeOptions">${themes.map(theme=>`<button class="gamePickerThemeBtn${theme.id===activeTheme?.id?' isSelected':''}" data-theme-id="${theme.id}">${theme.label}</button>`).join('')}</div></div>`;
 }
 
+function describePackRelease(pack){
+ const version=typeof gamePackVersionLine==='function'?gamePackVersionLine(pack):String(pack?.metadata?.versionLine||pack?.metadata?.version||'--');
+ const track=typeof gamePackReleaseTrackLine==='function'?gamePackReleaseTrackLine(pack):humanizeReleaseTrack(pack?.metadata?.releaseTrack||'');
+ const runtime=typeof gamePackRuntimeStatusLine==='function'?gamePackRuntimeStatusLine(pack):humanizeReleaseTrack(pack?.metadata?.runtimeStatus||'');
+ return [version&&version!=='--'?`Version ${version}`:'',track,runtime].filter(Boolean).join(' · ');
+}
+
 function renderGamePicker(){
  if(!gamePickerList||!gamePickerCurrent||!gamePickerStatus||typeof availableGamePacks!=='function')return;
  const packs=Object.values(availableGamePacks());
  const activeKey=typeof currentGamePackKey==='function'?currentGamePackKey():'';
   const activePack=typeof currentGamePack==='function'?currentGamePack():null;
   const activeTheme=typeof currentGamePackSelectedShellTheme==='function'?currentGamePackSelectedShellTheme():null;
- gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
+ gamePickerCurrent.innerHTML=`<strong>Current Cabinet</strong><span>${activePack?.metadata?.title||'Platinum'}</span><span>${describePackRelease(activePack)||'Version details unavailable'}</span><span>Shell theme: ${activeTheme?.label||'Default'}${started?' • finish the current run before switching':''
  }</span>${renderShellThemeOptions()}`;
  gamePickerList.innerHTML=packs.map(pack=>{
   const isActive=pack.metadata?.gameKey===activeKey;
   const caps=describePackCaps(pack);
   const flagHtml=caps.length?`<div class="gamePickerCardFlags">${caps.map(label=>`<span class="gamePickerFlag">${label}</span>`).join('')}</div>`:'';
   const playable=pack.metadata?.playable!==0&&pack.metadata?.playable!==false;
-  const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(pack);
-  const actionLabel=isActive?'Selected':(playable?'Select Game':devPlayable?'Select Dev Preview':'Preview Sneak Peek');
+  const previewPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(pack);
+  const actionLabel=isActive?'Selected':(playable?'Select Game':previewPlayable?'Select Preview':'Preview Sneak Peek');
   const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':devPlayable?'Dev-only playable preview in this development runtime':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${describePackRelease(pack)||'Version details unavailable'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in development and beta runtimes':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Finish the current run before switching to a different game pack.'
@@ -10149,7 +10254,7 @@ function chooseGamePack(key=''){
  const playable=typeof gamePackHasPlayableAdapter==='function'
   ? gamePackHasPlayableAdapter(nextPack)
   : (typeof packIsPlayable==='function'?packIsPlayable(nextPack):(nextPack?.metadata?.playable!==0&&nextPack?.metadata?.playable!==false));
- const devPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(nextPack);
+ const previewPlayable=typeof gamePackHasDevPreviewAdapter==='function'&&gamePackHasDevPreviewAdapter(nextPack);
  installGamePack(key,{persist:playable?1:0});
  if(!started&&typeof draw==='function')draw();
  renderGamePicker();
@@ -10159,7 +10264,7 @@ function chooseGamePack(key=''){
   if(typeof openGamePreview==='function')openGamePreview();
  }else{
   closeGamePicker(1);
-  showToast(devPlayable?`${currentGamePack().metadata?.title||'Game pack'} dev preview selected. Press Enter to start.`:`${currentGamePack().metadata?.title||'Game pack'} selected.`);
+  showToast(previewPlayable?`${currentGamePack().metadata?.title||'Game pack'} preview selected. Press Enter to start.`:`${currentGamePack().metadata?.title||'Game pack'} selected.`);
  }
 }
 
@@ -11391,7 +11496,7 @@ window.resetGalaxyGuardiansPreviewRenderState=resetGalaxyGuardiansPreviewRenderS
 window.drawGalaxyGuardiansPreviewBoard=drawGalaxyGuardiansPreviewBoard;
 
 registerGameBoardRenderer(GALAXY_GUARDIANS_PACK.metadata.gameKey,{
- label:'Galaxy Guardians dev preview board renderer',
+ label:'Galaxy Guardians preview board renderer',
  previewOnly:true,
  canDraw(){
   const playable=typeof currentGamePackHasPlayableAdapter==='function'&&currentGamePackHasPlayableAdapter();
