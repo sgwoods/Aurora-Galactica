@@ -411,11 +411,11 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 5, 2026</span>
+              <span class="metaValue">May 8, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Trust and pilot-surface refresh</span>
+              <span class="metaValue">Fidelity and second-cabinet release</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -708,12 +708,14 @@
 <p>Desired outcome:</p>
 <ul><li>clearer required fields</li><li>clearer optional capability flags</li><li>explicit platform-compatibility and game-version fields</li><li>forward-compatible pack evolution</li><li>earlier validation failures during boot</li></ul>
 <h4>1b. Multi-game ingestion workflow</h4>
-<p>We should get better at ingesting a second classic game lineage by turning preserved footage, manuals, timing libraries, and comparison artifacts into a repeatable pack-construction workflow.</p>
+<p>We should get better at ingesting a second classic game lineage by turning preserved footage, manuals, timing libraries, and comparison artifacts into a repeatable pack-construction workflow. This workflow is part of the conformance project, not a separate research sidecar.</p>
 <p>Desired outcome:</p>
 <ul><li>a new game can be analyzed in all major aspects with minimal user</li></ul>
 <p>intervention once the reference corpus exists</p>
 <ul><li>the ingestion flow yields game-owned manifests, conformance artifacts, and</li></ul>
 <p>versioned runtime packages rather than only platform-specific glue</p>
+<ul><li>the first playable phases are derived from external artifacts, semantic event</li></ul>
+<p>logs, and correspondence targets before subjective design tuning</p>
 <ul><li>Platinum can propose its own extension points where needed instead of</li></ul>
 <p>forcing every new mechanic into Aurora-shaped structures</p>
 <ul><li>the second game grows from a durable reference program rather than from</li></ul>
@@ -845,8 +847,8 @@
 <p>state shape</p>
 <ul><li>a visible preview board renderer that drives the Guardians-owned scout-wave</li></ul>
 <p>runtime, visual catalog, and audio cue catalog without registering a public playable adapter</p>
-<ul><li>a non-production playable-preview adapter that routes keyboard movement,</li></ul>
-<p>single-shot fire, life loss, reset, and game-over flow into the Guardians-owned runtime on development and beta lanes while keeping the public playable adapter disabled</p>
+<ul><li>a hosted-lane playable-preview adapter that routes keyboard movement,</li></ul>
+<p>single-shot fire, life loss, reset, and game-over flow into the Guardians-owned runtime on development, beta, and production lanes while keeping the public playable adapter disabled</p>
 <ul><li>a source-manifested Galaxian reference profile with three local source videos,</li></ul>
 <p>contact sheets, and waveforms</p>
 <ul><li>safe public-pack behavior because <code>Galaxy Guardians</code> still has no public</li></ul>
@@ -900,10 +902,15 @@
 <ol><li>reference-ingestion package</li></ol>
 <ul><li>source gameplay videos</li><li>manuals or descriptive artifacts where available</li><li>game-owned manifests, contact sheets, timing windows, waveforms, and other</li></ul>
 <p>conformance evidence</p>
+<ul><li>reference-side event logs, semantic profiles, confidence notes, and initial</li></ul>
+<p>scorer targets</p>
+<ul><li>a clear statement of which behaviors are evidence-backed, low-confidence, or</li></ul>
+<p>intentionally deferred</p>
 <ol><li>shell preview</li></ol>
 <ul><li>name</li><li>framing</li><li>coming-soon or preview status</li></ul>
 <ol><li>minimal playable slice</li></ol>
-<ul><li>enough real rules to prove the platform seam</li><li>not a rushed full public release</li></ul>
+<ul><li>enough real rules to prove the platform seam</li><li>not a rushed full public release</li><li>implementation choices traceable back to the ingestion package rather than</li></ul>
+<p>copied from Aurora or invented as user design</p>
 <ol><li>application-owned harnesses</li></ol>
 <ul><li>rules and scoring checks</li><li>outcome/distribution checks if difficulty matters</li></ul>
 <ol><li>independent application candidate path</li></ol>
@@ -921,13 +928,13 @@
 <p>The runtime model now has a visible preview renderer. It draws the Guardians scout-wave board, single player shot, alien silhouettes, and preview HUD from Guardians-owned runtime state and catalog IDs while keeping the pack publicly non-playable. The compact cabinet harness verifies the renderer by checking the preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct signal palette. The renderer is now registered through a Platinum game-board renderer registry, so the top-level render loop no longer branches on a specific game by name.</p>
 <p>The next application proof is maturing the first non-production playable slice. It now has the initial lifecycle path, but the behavior is still intentionally kept out of production until the measured 0.1 scout-wave evidence is stronger. The first aggregate 0.1 candidate gate is now source-controlled so future preview readiness claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
-<p>Current non-production playable-preview coverage:</p>
-<ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the non-production</li></ul>
+<p>Current hosted-lane playable-preview coverage:</p>
+<ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
 <p>start and update adapter for <code>Galaxy Guardians</code></p>
 <ul><li><code>src/js/13-galaxy-guardians-runtime.js</code> owns the runtime state, events, player</li></ul>
 <p>shot, life-loss, reset, and game-over mechanics</p>
 <ul><li><code>src/js/13-gameplay-adapter-registry.js</code> keeps public playable adapters and</li></ul>
-<p>non-production preview adapters in separate registries</p>
+<p>hosted preview adapters in separate registries</p>
 <ul><li><code>reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json</code></li></ul>
 <p>persists the first cue-shape and runtime-audio coverage contract for the Guardians signal theme</p>
 <ul><li><code>tools/harness/check-galaxy-guardians-audio-character.js</code> proves the required</li></ul>
@@ -994,7 +1001,7 @@
 <ul><li><code>Platinum</code> is a real shipped host platform</li><li><code>Aurora Galactica</code> is the first shipped playable application on Platinum</li><li>hosted lanes exist for local <code>localhost</code>, hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code></li><li>the hosted documentation set is now part of the intended release surface</li></ul>
 <p>What is still transitional:</p>
 <ul><li>some naming and compatibility residue is still Aurora-shaped</li><li>the game-pack contract is still practical rather than strongly versioned</li><li>the second application is still public-preview-only rather than fully</li></ul>
-<p>playable; it now has a development-only playable-preview adapter for local runtime proof</p>
+<p>shipped; it now has a hosted-lane playable-preview adapter for release-lane runtime proof</p>
 <ul><li>the second-game preview now owns placeholder pack data, but playable</li></ul>
 <p>second-game work still needs measured game data and a gameplay adapter rather than Aurora gameplay reuse</p>
 <h3>Runtime Layout</h3>
@@ -1040,9 +1047,9 @@
 <ul><li><code>tools/harness/check-galaxy-guardians-threat-scoring.js</code></li></ul>
 <p>verifies that the persistent lower-field threat/scoring artifact matches runtime rules and that enemy shots, player loss, and owned point values stay in the Galaxy Guardians application layer.</p>
 <ul><li><code>tools/harness/check-galaxy-guardians-playable-preview.js</code></li></ul>
-<p>verifies the development-only Galaxy Guardians playable-preview adapter: keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and isolation from the public playable adapter registry.</p>
+<p>verifies the development-lane Galaxy Guardians playable-preview adapter: keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and isolation from the public playable adapter registry.</p>
 <ul><li><code>tools/harness/check-compact-cabinet-rails.js</code></li></ul>
-<p>verifies that both side-frame icon rails remain visible and inside the cabinet frame at the compact in-app browser scale, and that the Galaxy Guardians preview modal stays readable in that compact layout. It also verifies the dev-only Guardians preview renderer by checking its render mode, registered renderer key, visual catalog IDs, audio cue IDs, signal palette, Platinum harness alias, and non-playable adapter state.</p>
+<p>verifies that both side-frame icon rails remain visible and inside the cabinet frame at the compact in-app browser scale, and that the Galaxy Guardians preview modal stays readable in that compact layout. It also verifies the hosted-preview Guardians renderer by checking its render mode, registered renderer key, visual catalog IDs, audio cue IDs, signal palette, Platinum harness alias, and non-playable public adapter state.</p>
 <ul><li><code>tools/harness/check-framed-popout-bounds.js</code></li></ul>
 <p>verifies that frame-owned popouts stay inside the gameplay frame, that platform messages, high scores, and pilot/account popouts share the same framed footprint, and that opening another dock popout closes the current one before showing the next surface.</p>
 <ul><li><code>tools/harness/check-platinum-renderer-boundaries.js</code></li></ul>
@@ -1149,6 +1156,7 @@
 <ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
+<p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
 <p>Default direction:</p>
 <ul><li>ingest user gameplay videos and other primary source artifacts into</li></ul>
 <p>game-owned manifests</p>
@@ -1160,6 +1168,21 @@
 <p>not buried only in Platinum-specific release logic</p>
 <ul><li>use Platinum as the host contract and tooling surface for launch, not as a</li></ul>
 <p>substitute for game-owned reference truth</p>
+<p>For a new game, the first playable slice should cite:</p>
+<ul><li>source manifest</li><li>selected reference windows</li><li>event log or semantic profile</li><li>initial conformance targets</li><li>candidate harness plan</li><li>explicit confidence and known gaps</li></ul>
+<p>If a release candidate includes a new or materially changed game behavior, its release notes and dashboard should identify which ingestion package or correspondence artifact grounds the claim.</p>
+<h3>Dashboard And Ingestion Release Boundary</h3>
+<p>The shipped Platinum platform should include the read-only conformance dashboard as a release surface.</p>
+<p>That means each <code>/dev</code>, <code>/beta</code>, and <code>/production</code> lane should carry:</p>
+<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li></ul>
+<p>The release dashboard should link to the <code>assets/</code> copy because the public GitHub Pages workflow already publishes the asset tree for production. The top-level files remain lane artifacts for local/publish tooling.</p>
+<p>The dashboard is platform-owned presentation of release evidence. It is allowed to summarize application-owned game conformance, ingestion state, confidence, measurement debt, and compute/resource spend.</p>
+<p>The ingestion framework itself remains engineering-owned unless we explicitly promote a separate Root-gated or public evidence browser. Raw source media, reference extraction workspaces, candidate clips, unreviewed traces, and in-progress annotation notebooks should not automatically become player-facing Platinum assets just because the dashboard summarizes them.</p>
+<p>This gives us the right separation:</p>
+<ul><li>Platinum publishes the release evidence surface.</li><li>Aurora or another game owns its reference truth, metric definitions, and</li></ul>
+<p>ingestion artifacts.</p>
+<ul><li>The integrated release bundle records enough conformance and ingestion</li></ul>
+<p>summary data to explain the release without exposing the whole engineering workspace.</p>
 <h3>Gate Profiles By Change Type</h3>
 <p>We want:</p>
 <ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
@@ -1526,8 +1549,8 @@
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Trust and pilot-surface refresh</strong><br>
-          Release 1.3.0 · Updated May 5, 2026
+          Latest release note: <strong>Fidelity and second-cabinet release</strong><br>
+          Release 1.3.0 · Updated May 8, 2026
         </p>
       </aside>
     </main>

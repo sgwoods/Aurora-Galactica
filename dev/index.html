@@ -159,6 +159,8 @@ mask:
 #settingsActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 #settingsActions button{border:1px solid rgba(136,245,255,.34);background:rgba(8,18,35,.84);color:#e9f8ff;padding:8px 10px;text-align:left;font:700 13px/1 "Courier New",Consolas,monospace;cursor:pointer;transition:background .14s,border-color .14s}
 #settingsActions button:hover{background:rgba(19,43,84,.9);border-color:rgba(136,245,255,.78)}
+#settingsActions button:disabled{cursor:not-allowed;color:rgba(220,236,255,.42);border-color:rgba(150,170,190,.18);background:rgba(26,30,40,.56);box-shadow:none}
+#settingsActions button:disabled:hover{border-color:rgba(150,170,190,.18);background:rgba(26,30,40,.56)}
 #openViewerBtn{border-color:rgba(255,214,104,.4);background:rgba(46,34,8,.82);color:#fff0c5}
 #openViewerBtn:hover{background:rgba(68,50,12,.92);border-color:rgba(255,214,104,.82)}
 #recordBtn.active{border-color:rgba(255,84,84,.72);background:rgba(92,15,15,.8);color:#fff3f3}
@@ -166,6 +168,15 @@ mask:
 #settingsSections{display:flex;flex-direction:column;gap:12px;min-height:0}
 .settingsSection{display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid rgba(136,245,255,.14)}
 .settingsSection h4{margin:0;font-size:13px;letter-spacing:.05em}
+#conformanceToolsPanel{gap:8px}
+#conformanceToolsPanel.disabled{opacity:.55}
+#conformanceRollupCard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center;padding:10px 12px;border:1px solid rgba(145,255,179,.18);background:linear-gradient(180deg,rgba(7,20,13,.52),rgba(6,14,19,.72))}
+#conformanceRollupLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.62);letter-spacing:.08em;text-transform:uppercase}
+#conformanceRollupScore{font:700 22px/1 "Courier New",Consolas,monospace;color:#d8ffe4}
+#conformanceRollupBody{grid-column:1/-1;font-size:11px;line-height:1.35;color:#bfe9cc;overflow-wrap:anywhere}
+#conformanceDashboardHint{font-size:11px;line-height:1.25;color:#d7c38b}
+#conformanceToolsPanel.disabled #conformanceRollupCard{border-color:rgba(170,190,210,.14);background:rgba(26,30,40,.42)}
+#conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
@@ -659,6 +670,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   </div>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
+    <button id="openConformanceDashboardBtn" type="button" aria-label="Open conformance dashboard">Open Conformance Dashboard</button>
     <button id="openProjectGuideBtn" type="button" aria-label="Open project guide">📘 Project Guide</button>
     <button id="exportBtn" type="button">Export Log</button>
     <button id="recordBtn" type="button">Auto Video: On</button>
@@ -666,6 +678,15 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <button id="resetTestPilotScoresBtn" type="button" hidden>🧹 Reset Test Pilot Scores</button>
   </div>
   <div id="settingsSections">
+    <div id="conformanceToolsPanel" class="settingsSection">
+      <h4>Conformance Rollup</h4>
+      <div id="conformanceRollupCard">
+        <span id="conformanceRollupLabel">Overall conformance</span>
+        <span id="conformanceRollupScore">--</span>
+        <span id="conformanceRollupBody">Dashboard summary pending.</span>
+      </div>
+      <div id="conformanceDashboardHint">Local dashboard opens from localhost builds only.</div>
+    </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
       <div class="settingsFieldGrid">
@@ -745,8 +766,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.3.0</span>
-      <span id="settingsRelease">May 05 2026, 6:06 AM EDT</span>
-      <span id="settingsState">main@881d26f clean</span>
+      <span id="settingsRelease">May 08 2026, 11:04 AM EDT</span>
+      <span id="settingsState">main@acc8b71 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -754,8 +775,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">Trust and pilot-surface refresh</span>
-      <span id="settingsNotesBody">Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.</span>
+      <span id="settingsNotesTitle">Fidelity and second-cabinet release</span>
+      <span id="settingsNotesBody">Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.</span>
     </div>
   </div>
 </div>
@@ -1044,7 +1065,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0</span>
-    <span id="buildStampRelease">May 05 2026, 6:06 AM EDT</span>
+    <span id="buildStampRelease">May 08 2026, 11:04 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1252,6 +1273,7 @@ const gamePreviewMission=document.getElementById('gamePreviewMission');
 const gamePreviewScoreTable=document.getElementById('gamePreviewScoreTable');
 const gamePreviewMilestones=document.getElementById('gamePreviewMilestones');
 const openViewerBtn=document.getElementById('openViewerBtn');
+const openConformanceDashboardBtn=document.getElementById('openConformanceDashboardBtn');
 const openProjectGuideBtn=document.getElementById('openProjectGuideBtn');
 const guideDockBtn=document.getElementById('guideDockBtn');
 const controlsDockBtn=document.getElementById('controlsDockBtn');
@@ -1272,6 +1294,10 @@ const settingsVersion=document.getElementById('settingsVersion');
 const settingsRelease=document.getElementById('settingsRelease');
 const settingsState=document.getElementById('settingsState');
 const settingsAudioDebugBody=document.getElementById('settingsAudioDebugBody');
+const conformanceToolsPanel=document.getElementById('conformanceToolsPanel');
+const conformanceRollupScore=document.getElementById('conformanceRollupScore');
+const conformanceRollupBody=document.getElementById('conformanceRollupBody');
+const conformanceDashboardHint=document.getElementById('conformanceDashboardHint');
 const buildStamp=document.getElementById('buildStamp'),buildStampChannel=document.getElementById('buildStampChannel'),buildStampVersion=document.getElementById('buildStampVersion'),buildStampRelease=document.getElementById('buildStampRelease');
 const buildStampRefreshBtn=document.getElementById('buildStampRefreshBtn');
 const platformMessagePanel=document.getElementById('platformMessagePanel');
@@ -1284,6 +1310,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-08T14%3A53%3A13.445Z%22%2C%22commit%22%3A%220854fbc%22%2C%22branch%22%3A%22codex%2Fmacbook-pro-level-arc-long-cycle%22%2C%22overallCurrent%22%3A%229.1%2F10%22%2C%22audioCurrent%22%3A%227.7%2F10%22%2C%22levelArcCurrent%22%3A%228.4%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Stage%204%20pressure%20exact%20replay%20%2F%20pressure%20curve%20precision%22%2C%22weakestCurrent%22%3A%227.5%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1682,7 +1709,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',label:'1.3.0+build.573.sha.881d26f',commit:'881d26f362b9c2e8b7d9d601bff86f3115a7c9af',branch:'main',dirty:false,released:'May 05 2026, 6:06 AM EDT',state:'main@881d26f clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"active-candidate","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"primary-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"non-production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"development-and-beta-only"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',label:'1.3.0+build.625.sha.acc8b71',commit:'acc8b71e6aeb586b181b60e801db82b975257c50',branch:'main',dirty:false,released:'May 08 2026, 11:04 AM EDT',state:'main@acc8b71 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"active-candidate","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"primary-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"non-production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"development-and-beta-only"}]};
 function humanizeReleaseTrack(value=''){
  const raw=String(value||'').trim();
  return raw?raw.replace(/-/g,' '):'';
@@ -1810,7 +1837,8 @@ const sfx={
     phase,
     challenge,
     frontDoor,
-    attractPhase
+    attractPhase,
+    audioTheme:opts.audioTheme
    });
   }
   return Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase});
@@ -2263,6 +2291,27 @@ function displayStageNumber(stage,challenge=isChallengeStage(stage)){
 function formatDisplayedStage(stage,challenge=isChallengeStage(stage),pad=2){
  return String(displayStageNumber(stage,challenge)).padStart(pad,'0');
 }
+function internalRegularStageForDisplayedStage(stage){
+ const target=Math.max(1, stage|0);
+ for(let internal=1;internal<=240;internal++){
+  if(isChallengeStage(internal))continue;
+  if(displayStageNumber(internal,false)===target)return internal;
+ }
+ return target;
+}
+function currentStartStageMode(){
+ const mode=String(window.__platinumStartStageMode||window.__auroraStartStageMode||'display').toLowerCase();
+ return mode==='internal'?'internal':'display';
+}
+function resolveGameplayStartStage(cfg={}){
+ const requestedStage=cl(+cfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0;
+ const stageMode=currentStartStageMode();
+ const forceChallenge=!!cfg.challenge;
+ const stage=stageMode==='display'&&!forceChallenge
+  ? internalRegularStageForDisplayedStage(requestedStage)
+  : requestedStage;
+ return {requestedStage,stage,stageMode,forceChallenge};
+}
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>{
  if(!REC)return 0;
@@ -2602,7 +2651,9 @@ function resolvedAudioAtmosphere(opts={}){
  const atmosphere=typeof currentGamePackResolvedAtmosphere==='function'
   ? currentGamePackResolvedAtmosphere(opts)
   : Object.freeze({id:'classic-arcade',audioTheme:'classic-arcade',phase:String(opts.phase||'stage').trim()||'stage'});
- const selection=currentAudioOverrides().audioTheme;
+ const selection=opts.audioTheme!==undefined
+  ? sanitizeAudioThemeValue(opts.audioTheme)
+  : currentAudioOverrides().audioTheme;
  if(selection==='auto'||selection==='aurora-application')return atmosphere;
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
  const useGalagaReference=phase==='demo'||phase==='stage'||phase==='challenge'||phase==='results';
@@ -2720,8 +2771,49 @@ function syncSettingsUi(){
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
+ syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
+function isLocalDashboardHost(){
+ if(window.__platinumForceExternalConformanceDashboard)return false;
+ const host=String(location.hostname||'').toLowerCase();
+ return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
+}
+function conformanceDashboardUrl(){
+ return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+}
+function syncConformanceDashboardUi(){
+ const summary=CONFORMANCE_DASHBOARD_SUMMARY&&typeof CONFORMANCE_DASHBOARD_SUMMARY==='object'
+  ? CONFORMANCE_DASHBOARD_SUMMARY
+  : {};
+ const local=isLocalDashboardHost();
+ const available=!!summary.available;
+ if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',!local);
+ if(openConformanceDashboardBtn){
+  openConformanceDashboardBtn.disabled=!local;
+  openConformanceDashboardBtn.title=local
+   ? 'Open the local conformance dashboard'
+   : 'Localhost-only for now. Future work will externalize this behind Root access.';
+ }
+ if(conformanceRollupScore)conformanceRollupScore.textContent=available ? (summary.overallCurrent||'--') : '--';
+ if(conformanceRollupBody){
+  if(!local){
+   conformanceRollupBody.textContent='Local-only dashboard hidden on external builds.';
+  }else if(available){
+   const generated=summary.generatedAt?summary.generatedAt.replace('T',' ').replace(/\.\d+Z$/,'Z'):'unknown';
+   const weak=summary.weakestMetric?`${summary.weakestMetric} ${summary.weakestCurrent||''}`.trim():'weakest axis pending';
+   conformanceRollupBody.textContent=`Weakest: ${weak}. Audio ${summary.audioCurrent||'--'} · level arc ${summary.levelArcCurrent||'--'} · visual ${summary.visualCurrent||'--'}. Generated ${generated}.`;
+  }else{
+   conformanceRollupBody.textContent='No generated conformance dashboard summary found for this build.';
+  }
+ }
+ if(conformanceDashboardHint){
+  conformanceDashboardHint.textContent=local
+   ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
+   : 'Future feature: expose this behind Root login password when external developer access is ready.';
+ }
+}
+window.__platinumSyncConformanceDashboardUi=syncConformanceDashboardUi;
 function syncAudioDebugUi(){
  if(!settingsAudioDebugBody)return;
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
@@ -2917,6 +3009,17 @@ function openProjectGuide(){
   try{win.focus();}catch{}
   showToast('Opened project guide');
  }else showToast('Allow popups to open the project guide');
+}
+function openConformanceDashboard(){
+ if(!isLocalDashboardHost()){
+  showToast('Conformance dashboard is localhost-only for now');
+  return;
+ }
+ const win=window.open(conformanceDashboardUrl(), '_blank', 'noopener');
+ if(win){
+  try{win.focus();}catch{}
+  showToast('Opened conformance dashboard');
+ }else showToast('Allow popups to open the conformance dashboard');
 }
 function openPlayersGuideWindow(){
  const win=window.open(playersGuideUrl(), '_blank', 'noopener');
@@ -3170,6 +3273,7 @@ function toggleFullscreen(){if(!document.fullscreenElement)document.documentElem
 settingsBtn.addEventListener('click',()=>{if(settingsOpen)closeSettings();else openSettings();});
 if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
+if(openConformanceDashboardBtn)openConformanceDashboardBtn.addEventListener('click',()=>{openConformanceDashboard();closeSettings();});
 if(openProjectGuideBtn)openProjectGuideBtn.addEventListener('click',()=>{openProjectGuide();closeSettings();});
 if(platformSplashBtn)platformSplashBtn.addEventListener('click',()=>{if(platformSplashOpen)closePlatformSplash();else openPlatformSplash();});
 if(platformSplashClose)platformSplashClose.addEventListener('click',()=>closePlatformSplash());
@@ -3396,7 +3500,8 @@ function resetActiveInputState(reason='manual'){
  keyState={};
  if(S?.p&&Number.isFinite(+S.p.vx)){
   S.p.vx=0;
-  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'){
+  const recenterReason=/-recenter$/.test(String(reason||''));
+  if(reason&&reason!=='manual'&&reason!=='game_start'&&reason!=='input-mapping-recenter'&&!recenterReason){
    S.p.inputResetHoldT=Math.max(+S.p.inputResetHoldT||0,.24);
   }
  }
@@ -4621,7 +4726,7 @@ function updatePlayerBullets(dt){
 }
 
 function updateEnemyBullets(dt,p){
- for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
+ for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];if(!b){S.eb.splice(i,1);continue}b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
   // Reference note for #33: original Galaga challenge stages are treated as
   // non-attacking/non-lethal bonus rounds, so player deaths remain disabled
   // while S.challenge is active.
@@ -4629,7 +4734,33 @@ function updateEnemyBullets(dt,p){
 }
 
 function updateEnemyBodyCollisions(p){
- for(const e of S.e){if(e.hp<=0||p.spawn>0||p.captured||p.returning)continue;const he=enemyCollisionHitbox(e),hp=playerHitbox();if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){e.hp=0;ex(e.x,e.y,12,'#fff');loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});}}
+ for(const e of S.e){
+  if(e.hp<=0||p.spawn>0||p.captured||p.returning)continue;
+  const he=enemyCollisionHitbox(e),hp=playerHitbox();
+  if(Math.abs(e.x-p.x)<he.w+hp.w&&Math.abs(e.y-p.y)<he.h+hp.h){
+   if(S.challenge){
+    if(!e.challengeContactLogged){
+     e.challengeContactLogged=1;
+     logEvent('challenge_enemy_contact',Object.assign({
+      stage:S.stage,
+      challenge:1,
+      nonLethal:1,
+      playerX:+p.x.toFixed(2),
+      playerY:+p.y.toFixed(2),
+      playerLane:playLane(p.x),
+      enemyX:+e.x.toFixed(2),
+      enemyY:+e.y.toFixed(2),
+      enemyLane:playLane(e.x),
+      enemyForm:!!e.form
+     },enemyRef(e)));
+    }
+    continue;
+   }
+   e.hp=0;
+   ex(e.x,e.y,12,'#fff');
+   loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});
+  }
+ }
 }
 
 function updateReleasedCapture(dt,p){
@@ -4669,6 +4800,7 @@ function startAuroraGameplay(){
  resetSession('game_start');
  autoExportedSessionId='';
  const cfg=saveTestCfg();
+ const startStage=resolveGameplayStartStage(cfg);
  const extendRules=currentGamePack()?.scoring?.extends||{};
  const extendFirst=Math.max(0,Number.isFinite(+cfg.extendFirst)?(+cfg.extendFirst|0):(+extendRules.first||0));
  const extendRecurring=Math.max(0,Number.isFinite(+cfg.extendRecurring)?(+cfg.extendRecurring|0):(+extendRules.recurring||0));
@@ -4676,16 +4808,16 @@ function startAuroraGameplay(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:cfg.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:cfg.challenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null});
+ logEvent('game_start',{persona:S.harnessPersona||null,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge});
  startRunRecording();
  spawnStage();msg.textContent='';
- const openingTiming=(!cfg.challenge&&cfg.stage===1&&usesReferenceTimingModel())
+ const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
   ? currentGamePackReferenceTiming('stage1Opening')
   : null;
  if(usesRuntimeGalagaReferenceAudio()){
@@ -5072,9 +5204,9 @@ const accountFlightStats=document.getElementById('accountFlightStats');
 const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
-const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
+const TEST_ACCOUNT_EMAIL='';
 const TEST_ACCOUNT_USER_ID='';
-const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
+const TEST_ACCOUNT_EMAILS=[];
 const TEST_ACCOUNT_USER_IDS=[];
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
@@ -5555,7 +5687,15 @@ function updateEnemy(e,dt,t,T,p){
  e.cool-=dt*(cleanup?1.8:1);
  if(S.scriptMode)return;
  const attackCap=cleanup?2:T.attackCap,diveRate=cleanup?T.diveRate*1.7:T.diveRate,stageAttackGap=!S.challenge&&(S.stage===2||S.stage>=4)&&!cleanup;
- if(e.cool<=0&&randUnit()<dt*diveRate&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
+ const stage4Lane2Priority=!S.challenge&&S.stage===4&&!S.stage4Lane2PriorityDive&&S.stageClock>=13.85&&S.stageClock<=14&&e.t==='but'&&e.c===5&&e.r===1;
+ if(stage4Lane2Priority){
+  S.stage4Lane2PriorityDive=1;
+  startDive(e,p,{});
+  return;
+ }
+ // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
+ const harnessDiveRateBoost=Math.max(1,+e.stage4Lane2ProbeDiveRateBoost||1);
+ if(e.cool<=0&&randUnit()<dt*diveRate*harnessDiveRateBoost&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
   e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
    ? currentGamePackReferenceTiming('enemyDiveCharge')
@@ -5570,6 +5710,7 @@ function updateEnemy(e,dt,t,T,p){
    e.esc=0;
    logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});
   }else{
+   const midRunFlank=S.stage>=8&&S.stage<12&&!S.challenge&&e.t==='but'&&(e.c<=1||e.c>=8);
    const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:S.stage===1?.46:.56)*fm.steer;
    const jitter=(S.stage===2?22:S.stage===4?20:S.stage>=5?32:S.stage===1?24:38)*fm.jitter;
    const vyRnd=S.stage===4?14:S.stage>=5?20:S.stage===2?8:S.stage===1?6:12;
@@ -5577,11 +5718,15 @@ function updateEnemy(e,dt,t,T,p){
    e.low=0;
    e.vx=(p.x-e.x)*steer+rnd(jitter,-jitter);
    e.vy=randomDiveVy(S.stage)*fm.diveVy+rnd(vyRnd,-vyRnd);
+   if(midRunFlank){
+    e.vx+=(e.c<5?1:-1)*(42+rnd(8,-8));
+    e.vy*=.95;
+   }
    e.shot=e.t==='boss'?2:1;
    e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
    e.chargeCueT=chargeTiming?.cueDelay??0;
    e.chargeCueStartY=e.y;
-   logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0});
+   logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0,pattern:midRunFlank?'mid-run-flank-dive':'standard-dive'});
    if(!e.chargeCuePending)sfx.attackCharge();
    if(e.t==='boss')assignEscorts(e);
   }
@@ -5976,6 +6121,14 @@ function specialSquadronTuning(stage=S.stage){
    escortLift:16
   };
  }
+ if(stage>=14){
+  return {
+   escortOffset:36,
+   escortTrackX:6.4,
+   escortTrackY:24,
+   escortLift:24
+  };
+ }
  return {
   escortOffset:30,
   escortTrackX:7.4,
@@ -6001,21 +6154,24 @@ function carriedFighterTarget(e){
 
 function assignEscorts(boss){
  if(boss.t!=='boss'||!enemyHasEscortState(boss))return;
- const maxEscorts=S.stage===1&&S.scriptMode?1:2;
+ const lateEscortSurge=S.stage>=14&&!S.challenge;
+ const maxEscorts=S.stage===1&&S.scriptMode?1:(lateEscortSurge?3:2);
  const squadId=++S.squadSeq;
- const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=2).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
+ const columnReach=lateEscortSurge?3:2;
+ const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t==='but'&&Math.abs(e.c-boss.c)<=columnReach).sort((a,b)=>Math.abs(a.c-boss.c)-Math.abs(b.c-boss.c)).slice(0,maxEscorts);
  boss.esc=0;
  boss.squadId=cand.length?squadId:0;
  const { escortOffset }=specialSquadronTuning(S.stage);
+ const offsetOrder=lateEscortSurge?[-escortOffset,escortOffset,-escortOffset*.5]:[-escortOffset,escortOffset];
  for(const [i,e] of cand.entries()){
   if(!enemyHasEscortState(e))continue;
   e.dive=5;
   e.lead=boss.id;
-  e.off=(i?1:-1)*escortOffset;
-  e.shot=1;
+  e.off=offsetOrder[i]??((i?1:-1)*escortOffset);
+  e.shot=lateEscortSurge&&i>1?0:1;
   e.squadId=squadId;
   boss.esc++;
-  logEnemyAttackStart(e,'escort',{lead:boss.id,offset:e.off});
+  logEnemyAttackStart(e,'escort',{lead:boss.id,offset:+e.off.toFixed(2),pattern:lateEscortSurge?'late-stage-wide-escort':'standard-escort'});
  }
 }
 
@@ -6289,6 +6445,16 @@ function spawnFormation(){
    profile
   });
   e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+  if(S.stage>=8&&S.stage<12&&!S.challenge){
+   if(t==='but'&&(c<=1||c>=8))e.cool=.16+(c<=1?c:9-c)*.12;
+   else if(t==='but')e.cool+=.55;
+   else if(t==='boss')e.cool+=2.2;
+   else if(t==='bee'&&r>=2)e.cool+=1.35;
+  }
+  if(S.stage>=14&&!S.challenge){
+   if(t==='boss')e.cool=.72+(c-3)*.16;
+   else if(t==='but'&&r<=1)e.cool+=.55;
+  }
   S.e.push(e);
  }
  for(let i=0;i<S.rogue;i++){
@@ -6355,7 +6521,7 @@ function spawnStage(){
  const stageEntryTiming=usesReference&&!S.challenge&&S.stage>1&&transitionMode==='challengeResult'
   ? currentGamePackReferenceTiming('postChallengeStageEntry')
   : null;
- S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
+ S.stageClock=0;S.captureCountStage=0;S.lastCaptureStartT=null;S.lastFighterCapturedT=null;S.stage4Lane2PriorityDive=0;S.sequenceT=0;S.sequenceMode='';S.seq=0;S.seqT=usesReference?(S.challenge?1.85:(stageEntryTiming?.firstPulseDelay||3.05)):.45;S.recoverT=S.challenge?0:(S.stage>=6?1.18:S.stage===4?1.34:S.stage>=5?1.2:0);S.attackGapT=S.challenge?0:(S.stage>=6?1.02:S.stage===4?1.42:S.stage>=5?1.24:0);
  if(stageEntryTiming)S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,(stageEntryTiming.firstPulseDelay||0)+.15);
  S.transitionMode='';
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
@@ -7653,7 +7819,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
    extendAward:Object.freeze({seq:[880,1175,1568],step:.058,wave:'triangle',volume:.015,slide:54,lpHz:4700,tones:Object.freeze([{freq:2093,duration:.1,wave:'sine',volume:.007,slide:18,lpHz:5600,delay:.08}])}),
    capturedFighterDestroyed:Object.freeze({tones:Object.freeze([{freq:340,duration:.042,wave:'triangle',volume:.0118,slide:-250,lpHz:3500},{freq:208,duration:.092,wave:'sine',volume:.0088,slide:-130,lpHz:2360,delay:.014}]),noise:Object.freeze([{duration:.05,volume:.0056,hp:1500,delay:.01}])}),
    challengeResults:Object.freeze({seq:[440,587,784,988],step:.058,wave:'triangle',volume:.0134,slide:24,lpHz:3800,tones:Object.freeze([{freq:1245,duration:.12,wave:'sine',volume:.0054,slide:12,lpHz:4500,delay:.174}])}),
-   challengePerfect:Object.freeze({seq:[698,932,1175,1568,2093],step:.05,wave:'triangle',volume:.0152,slide:42,lpHz:4500,tones:Object.freeze([{freq:2637,duration:.14,wave:'sine',volume:.0068,slide:18,lpHz:5400,delay:.2}])}),
+   challengePerfect:Object.freeze({seq:[880,1175,1568,2093,2794,3520],step:.039,wave:'triangle',volume:.0086,slide:10,lpHz:6900,tones:Object.freeze([{freq:3136,duration:.075,wave:'square',volume:.0027,slide:0,lpHz:7600,delay:.195}])}),
    rescueJoin:Object.freeze({seq:[659,784,1047,1397],step:.05,wave:'triangle',volume:.014,slide:48,lpHz:4500,tones:Object.freeze([{freq:1760,duration:.1,wave:'sine',volume:.006,slide:20,lpHz:5200,delay:.08}])}),
    captureRetreat:Object.freeze({seq:[330,392,494,587],step:.06,wave:'triangle',volume:.012,slide:18,lpHz:2600,tones:Object.freeze([{freq:784,duration:.18,wave:'sawtooth',volume:.005,slide:-70,lpHz:3200,delay:.08}])}),
    attractEnter:Object.freeze({
@@ -8264,9 +8430,9 @@ const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecor
  version:'0.1.0-preview',
  versionLine:'0.1.0 preview',
  releaseTrack:'playable-preview',
- runtimeStatus:'non-production-playable-preview',
+ runtimeStatus:'production-playable-preview',
  platformCompatibility:buildPlatformInfo().compatibility||'',
- launchPolicy:'development-and-beta-only'
+ launchPolicy:'production-preview-playable'
 }));
 
 const GALAXY_GUARDIANS_PACK=Object.freeze({
@@ -8276,9 +8442,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   version:GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0-preview',
   versionLine:GALAXY_GUARDIANS_APPLICATION_RELEASE.versionLine||GALAXY_GUARDIANS_APPLICATION_RELEASE.version||'0.1.0 preview',
   releaseTrack:GALAXY_GUARDIANS_APPLICATION_RELEASE.releaseTrack||'playable-preview',
-  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'non-production-playable-preview',
+  runtimeStatus:GALAXY_GUARDIANS_APPLICATION_RELEASE.runtimeStatus||'production-playable-preview',
   platformCompatibility:GALAXY_GUARDIANS_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
-  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'development-and-beta-only',
+  launchPolicy:GALAXY_GUARDIANS_APPLICATION_RELEASE.launchPolicy||'production-preview-playable',
   playable:0,
   previewOnly:1
  }),
@@ -8300,9 +8466,9 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   subtitle:'SECOND GAME PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
-  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on development and beta lanes.',
+  cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on the hosted release lanes.',
   summary:'Galaxy Guardians is the planned Galaxian-inspired sibling title for Platinum. This preview now lives as pack-owned content instead of one-off shell copy.',
-  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a non-production scout-wave runtime while Aurora remains the primary public production cabinet.',
+  detail:'Today it proves the second-game identity, shell theme, picker flow, preview modal, safe launch behavior, and a production-safe scout-wave runtime while Aurora remains the primary public production cabinet.',
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
@@ -8315,7 +8481,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
    Object.freeze({label:'Minimal scout-wave playable slice',state:'online'}),
    Object.freeze({label:'Application-owned scoring harness',state:'online'})
   ]),
-  launchFallbackToast:'Galaxy Guardians sneak peek is preview-only. Launching Aurora Galactica.'
+  launchFallbackToast:'Galaxy Guardians playable preview is unavailable in this build. Launching Aurora Galactica.'
  }),
  shellThemes:Object.freeze([
   Object.freeze({id:'guardians-preview',label:'Guardians Preview',shellFrameTheme:'guardians-preview',frameAccent:'signal-crimson',default:1}),
@@ -8350,7 +8516,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
 });
 
 // Source: src/js/13-galaxy-guardians-gameplay-adapter.js
-// Disabled Galaxy Guardians gameplay adapter skeleton for the first owned 0.1 slice.
+// Galaxy Guardians gameplay adapter skeleton plus the owned hosted preview slice.
 
 const GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES=Object.freeze({
  usesCaptureRescue:0,
@@ -8439,7 +8605,8 @@ const GALAXY_GUARDIANS_SCOUT_WAVE_PROFILE=Object.freeze({
 
 const GALAXY_GUARDIANS_PLAYABLE_PREVIEW_RELEASE_CHANNELS=Object.freeze([
  'development',
- 'production beta'
+ 'production beta',
+ 'production'
 ]);
 
 function createGalaxyGuardiansInitialState(opts={}){
@@ -8493,8 +8660,7 @@ function galaxyGuardiansDevPreviewAllowed(){
   .map(value=>String(value).toLowerCase());
  return typeof BUILD_INFO!=='undefined'
   && allowedChannels.includes(channel)
-  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable)
-  && !GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable;
+  && !!(GALAXY_GUARDIANS_RUNTIME_PROFILE.previewPlayable||GALAXY_GUARDIANS_RUNTIME_PROFILE.devPlayable);
 }
 
 function syncGalaxyGuardiansShellState(state){
@@ -8523,7 +8689,7 @@ function closeGalaxyGuardiansDevOverlays(){
 
 function startGalaxyGuardiansDevPreview(cfg={}){
  if(!galaxyGuardiansDevPreviewAllowed()){
-  showToast('Galaxy Guardians playable preview is available only in development and beta builds.');
+  showToast('Galaxy Guardians playable preview is unavailable in this build.');
   return false;
  }
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
@@ -8644,7 +8810,7 @@ function summarizeGalaxyGuardiansDevPreview(){
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
- label:'Galaxy Guardians non-production playable preview',
+ label:'Galaxy Guardians hosted playable preview',
  enabled:1,
  devOnly:0,
  previewOnly:1,
@@ -8660,7 +8826,7 @@ window.currentGalaxyGuardiansDevPreviewState=currentGalaxyGuardiansDevPreviewSta
 window.summarizeGalaxyGuardiansDevPreview=summarizeGalaxyGuardiansDevPreview;
 
 // Source: src/js/13-galaxy-guardians-runtime.js
-// Non-production Galaxy Guardians scout-wave runtime model.
+// Hosted Galaxy Guardians scout-wave runtime model for the first public preview slice.
 
 const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
  flagship:Object.freeze({
@@ -8704,11 +8870,11 @@ const GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG=Object.freeze({
 
 const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
  id:'galaxy-guardians-dev-scout-wave-runtime',
- status:'preview-runtime-slice-not-production-release',
+ status:'preview-runtime-slice-production-enabled',
  publicPlayable:0,
  previewPlayable:1,
  devPlayable:1,
- playablePreviewReleaseChannels:Object.freeze(['development','production beta']),
+ playablePreviewReleaseChannels:Object.freeze(['development','production beta','production']),
  evidenceProfile:'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json',
  promotedEventLog:'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json',
  eventVocabulary:Object.freeze([
@@ -8867,7 +9033,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
  const seed=(+opts.seed>>>0)||42719;
  const state={
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
-  runtimeState:'dev-scout-wave',
+  runtimeState:'hosted-preview-scout-wave',
   publicPlayable:0,
   previewPlayable:1,
   devPlayable:1,
@@ -10210,7 +10376,7 @@ function renderGamePicker(){
   const previewLine=pack.preview?.cardLine||'Shell preview only while gameplay integration is still in progress';
   const disabled=isActive?' disabled':'';
   const selectedTheme=typeof selectedShellThemeForPack==='function'?selectedShellThemeForPack(pack,pack.metadata?.gameKey||''):null;
-  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${describePackRelease(pack)||'Version details unavailable'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in development and beta runtimes':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
+  return `<div class="gamePickerCard${isActive?' isActive':''}"><span class="gamePickerCardTitle">${pack.metadata?.title||pack.metadata?.gameKey||'Game Pack'}</span><span class="gamePickerCardMeta">${describePackRelease(pack)||'Version details unavailable'}</span><span class="gamePickerCardMeta">${pack.frontDoor?.featureLine||'Platform pack preview'}</span><span class="gamePickerCardMeta">${playable?'Playable in the current runtime':previewPlayable?'Preview playable in the current hosted lane':previewLine}</span><span class="gamePickerCardMeta">Preferred shell theme: ${selectedTheme?.label||'Default'}</span>${flagHtml}<button class="gamePickerCardAction" data-pack-key="${pack.metadata?.gameKey||''}"${disabled}>${actionLabel}</button></div>`;
  }).join('');
  gamePickerStatus.textContent=started
   ? 'Finish the current run before switching to a different game pack.'
@@ -11541,7 +11707,20 @@ window.__galagaHarness__={
   S.simT=+cfg.initialSimT;
  }
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
- if(!started)start();
+ if(!started){
+  const startStageMode=String(cfg.stageMode||'internal').toLowerCase()==='display'?'display':'internal';
+  const previousPlatinumStageMode=window.__platinumStartStageMode;
+  const previousAuroraStageMode=window.__auroraStartStageMode;
+  window.__platinumStartStageMode=startStageMode;
+  window.__auroraStartStageMode=startStageMode;
+  try{start()}
+  finally{
+   if(previousPlatinumStageMode===undefined)delete window.__platinumStartStageMode;
+   else window.__platinumStartStageMode=previousPlatinumStageMode;
+   if(previousAuroraStageMode===undefined)delete window.__auroraStartStageMode;
+   else window.__auroraStartStageMode=previousAuroraStageMode;
+  }
+ }
 },
  setControlledClock(enabled=1){
   if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!enabled);
@@ -11555,8 +11734,9 @@ window.__galagaHarness__={
   let elapsed=0;
   while(elapsed<total){
    if(stopOnGameOver&&!started)break;
-   update(step);
-   elapsed+=step;
+   const dt=Math.min(step,total-elapsed);
+   update(dt);
+   elapsed+=dt;
   }
   draw();
   return this.state();
@@ -11867,6 +12047,7 @@ window.__galagaHarness__={
    rightCodes:typeof movementRightCodes==='function'?[...movementRightCodes()]:[],
    playerX:+(+S.p.x||0).toFixed(2),
    playerVx:+(+S.p.vx||0).toFixed(2),
+   inputResetHoldT:+(+S.p.inputResetHoldT||0).toFixed(3),
    spawn:+(+S.p.spawn||0).toFixed(3),
    started:!!started,
    keys:Object.keys(keys||{}).filter(code=>!!keys[code]),
@@ -12113,7 +12294,7 @@ window.__galagaHarness__={
   if(Array.isArray(cue.noise))for(const burst of cue.noise){
    endT=Math.max(endT,Math.max(0,+burst.delay||0)+Math.max(.01,+burst.duration||.08)+.04);
   }
-  return Math.max(.8,Math.min(4,endT+.12));
+  return Math.max(.25,Math.min(4,endT+.12));
  },
  async captureAudioCue(name,opts={}){
   if(!name)return null;
@@ -12160,6 +12341,20 @@ window.__galagaHarness__={
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },
+ async captureAudioCueSpec(spec={},opts={}){
+  if(typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return {ok:false,error:'Audio engine is not available.'};
+  const cueName=String(opts.name||'__candidateCue').trim()||'__candidateCue';
+  const originalCueDef=sfx.cueDef;
+  sfx.cueDef=function(name,cueOpts={}){
+   if(String(name)===cueName)return spec;
+   return originalCueDef.call(this,name,cueOpts);
+  };
+  try{
+   return await this.captureAudioCue(cueName,opts);
+  }finally{
+   sfx.cueDef=originalCueDef;
+  }
+ },
  formationState(){
   const active=S.e.filter(e=>e.hp>0&&!e.ch);
  return {
@@ -12191,6 +12386,60 @@ window.__galagaHarness__={
     esc:+(+e.esc||0).toFixed(2),
     squadId:+(+e.squadId||0).toFixed(2)
    }))
+  };
+ },
+ applyStage4Lane2SchedulingProbe(cfg={}){
+  if(S.stage!==4||S.challenge)return { applied:false, reason:'not-stage4-normal' };
+  const start=Number.isFinite(+cfg.start)?+cfg.start:13.1;
+  const end=Number.isFinite(+cfg.end)?+cfg.end:15.1;
+  if(S.stageClock<start||S.stageClock>end)return { applied:false, reason:'outside-window', stageClock:+(+S.stageClock||0).toFixed(3) };
+  const mode=String(cfg.mode||'cooldown-only');
+  const target=S.e.find(e=>e.hp>0&&!e.ch&&e.form&&!e.dive&&e.t==='but'&&e.c===5&&e.r===1);
+  if(!target)return { applied:false, reason:'target-unavailable', stageClock:+(+S.stageClock||0).toFixed(3) };
+  const beforeCool=+target.cool||0;
+  const beforeGap=+S.attackGapT||0;
+  const maxCool=Number.isFinite(+cfg.maxCool)?+cfg.maxCool:0;
+  target.cool=Math.min(beforeCool,maxCool);
+  if(mode.includes('rate')){
+   target.stage4Lane2ProbeDiveRateBoost=Math.max(1,+cfg.diveRateBoost||1);
+  }
+  if(mode.includes('gap')){
+   const maxGap=Number.isFinite(+cfg.maxGap)?+cfg.maxGap:0;
+   S.attackGapT=Math.min(beforeGap,maxGap);
+  }
+  if(mode.includes('recover')){
+   const maxRecover=Number.isFinite(+cfg.maxRecover)?+cfg.maxRecover:0;
+   S.recoverT=Math.min(+S.recoverT||0,maxRecover);
+  }
+  if(mode.includes('priority')&&!target.stage4Lane2PriorityStarted){
+   target.stage4Lane2PriorityStarted=1;
+   if(typeof startDive==='function')startDive(target,S.p,{});
+  }
+  if(!target.stage4Lane2ProbeLogged){
+   target.stage4Lane2ProbeLogged=1;
+   logEvent('harness_stage4_lane2_scheduling_probe',{
+    stage:S.stage,
+    mode,
+    start,
+    end,
+    stageClock:+(+S.stageClock||0).toFixed(3),
+    targetId:target.id,
+    diveRateBoost:+(+target.stage4Lane2ProbeDiveRateBoost||1).toFixed(3),
+    targetCoolBefore:+beforeCool.toFixed(3),
+    targetCoolAfter:+(+target.cool||0).toFixed(3),
+    attackGapBefore:+beforeGap.toFixed(3),
+    attackGapAfter:+(+S.attackGapT||0).toFixed(3)
+   });
+  }
+  return {
+   applied:true,
+   mode,
+   stageClock:+(+S.stageClock||0).toFixed(3),
+   targetId:target.id,
+   diveRateBoost:+(+target.stage4Lane2ProbeDiveRateBoost||1).toFixed(3),
+   targetCool:+(+target.cool||0).toFixed(3),
+   attackGap:+(+S.attackGapT||0).toFixed(3),
+   recoverT:+(+S.recoverT||0).toFixed(3)
   };
  },
  challengeFormationState(){
@@ -12444,6 +12693,7 @@ window.__galagaHarness__={
   const enemy=candidates.sort((a,b)=>Math.abs(a.x-PLAY_W/2)-Math.abs(b.x-PLAY_W/2))[0];
   if(!enemy)return false;
   for(const e of S.e)if(e.id!==enemy.id)e.hp=0;
+  enemy.spawn=0;
   enemy.tm=+cfg.enemyTm||11.2;
   updateChallengeEnemy(enemy,0.016);
   p.x=cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:enemy.x,18,PLAY_W-18);
@@ -12472,7 +12722,8 @@ window.__galagaHarness__={
    enemyId:enemy.id,
    enemyX:+enemy.x.toFixed(2),
    enemyY:+enemy.y.toFixed(2),
-   enemyTm:+enemy.tm.toFixed(3)
+   enemyTm:+enemy.tm.toFixed(3),
+   enemySpawn:+(enemy.spawn||0).toFixed(3)
   });
   return true;
  },
