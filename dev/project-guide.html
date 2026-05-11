@@ -694,6 +694,51 @@
 </ul>
     </section>
   
+
+    <section class="section" id="documentation-provenance">
+      <div class="sectionHeader">
+        <h2>Documentation Provenance</h2>
+        <p>Machine-readable source-of-truth map for the hosted project documentation. Generated pages should summarize persistent repo artifacts and analysis outputs rather than carrying current release facts only as hand-edited prose.</p>
+      </div>
+      <div class="tableWrap">
+        <table class="dataTable">
+          <thead>
+            <tr><th>Visible Surface</th><th>Generated From</th><th>Persistent Inputs</th><th>Freshness Rule</th></tr>
+          </thead>
+          <tbody>
+            
+              <tr><td>Public Project Page
+
+<code>public-project-page.html</code></td><td><code>tools/build/build-index.js#buildPublicProjectPage</code>
+
+Template: <code>src/public/aurora-galactica.template.html</code></td><td><code>release-manifest.json</code>, <code>release-dashboard.json</code>, <code>release-notes.json</code>, <code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code>, <code>RELEASE_CONFORMANCE_DASHBOARD.md</code>, <code>CONFORMANCE_ECONOMICS.md</code>, <code>reference-artifacts/analyses/conformance-economics</code>, <code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code>, <code>REFERENCE_MEDIA_INVENTORY.md</code>, <code>ARTIFACT_POLICY.md</code>, <code>GAME_CONFORMANCE_CATALOG.md</code>, <code>application-guide.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code></td><td>Release identity and current focus: Build tokens and release dashboard fields are injected by npm run build for the active lane. Conformance readout and release gates: Score bars and gate cards are generated from the release conformance dashboard artifact. Value versus compute: Resource cards and investment rows are generated from economics fields in the dashboard artifact and linked economics docs. Reference ingestion: Ingestion cards are generated from dashboard ingestion rows and linked to maintained ingestion/reference docs. Game conformance catalog: Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.</td></tr>
+            
+
+              <tr><td>Hosted Project Guide
+
+<code>project-guide.html</code></td><td><code>tools/build/build-index.js#buildProjectGuide</code>
+
+Template: <code>src/project-guide.template.html</code></td><td><code>project-guide.json</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>PLAN.md</code>, <code>PRODUCT_ROADMAP.md</code>, <code>RELEASE_READINESS_REVIEW.md</code>, <code>documentation-provenance.json</code></td><td>Guide overview and source document index: Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files. Documentation provenance: The hosted guide renders this manifest as a build-time table.</td></tr>
+            
+
+              <tr><td>Aurora Application Guide
+
+<code>application-guide.html</code></td><td><code>tools/build/build-index.js#buildApplicationGuide</code>
+
+Template: <code>src/application-guide.template.html</code></td><td><code>application-guide.json</code>, <code>src/js/13-aurora-game-pack.js</code>, <code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code>, <code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td><td>Audio and visual catalog: Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations. Artifact conformance status: The artifact scorecard is generated from analysis outputs rather than a single static sprite claim.</td></tr>
+            
+
+              <tr><td>Conformance Dashboard
+
+<code>conformance-dashboard.html</code></td><td><code>tools/harness/build-dev-conformance-dashboard-page.js</code>
+
+Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td><td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code></td><td>Dashboard data and metrics: The HTML and raw JSON are built from the same release-conformance artifact.</td></tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+  
         
     <section class="section" id="project-state-conformance-doc">
       <div class="sectionHeader">
@@ -1231,7 +1276,8 @@ npm run build</code></pre>
 <h3>Documentation Refresh</h3>
 <p>The release documentation now treats the conformance project as a first-class product effort rather than an internal note. The key maintained surfaces are:</p>
 <ul><li><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></li><li><code>CONFORMANCE_METRICS_OVERVIEW.md</code></li><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li><li><code>CONFORMANCE_ECONOMICS.md</code></li><li><code>GAME_CONFORMANCE_CATALOG.md</code></li><li><code>AUDIO_CONFORMANCE_LAB.md</code></li><li><code>STRATEGIC_BETA_REVIEW.md</code></li><li>hosted project guide, application guide, conformance dashboard, release</li></ul>
-<p>dashboard, and public project page</p>
+<p>dashboard, public project page, and <code>documentation-provenance.json</code></p>
+<p>The hosted public project page and project guide now render a documentation provenance section from <code>documentation-provenance.json</code>, and publish preflight checks fail if that source map or generated section disappears. Current scores, costs, release posture, game status, and artifact claims should therefore be changed in their persistent source artifacts first, then rebuilt into the visible pages.</p>
 <p>Documentation suggestions carried forward:</p>
 <ul><li>Add timeline charts that show conformance score movement beside CPU,</li></ul>
 <p>browser, GPU-equivalent model, and artifact-volume spend.</p>
@@ -3692,6 +3738,9 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
   
 
     <li><a href="#next">Likely Next Steps</a></li>
+  
+
+    <li><a href="#documentation-provenance">Documentation Provenance</a></li>
   
 
     <li><a href="#project-state-conformance-doc">Project State And Conformance Program</a></li>
