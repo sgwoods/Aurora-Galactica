@@ -414,6 +414,12 @@
     .audioAction:hover{
       background:rgba(105,226,167,0.2);
     }
+    .audioAction.isCompact{
+      min-width:0;
+      padding:7px 10px;
+      font-size:12px;
+      letter-spacing:.02em;
+    }
     .audioStatus{
       margin-top:16px;
       padding:12px 14px;
@@ -482,6 +488,111 @@
       color:#eff7ff;
       font-weight:600;
     }
+    .catalogMedia{
+      display:grid;
+      gap:10px;
+      min-width:190px;
+    }
+    .catalogMediaGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(108px,1fr));
+      gap:10px;
+      align-items:stretch;
+    }
+    .catalogMediaItem{
+      min-width:0;
+      padding:8px;
+      border-radius:14px;
+      background:rgba(6,15,24,0.66);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaLabel{
+      display:block;
+      margin:0 0 6px;
+      color:#dff7ff;
+      font-size:11px;
+      line-height:1.35;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .catalogMediaNote{
+      display:block;
+      margin-top:6px;
+      color:var(--soft);
+      font-size:11px;
+      line-height:1.35;
+    }
+    .catalogMediaImg{
+      display:block;
+      width:100%;
+      max-height:126px;
+      object-fit:contain;
+      image-rendering:auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .catalogMediaImg.isPixelated{
+      image-rendering:pixelated;
+    }
+    .mediaCrop{
+      position:relative;
+      overflow:hidden;
+      max-width:100%;
+      margin:0 auto;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .mediaCrop img{
+      display:block;
+      max-width:none;
+      transform-origin:top left;
+      image-rendering:pixelated;
+    }
+    .pixelSprite{
+      display:grid;
+      grid-template-columns:repeat(var(--pixel-cols), 8px);
+      gap:1px;
+      justify-content:center;
+      align-content:center;
+      min-height:58px;
+      padding:10px 8px;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .pixelSprite span{
+      width:8px;
+      height:8px;
+      background:transparent;
+    }
+    .pixelSprite span.isFilled{
+      background:var(--pixel-color);
+      box-shadow:0 0 10px color-mix(in srgb, var(--pixel-color), transparent 55%);
+    }
+    .mediaPlaceholder{
+      padding:10px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.045);
+      border:1px dashed rgba(255,255,255,0.16);
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .conformanceActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .waveformStrip{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+      gap:8px;
+    }
+    .waveformStrip .catalogMediaImg{
+      max-height:86px;
+    }
     .previewFrame{
       position:absolute;
       width:1px;
@@ -508,7 +619,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">1.3.0</span>
+              <span class="metaValue">1.3.0.1</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -516,7 +627,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 8, 2026</span>
+              <span class="metaValue">May 11, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -776,8 +887,8 @@
 
     <tr>
       <td><strong>Normal stage-to-stage transition</strong><br><span class="docMeta">stage</span></td>
-      <td>Queued late in the inter-stage window. Normal transition window is about 3.2s; the reference excerpt used is 0.86s.</td>
-      <td><code>stageTransition -&gt; galaga-level-flag-v1.m4a excerpt 0.00s-0.86s</code><br><span class="docMeta">Implemented with timing-budget policy</span></td>
+      <td>Queued late in the inter-stage window. The runtime cue now preserves a 3.35s reference-backed phrase when the handoff budget allows, so the inter-level moment no longer collapses into a short flag blip.</td>
+      <td><code>stageTransition -&gt; galaga-level-flag-v1.m4a excerpt 0.00s-3.35s</code><br><span class="docMeta">Implemented with timing-budget policy</span></td>
       <td><strong>Start:</strong> Initiated during the inter-stage handoff once the board has cleared and the transition timer reaches its cue point.<br><strong>Stop:</strong> Stops stagePulse, challengeResults, and challengePerfect before playback.</td>
       <td>Now cue-budgeted and backed by reference timing windows, with later-stage entry delays used to keep arrival/cadence from stepping on the handoff.</td>
       <td><div class="buttonRow"><button class="audioAction" type="button" data-event-entry-id="stage-transition" data-event-mode="current">Play Current</button><button class="audioAction" type="button" data-event-entry-id="stage-transition" data-event-mode="aurora">Play Aurora</button></div></td>
@@ -786,8 +897,8 @@
 
     <tr>
       <td><strong>Challenge-stage entry</strong><br><span class="docMeta">challenge</span></td>
-      <td>Queued late in the normal-to-challenge window. Transition window is now about 4.35s; the challenge cue lands about 1.72s before spawn, and challenge enemy arrivals are delayed by about 0.96s after stage spawn in reference mode.</td>
-      <td><code>challengeTransition -&gt; galaga2-challenging-stage.m4a excerpt 0.00s-1.05s</code><br><span class="docMeta">Implemented with reference timing window</span></td>
+      <td>Queued late in the normal-to-challenge window. The challenge-entry window is now 3.35s; the cue starts about 1.13s before challenge spawn, uses a 1.6s excerpt, and preserves about 0.47s of cue tail past spawn in reference mode.</td>
+      <td><code>challengeTransition -&gt; galaga2-challenging-stage.m4a excerpt 0.00s-1.60s</code><br><span class="docMeta">Implemented with reference timing window</span></td>
       <td><strong>Start:</strong> Initiated when the next stage is a challenge stage and the transition timer reaches the challenge cue point.<br><strong>Stop:</strong> Stops stagePulse, stageTransition, challengeResults, and challengePerfect before playback.</td>
       <td>Still one of the most sensitive timing/problem areas in live play, but it is now managed by a named reference timing window instead of a single hardcoded delay.</td>
       <td><div class="buttonRow"><button class="audioAction" type="button" data-event-entry-id="challenge-transition" data-event-mode="current">Play Current</button><button class="audioAction" type="button" data-event-entry-id="challenge-transition" data-event-mode="aurora">Play Aurora</button></div></td>
@@ -797,7 +908,7 @@
     <tr>
       <td><strong>Challenge results</strong><br><span class="docMeta">challenge</span></td>
       <td>Queued about 0.34s after challenge clear; the post-challenge handoff is now widened so the next-stage cue lands about 4.38s after clear and the next stage spawns about 6.0s after clear in the measured perfect-clear path.</td>
-      <td><code>challengeResults -&gt; galaga2-challenging-stage-results.m4a excerpt 0.00s-1.55s</code><br><span class="docMeta">Implemented with widened handoff policy</span></td>
+      <td><code>challengeResults -&gt; galaga2-challenging-stage-results.m4a excerpt 0.00s-1.95s</code><br><span class="docMeta">Implemented with widened handoff policy</span></td>
       <td><strong>Start:</strong> Initiated when a challenge stage is cleared without a perfect result.<br><strong>Stop:</strong> Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.</td>
       <td>Now separated from challengePerfect and given a wider hold window so the result phrase can finish before the next-stage handoff.</td>
       <td><div class="buttonRow"><button class="audioAction" type="button" data-event-entry-id="challenge-results" data-event-mode="current">Play Current</button><button class="audioAction" type="button" data-event-entry-id="challenge-results" data-event-mode="aurora">Play Aurora</button></div></td>
@@ -806,8 +917,8 @@
 
     <tr>
       <td><strong>Challenge perfect result</strong><br><span class="docMeta">challenge</span></td>
-      <td>Queued about 0.34s after a perfect challenge clear; excerpt runs 1.7s with extra cadence hold before the next-stage handoff, which now uses the same widened measured window as challenge results.</td>
-      <td><code>challengePerfect -&gt; galaga2-challenging-stage-perfect.m4a excerpt 0.00s-1.70s</code><br><span class="docMeta">Implemented with hold policy</span></td>
+      <td>Queued about 0.34s after a perfect challenge clear; excerpt runs 2.15s with extra cadence hold before the next-stage handoff, which now uses the same widened measured window as challenge results.</td>
+      <td><code>challengePerfect -&gt; galaga2-challenging-stage-perfect.m4a excerpt 0.00s-2.15s</code><br><span class="docMeta">Implemented with hold policy</span></td>
       <td><strong>Start:</strong> Initiated when a challenge stage is cleared perfectly.<br><strong>Stop:</strong> Stops stagePulse, stageTransition, and challengeTransition before playback; also holds ambient cadence.</td>
       <td>Direct reference mapping with runtime-safe duration.</td>
       <td><div class="buttonRow"><button class="audioAction" type="button" data-event-entry-id="challenge-perfect" data-event-mode="current">Play Current</button><button class="audioAction" type="button" data-event-entry-id="challenge-perfect" data-event-mode="aurora">Play Aurora</button></div></td>
@@ -1347,8 +1458,8 @@
       <td><strong>Player Shot</strong></td>
       <td>
         <div>Compare whether player fire reads as a quick arcade shot instead of a generic impact.</div>
-        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured coverage added for shot identity; current reference clip is shared and may still be too broad.</div>
-        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured subwindow promoted for shot identity; uses a distinct initial transient so player fire can be scored separately from enemy fire and boss damage.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium-high</div>
       </td>
       <td>
         <div class="buttonRow">
@@ -1368,8 +1479,8 @@
       <td><strong>Enemy Shot</strong></td>
       <td>
         <div>Compare whether enemy fire is distinct enough from player fire and boss damage.</div>
-        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured coverage added for projectile feedback; current reference clip is shared and may still be too broad.</div>
-        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured subwindow promoted for enemy projectile feedback; still from the same source clip, but scored as a distinct reference phrase from playerShot and bossHit.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium-high</div>
       </td>
       <td>
         <div class="buttonRow">
@@ -1389,8 +1500,8 @@
       <td><strong>Enemy Hit</strong></td>
       <td>
         <div>Compare whether an enemy impact gives immediate hit confirmation.</div>
-        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured coverage added for impact feedback; hit and kill hierarchy still needs refinement.</div>
-        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured subwindow promoted for impact feedback; hit and kill hierarchy remains under review but is now scored against a distinct phrase from enemyBoom.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium-high</div>
       </td>
       <td>
         <div class="buttonRow">
@@ -1410,8 +1521,8 @@
       <td><strong>Boss Hit</strong></td>
       <td>
         <div>Compare whether boss damage reads as a distinct multi-hit event.</div>
-        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured coverage added for boss damage feedback; reference source is mixed and may require subwindow promotion.</div>
-        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured subwindow promoted for boss damage feedback; reference source remains shared, but bossHit now has a dedicated scoring window.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium-high</div>
       </td>
       <td>
         <div class="buttonRow">
@@ -1431,8 +1542,8 @@
       <td><strong>Enemy Boom</strong></td>
       <td>
         <div>Compare whether normal enemy destruction is more emphatic than a simple hit.</div>
-        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured coverage added for destruction feedback; may need a better split between impact and explosion.</div>
-        <div class="docMeta"><strong>Confidence:</strong> medium</div>
+        <div class="docMeta" style="margin-top:8px;"><strong>Mapping status:</strong> Measured subwindow promoted for normal-enemy destruction feedback; enemyHit and enemyBoom now score against separate Zako phrases.</div>
+        <div class="docMeta"><strong>Confidence:</strong> medium-high</div>
       </td>
       <td>
         <div class="buttonRow">
@@ -1933,6 +2044,7 @@
               <thead>
                 <tr>
                   <th>Ship / Type</th>
+                  <th>Visual</th>
                   <th>Families / Presentation</th>
                   <th>Where It Appears</th>
                   <th>Gameplay Context</th>
@@ -1943,6 +2055,24 @@
                 
     <tr>
       <td><strong>Player Fighter</strong><br><span class="docMeta">player</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora player sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:6" aria-hidden="true"><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga player fighter model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/bf37df99b3-galaga-player-fighter-model.png" alt="Inferred Galaga player fighter model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 8 samples, 84% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga player fighter target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/571e0e71ea-galaga-player-fighter.png" alt="Galaga player fighter target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for player ship visual comparison.</span>
+    </div>
+  </div></div></td>
       <td>player ship</td>
       <td>Every standard and challenge stage as the main player ship.</td>
       <td>Primary player-controlled ship. Can be captured, rescued, and rejoined into dual-fighter mode.</td>
@@ -1952,6 +2082,24 @@
 
     <tr>
       <td><strong>Dual Fighter</strong><br><span class="docMeta">player state</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current dual-fighter state</span>
+      <div class="pixelSprite" style="--pixel-cols:12" aria-hidden="true"><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#ff4658"></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#72c8ff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span class="isFilled" style="--pixel-color:#9adfff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga dual-fighter model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/b9e30d5c04-galaga-dual-fighter-model.png" alt="Inferred Galaga dual-fighter model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga dual-fighter target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/c39b46c91b-galaga-dual-fighter.png" alt="Galaga dual-fighter target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for rescue, dual-fighter, and captured-fighter comparison.</span>
+    </div>
+  </div></div></td>
       <td>joined player pair</td>
       <td>After a successful rescue join during normal Aurora play.</td>
       <td>A paired player state rather than a separate enemy or pack. Central to Aurora&#39;s rescue and trust-fix behavior.</td>
@@ -1961,6 +2109,24 @@
 
     <tr>
       <td><strong>Bee Line</strong><br><span class="docMeta">enemy</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora bee sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga Zako scout model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/84b3a4cec3-galaga-zako-dive-model.png" alt="Inferred Galaga Zako scout model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 3 samples, 92% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga Zako scout target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/f6f88e7233-galaga-zako-dive.png" alt="Galaga Zako scout target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop from a live Zako/scout dive pose.</span>
+    </div>
+  </div></div></td>
       <td>classic, scorpion, stingray, galboss</td>
       <td>Lower-pressure enemy line across standard stages, with family reskins tied to stage bands.</td>
       <td>Fast, lighter-value formation and dive enemy. Forms part of the classic opening pressure and remains present through later bands.</td>
@@ -1970,6 +2136,24 @@
 
     <tr>
       <td><strong>Butterfly Line</strong><br><span class="docMeta">enemy</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora butterfly sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga butterfly escort model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/dcb0c93c71-galaga-butterfly-escort-model.png" alt="Inferred Galaga butterfly escort model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 7 samples, 90% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga butterfly escort target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/dc0e59fd5b-galaga-butterfly-escort.png" alt="Galaga butterfly escort target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for escort/butterfly visual comparison.</span>
+    </div>
+  </div></div></td>
       <td>classic, scorpion, stingray, galboss</td>
       <td>Main non-boss formation rows across standard stages.</td>
       <td>Mid-tier enemy line with higher scoring and more visible board presence than bees.</td>
@@ -1979,6 +2163,24 @@
 
     <tr>
       <td><strong>Boss / Super Boss</strong><br><span class="docMeta">enemy</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora boss sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga command boss model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/17b64d785d-galaga-command-boss-model.png" alt="Inferred Galaga command boss model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga command boss target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/8bf2c56dfd-galaga-command-boss.png" alt="Galaga command boss target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop from a live formation boss window.</span>
+    </div>
+  </div></div></td>
       <td>classic, stingray, galboss</td>
       <td>Top formation row in standard stages, with later themed boss families and archetypes.</td>
       <td>Higher-health enemy that can dive solo or with escorts and is central to capture/rescue flow.</td>
@@ -1988,6 +2190,24 @@
 
     <tr>
       <td><strong>Rogue Fighter</strong><br><span class="docMeta">enemy</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora rogue/captured-fighter sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga dual-fighter model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/b9e30d5c04-galaga-dual-fighter-model.png" alt="Inferred Galaga dual-fighter model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga dual-fighter target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/c39b46c91b-galaga-dual-fighter.png" alt="Galaga dual-fighter target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for rescue, dual-fighter, and captured-fighter comparison.</span>
+    </div>
+  </div></div></td>
       <td>rogue</td>
       <td>When a captured fighter is converted into an enemy state.</td>
       <td>High-value special case enemy tied directly to the capture lifecycle.</td>
@@ -1997,6 +2217,24 @@
 
     <tr>
       <td><strong>Challenge Dragonfly Family</strong><br><span class="docMeta">challenge enemy family</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current challenge dragonfly family</span>
+      <div class="pixelSprite" style="--pixel-cols:7" aria-hidden="true"><span></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#ffe76f"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span></span><span class="isFilled" style="--pixel-color:#94f0ff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span class="isFilled" style="--pixel-color:#ffe76f"></span><span class="isFilled" style="--pixel-color:#98ffab"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga specialty dive model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/419d4de89c-galaga-specialty-dive-model.png" alt="Inferred Galaga specialty dive model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga specialty dive target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/8966519ade-galaga-specialty-dive.png" alt="Galaga specialty dive target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame dive crop used as the challenge-specialty target until a challenge-only sheet is promoted.</span>
+    </div>
+  </div></div></td>
       <td>dragonfly</td>
       <td>Challenge stages from stage 11 onward until the mosquito family takes over.</td>
       <td>Challenge-only presentation family used to make bonus-stage waves feel distinct from the normal rack.</td>
@@ -2006,6 +2244,24 @@
 
     <tr>
       <td><strong>Challenge Mosquito Family</strong><br><span class="docMeta">challenge enemy family</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current challenge mosquito family</span>
+      <div class="pixelSprite" style="--pixel-cols:7" aria-hidden="true"><span></span><span></span><span class="isFilled" style="--pixel-color:#ffab85"></span><span></span><span class="isFilled" style="--pixel-color:#ffab85"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span class="isFilled" style="--pixel-color:#74f4ff"></span><span class="isFilled" style="--pixel-color:#74f4ff"></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span class="isFilled" style="--pixel-color:#ffab85"></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span class="isFilled" style="--pixel-color:#74f4ff"></span><span class="isFilled" style="--pixel-color:#74f4ff"></span><span class="isFilled" style="--pixel-color:#ffab85"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span class="isFilled" style="--pixel-color:#ffe179"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga specialty dive model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/419d4de89c-galaga-specialty-dive-model.png" alt="Inferred Galaga specialty dive model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga specialty dive target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/8966519ade-galaga-specialty-dive.png" alt="Galaga specialty dive target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame dive crop used as the challenge-specialty target until a challenge-only sheet is promoted.</span>
+    </div>
+  </div></div></td>
       <td>mosquito</td>
       <td>Late challenge stages from stage 19 onward.</td>
       <td>Late challenge-family visual used for stronger bonus-stage identity deeper into the Aurora progression.</td>
@@ -2071,6 +2327,695 @@
       <td>bee galboss · but galboss · boss galboss · challenge mosquito</td>
       <td><code>super-partner-pair</code></td>
       <td>Late Aurora crown band tying the strongest shell/front-door identity back into the deeper stage family.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="artifact-conformance-status">
+          <div class="sectionHeader">
+            <h2>Artifact Conformance Status</h2>
+            <p>Target-versus-current conformance across the application artifacts that shape the game: sprite targets, sprite motion, audio cues, backgrounds, shell/icon surfaces, fonts, stage feel, and boss choreography. Rows are generated from the current analysis artifacts so the scorecard stays tied to measured evidence.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Artifact Surface</th>
+                  <th>Current / Target</th>
+                  <th>Measurement</th>
+                  <th>Evidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Sprites: docs catalog proxy vs inferred Galaga pixel models</strong><br><span class="docMeta">Measured proxy; keep alongside live runtime canvas score</span></td>
+      <td><strong>6.2/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 as a fast docs/current-definition proxy</span></td>
+      <td>8 catalog keys compared; model confidence 94% from 21 accepted source samples; weakest current proxy challenge-dragonfly 5.5/10.</td>
+      <td><code>reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json</code><br><code>reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json</code></td>
+      <td>Use this as the cheap warning metric when docs/current definitions drift from the target model; the runtime canvas metric is the player-visible read.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Sprites: live runtime canvas capture vs inferred Galaga pixel models</strong><br><span class="docMeta">Measured from isolated live canvas crops</span></td>
+      <td><strong>6.2/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against isolated live-rendered canvas captures</span></td>
+      <td>8 live sprite captures; weakest runtime sprite challenge-mosquito 5.2/10; capture mode isolated-live-canvas-sprite-crops.</td>
+      <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
+      <td>Expand from static isolated poses into animation-phase, dive-rotation, formation-context, and capture/rescue runtime sprite windows.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Sprite motion: flapping, pulsing, dive poses, and transition animation</strong><br><span class="docMeta">Not yet scored; current sprite metrics are static-pose measurements</span></td>
+      <td><strong>0/4 planned motion axes covered</strong><br><span class="docMeta">Target: Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions</span></td>
+      <td>Static live-canvas pose score exists at 6.2/10; motion axes still pending: flap-cycle cadence and alternating wing/body pixels; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.</td>
+      <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
+      <td>Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Reference sprite targets: source-frame pixel library</strong><br><span class="docMeta">Source-frame pixel targets promoted</span></td>
+      <td><strong>8 catalog keys covered by 6 exact crops</strong><br><span class="docMeta">Target: All live ship/enemy catalog keys covered by source-frame targets</span></td>
+      <td>6 unscaled PNG crops cover bee-line, boss-line, but-line, challenge-dragonfly, challenge-mosquito, dual-fighter, player-fighter, rogue-fighter; target dimensions are verified against crop metadata.</td>
+      <td><code>reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json</code></td>
+      <td>Add additional formation, animation-phase, and damage-state crops so target references cover more than the static catalog poses.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Audio cues: runtime cue assets vs Galaga-family references</strong><br><span class="docMeta">Primary user-experience gap</span></td>
+      <td><strong>7.2/10</strong><br><span class="docMeta">Target: &gt;=7.5</span></td>
+      <td>21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk playerHit 6.2/10.</td>
+      <td><code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code><br><code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-11-23c856ad/report.json</code></td>
+      <td>Tune the highest segment-level gap next: playerHit tail. Rerun audio comparison and event-gap analysis after the change.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Audio timing and event alignment</strong><br><span class="docMeta">Guardrail measured in quality conformance</span></td>
+      <td><strong>9/9 checks passed</strong><br><span class="docMeta">Target: All event-alignment checks pass with low drift</span></td>
+      <td>Worst current delta 6.31 ms; worst drift from baseline 0.55 ms.</td>
+      <td><code>reference-artifacts/analyses/quality-conformance/2026-05-11-23c856ad/report.json</code></td>
+      <td>Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Backgrounds, starfield, and arcade atmosphere</strong><br><span class="docMeta">New explicit gate; first-pass scorer measured</span></td>
+      <td><strong>8.6/10</strong><br><span class="docMeta">Target: &gt;=8.4</span></td>
+      <td>4 browser surfaces measured; evidence coverage 1; frame containment average 1; weakest surface Developer/settings popup surface 7.1/10.</td>
+      <td><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
+      <td>Add direct Galaga contact-sheet targets for background density, starfield cadence, palette spread, and attract/gameplay contrast.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Frame, popups, shell controls, and icons</strong><br><span class="docMeta">Split from generic UI shell before final gate</span></td>
+      <td><strong>9.2/10</strong><br><span class="docMeta">Target: &gt;=9.4</span></td>
+      <td>12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.</td>
+      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-11-23c856ad/report.json</code><br><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
+      <td>Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Fonts, typography, and text containment</strong><br><span class="docMeta">Measured as layout/text containment, not yet arcade font identity</span></td>
+      <td><strong>7.1/10</strong><br><span class="docMeta">Target: &gt;=8.4/10 visual gate; font-authenticity target still pending</span></td>
+      <td>4 overflow markers across 4 surfaces; weakest text-heavy surface Developer/settings popup surface at 7.1/10.</td>
+      <td><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
+      <td>Add pixel-font targets for score labels, score-table labels, popup headings, and HUD numerals so font authenticity gets its own score.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage backgrounds, level arc, and encounter shape</strong><br><span class="docMeta">Long-play gameplay-quality gate</span></td>
+      <td><strong>8.8/10</strong><br><span class="docMeta">Target: &gt;=8.8</span></td>
+      <td>Release gate tracks stage distinctiveness, challenge identity, pressure curve, reward/rescue layering, and learning/mastery windows.</td>
+      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code></td>
+      <td>Tie visual background/theme transitions to the level-arc windows so stage identity scores include both motion and look.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bosses, formation grammar, and alien entry choreography</strong><br><span class="docMeta">New measured gate for stage choreography</span></td>
+      <td><strong>9.2/10</strong><br><span class="docMeta">Target: &gt;=8.0 first gate; &gt;=9.0 mature</span></td>
+      <td>Companion novelty gate 7.8/10 for broader alien entry/challenge variety.</td>
+      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code></td>
+      <td>Continue frame-labeled path references so boss and alien choreography can be judged against exact source trajectories.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-alien-index">
+          <div class="sectionHeader">
+            <h2>Alien Conformance Index</h2>
+            <p>Current game-visible alien and enemy roles with activity, presence, evidence anchors, confidence, and the next conformance gap. This is the generated-guide view of the maintained game conformance catalog.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Alien / Role</th>
+                  <th>Visual Evidence</th>
+                  <th>Activity</th>
+                  <th>Presence</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Bee / Zako Scout</strong><br><span class="docMeta">type bee; families classic, scorpion, stingray, galboss</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora bee sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#f08f2e"></span><span class="isFilled" style="--pixel-color:#ffd24a"></span><span class="isFilled" style="--pixel-color:#4e95ff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga Zako scout model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/84b3a4cec3-galaga-zako-dive-model.png" alt="Inferred Galaga Zako scout model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 3 samples, 92% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga Zako scout target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/f6f88e7233-galaga-zako-dive.png" alt="Galaga Zako scout target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop from a live Zako/scout dive pose.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga reference context</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/9b77d370bc-galaga-reference-00m12s.png" alt="Galaga reference context" loading="lazy">
+      <span class="catalogMediaNote">Score-table context for role and color family.</span>
+    </div>
+  </div></div></td>
+      <td>Basic formation alien; dives, fires, supplies early pressure, and appears in challenge groups.</td>
+      <td>All regular stages and challenge stages.</td>
+      <td>Galaga Zako/scout behavior, challenge-stage evidence, and galaga3-zako audio reference.</td>
+      <td><strong>8.7/10 behavior</strong><br><span class="docMeta">medium; visual likeness is still low-confidence proxy</span></td>
+      <td>Score Aurora displayed sprites against the inferred Galaga consensus models and source-frame pixel targets, then promote lossless/emulator targets when available.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Butterfly / Escort Alien</strong><br><span class="docMeta">type but; families classic, scorpion, stingray, galboss</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora butterfly sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ffd25a"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#ff3d51"></span><span class="isFilled" style="--pixel-color:#62a5ff"></span><span></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga butterfly escort model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/dcb0c93c71-galaga-butterfly-escort-model.png" alt="Inferred Galaga butterfly escort model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 7 samples, 90% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga butterfly escort target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/dc0e59fd5b-galaga-butterfly-escort.png" alt="Galaga butterfly escort target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for escort/butterfly visual comparison.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga reference context</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/9b77d370bc-galaga-reference-00m12s.png" alt="Galaga reference context" loading="lazy">
+      <span class="catalogMediaNote">Score-table context for role and color family.</span>
+    </div>
+  </div></div></td>
+      <td>Mid-value formation alien; dives more dangerously, escorts bosses in special attacks, and participates in challenge set pieces.</td>
+      <td>All regular stages, with high-value role in stages 4 and later.</td>
+      <td>Galaga butterfly/escort behavior through boss/formation grammar and path-family reports.</td>
+      <td><strong>8.7/10 behavior; 9.0/10 boss grammar contribution</strong><br><span class="docMeta">medium; visual likeness pending</span></td>
+      <td>Run per-role visual scoring against the inferred Galaga consensus model and separate escort-path precision against reference windows.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Boss Galaga / Command Boss</strong><br><span class="docMeta">type boss; families classic, stingray, galboss</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora boss sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#cc5fff"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#5fe85c"></span><span class="isFilled" style="--pixel-color:#60f0cf"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga command boss model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/17b64d785d-galaga-command-boss-model.png" alt="Inferred Galaga command boss model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga command boss target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/8bf2c56dfd-galaga-command-boss.png" alt="Galaga command boss target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop from a live formation boss window.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga boss context</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/9b77d370bc-galaga-reference-00m12s.png" alt="Galaga boss context" loading="lazy">
+      <span class="catalogMediaNote">Score-table context for boss role and points.</span>
+    </div>
+  </div></div></td>
+      <td>Two-hit boss; captures player ship, carries captured fighter, leads special attacks, and awards high dive/squadron points.</td>
+      <td>All regular stages; capture/rescue and special-attack windows.</td>
+      <td>Galaga boss, tractor beam, capture/rescue, boss-hit, and boss-death timing/audio references.</td>
+      <td><strong>9.0/10 boss/formation grammar</strong><br><span class="docMeta">medium-high for behavior; audiovisual damage feedback still weaker</span></td>
+      <td>Improve explosion/damage visual event authenticity and direct boss path precision from extracted reference paths.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge Rogue / Specialty Alien</strong><br><span class="docMeta">type rogue in challenge and captured-fighter contexts</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora rogue/captured-fighter sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga dual-fighter model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/b9e30d5c04-galaga-dual-fighter-model.png" alt="Inferred Galaga dual-fighter model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga dual-fighter target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/c39b46c91b-galaga-dual-fighter.png" alt="Galaga dual-fighter target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for rescue, dual-fighter, and captured-fighter comparison.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Capture/rescue context</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/40c196350a-contact-03.png" alt="Capture/rescue context" loading="lazy">
+      <span class="catalogMediaNote">Reference-media context for capture and rescue flow.</span>
+    </div>
+  </div></div></td>
+      <td>Challenge-stage novelty role used to create distinct set pieces and visible learning opportunities.</td>
+      <td>Challenge stages 7, 11, and 15 in current evidence windows.</td>
+      <td>Galaga challenging-stage specialty waves and bonus-stage composition.</td>
+      <td><strong>7.9/10 challenge alien novelty</strong><br><span class="docMeta">medium</span></td>
+      <td>Promote a challenge-only Galaga target when the ingestion has a clean bonus-stage sheet, then score reward clarity separately.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Captured Fighter</strong><br><span class="docMeta">carried player fighter state on boss</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Current Aurora rogue/captured-fighter sprite</span>
+      <div class="pixelSprite" style="--pixel-cols:9" aria-hidden="true"><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ffe36a"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span><span></span><span></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#ff5ea0"></span><span class="isFilled" style="--pixel-color:#a3cfff"></span><span></span><span></span></div>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Inferred Galaga dual-fighter model</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/b9e30d5c04-galaga-dual-fighter-model.png" alt="Inferred Galaga dual-fighter model" loading="lazy">
+      <span class="catalogMediaNote">Consensus model; 1 sample, 100% average confidence.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Galaga dual-fighter target</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/c39b46c91b-galaga-dual-fighter.png" alt="Galaga dual-fighter target" loading="lazy">
+      <span class="catalogMediaNote">Exact source-frame crop for rescue, dual-fighter, and captured-fighter comparison.</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Capture/rescue context</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/40c196350a-contact-03.png" alt="Capture/rescue context" loading="lazy">
+      <span class="catalogMediaNote">Reference-media context for capture and rescue flow.</span>
+    </div>
+  </div></div></td>
+      <td>Converts player state into risk/reward: destroy too early for loss, rescue for dual fighter.</td>
+      <td>Capture/rescue stages after boss capture.</td>
+      <td>Galaga capture/rescue audio and event flow correspondence artifacts.</td>
+      <td><strong>guardrail pass for flow</strong><br><span class="docMeta">medium-high for state flow; visual feedback lower</span></td>
+      <td>Use the generated dual-fighter target for rescue/carry review, then add visual event scoring for destruction, rescue join, and player comprehension.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="conformance-audio-index">
+          <div class="sectionHeader">
+            <h2>Audio Conformance Index</h2>
+            <p>The major event-audio families, what they mean to the player, which Galaga-family references currently ground them, and where measurement still needs to improve.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Cue Family</th>
+                  <th>Gameplay Meaning</th>
+                  <th>Human Review</th>
+                  <th>Reference</th>
+                  <th>Score / Confidence</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Start and stage entry</strong><br><span class="docMeta"><code>gameStart, formationArrival, stageTransition</code></span></td>
+      <td>Begins run and anchors formation-arrival timing.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="6">Play Stage 1 Start</button><button class="audioAction isCompact" type="button" data-audio-index="7">Play Aurora Surge Start</button><button class="audioAction isCompact" type="button" data-audio-index="25">Play Stage Transition</button><button class="audioAction isCompact" type="button" data-audio-index="33">Play Formation Arrival Signal</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-start.m4a" data-event-label="Start">Ref Start</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga2-game-start.m4a" data-event-label="Game start / start preamble">Ref Game start / start preamble</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-level-underscore.m4a" data-event-label="Formation arrival / stage-ready signal">Ref Formation arrival / stage-ready signal</button><button class="audioAction isCompact" type="button" data-compare-entry-id="stage-start-classic" data-theme-play="triple">Compare Stage 1 Start</button></div>
+      <div class="waveformStrip">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">stage-start Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/59ffc1cbca-stage-start-aurora-waveform.png" alt="stage-start Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">stage-start reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/cb77121945-stage-start-reference-spectrogram.png" alt="stage-start reference spectrogram" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">formation-pulse Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/f6357ec92e-formation-pulse-aurora-waveform.png" alt="formation-pulse Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">formation-pulse reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/9c2827fa82-formation-pulse-reference-spectrogram.png" alt="formation-pulse reference spectrogram" loading="lazy">
+      
+    </div>
+  </div>
+    </div>
+  </td>
+      <td>galaga2-game-start, galaga3-level-underscore, galaga-level-flag.</td>
+      <td><strong>7.2/10 audio category</strong><br><span class="docMeta">medium</span></td>
+      <td>Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Player and enemy fire</strong><br><span class="docMeta"><code>playerShot, enemyShot</code></span></td>
+      <td>Differentiates player action from enemy pressure.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="10">Play Player Shot Classic</button><button class="audioAction isCompact" type="button" data-audio-index="11">Play Player Shot Aurora</button><button class="audioAction isCompact" type="button" data-audio-index="12">Play Enemy Shot Classic</button><button class="audioAction isCompact" type="button" data-audio-index="13">Play Enemy Shot Aurora</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a" data-event-label="Flagship/Fighter Shot">Ref Flagship/Fighter Shot</button><button class="audioAction isCompact" type="button" data-compare-entry-id="player-shot-classic" data-theme-play="triple">Compare Player Shot Classic</button></div>
+      <div class="waveformStrip">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">player-shot Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/ae4bc7104c-player-shot-aurora-waveform.png" alt="player-shot Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">player-shot reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/c687c34650-player-shot-reference-spectrogram.png" alt="player-shot reference spectrogram" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">enemy-shot Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/30c4531df2-enemy-shot-aurora-waveform.png" alt="enemy-shot Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">enemy-shot reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/7e1c0986ba-enemy-shot-reference-spectrogram.png" alt="enemy-shot reference spectrogram" loading="lazy">
+      
+    </div>
+  </div>
+    </div>
+  </td>
+      <td>Dedicated subwindows from galaga3-boss-damage-flagship-fighter-shot.</td>
+      <td><strong>measured but weak category</strong><br><span class="docMeta">medium</span></td>
+      <td>Improve cue distinctness, cooldown fit, and event alignment without masking hit feedback.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Enemy impact and destruction</strong><br><span class="docMeta"><code>enemyHit, enemyBoom</code></span></td>
+      <td>Immediate feedback that a missile impacted or destroyed a normal alien.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="14">Play Enemy Hit</button><button class="audioAction isCompact" type="button" data-audio-index="16">Play Enemy Boom</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-zako.m4a" data-event-label="Zako">Ref Zako</button><button class="audioAction isCompact" type="button" data-compare-entry-id="enemy-hit-aurora" data-theme-play="triple">Compare Enemy Hit</button></div>
+      <div class="mediaPlaceholder">Waveform or spectrogram preview pending for this row.</div>
+    </div>
+  </td>
+      <td>galaga3-zako subwindows and aurora-audio-event-gap latest report.</td>
+      <td><strong>open high-value gap</strong><br><span class="docMeta">medium</span></td>
+      <td>Add event-specific explosion/impact scorer for missile impact, alien death, ship impact, immunity, and boss damage.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Boss damage and destruction</strong><br><span class="docMeta"><code>bossHit, bossBoom</code></span></td>
+      <td>Shows multi-hit boss damage and final destruction clearly.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="15">Play Boss Hit</button><button class="audioAction isCompact" type="button" data-audio-index="17">Play Boss Boom</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a" data-event-label="Boss Damage / Flagship Fighter Shot">Ref Boss Damage / Flagship Fighter Shot</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-boss-death-sasori.m4a" data-event-label="Boss Death / Sasori">Ref Boss Death / Sasori</button><button class="audioAction isCompact" type="button" data-compare-entry-id="boss-hit-aurora" data-theme-play="triple">Compare Boss Hit</button></div>
+      <div class="mediaPlaceholder">Waveform or spectrogram preview pending for this row.</div>
+    </div>
+  </td>
+      <td>galaga3-boss-damage-flagship-fighter-shot and galaga3-boss-death-sasori.</td>
+      <td><strong>measured but still in audio gap</strong><br><span class="docMeta">medium-high</span></td>
+      <td>Score first-hit flash, sound onset, hold/cadence, final explosion, and player comprehension.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Capture and rescue</strong><br><span class="docMeta"><code>captureBeam, captureSuccess, captureRetreat, rescueJoin, capturedFighterDestroyed</code></span></td>
+      <td>Explains the most important Galaga-style risk/reward loop.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="18">Play Capture Beam</button><button class="audioAction isCompact" type="button" data-audio-index="19">Play Capture Retreat</button><button class="audioAction isCompact" type="button" data-audio-index="20">Play Fighter Captured</button><button class="audioAction isCompact" type="button" data-audio-index="21">Play Captured Fighter Destroyed</button><button class="audioAction isCompact" type="button" data-audio-index="22">Play Rescue Join</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-tractor-beam.m4a" data-event-label="Tractor Beam">Ref Tractor Beam</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-capturing.m4a" data-event-label="Capturing">Ref Capturing</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-fighter-captured.m4a" data-event-label="Fighter Captured">Ref Fighter Captured</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-captured-fighter-destroyed.m4a" data-event-label="Captured Fighter Destroyed">Ref Captured Fighter Destroyed</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a" data-event-label="Fighter Rescued (Double Ship)">Ref Fighter Rescued (Double Ship)</button><button class="audioAction isCompact" type="button" data-compare-entry-id="capture-beam" data-theme-play="triple">Compare Capture Beam</button></div>
+      <div class="waveformStrip">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">capture-beam Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/e8adc97a8f-capture-beam-aurora-waveform.png" alt="capture-beam Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">capture-beam reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/6ecd9a9412-capture-beam-reference-spectrogram.png" alt="capture-beam reference spectrogram" loading="lazy">
+      
+    </div>
+  </div>
+    </div>
+  </td>
+      <td>Tractor beam, captured-fighter, capturing, rescued-double-ship, and captured-fighter-destroyed clips.</td>
+      <td><strong>flow guardrail pass</strong><br><span class="docMeta">medium-high</span></td>
+      <td>Improve event-rich logs and status/commentary hooks around capture and rescue.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Player loss and game over</strong><br><span class="docMeta"><code>playerHit, gameOver</code></span></td>
+      <td>Explains ship loss, final loss, and the emotional end of a run without muting the next start.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="24">Play Ship Loss</button><button class="audioAction isCompact" type="button" data-audio-index="29">Play Game Over</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-death.m4a" data-event-label="Death">Ref Death</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a" data-event-label="Last Ship Destroyed Ambience">Ref Last Ship Destroyed Ambience</button><button class="audioAction isCompact" type="button" data-compare-entry-id="player-hit" data-theme-play="triple">Compare Ship Loss</button></div>
+      <div class="waveformStrip">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">ship-loss Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/2c5fcd44e7-ship-loss-aurora-waveform.png" alt="ship-loss Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">ship-loss reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/cec0b3742f-ship-loss-reference-spectrogram.png" alt="ship-loss reference spectrogram" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">game-over Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/52de726d83-game-over-aurora-waveform.png" alt="game-over Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">game-over reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/bb24396f69-game-over-reference-spectrogram.png" alt="game-over reference spectrogram" loading="lazy">
+      
+    </div>
+  </div>
+    </div>
+  </td>
+      <td>galaga3-death and game-over reference windows with onset/body/tail segmentation.</td>
+      <td><strong>highest current audio gap; playerHit tail</strong><br><span class="docMeta">medium-high</span></td>
+      <td>Run tail/body composite modeling plus browser-capture calibration before allowing a runtime audio promotion.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Challenge results</strong><br><span class="docMeta"><code>challengeTransition, challengeResults, challengePerfect</code></span></td>
+      <td>Marks bonus-stage entry and result/reward feedback.</td>
+      <td>
+    <div class="catalogMedia">
+      <div class="conformanceActions"><button class="audioAction isCompact" type="button" data-audio-index="26">Play Challenge Transition</button><button class="audioAction isCompact" type="button" data-audio-index="27">Play Challenge Results</button><button class="audioAction isCompact" type="button" data-audio-index="28">Play Challenge Perfect</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga3-challenging-stage.m4a" data-event-label="Challenging Stage">Ref Challenging Stage</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga2-challenging-stage-results.m4a" data-event-label="Challenging Stage Results">Ref Challenging Stage Results</button><button class="audioAction isCompact" type="button" data-event-reference="assets/reference-audio/galaga2-challenging-stage-perfect.m4a" data-event-label="Challenging Stage Perfect">Ref Challenging Stage Perfect</button><button class="audioAction isCompact" type="button" data-compare-entry-id="challenge-transition" data-theme-play="triple">Compare Challenge Transition</button></div>
+      <div class="waveformStrip">
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">challenge-transition Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/1d428ac300-challenge-transition-aurora-waveform.png" alt="challenge-transition Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">challenge-transition reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/b98695a917-challenge-transition-reference-spectrogram.png" alt="challenge-transition reference spectrogram" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">challenge-results Aurora waveform</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/46d18e0498-challenge-results-aurora-waveform.png" alt="challenge-results Aurora waveform" loading="lazy">
+      
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">challenge-results reference spectrogram</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/9a7f539708-challenge-results-reference-spectrogram.png" alt="challenge-results reference spectrogram" loading="lazy">
+      
+    </div>
+  </div>
+    </div>
+  </td>
+      <td>galaga challenging-stage, results, and perfect-result clips.</td>
+      <td><strong>timing guardrail pass</strong><br><span class="docMeta">medium</span></td>
+      <td>Add score/result surface conformance and direct challenge-stage audio fit checks.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="stage-conformance-summary">
+          <div class="sectionHeader">
+            <h2>Stage Conformance Summary</h2>
+            <p>Stage-by-stage and stage-band summary of difficulty, maneuvers, trajectory identity, gameplay description, current evidence, and the main conformance gap.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage / Band</th>
+                  <th>Gameplay Summary</th>
+                  <th>Key Aspects</th>
+                  <th>Evidence</th>
+                  <th>Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Stage 1</strong></td>
+      <td>Baseline rack entry, first dives, low pressure, player onboarding.</td>
+      <td>Formation arrival timing, first dive timing, safe early pressure, classic visual/audio framing.</td>
+      <td>stage-1-baseline evidence window; stage-1 geometry and shot trust guardrails.</td>
+      <td>Improve direct visual reference grounding for alien/player likeness.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 3 / first challenge</strong></td>
+      <td>First challenging stage and bonus-stage learning moment.</td>
+      <td>Non-lethal challenge behavior, scoreable windows, group readability, perfect-result feedback.</td>
+      <td>Challenge timing guardrails and challenge-stage candidate window.</td>
+      <td>Add direct Galaga challenge contact-sheet path labels.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 4</strong></td>
+      <td>First major pressure step and capture/squadron importance.</td>
+      <td>Boss capture, special attacks, lane pressure, player loss windows, fairness.</td>
+      <td>Stage 4 pressure geometry, lane loss windows, close-shot trust harnesses.</td>
+      <td>Continue pressure precision while protecting fairness and persona safety.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 7 challenge</strong></td>
+      <td>Scorpion cross-sweep challenge set piece.</td>
+      <td>New trajectory family, challenge alien novelty, bonus opportunity clarity.</td>
+      <td>challenge-stage-scorpion-cross; alien-entry/challenge score 8.7/10.</td>
+      <td>Score reward clarity and reference-grounded path precision.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 11 challenge</strong></td>
+      <td>Stingray hook-arc challenge set piece.</td>
+      <td>Hooking trajectories, mixed alien composition, learning-stage novelty.</td>
+      <td>challenge-stage-stingray-hook; challenge trajectory variation maxed at current scorer resolution.</td>
+      <td>Move from internal variation scoring to direct reference comparison.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 12 to 14</strong></td>
+      <td>Late-run cleanup, pressure, squadron reward, and advanced route planning.</td>
+      <td>Higher pressure, special-attack scoring, escort recovery route, advanced-persona outcomes.</td>
+      <td>late-run-cleanup-or-failure, late-run-escort-variant, level-arc probes, escort-reward sweeps.</td>
+      <td>Improve direct late-stage path/cadence precision and replay-style pressure analysis.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Stage 15 challenge</strong></td>
+      <td>Boss-led late-loop challenge set piece.</td>
+      <td>Boss-led entry style, late challenge novelty, high bonus readability.</td>
+      <td>challenge-stage-boss-led-loop; challenge window coverage now 4/4.</td>
+      <td>Ground boss-led challenge path against extracted Galaga challenge-stage reference paths.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="persona-catalog">
+          <div class="sectionHeader">
+            <h2>Testing Personas</h2>
+            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the harness substrate; Aurora owns what each persona should prove for its gameplay.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Testing Role</th>
+                  <th>Expected Behavior</th>
+                  <th>Game-Specific Checks</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Beginner</strong><br><span class="docMeta">novice</span></td>
+      <td>Low-skill onboarding and unfairness detector.</td>
+      <td>Moves less efficiently, misses more challenge opportunities, but should still experience readable cause and effect.</td>
+      <td>Stage 1, Stage 2 safety, first challenge clarity.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Intermediate</strong><br><span class="docMeta">advanced</span></td>
+      <td>Competent casual-play proxy.</td>
+      <td>Clears early waves more often and engages capture/rescue and challenge bonuses inconsistently.</td>
+      <td>Mid-run pressure, challenge hit rate, Stage 4 fairness.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Expert</strong><br><span class="docMeta">expert</span></td>
+      <td>Skilled player proxy.</td>
+      <td>Reaches deeper stage bands, positions better, and reveals whether reward routes are viable.</td>
+      <td>Stage 12/14 reward routes, boss/squadron scoring.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Professional</strong><br><span class="docMeta">professional</span></td>
+      <td>High-skill regression guard and release-confidence proxy.</td>
+      <td>Exploits strong routes without collapsing from unfair timing or broken scoring.</td>
+      <td>Professional stage-2 checks, long-run progression ordering, late reward windows.</td>
     </tr>
   
               </tbody>
@@ -2191,6 +3136,21 @@
     <li><a href="#stage-families">Stage Family Progression</a></li>
   
 
+    <li><a href="#artifact-conformance-status">Artifact Conformance Status</a></li>
+  
+
+    <li><a href="#conformance-alien-index">Alien Conformance Index</a></li>
+  
+
+    <li><a href="#conformance-audio-index">Audio Conformance Index</a></li>
+  
+
+    <li><a href="#stage-conformance-summary">Stage Conformance Summary</a></li>
+  
+
+    <li><a href="#persona-catalog">Testing Personas</a></li>
+  
+
     <li><a href="#graphics-controls">Presentation Controls</a></li>
   
 
@@ -2199,12 +3159,12 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Fidelity and second-cabinet release</strong><br>
-          Release 1.3.0 · Updated May 8, 2026
+          Release 1.3.0.1 · Updated May 11, 2026
         </p>
       </aside>
     </main>
     <iframe id="audioPreviewFrame" class="previewFrame" title="Aurora audio preview frame" src="index.html?docsPreview=1"></iframe>
-    <script id="applicationGuideData" type="application/json">{"audioContexts":[{"id":"front-door-tick","context":"Front Door","label":"Navigation Tick","cue":"uiTick","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Light Aurora shell tick, not gameplay urgency.","description":"Subtle front-door navigation tick for Aurora-owned shell identity surfaces.","preview":{"cue":"uiTick","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"front-door-confirm","context":"Front Door","label":"Confirm","cue":"uiConfirm","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Short confirm flourish with a polished shell feel.","description":"Confirmation cue for front-door and shell-level Aurora selections.","preview":{"cue":"uiConfirm","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"wait-enter","context":"Wait Mode","label":"Score Rotation Enter","cue":"attractEnter","phase":"wait","audioTheme":"aurora-crown","listenFor":"A small rising motif that feels like the board is waking up.","description":"Entry sting when Aurora transitions into the score-focused wait-mode surface.","preview":{"cue":"attractEnter","phase":"wait","atmosphereTheme":"aurora-crown"}},{"id":"wait-pulse","context":"Wait Mode","label":"Score Rotation Pulse","cue":"attractPulse","phase":"wait","audioTheme":"aurora-crown","listenFor":"Gentle repeating pulse that stays ambient rather than mechanical.","description":"Recurring pulse that keeps the score rotation alive without sounding like gameplay.","preview":{"cue":"attractPulse","phase":"wait","atmosphereTheme":"aurora-crown","variant":0}},{"id":"demo-enter","context":"Demo","label":"Demo Entry","cue":"attractEnter","phase":"demo","audioTheme":"aurora-crown","listenFor":"Aurora identity at the handoff from shell to autoplay.","description":"Bridge from the Aurora shell identity into autoplay demo mode.","preview":{"cue":"attractEnter","phase":"demo","atmosphereTheme":"aurora-crown"}},{"id":"demo-pulse","context":"Demo","label":"Demo Pulse","cue":"attractPulse","phase":"demo","audioTheme":"classic-arcade","listenFor":"Classic arcade cadence once motion on the board begins.","description":"Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.","preview":{"cue":"attractPulse","phase":"demo","atmosphereTheme":"classic-arcade","variant":0}},{"id":"stage-start-classic","context":"Stage Start","label":"Stage 1 Start","cue":"gameStart","phase":"stage","audioTheme":"classic-arcade","listenFor":"A crisp arcade rise that feels close to classic stage-start energy.","description":"Opening cue for classic early-stage Aurora presentation.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"stage-start-aurora","context":"Stage Start","label":"Aurora Surge Start","cue":"gameStart","phase":"stage","audioTheme":"aurora-surge","listenFor":"A brighter upward flourish that feels more expansive than the classic set.","description":"Opening cue for the later Aurora surge/borealis stage family.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-pulse-classic","context":"Gameplay Loop","label":"Formation Pulse Classic","cue":"stagePulse","phase":"stage","audioTheme":"classic-arcade","listenFor":"Clear march-like pulse that supports classic board pressure.","description":"Formation march/pulse for classic early-stage cadence.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"classic-arcade","variant":0}},{"id":"formation-pulse-aurora","context":"Gameplay Loop","label":"Formation Pulse Aurora","cue":"stagePulse","phase":"stage","audioTheme":"aurora-surge","listenFor":"A more glassy pulse that still reads as rhythm, not ambience.","description":"Formation pulse for the Aurora-themed later-stage family.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"aurora-borealis","variant":0}},{"id":"player-shot-classic","context":"Combat","label":"Player Shot Classic","cue":"playerShot","phase":"stage","audioTheme":"classic-arcade","description":"Early-stage player shot reference aligned to the classic arcade mix.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"player-shot-aurora","context":"Combat","label":"Player Shot Aurora","cue":"playerShot","phase":"stage","audioTheme":"aurora-surge","description":"Later-stage Aurora shot variant with a slightly sleeker synth edge.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-shot-classic","context":"Combat","label":"Enemy Shot Classic","cue":"enemyShot","phase":"stage","audioTheme":"classic-arcade","description":"Enemy projectile cue for classic stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"enemy-shot-aurora","context":"Combat","label":"Enemy Shot Aurora","cue":"enemyShot","phase":"stage","audioTheme":"aurora-surge","description":"Enemy projectile cue for Aurora-leaning later stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-hit-aurora","context":"Combat","label":"Enemy Hit","cue":"enemyHit","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy hit cue used across Aurora combat.","preview":{"cue":"enemyHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-hit-aurora","context":"Combat","label":"Boss Hit","cue":"bossHit","phase":"stage","audioTheme":"aurora-surge","description":"Heavier impact cue for boss and stronger target hits.","preview":{"cue":"bossHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-boom-aurora","context":"Combat","label":"Enemy Boom","cue":"enemyBoom","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy destruction cue.","preview":{"cue":"enemyBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-boom-aurora","context":"Combat","label":"Boss Boom","cue":"bossBoom","phase":"stage","audioTheme":"aurora-surge","description":"Larger destruction cue for boss enemies and rogue fighter losses.","preview":{"cue":"bossBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-beam","context":"Capture / Rescue","label":"Capture Beam","cue":"captureBeam","phase":"stage","audioTheme":"aurora-surge","description":"Beam/deploy cue for the capture sequence.","preview":{"cue":"captureBeam","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-retreat","context":"Capture / Rescue","label":"Capture Retreat","cue":"captureRetreat","phase":"stage","audioTheme":"aurora-surge","description":"Recovery cue when the capture sequence resolves and retreats.","preview":{"cue":"captureRetreat","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-success","context":"Capture / Rescue","label":"Fighter Captured","cue":"captureSuccess","phase":"stage","audioTheme":"aurora-surge","listenFor":"A clear loss-state handoff before the boss retreats with the captured ship.","description":"Distinct cue for the exact moment the player's fighter is fully captured.","preview":{"cue":"captureSuccess","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"captured-fighter-destroyed","context":"Capture / Rescue","label":"Captured Fighter Destroyed","cue":"capturedFighterDestroyed","phase":"stage","audioTheme":"aurora-surge","listenFor":"A sharp, regrettable destruction cue distinct from ordinary enemy hits.","description":"Cue used when the carried/captured fighter itself is destroyed for points.","preview":{"cue":"capturedFighterDestroyed","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"rescue-join","context":"Capture / Rescue","label":"Rescue Join","cue":"rescueJoin","phase":"stage","audioTheme":"aurora-surge","description":"Join cue for dual-fighter reunification and rescue success.","preview":{"cue":"rescueJoin","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"extend-award","context":"Scoring","label":"Bonus Ship Award","cue":"extendAward","phase":"stage","audioTheme":"aurora-surge","description":"Extra-ship award cue used when Aurora score extends trigger.","preview":{"cue":"extendAward","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"player-hit","context":"Player State","label":"Ship Loss","cue":"playerHit","phase":"stage","audioTheme":"aurora-surge","description":"Player ship destruction cue during live play.","preview":{"cue":"playerHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"stage-transition","context":"Transitions","label":"Stage Transition","cue":"stageTransition","phase":"stage","audioTheme":"aurora-surge","listenFor":"A short rising handoff with more melodic identity than a simple beep.","description":"Transition cue between standard stages.","preview":{"cue":"stageTransition","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"challenge-transition","context":"Transitions","label":"Challenge Transition","cue":"challengeTransition","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A distinct bonus-stage announcement with more lift and ceremony.","description":"Transition cue into challenge/bonus stage presentation.","preview":{"cue":"challengeTransition","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-results","context":"Challenge Results","label":"Challenge Results","cue":"challengeResults","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A clean wrap-up phrase that feels like challenge scoring has concluded.","description":"Result cue for challenge-stage completion when the run was not perfect.","preview":{"cue":"challengeResults","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-perfect","context":"Challenge Results","label":"Challenge Perfect","cue":"challengePerfect","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A more celebratory result than the standard challenge wrap-up.","description":"Distinct challenge-stage result cue for perfect clears.","preview":{"cue":"challengePerfect","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"game-over","context":"Results","label":"Game Over","cue":"gameOver","phase":"results","audioTheme":"aurora-surge","listenFor":"A readable downward ending phrase, not just an impact effect.","description":"End-of-run cue used by Aurora results/game-over flow.","preview":{"cue":"gameOver","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-first","context":"Results","label":"High Score 1st","cue":"highScoreFirst","phase":"results","audioTheme":"aurora-surge","listenFor":"A stronger celebratory placement cue for first place entry.","description":"Rank-specific scoreboard cue when a run enters first place.","preview":{"cue":"highScoreFirst","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-other","context":"Results","label":"High Score 2nd-10th","cue":"highScoreOther","phase":"results","audioTheme":"aurora-surge","listenFor":"A positive but smaller placement cue for non-first leaderboard entries.","description":"Rank-specific scoreboard cue when a run enters the board outside first place.","preview":{"cue":"highScoreOther","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"attack-charge","context":"Combat","label":"Dive Charge / Falling Alien","cue":"attackCharge","phase":"stage","audioTheme":"aurora-surge","listenFor":"The charge cue should begin with the enemy dive, not with bullet fire.","description":"Cue used when an enemy commits to a dive or attack run toward the player.","preview":{"cue":"attackCharge","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-arrival","context":"Stage Start","label":"Formation Arrival Signal","cue":"formationArrival","phase":"stage","audioTheme":"aurora-surge","listenFor":"Short interstitial signal after start music and before alien arrival begins.","description":"Pre-entry signal used to separate the opening start phrase from the first enemy formation arrival in Galaga reference mode.","preview":{"cue":"formationArrival","phase":"stage","atmosphereTheme":"aurora-borealis"}}],"comparisonSets":[{"id":"demo-pulse-compare","label":"Demo Pulse","entryId":"demo-pulse","focus":"Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","referenceWindow":{"startSeconds":4.598,"endSeconds":4.838,"source":"aurora-audio-theme-comparison/2026-05-08-main-96c62d6 nested corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture; original 4.148s window plus 0.450s-0.690s candidate"},"mappingStatus":"Synthetic Galaga runtime cue vs actual indexed reference clip.","mappingConfidence":"high"},{"id":"stage-start-compare","label":"Stage Start","entryId":"stage-start-classic","focus":"Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.","referenceLabel":"Start","referenceClip":"assets/reference-audio/galaga3-start.m4a","referenceWindow":{"startSeconds":0.55,"endSeconds":1.09,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Best current stage-start mapping from the cue matrix.","mappingConfidence":"medium"},{"id":"formation-pulse-compare","label":"Formation Pulse","entryId":"formation-pulse-classic","focus":"Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","referenceWindow":{"startSeconds":0.6,"endSeconds":0.84,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strongest current reference for the board cadence bed.","mappingConfidence":"high"},{"id":"player-shot-compare","label":"Player Shot","entryId":"player-shot-classic","focus":"Compare whether player fire reads as a quick arcade shot instead of a generic impact.","referenceLabel":"Flagship/Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","mappingStatus":"Measured coverage added for shot identity; current reference clip is shared and may still be too broad.","mappingConfidence":"medium"},{"id":"enemy-shot-compare","label":"Enemy Shot","entryId":"enemy-shot-classic","focus":"Compare whether enemy fire is distinct enough from player fire and boss damage.","referenceLabel":"Flagship/Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","mappingStatus":"Measured coverage added for projectile feedback; current reference clip is shared and may still be too broad.","mappingConfidence":"medium"},{"id":"enemy-hit-compare","label":"Enemy Hit","entryId":"enemy-hit-aurora","focus":"Compare whether an enemy impact gives immediate hit confirmation.","referenceLabel":"Zako","referenceClip":"assets/reference-audio/galaga3-zako.m4a","mappingStatus":"Measured coverage added for impact feedback; hit and kill hierarchy still needs refinement.","mappingConfidence":"medium"},{"id":"boss-hit-compare","label":"Boss Hit","entryId":"boss-hit-aurora","focus":"Compare whether boss damage reads as a distinct multi-hit event.","referenceLabel":"Boss Damage / Flagship Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","mappingStatus":"Measured coverage added for boss damage feedback; reference source is mixed and may require subwindow promotion.","mappingConfidence":"medium"},{"id":"enemy-boom-compare","label":"Enemy Boom","entryId":"enemy-boom-aurora","focus":"Compare whether normal enemy destruction is more emphatic than a simple hit.","referenceLabel":"Zako","referenceClip":"assets/reference-audio/galaga3-zako.m4a","mappingStatus":"Measured coverage added for destruction feedback; may need a better split between impact and explosion.","mappingConfidence":"medium"},{"id":"boss-boom-compare","label":"Boss Boom","entryId":"boss-boom-aurora","focus":"Compare whether boss destruction feels larger and more final than normal enemy destruction.","referenceLabel":"Boss Death / Sasori","referenceClip":"assets/reference-audio/galaga3-boss-death-sasori.m4a","mappingStatus":"Measured coverage added for boss destruction feedback.","mappingConfidence":"high"},{"id":"capture-beam-compare","label":"Capture Beam","entryId":"capture-beam","focus":"Compare whether the beam deploy moment reads clearly as tractor-beam danger.","referenceLabel":"Tractor Beam","referenceClip":"assets/reference-audio/galaga3-tractor-beam.m4a","referenceWindow":{"startSeconds":3.199,"endSeconds":3.679,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"capture-retreat-compare","label":"Capture Retreat","entryId":"capture-retreat","focus":"Compare whether the post-capture retreat phase remains audible as a distinct state.","referenceLabel":"Capturing","referenceClip":"assets/reference-audio/galaga3-capturing.m4a","referenceWindow":{"startSeconds":2.549,"endSeconds":2.969,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Measured coverage added for the transition between beam danger and captured-fighter state.","mappingConfidence":"medium"},{"id":"capture-success-compare","label":"Fighter Captured","entryId":"capture-success","focus":"Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.","referenceLabel":"Fighter Captured","referenceClip":"assets/reference-audio/galaga3-fighter-captured.m4a","referenceWindow":{"startSeconds":4.248,"endSeconds":4.668,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"captured-fighter-destroyed-compare","label":"Captured Fighter Destroyed","entryId":"captured-fighter-destroyed","focus":"Compare the regret/penalty moment when the carried fighter is destroyed.","referenceLabel":"Captured Fighter Destroyed","referenceClip":"assets/reference-audio/galaga3-captured-fighter-destroyed.m4a","referenceWindow":{"startSeconds":1.949,"endSeconds":2.189,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"rescue-join-compare","label":"Rescue Join","entryId":"rescue-join","focus":"Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.","referenceLabel":"Fighter Rescued (Double Ship)","referenceClip":"assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a","referenceWindow":{"startSeconds":2.399,"endSeconds":2.759,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"ship-loss-compare","label":"Ship Loss","entryId":"player-hit","focus":"Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.","referenceLabel":"Death","referenceClip":"assets/reference-audio/galaga3-death.m4a","mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-transition-compare","label":"Challenge Transition","entryId":"challenge-transition","focus":"Compare how distinct and ceremonial the challenge-stage announcement feels.","referenceLabel":"Challenging Stage","referenceClip":"assets/reference-audio/galaga3-challenging-stage.m4a","referenceWindow":{"startSeconds":0.4,"endSeconds":0.88,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-results-compare","label":"Challenge Results","entryId":"challenge-results","focus":"Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.","referenceLabel":"Challenging Stage Results","referenceClip":"assets/reference-audio/galaga2-challenging-stage-results.m4a","referenceWindow":{"startSeconds":0.75,"endSeconds":1.17,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"challenge-perfect-compare","label":"Challenge Perfect","entryId":"challenge-perfect","focus":"Compare whether a perfect challenge result feels more celebratory than the standard results cue.","referenceLabel":"Challenging Stage Perfect","referenceClip":"assets/reference-audio/galaga2-challenging-stage-perfect.m4a","referenceWindow":{"startSeconds":0,"endSeconds":0.48,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-first-compare","label":"High Score 1st","entryId":"high-score-first","focus":"Compare whether first place entry feels distinct and more important than a lower board placement.","referenceLabel":"Name Entry (1st)","referenceClip":"assets/reference-audio/galaga3-name-entry-1st.m4a","referenceWindow":{"startSeconds":2.649,"endSeconds":3.129,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-other-compare","label":"High Score 2nd-10th","entryId":"high-score-other","focus":"Compare whether non-first leaderboard entry feels positive but smaller than first place.","referenceLabel":"Name Entry (2nd-5th)","referenceClip":"assets/reference-audio/galaga3-name-entry-2nd-5th.m4a","referenceWindow":{"startSeconds":2.899,"endSeconds":3.319,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"game-over-compare","label":"Game Over","entryId":"game-over","focus":"Compare whether the ending cue feels final and emotionally complete enough.","referenceLabel":"Last Ship Destroyed Ambience","referenceClip":"assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a","referenceWindow":{"startSeconds":3.798,"endSeconds":4.638,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Best current end-state reference; still broader than Aurora's single slot.","mappingConfidence":"medium"}]}</script>
+    <script id="applicationGuideData" type="application/json">{"audioContexts":[{"id":"front-door-tick","context":"Front Door","label":"Navigation Tick","cue":"uiTick","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Light Aurora shell tick, not gameplay urgency.","description":"Subtle front-door navigation tick for Aurora-owned shell identity surfaces.","preview":{"cue":"uiTick","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"front-door-confirm","context":"Front Door","label":"Confirm","cue":"uiConfirm","phase":"frontDoor","audioTheme":"aurora-crown","listenFor":"Short confirm flourish with a polished shell feel.","description":"Confirmation cue for front-door and shell-level Aurora selections.","preview":{"cue":"uiConfirm","phase":"frontDoor","atmosphereTheme":"aurora-crown"}},{"id":"wait-enter","context":"Wait Mode","label":"Score Rotation Enter","cue":"attractEnter","phase":"wait","audioTheme":"aurora-crown","listenFor":"A small rising motif that feels like the board is waking up.","description":"Entry sting when Aurora transitions into the score-focused wait-mode surface.","preview":{"cue":"attractEnter","phase":"wait","atmosphereTheme":"aurora-crown"}},{"id":"wait-pulse","context":"Wait Mode","label":"Score Rotation Pulse","cue":"attractPulse","phase":"wait","audioTheme":"aurora-crown","listenFor":"Gentle repeating pulse that stays ambient rather than mechanical.","description":"Recurring pulse that keeps the score rotation alive without sounding like gameplay.","preview":{"cue":"attractPulse","phase":"wait","atmosphereTheme":"aurora-crown","variant":0}},{"id":"demo-enter","context":"Demo","label":"Demo Entry","cue":"attractEnter","phase":"demo","audioTheme":"aurora-crown","listenFor":"Aurora identity at the handoff from shell to autoplay.","description":"Bridge from the Aurora shell identity into autoplay demo mode.","preview":{"cue":"attractEnter","phase":"demo","atmosphereTheme":"aurora-crown"}},{"id":"demo-pulse","context":"Demo","label":"Demo Pulse","cue":"attractPulse","phase":"demo","audioTheme":"classic-arcade","listenFor":"Classic arcade cadence once motion on the board begins.","description":"Ongoing demo pulse that leans back toward the classic arcade cadence once play is underway.","preview":{"cue":"attractPulse","phase":"demo","atmosphereTheme":"classic-arcade","variant":0}},{"id":"stage-start-classic","context":"Stage Start","label":"Stage 1 Start","cue":"gameStart","phase":"stage","audioTheme":"classic-arcade","listenFor":"A crisp arcade rise that feels close to classic stage-start energy.","description":"Opening cue for classic early-stage Aurora presentation.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"stage-start-aurora","context":"Stage Start","label":"Aurora Surge Start","cue":"gameStart","phase":"stage","audioTheme":"aurora-surge","listenFor":"A brighter upward flourish that feels more expansive than the classic set.","description":"Opening cue for the later Aurora surge/borealis stage family.","preview":{"cue":"gameStart","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-pulse-classic","context":"Gameplay Loop","label":"Formation Pulse Classic","cue":"stagePulse","phase":"stage","audioTheme":"classic-arcade","listenFor":"Clear march-like pulse that supports classic board pressure.","description":"Formation march/pulse for classic early-stage cadence.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"classic-arcade","variant":0}},{"id":"formation-pulse-aurora","context":"Gameplay Loop","label":"Formation Pulse Aurora","cue":"stagePulse","phase":"stage","audioTheme":"aurora-surge","listenFor":"A more glassy pulse that still reads as rhythm, not ambience.","description":"Formation pulse for the Aurora-themed later-stage family.","preview":{"cue":"stagePulse","phase":"stage","atmosphereTheme":"aurora-borealis","variant":0}},{"id":"player-shot-classic","context":"Combat","label":"Player Shot Classic","cue":"playerShot","phase":"stage","audioTheme":"classic-arcade","description":"Early-stage player shot reference aligned to the classic arcade mix.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"player-shot-aurora","context":"Combat","label":"Player Shot Aurora","cue":"playerShot","phase":"stage","audioTheme":"aurora-surge","description":"Later-stage Aurora shot variant with a slightly sleeker synth edge.","preview":{"cue":"playerShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-shot-classic","context":"Combat","label":"Enemy Shot Classic","cue":"enemyShot","phase":"stage","audioTheme":"classic-arcade","description":"Enemy projectile cue for classic stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"classic-arcade"}},{"id":"enemy-shot-aurora","context":"Combat","label":"Enemy Shot Aurora","cue":"enemyShot","phase":"stage","audioTheme":"aurora-surge","description":"Enemy projectile cue for Aurora-leaning later stages.","preview":{"cue":"enemyShot","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-hit-aurora","context":"Combat","label":"Enemy Hit","cue":"enemyHit","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy hit cue used across Aurora combat.","preview":{"cue":"enemyHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-hit-aurora","context":"Combat","label":"Boss Hit","cue":"bossHit","phase":"stage","audioTheme":"aurora-surge","description":"Heavier impact cue for boss and stronger target hits.","preview":{"cue":"bossHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"enemy-boom-aurora","context":"Combat","label":"Enemy Boom","cue":"enemyBoom","phase":"stage","audioTheme":"aurora-surge","description":"Standard enemy destruction cue.","preview":{"cue":"enemyBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"boss-boom-aurora","context":"Combat","label":"Boss Boom","cue":"bossBoom","phase":"stage","audioTheme":"aurora-surge","description":"Larger destruction cue for boss enemies and rogue fighter losses.","preview":{"cue":"bossBoom","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-beam","context":"Capture / Rescue","label":"Capture Beam","cue":"captureBeam","phase":"stage","audioTheme":"aurora-surge","description":"Beam/deploy cue for the capture sequence.","preview":{"cue":"captureBeam","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-retreat","context":"Capture / Rescue","label":"Capture Retreat","cue":"captureRetreat","phase":"stage","audioTheme":"aurora-surge","description":"Recovery cue when the capture sequence resolves and retreats.","preview":{"cue":"captureRetreat","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"capture-success","context":"Capture / Rescue","label":"Fighter Captured","cue":"captureSuccess","phase":"stage","audioTheme":"aurora-surge","listenFor":"A clear loss-state handoff before the boss retreats with the captured ship.","description":"Distinct cue for the exact moment the player's fighter is fully captured.","preview":{"cue":"captureSuccess","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"captured-fighter-destroyed","context":"Capture / Rescue","label":"Captured Fighter Destroyed","cue":"capturedFighterDestroyed","phase":"stage","audioTheme":"aurora-surge","listenFor":"A sharp, regrettable destruction cue distinct from ordinary enemy hits.","description":"Cue used when the carried/captured fighter itself is destroyed for points.","preview":{"cue":"capturedFighterDestroyed","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"rescue-join","context":"Capture / Rescue","label":"Rescue Join","cue":"rescueJoin","phase":"stage","audioTheme":"aurora-surge","description":"Join cue for dual-fighter reunification and rescue success.","preview":{"cue":"rescueJoin","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"extend-award","context":"Scoring","label":"Bonus Ship Award","cue":"extendAward","phase":"stage","audioTheme":"aurora-surge","description":"Extra-ship award cue used when Aurora score extends trigger.","preview":{"cue":"extendAward","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"player-hit","context":"Player State","label":"Ship Loss","cue":"playerHit","phase":"stage","audioTheme":"aurora-surge","description":"Player ship destruction cue during live play.","preview":{"cue":"playerHit","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"stage-transition","context":"Transitions","label":"Stage Transition","cue":"stageTransition","phase":"stage","audioTheme":"aurora-surge","listenFor":"A short rising handoff with more melodic identity than a simple beep.","description":"Transition cue between standard stages.","preview":{"cue":"stageTransition","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"challenge-transition","context":"Transitions","label":"Challenge Transition","cue":"challengeTransition","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A distinct bonus-stage announcement with more lift and ceremony.","description":"Transition cue into challenge/bonus stage presentation.","preview":{"cue":"challengeTransition","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-results","context":"Challenge Results","label":"Challenge Results","cue":"challengeResults","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A clean wrap-up phrase that feels like challenge scoring has concluded.","description":"Result cue for challenge-stage completion when the run was not perfect.","preview":{"cue":"challengeResults","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"challenge-perfect","context":"Challenge Results","label":"Challenge Perfect","cue":"challengePerfect","phase":"challenge","audioTheme":"aurora-surge","listenFor":"A more celebratory result than the standard challenge wrap-up.","description":"Distinct challenge-stage result cue for perfect clears.","preview":{"cue":"challengePerfect","phase":"challenge","atmosphereTheme":"aurora-borealis","challenge":true}},{"id":"game-over","context":"Results","label":"Game Over","cue":"gameOver","phase":"results","audioTheme":"aurora-surge","listenFor":"A readable downward ending phrase, not just an impact effect.","description":"End-of-run cue used by Aurora results/game-over flow.","preview":{"cue":"gameOver","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-first","context":"Results","label":"High Score 1st","cue":"highScoreFirst","phase":"results","audioTheme":"aurora-surge","listenFor":"A stronger celebratory placement cue for first place entry.","description":"Rank-specific scoreboard cue when a run enters first place.","preview":{"cue":"highScoreFirst","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"high-score-other","context":"Results","label":"High Score 2nd-10th","cue":"highScoreOther","phase":"results","audioTheme":"aurora-surge","listenFor":"A positive but smaller placement cue for non-first leaderboard entries.","description":"Rank-specific scoreboard cue when a run enters the board outside first place.","preview":{"cue":"highScoreOther","phase":"results","atmosphereTheme":"aurora-borealis"}},{"id":"attack-charge","context":"Combat","label":"Dive Charge / Falling Alien","cue":"attackCharge","phase":"stage","audioTheme":"aurora-surge","listenFor":"The charge cue should begin with the enemy dive, not with bullet fire.","description":"Cue used when an enemy commits to a dive or attack run toward the player.","preview":{"cue":"attackCharge","phase":"stage","atmosphereTheme":"aurora-borealis"}},{"id":"formation-arrival","context":"Stage Start","label":"Formation Arrival Signal","cue":"formationArrival","phase":"stage","audioTheme":"aurora-surge","listenFor":"Short interstitial signal after start music and before alien arrival begins.","description":"Pre-entry signal used to separate the opening start phrase from the first enemy formation arrival in Galaga reference mode.","preview":{"cue":"formationArrival","phase":"stage","atmosphereTheme":"aurora-borealis"}}],"comparisonSets":[{"id":"demo-pulse-compare","label":"Demo Pulse","entryId":"demo-pulse","focus":"Compare autoplay cadence and whether the board feels mechanically alive enough once demo motion begins.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","referenceWindow":{"startSeconds":4.598,"endSeconds":4.838,"source":"aurora-audio-theme-comparison/2026-05-08-main-96c62d6 nested corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture; original 4.148s window plus 0.450s-0.690s candidate"},"mappingStatus":"Synthetic Galaga runtime cue vs actual indexed reference clip.","mappingConfidence":"high"},{"id":"stage-start-compare","label":"Stage Start","entryId":"stage-start-classic","focus":"Compare whether stage start feels like a clear arcade start/announcement instead of a generic cue.","referenceLabel":"Start","referenceClip":"assets/reference-audio/galaga3-start.m4a","referenceWindow":{"startSeconds":0.55,"endSeconds":1.09,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Best current stage-start mapping from the cue matrix.","mappingConfidence":"medium"},{"id":"formation-pulse-compare","label":"Formation Pulse","entryId":"formation-pulse-classic","focus":"Compare ongoing formation cadence and whether gameplay feels like it has enough marching pressure.","referenceLabel":"Ambience / Convoy","referenceClip":"assets/reference-audio/galaga3-ambience-convoy.m4a","referenceWindow":{"startSeconds":0.6,"endSeconds":0.84,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strongest current reference for the board cadence bed.","mappingConfidence":"high"},{"id":"player-shot-compare","label":"Player Shot","entryId":"player-shot-classic","focus":"Compare whether player fire reads as a quick arcade shot instead of a generic impact.","referenceLabel":"Flagship/Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","referenceWindow":{"startSeconds":0.05,"endSeconds":0.29,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate","selection":"distinct initial high-transient subwindow reserved for player fire; lower score than the shared best window but prevents playerShot/enemyShot/bossHit semantic collapse"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient","confidence":"high","resolution":"relative to the clipped 0.05-0.29s flagship/fighter-shot window; player fire is a single crisp transient rather than a multi-phase phrase","segments":[{"role":"onset","label":"player fire transient","startSeconds":0.08,"endSeconds":0.2}]},"mappingStatus":"Measured subwindow promoted for shot identity; uses a distinct initial transient so player fire can be scored separately from enemy fire and boss damage.","mappingConfidence":"medium-high"},{"id":"enemy-shot-compare","label":"Enemy Shot","entryId":"enemy-shot-classic","focus":"Compare whether enemy fire is distinct enough from player fire and boss damage.","referenceLabel":"Flagship/Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","referenceWindow":{"startSeconds":0.9,"endSeconds":1.14,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate","selection":"second measured high-transient subwindow reserved for enemy projectile feedback so enemyShot no longer scores against the same active phrase as playerShot"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient","confidence":"high","resolution":"relative to the clipped 0.90-1.14s flagship/fighter-shot window; enemy fire is a single projectile transient","segments":[{"role":"onset","label":"enemy fire transient","startSeconds":0.07,"endSeconds":0.22}]},"mappingStatus":"Measured subwindow promoted for enemy projectile feedback; still from the same source clip, but scored as a distinct reference phrase from playerShot and bossHit.","mappingConfidence":"medium-high"},{"id":"enemy-hit-compare","label":"Enemy Hit","entryId":"enemy-hit-aurora","focus":"Compare whether an enemy impact gives immediate hit confirmation.","referenceLabel":"Zako","referenceClip":"assets/reference-audio/galaga3-zako.m4a","referenceWindow":{"startSeconds":0.75,"endSeconds":0.99,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate","selection":"later Zako phrase reserved for immediate hit confirmation, separated from the normal-enemy destruction subwindow"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient","confidence":"high","resolution":"relative to the clipped 0.75-0.99s Zako window; enemy hit is scored as immediate damage confirmation","segments":[{"role":"onset","label":"enemy hit confirmation","startSeconds":0.01,"endSeconds":0.17}]},"mappingStatus":"Measured subwindow promoted for impact feedback; hit and kill hierarchy remains under review but is now scored against a distinct phrase from enemyBoom.","mappingConfidence":"medium-high"},{"id":"boss-hit-compare","label":"Boss Hit","entryId":"boss-hit-aurora","focus":"Compare whether boss damage reads as a distinct multi-hit event.","referenceLabel":"Boss Damage / Flagship Fighter Shot","referenceClip":"assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a","referenceWindow":{"startSeconds":1.149,"endSeconds":1.439,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate","selection":"highest-scoring measured subwindow for boss damage confirmation, reserved for multi-hit boss feedback rather than generic shot identity"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient","confidence":"high","resolution":"relative to the clipped 1.149-1.439s boss-damage window; boss hit is a distinct damage confirmation transient","segments":[{"role":"onset","label":"boss damage confirmation","startSeconds":0,"endSeconds":0.15}]},"mappingStatus":"Measured subwindow promoted for boss damage feedback; reference source remains shared, but bossHit now has a dedicated scoring window.","mappingConfidence":"medium-high"},{"id":"enemy-boom-compare","label":"Enemy Boom","entryId":"enemy-boom-aurora","focus":"Compare whether normal enemy destruction is more emphatic than a simple hit.","referenceLabel":"Zako","referenceClip":"assets/reference-audio/galaga3-zako.m4a","referenceWindow":{"startSeconds":0.5,"endSeconds":0.74,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec active-segment candidate","selection":"highest-scoring measured Zako subwindow reserved for normal-enemy destruction, separated from enemyHit"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured Zako destruction transient","confidence":"high","resolution":"relative to the clipped 0.50-0.74s Zako window; normal enemy destruction is a compact finality transient","segments":[{"role":"onset","label":"normal enemy destruction transient","startSeconds":0.02,"endSeconds":0.2}]},"mappingStatus":"Measured subwindow promoted for normal-enemy destruction feedback; enemyHit and enemyBoom now score against separate Zako phrases.","mappingConfidence":"medium-high"},{"id":"boss-boom-compare","label":"Boss Boom","entryId":"boss-boom-aurora","focus":"Compare whether boss destruction feels larger and more final than normal enemy destruction.","referenceLabel":"Boss Death / Sasori","referenceClip":"assets/reference-audio/galaga3-boss-death-sasori.m4a","referenceWindow":{"startSeconds":0.798,"endSeconds":1.567,"source":"aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 active-window measurement","selection":"full active boss-death phrase so destruction can be scored as a larger multi-burst event rather than a single generic explosion"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 boss-death burst candidates","confidence":"medium-high","resolution":"relative to the clipped 0.798-1.567s boss-death window; labels early, middle, and final destruction bursts","segments":[{"role":"onset","label":"boss death opening burst","startSeconds":0.052,"endSeconds":0.233},{"role":"body","label":"boss death main burst","startSeconds":0.252,"endSeconds":0.433},{"role":"tail","label":"boss death final burst","startSeconds":0.601,"endSeconds":0.769}]},"mappingStatus":"Measured coverage added for boss destruction feedback.","mappingConfidence":"high"},{"id":"capture-beam-compare","label":"Capture Beam","entryId":"capture-beam","focus":"Compare whether the beam deploy moment reads clearly as tractor-beam danger.","referenceLabel":"Tractor Beam","referenceClip":"assets/reference-audio/galaga3-tractor-beam.m4a","referenceWindow":{"startSeconds":3.199,"endSeconds":3.679,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"referenceSegmentation":{"source":"curated from measured tractor-beam reference window after repeatability-gate pass","confidence":"medium-high","resolution":"relative to the clipped 3.199-3.679s tractor-beam window; labels separate beam strike from sustained beam body","segments":[{"role":"onset","label":"beam deploy strike","startSeconds":0,"endSeconds":0.17},{"role":"body","label":"sustained tractor tone","startSeconds":0.17,"endSeconds":0.269},{"role":"tail","label":"active beam falloff","startSeconds":0.269,"endSeconds":0.339}]},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"capture-retreat-compare","label":"Capture Retreat","entryId":"capture-retreat","focus":"Compare whether the post-capture retreat phase remains audible as a distinct state.","referenceLabel":"Capturing","referenceClip":"assets/reference-audio/galaga3-capturing.m4a","referenceWindow":{"startSeconds":2.549,"endSeconds":2.969,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Measured coverage added for the transition between beam danger and captured-fighter state.","mappingConfidence":"medium"},{"id":"capture-success-compare","label":"Fighter Captured","entryId":"capture-success","focus":"Compare the exact moment the fighter is fully captured, distinct from beam deploy and retreat.","referenceLabel":"Fighter Captured","referenceClip":"assets/reference-audio/galaga3-fighter-captured.m4a","referenceWindow":{"startSeconds":4.248,"endSeconds":4.668,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"captured-fighter-destroyed-compare","label":"Captured Fighter Destroyed","entryId":"captured-fighter-destroyed","focus":"Compare the regret/penalty moment when the carried fighter is destroyed.","referenceLabel":"Captured Fighter Destroyed","referenceClip":"assets/reference-audio/galaga3-captured-fighter-destroyed.m4a","referenceWindow":{"startSeconds":1.949,"endSeconds":2.189,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"referenceSegmentation":{"source":"curated from aurora-audio-theme-comparison/2026-05-09-main-6c0e2b61 measured active transient","confidence":"high","resolution":"relative to the clipped 1.949-2.189s captured-fighter-destroyed window; penalty feedback is a compact regret/destruction transient","segments":[{"role":"onset","label":"captured fighter destroyed transient","startSeconds":0,"endSeconds":0.19}]},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"rescue-join-compare","label":"Rescue Join","entryId":"rescue-join","focus":"Compare whether the rescue/join moment feels celebratory and distinct from ordinary scoring.","referenceLabel":"Fighter Rescued (Double Ship)","referenceClip":"assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a","referenceWindow":{"startSeconds":2.399,"endSeconds":2.759,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"ship-loss-compare","label":"Ship Loss","entryId":"player-hit","focus":"Compare whether ship loss feels like a real Galaga death moment rather than a generic impact.","referenceLabel":"Death","referenceClip":"assets/reference-audio/galaga3-death.m4a","referenceSegmentation":{"source":"curated from active-window reads in aurora-audio-theme-comparison and repeated playerHit candidate pass","confidence":"medium-high","resolution":"relative to full galaga3-death clip; labels preserve long death onset, sustained body, and final tail","segments":[{"role":"onset","label":"ship-loss blast onset","startSeconds":0.02,"endSeconds":0.459},{"role":"body","label":"sustained death body","startSeconds":0.459,"endSeconds":0.858},{"role":"tail","label":"death cue falloff","startSeconds":0.858,"endSeconds":0.988}]},"analysisPolicy":{"activeMetricsSource":"analysisWindow","eventSegmentationSource":"analysisWindow","reason":"Ship loss is a composite onset/body/tail event; conformance should score the scheduled cue window rather than the single loudest active island."},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-transition-compare","label":"Challenge Transition","entryId":"challenge-transition","focus":"Compare how distinct and ceremonial the challenge-stage announcement feels.","referenceLabel":"Challenging Stage","referenceClip":"assets/reference-audio/galaga3-challenging-stage.m4a","referenceWindow":{"startSeconds":0.4,"endSeconds":0.88,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Strong direct mapping.","mappingConfidence":"high"},{"id":"challenge-results-compare","label":"Challenge Results","entryId":"challenge-results","focus":"Compare whether challenge wrap-up feels like a proper result phrase instead of a generic transition.","referenceLabel":"Challenging Stage Results","referenceClip":"assets/reference-audio/galaga2-challenging-stage-results.m4a","referenceWindow":{"startSeconds":0.75,"endSeconds":1.17,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"referenceSegmentation":{"source":"curated from challenging-stage-results reference window after challengeResults event-gap pass","confidence":"medium-high","resolution":"relative to the clipped 0.75-1.17s challenge-results phrase; labels distinguish attack, result body, and falloff","segments":[{"role":"onset","label":"results phrase attack","startSeconds":0,"endSeconds":0.14},{"role":"body","label":"results phrase body","startSeconds":0.14,"endSeconds":0.34},{"role":"tail","label":"results phrase falloff","startSeconds":0.34,"endSeconds":0.42}]},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"challenge-perfect-compare","label":"Challenge Perfect","entryId":"challenge-perfect","focus":"Compare whether a perfect challenge result feels more celebratory than the standard results cue.","referenceLabel":"Challenging Stage Perfect","referenceClip":"assets/reference-audio/galaga2-challenging-stage-perfect.m4a","referenceWindow":{"startSeconds":0,"endSeconds":0.48,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-first-compare","label":"High Score 1st","entryId":"high-score-first","focus":"Compare whether first place entry feels distinct and more important than a lower board placement.","referenceLabel":"Name Entry (1st)","referenceClip":"assets/reference-audio/galaga3-name-entry-1st.m4a","referenceWindow":{"startSeconds":2.649,"endSeconds":3.129,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"high-score-other-compare","label":"High Score 2nd-10th","entryId":"high-score-other","focus":"Compare whether non-first leaderboard entry feels positive but smaller than first place.","referenceLabel":"Name Entry (2nd-5th)","referenceClip":"assets/reference-audio/galaga3-name-entry-2nd-5th.m4a","referenceWindow":{"startSeconds":2.899,"endSeconds":3.319,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"New Aurora cue slot added from the cue matrix.","mappingConfidence":"high"},{"id":"game-over-compare","label":"Game Over","entryId":"game-over","focus":"Compare whether the ending cue feels final and emotionally complete enough.","referenceLabel":"Last Ship Destroyed Ambience","referenceClip":"assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a","referenceWindow":{"startSeconds":3.798,"endSeconds":4.638,"source":"aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate","selection":"highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"},"mappingStatus":"Best current end-state reference; still broader than Aurora's single slot.","mappingConfidence":"medium"}]}</script>
     <script>
       (function(){
         const data = JSON.parse(document.getElementById('applicationGuideData').textContent || '{}');
@@ -2362,10 +3322,15 @@
               }
               return;
             }
-            if(!playEntry(entry, mode === 'galaga' ? 'galaga' : 'aurora')){
+            const playMode = mode === 'galaga'
+              ? 'galaga'
+              : mode === 'galaga-assets'
+                ? 'galaga-assets'
+                : 'aurora';
+            if(!playEntry(entry, playMode)){
               return;
             }
-            setStatus('Played ' + (mode === 'galaga' ? 'Galaga' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
+            setStatus('Played ' + (playMode === 'galaga' ? 'Galaga' : playMode === 'galaga-assets' ? 'Galaga runtime reference' : 'Aurora') + ' version of ' + (entry.label || entry.cue || 'comparison') + '.');
             return;
           }
           const compareSetButton = event.target.closest('[data-compare-set]');
@@ -2373,6 +3338,7 @@
             const mode = compareSetButton.getAttribute('data-compare-set');
             playSet(
               mode === 'galaga' ? 'galaga'
+              : mode === 'galaga-assets' ? 'galaga-assets'
               : mode === 'ab' ? 'ab'
               : mode === 'reference' ? 'reference'
               : mode === 'triple' ? 'triple'
