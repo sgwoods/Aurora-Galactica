@@ -654,7 +654,7 @@
 <h3>Purpose</h3>
 <p>Platinum exists to separate the reusable arcade host from the specific games it runs.</p>
 <p>That means Platinum should own the things that ought to be consistent across multiple games:</p>
-<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
+<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>optional shell-owned media ambience such as Arcade Music</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
 <p>the same core input model</p>
 <p>At the same time, Platinum should stay out of application-specific rules.</p>
 <p>It should not own:</p>
@@ -694,7 +694,7 @@
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
-<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li></ul>
+<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>

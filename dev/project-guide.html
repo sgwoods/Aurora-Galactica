@@ -2804,7 +2804,7 @@ npm run build</code></pre>
 <h3>Purpose</h3>
 <p>Platinum exists to separate the reusable arcade host from the specific games it runs.</p>
 <p>That means Platinum should own the things that ought to be consistent across multiple games:</p>
-<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
+<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>optional shell-owned media ambience such as Arcade Music</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
 <p>the same core input model</p>
 <p>At the same time, Platinum should stay out of application-specific rules.</p>
 <p>It should not own:</p>
@@ -2844,7 +2844,7 @@ npm run build</code></pre>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
-<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li></ul>
+<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>
@@ -3443,6 +3443,8 @@ npm run build</code></pre>
 <ul><li>Service:<ul><li><code>https://iddyodcknmxupavnuuwg.supabase.co</code></li></ul></li><li>Used for:<ul><li>pilot account sign-up and sign-in</li><li>authenticated pilot profile data</li><li>shared leaderboard data</li><li>validated score views</li><li>player-specific score views such as <code>mine</code></li></ul></li><li>Main runtime code:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/05-supabase.js</code></li></ul></li><li>Build token source:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li></ul>
 <h4>Web3Forms</h4>
 <ul><li>Service:<ul><li><code>https://api.web3forms.com/submit</code></li></ul></li><li>Used for:<ul><li>in-game bug reports</li><li>in-game feature requests</li></ul></li><li>Main runtime code:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li></ul></li></ul>
+<h4>YouTube Playlist Embed</h4>
+<ul><li>Status:<ul><li>optional, configured by <code>release-manifest.json</code> and overrideable with <code>ARCADE_MUSIC_PLAYLIST_ID</code> or <code>NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID</code> at build time</li></ul></li><li>Used for:<ul><li>opt-in Arcade Music playback from the right rail</li></ul></li><li>Boundary:<ul><li>the playlist embed is shell ambience, not Aurora reference audio</li><li>the game mute control remains scoped to game audio</li><li>high-score video upload credentials are not part of this client-side feature</li></ul></li><li>Main runtime code:<ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li></ul></li><li>Build token source:<ul><li><code>/Users/steven/Documents/Codex-Test1/tools/build/build-index.js</code></li></ul></li></ul>
 <h3>Hosting And Delivery</h3>
 <h4>GitHub Pages</h4>
 <ul><li>Production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>Beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>Also hosts:<ul><li>player guide</li><li>project guide</li><li>release dashboard</li></ul></li><li>Used for:<ul><li>public delivery of the playable game and public documentation surfaces</li></ul></li><li>Main policy docs:<ul><li><code>/Users/steven/Documents/Codex-Test1/README.md</code></li><li><code>/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md</code></li></ul></li></ul>
@@ -3461,7 +3463,7 @@ npm run build</code></pre>
 <ul><li>Local game server:<ul><li><code>http://localhost:8000</code></li></ul></li><li>Local log viewer:<ul><li><code>http://127.0.0.1:4311/</code></li></ul></li><li>Used for:<ul><li>development</li><li>artifact review</li><li>harness/video debugging</li></ul></li><li>These are not production dependencies.</li></ul>
 <h3>Practical Summary</h3>
 <h4>Player-Facing External Runtime Dependencies</h4>
-<ul><li>Supabase</li><li>Web3Forms</li></ul>
+<ul><li>Supabase</li><li>Web3Forms</li><li>YouTube playlist embed, only when Arcade Music is configured</li></ul>
 <h4>Hosting Dependencies</h4>
 <ul><li>GitHub Pages</li></ul>
 <h4>Developer And Release Dependencies</h4>
