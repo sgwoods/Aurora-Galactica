@@ -711,7 +711,7 @@
 
 <code>public-project-page.html</code></td><td><code>tools/build/build-index.js#buildPublicProjectPage</code>
 
-Template: <code>src/public/aurora-galactica.template.html</code></td><td><code>release-manifest.json</code>, <code>release-dashboard.json</code>, <code>release-notes.json</code>, <code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code>, <code>RELEASE_CONFORMANCE_DASHBOARD.md</code>, <code>CONFORMANCE_ECONOMICS.md</code>, <code>reference-artifacts/analyses/conformance-economics</code>, <code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code>, <code>REFERENCE_MEDIA_INVENTORY.md</code>, <code>ARTIFACT_POLICY.md</code>, <code>GAME_CONFORMANCE_CATALOG.md</code>, <code>application-guide.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code></td><td>Release identity and current focus: Build tokens and release dashboard fields are injected by npm run build for the active lane. Conformance readout and release gates: Score bars and gate cards are generated from the release conformance dashboard artifact. Value versus compute: Resource cards and investment rows are generated from economics fields in the dashboard artifact and linked economics docs. Reference ingestion: Ingestion cards are generated from dashboard ingestion rows and linked to maintained ingestion/reference docs. Game conformance catalog: Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.</td></tr>
+Template: <code>src/public/aurora-galactica.template.html</code></td><td><code>release-manifest.json</code>, <code>release-dashboard.json</code>, <code>release-notes.json</code>, <code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code>, <code>RELEASE_CONFORMANCE_DASHBOARD.md</code>, <code>CONFORMANCE_ECONOMICS.md</code>, <code>reference-artifacts/analyses/conformance-economics</code>, <code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code>, <code>REFERENCE_MEDIA_INVENTORY.md</code>, <code>ARTIFACT_POLICY.md</code>, <code>GAME_CONFORMANCE_CATALOG.md</code>, <code>application-guide.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code>, <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code></td><td>Release identity and current focus: Build tokens and release dashboard fields are injected by npm run build for the active lane. Conformance readout and release gates: Score bars and gate cards are generated from the release conformance dashboard artifact. Value versus compute: Resource cards and investment rows are generated from economics fields in the dashboard artifact and linked economics docs. Reference ingestion: Ingestion cards are generated from dashboard ingestion rows and linked to maintained ingestion/reference docs. Game conformance catalog: Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.</td></tr>
             
 
               <tr><td>Hosted Project Guide
@@ -725,7 +725,7 @@ Template: <code>src/project-guide.template.html</code></td><td><code>project-gui
 
 <code>application-guide.html</code></td><td><code>tools/build/build-index.js#buildApplicationGuide</code>
 
-Template: <code>src/application-guide.template.html</code></td><td><code>application-guide.json</code>, <code>src/js/13-aurora-game-pack.js</code>, <code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code>, <code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td><td>Audio and visual catalog: Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations. Artifact conformance status: The artifact scorecard is generated from analysis outputs rather than a single static sprite claim.</td></tr>
+Template: <code>src/application-guide.template.html</code></td><td><code>application-guide.json</code>, <code>src/js/13-aurora-game-pack.js</code>, <code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code>, <code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code>, <code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>, <code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code>, <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code></td><td>Audio and visual catalog: Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations. Artifact conformance status: The artifact scorecard and persona performance distribution are generated from analysis outputs rather than single static claims.</td></tr>
             
 
               <tr><td>Conformance Dashboard
@@ -914,6 +914,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <tr><td>Platform ownership and architecture</td><td><a href="PLATINUM.md">PLATINUM.md</a> and <a href="PLATINUM_ARCHITECTURE_OVERVIEW.md">PLATINUM_ARCHITECTURE_OVERVIEW.md</a></td></tr>
 <tr><td>Game/platform boundary</td><td><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></td></tr>
 <tr><td>Per-game alien, audio, stage, and persona catalog</td><td><a href="GAME_CONFORMANCE_CATALOG.md">GAME_CONFORMANCE_CATALOG.md</a></td></tr>
+<tr><td>Persona gameplay distribution evidence</td><td><a href="application-guide.html#persona-performance-distribution">Aurora Application Guide</a> and <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code></td></tr>
 <tr><td>Expert beta strategy review</td><td><a href="STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a></td></tr>
 <tr><td>Ingestion process</td><td><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></td></tr>
 <tr><td>Quality scoring model</td><td><a href="QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></td></tr>
@@ -1053,6 +1054,7 @@ npm run build</code></pre>
           </table>
         </div>
 <p>The current canonical persona profile is <code>tools/harness/reference-profiles/persona-progression-correspondence.json</code>. Future docs may expose <code>beginner/intermediate/expert/professional</code> aliases in the dashboard while keeping the historical <code>novice/advanced/expert/professional</code> ids stable for harness compatibility.</p>
+<p>Distribution evidence is now promoted as a first-class persona artifact: <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code>. The current Aurora application guide renders a 30-run-per-persona score/stage chart and table from that artifact so one lucky or unlucky seed does not overstate the health of the persona ladder.</p>
 <h3>Galaxy Guardians</h3>
 <p>Galaxy Guardians is the Galaxian-style second-game preview and ingestion proof. It has stronger extracted visual reference artifacts than Aurora&#39;s alien visual catalog, but a much less mature playable/runtime conformance posture.</p>
 <h4>Alien And Enemy Index</h4>
@@ -1116,9 +1118,9 @@ npm run build</code></pre>
 <h3>Platform Persona Contract</h3>
 <p>Platinum owns the persona harness substrate, not the game-specific truth behind each persona.</p>
 <p>The platform should provide:</p>
-<ul><li>stable persona IDs and aliases</li><li>controlled seeds and deterministic clock execution</li><li>scenario registration and result comparison</li><li>dashboard display of persona outcomes</li><li>cross-game resource/economics accounting for persona runs</li></ul>
+<ul><li>stable generic persona IDs and aliases</li><li>controlled seeds and deterministic clock execution</li><li>scenario registration and result comparison</li><li>dashboard display of persona outcomes</li><li>distribution tables and charts across repeated seeded runs</li><li>cross-game resource/economics accounting for persona runs</li></ul>
 <p>Each game should provide:</p>
-<ul><li>which scenarios matter for each persona</li><li>what success, failure, score, stage depth, and confidence mean</li><li>which behaviors are allowed to differ from the reference game</li><li>which persona outcomes block a release gate</li></ul>
+<ul><li>which scenarios matter for each persona</li><li>what success, failure, score, stage depth, and confidence mean</li><li>how the generic personas map to that game&#39;s controls, threats, and scoring</li><li>which behaviors are allowed to differ from the reference game</li><li>which persona outcomes block a release gate</li></ul>
 <h3>Maintenance Rule</h3>
 <p>When conformance work changes any alien role, audio cue, stage behavior, or persona assumption, update this file in the same commit as the harness or game change whenever practical. If the work is generated by long-cycle analysis, add the generated artifact path and note whether the row is high, medium, or low confidence.</p>
 <p>The release path now treats catalog visibility as a gate, not a courtesy. Major artifact families that influence conformance decisions must appear in generated user-visible documentation or dashboard data before a lane publish check passes. Use this catalog for game-owned rows; use the release dashboard or conformance economics docs for release/resource rows.</p>
@@ -2827,7 +2829,8 @@ npm run build</code></pre>
 <p>Current proof points:</p>
 <ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-only second-game sneak peek on top of the same platform</li><li>the second-game preview content is now pack-owned instead of hardcoded into</li></ul>
 <p>the shell surface</p>
-<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li></ul>
+<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li><li>the settings/configuration panel exposes the bundled read-only conformance</li></ul>
+<p>dashboard in hosted dev, beta, and production lanes while raw ingestion workspaces remain engineering-owned</p>
 <h3>Platform Structure</h3>
 <h4>Shell and presentation</h4>
 <p>Platinum owns the outer cabinet treatment:</p>
@@ -2914,6 +2917,10 @@ npm run build</code></pre>
 <h4>4. Persona and simulated opponents</h4>
 <p>Platinum should eventually support more than passive replay personas.</p>
 <p>Desired outcome:</p>
+<ul><li>personas are generic platform-level skill profiles that can play multiple</li></ul>
+<p>games through game-owned adapters and scenario definitions</p>
+<ul><li>repeated seeded persona runs produce distribution evidence for score, stage</li></ul>
+<p>depth, time alive, losses, and challenge/reward performance</p>
 <ul><li>game packs can expose enough action/state annotation for richer personas</li><li>a player can compete against curated persona styles as a <code>Player 2</code>-like</li></ul>
 <p>experience</p>
 <ul><li>future learn-by-playing personas can train through simulation while still</li></ul>
@@ -3296,8 +3303,9 @@ npm run build</code></pre>
 <h3>Dashboard And Ingestion Release Boundary</h3>
 <p>The shipped Platinum platform should include the read-only conformance dashboard as a release surface.</p>
 <p>That means each <code>/dev</code>, <code>/beta</code>, and <code>/production</code> lane should carry:</p>
-<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li></ul>
-<p>The release dashboard should link to the <code>assets/</code> copy because the public GitHub Pages workflow already publishes the asset tree for production. The top-level files remain lane artifacts for local/publish tooling.</p>
+<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li><li>a settings/configuration-panel launcher that opens the bundled read-only</li></ul>
+<p>dashboard for the active lane</p>
+<p>The release dashboard may link to the <code>assets/</code> copy, but the top-level dashboard files must also be published because the game settings/configuration launcher opens <code>conformance-dashboard.html</code> beside the active game lane.</p>
 <p>The dashboard is platform-owned presentation of release evidence. It is allowed to summarize application-owned game conformance, ingestion state, confidence, measurement debt, and compute/resource spend.</p>
 <p>The ingestion framework itself remains engineering-owned unless we explicitly promote a separate Root-gated or public evidence browser. Raw source media, reference extraction workspaces, candidate clips, unreviewed traces, and in-progress annotation notebooks should not automatically become player-facing Platinum assets just because the dashboard summarizes them.</p>
 <p>This gives us the right separation:</p>
@@ -3377,7 +3385,9 @@ npm run build</code></pre>
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>npm run harness:check:persona-performance-distribution</code> when persona</li></ul>
+<p>distribution evidence is part of the release story</p>
+<ul><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
 <p>Selection rule:</p>
 <ul><li>choose the smallest harness set that matches the active gate profile</li><li>avoid dragging platform-wide or gameplay-wide suites into every change unless</li></ul>
 <p>the change actually crosses those boundaries</p>
@@ -3611,6 +3621,10 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
 <p>Release boundary:</p>
 <ul><li>publish the dashboard and its compact data file as platform release assets,</li></ul>
 <p>including the <code>assets/</code> copy used by the public Pages deployment</p>
+<ul><li>expose the bundled read-only dashboard from the game settings/configuration</li></ul>
+<p>panel in hosted <code>/dev</code>, <code>/beta</code>, and <code>/production</code></p>
+<ul><li>keep the public mirror Pages workflow aligned during production publish so</li></ul>
+<p>top-level guide and conformance files are included in the deployed <code>_site</code></p>
 <ul><li>keep raw ingestion workspaces, source-media extraction, candidate clips,</li></ul>
 <p>unreviewed traces, and annotation notebooks engineering-owned</p>
 <ul><li>expose ingestion only as summarized release evidence unless a future</li></ul>

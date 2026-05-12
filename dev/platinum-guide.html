@@ -546,19 +546,25 @@
 
     <article class="card">
       <h3>What Platinum Owns</h3>
-      <p>Platinum owns stable persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, and cross-game resource accounting for persona runs.</p>
+      <p>Platinum owns stable generic persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, distribution reporting, and cross-game resource accounting for persona runs.</p>
     </article>
   
 
     <article class="card">
       <h3>What Each Game Owns</h3>
-      <p>Each game owns which scenarios matter for each persona, what success or failure means, which behaviors intentionally differ from the reference game, and which persona outcomes block release gates.</p>
+      <p>Each game maps the generic personas into game-specific controllers, scenarios, expected outcomes, acceptable reference deviations, and release-blocking persona evidence.</p>
     </article>
   
 
     <article class="card">
       <h3>Current Vocabulary</h3>
-      <p>The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora&#39;s historical harness IDs are novice, advanced, expert, and professional.</p>
+      <p>The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora&#39;s historical harness IDs are novice, advanced, expert, and professional; future games should keep the generic labels while providing game-owned behavior adapters.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Distribution Evidence</h3>
+      <p>Persona evidence should be read as distributions over seeded runs. The current Aurora guide publishes 30 full-run games per persona with score, stage, time, losses, and challenge-hit charts.</p>
     </article>
   
 </div>
@@ -673,7 +679,8 @@
 <p>Current proof points:</p>
 <ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-only second-game sneak peek on top of the same platform</li><li>the second-game preview content is now pack-owned instead of hardcoded into</li></ul>
 <p>the shell surface</p>
-<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li></ul>
+<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li><li>the settings/configuration panel exposes the bundled read-only conformance</li></ul>
+<p>dashboard in hosted dev, beta, and production lanes while raw ingestion workspaces remain engineering-owned</p>
 <h3>Platform Structure</h3>
 <h4>Shell and presentation</h4>
 <p>Platinum owns the outer cabinet treatment:</p>
@@ -760,6 +767,10 @@
 <h4>4. Persona and simulated opponents</h4>
 <p>Platinum should eventually support more than passive replay personas.</p>
 <p>Desired outcome:</p>
+<ul><li>personas are generic platform-level skill profiles that can play multiple</li></ul>
+<p>games through game-owned adapters and scenario definitions</p>
+<ul><li>repeated seeded persona runs produce distribution evidence for score, stage</li></ul>
+<p>depth, time alive, losses, and challenge/reward performance</p>
 <ul><li>game packs can expose enough action/state annotation for richer personas</li><li>a player can compete against curated persona styles as a <code>Player 2</code>-like</li></ul>
 <p>experience</p>
 <ul><li>future learn-by-playing personas can train through simulation while still</li></ul>
@@ -1204,8 +1215,9 @@
 <h3>Dashboard And Ingestion Release Boundary</h3>
 <p>The shipped Platinum platform should include the read-only conformance dashboard as a release surface.</p>
 <p>That means each <code>/dev</code>, <code>/beta</code>, and <code>/production</code> lane should carry:</p>
-<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li></ul>
-<p>The release dashboard should link to the <code>assets/</code> copy because the public GitHub Pages workflow already publishes the asset tree for production. The top-level files remain lane artifacts for local/publish tooling.</p>
+<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li><li>a settings/configuration-panel launcher that opens the bundled read-only</li></ul>
+<p>dashboard for the active lane</p>
+<p>The release dashboard may link to the <code>assets/</code> copy, but the top-level dashboard files must also be published because the game settings/configuration launcher opens <code>conformance-dashboard.html</code> beside the active game lane.</p>
 <p>The dashboard is platform-owned presentation of release evidence. It is allowed to summarize application-owned game conformance, ingestion state, confidence, measurement debt, and compute/resource spend.</p>
 <p>The ingestion framework itself remains engineering-owned unless we explicitly promote a separate Root-gated or public evidence browser. Raw source media, reference extraction workspaces, candidate clips, unreviewed traces, and in-progress annotation notebooks should not automatically become player-facing Platinum assets just because the dashboard summarizes them.</p>
 <p>This gives us the right separation:</p>
@@ -1285,7 +1297,9 @@
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>npm run harness:check:persona-performance-distribution</code> when persona</li></ul>
+<p>distribution evidence is part of the release story</p>
+<ul><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
 <p>Selection rule:</p>
 <ul><li>choose the smallest harness set that matches the active gate profile</li><li>avoid dragging platform-wide or gameplay-wide suites into every change unless</li></ul>
 <p>the change actually crosses those boundaries</p>

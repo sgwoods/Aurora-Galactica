@@ -668,7 +668,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="settingsPanelHead" class="framePopupHead">
     <div>
       <span id="settingsPanelTitle" class="framePopupTitle">Developer Tools</span>
-      <span id="settingsPanelSub" class="framePopupSub">Local tools and diagnostic controls for this build.</span>
+      <span id="settingsPanelSub" class="framePopupSub">Release diagnostics, conformance rollup, and local controls for this build.</span>
     </div>
     <button type="button" id="settingsPanelClose" aria-label="Close developer tools">×</button>
   </div>
@@ -689,7 +689,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <span id="conformanceRollupScore">--</span>
         <span id="conformanceRollupBody">Dashboard summary pending.</span>
       </div>
-      <div id="conformanceDashboardHint">Local dashboard opens from localhost builds only.</div>
+      <div id="conformanceDashboardHint">Open the read-only conformance dashboard for this build.</div>
     </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
@@ -770,8 +770,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.3.0.1</span>
-      <span id="settingsRelease">May 12 2026, 7:54 AM EDT</span>
-      <span id="settingsState">main@583cc0c7 clean</span>
+      <span id="settingsRelease">May 12 2026, 4:15 PM EDT</span>
+      <span id="settingsState">main@6118e13e clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1069,7 +1069,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0.1</span>
-    <span id="buildStampRelease">May 12 2026, 7:54 AM EDT</span>
+    <span id="buildStampRelease">May 12 2026, 4:15 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1713,7 +1713,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.705.sha.583cc0c7',commit:'583cc0c7838c87f6b992ddb9d9cb8f1550a365ee',branch:'main',dirty:false,released:'May 12 2026, 7:54 AM EDT',state:'main@583cc0c7 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.708.sha.6118e13e',commit:'6118e13e16172c3091c2e49366e581f5b2882f6a',branch:'main',dirty:false,released:'May 12 2026, 4:15 PM EDT',state:'main@6118e13e clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2907,7 +2907,8 @@ function isLocalDashboardHost(){
  return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
 }
 function conformanceDashboardUrl(){
- return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ if(isLocalDashboardHost())return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}conformance-dashboard.html`;
 }
 function syncConformanceDashboardUi(){
  const summary=CONFORMANCE_DASHBOARD_SUMMARY&&typeof CONFORMANCE_DASHBOARD_SUMMARY==='object'
@@ -2915,18 +2916,16 @@ function syncConformanceDashboardUi(){
   : {};
  const local=isLocalDashboardHost();
  const available=!!summary.available;
- if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',!local);
+ if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',false);
  if(openConformanceDashboardBtn){
-  openConformanceDashboardBtn.disabled=!local;
+  openConformanceDashboardBtn.disabled=false;
   openConformanceDashboardBtn.title=local
    ? 'Open the local conformance dashboard'
-   : 'Localhost-only for now. Future work will externalize this behind Root access.';
+   : 'Open the read-only conformance dashboard for this release lane.';
  }
  if(conformanceRollupScore)conformanceRollupScore.textContent=available ? (summary.overallCurrent||'--') : '--';
  if(conformanceRollupBody){
-  if(!local){
-   conformanceRollupBody.textContent='Local-only dashboard hidden on external builds.';
-  }else if(available){
+  if(available){
    const generated=summary.generatedAt?summary.generatedAt.replace('T',' ').replace(/\.\d+Z$/,'Z'):'unknown';
    const weak=summary.weakestMetric?`${summary.weakestMetric} ${summary.weakestCurrent||''}`.trim():'weakest axis pending';
    conformanceRollupBody.textContent=`Weakest: ${weak}. Audio ${summary.audioCurrent||'--'} · level arc ${summary.levelArcCurrent||'--'} · visual ${summary.visualCurrent||'--'}. Generated ${generated}.`;
@@ -2937,10 +2936,11 @@ function syncConformanceDashboardUi(){
  if(conformanceDashboardHint){
   conformanceDashboardHint.textContent=local
    ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
-   : 'Future feature: expose this behind Root login password when external developer access is ready.';
+   : 'Open the bundled read-only dashboard for this release lane. Raw ingestion workspaces remain engineering-owned.';
  }
 }
 window.__platinumSyncConformanceDashboardUi=syncConformanceDashboardUi;
+window.__platinumConformanceDashboardUrl=conformanceDashboardUrl;
 function syncAudioDebugUi(){
  if(!settingsAudioDebugBody)return;
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
@@ -3138,10 +3138,6 @@ function openProjectGuide(){
  }else showToast('Allow popups to open the project guide');
 }
 function openConformanceDashboard(){
- if(!isLocalDashboardHost()){
-  showToast('Conformance dashboard is localhost-only for now');
-  return;
- }
  const win=window.open(conformanceDashboardUrl(), '_blank', 'noopener');
  if(win){
   try{win.focus();}catch{}
@@ -5347,9 +5343,9 @@ const accountFlightStats=document.getElementById('accountFlightStats');
 const accountRecordsTop5=document.getElementById('accountRecordsTop5');
 const SUPABASE_URL='https://iddyodcknmxupavnuuwg.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
-const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
+const TEST_ACCOUNT_EMAIL='';
 const TEST_ACCOUNT_USER_ID='';
-const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
+const TEST_ACCOUNT_EMAILS=[];
 const TEST_ACCOUNT_USER_IDS=[];
 const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();

@@ -593,6 +593,25 @@
     .waveformStrip .catalogMediaImg{
       max-height:86px;
     }
+    .distributionChartWrap{
+      margin:0 0 16px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(6,15,24,0.66);
+      overflow:auto;
+    }
+    .distributionChart{
+      display:block;
+      width:100%;
+      min-width:0;
+      height:auto;
+    }
+    .personaReadout{
+      margin-top:16px;
+    }
+    .personaReadout .bulletList{
+      margin-top:12px;
+    }
     .previewFrame{
       position:absolute;
       width:1px;
@@ -2973,7 +2992,7 @@
         <section class="section" id="persona-catalog">
           <div class="sectionHeader">
             <h2>Testing Personas</h2>
-            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the harness substrate; Aurora owns what each persona should prove for its gameplay.</p>
+            <p>The platform-level persona vocabulary as applied to Aurora. Platinum owns the generic persona IDs, aliases, seeded execution, and comparison substrate; Aurora owns which scenarios matter and what each persona should prove for this game.</p>
           </div>
           <div class="tableWrap">
             <table class="dataTable">
@@ -3020,6 +3039,89 @@
   
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="persona-performance-distribution">
+          <div class="sectionHeader">
+            <h2>Persona Performance Distribution</h2>
+            <p>Repeated seeded full-run gameplay for the generic Platinum personas. This measures score, stage depth, time alive, losses, and challenge performance as a distribution rather than treating one seeded route as the whole truth.</p>
+          </div>
+          <div class="distributionChartWrap">
+            <img class="distributionChart" src="assets/catalog-media/bd48a34cbd-performance-lines.svg" alt="Line chart of persona score and stage reached across repeated seeded full-run games" loading="lazy">
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Runs</th>
+                  <th>Score</th>
+                  <th>Stage Reached</th>
+                  <th>Time Alive</th>
+                  <th>Score / Min</th>
+                  <th>Ship Losses</th>
+                  <th>Challenge Hit Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Beginner</strong><br><span class="docMeta"><code>novice</code><br>51001-51030</span></td>
+      <td><strong>30</strong><br><span class="docMeta">Seeded full-run games</span></td>
+      <td><strong>14201</strong><br><span class="docMeta">median 16005</span><br><span class="docMeta">range 4910-22640</span></td>
+      <td><strong>3.7</strong><br><span class="docMeta">median 4</span><br><span class="docMeta">range 2-5</span></td>
+      <td><strong>1.39 min</strong><br><span class="docMeta">median 1.46 min</span><br><span class="docMeta">range 0.67-2.02 min</span></td>
+      <td><strong>9840</strong><br><span class="docMeta">median 10256</span><br><span class="docMeta">range 5842-13017</span></td>
+      <td><strong>2.93</strong><br><span class="docMeta">median 3</span><br><span class="docMeta">range 2-4</span></td>
+      <td><strong>56.4%</strong><br><span class="docMeta">median 80.0%</span></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Intermediate</strong><br><span class="docMeta"><code>advanced</code><br>51101-51130</span></td>
+      <td><strong>30</strong><br><span class="docMeta">Seeded full-run games</span></td>
+      <td><strong>20868</strong><br><span class="docMeta">median 21205</span><br><span class="docMeta">range 5510-46370</span></td>
+      <td><strong>4.33</strong><br><span class="docMeta">median 5</span><br><span class="docMeta">range 2-8</span></td>
+      <td><strong>1.6 min</strong><br><span class="docMeta">median 1.74 min</span><br><span class="docMeta">range 0.72-2.83 min</span></td>
+      <td><strong>12011</strong><br><span class="docMeta">median 11773</span><br><span class="docMeta">range 6514-18896</span></td>
+      <td><strong>3.27</strong><br><span class="docMeta">median 3</span><br><span class="docMeta">range 2-4</span></td>
+      <td><strong>61.3%</strong><br><span class="docMeta">median 86.3%</span></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Expert</strong><br><span class="docMeta"><code>expert</code><br>51201-51230</span></td>
+      <td><strong>30</strong><br><span class="docMeta">Seeded full-run games</span></td>
+      <td><strong>41090</strong><br><span class="docMeta">median 40885</span><br><span class="docMeta">range 23680-88940</span></td>
+      <td><strong>6.87</strong><br><span class="docMeta">median 6</span><br><span class="docMeta">range 5-13</span></td>
+      <td><strong>2.51 min</strong><br><span class="docMeta">median 2.3 min</span><br><span class="docMeta">range 1.68-4 min</span></td>
+      <td><strong>16351</strong><br><span class="docMeta">median 16663</span><br><span class="docMeta">range 11224-22249</span></td>
+      <td><strong>3.27</strong><br><span class="docMeta">median 3.5</span><br><span class="docMeta">range 1-4</span></td>
+      <td><strong>97.2%</strong><br><span class="docMeta">median 98.5%</span></td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Professional</strong><br><span class="docMeta"><code>professional</code><br>51301-51330</span></td>
+      <td><strong>30</strong><br><span class="docMeta">Seeded full-run games</span></td>
+      <td><strong>42944</strong><br><span class="docMeta">median 40915</span><br><span class="docMeta">range 29000-63580</span></td>
+      <td><strong>6.33</strong><br><span class="docMeta">median 6</span><br><span class="docMeta">range 4-10</span></td>
+      <td><strong>2.26 min</strong><br><span class="docMeta">median 2.12 min</span><br><span class="docMeta">range 1.44-3.19 min</span></td>
+      <td><strong>19227</strong><br><span class="docMeta">median 19176</span><br><span class="docMeta">range 15884-24716</span></td>
+      <td><strong>3.73</strong><br><span class="docMeta">median 4</span><br><span class="docMeta">range 3-4</span></td>
+      <td><strong>98.0%</strong><br><span class="docMeta">median 100.0%</span></td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap personaReadout">
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code>. Raw run directories stay in <code>harness-artifacts/</code>; the published docs use the promoted summary and chart.</p>
+            <p class="docMeta"><strong>Measurement limits:</strong> Seeded persona runs are not human playtest proof. They are repeatable skill-profile probes that help us find unfairness, progression order breaks, and whether higher-skill play actually unlocks more of the game.</p>
+            <ul class="bulletList">
+    <li><strong>P1: Persona stage progression is out of order</strong> Professional averaged stage 6.33, below Expert at 6.87.</li>
+  </ul>
           </div>
         </section>
 
@@ -3149,6 +3251,9 @@
   
 
     <li><a href="#persona-catalog">Testing Personas</a></li>
+  
+
+    <li><a href="#persona-performance-distribution">Persona Performance Distribution</a></li>
   
 
     <li><a href="#graphics-controls">Presentation Controls</a></li>
