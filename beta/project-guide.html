@@ -399,7 +399,7 @@
           </div>
           <h1>Aurora Galactica And Platinum Project Guide</h1>
           <p>A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.</p>
-          <div class="goal"><strong>Current goal:</strong> Advance the post-1.3.0 conformance program: improve Aurora&#39;s Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.</div>
+          <div class="goal"><strong>Current goal:</strong> Carry the refreshed 1.3.0 public family cleanly while advancing the post-1.3.0 conformance program: improve Aurora&#39;s Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
@@ -411,11 +411,11 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 11, 2026</span>
+              <span class="metaValue">May 12, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Hosted dev conformance review</span>
+              <span class="metaValue">Production conformance refresh</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -439,7 +439,7 @@
 
     <article class="card">
       <h3>What Shipped</h3>
-      <p>`1.3.0` is the current public Aurora / Platinum release family. Hosted `/dev` now carries the `1.3.0.1` review increment, while `/beta` and `/production` preserve the shipped family. The release path keeps the shell, picker, release dashboards, and hosted docs part of the product.</p>
+      <p>`1.3.0` is the current public Aurora / Platinum release family. The accepted `1.3.0.1` hosted-dev review increment has now refreshed hosted `/beta` and hosted `/production`, while hosted `/dev` remains the visible forward-review line. The release path keeps the shell, picker, release dashboards, and hosted docs part of the product.</p>
     </article>
   
 
@@ -508,7 +508,7 @@
     <li>local `localhost` is the active engineering lane and the source of the current candidate.</li>
   
 
-    <li>hosted `/dev` is the shared integration preview and currently carries the `1.3.0.1` conformance/docs review increment.</li>
+    <li>hosted `/dev` is the shared integration preview and currently carries the visible `1.3.0.1` forward-review increment.</li>
   
 
     <li>hosted `/beta` is the reviewed release-candidate lane.</li>
@@ -665,8 +665,8 @@
   
 
     <article class="linkCard">
-      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">1.3.0.1 Hosted Dev Release Note</a>
-      <p>Detailed beta-request handoff note for the current hosted-dev conformance review increment.</p>
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">1.3.0 Production Refresh Note</a>
+      <p>Detailed note for the refreshed public 1.3.0 family, including the accepted 1.3.0.1 review bundle, public documentation, conformance story, and measured audio lift.</p>
     </article>
   
 </div>
@@ -748,7 +748,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
       <div class="docWrap">
         <p class="docMeta">Generated from <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code> during build.</p>
         <div class="markdown">
-          <p>Updated: May 11, 2026</p>
+          <p>Updated: May 12, 2026</p>
 <p>This is the maintained top-level explanation of the broader Aurora / Platinum effort. It is meant to answer four questions at once:</p>
 <ul><li>what the project is trying to prove</li><li>how Platinum, game applications, ingestion, harnesses, and release lanes fit</li></ul>
 <p>together</p>
@@ -778,7 +778,9 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <p>The main discipline is that reusable capability moves down into Platinum, while game truth stays with the game and reference truth stays in ingestion artifacts.</p>
 <h3>Current Project State</h3>
 <p>Aurora / Platinum is in a post-<code>1.3.0</code> shipped posture.</p>
-<ul><li>hosted <code>/production</code> carries the public <code>1.3.0</code> family</li><li>hosted <code>/beta</code> is the reviewed candidate lane</li><li>hosted <code>/dev</code> carries the active <code>1.3.0.1</code> integrated hosted review lane</li><li>local <code>localhost</code> is the active engineering lane</li><li><code>main</code> is the authoritative integration line for the deliberate <code>1.4.0</code></li></ul>
+<ul><li>hosted <code>/production</code> carries the refreshed public <code>1.3.0</code> family</li><li>hosted <code>/beta</code> is the reviewed lane aligned with that refreshed public family</li><li>hosted <code>/dev</code> carries the active <code>1.3.0.1</code> integrated hosted forward-review</li></ul>
+<p>line</p>
+<ul><li>local <code>localhost</code> is the active engineering lane</li><li><code>main</code> is the authoritative integration line for the deliberate <code>1.4.0</code></li></ul>
 <p>pickup</p>
 <p>The active direction is no longer &quot;can Platinum host Aurora?&quot; It can. The active direction is:</p>
 <ul><li>raise Aurora&#39;s Galaga-like conformance in the areas that most affect player</li></ul>
@@ -871,17 +873,15 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <p>The next major release gate should be judged not only by a higher overall score, but by whether the improved categories are the ones players actually feel.</p>
 <h3>Release Recommendation</h3>
 <p>Current recommendation:</p>
-<ul><li>treat hosted <code>/dev</code> as the current <code>1.3.0.1</code> review increment</li><li>complete the documentation/release-note/readiness review before any beta</li></ul>
-<p>request</p>
-<ul><li>if the review accepts the bundle as a real player-visible improvement, ask</li></ul>
-<p>the release-authority machine to publish hosted <code>/beta</code></p>
-<ul><li>keep the larger <code>1.4.0</code> family focused on arcade depth: alien entry,</li></ul>
+<ul><li>treat the refreshed public <code>1.3.0</code> family as the stable current line</li><li>treat hosted <code>/dev</code> as the current forward-review increment rather than as an</li></ul>
+<p>automatic release candidate</p>
+<ul><li>use the next coherent hosted <code>/dev</code> bundle to justify the next beta request</li><li>keep the larger <code>1.4.0</code> family focused on arcade depth: alien entry,</li></ul>
 <p>challenge-stage novelty, stage progression, boss/formation grammar, visual reference grounding, and measured audio feedback</p>
 <p>Short term:</p>
-<ul><li>finish the <code>1.3.0.1</code> release-readiness documentation pass and preserve the</li></ul>
-<p>detailed release note as the handoff artifact for beta authority</p>
+<ul><li>keep the refreshed <code>1.3.0</code> release note and readiness docs aligned with the</li></ul>
+<p>live public line</p>
 <ul><li>keep all candidate work wrapped in <code>harness:measure</code></li><li>keep dashboard, scorecard, public project page, project guide, release notes,</li></ul>
-<p>and strategic review aligned with the same current score read before beta publish</p>
+<p>and strategic review aligned with the same current score read before the next beta candidate is cut</p>
 <p>Latest local playtest response:</p>
 <ul><li><code>stageTransition</code> now uses a longer reference-backed window so the inter-level</li></ul>
 <p>moment is less abrupt.</p>
@@ -1135,7 +1135,7 @@ npm run build</code></pre>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>STRATEGIC_BETA_REVIEW.md</code> during build.</p>
         <div class="markdown">
-          <p>Updated: May 11, 2026</p>
+          <p>Updated: May 12, 2026</p>
 <p>This is the maintained expert assessment for whether the project is on track near-term and long-term before or after a major hosted <code>/beta</code> push. It is written from the combined perspective of:</p>
 <ul><li>an AI-forward software developer using Codex as a planning, coding, and</li></ul>
 <p>synthesis partner</p>
@@ -1159,44 +1159,48 @@ npm run build</code></pre>
           </table>
         </div>
 <h3>Current Assessment</h3>
-<p>Use the hosted <code>1.3.0.1</code> <code>/dev</code> lane as the current beta-readiness review package. It is now a real review increment, not just a future plan. If the bundle is accepted, the beta publish should be requested from <code>imacm1 / iMacM1</code>, which currently holds release authority. Keep the next larger beta family centered on <code>1.4.0</code> arcade depth.</p>
+<p>The accepted <code>1.3.0.1</code> hosted-dev bundle has now refreshed the public <code>1.3.0</code> family on hosted <code>/beta</code> and hosted <code>/production</code>.</p>
 <p>Current strengths:</p>
 <ul><li>The strategy is sound: Codex/model reasoning designs better local harnesses,</li></ul>
 <p>while local CPU/browser loops perform repeatable measurement.</p>
-<ul><li>The release lane model is disciplined: <code>/dev</code>, <code>/beta</code>, and <code>/production</code></li></ul>
-<p>have distinct meanings and release authority is explicit.</p>
+<ul><li>The release lane model is disciplined: hosted <code>/dev</code>, hosted <code>/beta</code>, and</li></ul>
+<p>hosted <code>/production</code> have distinct meanings and release authority is explicit.</p>
+<ul><li>The public documentation set now explains provenance, evidence, current</li></ul>
+<p>scores, and resource economics more honestly than the earlier shipped line.</p>
 <ul><li>Aurora now has first-class conformance categories for audio, level arc,</li></ul>
 <p>alien entry/challenge novelty, boss/formation grammar, visual look, and resource economics.</p>
-<ul><li>Galaxy Guardians is correctly framed as a preview/ingestion proof rather</li></ul>
-<p>than a shipped second game.</p>
+<ul><li>Galaxy Guardians is still correctly framed as a preview/ingestion proof</li></ul>
+<p>rather than a fully shipped second game.</p>
 <p>Current risks:</p>
-<ul><li>Documentation freshness is a release risk. Game sections, audio cue windows,</li></ul>
-<p>and public-page summaries can drift from runtime contracts unless checked.</p>
-<ul><li>The overall <code>9.2/10</code> quality score can obscure player-visible gaps in audio</li></ul>
-<p>identity, challenge-stage arrival authenticity, start/wait-mode polish, explosion feedback, and visual style.</p>
-<ul><li>Audio conformance has consumed the largest measured local compute spend while</li></ul>
-<p>the runtime score remains the weakest high-value category at <code>7.3/10</code>; the latest ship-loss promotion is a real user-visible lift, but the next audio work should still attack calibrated event gaps rather than simply sweeping more pleasant candidates.</p>
+<ul><li>Documentation freshness remains a release risk. The project is better</li></ul>
+<p>instrumented now, but user-visible docs can still drift if current artifact sources stop being maintained.</p>
+<ul><li>The overall <code>9.2/10</code> quality score can still obscure player-visible gaps in</li></ul>
+<p>audio identity, challenge-stage arrival authenticity, explosion feedback, and visual style.</p>
+<ul><li>Audio conformance remains the weakest high-value runtime category at</li></ul>
+<p><code>7.3/10</code>; the latest ship-loss promotion is real, but the next audio work should keep attacking calibrated event gaps rather than settling for &quot;pleasant enough&quot; candidates.</p>
 <ul><li>GPU-equivalent accounting is conceptually correct but still under-instruments</li></ul>
 <p>Codex/model effort. Treat missing model usage as accounting debt, not proof that cloud/model compute was irrelevant.</p>
 <h3>Beta-Readiness Standard</h3>
 <p>A beta candidate should have:</p>
-<ol><li>One coherent player-visible improvement bundle beyond hosted-dev parity.</li><li>A refreshed conformance dashboard and economics report.</li><li>User-visible docs that explain the improvement, current gaps, evidence,</li></ol>
+<ol><li>One coherent player-visible improvement bundle beyond the current public</li></ol>
+<p>family.</p>
+<ol><li>A refreshed conformance dashboard and economics report.</li><li>User-visible docs that explain the improvement, current gaps, evidence,</li></ol>
 <p>cost, and next investment.</p>
 <ol><li>No stale runtime-vs-doc cue contract mismatches.</li><li>Clear separation between Platinum platform capability, Aurora game-owned</li></ol>
 <p>behavior, Galaxy Guardians preview status, and the ingestion framework.</p>
 <h3>Next Recommended Investment</h3>
-<p>Before the next conformance compute cycle, finish the beta-request readiness sprint:</p>
-<ul><li>keep the detailed <code>1.3.0.1</code> release note, public project page, application</li></ul>
-<p>guide, release dashboard, scorecards, and project guide aligned</p>
-<ul><li>confirm <code>npm run build</code>, documentation freshness, and publish preflight are</li></ul>
-<p>green from the source repo</p>
-<ul><li>preserve the beta handoff rule: MacBook may prepare and push source/dev</li></ul>
-<p>review work, but <code>imacm1</code> must perform beta publish unless authority changes</p>
-<ul><li>record any docs/dashboard suggestions that are not part of the beta bundle as</li></ul>
-<p>explicit next-plan items</p>
+<p>Before the next major conformance compute cycle, keep the refreshed public line boring and trustworthy:</p>
+<ul><li>keep the detailed <code>1.3.0</code> production refresh note, public project page,</li></ul>
+<p>application guide, release dashboard, scorecards, and project guide aligned</p>
+<ul><li>preserve the authority rule: <code>imacm1 / iMacM1</code> performs beta/production</li></ul>
+<p>publish while it holds release authority</p>
+<ul><li>record docs/dashboard suggestions that are not part of the public line as</li></ul>
+<p>explicit next-plan items instead of ad hoc drift</p>
 <p>Then return to the highest-value user experience work:</p>
 <ul><li>audio/event feedback if the goal is immediate feel improvement</li><li>alien/challenge-stage arrival and novelty if the goal is the strongest</li></ul>
 <p><code>1.4.0</code> arcade-depth story</p>
+<ul><li>level arc, boss/formation grammar, and visual reference grounding if the goal</li></ul>
+<p>is deeper long-play authenticity</p>
 <h3>Maintenance Rule</h3>
 <p>Each major beta push should add a short dated entry below summarizing:</p>
 <ul><li>candidate version and lane</li><li>player-visible claim</li><li>conformance scores and confidence changes</li><li>local CPU/browser spend and GPU-equivalent spend</li><li>documentation/dashboard freshness result</li><li>strategic recommendation: proceed, hold, or redirect</li></ul>
@@ -1207,7 +1211,8 @@ npm run build</code></pre>
               <tr><th>Date</th><th>Candidate / lane</th><th>Recommendation</th><th>Reason</th></tr>
             </thead>
             <tbody>
-              <tr><td>May 11, 2026</td><td>Hosted <code>/dev</code> <code>1.3.0.1</code> review line</td><td>Prepare beta request, authority-gated</td><td>Overall quality is <code>9.2/10</code>; audio is up to <code>7.3/10</code> with a measured ship-loss cue lift, dashboard/docs/economics are now part of the candidate story, and remaining gaps are understood enough to request a beta publish from <code>imacm1</code> if the review accepts the bundle.</td></tr>
+              <tr><td>May 12, 2026</td><td>Hosted <code>/beta</code> and <code>/production</code> refreshed <code>1.3.0</code> family</td><td>Proceed with <code>1.4.0</code> pickup; hold new beta until a real next bundle exists</td><td>The accepted <code>1.3.0.1</code> review bundle is now live publicly with a <code>9.2/10</code> maintained quality read, provenance-backed docs, economics, and a measured ship-loss cue lift. Remaining gaps are authentic next-cycle targets, not blockers to the refreshed public line.</td></tr>
+<tr><td>May 11, 2026</td><td>Hosted <code>/dev</code> <code>1.3.0.1</code> review line</td><td>Prepare beta request, authority-gated</td><td>Overall quality is <code>9.2/10</code>; audio is up to <code>7.3/10</code> with a measured ship-loss cue lift, dashboard/docs/economics are now part of the candidate story, and remaining gaps are understood enough to request a beta publish from <code>imacm1</code> if the review accepts the bundle.</td></tr>
 <tr><td>May 10, 2026</td><td>Local <code>1.3.0.1</code> dev-review preparation</td><td>Hold beta; continue hosted-dev and conformance work</td><td>Audio remains <code>7.1/10</code>, alien/challenge novelty and visual/event feedback remain player-visible gaps, and docs needed freshness checks before a serious beta claim.</td></tr>
             </tbody>
           </table>
@@ -1217,105 +1222,93 @@ npm run build</code></pre>
     </section>
   
 
-    <section class="section" id="release-note-1301-hosted-dev-doc">
+    <section class="section" id="release-note-130-production-refresh-doc">
       <div class="sectionHeader">
-        <h2>1.3.0.1 Hosted Dev Release Note</h2>
-        <p>Detailed hosted-dev conformance review and beta-request handoff note covering player-visible changes, metrics, economics, known gaps, and authority-gated release steps.</p>
+        <h2>1.3.0 Production Conformance Refresh Note</h2>
+        <p>Detailed production refresh note covering the accepted 1.3.0.1 review bundle, public-facing documentation/provenance improvements, measured conformance lifts, known gaps, and the next 1.4.0 direction.</p>
       </div>
       <div class="docWrap">
-        <p class="docMeta">Generated from <code>RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</code> during build.</p>
+        <p class="docMeta">Generated from <code>RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</code> during build.</p>
         <div class="markdown">
-          <p>Date: May 11, 2026</p>
-<p>Release track: hosted-dev review increment</p>
-<p>Authority posture: MacBook may prepare, commit, push, merge, and publish hosted <code>/dev</code>; hosted <code>/beta</code> and <code>/production</code> remain authority-gated on <code>imacm1 / iMacM1</code> unless release authority is explicitly transferred.</p>
+          <p>Date: May 12, 2026</p>
+<p>Release track: production refresh inside the public <code>1.3.0</code> family</p>
+<p>Source promotion path: accepted <code>1.3.0.1</code> hosted-dev review bundle -&gt; hosted <code>/beta</code> -&gt; hosted <code>/production</code></p>
 <h3>Summary</h3>
-<p><code>1.3.0.1</code> is the first post-<code>1.3.0</code> review increment. It keeps production and beta stable on the shipped <code>1.3.0</code> family while using hosted <code>/dev</code> to review a coherent conformance bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite-capture scoring, and a measured audio/event-feedback lift.</p>
-<p>This is not a production promotion. It is the package to review before asking the release-authority machine to publish the next hosted <code>/beta</code> candidate.</p>
-<h3>Player-Visible Improvements</h3>
-<ul><li>Ship-loss feedback is more arcade-complete: the calibrated layered</li></ul>
-<p><code>playerHit</code> cue preserves a fuller death phrase while maintaining cue alignment, semantic event scoring, and overall quality guardrails.</p>
-<ul><li>Inter-level and final-loss audio reliability is better protected: critical</li></ul>
-<p>reference cues now have runtime-recovery coverage so transition, loss, game-over, and next-start cues actually begin in the browser runtime.</p>
-<ul><li>Start/wait-mode and boss-first-hit presentation have been cleaned up enough</li></ul>
-<p>that the current review bundle reads more coherent than the shipped baseline, while larger visual-authenticity work remains queued.</p>
-<ul><li>The conformance dashboard and public project documentation now expose more of</li></ul>
-<p>the real development story: what improved, what remains weak, what it cost, and what should be attacked next.</p>
-<h3>Conformance And Evidence</h3>
-<p>Current maintained Aurora read:</p>
+<p>This release keeps the public SemVer family at <code>1.3.0</code> while promoting the accepted <code>1.3.0.1</code> hosted-dev review bundle into the live hosted <code>/beta</code> and hosted <code>/production</code> lanes.</p>
+<p>That matters because the fourth-segment <code>1.3.0.1</code> line is a hosted-dev review signal, not the public package version. Public production still presents itself as <code>1.3.0+build...</code>, but it now carries the stronger conformance/documentation bundle that was previously isolated to hosted <code>/dev</code>.</p>
+<p>The public effect is a more trustworthy Aurora / Platinum release: stronger player-facing documentation, clearer provenance, a better measured conformance story, improved runtime ship-loss audio feedback, and a release package that explains not just what changed, but why the team believes it.</p>
+<h3>What Players And Reviewers Get</h3>
+<ul><li>A production line that is better documented in public, not only better</li></ul>
+<p>described in engineering chat.</p>
+<ul><li>A measured calibrated ship-loss cue lift that preserves a fuller arcade-like</li></ul>
+<p>death phrase while keeping cue alignment guardrails intact.</p>
+<ul><li>Better protection around inter-level, final-loss, and game-over audio starts</li></ul>
+<p>so browser runtime capture no longer silently drops critical cue moments.</p>
+<ul><li>A public project page, project guide, release dashboard, and conformance</li></ul>
+<p>dashboard that now explain persistent artifact provenance, score movement, and resource economics as first-class parts of the product story.</p>
+<ul><li>Clearer layered release identity across the integrated release, the Platinum</li></ul>
+<p>host, Aurora, and Galaxy Guardians.</p>
+<h3>Main Production Improvements</h3>
+<h4>1. Conformance Story Is Public-Facing Now</h4>
+<p>The public project surfaces now describe the real conformance effort rather than only presenting a thin product shell.</p>
+<p>That includes:</p>
+<ul><li>provenance-backed generated documentation</li><li>release-facing conformance dashboards</li><li>resource-economics reporting</li><li>application artifact scoring</li><li>runtime static sprite-capture scoring</li><li>a clearer explanation of score meaning, confidence, and next investments</li></ul>
+<p>This means a future reader can inspect what the project believes, what evidence it is using, and what still remains weak without needing repository archaeology or prior chat context.</p>
+<h4>2. Audio/Event Feedback Improved With Measurement</h4>
+<p>The accepted runtime audio lift in this refresh is the calibrated layered <code>playerHit</code> ship-loss phrase.</p>
+<p>Why it shipped:</p>
+<ul><li>cue alignment remained green</li><li>semantic event scoring stayed strong</li><li>focused candidate gates held</li><li>browser-reference comparison improved</li><li>the player-facing moment became more arcade-complete than the prior shipped</li></ul>
+<p>line</p>
+<p>This does not claim the audio problem is solved. It does mean the public line now carries a real measured improvement rather than only pipeline/process work.</p>
+<h4>3. Documentation Provenance Is Enforced</h4>
+<p>Generated public pages now explicitly explain that they are assembled from persistent repository artifacts and maintained source docs.</p>
+<p>The provenance source is captured in <code>documentation-provenance.json</code> and rendered into the public project page and project guide. Release freshness checks now fail if that source map or those rendered sections disappear.</p>
+<p>That is important for a project whose long-term promise depends on repeatable ingestion, evidence-backed conformance work, and durable release reasoning.</p>
+<h4>4. Layered Release Identity Is Stronger</h4>
+<p>This refresh continues the move away from one flattened version story.</p>
+<p>The release now more clearly distinguishes:</p>
+<ul><li>integrated bundle identity</li><li>Platinum platform identity</li><li>game-owned release identity</li><li>build identity</li><li>hosted-dev review-line identity</li></ul>
+<p>Aurora remains the primary shipped game. Galaxy Guardians remains a preview application, but its pack-owned identity and release metadata are now kept more honestly aligned with the production-capable preview runtime.</p>
+<h3>Current Quality Read</h3>
+<p>Current maintained Aurora read for this refreshed public family:</p>
 <div class="tableWrap">
           <table class="dataTable">
             <thead>
               <tr><th>Area</th><th>Current Read</th><th>Notes</th></tr>
             </thead>
             <tbody>
-              <tr><td>Overall quality</td><td><code>9.2/10</code></td><td>Current release-quality roll-up.</td></tr>
-<tr><td>Audio identity and cue alignment</td><td><code>7.3/10</code></td><td>Weakest high-value category, but improved after calibrated ship-loss promotion.</td></tr>
-<tr><td>Audio semantic event score</td><td><code>9.78/10</code></td><td>Event meanings remain strong.</td></tr>
-<tr><td>Audio acoustic event score</td><td><code>6.31/10</code></td><td>Still the main audio gap; highest current segment risk is <code>playerHit</code> tail.</td></tr>
+              <tr><td>Overall quality</td><td><code>9.2/10</code></td><td>Stronger than the older shipped <code>1.3.0</code> baseline.</td></tr>
+<tr><td>Audio identity and cue alignment</td><td><code>7.3/10</code></td><td>Still the weakest high-value category.</td></tr>
+<tr><td>Audio semantic event score</td><td><code>9.78/10</code></td><td>Meanings remain strong.</td></tr>
+<tr><td>Audio acoustic event score</td><td><code>6.31/10</code></td><td>Main residual runtime audio gap.</td></tr>
 <tr><td>Audio cue alignment</td><td><code>9/9</code></td><td>Alignment guardrail preserved.</td></tr>
-<tr><td>Level arc and encounter shape</td><td><code>8.8/10</code></td><td>First-class long-play/gameplay-shape category.</td></tr>
-<tr><td>Alien entry and challenge novelty</td><td><code>7.8/10</code></td><td>High-priority gameplay-authenticity gap.</td></tr>
-<tr><td>Boss entry and formation grammar</td><td><code>9.2/10</code></td><td>Strong broad score, but direct path/slot reference precision remains next.</td></tr>
-<tr><td>Application artifact conformance</td><td>about <code>8.25/10</code></td><td>Aggregates sprites, audio, frame surfaces, text, level shape, and choreography.</td></tr>
-<tr><td>Runtime static sprite canvas score</td><td>about <code>6.2/10</code></td><td>Static pose only; active motion is explicitly unscored/planning.</td></tr>
+<tr><td>Level arc and encounter shape</td><td><code>8.8/10</code></td><td>Now a first-class release-facing category.</td></tr>
+<tr><td>Alien entry and challenge novelty</td><td><code>7.8/10</code></td><td>Strong next-cycle gameplay-authenticity target.</td></tr>
+<tr><td>Boss entry and formation grammar</td><td><code>9.2/10</code></td><td>Broadly strong, with room for tighter path/slot precision.</td></tr>
+<tr><td>UI, shell, and graphics integrity</td><td><code>9.2/10</code></td><td>Public-facing surfaces remain green after the doc/dashboard refresh.</td></tr>
             </tbody>
           </table>
         </div>
-<p>Important interpretation: a <code>10/10</code> metric means maxed at current scorer resolution, not perfect arcade imitation. Confidence and resolution are part of the release story because a better scorer may lower a score while improving the truthfulness of the project.</p>
-<h3>Platform And Harness Improvements</h3>
-<ul><li>Audio candidate work now leaves behind reusable cue-contract, focused</li></ul>
-<p>candidate, promotion-precheck, runtime-recapture, and event-gap artifacts.</p>
-<ul><li>Composite/layered audio cue scoring can evaluate scheduled onset/body/tail</li></ul>
-<p>windows instead of only the loudest active island.</p>
-<ul><li>Runtime sprite conformance can capture isolated live canvas crops and score</li></ul>
-<p>those visible pixels separately from documentation/catalog proxy scores.</p>
-<ul><li>Application artifact conformance now aggregates game-artifact surfaces beyond</li></ul>
-<p>aliens: sprites, sprite motion planning, audio cues, audio alignment, backgrounds, frame/popups/icons, fonts/text, level shape, and boss/formation choreography.</p>
-<ul><li>Conformance economics tracks local CPU/browser spend, GPU-equivalent</li></ul>
-<p>Codex/OpenAI/API effort, artifact growth, and cost-per-score movement.</p>
-<h3>Documentation Refresh</h3>
-<p>The release documentation now treats the conformance project as a first-class product effort rather than an internal note. The key maintained surfaces are:</p>
-<ul><li><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></li><li><code>CONFORMANCE_METRICS_OVERVIEW.md</code></li><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li><li><code>CONFORMANCE_ECONOMICS.md</code></li><li><code>GAME_CONFORMANCE_CATALOG.md</code></li><li><code>AUDIO_CONFORMANCE_LAB.md</code></li><li><code>STRATEGIC_BETA_REVIEW.md</code></li><li>hosted project guide, application guide, conformance dashboard, release</li></ul>
-<p>dashboard, public project page, and <code>documentation-provenance.json</code></p>
-<p>The hosted public project page and project guide now render a documentation provenance section from <code>documentation-provenance.json</code>, and publish preflight checks fail if that source map or generated section disappears. Current scores, costs, release posture, game status, and artifact claims should therefore be changed in their persistent source artifacts first, then rebuilt into the visible pages.</p>
-<p>Documentation suggestions carried forward:</p>
-<ul><li>Add timeline charts that show conformance score movement beside CPU,</li></ul>
-<p>browser, GPU-equivalent model, and artifact-volume spend.</p>
-<ul><li>Add release-story charts that separate gameplay-facing gains from</li></ul>
-<p>measurement-facing gains.</p>
-<ul><li>Add confidence/resolution timelines so a score drop caused by a better</li></ul>
-<p>scorer is visibly different from a gameplay regression.</p>
-<ul><li>Add more drill-down from the public project page into game-specific alien,</li></ul>
-<p>audio, stage, persona, sprite, and artifact-conformance tables.</p>
-<ul><li>Add direct beta handoff checklists to make authority-gated release movement</li></ul>
-<p>easier to verify from any machine.</p>
-<h3>Known Gaps</h3>
-<ul><li>Audio remains the weakest high-value category. <code>stagePulse</code> needs a better</li></ul>
-<p>pressure-bed strategy, and the residual <code>playerHit</code> tail gap should be refined with calibrated browser-reference evidence.</p>
-<ul><li>Challenging stages still need stronger Galaga-like arrival, movement,</li></ul>
-<p>specialty-alien introduction, and bonus-opportunity novelty.</p>
-<ul><li>Static sprite scoring is useful but incomplete; sprite identity includes</li></ul>
-<p>flapping, pulsing, dive rotation, capture/rescue, carried-fighter, and dual-fighter transitions that need temporal harness windows.</p>
-<ul><li>Visual explosion and boss damage feedback are improved but still not fully</li></ul>
-<p>reference-authentic.</p>
-<ul><li>GPU-equivalent accounting is now conceptually represented, but Codex/model</li></ul>
-<p>effort still depends on deliberate manual ledger entries and usage snapshots.</p>
-<h3>Beta Handoff</h3>
-<p>If this hosted-dev review is accepted, the authority machine should:</p>
-<ol><li>pull <code>origin/main</code></li><li>run <code>npm run machine:bootstrap</code></li><li>run <code>npm run machine:status</code></li><li>run <code>npm run machine:doctor</code></li><li>confirm <code>npm run release:show-authority</code></li><li>run <code>npm run build</code></li><li>run <code>npm run harness:check:documentation-freshness</code></li><li>run <code>npm run publish:check:dev</code></li><li>inspect hosted <code>/dev</code></li><li>publish hosted <code>/beta</code> only from the authority machine</li><li>run hosted beta verification and update the strategic beta review with the</li></ol>
-<p>final lane stamp and any accepted gaps</p>
-<h3>Next Plan</h3>
-<p>Short term:</p>
-<ul><li>complete hosted-dev review and beta-request handoff</li><li>keep source docs, dashboard, release note, and public surfaces aligned</li></ul>
-<p>Medium term:</p>
-<ul><li>move audio from <code>7.3/10</code> toward <code>7.5+</code></li><li>attack alien entry, challenge-stage novelty, level arc, and direct</li></ul>
-<p>path/slot reference precision</p>
-<ul><li>add temporal sprite-motion scoring instead of relying on static crops</li></ul>
-<p>Longer term:</p>
-<ul><li>shape <code>1.4.0</code> as the arcade-depth family</li><li>keep Galaxy Guardians in ingestion-backed preview until its own conformance</li></ul>
-<p>package proves a real second game</p>
-<ul><li>continue shifting repeatable assessment into local CPU/browser harnesses while</li></ul>
-<p>using Codex/model work to design better evaluators, code, and review loops</p>
+<p>Important interpretation:</p>
+<ul><li><code>10/10</code> means maxed at current scorer resolution, not perfect arcade</li></ul>
+<p>imitation</p>
+<ul><li>a better scorer may lower a number while improving truthfulness</li><li>the project should keep treating confidence, resolution, and cost as part of</li></ul>
+<p>the release story, not as invisible background metadata</p>
+<h3>Release Evidence</h3>
+<p>This refreshed production line is supported by:</p>
+<ul><li>current conformance dashboard source and generated hosted dashboard</li><li>documentation freshness checks</li><li>provenance-backed public project pages and guides</li><li>application artifact scoring and runtime sprite-capture scoring</li><li>accepted beta promotion on the release-authority machine</li><li>production publish verification plus public project-page sync verification</li></ul>
+<p>The release is therefore not just &quot;the code seems okay.&quot; It is a documented, verified promotion with a public explanation of evidence and remaining gaps.</p>
+<h3>Accepted Gaps</h3>
+<p>This production refresh intentionally does not claim completion on:</p>
+<ul><li>audio identity beyond the improved ship-loss phrase</li><li>challenge-stage arrival authenticity and novelty depth</li><li>full temporal sprite-motion scoring</li><li>richer later-level pressure and reward texture</li><li>fully mature second-game conformance for Galaxy Guardians</li></ul>
+<p>Those are next-cycle targets, not hidden regressions.</p>
+<h3>Next Direction</h3>
+<p>Now that the refreshed <code>1.3.0</code> public family is live, the next coherent pickup is <code>1.4.0</code>.</p>
+<p>That next family should emphasize:</p>
+<ul><li>audio/event feedback beyond cue correctness</li><li>alien entry variation and challenge-stage novelty</li><li>level arc and encounter shape</li><li>boss/formation grammar precision</li><li>visual reference grounding</li><li>cleaner Platinum/application seams</li><li>ingestion-backed progress for Galaxy Guardians and future games</li></ul>
+<h3>Release Message</h3>
+<p>Short external framing:</p>
+<p>Aurora / Platinum <code>1.3.0</code> has been refreshed with stronger public documentation, a better measured conformance story, clearer artifact provenance, and a real audio/event-feedback lift while keeping the product honest about what still needs work for the <code>1.4.0</code> arcade-depth cycle.</p>
         </div>
       </div>
     </section>
@@ -2384,21 +2377,25 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
 <p>Best conformance/resource economics doc:</p>
 <ul><li><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></li><li><a href="QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></li><li><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li><li><a href="CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li><li><a href="RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></li></ul>
 <p>Release planning and readiness docs:</p>
-<ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
+<ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
 <p>Best repo-role clarification:</p>
 <ul><li><a href="REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
 <h3>Current Release State</h3>
 <p>Current live release family:</p>
-<ul><li>hosted <code>/dev</code>:<ul><li>active <code>1.3.0.1</code> hosted-dev review line</li></ul></li><li>hosted <code>/beta</code>:<ul><li>approved <code>1.3.0</code> beta lane</li></ul></li><li>hosted <code>/production</code>:<ul><li>shipped <code>1.3.0</code> public line</li></ul></li></ul>
+<ul><li>hosted <code>/dev</code>:<ul><li>active <code>1.3.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code>:<ul><li>refreshed <code>1.3.0</code> reviewed lane sourced from the accepted <code>1.3.0.1</code></li></ul></li></ul>
+<p>bundle</p>
+<ul><li>hosted <code>/production</code>:<ul><li>refreshed <code>1.3.0</code> public line</li></ul></li></ul>
 <p>What that means:</p>
-<ul><li>Aurora now ships as the first playable application on Platinum</li><li>the current production family is <code>1.3.0</code></li><li>hosted <code>/dev</code> now carries the post-production conformance/docs/dashboard</li></ul>
-<p>review increment that can be inspected before any beta request</p>
+<ul><li>Aurora now ships as the first playable application on Platinum</li><li>the current public family is still <code>1.3.0</code>, but it now carries the accepted</li></ul>
+<p>conformance/docs/dashboard refresh first assembled on hosted <code>/dev</code></p>
+<ul><li>hosted <code>/dev</code> remains the visible forward-review lane through the</li></ul>
+<p><code>1.3.0.1</code> increment</p>
 <ul><li>Galaxy Guardians is now part of the public Platinum story as a second-cabinet</li></ul>
 <p>sneak peek</p>
 <ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
 <p>Current go-forward focus:</p>
-<ul><li>keep the current <code>1.3.0</code> production line stable</li><li>review the <code>1.3.0.1</code> hosted-dev increment and, if accepted, request the</li></ul>
-<p>hosted <code>/beta</code> publish from the release-authority machine</p>
+<ul><li>keep the refreshed <code>1.3.0</code> public line stable</li><li>use the hosted <code>1.3.0.1</code> <code>/dev</code> line for the next coherent review bundle,</li></ul>
+<p>not for casual lane churn</p>
 <ul><li>use <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
 <p>as the maintained overview of how Platinum, applications, ingestion, harnessing, conformance metrics, and resource economics fit together</p>
 <ul><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> for the</li></ul>
@@ -2453,13 +2450,16 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PLAN.md</code> during build.</p>
         <div class="markdown">
           <h3>Current State</h3>
-<p>Verified May 11, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li>active <code>1.3.0.1</code> hosted-dev review line</li></ul></li><li>hosted <code>/beta</code><ul><li>approved <code>1.3.0</code> beta lane</li></ul></li><li>hosted <code>/production</code><ul><li>shipped <code>1.3.0</code> public line</li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the <code>1.4.0</code> pickup after the <code>1.3.0</code> ship</li></ul></li></ul>
+<p>Verified May 12, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li>active <code>1.3.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code><ul><li>refreshed <code>1.3.0</code> reviewed lane sourced from the accepted <code>1.3.0.1</code></li></ul></li></ul>
+<p>bundle</p>
+<ul><li>hosted <code>/production</code><ul><li>refreshed <code>1.3.0</code> public line</li></ul></li><li><code>main</code><ul><li>authoritative integration branch for the <code>1.4.0</code> pickup after the <code>1.3.0</code></li></ul></li></ul>
+<p>production conformance refresh</p>
 <p>This means:</p>
-<ul><li>the <code>1.3.0</code> fidelity-and-second-cabinet release is now the stable public</li></ul>
-<p>family</p>
-<ul><li>hosted <code>/dev</code> now carries the post-production conformance/docs/dashboard</li></ul>
-<p>review increment, while <code>/beta</code> and <code>/production</code> preserve the shipped <code>1.3.0</code> family</p>
+<ul><li>the <code>1.3.0</code> fidelity-and-second-cabinet release remains the public family,</li></ul>
+<p>now refreshed through the accepted <code>1.3.0.1</code> conformance/docs/dashboard bundle</p>
+<ul><li>hosted <code>/dev</code> remains the forward review lane, while <code>/beta</code> and</li></ul>
+<p><code>/production</code> now carry the refreshed public <code>1.3.0</code> story</p>
 <ul><li>the active source-planning question has moved from &quot;what must land for <code>1.3.0</code>?&quot;</li></ul>
 <p>to &quot;what is the cleanest deliberate <code>1.4.0</code> pickup?&quot;</p>
 <ul><li>the post-release work should now be treated as intentional carry-forward, not</li></ul>
@@ -2467,7 +2467,7 @@ npm run build</code></pre>
 <p>Top-level program framing is now maintained in <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>. Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion, harnesses, dashboards, release lanes, Codex/model assistance, and local resource economics fit together.</p>
 <h3>Active Workstreams</h3>
 <h4>1. <code>1.3.0</code> Production Stabilization</h4>
-<ul><li>keep the shipped <code>1.3.0</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> as the</li></ul>
+<ul><li>keep the refreshed <code>1.3.0</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> as the</li></ul>
 <p>readable current quality map before choosing beta-shaping work</p>
 <h4>2. Multi-Machine Release Discipline</h4>
 <ul><li>make new-machine bring-up one practical bootstrap command</li><li>keep a committed one-authority release model</li><li>keep beta and production promotion blocked unless the authority contract is</li></ul>
@@ -2517,8 +2517,8 @@ npm run build</code></pre>
 <ul><li>deepen action/event annotation so personas can become richer</li><li>prepare for future player-versus-persona experiences</li><li>keep &quot;learn by playing&quot; persona ideas tied to simulation and durable logs,</li></ul>
 <p>not just aspiration</p>
 <h3>Immediate Priorities</h3>
-<ol><li>treat <code>main</code> as the authoritative post-production integration line</li><li>keep the multi-machine bootstrap and release-authority workflow healthy</li><li>review the hosted <code>1.3.0.1</code> <code>/dev</code> increment as the current coherent</li></ol>
-<p>conformance/docs/dashboard bundle; if accepted, request the beta publish from <code>imacm1</code>, the current release-authority machine</p>
+<ol><li>treat <code>main</code> as the authoritative post-production integration line</li><li>keep the multi-machine bootstrap and release-authority workflow healthy</li><li>keep hosted <code>/dev</code> available for the next coherent review bundle instead of</li></ol>
+<p>using it as a casual mirror of <code>main</code></p>
 <ol><li>prioritize audio/event feedback and stage-shape conformance over more broad</li></ol>
 <p>planning; the planning scaffolding is strong enough, while runtime feel still needs a measurable lift</p>
 <ol><li>incorporate the other machine&#39;s Galaxians-style second-game, harness, and</li></ol>
@@ -2549,10 +2549,10 @@ npm run build</code></pre>
 <p>release discipline, but hosted <code>/dev</code> is intentionally ahead as the <code>1.3.0.1</code> review increment</p>
 <ul><li>the active source line should now present itself as the deliberate <code>1.4.0</code></li></ul>
 <p>pickup family</p>
-<ul><li>the next practical release artifact is the <code>1.3.0.1</code> hosted-dev review</li></ul>
-<p>increment: documentation, dashboard, economics, application artifact conformance, and a measured audio/event-feedback lift are now assembled for review</p>
-<ul><li>the next hosted <code>/beta</code> decision should be a deliberate handoff from this</li></ul>
-<p>reviewed <code>/dev</code> increment, performed only on the release-authority machine and only if the player-visible value is accepted as enough for the beta lane</p>
+<ul><li>the latest practical release artifact was the accepted <code>1.3.0.1</code></li></ul>
+<p>hosted-dev review increment, now refreshed into the public <code>1.3.0</code> family</p>
+<ul><li>the next hosted <code>/beta</code> decision should now wait for a coherent <code>1.4.0</code></li></ul>
+<p>improvement bundle rather than immediately reusing the just-shipped refresh</p>
 <ul><li><code>1.3.0</code> was the intentional bundle for fidelity, trust, and the first</li></ul>
 <p>significant second-game Platinum story</p>
 <ul><li>the shipped <code>1.3.0</code> family is now the stable public baseline while <code>main</code></li></ul>
@@ -2565,8 +2565,8 @@ npm run build</code></pre>
 <p><a href="STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a> and should be refreshed after each major hosted <code>/beta</code> push</p>
 <h3>Post-1.3.0 Pickup</h3>
 <p>After <code>1.3.0</code> ships, the plan should pick up in this order:</p>
-<ol><li>Short term: review and, if accepted, request beta publication of the</li></ol>
-<p><code>1.3.0.1</code> hosted-dev integration increment from the release-authority machine.</p>
+<ol><li>Short term: keep the refreshed <code>1.3.0</code> public line trustworthy while</li></ol>
+<p>assembling the next coherent hosted <code>/dev</code> review bundle.</p>
 <ol><li>Medium term: <code>1.4.0</code> arcade depth and platform-contract follow-through,</li></ol>
 <p>including alien entry/challenge novelty, stage shape, audio/event feedback, and visual reference grounding.</p>
 <ol><li>Longer term: <code>1.5.0</code> shared-video evidence and flight-recorder capabilities,</li></ol>
@@ -2599,14 +2599,16 @@ npm run build</code></pre>
         <p class="docMeta">Generated from <code>PRODUCT_ROADMAP.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Shipped State</h3>
-<p>Verified May 11, 2026:</p>
-<ul><li>hosted <code>/dev</code><ul><li>active <code>1.3.0.1</code> hosted-dev review line</li></ul></li><li>hosted <code>/beta</code><ul><li>approved <code>1.3.0</code> beta lane</li></ul></li><li>hosted <code>/production</code><ul><li>shipped <code>1.3.0</code> public line</li></ul></li></ul>
+<p>Verified May 12, 2026:</p>
+<ul><li>hosted <code>/dev</code><ul><li>active <code>1.3.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code><ul><li>refreshed <code>1.3.0</code> reviewed lane sourced from the accepted <code>1.3.0.1</code></li></ul></li></ul>
+<p>bundle</p>
+<ul><li>hosted <code>/production</code><ul><li>refreshed <code>1.3.0</code> public line</li></ul></li></ul>
 <p>Aurora is in a post-<code>1.3.0</code> ship posture:</p>
 <ul><li>production now carries the current <code>1.3.0</code> public family</li><li>beta remains the proving lane for the next release step</li><li>dev carries the current forward review bundle</li><li><code>main</code> is the forward line for the deliberate <code>1.4.0</code> pickup</li></ul>
 <h3>Roadmap Frame</h3>
 <p>The roadmap is no longer centered on whether Platinum can host Aurora at all.</p>
 <p>It is centered on:</p>
-<ul><li>keeping the shipped line trustworthy</li><li>improving fidelity where the game still feels less authentic than the arcade</li></ul>
+<ul><li>keeping the refreshed public line trustworthy</li><li>improving fidelity where the game still feels less authentic than the arcade</li></ul>
 <p>reference</p>
 <ul><li>treating conformance as a standing project layer with its own ingestion,</li></ul>
 <p>harnessing, dashboard, and resource-economics loop</p>
@@ -2621,17 +2623,15 @@ npm run build</code></pre>
 <ul><li>keep hosted <code>/production</code>, hosted <code>/beta</code>, and hosted <code>/dev</code> aligned and</li></ul>
 <p>trustworthy after the fidelity-and-second-cabinet release</p>
 <ul><li>keep release docs, scorecards, and committed evidence current</li><li>make new-machine and two-machine development simple and safe</li></ul>
-<h4>Review <code>1.3.0.1</code> Hosted Dev</h4>
+<h4><code>1.3.0.1</code> Review Bundle Is Now Publicly Carried</h4>
 <p>The current practical artifact is a fourth-segment hosted-dev increment:</p>
 <ul><li><code>1.3.0.1</code></li></ul>
-<p>It collects the current documentation/dashboard/conformance process work, application artifact conformance scoring, resource economics, and a measured audio/event-feedback lift. It is a review increment, not a beta approval by itself.</p>
+<p>That bundle collected the documentation/dashboard/conformance process work, application artifact conformance scoring, resource economics, and the measured audio/event-feedback lift that have now been refreshed into the public <code>1.3.0</code> family through hosted <code>/beta</code> and hosted <code>/production</code>.</p>
 <p>Recommended gate:</p>
-<ul><li>keep source and hosted <code>/dev</code> aligned for review</li><li>show the conformance dashboard and public project page with current short,</li></ul>
-<p>medium, and long-term plans</p>
-<ul><li>require at least one measurable user-facing improvement or a clearly</li></ul>
+<ul><li>keep source and hosted <code>/dev</code> aligned for the next coherent review bundle</li><li>require at least one measurable user-facing improvement or a clearly</li></ul>
 <p>documented negative result that changes the next investment decision</p>
-<ul><li>keep hosted <code>/beta</code> unchanged until the improvement is accepted and the</li></ul>
-<p>release-authority machine performs the beta publish</p>
+<ul><li>keep hosted <code>/beta</code> and hosted <code>/production</code> stable until a real <code>1.4.0</code></li></ul>
+<p>candidate exists</p>
 <h4>Pick Up <code>1.4.0</code></h4>
 <p>The active source and pickup family is now:</p>
 <ul><li><code>1.4.0</code></li></ul>
@@ -2661,8 +2661,8 @@ npm run build</code></pre>
 <p><code>2.0</code> multi-game release</p>
 <h4>Pick Up After <code>1.3.0</code></h4>
 <p>Once <code>1.3.0</code> is out, the roadmap pickup should be:</p>
-<ul><li>Short term: <code>1.3.0.1</code> hosted-dev review, source/docs readiness, and</li></ul>
-<p>authority-gated beta request if accepted.</p>
+<ul><li>Short term: keep the refreshed <code>1.3.0</code> public family stable while using</li></ul>
+<p>hosted <code>/dev</code> for the next real review bundle.</p>
 <ul><li>Medium term: <code>1.4.0</code> for level-by-level arcade depth plus</li></ul>
 <p>platform-contract cleanup.</p>
 <ul><li>Longer term: <code>1.5.0</code> for shared-video evidence and flight-recorder</li></ul>
@@ -3644,71 +3644,77 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         <div class="markdown">
           <h3>Current Read</h3>
 <p>Aurora <code>1.3.0</code> is the release currently live on hosted <code>/production</code>.</p>
-<p>Verified May 11, 2026:</p>
-<ul><li>hosted <code>/production</code><ul><li>current live family: <code>1.3.0</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current live family: <code>1.3.0 beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current review family: <code>1.3.0.1</code></li></ul></li></ul>
-<p>For exact active labels, use each lane&#39;s <code>build-info.json</code>. The key release decision is that hosted <code>/beta</code> and <code>/production</code> preserve the shipped <code>1.3.0</code> family, while hosted <code>/dev</code> is intentionally ahead as the current post-production review increment.</p>
-<h3>Current Hosted-Dev Review Read</h3>
-<p>As of May 11, 2026, hosted <code>/dev</code> is intentionally ahead of the shipped family as the <code>1.3.0.1</code> review increment. It carries the current conformance dashboard, public documentation, resource-economics reporting, application artifact scorecard, runtime sprite static-crop scoring, and a measured calibrated ship-loss audio cue lift.</p>
-<p>This changes the near-term release question from &quot;is 1.3.0 shipped?&quot; to &quot;is the 1.3.0.1 hosted-dev review bundle strong enough to request a beta publish from the release-authority machine?&quot;</p>
-<p>Current local/dev review quality position:</p>
-<ul><li>overall quality score:<ul><li><code>9.2/10</code></li></ul></li><li>weakest high-value category:<ul><li>audio identity and cue alignment at <code>7.3/10</code></li></ul></li><li>current audio support:<ul><li>semantic event score <code>9.78/10</code></li><li>acoustic event score <code>6.31/10</code></li><li>cue alignment <code>9/9</code></li></ul></li><li>highest remaining audio gap:<ul><li>residual <code>playerHit</code> tail after the calibrated ship-loss promotion</li></ul></li></ul>
-<p>Release authority note: this MacBook may prepare and publish hosted <code>/dev</code>, but hosted <code>/beta</code> and <code>/production</code> remain blocked here while release authority is held by <code>imacm1 / iMacM1</code>.</p>
+<p>Verified May 12, 2026:</p>
+<ul><li>hosted <code>/production</code><ul><li>current live family: <code>1.3.0</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current reviewed family: <code>1.3.0 beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current forward review line: <code>1.3.0.1</code></li></ul></li></ul>
+<p>For exact active labels, use each lane&#39;s <code>build-info.json</code>. The important release truth is that hosted <code>/beta</code> and hosted <code>/production</code> now carry the same refreshed public <code>1.3.0</code> family sourced from the accepted <code>1.3.0.1</code> hosted-dev review bundle.</p>
+<h3>What This Production Refresh Means</h3>
+<p>This is not a brand-new public SemVer family. It is a production refresh inside the <code>1.3.0</code> family.</p>
+<p>The fourth-segment <code>1.3.0.1</code> line remains the hosted-dev review signal. It was used to gather the current conformance/docs/dashboard bundle, review it on the authority machine, promote it through hosted <code>/beta</code>, and then refresh hosted <code>/production</code> without pretending this was the same kind of public jump as the original <code>1.3.0</code> fidelity-and-second-cabinet release.</p>
+<p>What is now live in the refreshed public line:</p>
+<ul><li>provenance-backed public docs and guides</li><li>current conformance dashboard and economics story</li><li>application artifact conformance scoring</li><li>runtime static sprite-capture scoring</li><li>a measured calibrated ship-loss audio cue lift</li><li>clearer layered release identity across bundle, platform, and applications</li></ul>
+<h3>Current Public Quality Position</h3>
+<p>Current maintained quality read for the refreshed public family:</p>
+<ul><li>overall quality score:<ul><li><code>9.2/10</code></li></ul></li><li>weakest high-value category:<ul><li>audio identity and cue alignment at <code>7.3/10</code></li></ul></li><li>audio support:<ul><li>semantic event score <code>9.78/10</code></li><li>acoustic event score <code>6.31/10</code></li><li>cue alignment <code>9/9</code></li></ul></li><li>current strong supporting categories:<ul><li>level arc and encounter shape at <code>8.8/10</code></li><li>boss entry and formation grammar at <code>9.2/10</code></li><li>player movement, shot/hit responsiveness, capture/rescue rules, and key</li></ul></li></ul>
+<p>shell surfaces at current guardrail passes</p>
+<p>Important interpretation:</p>
+<ul><li><code>10/10</code> still means maxed at current scorer resolution, not perfect arcade</li></ul>
+<p>imitation</p>
+<ul><li>the improved public score comes from a better measured bundle, not from</li></ul>
+<p>relaxing standards</p>
+<ul><li>future score changes may go down as measurement gets sharper, and that can</li></ul>
+<p>still represent project progress</p>
 <h3>What Is Now True</h3>
 <ul><li><code>Platinum</code> is a shipped browser-arcade host platform with committed release</li></ul>
-<p>authority and lane discipline</p>
+<p>authority, multi-lane discipline, and first-class hosted docs</p>
 <ul><li><code>Aurora Galactica</code> remains the primary shipped playable application on</li></ul>
 <p>Platinum</p>
-<ul><li><code>Galaxy Guardians</code> is now part of the public product story as the first</li></ul>
-<p>second-cabinet sneak peek, while still remaining a preview-first application</p>
-<ul><li>hosted <code>/beta</code> and hosted <code>/production</code> are aligned around the same <code>1.3.0</code></li></ul>
-<p>release family, while hosted <code>/dev</code> carries the <code>1.3.0.1</code> review increment</p>
+<ul><li><code>Galaxy Guardians</code> remains a preview application and ingestion-backed</li></ul>
+<p>second-cabinet proof, now with production-capable preview metadata aligned to the runtime intent</p>
+<ul><li>hosted <code>/beta</code> and hosted <code>/production</code> are aligned around the refreshed</li></ul>
+<p>public <code>1.3.0</code> family</p>
+<ul><li>hosted <code>/dev</code> remains the forward review lane and still uses the</li></ul>
+<p>fourth-segment <code>1.3.0.1</code> display line</p>
 <ul><li>layered release identity is now explicit across the integrated bundle, the</li></ul>
 <p>Platinum platform, and each application</p>
-<ul><li>the shipped release family is backed by committed docs, harnesses, and</li></ul>
-<p>quality artifacts rather than chat-only release state</p>
-<h3>Current Shipped Candidate Quality</h3>
-<p>Current quality position for the shipped <code>1.3.0</code> family:</p>
-<ul><li>overall quality score:<ul><li><code>8.8/10</code> from the latest full bundled rollup still used for this cycle</li></ul></li><li>strongest category:<ul><li>combat responsiveness</li></ul></li><li>weakest bundled category:<ul><li>audio identity and cue alignment at <code>6.1/10</code></li></ul></li></ul>
-<p>That quality read is good enough for ship, but it still justifies the explicit <code>1.4.0</code> pickup focused on arcade depth and stronger measured identity work.</p>
-<h3>Evidence Supporting The Shipped Release</h3>
-<p>The current shipped family is supported by these committed evidence sources:</p>
-<ul><li>quality rollup:<ul><li><code>reference-artifacts/analyses/quality-conformance/2026-05-04-26ca77c</code></li></ul></li><li>movement correspondence:<ul><li><code>reference-artifacts/analyses/correspondence/player-movement/2026-04-24-e1c2c65</code></li></ul></li><li>audio cue alignment:<ul><li><code>reference-artifacts/analyses/correspondence/audio-cue-alignment/2026-04-24-e1c2c65</code></li></ul></li><li>audio identity comparison:<ul><li><code>reference-artifacts/analyses/aurora-audio-theme-comparison/2026-04-24-main-ca481f2</code></li></ul></li><li>reference video alignment:<ul><li><code>reference-artifacts/analyses/reference-video-alignment/stage1-opening-window-2026-04-24-e1c2c65</code></li></ul></li></ul>
-<p>The shipped family also has direct verification evidence:</p>
-<ul><li><code>npm run build</code></li><li><code>npm run publish:check:beta</code></li><li><code>npm run publish:check:production</code></li><li>hosted <code>/beta</code> live verification</li><li>hosted <code>/production</code> live verification</li><li>non-production pilot-account path verified for the configured test-pilot lane</li></ul>
+<ul><li>the shipped public line is backed by committed docs, harnesses, dashboards,</li></ul>
+<p>and quality artifacts rather than chat-only release state</p>
+<h3>Evidence Supporting The Refreshed Public Line</h3>
+<p>The refreshed public family is supported by these durable sources:</p>
+<ul><li>quality roll-up:<ul><li><code>reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd</code></li></ul></li><li>conformance dashboard source:<ul><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li></ul></li><li>conformance economics source:<ul><li><code>CONFORMANCE_ECONOMICS.md</code></li></ul></li><li>public-document provenance source:<ul><li><code>documentation-provenance.json</code></li></ul></li><li>strategic lane review:<ul><li><code>STRATEGIC_BETA_REVIEW.md</code></li></ul></li><li>detailed public refresh note:<ul><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li></ul></li></ul>
+<p>The refreshed line also has direct verification evidence:</p>
+<ul><li><code>npm run build</code></li><li><code>npm run harness:check:documentation-freshness</code></li><li><code>npm run publish:check:beta</code></li><li><code>npm run publish:verify:beta</code></li><li><code>npm run approve:beta</code></li><li><code>npm run publish:check:production</code></li><li><code>npm run publish:verify:production</code></li><li><code>npm run verify:public</code></li></ul>
 <h3>Code Review And Boundary Read</h3>
-<p>The production decision should treat the platform/application boundary as strong enough for the <code>1.3.0</code> ship, but still deserving of explicit next-cycle work.</p>
-<p>The dedicated boundary review remains captured in:</p>
-<ul><li><a href="PLATINUM_INTERFACE_REVIEW.md">PLATINUM_INTERFACE_REVIEW.md</a></li></ul>
-<p>Current read from that review:</p>
+<p>The current production decision should treat the platform/application boundary as strong enough for the refreshed <code>1.3.0</code> public line, while still keeping <code>1.4.0</code> follow-through visible.</p>
+<p>Current durable read:</p>
 <ul><li>shared service ownership is reasonably clean</li><li>pack selection and shell ownership are meaningfully separated from Aurora</li></ul>
 <p>rules</p>
-<ul><li>version tracking is now explicit across bundle, platform, and application</li></ul>
-<p>records</p>
-<ul><li>remaining non-blocking seams still include:<ul><li>Aurora-shaped compatibility names inside some platform-owned storage and</li></ul></li></ul>
+<ul><li>version tracking is explicit across bundle, platform, and application records</li><li>remaining next-cycle seams still include:<ul><li>Aurora-shaped compatibility names in some platform-owned storage and</li></ul></li></ul>
 <p>migration surfaces</p>
-<ul><li>a still-preview <code>Galaxy Guardians</code> application whose production presence is</li></ul>
-<p>intentionally shell-first, not a fully shipped second game</p>
-<p>These are not current ship blockers, but they are the correct <code>1.4.0</code> follow-through targets.</p>
+<ul><li>a still-preview <code>Galaxy Guardians</code> application that needs more of its own</li></ul>
+<p>ingestion-backed conformance package before a stronger public claim</p>
+<p>These are no longer ship blockers for the refreshed public line. They are the correct <code>1.4.0</code> and later follow-through targets.</p>
 <h3>Documentation Contract For Production</h3>
-<p>The <code>1.3.0</code> shipped line depends on these docs being current and committed:</p>
-<ul><li><a href="README.md">README.md</a></li><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="GO_FORWARD_EXECUTION_PLAN.md">GO_FORWARD_EXECUTION_PLAN.md</a></li><li><a href="PLATINUM.md">PLATINUM.md</a></li><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a></li><li><a href="BETA_TO_PRODUCTION_PLAN.md">BETA_TO_PRODUCTION_PLAN.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li><li><a href="release-manifest.json">release-manifest.json</a></li></ul>
+<p>The refreshed <code>1.3.0</code> public line depends on these docs being current and committed:</p>
+<ul><li><a href="README.md">README.md</a></li><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="GO_FORWARD_EXECUTION_PLAN.md">GO_FORWARD_EXECUTION_PLAN.md</a></li><li><a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li><li><a href="PLATINUM.md">PLATINUM.md</a></li><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a></li><li><a href="BETA_TO_PRODUCTION_PLAN.md">BETA_TO_PRODUCTION_PLAN.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li><li><a href="release-manifest.json">release-manifest.json</a></li></ul>
 <h3>Current Follow-Up Work</h3>
-<p>The production push is complete. The follow-up work now is:</p>
-<ol><li>keep the <code>1.3.0</code> production family trustworthy while it settles in public</li><li>review the <code>1.3.0.1</code> hosted-dev bundle and request beta only from the</li></ol>
-<p>release-authority machine if accepted</p>
+<p>The refreshed <code>1.3.0</code> production push is complete. The follow-up work now is:</p>
+<ol><li>keep the refreshed public <code>1.3.0</code> line trustworthy</li><li>use hosted <code>/dev</code> for the next coherent review bundle rather than treating</li></ol>
+<p>every source change as a lane move</p>
 <ol><li>shift the active execution frame to <code>1.4.0</code> arcade depth and</li></ol>
 <p>platform-contract cleanup</p>
-<ol><li>continue <code>Galaxy Guardians</code> through measured evidence and application-owned</li></ol>
-<p>runtime work without over-claiming polish</p>
+<ol><li>continue <code>Galaxy Guardians</code> through measured ingestion and game-owned</li></ol>
+<p>runtime/conformance work without over-claiming polish</p>
 <ol><li>keep layered platform/application release tracking visible in docs,</li></ol>
-<p>dashboards, and build surfaces</p>
+<p>dashboards, manifests, and build surfaces</p>
 <h3>Recommendation</h3>
-<p>Recommendation: treat the shipped <code>1.3.0</code> family as the stable new public line and begin the <code>1.4.0</code> pickup deliberately rather than trying to rediscover the post-release plan later.</p>
-<p>The strongest argument for doing that now is:</p>
-<ul><li>hosted <code>/production</code>, hosted <code>/beta</code>, and hosted <code>/dev</code> now tell one coherent</li></ul>
-<p><code>1.3.0</code> story</p>
-<ul><li>the second-game preview is public, but still honestly framed as preview work</li><li>the remaining gaps are next-cycle quality and product-depth opportunities, not</li></ul>
-<p>obvious blockers to the current shipped family</p>
+<p>Recommendation: treat the refreshed <code>1.3.0</code> public family as the stable current line and begin the next <code>1.4.0</code> pickup deliberately rather than letting the release story drift back into unprioritized polish.</p>
+<p>The strongest reasons are:</p>
+<ul><li>hosted <code>/production</code>, hosted <code>/beta</code>, and the source docs now tell one</li></ul>
+<p>coherent refreshed <code>1.3.0</code> story</p>
+<ul><li>the public documentation and conformance surfaces now explain evidence and</li></ul>
+<p>cost more honestly than the earlier shipped line</p>
+<ul><li>the remaining gaps are next-cycle authenticity and depth opportunities, not</li></ul>
+<p>obvious blockers to the current public line</p>
         </div>
       </div>
     </section>
@@ -3752,7 +3758,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
     <li><a href="#strategic-beta-review-doc">Strategic Beta Review</a></li>
   
 
-    <li><a href="#release-note-1301-hosted-dev-doc">1.3.0.1 Hosted Dev Release Note</a></li>
+    <li><a href="#release-note-130-production-refresh-doc">1.3.0 Production Conformance Refresh Note</a></li>
   
 
     <li><a href="#release-conformance-dashboard-doc">Release Conformance Dashboard Source</a></li>
@@ -3807,8 +3813,8 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Hosted dev conformance review</strong><br>
-          Release 1.3.0.1 · Updated May 11, 2026
+          Latest release note: <strong>Production conformance refresh</strong><br>
+          Release 1.3.0.1 · Updated May 12, 2026
         </p>
       </aside>
     </main>
