@@ -80,6 +80,10 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
 ## Canonical Source Docs
 
+Best top-level state and conformance-program overview:
+
+- [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+
 Best platform overview:
 
 - [PLATINUM.md](PLATINUM.md)
@@ -98,12 +102,21 @@ Best release and testing gate doc:
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
 - [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
 
+Best conformance/resource economics doc:
+
+- [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
+- [QUALITY_CONFORMANCE_MODEL.md](QUALITY_CONFORMANCE_MODEL.md)
+- [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
+- [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
+- [RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md)
+
 Release planning and readiness docs:
 
 - [PLAN.md](PLAN.md)
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md](RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md)
 - [release-dashboard.json](release-dashboard.json)
 - [release-notes.json](release-notes.json)
 
@@ -116,7 +129,7 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.3.0` line
+  - active `1.3.0.1` hosted-dev review line
 - hosted `/beta`:
   - approved `1.3.0` beta lane
 - hosted `/production`:
@@ -126,6 +139,8 @@ What that means:
 
 - Aurora now ships as the first playable application on Platinum
 - the current production family is `1.3.0`
+- hosted `/dev` now carries the post-production conformance/docs/dashboard
+  review increment that can be inspected before any beta request
 - Galaxy Guardians is now part of the public Platinum story as a second-cabinet
   sneak peek
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
@@ -134,13 +149,19 @@ What that means:
 Current go-forward focus:
 
 - keep the current `1.3.0` production line stable
-- use [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md) for the
+- review the `1.3.0.1` hosted-dev increment and, if accepted, request the
+  hosted `/beta` publish from the release-authority machine
+- use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+  as the maintained overview of how Platinum, applications, ingestion,
+  harnessing, conformance metrics, and resource economics fit together
+- use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
   current readable quality table before shaping the `1.4.0` pickup
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis
-- improve movement fidelity against real Galaga footage
-- continue audio identity polish beyond cue timing
+- prioritize the next measurable conformance lifts in audio/event feedback,
+  alien/challenge-stage variation, level arc, visual artifact fidelity, and
+  gameplay-scale stage choreography
 - keep the platform/application boundary strong before deeper multi-game growth
 
 ## Run Locally
@@ -204,6 +225,17 @@ That means refreshing:
 - platform and application docs
 - testing and release-gate docs
 - hosted project, Platinum, and player guides
+
+The publish preflight also enforces a documentation visibility gate. Major
+curated conformance artifact families under `reference-artifacts/analyses/`
+must be referenced by the generated user-visible docs, dashboard data, or public
+project page before a lane can publish. The intended rhythm is:
+
+1. generate or promote evidence
+2. update the maintained catalog/dashboard/source doc that explains it
+3. run `npm run build`
+4. let `npm run publish:check:dev`, `npm run publish:check:beta`, or
+   `npm run publish:check:production` verify that the explanation is visible
 
 See:
 
