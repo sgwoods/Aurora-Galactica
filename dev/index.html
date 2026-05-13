@@ -130,6 +130,8 @@ mask:
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
 #msg .gameOverAuthPrompt{display:block;color:#7ef2ff;font-size:.54em;letter-spacing:.06em;line-height:1.28;margin:-.12em auto .42em;max-width:28em}
+#msg .gameOverAuthBtn{display:inline-flex;align-items:center;justify-content:center;margin:0 .2em;padding:.1em .42em;border:1px solid rgba(255,216,109,.62);background:rgba(61,46,9,.72);color:#ffe39a;font:700 .92em/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+#msg .gameOverAuthBtn:hover,#msg .gameOverAuthBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.88);box-shadow:0 0 10px rgba(255,216,109,.18)}
 #msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
@@ -572,8 +574,12 @@ mask:
 #leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta{gap:1px}
 #leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
+#leaderboardPanelTable .scoreCell.meta .scoreMetaFooter{display:flex;align-items:center;gap:6px;min-width:0}
 #leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta .scoreDate{font-size:.82em}
+#leaderboardPanelTable .leaderboardReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 9px/1 "Courier New",Consolas,monospace;padding:3px 5px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+#leaderboardPanelTable .leaderboardReplayBtn:hover,#leaderboardPanelTable .leaderboardReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
+#statusPanels.framedOverlay #leaderboardPanelTable .leaderboardReplayBtn{font-size:8px;padding:2px 4px}
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
@@ -898,8 +904,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.3.0.1</span>
-      <span id="settingsRelease">May 13 2026, 12:31 PM EDT</span>
-      <span id="settingsState">codex/player-two-persona-mode@5af5de39 clean</span>
+      <span id="settingsRelease">May 13 2026, 5:21 PM EDT</span>
+      <span id="settingsState">codex/player-two-persona-mode@51850a3f clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1197,7 +1203,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0.1</span>
-    <span id="buildStampRelease">May 13 2026, 12:31 PM EDT</span>
+    <span id="buildStampRelease">May 13 2026, 5:21 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1891,7 +1897,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.722.sha.5af5de39',commit:'5af5de39c8966623b23d3900cefcc344cd2ec78e',branch:'codex/player-two-persona-mode',dirty:false,released:'May 13 2026, 12:31 PM EDT',state:'codex/player-two-persona-mode@5af5de39 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.723.sha.51850a3f',commit:'51850a3faafaedf99db96b60dab481bd2bc1eddc',branch:'codex/player-two-persona-mode',dirty:false,released:'May 13 2026, 5:21 PM EDT',state:'codex/player-two-persona-mode@51850a3f clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2729,7 +2735,7 @@ function buildGameOverHtmlFromState(){
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
- const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Sign in to post your replay and claim a verified score.</span>':'';
+ const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Top-10 run saved locally. Sign in to post your replay, claim a verified score, and prepare future video posting. <button type="button" class="gameOverAuthBtn">Pilot Sign In</button></span>':'';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
@@ -4992,6 +4998,41 @@ window.__platinumCommentator=window.__auroraCommentator={
 // Source: src/js/04-leaderboard-ui.js
 // Shared leaderboard and pilot account UI/state helpers.
 
+function findReplayForScoreRow(row,opts={}){
+ const runs=typeof replayCatalogRows==='function'?replayCatalogRows():[];
+ if(!row||!runs.length)return null;
+ if(row?.replayId){
+  const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
+  if(directRun)return directRun;
+ }
+ const scopedRuns=opts.activePilotOnly&&typeof replayMatchesActivePilot==='function'
+  ? runs.filter(run=>replayMatchesActivePilot(run))
+  : runs;
+ const runPool=scopedRuns.length?scopedRuns:runs;
+ const rowScore=+row.score||0;
+ const rowStage=+row.stage||0;
+ const rowStamp=Date.parse((typeof resolveRowTimestamp==='function'?resolveRowTimestamp(row):row?.at)||'');
+ const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+ if(Number.isFinite(rowStamp)){
+  const exactTimed=byScoreStage.find(run=>{
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(exactTimed)return exactTimed;
+ }
+ if(byScoreStage.length)return byScoreStage[0];
+ if(Number.isFinite(rowStamp)){
+  const sameStageTimed=runPool.find(run=>{
+   if((+run.stage||0)!==rowStage)return false;
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(sameStageTimed)return sameStageTimed;
+ }
+ const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
+ if(sameStageRuns.length===1)return sameStageRuns[0];
+ return null;
+}
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
@@ -5024,43 +5065,10 @@ function renderPilotRecords(rows){
   .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)||row.at||''}))
   .sort((a,b)=>(Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))||(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0))
   .slice(0,5);
- const replayForRow=(row)=>{
-  const runs=replayCatalogRows();
-  if(row?.replayId){
-   const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
-   if(directRun)return directRun;
-  }
-  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run));
-  const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
-  const rowScore=+row.score||0;
-  const rowStage=+row.stage||0;
-  const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
-  const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
-  if(Number.isFinite(rowStamp)){
-   const exactTimed=byScoreStage.find(run=>{
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(exactTimed)return exactTimed;
-  }
-  if(byScoreStage.length)return byScoreStage[0];
-  if(Number.isFinite(rowStamp)){
-   const sameStageTimed=runPool.find(run=>{
-    if((+run.stage||0)!==rowStage)return false;
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(sameStageTimed)return sameStageTimed;
-  }
-  const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
-  if(sameStageRuns.length===1)return sameStageRuns[0];
-  if(pilotMatchedRuns.length===1)return pilotMatchedRuns[0];
-  return null;
- };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
   const stamp=formatWhenShort(row.resolvedAt||resolveRowTimestamp(row)||row.at);
-  const replay=replayForRow(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:true});
   return `<div class="accountRecordRow${replay?' hasReplay':''}"${replay?` data-replay-id="${replay.id}" tabindex="0" role="button" aria-label="Replay this flight"`:''}><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}" title="Replay this flight">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
  const bindReplayAction=(node,opts={})=>{
@@ -5234,10 +5242,12 @@ function renderLeaderboardPanel(){
  for(let i=0;i<10;i++){
   const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
   const meta=formatLeaderboardRowMeta(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:LEADERBOARD.view==='mine'});
+  const replayHtml=replay?`<button type="button" class="leaderboardReplayBtn" data-replay-id="${escapeLeaderboardHtml(replay.id)}" title="Watch this local replay">Replay</button>`:'';
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
   const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
-  body.push(`<span class="scoreCell meta" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
+  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
@@ -6770,14 +6780,22 @@ if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
 if(accountPasswordToggle)accountPasswordToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPassword,accountPasswordToggle,'password'));
 if(accountPasswordConfirmToggle)accountPasswordConfirmToggle.addEventListener('click',()=>toggleAccountPasswordVisibility(accountPasswordConfirm,accountPasswordConfirmToggle,'confirmation password'));
 if(resetTestPilotScoresBtn)resetTestPilotScoresBtn.addEventListener('click',resetTestPilotScores);
-async function openReplayFromPilotRecordsTarget(target){
+async function openReplayFromScoreTarget(target,opts={}){
  const replayId=target?.dataset?.replayId||target?.closest?.('[data-replay-id]')?.dataset?.replayId||'';
  if(replayId&&typeof window.openMovieReplayById==='function'){
-  if(typeof closeAccountPanel==='function')closeAccountPanel();
+  if(opts.closeAccount&&typeof closeAccountPanel==='function')closeAccountPanel();
+  if(opts.closeLeaderboard&&typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
+  if(typeof logEvent==='function')logEvent('score_replay_opened',{replayId,source:opts.source||'score_surface'});
   await window.openMovieReplayById(replayId);
   return true;
  }
  return false;
+}
+async function openReplayFromPilotRecordsTarget(target){
+ return openReplayFromScoreTarget(target,{closeAccount:true,source:'pilot_records'});
+}
+async function openReplayFromLeaderboardTarget(target){
+ return openReplayFromScoreTarget(target,{closeLeaderboard:true,source:'leaderboard'});
 }
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
  const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
@@ -6801,6 +6819,34 @@ if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
  e.preventDefault();
  e.stopPropagation();
  openReplayFromPilotRecordsTarget(row);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('click',e=>{
+ const btn=e.target.closest('.leaderboardReplayBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const btn=e.target.closest('.leaderboardReplayBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(msg)msg.addEventListener('click',e=>{
+ const btn=e.target.closest('.gameOverAuthBtn');
+ if(!btn)return;
+ e.preventDefault();
+ e.stopPropagation();
+ if(typeof setAccountNotice==='function')setAccountNotice('Sign in to claim this top-10 score, tie the replay to your pilot, and prepare it for future video posting.');
+ if(typeof logEvent==='function')logEvent('top_score_signin_prompt_opened',{
+  rank:+(gameOverState?.rank||0),
+  score:+(gameOverState?.score||0),
+  stage:+(gameOverState?.shownStage||gameOverState?.stage||0)
+ });
+ if(typeof openAccountPanel==='function')openAccountPanel();
 });
 addEventListener('pointerdown',e=>{
  const inAccount=LEADERBOARD.accountPanelOpen&&accountPanel&&(e.target===accountDockBtn||accountPanel.contains(e.target));
