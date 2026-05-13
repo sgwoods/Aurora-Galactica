@@ -79,6 +79,9 @@ mask:
 #center{grid-column:2}
 #hud .hudLabel{color:#ff3a36}
 #hud .hudValue{color:#f4f7ff}
+#hud .playerTwoHudReady .hudLabel{color:#ffd86d}
+#hud .playerTwoHudActive .hudLabel{color:#7ef2ff}
+#hud .playerTwoHudActive .hudValue{color:#ffd86d}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg.boardMessage{top:50%;width:min(82vw,620px);font-size:clamp(22px,2vw,34px);line-height:1.06}
 #msg .boardTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.12em;text-transform:uppercase}
@@ -96,6 +99,28 @@ mask:
 #msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
 #msg .startPickerHint{color:#ffe39a}
 #msg .startNotice{display:block;margin:.42em auto 0;max-width:34em;color:rgba(223,247,255,.76);font-size:.56em;letter-spacing:.08em;line-height:1.42}
+#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(9.8em,1fr));gap:.18em .42em;justify-content:center;align-items:stretch;width:min(100%,27em);margin:.08em auto .42em;color:#f4f7ff;font-size:.56em;letter-spacing:.08em;line-height:1.12;text-transform:uppercase}
+#msg .playerModeOption,#msg .playerModePersona,#msg .playerModeWatch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.26em;align-items:center;border:1px solid rgba(126,242,255,.34);background:rgba(3,12,24,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 10px rgba(0,0,0,.24);padding:.34em .44em;text-align:left;cursor:pointer}
+#msg .playerModeKey{display:grid;gap:.02em;min-width:3.2em;color:#7ef2ff;text-align:center}
+#msg .playerModeKey b{color:inherit;font-size:.82em;letter-spacing:.1em}
+#msg .playerModeKey small{color:rgba(231,240,255,.7);font-size:.52em;letter-spacing:.1em}
+#msg .playerModeText{display:grid;gap:.08em;min-width:0}
+#msg .playerModeText strong{color:#f4f7ff;font-size:.9em;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#msg .playerModeText em{color:rgba(231,240,255,.78);font-style:normal;font-size:.64em;letter-spacing:.08em;line-height:1.16;white-space:normal;overflow:visible;text-overflow:clip}
+#msg .playerModeStepper{grid-template-columns:1.15em minmax(0,1fr) 1.15em;align-items:center}
+#msg .playerModeStepper strong{font-size:.74em;letter-spacing:.04em;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.05}
+#msg .playerModeStepper em{grid-column:1/4}
+#msg .playerModeArrow{display:inline-grid;place-items:center;min-width:1.05em;min-height:1.05em;border:1px solid rgba(126,242,255,.32);color:#ffd86d;background:rgba(255,216,109,.08);font-size:.88em;line-height:1}
+#msg .playerModePersona .playerModeText strong,#msg .playerModeWatch .playerModeText strong{text-align:center}
+#msg .playerModeOption.isSelected{border-color:#ffd86d;color:#ffd86d;text-shadow:0 0 8px rgba(255,216,109,.32)}
+#msg .playerModeOption.isSelected .playerModeKey,#msg .playerModeOption.isSelected .playerModeText strong{color:#ffd86d}
+#msg .playerModeOption.isLocked,#msg .playerModePersona.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}
+#msg .playerModeOption.isLocked .playerModeKey,#msg .playerModeOption.isLocked .playerModeText strong,#msg .playerModePersona.isLocked .playerModeKey,#msg .playerModePersona.isLocked .playerModeText strong{color:rgba(231,240,255,.46)}
+#msg .playerModePersona.isLocked .playerModeArrow{border-color:rgba(231,240,255,.22);color:rgba(255,216,109,.5);background:rgba(255,255,255,.03)}
+#msg .playerModePersona{color:#7ef2ff}
+#msg .playerModePersona.isActive{border-color:rgba(255,216,109,.62);box-shadow:inset 0 0 0 1px rgba(255,216,109,.16),0 0 12px rgba(255,216,109,.12)}
+#msg .playerModeWatch{color:#ffd86d}
+#msg .playerModeHint{grid-column:1/3;color:rgba(231,240,255,.72);font-size:.72em;text-align:center;line-height:1.28}
 #msg .startQuoteWrap{display:grid;gap:.12em;justify-items:center;margin:.08em auto .46em;max-width:28em}
 #msg .startQuoteKicker{display:block;color:#7ef2ff;font-size:.5em;letter-spacing:.24em;text-transform:uppercase}
 #msg .startQuoteText{display:block;color:#f4f7ff;font-size:.58em;line-height:1.38;letter-spacing:.04em}
@@ -139,6 +164,19 @@ mask:
 #msg.gameOverScreen .gameOverAuthPrompt{font-size:.48em;margin-bottom:.32em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
+#msg.gameOverScreen .playerTwoResult{display:grid;gap:.16em;margin:.28em auto .04em;color:#7ef2ff;font-size:.58em;letter-spacing:.08em;line-height:1.18;width:min(100%,25em)}
+#msg.gameOverScreen .playerTwoKicker{display:block;color:#ffd86d;font-size:.9em;letter-spacing:.12em;text-transform:uppercase}
+#msg.gameOverScreen .playerTwoVersus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.34em;align-items:stretch}
+#msg.gameOverScreen .playerTwoLane{display:grid;gap:.08em;align-content:center;min-height:3.4em;padding:.34em .46em;border:1px solid rgba(126,242,255,.32);background:rgba(4,12,25,.7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+#msg.gameOverScreen .playerTwoLane b{color:#ff6f66;font-size:.82em;font-weight:700;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane strong{color:#f4f7ff;font-size:1.06em;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane em{color:#a9d8ff;font-style:normal;font-size:.74em;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane.is2up b{color:#7ef2ff}
+#msg.gameOverScreen .playerTwoLane.isLeader{border-color:#ffd86d;box-shadow:inset 0 0 0 1px rgba(255,216,109,.22),0 0 12px rgba(255,216,109,.16)}
+#msg.gameOverScreen .playerTwoLane.isLeader strong{color:#ffd86d}
+#msg.gameOverScreen .playerTwoPrompt{display:block;color:#ffd86d;font-size:1em;letter-spacing:.12em;animation:blinkPrompt .8s steps(1,end) infinite}
+#msg.gameOverScreen .playerTwoRule{display:block;color:rgba(244,247,255,.88);font-size:.78em;letter-spacing:.08em}
+#msg.gameOverScreen .playerTwoResultQueued{gap:.08em}
 #msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}
 #msg.gameOverScreen .entrySlot{min-width:1.14em}
 #msg.gameOverScreen .gameOverFoot{font-size:.72em;margin-top:.4em;max-width:24em}
@@ -181,6 +219,7 @@ mask:
 #conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
 #audioMixPanel h4{color:#9eefff}
+#commentatorPanel h4{color:#ffd86d}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -188,6 +227,7 @@ mask:
 #graphicsPanel label,#testPanel label,#audioMixPanel label{display:block;font-size:12px}
 #graphicsPanel label{color:#ffe6ae}
 #audioMixPanel label{color:#bff6ff}
+#commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
 #graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
@@ -197,6 +237,10 @@ mask:
 .settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .settingsRangeValue{font:700 12px/1 "Courier New",Consolas,monospace;color:#ffe39a}
 .settingsRangeRow input[type="range"]{width:100%;accent-color:#7ef2ff;cursor:pointer}
+.settingsToggleRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border:1px solid rgba(255,216,109,.18);background:rgba(28,21,5,.42);cursor:pointer}
+.settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
+.settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
+.settingsToggleHint{font-size:11px;line-height:1.25;color:#d7c38b}
 #testStage,#testShips{max-width:240px}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
@@ -349,9 +393,23 @@ mask:
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
 #accountDockBtn[data-signed-in="true"] .dockPilotIcon{filter:none;opacity:1}
+#accountDockBtn[data-pilot-mode="watch"],
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"],
+#accountDockBtn[data-pilot-mode="player-two-done"]{border-color:rgba(126,242,255,.72);background:linear-gradient(180deg,rgba(12,48,74,.96),rgba(8,24,43,.94));color:#7ef2ff}
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"]{border-color:rgba(255,216,109,.78);color:#ffe39a}
+#accountDockBtn[data-pilot-mode="watch"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-active"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-ready"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-done"] .dockPilotIcon{filter:none;opacity:1}
 #accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
+#accountDockBtn[data-pilot-mode="watch"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-active"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-ready"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-done"] #accountDockStatus{color:#fff2bf}
 #muteToggleBtn[data-muted="true"]{color:#ffe39a}
 #accountPanel{display:none;flex-direction:column;gap:10px;width:min(100%,620px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.32 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
@@ -360,6 +418,14 @@ mask:
 #accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 #accountPanelPortrait{font-size:54px;line-height:1;filter:grayscale(1);opacity:.68}
 #accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelTitle{color:#ffe39a}
 #accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
 #accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
@@ -622,6 +688,10 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}
+ #msg .playerModeSelect{grid-template-columns:1fr;width:min(100%,19em);font-size:.52em}
+ #msg .playerModePersona,#msg .playerModeWatch,#msg .playerModeHint{grid-column:1}
+ #msg.gameOverScreen .playerTwoVersus{grid-template-columns:1fr}
+ #msg.gameOverScreen .playerTwoLane{min-height:2.8em}
  #helpPanel{height:min(84vh,760px)}
  #platformSplashPanel,#gamePreviewPanel{width:min(calc(100% - 24px),760px)!important}
  #platformSplashBody,#gamePreviewBody{grid-template-columns:1fr}
@@ -741,6 +811,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       </div>
       <div class="settingsHint">Audio mix changes apply live and are logged with the active session for production tuning.</div>
     </div>
+    <div id="commentatorPanel" class="settingsSection">
+      <h4>Game Updates</h4>
+      <label class="settingsToggleRow" for="commentatorToggle">
+        <input id="commentatorToggle" type="checkbox" checked />
+        <span class="settingsToggleLabel">Commentator</span>
+        <span class="settingsToggleHint">Occasional gameplay callouts in the message window.</span>
+      </label>
+    </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
       <div class="settingsFieldGrid">
@@ -820,8 +898,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.3.0.1</span>
-      <span id="settingsRelease">May 12 2026, 8:17 PM EDT</span>
-      <span id="settingsState">main@a5f7ce56 clean</span>
+      <span id="settingsRelease">May 13 2026, 12:31 PM EDT</span>
+      <span id="settingsState">codex/player-two-persona-mode@5af5de39 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1119,7 +1197,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.3.0.1</span>
-    <span id="buildStampRelease">May 12 2026, 8:17 PM EDT</span>
+    <span id="buildStampRelease">May 13 2026, 12:31 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1338,7 +1416,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1570,6 +1648,10 @@ const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
 const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
 const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
 const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
+const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
+const PLAYER_TWO_PERSONA_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoPersona`;
+const WATCH_MODE_PERSONA_PREF_KEY=`${STORAGE_PREFIX}WatchModePersona`;
+const COMMENTATOR_PREF_KEY=`${STORAGE_PREFIX}Commentator`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -1584,6 +1666,10 @@ const LEGACY_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [PLAYER_TWO_MODE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoMode`,
+ [PLAYER_TWO_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoPersona`,
+ [WATCH_MODE_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}WatchModePersona`,
+ [COMMENTATOR_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -1600,6 +1686,10 @@ const PLATFORM_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [PLAYER_TWO_MODE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoMode`,
+ [PLAYER_TWO_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoPersona`,
+ [WATCH_MODE_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}WatchModePersona`,
+ [COMMENTATOR_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
@@ -1801,7 +1891,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.713.sha.a5f7ce56',commit:'a5f7ce56895191bbbdbc85d1b894e0c0613bf0e2',branch:'main',dirty:false,released:'May 12 2026, 8:17 PM EDT',state:'main@a5f7ce56 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.722.sha.5af5de39',commit:'5af5de39c8966623b23d3900cefcc344cd2ec78e',branch:'codex/player-two-persona-mode',dirty:false,released:'May 13 2026, 12:31 PM EDT',state:'codex/player-two-persona-mode@5af5de39 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2382,7 +2472,7 @@ const P={
 
 const S={score:0,best:+readPref(BEST_SCORE_KEY)||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0}};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -2554,7 +2644,7 @@ function isHarnessClockControlled(){
  return !!harnessClockControlled;
 }
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(){
  try{
@@ -2595,7 +2685,9 @@ function hitMissRatio(stats){
 }
 function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage)){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
- return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ const playerTwo=typeof buildPlayerTwoResultsHtml==='function'?buildPlayerTwoResultsHtml():'';
+ const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}</span><span>SCORE NOT RECORDED</span></span>`:'';
+ return `<span class="gameOverTitle">GAME OVER</span><span class="gameOverSub">RESULTS</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const entry={id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),score:score|0,stage:stage|0,at:new Date().toISOString(),build:BUILD};
@@ -2654,6 +2746,28 @@ function buildAttractScoreboardHtml(){
  return `<span class="gameOverTitle">HIGH SCORES</span><span class="gameOverSub">${boardTitle}</span><span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span><span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to start</span>`;
 }
 function buildGameOverState(score,stage,challenge=0){
+ if(S.watchMode||S.playerTwo?.activeTurn==='done'){
+  const shownStage=displayStageNumber(stage,challenge);
+  const playerTwoMode=!!(!S.watchMode&&S.playerTwo?.activeTurn==='done');
+  return{
+   entryId:'',
+   rank:0,
+   phase:'results',
+   score:score|0,
+   stage:stage|0,
+   challenge:!!challenge,
+   shownStage,
+   stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
+   initials:['-','-','-'],
+   cursor:0,
+   editing:false,
+   watchMode:!!S.watchMode,
+   playerTwoMode,
+   topScoreSigninPrompt:false,
+   topScoreVideoPosting:{top10:false,signedIn:false,canPostVideo:false,verifiedScore:false,reason:playerTwoMode?'player_two_persona':'watch_mode'},
+   remoteSubmitted:1
+  };
+ }
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
  const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
@@ -2731,7 +2845,7 @@ function startAttractDemo(opts={}){
  ATTRACT.audioPulseTimer=.8;
  ATTRACT.audioPulseIndex=0;
  ATTRACT.cycle++;
- Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+ Object.assign(S,{score:0,lives:2,stage:1,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,alertTxt:'',forceChallenge:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,transitionMode:'',transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:1,simT:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  resetHarnessFrameClock();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inv:0,vx:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0});
@@ -3059,6 +3173,7 @@ function syncSettingsUi(){
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
  syncAudioMixControls();
+ if(typeof syncCommentatorControls==='function')syncCommentatorControls();
  syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
@@ -3674,11 +3789,12 @@ addEventListener('keydown',e=>{
   return;
  }
  if(!started&&gameOverState){
+  if(typeof handlePlayerTwoGameOverKey==='function'&&handlePlayerTwoGameOverKey(e))return;
   if(gameOverState.phase==='results'){
    if(e.code==='Enter'){
     e.preventDefault();
     gameOverState.phase='scoreboard';
-    if(!gameOverState.editing)submitGameOverScore();
+    if(!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode)submitGameOverScore();
     if(gameOverState.rank)sfx.highScore(gameOverState.rank);
     gameOverHtml=buildGameOverHtmlFromState();
    }
@@ -3737,24 +3853,27 @@ addEventListener('keydown',e=>{
    return;
   }
  }
- if(!started&&e.code==='Enter'){
-  const packCanStart=typeof currentGamePackCanStart==='function'
-   ? currentGamePackCanStart()
-   : typeof currentGamePackHasPlayableAdapter==='function'
-   ? currentGamePackHasPlayableAdapter()
-   : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
-  if(!packCanStart){
-   e.preventDefault();
-   restorePlayableGamePackForLaunch();
-  }
-  if(gameOverState&&!gameOverState.editing)submitGameOverScore();
-  stopAttractLoop();start();
- }
+ if(!started&&typeof handlePlayerTwoWaitKey==='function'&&handlePlayerTwoWaitKey(e))return;
+ if(!started&&e.code==='Enter')launchCurrentGameFromWaitMode(e);
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
+function launchCurrentGameFromWaitMode(e=null){
+ const packCanStart=typeof currentGamePackCanStart==='function'
+  ? currentGamePackCanStart()
+  : typeof currentGamePackHasPlayableAdapter==='function'
+  ? currentGamePackHasPlayableAdapter()
+  : (typeof currentGamePackPlayable!=='function'||currentGamePackPlayable());
+ if(!packCanStart){
+  e?.preventDefault?.();
+  restorePlayableGamePackForLaunch();
+ }
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode)submitGameOverScore();
+ stopAttractLoop();start();
+ return true;
+}
 addEventListener('keyup',e=>{
  keys[e.code]=0;
  if(!keyState[e.code])keyState[e.code]={downAt:0,upAt:performance.now()};
@@ -3770,6 +3889,10 @@ document.addEventListener('visibilitychange',()=>{
  if(document.visibilityState==='visible'&&typeof checkForHostedBuildUpdate==='function')checkForHostedBuildUpdate();
 });
 addEventListener('pointerdown',e=>{
+ if(typeof handlePlayerTwoWaitClick==='function'&&handlePlayerTwoWaitClick(e.target)){
+  e.preventDefault();
+  return;
+ }
  if(!settingsOpen)return;
  if(e.target===settingsBtn||settingsPanel.contains(e.target))return;
  closeSettings();
@@ -4467,6 +4590,9 @@ function currentReplayMeta(){
   attract:!!S.attract,
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
+  watchMode:!!S.watchMode,
+  watchPersona:S.watchPersona||'',
+  playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
   pilotUserId,
   pilotEmail,
   pilotInitials,
@@ -4730,6 +4856,138 @@ function friendlyAuthError(action,error){
  }
  return message||'Unknown authentication error.';
 }
+
+// Source: src/js/04-commentator.js
+// Optional gameplay callouts shown through the platform message window.
+var commentatorEnabled=readPref(COMMENTATOR_PREF_KEY)!=='0';
+
+function commentatorSafeLine(value=''){
+ return String(value||'').trim().replace(/\s+/g,' ').slice(0,44);
+}
+function commentatorState(){
+ return {
+  enabled:!!commentatorEnabled,
+  active:+(+S.commentaryT||0).toFixed(3),
+  cooldown:+(+S.commentaryCooldown||0).toFixed(3),
+  title:S.commentaryTitle||'',
+  lines:Array.isArray(S.commentaryLines)?S.commentaryLines.slice(0,3):[]
+ };
+}
+function syncCommentatorControls(){
+ if(commentatorToggle)commentatorToggle.checked=!!commentatorEnabled;
+}
+function setCommentatorEnabled(enabled,opts={}){
+ commentatorEnabled=!!enabled;
+ writePref(COMMENTATOR_PREF_KEY,commentatorEnabled?'1':'0');
+ if(!commentatorEnabled){
+  S.commentaryT=0;
+  S.commentaryTitle='';
+  S.commentaryLines=[];
+ }
+ syncCommentatorControls();
+ if(opts.log&&typeof logEvent==='function'){
+  logEvent('commentator_setting_changed',{
+   enabled:!!commentatorEnabled,
+   source:opts.source||'settings',
+   stage:S.stage,
+   score:S.score,
+   watchMode:!!S.watchMode,
+   persona:S.harnessPersona||S.watchPersona||''
+  });
+ }
+ return commentatorState();
+}
+function updateCommentator(dt){
+ S.commentaryCooldown=Math.max(0,(+S.commentaryCooldown||0)-dt);
+ if(S.commentaryT>0&&S.alertT<=0&&S.banner<=0){
+  S.commentaryT=Math.max(0,S.commentaryT-dt);
+  if(!S.commentaryT){
+   S.commentaryTitle='';
+   S.commentaryLines=[];
+  }
+ }
+}
+function commentatorMessageState(){
+ if(!commentatorEnabled||S.commentaryT<=0||S.alertT>0||S.banner>0)return null;
+ if(typeof buildBoardMessageHtml!=='function')return null;
+ return {
+  mode:'board',
+  html:buildBoardMessageHtml({
+   title:S.commentaryTitle||'TACTICAL UPDATE',
+   lines:Array.isArray(S.commentaryLines)?S.commentaryLines.slice(0,3):[]
+  }),
+  topRatio:.62
+ };
+}
+function queueCommentatorCallout(key,title,lines=[],opts={}){
+ if(!commentatorEnabled||!started||S.attract)return false;
+ if(!opts.force&&S.commentaryCooldown>0)return false;
+ const cleanedLines=(Array.isArray(lines)?lines:[lines])
+  .map(commentatorSafeLine)
+  .filter(Boolean)
+  .slice(0,3);
+ const cleanTitle=commentatorSafeLine(title||'TACTICAL UPDATE')||'TACTICAL UPDATE';
+ S.commentaryTitle=cleanTitle;
+ S.commentaryLines=cleanedLines;
+ S.commentaryT=Math.max(.8,Math.min(5,+opts.duration||2.25));
+ S.commentaryCooldown=Math.max(1,Math.min(20,+opts.minGap||7.5));
+ if(typeof logEvent==='function'){
+  logEvent('commentator_callout',{
+   key:String(key||'callout'),
+   title:cleanTitle,
+   lines:cleanedLines,
+   duration:+S.commentaryT.toFixed(3),
+   minGap:+S.commentaryCooldown.toFixed(3),
+   stage:S.stage,
+   score:S.score,
+   watchMode:!!S.watchMode,
+   persona:S.harnessPersona||S.watchPersona||''
+  });
+ }
+ return true;
+}
+function commentatorEvent(type,payload={}){
+ switch(String(type||'')){
+  case 'boss_damaged':
+   return queueCommentatorCallout('boss_damaged','BOSS DAMAGED',['Keep pressure on the flagship.'],{duration:1.8,minGap:5});
+  case 'boss_destroyed':
+   return queueCommentatorCallout('boss_destroyed','BOSS DOWN',[payload.points?`${payload.points} POINTS`:'Flagship destroyed.'],{duration:2,minGap:5});
+  case 'capture_started':
+   return queueCommentatorCallout('capture_started','TRACTOR BEAM',['Break away or prepare a rescue.'],{duration:2.35,minGap:4.5,force:1});
+  case 'fighter_rescued':
+   return queueCommentatorCallout('fighter_rescued','DUAL FIGHTER',['Firepower restored.'],{duration:2.1,minGap:4.5,force:1});
+  case 'challenge_perfect':
+   return queueCommentatorCallout('challenge_perfect','PERFECT CHALLENGE',['All targets destroyed.'],{duration:2.4,minGap:4.5,force:1});
+  case 'challenge_clear':
+   return queueCommentatorCallout('challenge_clear','CHALLENGE COMPLETE',[`Hits ${payload.hits||0}/${payload.total||0}`],{duration:2.1,minGap:4.5,force:1});
+  case 'stage_clear':
+   return queueCommentatorCallout('stage_clear','STAGE CLEAR',[`Score ${formatScore(payload.score||S.score)}`],{duration:2,minGap:4.5,force:1});
+  case 'watch_mode':
+   return queueCommentatorCallout('watch_mode','WATCH MODE',[payload.label?`${payload.label} pilot flying now.`:'Persona pilot flying now.'],{duration:2.2,minGap:3,force:1});
+  case 'player_two_queued':
+   return queueCommentatorCallout('player_two_queued','2UP QUEUED',[`${payload.initials||'2UP'} ${payload.label||'persona'} ready.`,'Human score only.'],{duration:2.3,minGap:3,force:1});
+  case 'player_two_turn_start':
+   return queueCommentatorCallout('player_two_turn_start','2UP TURN',[`${payload.initials||'2UP'} ${payload.label||'persona'} flying now.`,'Score will not post.'],{duration:2.35,minGap:3,force:1});
+  case 'player_two_progress':
+   return queueCommentatorCallout('player_two_progress','2UP UPDATE',[`${payload.initials||'2UP'} ${formatScore(payload.score||0)} STG ${String(payload.stage||1).padStart(2,'0')}`,'Human score only.'],{duration:2.1,minGap:10});
+  case 'player_two_stage':
+   return queueCommentatorCallout('player_two_stage','2UP STAGE ADVANCE',[`${payload.initials||'2UP'} reached stage ${payload.stage||1}.`,'Human score only.'],{duration:2.1,minGap:8});
+  default:
+   return false;
+ }
+}
+
+if(commentatorToggle){
+ commentatorToggle.addEventListener('change',()=>setCommentatorEnabled(commentatorToggle.checked,{log:1,source:'settings'}));
+}
+syncCommentatorControls();
+
+window.__platinumCommentator=window.__auroraCommentator={
+ state:commentatorState,
+ setEnabled:setCommentatorEnabled,
+ queueForHarness:queueCommentatorCallout,
+ eventForHarness:commentatorEvent
+};
 
 // Source: src/js/04-leaderboard-ui.js
 // Shared leaderboard and pilot account UI/state helpers.
@@ -5115,8 +5373,10 @@ function syncAccountUi(){
  const initials=preferredInitialsFromUser();
  const dockId=pilotDisplayId();
  const hasLockedInitials=!!signedIn;
- if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
- if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'QUICK PILOT REFERENCE';
+ const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
+ const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
@@ -5165,8 +5425,9 @@ function syncAccountUi(){
  }
  if(accountSummary){
   if(pending)accountSummary.textContent='Connecting leaderboard...';
-  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
+  else if(!recovering&&pilotCard?.summary)accountSummary.textContent=pilotCard.summary;
+  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
   else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
   else if(recovering)accountSummary.textContent='Recovery accepted. Save a new password to finish signing back in.';
@@ -5176,22 +5437,25 @@ function syncAccountUi(){
  const rows=rowsForPilotProfile();
  if(accountDockBtn){
   accountDockBtn.dataset.signedIn=signedIn?'true':'false';
+  accountDockBtn.dataset.pilotMode=pilotMode;
   accountDockBtn.classList.toggle('open',!!LEADERBOARD.accountPanelOpen);
-  accountDockBtn.title=signedIn?`${dockId} onboard`:'Pilot Sign In';
+  accountDockBtn.title=pilotCard?.dockTitle||(signedIn?`${dockId} onboard`:'Pilot Sign In');
  }
- if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
- if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
- if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
- if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.');
- if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
- if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
+ if(accountDockIcon&&pilotCard?.icon)accountDockIcon.textContent=pilotCard.icon;
+ if(accountPanelPortrait&&pilotCard?.icon)accountPanelPortrait.textContent=pilotCard.icon;
+ if(accountDockLabel)accountDockLabel.textContent=pilotCard?.dockLabel||(signedIn?'ONBOARD':'SIGN IN');
+ if(accountDockStatus)accountDockStatus.textContent=pilotCard?.dockStatus||(signedIn?dockId:'Pilot offline');
+ if(accountPilotCallsign)accountPilotCallsign.textContent=recovering?'RESET IN PROGRESS':(pilotCard?.callsign||(signedIn?`${dockId} IS ONBOARD`:'PILOT OFFLINE'));
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(pilotCard?.status||(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.'));
+ if(accountIdentityEmail)accountIdentityEmail.textContent=pilotCard?.email||`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
+ if(accountIdentityUserId)accountIdentityUserId.textContent=pilotCard?.userId||`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
  if(accountPanel){
   accountPanel.dataset.signedIn=signedIn?'true':'false';
+  accountPanel.dataset.pilotMode=pilotMode;
  }
  renderPilotFlightStats(rows,signedIn);
  renderPilotRecords(rows);
- const hudInitials=signedIn?dockId:'---';
- window.__platinumPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ window.__platinumPilotHudHtml=pilotCard?.hudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?dockId:'---'}</span>`;
  window.__auroraPilotHudHtml=window.__platinumPilotHudHtml;
  if(resetTestPilotScoresBtn){
   const show=testAccountEnabled();
@@ -5297,6 +5561,7 @@ function resolvePlayerBulletHit(i,seg){
      S.shake=Math.max(S.shake,.22);
      bossDamageFx(e.x,e.y);
      sfx.bossHit();
+     if(typeof commentatorEvent==='function')commentatorEvent('boss_damaged',{enemyId:e.id,hpBefore,hpAfter:e.hp});
     }else sfx.hit();
    }
    return true;
@@ -5393,15 +5658,18 @@ function startAuroraGameplay(){
  const extendRecurring=Math.max(0,Number.isFinite(+cfg.extendRecurring)?(+cfg.extendRecurring|0):(+extendRules.recurring||0));
  const nextExtendScore=extendFirst>0?extendFirst:(extendRecurring>0?extendRecurring:0);
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
+ const pendingPlayerTwoTurn=resolvePendingPlayerTwoTurn();
+ const watchPersona=pendingPlayerTwoTurn?'':resolveWatchModeStartPersona();
+ const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
- S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -5411,6 +5679,17 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
  }
  sfx.start();
+ if(S.watchMode){
+  S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
+  S.alertT=Math.max(S.alertT,1.8);
+  if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona)});
+ }else if(playerTwoRun?.enabled&&playerTwoRun.activeTurn==='p2'){
+  S.alertTxt=`2UP TURN\n${playerTwoRun.label||watchModePersonaLabel(playerTwoRun.personaKey)} PILOT`;
+  S.alertT=Math.max(S.alertT,1.8);
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_turn_start',playerTwoSnapshot(playerTwoRun));
+ }else if(playerTwoRun?.enabled&&typeof commentatorEvent==='function'){
+  commentatorEvent('player_two_queued',playerTwoSnapshot(playerTwoRun));
+ }
  S.startCueT=0;
  if(openingTiming){
   S.formationCueT=openingTiming.formationArrivalDelay;
@@ -5474,12 +5753,13 @@ function gameOver(){
  }
  logEvent('game_over',{score:S.score,stage:S.stage});
  logSnapshot('game_over');
+ if(typeof updatePlayerTwoGameOverState==='function')updatePlayerTwoGameOverState();
  started=0;
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
- if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
  if(usesRuntimeGalagaReferenceAudio()&&typeof sfx.stopCueNames==='function'){
   sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect']);
  }
@@ -5518,9 +5798,504 @@ const HARNESS_PERSONAS={
  professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 
+const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
+const PLAYER_TWO_PERSONA_PROFILES=Object.freeze({
+ novice:Object.freeze({id:'novice',label:'BEGINNER',initials:'BEG',scorePerSecond:34,stageSeconds:126,variance:.14}),
+ advanced:Object.freeze({id:'advanced',label:'INTERMEDIATE',initials:'INT',scorePerSecond:55,stageSeconds:98,variance:.12}),
+ expert:Object.freeze({id:'expert',label:'EXPERT',initials:'EXP',scorePerSecond:78,stageSeconds:78,variance:.1}),
+ professional:Object.freeze({id:'professional',label:'PROFESSIONAL',initials:'PRO',scorePerSecond:96,stageSeconds:66,variance:.08})
+});
+const PLAYER_TWO_PERSONA_DESCRIPTIONS=Object.freeze({
+ novice:'Careful learner: slower movement, conservative shots, safer reactions.',
+ advanced:'Balanced pilot: steady movement, moderate firing, practical survival.',
+ expert:'Aggressive pilot: faster tracking, tighter aim, stronger dive response.',
+ professional:'Arcade-grade pilot: high tempo, sharper aim, pressure-ready movement.'
+});
+
+function normalizePlayerTwoPersona(value=''){
+ const key=String(value||'').trim().toLowerCase();
+ return PLAYER_TWO_PERSONA_PROFILES[key]?key:'advanced';
+}
+function currentGameSupportsPlayerTwo(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const gameKey=pack?.metadata?.gameKey||'aurora-galactica';
+ return gameKey==='aurora-galactica';
+}
+function playerTwoAuthReady(){
+ if(window.__platinumHarnessPlayerTwoAuth||window.__auroraHarnessPlayerTwoAuth)return true;
+ return typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user&&(typeof remoteAuthEnabled!=='function'||remoteAuthEnabled());
+}
+function selectedPlayerTwoMode(){
+ return readPref(PLAYER_TWO_MODE_PREF_KEY)==='2';
+}
+function selectedPlayerTwoPersona(){
+ return normalizePlayerTwoPersona(readPref(PLAYER_TWO_PERSONA_PREF_KEY)||'advanced');
+}
+function playerTwoSelectionState(){
+ const personaKey=selectedPlayerTwoPersona();
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return{
+  supported:currentGameSupportsPlayerTwo(),
+  signedIn:playerTwoAuthReady(),
+  selected:selectedPlayerTwoMode(),
+  personaKey,
+  personaLabel:profile.label,
+  personaInitials:profile.initials
+ };
+}
+function selectedWatchPersona(){
+ return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||'advanced');
+}
+function setWatchPersona(key,opts={}){
+ const personaKey=normalizePlayerTwoPersona(key);
+ writePref(WATCH_MODE_PERSONA_PREF_KEY,personaKey);
+ if(!opts.silent&&typeof logEvent==='function')logEvent('watch_mode_persona_selected',{persona:personaKey,source:opts.source||'ui'});
+ return personaKey;
+}
+function cycleWatchPersona(dir=1,opts={}){
+ const current=selectedWatchPersona();
+ const idx=Math.max(0,PLAYER_TWO_PERSONA_ORDER.indexOf(current));
+ const next=PLAYER_TWO_PERSONA_ORDER[(idx+(dir<0?-1:1)+PLAYER_TWO_PERSONA_ORDER.length)%PLAYER_TWO_PERSONA_ORDER.length];
+ return setWatchPersona(next,opts);
+}
+function watchModePersonaLabel(key=selectedWatchPersona()){
+ return (PLAYER_TWO_PERSONA_PROFILES[normalizePlayerTwoPersona(key)]||PLAYER_TWO_PERSONA_PROFILES.advanced).label;
+}
+function playerPersonaCardSummary(key='advanced'){
+ const personaKey=normalizePlayerTwoPersona(key);
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return{
+  key:personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  description:PLAYER_TWO_PERSONA_DESCRIPTIONS[personaKey]||PLAYER_TWO_PERSONA_DESCRIPTIONS.advanced
+ };
+}
+function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
+ const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
+ setPlayerTwoSelection(false,{silent:1,source:opts.source||'ui'});
+ window.__platinumWatchModePersona=key;
+ window.__auroraWatchModePersona=key;
+ if(typeof logEvent==='function')logEvent('watch_mode_armed',{persona:key,source:opts.source||'ui'});
+ if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+ return key;
+}
+function resolveWatchModeStartPersona(){
+ const key=normalizePlayerTwoPersona(window.__platinumWatchModePersona||window.__auroraWatchModePersona||'');
+ if(!(window.__platinumWatchModePersona||window.__auroraWatchModePersona))return '';
+ delete window.__platinumWatchModePersona;
+ delete window.__auroraWatchModePersona;
+ return key;
+}
+function resolvePendingPlayerTwoTurn(){
+ const pending=window.__platinumPendingPlayerTwoTurn||window.__auroraPendingPlayerTwoTurn||null;
+ delete window.__platinumPendingPlayerTwoTurn;
+ delete window.__auroraPendingPlayerTwoTurn;
+ if(!pending||!pending.enabled)return null;
+ const personaKey=normalizePlayerTwoPersona(pending.personaKey||pending.persona||'advanced');
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return Object.assign({},pending,{
+  enabled:true,
+  eligibleForLeaderboard:false,
+  mode:'persona-rival',
+  turnModel:'galaga-inspired-alternating-turns',
+  activeTurn:'p2',
+  personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:Math.max(1,+pending.lives||3),
+  elapsed:0,
+  nextLogT:8,
+  lastStage:1
+ });
+}
+function setPlayerTwoPersona(key,opts={}){
+ const personaKey=normalizePlayerTwoPersona(key);
+ writePref(PLAYER_TWO_PERSONA_PREF_KEY,personaKey);
+ if(!opts.silent&&typeof logEvent==='function')logEvent('player_two_persona_selected',{persona:personaKey,source:opts.source||'ui'});
+ return personaKey;
+}
+function cyclePlayerTwoPersona(dir=1,opts={}){
+ const current=selectedPlayerTwoPersona();
+ const idx=Math.max(0,PLAYER_TWO_PERSONA_ORDER.indexOf(current));
+ const next=PLAYER_TWO_PERSONA_ORDER[(idx+(dir<0?-1:1)+PLAYER_TWO_PERSONA_ORDER.length)%PLAYER_TWO_PERSONA_ORDER.length];
+ return setPlayerTwoPersona(next,opts);
+}
+function blockPlayerTwoSelection(source='ui'){
+ setAccountNotice('Sign in to choose 2 PLAYERS with a persona rival.');
+ if(typeof openAccountPanel==='function')openAccountPanel();
+ if(typeof showToast==='function')showToast('Sign in to choose 2 PLAYERS.');
+ if(typeof logEvent==='function')logEvent('player_two_mode_blocked',{source,reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
+}
+function setPlayerTwoSelection(enabled,opts={}){
+ const want=!!enabled;
+ if(want&&(!currentGameSupportsPlayerTwo()||!playerTwoAuthReady())){
+  writePref(PLAYER_TWO_MODE_PREF_KEY,'1');
+  if(!opts.silent)blockPlayerTwoSelection(opts.source||'ui');
+  return false;
+ }
+ writePref(PLAYER_TWO_MODE_PREF_KEY,want?'2':'1');
+ if(!opts.silent&&typeof logEvent==='function')logEvent('player_two_mode_selected',{mode:want?'2p':'1p',persona:selectedPlayerTwoPersona(),source:opts.source||'ui'});
+ return true;
+}
+function playerTwoHashUnit(seed){
+ let h=2166136261>>>0;
+ const txt=String(seed||'');
+ for(let i=0;i<txt.length;i++){
+  h^=txt.charCodeAt(i);
+  h=Math.imul(h,16777619)>>>0;
+ }
+ h=(h+0x6D2B79F5)|0;
+ let t=Math.imul(h^h>>>15,1|h);
+ t^=t+Math.imul(t^t>>>7,61|t);
+ return ((t^t>>>14)>>>0)/4294967296;
+}
+function resolvePlayerTwoStartState(){
+ if(!selectedPlayerTwoMode())return {enabled:false};
+ if(!currentGameSupportsPlayerTwo()||!playerTwoAuthReady()){
+  writePref(PLAYER_TWO_MODE_PREF_KEY,'1');
+  if(typeof logEvent==='function')logEvent('player_two_start_downgraded',{reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
+  return {enabled:false};
+ }
+ const personaKey=selectedPlayerTwoPersona();
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ const seed=`${RNG_SEED||0}:${Date.now()}:${personaKey}:${Math.random()}`;
+ const skillUnit=playerTwoHashUnit(`${seed}:skill`);
+ const paceUnit=playerTwoHashUnit(`${seed}:pace`);
+ const variance=1+((skillUnit*2)-1)*profile.variance;
+ const pace=1+((paceUnit*2)-1)*profile.variance*.7;
+ return{
+  enabled:true,
+  eligibleForLeaderboard:false,
+  mode:'persona-rival',
+  turnModel:'galaga-inspired-alternating-turns',
+  activeTurn:'queued',
+  personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:3,
+  elapsed:0,
+  nextLogT:8,
+  seed,
+  variance:+variance.toFixed(4),
+  scorePerSecond:+(profile.scorePerSecond*variance).toFixed(3),
+  stageSeconds:+Math.max(48,profile.stageSeconds/pace).toFixed(3)
+ };
+}
+function updatePlayerTwoGameOverState(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return;
+ if(p2.activeTurn==='p2'){
+  p2.score=S.score|0;
+  p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
+  p2.stage=displayStageNumber(S.stage,!!S.challenge);
+  p2.elapsed=+(+S.stageClock||0).toFixed(3);
+  p2.finished=1;
+  p2.activeTurn='done';
+  if(typeof logEvent==='function')logEvent('player_two_turn_complete',playerTwoSnapshot(p2));
+  return;
+ }
+ if(p2.activeTurn==='queued'){
+  p2.activeTurn='ready';
+  p2.humanScore=S.score|0;
+  p2.humanStage=displayStageNumber(S.stage,!!S.challenge);
+  p2.humanStats={shots:S.stats.shots|0,hits:S.stats.hits|0};
+  if(typeof logEvent==='function')logEvent('player_two_turn_ready',playerTwoSnapshot(p2));
+ }
+}
+function playerTwoTurnAvailable(){
+ return !!(!started&&gameOverState&&!gameOverState.editing&&S.playerTwo?.enabled&&S.playerTwo.activeTurn==='ready');
+}
+function startPlayerTwoTurnFromGameOver(source='keyboard'){
+ if(!playerTwoTurnAvailable())return false;
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
+ const p2=Object.assign({},S.playerTwo,{
+  activeTurn:'p2',
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:3,
+  elapsed:0,
+  nextLogT:8,
+  lastStage:1,
+  source
+ });
+ window.__platinumPendingPlayerTwoTurn=p2;
+ window.__auroraPendingPlayerTwoTurn=p2;
+ if(typeof logEvent==='function')logEvent('player_two_turn_start_requested',playerTwoSnapshot(p2));
+ stopAttractLoop();
+ start();
+ return true;
+}
+function updatePlayerTwoRival(dt){
+ const p2=S.playerTwo;
+ if(!p2?.enabled||S.attract||!started)return;
+ if(p2.activeTurn==='p2'){
+  p2.elapsed+=dt;
+  p2.score=S.score|0;
+  p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
+  const shownStage=displayStageNumber(S.stage,!!S.challenge);
+  if(shownStage!==p2.stage){
+   p2.stage=shownStage;
+   if(typeof logEvent==='function')logEvent('player_two_stage_advance',playerTwoSnapshot(p2));
+   if(typeof commentatorEvent==='function')commentatorEvent('player_two_stage',playerTwoSnapshot(p2));
+  }
+  p2.nextLogT=Math.max(0,(+p2.nextLogT||0)-dt);
+  if(!p2.nextLogT){
+   p2.nextLogT=8;
+   if(typeof logEvent==='function')logEvent('player_two_progress',playerTwoSnapshot(p2));
+   if(typeof commentatorEvent==='function')commentatorEvent('player_two_progress',playerTwoSnapshot(p2));
+  }
+  return;
+ }
+ if(p2.activeTurn!=='simulated')return;
+ p2.elapsed+=dt;
+ const stageLift=1+Math.min(.34,Math.max(0,(S.stage-1)*.018));
+ const challengeDrag=S.challenge ? .82 : 1;
+ p2.scoreFloat+=dt*p2.scorePerSecond*stageLift*challengeDrag;
+ p2.score=Math.max(p2.score|0,Math.floor(p2.scoreFloat/10)*10);
+ const nextStage=Math.max(1,Math.floor(p2.elapsed/Math.max(1,p2.stageSeconds))+1);
+ if(nextStage!==p2.stage){
+  p2.stage=nextStage;
+  if(typeof logEvent==='function')logEvent('player_two_stage_advance',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_stage',playerTwoSnapshot(p2));
+ }
+ p2.nextLogT=Math.max(0,(+p2.nextLogT||0)-dt);
+ if(!p2.nextLogT){
+  p2.nextLogT=8;
+  if(typeof logEvent==='function')logEvent('player_two_progress',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_progress',playerTwoSnapshot(p2));
+ }
+}
+function playerTwoSnapshot(state=S.playerTwo){
+ const p2=state||{};
+ if(!p2.enabled)return {enabled:false};
+ return{
+  enabled:true,
+  mode:p2.mode||'persona-rival',
+  turnModel:p2.turnModel||'galaga-inspired-alternating-turns',
+  activeTurn:p2.activeTurn||'queued',
+  personaKey:p2.personaKey||'',
+  label:p2.label||'',
+  initials:p2.initials||'',
+  score:+(p2.score||0)|0,
+  stage:+(p2.stage||1)|0,
+  humanScore:+(p2.humanScore||0)|0,
+  humanStage:+(p2.humanStage||0)|0,
+  elapsed:+(+p2.elapsed||0).toFixed(3),
+  variance:+(+p2.variance||1).toFixed(4),
+  eligibleForLeaderboard:false
+ };
+}
+function currentPilotCardState(){
+ const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
+ const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
+ const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
+ const p2=S.playerTwo;
+ if(S.watchMode){
+  const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
+  return{
+   mode:'watch',
+   icon:'🛰',
+   dockLabel:'WATCH',
+   dockStatus:persona.label,
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard`,
+   panelTitle:'PILOT ONBOARD',
+   panelSub:'WATCH MODE PERSONA',
+   callsign:`${persona.label} IS FLYING`,
+   status:`${persona.description} Score not recorded.`,
+   summary:'Watch Mode is a persona-controlled demonstration run. Scores and videos are not eligible for posting.',
+   email:'Controller: Persona pilot',
+   userId:`Role: ${persona.initials} watch pilot`,
+   hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&(p2.activeTurn==='p2'||p2.activeTurn==='done'||p2.activeTurn==='ready')){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  const active=p2.activeTurn==='p2';
+  const ready=p2.activeTurn==='ready';
+  return{
+   mode:active?'player-two-active':ready?'player-two-ready':'player-two-done',
+   icon:'🧑‍🚀',
+   dockLabel:active?'2UP PLAY':ready?'2UP READY':'2UP DONE',
+   dockStatus:persona.label,
+   dockTitle:`2UP ${persona.label} rival pilot ${active?'flying':ready?'ready':'complete'}`,
+   panelTitle:active?'2UP RIVAL ONBOARD':ready?'2UP RIVAL READY':'2UP RIVAL RESULTS',
+   panelSub:'PERSONA RIVAL PILOT',
+   callsign:`2UP ${persona.label}`,
+   status:`${persona.description} Human 1UP score is the only scoreboard entry.`,
+   summary:active?'Persona rival is flying now. This turn is comparison-only and will not post a score.':ready?'Persona rival is queued for the next turn. Press 2 from results to start it.':'Persona rival turn is complete. Only the human 1UP score remains eligible.',
+   email:'Controller: Persona rival',
+   userId:`Role: ${persona.initials} 2UP rival`,
+   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&p2.activeTurn==='queued'){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  return{
+   mode:'human-with-rival',
+   icon:'🧑‍🚀',
+   dockLabel:signedIn?'1UP PILOT':'1UP',
+   dockStatus:signedIn?humanId:'LOCAL',
+   dockTitle:signedIn?`${humanId} onboard; ${persona.label} 2UP queued`:`Local 1UP pilot; ${persona.label} 2UP queued`,
+   panelTitle:'1UP PILOT',
+   panelSub:'HUMAN TURN ACTIVE',
+   callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
+   status:`2UP ${persona.label} rival is queued after the human turn. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. 2UP rival scores do not post.`:'Local score path active. Sign in to post verified human scores.',
+   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+   userId:`Queued rival: ${persona.label}`,
+   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+   signedIn
+  };
+ }
+ return{
+  mode:signedIn?'human-signed-in':'human-local',
+  icon:'🧑‍🚀',
+  dockLabel:signedIn?'ONBOARD':'SIGN IN',
+  dockStatus:signedIn?humanId:'Pilot offline',
+  dockTitle:signedIn?`${humanId} onboard`:'Pilot Sign In',
+  panelTitle:'PILOT INFORMATION',
+  panelSub:'QUICK PILOT REFERENCE',
+  callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
+  status:signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.',
+  summary:'',
+  email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+  userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
+  hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+  signedIn
+ };
+}
+function buildPlayerTwoStartHtml(){
+ if(!currentGameSupportsPlayerTwo())return '';
+ const state=playerTwoSelectionState();
+ const watchPersona=selectedWatchPersona();
+ const watchLabel=watchModePersonaLabel(watchPersona);
+ const p2Locked=!state.signedIn;
+ const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
+ const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
+ const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
+ const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
+ const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
+ const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
+ const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span></span>`;
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
+}
+function buildPlayerTwoResultsHtml(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return '';
+ const human=(p2.humanScore!=null?p2.humanScore:S.score)|0;
+ const p2Score=p2.score|0;
+ const initials=p2.initials||'---';
+ if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>READY</strong></span></span><span class="playerTwoPrompt"><span class="k">2</span> START 2UP TURN</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
+ if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ const outcome=human>=p2Score?'1UP LEADS':'2UP LEADS';
+ const humanClass=human>=p2Score?' isLeader':'';
+ const p2Class=p2Score>human?' isLeader':'';
+ return `<span class="playerTwoResult playerTwoResultFinal"><span class="playerTwoKicker">${outcome}</span><span class="playerTwoVersus"><span class="playerTwoLane is1up${humanClass}"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up${p2Class}"><b>2UP ${initials}</b><strong>${formatScore(p2Score)}</strong><em>STG ${String(p2.stage||1).padStart(2,'0')}</em></span></span><span class="playerTwoRule">1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+}
+function playerTwoHudHtml(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return '';
+ const state=p2.activeTurn==='p2'?' PLAY':p2.activeTurn==='ready'?' READY':'';
+ const cls=p2.activeTurn==='p2'?' playerTwoHudActive':p2.activeTurn==='ready'?' playerTwoHudReady':'';
+ return `<span class="playerTwoHud${cls}"><span class="hudLabel">2UP${state}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`;
+}
+function handlePlayerTwoWaitKey(e){
+ if(started||gameOverState?.editing)return false;
+ if(gameOverState)return false;
+ if(e.code==='BracketLeft'||e.code==='BracketRight'){
+  e.preventDefault();
+  const next=cycleWatchPersona(e.code==='BracketLeft'?-1:1,{source:'keyboard'});
+  setPlayerTwoPersona(next,{silent:1,source:'keyboard'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ if(e.code==='KeyW'){
+  e.preventDefault();
+  armWatchMode(selectedWatchPersona(),{source:'keyboard'});
+  return true;
+ }
+ if(e.code==='Digit1'||e.code==='Numpad1'){
+  e.preventDefault();
+  setPlayerTwoSelection(false,{source:'keyboard'});
+  if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+  return true;
+ }
+ if(e.code==='Digit2'||e.code==='Numpad2'){
+  e.preventDefault();
+  if(setPlayerTwoSelection(true,{source:'keyboard'})){
+   if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+  }
+  return true;
+ }
+ return false;
+}
+function handlePlayerTwoGameOverKey(e){
+ if(e.code==='Digit2'||e.code==='Numpad2'){
+  if(startPlayerTwoTurnFromGameOver('keyboard')){
+   e.preventDefault();
+   return true;
+  }
+ }
+ return false;
+}
+function handlePlayerTwoWaitClick(target){
+ if(started||gameOverState)return false;
+ const mode=target?.closest?.('[data-player-mode]')?.getAttribute('data-player-mode');
+ if(mode==='1'||mode==='2'){
+  setPlayerTwoSelection(mode==='2',{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ const playerPersonaTarget=target?.closest?.('[data-player-two-persona]');
+ if(playerPersonaTarget){
+  const dir=playerPersonaTarget.getAttribute('data-player-two-persona')==='prev'?-1:1;
+  cyclePlayerTwoPersona(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ const watchPersonaTarget=target?.closest?.('[data-watch-persona]');
+ if(watchPersonaTarget){
+  const dir=watchPersonaTarget.getAttribute('data-watch-persona')==='prev'?-1:1;
+  cycleWatchPersona(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ if(target?.closest?.('[data-watch-mode]')){
+  armWatchMode(selectedWatchPersona(),{source:'click'});
+  return true;
+ }
+ return false;
+}
+
 function harnessPersonaCfg(){
- const key=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
- return HARNESS_PERSONAS[key]||null;
+ const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ const base=HARNESS_PERSONAS[key]||null;
+ const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
+ if(!base||!p2)return base;
+ const skill=cl(Number.isFinite(+p2.variance)?+p2.variance:1,.82,1.18);
+ const agility=.92+skill*.08;
+ const precision=.94+skill*.06;
+ return Object.assign({},base,{
+  moveMul:cl(base.moveMul*agility,.32,.98),
+  urgentLook:base.urgentLook*precision,
+  deadZone:Math.max(3,base.deadZone/precision),
+  aimBoss:base.aimBoss*precision,
+  aimOther:base.aimOther*precision,
+  fireChance:cl(base.fireChance*precision,.1,.999),
+  challengeFireChance:cl(base.challengeFireChance*precision,.1,.999),
+  distanceBias:base.distanceBias/precision
+ });
 }
 
 function harnessTargetScore(e,p,cfg){
@@ -5719,7 +6494,7 @@ function updatePlayerControl(dt,p){
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
-  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
    const leftHeld=keyHeldMs(...leftCodes);
@@ -5739,7 +6514,7 @@ function updatePlayerControl(dt,p){
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();
- else if(!S.attract&&harnessPersona&&manualFire)shoot();
+ else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot();
 }
 
 // Source: src/js/05-supabase.js
@@ -5786,6 +6561,7 @@ const accountPanelSub=document.getElementById('accountPanelSub');
 const accountDockIcon=document.getElementById('accountDockIcon');
 const accountDockLabel=document.getElementById('accountDockLabel');
 const accountDockStatus=document.getElementById('accountDockStatus');
+const accountPanelPortrait=document.getElementById('accountPanelPortrait');
 const accountPilotCallsign=document.getElementById('accountPilotCallsign');
 const accountPilotStatus=document.getElementById('accountPilotStatus');
 const accountGuideBtn=document.getElementById('accountGuideBtn');
@@ -6714,6 +7490,7 @@ function capturePlayer(e){
  }
  S.lastCaptureStartT=S.stageClock;
  logEvent('capture_started',Object.assign({stage:S.stage,playerX:+p.x.toFixed(2),playerY:+p.y.toFixed(2),playerLane:playLane(p.x)},enemyRef(e)));
+ if(typeof commentatorEvent==='function')commentatorEvent('capture_started',{stage:S.stage,enemyId:e.id});
  sfx.beam();
 }
 
@@ -7019,6 +7796,7 @@ function awardKill(e,mode){
  awardScorePoints(pts);
  const carrying=enemyIsCarryingFighter(e);
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(carrying&&dive),turnedHostile:!!(carrying&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
+ if(e.t==='boss'&&typeof commentatorEvent==='function')commentatorEvent('boss_destroyed',{points:pts,dive,carrying});
  if(carrying){
   if(dive){
    releaseCapturedFighter(e);
@@ -7044,6 +7822,7 @@ function awardRescueJoin(autoDock){
   playerX:+p.x.toFixed(2),
   playerY:+p.y.toFixed(2)
  },autoDock?{autoDock:1}:null));
+ if(typeof commentatorEvent==='function')commentatorEvent('fighter_rescued',{stage:S.stage,autoDock:!!autoDock});
  logEvent('rescue_join_phase',Object.assign({
   stage:S.stage,
   duration:1.1,
@@ -7063,6 +7842,7 @@ function finalizeChallengeClear(){
  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
  const bonusTotal=(S.ch.bonus||0)+perfect;
  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
+ if(typeof commentatorEvent==='function')commentatorEvent(perfect?'challenge_perfect':'challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,bonusTotal});
  S.bannerMode='challengeResult';
  S.banner=1.15;
  S.pendingStage=S.stage+1;
@@ -7330,6 +8110,7 @@ function updateAuroraGameplay(dt){
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
  S.audioPulseHoldT=Math.max(0,(+S.audioPulseHoldT||0)-dt);
+ if(typeof updateCommentator==='function')updateCommentator(dt);
  if(S.startCueT>0){
   S.startCueT=Math.max(0,S.startCueT-dt);
   if(!S.startCueT)sfx.start();
@@ -7356,6 +8137,7 @@ function updateAuroraGameplay(dt){
  }
  const simT=advanceGameplayClock(dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
+ if(typeof updatePlayerTwoRival==='function')updatePlayerTwoRival(dt);
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
   ATTRACT.audioPulseTimer=Math.max(0,(+ATTRACT.audioPulseTimer||0)-dt);
@@ -7514,6 +8296,7 @@ function updateAuroraGameplay(dt){
   if(S.cap)return;
   if(S.attract){logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'stage_clear'});enterAttractScores();return}
   logEvent('stage_clear',{stage:S.stage,score:S.score});
+  if(typeof commentatorEvent==='function')commentatorEvent('stage_clear',{stage:S.stage,score:S.score});
   S.stage++;
   queueStageTransition();
   return
@@ -11436,7 +12219,7 @@ function gameplayMessageState(){
    topRatio:.48
   };
  }
- if(S.banner<=0)return null;
+ if(S.banner<=0)return typeof commentatorMessageState==='function'?commentatorMessageState():null;
  switch(S.bannerMode){
   case 'challengeIntro':
    return {mode:'board',html:buildBoardMessageHtml({accent:S.bannerTxt,lines:[S.bannerSub]}),topRatio:.46};
@@ -11663,10 +12446,16 @@ function syncCabinetShellLayout({
 function syncHudAndShellMessages({ox,oy,viewW,viewH}){
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
- const pilotHudHtml=(typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
+ const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
+ const playerTwoHud=typeof playerTwoHudHtml==='function'?playerTwoHudHtml():'';
+ const pilotHudHtml=pilotCard?.hudHtml || playerTwoHud || ((typeof pilotDisplayId==='function'&&typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user)
   ? `<span class="hudLabel">PILOT</span> <span class="hudValue">${pilotDisplayId()}</span>`
-  : (window.__platinumPilotHudHtml||window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`);
+  : (window.__platinumPilotHudHtml||window.__auroraPilotHudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">---</span>`));
  right.innerHTML=pilotHudHtml;
+ if(typeof syncAccountUi==='function'&&pilotCard?.mode&&(window.__platinumPilotCardMode||'')!==pilotCard.mode){
+  window.__platinumPilotCardMode=pilotCard.mode;
+  syncAccountUi();
+ }
  const toolsVisible=!started||paused||feedbackOpen;
  settingsBtn.style.display='block';
  if(typeof syncLeaderboardPanelVisibility==='function')syncLeaderboardPanelVisibility();
@@ -11708,9 +12497,10 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
     : '';
    const missionBlock=showcaseMode?buildStartMissionHtml(frontDoor.attractMission):'';
    const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
+   const playerModeLine=typeof buildPlayerTwoStartHtml==='function'?buildPlayerTwoStartHtml():'';
    const accountLine=showcaseMode?`<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span>`:'';
    const utilityLine=showcaseMode?`<span class="startMeta">${frontDoor.utilityLine}</span>`:'';
-   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${quoteBlock}${missionBlock}${scoreAdvanceBlock}${accountLine}<span class="startMeta">${frontDoor.attractLine}</span>${utilityLine}${pickerHint}${noticeHint}`;
+   msg.innerHTML=`<span class="startTitle">${frontDoor.title}</span><span class="startSub">${frontDoor.subtitle}</span>${featureLine}<span class="startHelp">${frontDoor.startPrompt}</span>${playerModeLine}${quoteBlock}${missionBlock}${scoreAdvanceBlock}${accountLine}<span class="startMeta">${frontDoor.attractLine}</span>${utilityLine}${pickerHint}${noticeHint}`;
   }
  }
  else if(activeMessage)msg.innerHTML=activeMessage.html;
@@ -12560,6 +13350,9 @@ window.__galagaHarness__={
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
+ if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
+ if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
+ if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -12860,6 +13653,20 @@ window.__galagaHarness__={
   }
   return false;
  },
+ commentatorState(){
+  return window.__platinumCommentator?.state?.()||null;
+ },
+ setCommentatorEnabled(enabled=true){
+  return window.__platinumCommentator?.setEnabled?.(!!enabled,{log:1,source:'harness'})||null;
+ },
+ queueCommentator(cfg={}){
+  return !!window.__platinumCommentator?.queueForHarness?.(
+   cfg.key||'harness',
+   cfg.title||'TACTICAL UPDATE',
+   cfg.lines||['Harness callout'],
+   Object.assign({force:1,minGap:0,duration:+cfg.duration||1.5},cfg.opts||{})
+  );
+ },
  triggerShipLoss(cfg={}){
   const reserveLives = Math.max(0, Number.isFinite(+cfg.reserveLives) ? (+cfg.reserveLives|0) : 1);
   S.lives = reserveLives;
@@ -12915,6 +13722,45 @@ window.__galagaHarness__={
  resetInputState(reason='harness'){
   if(typeof resetActiveInputState==='function')resetActiveInputState(reason);
   return this.inputState();
+ },
+ setupPlayerTwoModeTest(cfg={}){
+  window.__platinumHarnessPlayerTwoAuth=!!cfg.signedIn;
+  window.__auroraHarnessPlayerTwoAuth=window.__platinumHarnessPlayerTwoAuth;
+  const initials=sanitizeInitials(cfg.initials||'SGW').padEnd(3,'-').slice(0,3);
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user=cfg.signedIn===false?null:{
+   id:String(cfg.userId||'pilot-player-two'),
+   email:String(cfg.email||'pilot@example.com'),
+   email_confirmed_at:new Date().toISOString(),
+   user_metadata:{display_initials:initials}
+  };
+  LEADERBOARD.profile=LEADERBOARD.user?{user_id:LEADERBOARD.user.id,display_initials:initials}:null;
+  LEADERBOARD.accountNotice='';
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return this.playerTwoState();
+ },
+ setPlayerTwoMode(cfg={}){
+  if(cfg.persona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.persona,{silent:1,source:'harness'});
+  if(cfg.enabled!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.enabled,{silent:!!cfg.silent,source:'harness'});
+  return this.playerTwoState();
+ },
+ playerTwoState(){
+  return{
+   selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
+   run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
+   hudRight:right?.textContent||'',
+   accountNotice:LEADERBOARD.accountNotice||''
+  };
+ },
+ startWatchMode(cfg={}){
+  if(typeof setSeed==='function'&&cfg.seed!==undefined)setSeed(cfg.seed);
+  if(typeof setWatchPersona==='function')setWatchPersona(cfg.persona||selectedWatchPersona?.()||'advanced',{silent:1,source:'harness'});
+  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
+  return this.state();
+ },
+ startPlayerTwoTurn(){
+  if(typeof startPlayerTwoTurnFromGameOver==='function')startPlayerTwoTurnFromGameOver('harness');
+  return this.state();
  },
  setupRemoteScoreSubmitTest(cfg={}){
   window.__platinumHarnessForceRemoteWrite=1;
@@ -13018,6 +13864,9 @@ window.__galagaHarness__={
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
+   watchMode:!!gameOverState?.watchMode,
+   playerTwoMode:!!gameOverState?.playerTwoMode,
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
    topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,
@@ -13057,6 +13906,10 @@ window.__galagaHarness__={
    simT:+(+S.simT||0).toFixed(3),
    stageClock:+(+S.stageClock||0).toFixed(3),
    persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,
+   harnessPersona:S.harnessPersona||null,
+   watchMode:!!S.watchMode,
+   watchPersona:S.watchPersona||'',
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',
     group:atmosphere.group||'',
