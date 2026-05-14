@@ -104,6 +104,7 @@ mask:
 #msg .gameOverTitle{display:block;color:#ff3a36;font-size:1.2em;letter-spacing:.1em;margin-bottom:.25em}
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
+#msg .gameOverAuthPrompt{display:block;color:#7ef2ff;font-size:.54em;letter-spacing:.06em;line-height:1.28;margin:-.12em auto .42em;max-width:28em}
 #msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
@@ -135,6 +136,7 @@ mask:
 #msg.gameOverScreen .gameOverTitle{font-size:1.34em;letter-spacing:.14em;margin-bottom:.16em}
 #msg.gameOverScreen .gameOverSub{font-size:.82em;letter-spacing:.08em;margin-bottom:.1em}
 #msg.gameOverScreen .gameOverMeta{font-size:.6em;margin-bottom:.38em}
+#msg.gameOverScreen .gameOverAuthPrompt{font-size:.48em;margin-bottom:.32em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
 #msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}
@@ -178,16 +180,23 @@ mask:
 #conformanceToolsPanel.disabled #conformanceRollupCard{border-color:rgba(170,190,210,.14);background:rgba(26,30,40,.42)}
 #conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
+#audioMixPanel h4{color:#9eefff}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
 .settingsFieldCompact{max-width:240px}
-#graphicsPanel label,#testPanel label{display:block;font-size:12px}
+#graphicsPanel label,#testPanel label,#audioMixPanel label{display:block;font-size:12px}
 #graphicsPanel label{color:#ffe6ae}
+#audioMixPanel label{color:#bff6ff}
 #testPanel label{color:#b7efd0}
 #graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
+.settingsRangeStack{display:flex;flex-direction:column;gap:10px;padding:8px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(5,14,26,.52)}
+.settingsRangeRow{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}
+.settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.settingsRangeValue{font:700 12px/1 "Courier New",Consolas,monospace;color:#ffe39a}
+.settingsRangeRow input[type="range"]{width:100%;accent-color:#7ef2ff;cursor:pointer}
 #testStage,#testShips{max-width:240px}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
@@ -291,6 +300,11 @@ mask:
 #feedbackStatus.err{color:#ff8c8c}
 #feedbackToast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:50;background:rgba(9,30,55,.96);border:1px solid rgba(136,245,255,.7);color:#dff7ff;padding:8px 14px;font:700 14px/1.2 "Courier New",Consolas,monospace;display:none}
 #feedbackToast.show{display:block}
+#platformTrackToast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(12px);z-index:25;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;width:min(560px,calc(100vw - 32px));box-sizing:border-box;padding:7px 12px;border:1px solid rgba(255,227,154,.54);background:rgba(7,14,28,.92);color:#dff7ff;font:700 12px/1.15 "Courier New",Consolas,monospace;box-shadow:0 10px 28px rgba(0,0,0,.32),0 0 18px rgba(255,227,154,.12);opacity:0;pointer-events:none;transition:opacity .42s ease,transform .42s ease}
+#platformTrackToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#platformTrackLabel{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#ffe39a;white-space:nowrap}
+#platformTrackTitle{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f7fbff}
+#platformTrackArtist{min-width:0;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9eefff;text-align:right}
 #pickerDock{position:absolute;left:12px;top:12px;right:12px;z-index:20;display:flex;justify-content:center;pointer-events:auto}
 #gamePickerDockBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:118px;padding:6px 4px;border:1px solid transparent;background:transparent;color:#f4fbff;font:700 14px/1 "Courier New",Consolas,monospace;cursor:pointer;backdrop-filter:none;box-shadow:none;transition:color .14s,transform .14s,filter .14s}
 #gamePickerDockBtn:hover{color:#ffe39a;transform:translateY(-1px);filter:drop-shadow(0 0 14px rgba(126,242,255,.24))}
@@ -322,6 +336,15 @@ mask:
 #dockQuickTools .dockToolGroupUtility button:hover::after,
 #dockQuickTools .dockToolGroupUtility button:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(-2px)}
 #dockQuickTools .dockIcon{display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transform:none;filter:drop-shadow(0 0 10px rgba(126,242,255,.18))}
+#dockQuickTools .musicDockIcon{font-size:34px}
+#arcadeMusicToggleBtn[data-music-playing="true"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-state="playing"] .dockIcon{animation:arcadeMusicPulse 1.15s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,227,154,.42))}
+#arcadeMusicToggleBtn[data-music-muted="true"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-muted="true"] .dockIcon{animation:none;filter:grayscale(.8) drop-shadow(0 0 8px rgba(255,227,154,.18));opacity:.72}
+#arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
+@keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+#arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
+#arcadeMusicFrameHost iframe{display:block;width:200px;height:200px;border:0}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
@@ -583,7 +606,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #accountDockBtn{min-height:72px;padding:6px}
  #accountDockLabel,#accountDockStatus{display:none}
  #settingsActions{grid-template-columns:1fr}
- #settingsFieldGrid{grid-template-columns:1fr}
+ .settingsFieldGrid{grid-template-columns:1fr}
  #statusPanels:not(.framedOverlay):not(.waitOverlay){left:14px!important;right:14px!important;top:auto!important;bottom:126px!important;transform:none!important;width:auto!important;align-items:stretch}
  #accountPanel,#leaderboardPanel,#leaderboardViews,#platformMessagePanel,#buildStamp{width:100%;max-width:none}
  #accountIdentityGrid,#accountFlightStats{grid-template-columns:1fr}
@@ -655,20 +678,27 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <button id="feedbackDockBtn" type="button" aria-expanded="false" aria-controls="feedbackModal" aria-label="Report a bug or send feedback" title="Report a bug or send feedback" data-action-tip="Report a bug or send feedback"><span class="dockIcon" aria-hidden="true">🐞</span></button>
       </div>
       <div class="dockToolGroup dockToolGroupUtility">
-        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute game audio" title="Mute game audio" data-action-tip="Mute game audio"><span class="dockIcon" aria-hidden="true">🔊</span></button>
+        <button id="arcadeMusicToggleBtn" type="button" aria-pressed="false" aria-label="Start Arcade Music" title="Start Arcade Music" data-action-tip="Start Arcade Music"><span class="dockIcon musicDockIcon" aria-hidden="true">🎵</span></button>
+        <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute sound effects" title="Mute sound effects" data-action-tip="Mute sound effects"><span class="dockIcon" aria-hidden="true">🔊</span></button>
         <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game" data-action-tip="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
         <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open developer tools" data-action-tip="Open developer tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
       </div>
     </div>
   </div>
 </div>
+<div id="arcadeMusicFrameHost" aria-hidden="true"></div>
 <div id="hud"><div id="left"></div><div id="center"></div><div id="right"></div></div>
 <div id="msg"></div>
+<div id="platformTrackToast" aria-live="polite" aria-atomic="true">
+  <span id="platformTrackLabel">Now Playing</span>
+  <span id="platformTrackTitle"></span>
+  <span id="platformTrackArtist"></span>
+</div>
 <div id="settingsPanel" aria-hidden="true">
   <div id="settingsPanelHead" class="framePopupHead">
     <div>
       <span id="settingsPanelTitle" class="framePopupTitle">Developer Tools</span>
-      <span id="settingsPanelSub" class="framePopupSub">Local tools and diagnostic controls for this build.</span>
+      <span id="settingsPanelSub" class="framePopupSub">Release diagnostics, conformance rollup, and local controls for this build.</span>
     </div>
     <button type="button" id="settingsPanelClose" aria-label="Close developer tools">×</button>
   </div>
@@ -689,7 +719,27 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <span id="conformanceRollupScore">--</span>
         <span id="conformanceRollupBody">Dashboard summary pending.</span>
       </div>
-      <div id="conformanceDashboardHint">Local dashboard opens from localhost builds only.</div>
+      <div id="conformanceDashboardHint">Open the read-only conformance dashboard for this build.</div>
+    </div>
+    <div id="audioMixPanel" class="settingsSection">
+      <h4>Audio Mix</h4>
+      <div class="settingsRangeStack">
+        <div class="settingsRangeRow">
+          <div class="settingsRangeHeader">
+            <label for="musicVolume">Music Volume</label>
+            <span id="musicVolumeValue" class="settingsRangeValue">--</span>
+          </div>
+          <input id="musicVolume" type="range" min="0" max="100" step="1" value="72" />
+        </div>
+        <div class="settingsRangeRow">
+          <div class="settingsRangeHeader">
+            <label for="gameSoundVolume">Game Sound</label>
+            <span id="gameSoundVolumeValue" class="settingsRangeValue">--</span>
+          </div>
+          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="68" />
+        </div>
+      </div>
+      <div class="settingsHint">Audio mix changes apply live and are logged with the active session for production tuning.</div>
     </div>
     <div id="graphicsPanel" class="settingsSection">
       <h4>Graphics Options</h4>
@@ -769,9 +819,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
-      <span id="settingsVersion">Version 1.3.0.1</span>
-      <span id="settingsRelease">May 14 2026, 6:48 PM EDT</span>
-      <span id="settingsState">codex/imacm1-guardians-playable-0-1@d4a9adbd clean</span>
+      <span id="settingsVersion">Version 1.4.0.1</span>
+      <span id="settingsRelease">May 14 2026, 7:56 PM EDT</span>
+      <span id="settingsState">main@7741afb2 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -779,8 +829,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">Production conformance refresh</span>
-      <span id="settingsNotesBody">Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`.</span>
+      <span id="settingsNotesTitle">First 1.4.0 beta candidate</span>
+      <span id="settingsNotesBody">Cut the first deliberate 1.4.0 beta family from merged main, keeping production stable on 1.3.0 while moving hosted `/dev` and hosted `/beta` onto the next minor-candidate line with the full Guardians playable/conformance tranche, side-by-side game conformance entry points, and a cleaner multi-game release story.</span>
     </div>
   </div>
 </div>
@@ -1068,8 +1118,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.3.0.1</span>
-    <span id="buildStampRelease">May 14 2026, 6:48 PM EDT</span>
+    <span id="buildStampVersion">1.4.0.1</span>
+    <span id="buildStampRelease">May 14 2026, 7:56 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1290,8 +1340,10 @@ const helpTabButtons=Array.from(document.querySelectorAll('[data-help-tab]')),he
 const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=document.getElementById('feedbackForm'),feedbackClose=document.getElementById('feedbackClose');
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
-const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
+const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
+const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
 const pauseToggleBtn=document.getElementById('pauseToggleBtn');
 const statusPanels=document.getElementById('statusPanels');
@@ -1517,6 +1569,10 @@ const SCORE_HISTORY_KEY=`${STORAGE_PREFIX}ScoreHistory`;
 const LEADERBOARD_PREF_KEY=`${STORAGE_PREFIX}LeaderboardView`;
 const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
+const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
+const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
+const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
+const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
 const LEGACY_STORAGE_KEYS={
@@ -1527,6 +1583,10 @@ const LEGACY_STORAGE_KEYS={
  [SCORE_HISTORY_KEY]:`${LEGACY_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}AudioMuted`,
+ [ARCADE_MUSIC_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusic`,
+ [ARCADE_MUSIC_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicMuted`,
+ [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
+ [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
 };
@@ -1539,11 +1599,39 @@ const PLATFORM_STORAGE_KEYS={
  [SCORE_HISTORY_KEY]:`${PLATFORM_STORAGE_PREFIX}ScoreHistory`,
  [LEADERBOARD_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}LeaderboardView`,
  [AUDIO_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}AudioMuted`,
+ [ARCADE_MUSIC_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusic`,
+ [ARCADE_MUSIC_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicMuted`,
+ [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
+ [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
+const DEFAULT_GAME_SOUND_VOLUME=.68;
+const DEFAULT_ARCADE_MUSIC_VOLUME=.72;
+function clampVolumeValue(value,fallback=1){
+ const n=+value;
+ return Number.isFinite(n)?Math.max(0,Math.min(1,n)):fallback;
+}
+function readVolumePref(key,fallback=1){
+ const raw=readPref(key);
+ if(raw==null||raw==='')return fallback;
+ const n=+raw;
+ if(!Number.isFinite(n))return fallback;
+ return clampVolumeValue(n>1?n/100:n,fallback);
+}
+function volumePercent(value){
+ return Math.round(clampVolumeValue(value,0)*100);
+}
+function volumePercentText(value){
+ return `${volumePercent(value)}%`;
+}
 let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
+let arcadeMusicMuted=readPref(ARCADE_MUSIC_MUTED_PREF_KEY)==='1';
+let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
+let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
+const ARCADE_MUSIC_PLAYLIST_ID="PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH";
+const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,lastTrackSignature:'',lastTrack:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1716,7 +1804,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.3.0',versionLine:'1.3.0.1',label:'1.3.0.1+build.714.sha.d4a9adbd',commit:'d4a9adbdcb17e0b6980ee45c883138810b0defc3',branch:'codex/imacm1-guardians-playable-0-1',dirty:false,released:'May 14 2026, 6:48 PM EDT',state:'codex/imacm1-guardians-playable-0-1@d4a9adbd clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.3.0","releaseTrack":"production-live","compatibility":"platinum-1.3","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract."},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.3.0","versionLine":"1.3.0","releaseTrack":"production-live","runtimeStatus":"playable","platformCompatibility":"platinum-1.3","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.3","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.724.sha.7741afb2',commit:'7741afb2e50cb4d9f84cefa2294012b90aa78352',branch:'main',dirty:false,released:'May 14 2026, 7:56 PM EDT',state:'main@7741afb2 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"beta-candidate","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"beta-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -1772,7 +1860,7 @@ const FEEDBACK_RATE_MS=30000;
 const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='';
-let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0;
+let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0,platformTrackToastTimer=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
 let platformSplashOpen=0,platformSplashPrevPaused=0;
 let gamePreviewOpen=0,gamePreviewPrevPaused=0;
@@ -1814,7 +1902,7 @@ const AC=()=>{
  const A=new (window.AudioContext||webkitAudioContext)();
  sfx.a=A;
  sfx.bus=A.createGain();
- sfx.bus.gain.value=audioMuted?0:.9;
+ sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
  sfx.tap=A.createMediaStreamDestination();
  sfx.keep=A.createConstantSource();
  sfx.keep.offset.value=0;
@@ -2645,13 +2733,14 @@ function buildGameOverHtmlFromState(){
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
+ const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Sign in to post your replay and claim a verified score.</span>':'';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
   entryHtml=`<span class="gameOverEntry"><span class="entryLabel">ENTER INITIALS</span><span class="entrySlots">${shown}</span></span>`;
   footHtml='<span class="gameOverFoot"><span class="gameOverFootLine"><span class="k">Left/Right</span> select, <span class="k">Up/Down</span> change</span><span class="gameOverFootLine">type letters or press <span class="k">Enter</span> to save</span></span>';
  }
- return `<span class="gameOverTitle">${gameOverState.resultTitle||'GAME OVER'}</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
+ return `<span class="gameOverTitle">${gameOverState.resultTitle||'GAME OVER'}</span><span class="gameOverSub">${boardTitle}</span><span class="gameOverMeta">${rankTxt}</span>${authPromptHtml}${entryHtml}<span class="scoreTable"><span class="scoreHead scoreRank">NO</span><span class="scoreHead scoreName">ID</span><span class="scoreHead scoreValue">SCORE</span><span class="scoreHead scoreStage">STG</span>${rows}</span>${footHtml}`;
 }
 function buildAttractScoreboardHtml(){
  const activeView=(ATTRACT.phase==='scores'&&ATTRACT.active)?(ATTRACT.scoreViews[ATTRACT.scoreViewIndex]||'all'):LEADERBOARD.view;
@@ -2671,6 +2760,20 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
  const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
  const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
  const editing=!!res.rank&&!hasLockedPilotInitials;
+ const videoPosting=typeof topScoreVideoPostingEligibility==='function'
+  ? topScoreVideoPostingEligibility(res.rank)
+  : {top10:!!res.rank,signedIn:hasLockedPilotInitials,canPostVideo:!!res.rank&&hasLockedPilotInitials,verifiedScore:false,reason:'unavailable'};
+ const topScoreSigninPrompt=typeof shouldPromptForTopScoreSignin==='function'?shouldPromptForTopScoreSignin(res.rank):false;
+ if(topScoreSigninPrompt&&typeof logEvent==='function'){
+  logEvent('top_score_signin_prompt',{
+   rank:res.rank,
+   score:score|0,
+   stage:shownStage,
+   canPostVideo:!!videoPosting.canPostVideo,
+   verifiedScore:!!videoPosting.verifiedScore,
+   reason:videoPosting.reason||'sign_in_required'
+  });
+ }
  return{
   entryId:res.entry.id,
   rank:res.rank,
@@ -2688,6 +2791,8 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
   initials:(hasLockedPilotInitials?pilotInitials:'YOU').split('').slice(0,3),
   cursor:0,
   editing,
+  topScoreSigninPrompt,
+  topScoreVideoPosting:videoPosting,
   remoteSubmitted:0
  };
 }
@@ -2831,6 +2936,61 @@ function syncDeveloperToolsUi(){
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+}
+function syncAudioMixControls(){
+ const gamePct=volumePercent(gameSoundVolume);
+ const musicPct=volumePercent(arcadeMusicVolume);
+ if(gameSoundVolumeControl){
+  gameSoundVolumeControl.value=String(gamePct);
+  gameSoundVolumeControl.setAttribute('aria-valuetext',volumePercentText(gameSoundVolume));
+ }
+ if(gameSoundVolumeValue)gameSoundVolumeValue.textContent=volumePercentText(gameSoundVolume);
+ if(musicVolume){
+  musicVolume.value=String(musicPct);
+  musicVolume.setAttribute('aria-valuetext',volumePercentText(arcadeMusicVolume));
+ }
+ if(musicVolumeValue)musicVolumeValue.textContent=volumePercentText(arcadeMusicVolume);
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ if(debug)debug.mix={
+  gameSoundVolume:+gameSoundVolume.toFixed(3),
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  arcadeMusicMuted:!!arcadeMusicMuted
+ };
+}
+function audioMixTelemetryBase(){
+ return {
+  gameSoundVolume:+gameSoundVolume.toFixed(3),
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  arcadeMusicMuted:!!arcadeMusicMuted,
+  musicState:ARCADE_MUSIC?.state||'off',
+  releaseChannel:BUILD_INFO?.releaseChannel||'development',
+  pack:typeof currentGamePackKey==='function'?currentGamePackKey():''
+ };
+}
+function logAudioMixSettingChange(setting='',source='developer_panel'){
+ if(typeof logEvent!=='function')return;
+ logEvent('audio_mix_changed',Object.assign({
+  setting:String(setting||'audio_mix'),
+  source:String(source||'developer_panel')
+ },audioMixTelemetryBase()));
+}
+function setGameSoundVolume(value,opts={}){
+ gameSoundVolume=clampVolumeValue(value,DEFAULT_GAME_SOUND_VOLUME);
+ writePref(GAME_SOUND_VOLUME_PREF_KEY,gameSoundVolume.toFixed(3));
+ if(sfx?.bus)sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
+ syncAudioMixControls();
+ if(opts.log)logAudioMixSettingChange('game_sound_volume',opts.source||'developer_panel');
+}
+function setArcadeMusicVolume(value,opts={}){
+ arcadeMusicVolume=clampVolumeValue(value,DEFAULT_ARCADE_MUSIC_VOLUME);
+ writePref(ARCADE_MUSIC_VOLUME_PREF_KEY,arcadeMusicVolume.toFixed(3));
+ if(typeof applyArcadeMusicVolume==='function')applyArcadeMusicVolume();
+ syncAudioMixControls();
+ if(opts.log)logAudioMixSettingChange('arcade_music_volume',opts.source||'developer_panel');
 }
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
@@ -3004,6 +3164,7 @@ function syncSettingsUi(){
  if(settingsRelease)settingsRelease.textContent=BUILD_INFO.released||'';
  if(settingsState)settingsState.textContent=BUILD_INFO.state||'';
  syncDeveloperToolsUi();
+ syncAudioMixControls();
  syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
@@ -3013,7 +3174,8 @@ function isLocalDashboardHost(){
  return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
 }
 function conformanceDashboardUrl(){
- return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ if(isLocalDashboardHost())return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}conformance-dashboard.html`;
 }
 function syncConformanceDashboardUi(){
  const summary=CONFORMANCE_DASHBOARD_SUMMARY&&typeof CONFORMANCE_DASHBOARD_SUMMARY==='object'
@@ -3021,18 +3183,16 @@ function syncConformanceDashboardUi(){
   : {};
  const local=isLocalDashboardHost();
  const available=!!summary.available;
- if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',!local);
+ if(conformanceToolsPanel)conformanceToolsPanel.classList.toggle('disabled',false);
  if(openConformanceDashboardBtn){
-  openConformanceDashboardBtn.disabled=!local;
+  openConformanceDashboardBtn.disabled=false;
   openConformanceDashboardBtn.title=local
    ? 'Open the local conformance dashboard'
-   : 'Localhost-only for now. Future work will externalize this behind Root access.';
+   : 'Open the read-only conformance dashboard for this release lane.';
  }
  if(conformanceRollupScore)conformanceRollupScore.textContent=available ? (summary.overallCurrent||'--') : '--';
  if(conformanceRollupBody){
-  if(!local){
-   conformanceRollupBody.textContent='Local-only dashboard hidden on external builds.';
-  }else if(available){
+  if(available){
    const generated=summary.generatedAt?summary.generatedAt.replace('T',' ').replace(/\.\d+Z$/,'Z'):'unknown';
    const weak=summary.weakestMetric?`${summary.weakestMetric} ${summary.weakestCurrent||''}`.trim():'weakest axis pending';
    conformanceRollupBody.textContent=`Weakest: ${weak}. Audio ${summary.audioCurrent||'--'} · level arc ${summary.levelArcCurrent||'--'} · visual ${summary.visualCurrent||'--'}. Generated ${generated}.`;
@@ -3043,10 +3203,11 @@ function syncConformanceDashboardUi(){
  if(conformanceDashboardHint){
   conformanceDashboardHint.textContent=local
    ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
-   : 'Future feature: expose this behind Root login password when external developer access is ready.';
+   : 'Open the bundled read-only dashboard for this release lane. Raw ingestion workspaces remain engineering-owned.';
  }
 }
 window.__platinumSyncConformanceDashboardUi=syncConformanceDashboardUi;
+window.__platinumConformanceDashboardUrl=conformanceDashboardUrl;
 function syncAudioDebugUi(){
  if(!settingsAudioDebugBody)return;
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
@@ -3204,6 +3365,7 @@ function syncTestUi(){
  const cfg=loadTestCfg();
  applyTestCfgToControls(cfg);
  syncAudioUi();
+ syncArcadeMusicUi();
  syncPauseUi();
  syncSettingsUi();
  syncHelpUi();
@@ -3244,10 +3406,6 @@ function openProjectGuide(){
  }else showToast('Allow popups to open the project guide');
 }
 function openConformanceDashboard(){
- if(!isLocalDashboardHost()){
-  showToast('Conformance dashboard is localhost-only for now');
-  return;
- }
  const win=window.open(conformanceDashboardUrl(), '_blank', 'noopener');
  if(win){
   try{win.focus();}catch{}
@@ -3378,6 +3536,19 @@ function showToast(t){
  feedbackToast.classList.add('show');
  clearTimeout(toastTimer);
  toastTimer=setTimeout(()=>feedbackToast.classList.remove('show'),1700);
+}
+function showPlatformTrackMessage(title='',artist=''){
+ const cleanTitle=String(title||'').trim();
+ const cleanArtist=String(artist||'').trim();
+ if(!platformTrackToast||!cleanTitle)return;
+ if(platformTrackTitle)platformTrackTitle.textContent=cleanTitle;
+ if(platformTrackArtist){
+  platformTrackArtist.textContent=cleanArtist;
+  platformTrackArtist.hidden=!cleanArtist;
+ }
+ platformTrackToast.classList.add('show');
+ clearTimeout(platformTrackToastTimer);
+ platformTrackToastTimer=setTimeout(()=>platformTrackToast.classList.remove('show'),4600);
 }
 function openFeedback(){
  if(feedbackOpen)return;
@@ -3530,6 +3701,14 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(musicVolume){
+ musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
+ musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
+}
+if(gameSoundVolumeControl){
+ gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
+ gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
+}
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
@@ -3539,6 +3718,7 @@ if(rootMode)rootMode.addEventListener('input',()=>{
  syncDeveloperToolsUi();
 });
 if(muteToggleBtn)muteToggleBtn.addEventListener('click',()=>setAudioMuted(!audioMuted,{silent:0}));
+if(arcadeMusicToggleBtn)arcadeMusicToggleBtn.addEventListener('click',toggleArcadeMusic);
 if(pauseToggleBtn)pauseToggleBtn.addEventListener('click',toggleGameplayPause);
 fbCancel.addEventListener('click',()=>closeFeedback());
 if(feedbackClose)feedbackClose.addEventListener('click',()=>closeFeedback());
@@ -3709,6 +3889,33 @@ window.openGamePreview=openGamePreview;
 window.closeGamePreview=closeGamePreview;
 window.openPlatformMessagePanel=openPlatformMessagePanel;
 window.closePlatformMessagePanel=closePlatformMessagePanel;
+window.__platinumArcadeMusic={
+ state:arcadeMusicState,
+ setPlaylistForHarness(id=''){
+  ARCADE_MUSIC.playlistOverride=sanitizeArcadeMusicPlaylistId(id);
+  syncArcadeMusicUi();
+  return arcadeMusicState();
+ },
+ noteTrackForHarness(title='Harness Track',artist='Harness Band'){
+  if(typeof acceptArcadeMusicTrack==='function')acceptArcadeMusicTrack({title,author:artist,video_id:`harness-${Date.now()}`},'harness');
+  return arcadeMusicState();
+ },
+ setMuted(value){setArcadeMusicMuted(!!value,{log:1,source:'harness'});return arcadeMusicState();},
+ toggleMute(){toggleArcadeMusicMute();return arcadeMusicState();},
+ stop:()=>stopArcadeMusic({silent:true})
+};
+window.__platinumAudioMix={
+ state(){
+  return Object.assign({},audioMixTelemetryBase(),{
+   gameSoundPercent:volumePercent(gameSoundVolume),
+   arcadeMusicPercent:volumePercent(arcadeMusicVolume),
+   soundEffectsMuted:!!audioMuted,
+   arcadeMusicMuted:!!arcadeMusicMuted
+  });
+ },
+ setGameSoundVolume(value){setGameSoundVolume(value,{log:1,source:'harness'});return this.state();},
+ setArcadeMusicVolume(value){setArcadeMusicVolume(value,{log:1,source:'harness'});return this.state();}
+};
 
 // Source: src/js/01-runtime-shell.js
 // Shared runtime/shell helpers for input, build-stamp state, and core chrome UI.
@@ -3757,12 +3964,225 @@ function syncAudioUi(){
  if(!muteToggleBtn)return;
  muteToggleBtn.dataset.muted=audioMuted?'true':'false';
  muteToggleBtn.setAttribute('aria-pressed',audioMuted?'true':'false');
- muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute game audio':'Mute game audio');
- muteToggleBtn.title=audioMuted?'Unmute game audio':'Mute game audio';
- muteToggleBtn.dataset.actionTip=audioMuted?'Unmute game audio':'Mute game audio';
+ muteToggleBtn.setAttribute('aria-label',audioMuted?'Unmute sound effects':'Mute sound effects');
+ muteToggleBtn.title=audioMuted?'Unmute sound effects':'Mute sound effects';
+ muteToggleBtn.dataset.actionTip=audioMuted?'Unmute sound effects':'Mute sound effects';
  const icon=muteToggleBtn.querySelector('.dockIcon');
  if(icon)icon.textContent=audioMuted?'🔇':'🔊';
- if(sfx.bus)sfx.bus.gain.value=audioMuted?0:.9;
+ if(sfx.bus)sfx.bus.gain.value=audioMuted?0:gameSoundVolume;
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+}
+function sanitizeArcadeMusicPlaylistId(value=''){
+ const raw=String(value||'').trim();
+ return /^[A-Za-z0-9_-]{8,160}$/.test(raw)?raw:'';
+}
+function arcadeMusicQueryPlaylistId(){
+ try{
+  const params=new URLSearchParams(location.search||'');
+  return sanitizeArcadeMusicPlaylistId(params.get('arcadeMusicPlaylist')||params.get('musicPlaylist')||'');
+ }catch{
+  return '';
+ }
+}
+function arcadeMusicPlaylistId(){
+ return sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC.playlistOverride)||arcadeMusicQueryPlaylistId()||sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
+}
+function arcadeMusicState(){
+ return {
+  state:ARCADE_MUSIC.state,
+  requested:!!ARCADE_MUSIC.requested,
+  configured:!!arcadeMusicPlaylistId(),
+  hasFrame:!!(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe')),
+  playlistId:arcadeMusicPlaylistId(),
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  arcadeMusicMuted:!!arcadeMusicMuted,
+  audible:!!((ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')&&!arcadeMusicMuted&&arcadeMusicVolume>0),
+  gameSoundVolume:+gameSoundVolume.toFixed(3),
+  lastTrack:ARCADE_MUSIC.lastTrack||null
+ };
+}
+function syncArcadeMusicUi(){
+ if(!arcadeMusicToggleBtn)return;
+ const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const unavailable=ARCADE_MUSIC.state==='unavailable'||!arcadeMusicPlaylistId();
+ const muted=active&&!!arcadeMusicMuted;
+ arcadeMusicToggleBtn.dataset.musicState=active?(muted?'muted':ARCADE_MUSIC.state):(unavailable?'unavailable':'off');
+ arcadeMusicToggleBtn.dataset.musicPlaying=active?'true':'false';
+ arcadeMusicToggleBtn.dataset.musicMuted=muted?'true':'false';
+ arcadeMusicToggleBtn.dataset.configured=arcadeMusicPlaylistId()?'true':'false';
+ arcadeMusicToggleBtn.setAttribute('aria-pressed',muted?'true':'false');
+ const label=unavailable?'Arcade Music unavailable':(!active?'Start Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'));
+ arcadeMusicToggleBtn.setAttribute('aria-label',label);
+ arcadeMusicToggleBtn.title=label;
+ arcadeMusicToggleBtn.dataset.actionTip=label;
+ arcadeMusicToggleBtn.classList.toggle('active',active&&!muted);
+ arcadeMusicToggleBtn.classList.toggle('muted',muted);
+ const icon=arcadeMusicToggleBtn.querySelector('.dockIcon');
+ if(icon)icon.textContent=active&&!muted?'🎶':'🎵';
+}
+function arcadeMusicEmbedUrl(playlistId){
+ const origin=(location&&location.origin&&location.origin!=='null')?`&origin=${encodeURIComponent(location.origin)}`:'';
+ return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&listType=playlist&autoplay=1&playsinline=1&enablejsapi=1&rel=0${origin}`;
+}
+function arcadeMusicPostMessage(payload={}){
+ const frame=ARCADE_MUSIC.iframe||(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe'));
+ if(!frame||!frame.contentWindow)return false;
+ try{
+  frame.contentWindow.postMessage(JSON.stringify(Object.assign({id:'arcadeMusicFrame'},payload)),'*');
+  return true;
+ }catch{
+  return false;
+ }
+}
+function arcadeMusicCommand(func='',args=[]){
+ if(!func)return false;
+ return arcadeMusicPostMessage({event:'command',func,args:Array.isArray(args)?args:[]});
+}
+function applyArcadeMusicVolume(){
+ const pct=volumePercent(arcadeMusicVolume);
+ arcadeMusicCommand('setVolume',[pct]);
+ arcadeMusicCommand(pct>0&&!arcadeMusicMuted?'unMute':'mute',[]);
+ return pct;
+}
+function primeArcadeMusicPlayerApi(){
+ arcadeMusicPostMessage({event:'listening'});
+ arcadeMusicCommand('addEventListener',['onStateChange']);
+ arcadeMusicCommand('addEventListener',['onReady']);
+ applyArcadeMusicVolume();
+ arcadeMusicCommand('getVideoData',[]);
+}
+function normalizeArcadeMusicTrack(videoData={}){
+ const title=String(videoData.title||videoData.video_title||videoData.videoTitle||'').trim();
+ const artist=String(videoData.author||videoData.ownerChannelName||videoData.channelTitle||videoData.channelName||'').trim();
+ const videoId=String(videoData.video_id||videoData.videoId||videoData.id||'').trim();
+ return title?{title,artist,videoId}:null;
+}
+function acceptArcadeMusicTrack(videoData={},source='youtube_player'){
+ const track=normalizeArcadeMusicTrack(videoData);
+ if(!track)return false;
+ const signature=track.videoId||`${track.title}|${track.artist}`;
+ if(signature&&signature===ARCADE_MUSIC.lastTrackSignature)return false;
+ ARCADE_MUSIC.lastTrackSignature=signature;
+ ARCADE_MUSIC.lastTrack=track;
+ if(typeof showPlatformTrackMessage==='function')showPlatformTrackMessage(track.title,track.artist);
+ if(typeof logEvent==='function')logEvent('arcade_music_track_change',{
+  title:track.title,
+  artist:track.artist,
+  videoId:track.videoId,
+  source,
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
+  arcadeMusicMuted:!!arcadeMusicMuted
+ });
+ return true;
+}
+function parseArcadeMusicMessage(data){
+ if(!data)return null;
+ if(typeof data==='object')return data;
+ if(typeof data!=='string')return null;
+ try{return JSON.parse(data)}catch{return null}
+}
+function handleArcadeMusicPlayerMessage(event){
+ const origin=String(event?.origin||'').toLowerCase();
+ let host='';
+ try{host=origin?new URL(origin).hostname:''}catch{}
+ if(origin&&!/(^|\.)youtube(?:-nocookie)?\.com$/.test(host))return;
+ const data=parseArcadeMusicMessage(event?.data);
+ if(!data||typeof data!=='object')return;
+ if(data.id&&data.id!=='arcadeMusicFrame')return;
+ if(data.event==='onReady')primeArcadeMusicPlayerApi();
+ const info=data.info&&typeof data.info==='object'?data.info:null;
+ const videoData=info?.videoData||data.videoData||null;
+ if(videoData)acceptArcadeMusicTrack(videoData,'youtube_info_delivery');
+ if(info&&Number.isFinite(+info.playerState)&&+info.playerState===1){
+  if(ARCADE_MUSIC.state!=='playing'){
+   ARCADE_MUSIC.state='playing';
+   syncArcadeMusicUi();
+  }
+  arcadeMusicCommand('getVideoData',[]);
+ }
+}
+if(typeof window!=='undefined'&&!window.__platinumArcadeMusicMessageListener){
+ window.__platinumArcadeMusicMessageListener=1;
+ window.addEventListener('message',handleArcadeMusicPlayerMessage);
+}
+function startArcadeMusic(){
+ const playlistId=arcadeMusicPlaylistId();
+ if(!playlistId){
+  ARCADE_MUSIC.state='unavailable';
+  ARCADE_MUSIC.requested=false;
+  writePref(ARCADE_MUSIC_PREF_KEY,'0');
+  syncArcadeMusicUi();
+  showToast('Arcade Music playlist not configured');
+  if(typeof logEvent==='function')logEvent('arcade_music_unavailable');
+  return false;
+ }
+ if(!arcadeMusicFrameHost)return false;
+ arcadeMusicMuted=false;
+ writePref(ARCADE_MUSIC_MUTED_PREF_KEY,'0');
+ arcadeMusicFrameHost.innerHTML='';
+ const frame=document.createElement('iframe');
+ frame.id='arcadeMusicFrame';
+ frame.title='Arcade Music playlist';
+ frame.tabIndex=-1;
+ frame.allow='autoplay; encrypted-media; picture-in-picture';
+ frame.referrerPolicy='strict-origin-when-cross-origin';
+ frame.src=arcadeMusicEmbedUrl(playlistId);
+ frame.addEventListener('load',()=>{
+  ARCADE_MUSIC.state='playing';
+  syncArcadeMusicUi();
+  [80,350,1100,2600].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
+ },{once:true});
+ arcadeMusicFrameHost.appendChild(frame);
+ ARCADE_MUSIC.iframe=frame;
+ ARCADE_MUSIC.lastTrackSignature='';
+ ARCADE_MUSIC.lastTrack=null;
+ ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.requested=true;
+ writePref(ARCADE_MUSIC_PREF_KEY,'1');
+ syncArcadeMusicUi();
+ [120,600,1800].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
+ showToast('Arcade Music on');
+ if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),arcadeMusicMuted:!!arcadeMusicMuted,gameSoundVolume:+gameSoundVolume.toFixed(3),soundEffectsMuted:!!audioMuted});
+ return true;
+}
+function stopArcadeMusic(opts={}){
+ if(arcadeMusicFrameHost)arcadeMusicFrameHost.innerHTML='';
+ ARCADE_MUSIC.iframe=null;
+ ARCADE_MUSIC.state='off';
+ ARCADE_MUSIC.requested=false;
+ ARCADE_MUSIC.lastTrackSignature='';
+ ARCADE_MUSIC.lastTrack=null;
+ writePref(ARCADE_MUSIC_PREF_KEY,'0');
+ syncArcadeMusicUi();
+ if(!opts.silent)showToast('Arcade Music off');
+ if(typeof logEvent==='function')logEvent('arcade_music_off',{silent:!!opts.silent});
+}
+function setArcadeMusicMuted(next,opts={}){
+ arcadeMusicMuted=!!next;
+ writePref(ARCADE_MUSIC_MUTED_PREF_KEY,arcadeMusicMuted?'1':'0');
+ applyArcadeMusicVolume();
+ syncArcadeMusicUi();
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+ if(!opts.silent)showToast(arcadeMusicMuted?'Arcade Music muted':'Arcade Music on');
+ if((opts.log||!opts.silent)&&typeof logEvent==='function')logEvent('arcade_music_mute_changed',Object.assign(
+  typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{},
+  {
+  muted:!!arcadeMusicMuted,
+   arcadeMusicMuted:!!arcadeMusicMuted,
+   source:String(opts.source||'dock')
+  }
+ ));
+}
+function toggleArcadeMusicMute(){
+ const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ if(!active){
+  startArcadeMusic();
+  return;
+ }
+ setArcadeMusicMuted(!arcadeMusicMuted,{silent:0,source:'dock'});
+}
+function toggleArcadeMusic(){
+ toggleArcadeMusicMute();
 }
 function syncPauseUi(){
  if(!pauseToggleBtn)return;
@@ -3795,7 +4215,8 @@ function setAudioMuted(next,opts={}){
  audioMuted=!!next;
  writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
  syncAudioUi();
- if(!opts.silent)showToast(audioMuted?'Game audio muted':'Game audio on');
+ if(!opts.silent)showToast(audioMuted?'Sound effects muted':'Sound effects on');
+ if(!opts.silent&&typeof logEvent==='function')logEvent('audio_mute_changed',Object.assign({muted:!!audioMuted,soundEffectsMuted:!!audioMuted},typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{}));
 }
 function splitBuildStampDateTime(value=''){
  const raw=String(value||'').trim().replace(/\s+/g,' ');
@@ -4311,6 +4732,33 @@ function remoteWriteEnabled(){
  if(window.__platinumHarnessForceRemoteWrite||window.__auroraHarnessForceRemoteWrite)return true;
  if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
  return isSignedInAsTestAccount();
+}
+function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){
+ const normalizedRank=+rank||0;
+ const top10=normalizedRank>0&&normalizedRank<=10;
+ const signedIn=!!user;
+ const confirmed=!!(user?.email_confirmed_at||user?.confirmed_at);
+ const authLane=remoteAuthEnabled();
+ let reason='not_top_10';
+ if(top10&&!authLane)reason='auth_unavailable';
+ else if(top10&&!signedIn)reason='sign_in_required';
+ else if(top10&&signedIn)reason=confirmed?'signed_in_verified':'signed_in_unverified';
+ return{
+  top10,
+  signedIn,
+  emailConfirmed:confirmed,
+  remoteAuthEnabled:authLane,
+  canPostVideo:top10&&signedIn&&authLane,
+  verifiedScore:top10&&signedIn&&confirmed&&authLane,
+  reason
+ };
+}
+function canPostTopScoreVideo(rank=0){
+ return topScoreVideoPostingEligibility(rank).canPostVideo;
+}
+function shouldPromptForTopScoreSignin(rank=0){
+ const eligibility=topScoreVideoPostingEligibility(rank);
+ return eligibility.top10&&eligibility.remoteAuthEnabled&&!eligibility.signedIn;
 }
 function shouldHideTestAccountScores(){
  return configuredTestAccountUserIds().length>0;
@@ -8671,9 +9119,9 @@ const AURORA_SCORING_RULES=Object.freeze({
 
 const AURORA_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('aurora-galactica',{
  title:'Aurora Galactica',
- version:'1.3.0',
- versionLine:'1.3.0',
- releaseTrack:'primary-candidate',
+ version:'1.4.0',
+ versionLine:'1.4.0',
+ releaseTrack:'beta-candidate',
  runtimeStatus:'playable',
  platformCompatibility:buildPlatformInfo().compatibility||'',
  launchPolicy:'production-capable'
@@ -8683,9 +9131,9 @@ const AURORA_GAME_PACK=Object.freeze({
  metadata:Object.freeze({
   gameKey:'aurora-galactica',
   title:'Aurora Galactica',
-  version:AURORA_APPLICATION_RELEASE.version||'1.3.0',
-  versionLine:AURORA_APPLICATION_RELEASE.versionLine||AURORA_APPLICATION_RELEASE.version||'1.3.0',
-  releaseTrack:AURORA_APPLICATION_RELEASE.releaseTrack||'primary-candidate',
+  version:AURORA_APPLICATION_RELEASE.version||'1.4.0',
+  versionLine:AURORA_APPLICATION_RELEASE.versionLine||AURORA_APPLICATION_RELEASE.version||'1.4.0',
+  releaseTrack:AURORA_APPLICATION_RELEASE.releaseTrack||'beta-candidate',
   runtimeStatus:AURORA_APPLICATION_RELEASE.runtimeStatus||'playable',
   platformCompatibility:AURORA_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
   launchPolicy:AURORA_APPLICATION_RELEASE.launchPolicy||'production-capable',
@@ -13230,6 +13678,27 @@ window.__galagaHarness__={
   if(typeof syncAccountUi==='function')syncAccountUi();
   return LEADERBOARD.remote.mine.length;
  },
+ setupUnsignedTopScoreTest(){
+  delete window.__platinumHarnessForceRemoteWrite;
+  delete window.__auroraHarnessForceRemoteWrite;
+  localStorage.removeItem(SCOREBOARD_KEY);
+  localStorage.removeItem(SCORE_HISTORY_KEY);
+  localStorage.removeItem(SYSTEM_LOG_KEY);
+  LEADERBOARD.user=null;
+  LEADERBOARD.profile=null;
+  LEADERBOARD.accountNotice='';
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return true;
+ },
+ showGameOverScoreboard(){
+  if(gameOverState){
+   gameOverState.phase='scoreboard';
+   gameOverHtml=buildGameOverHtmlFromState();
+   const msgEl=document.getElementById('msg');
+   if(msgEl)msgEl.innerHTML=gameOverHtml;
+  }
+  return this.gameOverView();
+ },
  triggerRemoteScoreGameOver(cfg={}){
   started=1;
   paused=0;
@@ -13274,6 +13743,8 @@ window.__galagaHarness__={
    challenge:!!gameOverState?.challenge,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
+   topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,
+   topScoreVideoPosting:Object.assign({},gameOverState?.topScoreVideoPosting||{}),
    initials:Array.isArray(gameOverState?.initials)?gameOverState.initials.join(''):''
   };
  },
