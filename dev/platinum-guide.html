@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 13, 2026</span>
+              <span class="metaValue">May 14, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -546,25 +546,19 @@
 
     <article class="card">
       <h3>What Platinum Owns</h3>
-      <p>Platinum owns stable generic persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, distribution reporting, and cross-game resource accounting for persona runs.</p>
+      <p>Platinum owns stable persona IDs and aliases, deterministic clock execution, scenario registration, result comparison, dashboard display, and cross-game resource accounting for persona runs.</p>
     </article>
   
 
     <article class="card">
       <h3>What Each Game Owns</h3>
-      <p>Each game maps the generic personas into game-specific controllers, scenarios, expected outcomes, acceptable reference deviations, and release-blocking persona evidence.</p>
+      <p>Each game owns which scenarios matter for each persona, what success or failure means, which behaviors intentionally differ from the reference game, and which persona outcomes block release gates.</p>
     </article>
   
 
     <article class="card">
       <h3>Current Vocabulary</h3>
-      <p>The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora&#39;s historical harness IDs are novice, advanced, expert, and professional; future games should keep the generic labels while providing game-owned behavior adapters.</p>
-    </article>
-  
-
-    <article class="card">
-      <h3>Distribution Evidence</h3>
-      <p>Persona evidence should be read as distributions over seeded runs. The current Aurora guide publishes 30 full-run games per persona with score, stage, time, losses, and challenge-hit charts.</p>
+      <p>The user-facing labels are Beginner, Intermediate, Expert, and Professional. Aurora&#39;s historical harness IDs are novice, advanced, expert, and professional.</p>
     </article>
   
 </div>
@@ -654,7 +648,7 @@
 <h3>Purpose</h3>
 <p>Platinum exists to separate the reusable arcade host from the specific games it runs.</p>
 <p>That means Platinum should own the things that ought to be consistent across multiple games:</p>
-<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>optional shell-owned media ambience such as Arcade Music</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
+<ul><li>shell framing and cabinet presentation</li><li>hosted lane model and release identity</li><li>platform contract versioning and compatibility policy</li><li>pack selection and boot path</li><li>common runtime, input, and session surfaces</li><li>shared services such as auth, leaderboard transport, and feedback transport</li><li>shared documentation and release discipline</li><li>platform-only harnesses and publish checks</li><li>a stable control contract that lets players move between hosted games with</li></ul>
 <p>the same core input model</p>
 <p>At the same time, Platinum should stay out of application-specific rules.</p>
 <p>It should not own:</p>
@@ -677,10 +671,11 @@
 <h3>What Platinum Is Today</h3>
 <p>Today Platinum is a real shipped platform, not a speculative refactor.</p>
 <p>Current proof points:</p>
-<ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-only second-game sneak peek on top of the same platform</li><li>the second-game preview content is now pack-owned instead of hardcoded into</li></ul>
+<ul><li><code>Aurora Galactica</code> ships as the first playable Platinum application on hosted <code>/production</code></li><li>hosted lanes now exist for:<ul><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ul></li><li>the shell supports pack selection and pack-owned framing accents</li><li><code>Galaxy Guardians</code> exists as a preview-first second-game slice on top of the</li></ul>
+<p>same platform, with the next post-production branch now targeting a minimally complete one-level playable game</p>
+<ul><li>the second-game preview content is now pack-owned instead of hardcoded into</li></ul>
 <p>the shell surface</p>
-<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li><li>the settings/configuration panel exposes the bundled read-only conformance</li></ul>
-<p>dashboard in hosted dev, beta, and production lanes while raw ingestion workspaces remain engineering-owned</p>
+<ul><li>platform-only harnesses exist alongside Aurora gameplay harnesses</li><li>the build pipeline now generates hosted documentation pages as first-class release artifacts</li></ul>
 <h3>Platform Structure</h3>
 <h4>Shell and presentation</h4>
 <p>Platinum owns the outer cabinet treatment:</p>
@@ -694,7 +689,7 @@
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
-<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li></ul>
+<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>
@@ -707,8 +702,8 @@
 <p>Platinum should be thought of as the host layer.</p>
 <p>Applications on Platinum are the games.</p>
 <p>Current application set:</p>
-<ul><li><code>Aurora Galactica</code><ul><li>first shipped playable application</li><li>owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content</li></ul></li><li><code>Galaxy Guardians</code><ul><li>current preview-first application shell</li><li>useful for proving the pack-selection path, preview-modal contract, alternate</li></ul></li></ul>
-<p>shell identity, and safe launch fallback without pretending gameplay exists yet</p>
+<ul><li><code>Aurora Galactica</code><ul><li>first shipped playable application</li><li>owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content</li></ul></li><li><code>Galaxy Guardians</code><ul><li>current preview-first application shell on the shipped line</li><li>next branch target: a minimally complete one-level playable game with its</li></ul></li></ul>
+<p>own score identity, ending flow, and platform-validation value</p>
 <p>The application-side separation is documented in:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
 <h3>Platform Is Host, Not Prison</h3>
@@ -767,10 +762,6 @@
 <h4>4. Persona and simulated opponents</h4>
 <p>Platinum should eventually support more than passive replay personas.</p>
 <p>Desired outcome:</p>
-<ul><li>personas are generic platform-level skill profiles that can play multiple</li></ul>
-<p>games through game-owned adapters and scenario definitions</p>
-<ul><li>repeated seeded persona runs produce distribution evidence for score, stage</li></ul>
-<p>depth, time alive, losses, and challenge/reward performance</p>
 <ul><li>game packs can expose enough action/state annotation for richer personas</li><li>a player can compete against curated persona styles as a <code>Player 2</code>-like</li></ul>
 <p>experience</p>
 <ul><li>future learn-by-playing personas can train through simulation while still</li></ul>
@@ -878,7 +869,7 @@
 <p>Aurora should remain the reference application when we ask:</p>
 <ul><li>does the platform still host a real shipped game cleanly</li><li>can application-specific rules evolve without breaking the shell or release lanes</li></ul>
 <h4>Galaxy Guardians</h4>
-<p><code>Galaxy Guardians</code> is currently a preview-first second-game application and sneak peek.</p>
+<p><code>Galaxy Guardians</code> is currently a preview-first second-game application and sneak peek on the shipped line, while the active post-production iMac branch now targets it as both a minimally complete one-level playable game and a first-class conformance target.</p>
 <p>Right now it proves:</p>
 <ul><li>application selection</li><li>preview-only behavior inside the platform</li><li>alternate identity and framing</li><li>future second-game positioning</li><li>pack-owned preview content for the picker and preview modal</li><li>pack-owned placeholder timing, audio, visual, cadence, layout, and scoring</li></ul>
 <p>tables that do not directly borrow Aurora tables</p>
@@ -895,11 +886,16 @@
 <p>It does not yet prove:</p>
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
+<p>Current branch-level next step:</p>
+<ul><li><a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
+<p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
 <h3>Application Responsibilities</h3>
 <p>A Platinum application should own:</p>
 <ul><li>gameplay rules</li><li>scoring and stage progression</li><li>game-specific presentation and content</li><li>alien/enemy catalog entries, audio cue catalog entries, stage summaries, and</li></ul>
 <p>game-owned persona expectations in <code>GAME_CONFORMANCE_CATALOG.md</code></p>
-<ul><li>application identity on the front door such as title and feature line</li><li>its own version line and changelog</li><li>its own conformance artifacts and readiness gates</li><li>its own harnesses for game behavior</li><li>optional shell preferences that remain within the platform shell contract</li></ul>
+<ul><li>application identity on the front door such as title and feature line</li><li>its own version line and changelog</li><li>its own conformance artifacts and readiness gates</li><li>its own harnesses for game behavior</li><li>its own longer-surface review logic when the game grows beyond a single</li></ul>
+<p>playable slice</p>
+<ul><li>optional shell preferences that remain within the platform shell contract</li></ul>
 <p>A Platinum application should not own:</p>
 <ul><li>the shared hosted release ladder or authority mechanism</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li><li>startup and wait-mode shell copy that promotes the platform or other applications</li></ul>
 <h3>Application Release Identity</h3>
@@ -963,11 +959,16 @@
 <p>Near-term Aurora application work should now focus on:</p>
 <ul><li>movement fidelity</li><li>audio identity polish</li><li>gameplay trust fixes such as boss/capture/carry edge cases</li><li>replay and pilot-surface improvements</li><li>shell and overlay polish that remains application-owned</li></ul>
 <h4>Galaxy Guardians next proof</h4>
-<p>The current sneak peek is intentionally still production-non-playable. It should be used to keep the Platinum pack contract honest while the second game is still being specified.</p>
+<p>The current shipped sneak peek is intentionally still production-framed as a preview. On the new iMac post-production branch, the next proof is no longer &quot;keep it preview-only.&quot; The next proof is to make it honestly playable as a minimal one-level game while still keeping the public maturity claim modest.</p>
 <p>The first non-production runtime slice is now underway as an application-owned model, not a public adapter. It creates a Galaxian-inspired scout-wave rack, enforces single-shot firing, emits promoted event names, scores against a Guardians-owned alien catalog, and keeps Aurora capture, challenge, dual-fighter, and scoring state out of the model.</p>
 <p>Galaxy Guardians also now owns its first identity catalogs rather than borrowing Aurora&#39;s look or sound names. The visual catalog names the <code>Signal Flagship</code>, <code>Signal Escort</code>, <code>Signal Scout</code>, and <code>Guardian Interceptor</code> silhouettes. The audio cue catalog names the start chirp, formation pulse, single-shot player fire, enemy shot, scout/flagship dive pressure, escort join, hit cues, wrap/return cue, and future player-loss cue. These are still synthesized starting points, but they give the 0.1 slice separate application-owned contracts before any public playability.</p>
 <p>The runtime model now has a visible preview renderer. It draws the Guardians scout-wave board, single player shot, alien silhouettes, and preview HUD from Guardians-owned runtime state and catalog IDs while keeping the pack publicly non-playable. The compact cabinet harness verifies the renderer by checking the preview mode, registered renderer key, visual IDs, audio cue IDs, and distinct signal palette. The renderer is now registered through a Platinum game-board renderer registry, so the top-level render loop no longer branches on a specific game by name.</p>
-<p>The next application proof is maturing the first non-production playable slice. It now has the initial lifecycle path, but the behavior is still intentionally kept out of production until the measured 0.1 scout-wave evidence is stronger. The first aggregate 0.1 candidate gate is now source-controlled so future preview readiness claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
+<p>The next application proof is maturing the first playable slice into a minimally complete game loop. That means the existing lifecycle path should now grow beyond preview-only framing and earn:</p>
+<ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
+<p>scattered preview harness set</p>
+<p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
+<p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
+<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>Current hosted-lane playable-preview coverage:</p>
 <ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
@@ -1089,6 +1090,10 @@
 <p>verifies that the persistent lower-field threat/scoring artifact matches runtime rules and that enemy shots, player loss, and owned point values stay in the Galaxy Guardians application layer.</p>
 <ul><li><code>tools/harness/check-galaxy-guardians-playable-preview.js</code></li></ul>
 <p>verifies the development-lane Galaxy Guardians playable-preview adapter: keyboard fire routing, life loss, reset, game over, owned audio cue IDs, and isolation from the public playable adapter registry.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-first-class-conformance.js</code></li></ul>
+<p>verifies that the Galaxy Guardians evidence stack, core docs, and harness family still support the maintained first-class conformance target instead of drifting back into a loose preview-only state.</p>
+<ul><li><code>tools/harness/check-galaxy-guardians-long-surface-conformance.js</code></li></ul>
+<p>verifies that the committed later-stage pressure bands, staged shell presentation, and deterministic persona review runs stay aligned with the current Guardians source instead of drifting back to one-level-only review.</p>
 <ul><li><code>tools/harness/check-compact-cabinet-rails.js</code></li></ul>
 <p>verifies that both side-frame icon rails remain visible and inside the cabinet frame at the compact in-app browser scale, and that the Galaxy Guardians preview modal stays readable in that compact layout. It also verifies the hosted-preview Guardians renderer by checking its render mode, registered renderer key, visual catalog IDs, audio cue IDs, signal palette, Platinum harness alias, and non-playable public adapter state.</p>
 <ul><li><code>tools/harness/check-framed-popout-bounds.js</code></li></ul>
@@ -1195,6 +1200,18 @@
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
 <p>Harness work should also follow the project reference program:</p>
 <ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
+<h3>Galaxy first-class parity</h3>
+<p><code>Galaxy Guardians</code> now has enough harness surface that we should treat it as a first-class parity program, not only as a preview experiment.</p>
+<p>That means every serious Galaxy review should preserve all three layers:</p>
+<ol><li>ingestion and scored evidence</li></ol>
+<ul><li><code>npm run harness:check:galaxian-reference-profile</code></li><li><code>npm run harness:check:galaxy-guardians-reference-conformance</code></li><li><code>npm run harness:check:galaxy-guardians-playtest-conformance-review</code></li></ul>
+<ol><li>gameplay/runtime completeness</li></ol>
+<ul><li><code>npm run harness:check:galaxy-guardians-runtime-slice</code></li><li><code>npm run harness:check:galaxy-guardians-score-progression</code></li><li><code>npm run harness:check:galaxy-guardians-threat-scoring</code></li><li><code>npm run harness:check:galaxy-guardians-playable-preview</code></li><li><code>npm run harness:check:galaxy-guardians-long-surface-conformance</code></li></ul>
+<ol><li>audiovisual and boundary review</li></ol>
+<ul><li><code>npm run harness:check:galaxy-guardians-visual-readability</code></li><li><code>npm run harness:check:galaxy-guardians-audio-character</code></li><li><code>npm run harness:check:gameplay-adapter-boundaries</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li></ul>
+<p>The standing aggregate process gate is:</p>
+<ul><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
 <p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
@@ -1212,12 +1229,13 @@
 <p>For a new game, the first playable slice should cite:</p>
 <ul><li>source manifest</li><li>selected reference windows</li><li>event log or semantic profile</li><li>initial conformance targets</li><li>candidate harness plan</li><li>explicit confidence and known gaps</li></ul>
 <p>If a release candidate includes a new or materially changed game behavior, its release notes and dashboard should identify which ingestion package or correspondence artifact grounds the claim.</p>
+<p>For Galaxy specifically, first-class application review should also preserve:</p>
+<ul><li>a playtest-weighted review that can remain stricter than the evidence score</li><li>game-owned score/progression/result contracts</li><li>browser/manual review notes for sound, motion feel, and sprite readability</li></ul>
 <h3>Dashboard And Ingestion Release Boundary</h3>
 <p>The shipped Platinum platform should include the read-only conformance dashboard as a release surface.</p>
 <p>That means each <code>/dev</code>, <code>/beta</code>, and <code>/production</code> lane should carry:</p>
-<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li><li>a settings/configuration-panel launcher that opens the bundled read-only</li></ul>
-<p>dashboard for the active lane</p>
-<p>The release dashboard may link to the <code>assets/</code> copy, but the top-level dashboard files must also be published because the game settings/configuration launcher opens <code>conformance-dashboard.html</code> beside the active game lane.</p>
+<ul><li><code>conformance-dashboard.html</code></li><li><code>conformance-dashboard-data.json</code></li><li><code>assets/conformance-dashboard.html</code></li><li><code>assets/conformance-dashboard-data.json</code></li><li>a release-dashboard link to the conformance dashboard</li></ul>
+<p>The release dashboard should link to the <code>assets/</code> copy because the public GitHub Pages workflow already publishes the asset tree for production. The top-level files remain lane artifacts for local/publish tooling.</p>
 <p>The dashboard is platform-owned presentation of release evidence. It is allowed to summarize application-owned game conformance, ingestion state, confidence, measurement debt, and compute/resource spend.</p>
 <p>The ingestion framework itself remains engineering-owned unless we explicitly promote a separate Root-gated or public evidence browser. Raw source media, reference extraction workspaces, candidate clips, unreviewed traces, and in-progress annotation notebooks should not automatically become player-facing Platinum assets just because the dashboard summarizes them.</p>
 <p>This gives us the right separation:</p>
@@ -1297,9 +1315,7 @@
 <p>Before promotion from local <code>localhost</code> into hosted <code>/dev</code> or hosted <code>/beta</code>, we expect:</p>
 <ul><li><code>npm run build</code></li><li><code>node tools/build/check-publish-ready.js --lane dev</code></li><li>core gameplay and shell harnesses relevant to the candidate</li></ul>
 <p>Typical current examples include:</p>
-<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>npm run harness:check:persona-performance-distribution</code> when persona</li></ul>
-<p>distribution evidence is part of the release story</p>
-<ul><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
+<ul><li><code>node tools/harness/check-input-mapping.js</code></li><li><code>node tools/harness/check-new-game-reset.js</code></li><li><code>node tools/harness/check-capture-lifecycle.js</code></li><li><code>node tools/harness/check-challenge-motion-profile.js</code></li><li><code>node tools/harness/check-remote-score-submit.js</code></li><li><code>node tools/harness/check-pilot-records-panel.js</code></li><li><code>node tools/harness/check-feedback-submit-path.js</code></li><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-popup-surfaces.js</code></li><li><code>node tools/harness/check-framed-popout-bounds.js</code></li><li><code>node tools/harness/check-dock-button-actions.js</code></li><li><code>node tools/harness/check-persona-repeatability.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li><li><code>node tools/harness/check-runtime-loop-crash-capture.js</code></li><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code> for any candidate touching player lifecycle, scoring, or other late-run gameplay transitions</li></ul>
 <p>Selection rule:</p>
 <ul><li>choose the smallest harness set that matches the active gate profile</li><li>avoid dragging platform-wide or gameplay-wide suites into every change unless</li></ul>
 <p>the change actually crosses those boundaries</p>
@@ -1597,7 +1613,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Production conformance refresh</strong><br>
-          Release 1.3.0.1 · Updated May 13, 2026
+          Release 1.3.0.1 · Updated May 14, 2026
         </p>
       </aside>
     </main>
