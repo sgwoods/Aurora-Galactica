@@ -249,6 +249,14 @@
       font-size:22px;
       line-height:1.1;
     }
+    .stepTitle a{
+      color:inherit;
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+    }
+    .stepTitle a:hover{
+      border-bottom-color:currentColor;
+    }
     .badge{
       flex:0 0 auto;
       padding:7px 11px;
@@ -263,6 +271,28 @@
       margin:0;
       color:var(--muted);
       line-height:1.55;
+    }
+    .stepActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .stepLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.05);
+      color:#edf7ff;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.2;
+    }
+    .stepLink:hover{
+      background:rgba(255,255,255,0.09);
     }
     .legend{
       margin-top:42px;
@@ -341,7 +371,7 @@
           </div>
           <div class="metaCard">
             <span class="metaLabel">Updated</span>
-            <span class="metaValue">May 12, 2026</span>
+            <span class="metaValue">May 14, 2026</span>
           </div>
         </div>
       </section>
@@ -353,7 +383,7 @@
     <article class="versionCard">
       <strong>Integrated Release</strong>
       <span>1.3.0.1</span>
-      <small>Lane production beta · Base 1.3.0 · 1.3.0-beta.1+build.705.sha.583cc0c7.beta</small>
+      <small>Lane production beta · Base 1.3.0 · 1.3.0-beta.1+build.723.sha.f3bb3b06.beta</small>
     </article>
   
 
@@ -431,6 +461,7 @@
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
           <a class="button" href="public-project-page.html">Open lane project page</a>
+          <a class="button" href="release-notes.html">Open release notes</a>
         </div>
       </section>
       <section class="timeline">
@@ -441,15 +472,57 @@
         <span class="badge">Completed</span>
       </div>
       <p>Browser build, harness, public hosting, and release identity are in place.</p>
+      
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.0 Platinum Release 1</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-03-30-1-0-0-aurora-galactica-1-0-launch">1.0.0 Aurora Launch</a></h2>
+        <span class="badge">Completed</span>
+      </div>
+      <p>Aurora&#39;s first public production launch established the initial live arcade slice, shared scoring, pilot identity, replay viewing, and the first real beta-to-production release ladder.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-03-30-1-0-0-aurora-galactica-1-0-launch">Read detailed release note</a></div>
+    </article>
+  
+
+    <article class="step done">
+      <div class="stepHeader">
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-03-31-1-0-0-build-284-post-launch-score-submit-and-refresh-reminder-hotfix">1.0.0 Post-Launch Score Submit Hotfix</a></h2>
+        <span class="badge">Completed</span>
+      </div>
+      <p>The first post-launch hotfix repaired shared score submission for signed-in runs and added a refresh reminder so stale hosted tabs could pick up live fixes cleanly.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-03-31-1-0-0-build-284-post-launch-score-submit-and-refresh-reminder-hotfix">Read detailed release note</a></div>
+    </article>
+  
+
+    <article class="step done">
+      <div class="stepHeader">
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-03-31-1-0-1-input-and-feedback-hotfix">1.0.1 Input And Feedback Hotfix</a></h2>
+        <span class="badge">Completed</span>
+      </div>
+      <p>The 1.0.1 hotfix simplified alternate controls, added focus-loss input reset, and cleaned up player feedback delivery right after launch.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-03-31-1-0-1-input-and-feedback-hotfix">Read detailed release note</a></div>
+    </article>
+  
+
+    <article class="step done">
+      <div class="stepHeader">
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-02-1-0-2-movement-regression-hotfix">1.0.2 Movement Regression Hotfix</a></h2>
+        <span class="badge">Completed</span>
+      </div>
+      <p>The 1.0.2 emergency repair fixed the live movement regression introduced after launch and added stronger smoke coverage so obvious input failures are caught earlier.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-02-1-0-2-movement-regression-hotfix">Read detailed release note</a></div>
+    </article>
+  
+
+    <article class="step done">
+      <div class="stepHeader">
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-07-1-2-0-platinum-release-1">1.2.0 Platinum Release 1</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>Aurora now ships as the first playable application on Platinum, with hosted `/dev`, hosted `/beta`, and hosted `/production` established as distinct lanes.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-07-1-2-0-platinum-release-1">Read detailed release note</a></div>
     </article>
   
 
@@ -459,51 +532,57 @@
         <span class="badge">Completed</span>
       </div>
       <p>The hosted docs set is now part of the release contract, with first-class project, platform, player, and release pages required for meaningful x.y releases.</p>
+      
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.1 Aurora Trust Fixes</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-07-1-2-1-aurora-trust-fix-and-copy-boundary-patch">1.2.1 Aurora Trust Fixes</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>The 1.2.1 patch shipped the dual-fighter survivor fix, challenge-stage bonus-stage numbering, game-over carry suppression, expanded carry-state coverage, and a clearer platform/application front-door copy boundary.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-07-1-2-1-aurora-trust-fix-and-copy-boundary-patch">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.2 Runtime Hardening</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-09-1-2-2-runtime-freeze-hardening-and-bonus-ship-patch">1.2.2 Runtime Hardening</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>The 1.2.2 patch shipped runtime-loop hardening, restart-time async score-submit safety, a late-run ship-loss soak gate in the release process, and Aurora-scoped configurable bonus-ship awards.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-09-1-2-2-runtime-freeze-hardening-and-bonus-ship-patch">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.3 Aurora Score-Surface Polish</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-09-1-2-3-aurora-score-surface-polish-patch">1.2.3 Aurora Score-Surface Polish</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>The 1.2.3 patch shipped clearer wait-mode score rotation, leaderboard trust context, and lightweight score filtering without changing Platinum shell ownership or broad gameplay rules.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-09-1-2-3-aurora-score-surface-polish-patch">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.3 Beta Refresh</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">1.2.3 Beta Refresh</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>Hosted `/beta` now runs the `f6ba6c2` candidate line with refreshed timing, movement evidence, audio correspondence, production-ready defaults, and committed quality artifacts.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.3 Production Refresh</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">1.2.3 Production Refresh</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>Hosted `/production` now runs the `f6ba6c2` release line with refreshed beta evidence, synced public project pages, and committed release-readiness documentation.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">Read detailed release note</a></div>
     </article>
   
 
@@ -513,42 +592,47 @@
         <span class="badge">Completed</span>
       </div>
       <p>Aurora now has a one-command machine bootstrap path, a committed release-authority contract, and public-sync verification that includes the rendered root project homepage.</p>
+      
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.2.3 Trust And Pilot-Surface Refresh</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">1.2.3 Trust And Pilot-Surface Refresh</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>The current patch line fixes signed-in end-of-run pilot locking, recent-flight and local-score visibility, a last-life runtime freeze, and multiple dock, panel, and login-polish issues without reopening broad gameplay tuning.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.3.0 Fidelity And Trust</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-05-05-1-3-0-fidelity-and-second-cabinet-release">1.3.0 Fidelity And Trust</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>1.3.0 is now the live Platinum production family, bundling Aurora fidelity and trust work with the first public Galaxy Guardians second-cabinet preview and the first layered platform/application version contract.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-05-05-1-3-0-fidelity-and-second-cabinet-release">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.3.0.1 Hosted Dev Review</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-05-11-1-3-0-1-hosted-dev-conformance-review-handoff">1.3.0.1 Hosted Dev Review</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>Hosted /dev carried the post-production conformance review bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite capture scoring, and a measured calibrated ship-loss audio cue lift. That bundle was reviewed, accepted, and used as the authority-gated public refresh source.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-05-11-1-3-0-1-hosted-dev-conformance-review-handoff">Read detailed release note</a></div>
     </article>
   
 
     <article class="step done">
       <div class="stepHeader">
-        <h2 class="stepTitle">1.3.0 Production Conformance Refresh</h2>
+        <h2 class="stepTitle"><a href="release-notes.html#release-note-2026-05-12-1-3-0-production-conformance-refresh">1.3.0 Production Conformance Refresh</a></h2>
         <span class="badge">Completed</span>
       </div>
       <p>The accepted 1.3.0.1 hosted-dev review bundle was promoted through hosted `/beta` into hosted `/production`, refreshing the public 1.3.0 family with current conformance docs, provenance, economics, application artifact scoring, runtime sprite scoring, and the measured ship-loss audio lift.</p>
+      <div class="stepActions"><a class="stepLink" href="release-notes.html#release-note-2026-05-12-1-3-0-production-conformance-refresh">Read detailed release note</a></div>
     </article>
   
 
@@ -558,6 +642,7 @@
         <span class="badge">In Progress</span>
       </div>
       <p>Shape 1.4.0 around arcade depth, audio/event feedback, visual reference grounding, challenge-stage novelty, level arc, and cleaner platform/application seams now that the 1.3.0 production conformance refresh is live.</p>
+      
     </article>
   
 
@@ -567,6 +652,7 @@
         <span class="badge">Up Next</span>
       </div>
       <p>Continue the Galaxians-style sibling work after 1.3.0 so Galaxy Guardians can move from second-cabinet proof toward a more durable standalone product promise.</p>
+      
     </article>
   
       </section>
@@ -611,7 +697,7 @@
   
         </div>
         <p class="footer">
-          Latest release note: <strong>Production conformance refresh</strong>. Live game:
+          Latest release note: <a href="release-notes.html#release-note-2026-05-12-1-3-0-production-conformance-refresh"><strong>Production conformance refresh</strong></a>. Live game:
           <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Aurora-Galactica/</a>
         </p>
       </section>
