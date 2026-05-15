@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-14T18:06:13.295Z",
-  "commit": "1c788342",
-  "branch": "codex/player-two-persona-mode",
+  "generatedAt": "2026-05-15T12:53:10.491Z",
+  "commit": "60326a33",
+  "branch": "codex/macbook-post-beta-conformance-10h",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
   "games": [
@@ -22,7 +22,7 @@
         },
         {
           "Gate": "Audio identity",
-          "Current": "6.9/10",
+          "Current": "7/10",
           "Target": ">=7.5",
           "Notes": "Primary user-experience gap"
         },
@@ -34,7 +34,7 @@
         },
         {
           "Gate": "Alien entry and challenge-stage novelty",
-          "Current": "7.8/10",
+          "Current": "8/10",
           "Target": ">=7.5 first gate; >=9.0 mature",
           "Notes": "New high-priority long-cycle gameplay-authenticity gate"
         },
@@ -87,30 +87,30 @@
           "scoreContext": {
             "confidence": "medium-high",
             "resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
-            "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
           },
-          "score10": 6.9,
-          "current": "6.9/10",
+          "score10": 7,
+          "current": "7/10",
           "target": "7.5-8.0",
           "status": "Measured release category; weakest axis",
           "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
           "effort": "High; 3-6 hrs local/model-assisted analysis",
           "next": "Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
           "costContext": {
             "costClass": "high",
             "expectedResources": "cpu, model-api, openai-api",
             "trackedAxes": [
               "audio"
             ],
-            "trackedSpend": "278 runs; 200 min wall; 359.1 min CPU",
-            "trackedRuns": 278,
-            "trackedWallSeconds": 12002.352,
-            "trackedCpuSeconds": 21545.15,
+            "trackedSpend": "266 runs; 185.8 min wall; 330 min CPU",
+            "trackedRuns": 266,
+            "trackedWallSeconds": 11147.079,
+            "trackedCpuSeconds": 19802.99,
             "expectedLift10": 0.7,
             "expectedOverallLift10": 0.058,
             "investmentScore": 2.96,
-            "gapToTarget": "+0.6",
+            "gapToTarget": "+0.5",
             "summary": "high; cpu, model-api, openai-api",
             "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.96."
           }
@@ -126,16 +126,16 @@
           "scoreContext": {
             "confidence": "medium",
             "resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
-            "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+            "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
           },
-          "score10": 7.8,
-          "current": "7.8/10",
+          "score10": 8,
+          "current": "8/10",
           "target": "7.5 first gate; 9.0+ mature",
           "status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
           "why": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
           "effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
-          "next": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
-          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+          "next": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -176,7 +176,7 @@
           "why": "Controls whether long play feels like Galaga-like escalation rather than repeated pressure.",
           "effort": "Medium-high; 2-5 hrs",
           "next": "Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.",
-          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "low",
             "expectedResources": "cpu, browser",
@@ -216,7 +216,7 @@
           "why": "Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.",
           "effort": "Medium-high; 2-5 hrs, then recurring low-cost guardrail",
           "next": "Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "high",
             "expectedResources": "cpu, browser",
@@ -295,7 +295,7 @@
           "why": "Pressure should be learnable and reproducible, not merely present in one run.",
           "effort": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
           "next": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.",
-          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "medium",
             "expectedResources": "cpu, browser",
@@ -334,7 +334,7 @@
           "why": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
           "effort": "Medium; 1-3 hrs plus visual review",
           "next": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
-          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -374,7 +374,7 @@
           "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
           "effort": "Medium-high; 2-4 hrs",
           "next": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
-          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+          "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -414,7 +414,7 @@
           "why": "Keeps the game learnable across skill levels and supports later-stage quality.",
           "effort": "Low-medium; 1-2 hrs",
           "next": "Resolve remaining ordering edge case after higher-value audio/level-arc work.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu",
@@ -453,7 +453,7 @@
           "why": "First impression and direct reference feel.",
           "effort": "Low-medium; 1-2 hrs",
           "next": "Tune only after audio and level-arc priorities unless regressions appear.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "medium",
             "expectedResources": "cpu, browser",
@@ -492,7 +492,7 @@
           "why": "The cabinet frame is the constant product surface around every game.",
           "effort": "Medium; 1-3 hrs visual QA",
           "next": "Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "medium",
             "expectedResources": "cpu, browser, gpu",
@@ -531,7 +531,7 @@
           "why": "Popup surfaces carry learning, scoring trust, feedback, and player records.",
           "effort": "Low-medium; 1-2 hrs",
           "next": "Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "medium",
             "expectedResources": "cpu, browser",
@@ -570,7 +570,7 @@
           "why": "Protects user trust while pressure is increased.",
           "effort": "Guardrail; 30-90 min per risky gameplay cycle",
           "next": "Keep as required guardrail for pressure/reward changes.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu",
@@ -601,16 +601,16 @@
           "scoreContext": {
             "confidence": "high-current-pass",
             "resolution": "reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution",
-            "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+            "scoreMeaning": "No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection."
           },
-          "score10": 9.8,
-          "current": "9.8/10",
+          "score10": 10,
+          "current": "10/10",
           "target": "Maintain 10",
           "status": "Measured release category",
           "why": "Core control feel is already excellent.",
           "effort": "Guardrail only",
           "next": "Do not tune unless a new reference metric proves a gap.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu, browser",
@@ -624,7 +624,7 @@
             "expectedLift10": null,
             "expectedOverallLift10": null,
             "investmentScore": null,
-            "gapToTarget": "+0.2",
+            "gapToTarget": "at target",
             "summary": "guardrail; cpu, browser",
             "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
           }
@@ -649,7 +649,7 @@
           "why": "Core combat response is already excellent.",
           "effort": "Guardrail only",
           "next": "Protect during explosion/audio/event feedback work.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu",
@@ -688,7 +688,7 @@
           "why": "Formation geometry is already locked.",
           "effort": "Guardrail only",
           "next": "Protect during alien-entry visual work.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu, browser",
@@ -727,7 +727,7 @@
           "why": "Strong Galaga identity mechanic; should not regress while feedback improves.",
           "effort": "Guardrail only",
           "next": "Use as release blocker for capture/rescue-adjacent audio or explosion changes.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu",
@@ -766,7 +766,7 @@
           "why": "Timing is strong; variation is the gap, not baseline timing.",
           "effort": "Guardrail only",
           "next": "Preserve while adding challenge variation scoring.",
-          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+          "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
           "costContext": {
             "costClass": "guardrail",
             "expectedResources": "cpu, browser",
@@ -789,12 +789,12 @@
       "economicsSummary": {
         "latestOverallScore10": 9.1,
         "latestLevelArcScore10": 8.7,
-        "metricPointCount": 1274,
-        "deltaCount": 137,
-        "measuredRuns": 529,
-        "wallSeconds": 20963.963,
-        "cpuSeconds": 33657.35,
-        "artifactBytes": 851825818,
+        "metricPointCount": 1230,
+        "deltaCount": 134,
+        "measuredRuns": 517,
+        "wallSeconds": 20108.69,
+        "cpuSeconds": 31915.19,
+        "artifactBytes": 822354573,
         "computeApplication": {
           "gpuUseByPurpose": [
             {
@@ -842,12 +842,12 @@
           "cpuUseByPurpose": [
             {
               "purpose": "Audio conformance and cue feedback",
-              "runs": 379,
-              "wallSeconds": 17676.296,
-              "wallMinutes": 294.6,
-              "cpuSeconds": 31152.51,
-              "share": 0.9082,
-              "sharePercent": 90.8,
+              "runs": 367,
+              "wallSeconds": 16821.023,
+              "wallMinutes": 280.35,
+              "cpuSeconds": 29410.35,
+              "share": 0.9039,
+              "sharePercent": 90.4,
               "examples": [
                 "Stage4 lane2 after bounded column5 cue",
                 "Stage4 lane2 source-exact scenario after cue",
@@ -861,8 +861,8 @@
               "wallSeconds": 1497.208,
               "wallMinutes": 24.95,
               "cpuSeconds": 2167.49,
-              "share": 0.0769,
-              "sharePercent": 7.7,
+              "share": 0.0805,
+              "sharePercent": 8,
               "examples": [
                 "Stage4 lane2 action precision baseline",
                 "Stage4 lane2 action precision baseline",
@@ -876,7 +876,7 @@
               "wallSeconds": 285.753,
               "wallMinutes": 4.76,
               "cpuSeconds": 332.76,
-              "share": 0.0147,
+              "share": 0.0154,
               "sharePercent": 1.5,
               "examples": [
                 "quality score after cadence generator no-keeper cycle",
@@ -918,8 +918,8 @@
             {
               "part": "Gameplay complexity and stage arc",
               "positiveScore10": 46.2,
-              "share": 0.7392,
-              "sharePercent": 73.9,
+              "share": 0.7404,
+              "sharePercent": 74,
               "axes": [
                 "quality:challenge-timing",
                 "quality:stage1-timing",
@@ -935,8 +935,8 @@
             {
               "part": "Core mechanics and control feel",
               "positiveScore10": 7.9,
-              "share": 0.1264,
-              "sharePercent": 12.6,
+              "share": 0.1266,
+              "sharePercent": 12.7,
               "axes": [
                 "quality:movement"
               ],
@@ -944,9 +944,9 @@
             },
             {
               "part": "Audio feedback and event clarity",
-              "positiveScore10": 5.7,
-              "share": 0.0912,
-              "sharePercent": 9.1,
+              "positiveScore10": 5.6,
+              "share": 0.0897,
+              "sharePercent": 9,
               "axes": [
                 "quality:audio"
               ],
@@ -955,7 +955,7 @@
             {
               "part": "Overall release-quality rollup",
               "positiveScore10": 2.7,
-              "share": 0.0432,
+              "share": 0.0433,
               "sharePercent": 4.3,
               "axes": [
                 "overall-quality"
@@ -965,8 +965,8 @@
           ],
           "totals": {
             "gpuEquivalentWallSeconds": 1547,
-            "cpuLocalWallSeconds": 19463.963,
-            "positiveScore10Attributed": 62.5
+            "cpuLocalWallSeconds": 18608.69,
+            "positiveScore10Attributed": 62.4
           },
           "limitations": [
             "GPU-equivalent accounting includes declared Codex/OpenAI/model/API/GPU usage and manual ledger entries. The repo cannot automatically read every Codex chat token or quota draw.",
@@ -975,13 +975,13 @@
           ]
         },
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg"
         ]
       },
       "ingestionSummary": {
@@ -1014,8 +1014,8 @@
           "annotationStatus": "semantic-scored",
           "confidence": "medium-high",
           "linkedMetric": "Audio identity, event feedback, and cue alignment",
-          "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-14-1c788342-dirty-180248/report.json",
-          "next": "Tune the highest segment-level gap next: captureBeam tail. Rerun audio comparison and event-gap analysis after the change."
+          "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-15-60326a33-dirty-124517/report.json",
+          "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
         },
         {
           "rank": 3,
@@ -1062,7 +1062,7 @@
           "annotationStatus": "scored",
           "confidence": "medium",
           "linkedMetric": "Boss entry and formation grammar",
-          "anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-14-1c788342/report.json",
+          "anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-60326a33/report.json",
           "next": "Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly."
         },
         {
@@ -1074,7 +1074,7 @@
           "annotationStatus": "scored",
           "confidence": "medium-high",
           "linkedMetric": "Level arc and encounter shape",
-          "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+          "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
           "next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
         },
         {
@@ -1145,11 +1145,11 @@
         "resolution": "Resolution describes how fine-grained the scorer currently is and which blind spots may remain."
       },
       "sourceReports": {
-        "quality": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+        "quality": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
         "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-11-46e1b45c/report.json",
-        "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/report.json",
-        "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+        "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/report.json",
+        "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
         "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-11-b83393cd-dirty/report.json",
         "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
@@ -1169,7 +1169,7 @@
       "gameName": "Galaxy Guardians",
       "gameStatus": "Preview / ingestion",
       "currentInvestment": "Paused while Aurora remains the active conformance investment; ready for measured preview review when we switch back.",
-      "releaseRead": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass.",
+      "releaseRead": "Useful playable-preview evidence now extends beyond the one-level public slice. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, longer-surface stage-band review, persona review runs, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is still stage-five-and-beyond collision fairness, later-band clear consistency, and another human-reviewed audio/browser pass.",
       "scoreSemantics": {
         "headline": "Galaxy Guardians scores are preview/ingestion scores, not public-release conformance claims.",
         "tenOutOfTen": "A high preview score would mean the current preview contracts are satisfied, not that a full Galaxian-style game is complete.",
@@ -1179,25 +1179,25 @@
       "releaseGate": [
         {
           "Gate": "Preview reference conformance",
-          "Current": "7.7/10",
+          "Current": "7.6/10",
           "Target": ">=7.5 for compelling preview",
-          "Notes": "Useful playable-preview evidence, now just below a compelling beta-facing quick peek. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is human listening/review of cue windows, browser play review of the new graphics/audio, and a motion-feel pass."
+          "Notes": "Useful playable-preview evidence now extends beyond the one-level public slice. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, longer-surface stage-band review, persona review runs, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is still stage-five-and-beyond collision fairness, later-band clear consistency, and another human-reviewed audio/browser pass."
         },
         {
           "Gate": "Playtest-weighted conformance",
           "Current": "6.9/10",
           "Target": ">=7.0 for preview confidence",
-          "Notes": "Closer, but still just below the compelling-preview bar. The runtime now has measured stage-rank pressure, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab that compares runtime cue synthesis to promoted reference windows. Audio and motion feel still need live browser/playback review before a beta-facing claim."
+          "Notes": "Closer, and now reviewable across a longer surface rather than only a one-level peek. The runtime has measured later-band pressure, stage-theme progression, rack-preserving life loss, deterministic review personas, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab. The preview still needs stronger stage-five-and-beyond survivability and another human-reviewed sound/browser pass before it feels compelling."
         },
         {
           "Gate": "Public release readiness",
-          "Current": "3.9/10",
+          "Current": "4.2/10",
           "Target": "defer",
           "Notes": "Preview game remains intentionally non-production."
         },
         {
           "Gate": "Audio conformance lab",
-          "Current": "8.3/10",
+          "Current": "8.5/10",
           "Target": ">=7.0 preview target",
           "Notes": "This lab is game-configured and can be registered for Aurora or future Platinum game packs."
         }
@@ -1216,8 +1216,8 @@
             "resolution": "scorer-backed artifact with selected harness windows",
             "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
           },
-          "score10": 7.7,
-          "current": "7.7/10",
+          "score10": 7.6,
+          "current": "7.6/10",
           "target": ">=7.5 compelling preview",
           "status": "Measured preview artifact; not public release art",
           "why": "Keeps the second game grounded in Galaxian-style evidence instead of Aurora inheritance.",
@@ -1260,8 +1260,8 @@
             "resolution": "scorer-backed artifact with selected harness windows",
             "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
           },
-          "score10": 8.3,
-          "current": "8.3/10",
+          "score10": 8.5,
+          "current": "8.5/10",
           "target": ">=7.0 preview target",
           "status": "Reusable Platinum audio conformance lab",
           "why": "This is the first evidence that ingestion-derived cue targets can score a non-Aurora game.",
@@ -1282,8 +1282,8 @@
             "resolution": "scorer-backed artifact with selected harness windows",
             "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 3.9,
-          "current": "3.9/10",
+          "score10": 4.2,
+          "current": "4.2/10",
           "target": "deferred until full game path exists",
           "status": "Intentionally low preview/public boundary score",
           "why": "Protects Platinum from presenting a preview as a shipped second game before rules, stages, scoring, and polish are ready.",
@@ -1306,7 +1306,7 @@
           "source": "Galaxy Guardians identity artifacts",
           "axis": "reference conformance / runtime identity",
           "artifactType": "game-owned preview contracts",
-          "coverage": "23 JSON artifacts",
+          "coverage": "24 JSON artifacts",
           "annotationStatus": "preview-scored",
           "confidence": "medium",
           "linkedMetric": "Preview reference conformance",
@@ -1374,11 +1374,11 @@
     }
   ],
   "sourceReports": {
-    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-11-46e1b45c/report.json",
-    "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/report.json",
-    "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+    "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/report.json",
+    "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
     "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-11-b83393cd-dirty/report.json",
     "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
@@ -1400,7 +1400,7 @@
     },
     {
       "Gate": "Audio identity",
-      "Current": "6.9/10",
+      "Current": "7/10",
       "Target": ">=7.5",
       "Notes": "Primary user-experience gap"
     },
@@ -1412,7 +1412,7 @@
     },
     {
       "Gate": "Alien entry and challenge-stage novelty",
-      "Current": "7.8/10",
+      "Current": "8/10",
       "Target": ">=7.5 first gate; >=9.0 mature",
       "Notes": "New high-priority long-cycle gameplay-authenticity gate"
     },
@@ -1465,30 +1465,30 @@
       "scoreContext": {
         "confidence": "medium-high",
         "resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
-        "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
+        "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
       },
-      "score10": 6.9,
-      "current": "6.9/10",
+      "score10": 7,
+      "current": "7/10",
       "target": "7.5-8.0",
       "status": "Measured release category; weakest axis",
       "why": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "effort": "High; 3-6 hrs local/model-assisted analysis",
       "next": "Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
       "costContext": {
         "costClass": "high",
         "expectedResources": "cpu, model-api, openai-api",
         "trackedAxes": [
           "audio"
         ],
-        "trackedSpend": "278 runs; 200 min wall; 359.1 min CPU",
-        "trackedRuns": 278,
-        "trackedWallSeconds": 12002.352,
-        "trackedCpuSeconds": 21545.15,
+        "trackedSpend": "266 runs; 185.8 min wall; 330 min CPU",
+        "trackedRuns": 266,
+        "trackedWallSeconds": 11147.079,
+        "trackedCpuSeconds": 19802.99,
         "expectedLift10": 0.7,
         "expectedOverallLift10": 0.058,
         "investmentScore": 2.96,
-        "gapToTarget": "+0.6",
+        "gapToTarget": "+0.5",
         "summary": "high; cpu, model-api, openai-api",
         "valueCostRead": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.96."
       }
@@ -1504,16 +1504,16 @@
       "scoreContext": {
         "confidence": "medium",
         "resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
-        "scoreMeaning": "Material conformance gap with meaningful user-experience or reference-identity impact."
+        "scoreMeaning": "Good conformance, but the gap is likely visible to attentive players or designers in some scenarios."
       },
-      "score10": 7.8,
-      "current": "7.8/10",
+      "score10": 8,
+      "current": "8/10",
       "target": "7.5 first gate; 9.0+ mature",
       "status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
       "why": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
       "effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
-      "next": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
-      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+      "next": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -1554,7 +1554,7 @@
       "why": "Controls whether long play feels like Galaga-like escalation rather than repeated pressure.",
       "effort": "Medium-high; 2-5 hrs",
       "next": "Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.",
-      "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "low",
         "expectedResources": "cpu, browser",
@@ -1594,7 +1594,7 @@
       "why": "Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.",
       "effort": "Medium-high; 2-5 hrs, then recurring low-cost guardrail",
       "next": "Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "high",
         "expectedResources": "cpu, browser",
@@ -1673,7 +1673,7 @@
       "why": "Pressure should be learnable and reproducible, not merely present in one run.",
       "effort": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
       "next": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.",
-      "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "medium",
         "expectedResources": "cpu, browser",
@@ -1712,7 +1712,7 @@
       "why": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
       "effort": "Medium; 1-3 hrs plus visual review",
       "next": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
-      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -1752,7 +1752,7 @@
       "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "effort": "Medium-high; 2-4 hrs",
       "next": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
-      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json",
+      "evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -1792,7 +1792,7 @@
       "why": "Keeps the game learnable across skill levels and supports later-stage quality.",
       "effort": "Low-medium; 1-2 hrs",
       "next": "Resolve remaining ordering edge case after higher-value audio/level-arc work.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu",
@@ -1831,7 +1831,7 @@
       "why": "First impression and direct reference feel.",
       "effort": "Low-medium; 1-2 hrs",
       "next": "Tune only after audio and level-arc priorities unless regressions appear.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "medium",
         "expectedResources": "cpu, browser",
@@ -1870,7 +1870,7 @@
       "why": "The cabinet frame is the constant product surface around every game.",
       "effort": "Medium; 1-3 hrs visual QA",
       "next": "Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "medium",
         "expectedResources": "cpu, browser, gpu",
@@ -1909,7 +1909,7 @@
       "why": "Popup surfaces carry learning, scoring trust, feedback, and player records.",
       "effort": "Low-medium; 1-2 hrs",
       "next": "Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "medium",
         "expectedResources": "cpu, browser",
@@ -1948,7 +1948,7 @@
       "why": "Protects user trust while pressure is increased.",
       "effort": "Guardrail; 30-90 min per risky gameplay cycle",
       "next": "Keep as required guardrail for pressure/reward changes.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu",
@@ -1979,16 +1979,16 @@
       "scoreContext": {
         "confidence": "high-current-pass",
         "resolution": "reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution",
-        "scoreMeaning": "Strong measured conformance with known remaining risk mostly in narrower edge cases, coverage, or polish."
+        "scoreMeaning": "No known measured gap under the current scorer and evidence coverage. This is a guardrail pass, not proof of perfection."
       },
-      "score10": 9.8,
-      "current": "9.8/10",
+      "score10": 10,
+      "current": "10/10",
       "target": "Maintain 10",
       "status": "Measured release category",
       "why": "Core control feel is already excellent.",
       "effort": "Guardrail only",
       "next": "Do not tune unless a new reference metric proves a gap.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu, browser",
@@ -2002,7 +2002,7 @@
         "expectedLift10": null,
         "expectedOverallLift10": null,
         "investmentScore": null,
-        "gapToTarget": "+0.2",
+        "gapToTarget": "at target",
         "summary": "guardrail; cpu, browser",
         "valueCostRead": "Guardrail spend: value is preventing regression rather than raising the score."
       }
@@ -2027,7 +2027,7 @@
       "why": "Core combat response is already excellent.",
       "effort": "Guardrail only",
       "next": "Protect during explosion/audio/event feedback work.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu",
@@ -2066,7 +2066,7 @@
       "why": "Formation geometry is already locked.",
       "effort": "Guardrail only",
       "next": "Protect during alien-entry visual work.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu, browser",
@@ -2105,7 +2105,7 @@
       "why": "Strong Galaga identity mechanic; should not regress while feedback improves.",
       "effort": "Guardrail only",
       "next": "Use as release blocker for capture/rescue-adjacent audio or explosion changes.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu",
@@ -2144,7 +2144,7 @@
       "why": "Timing is strong; variation is the gap, not baseline timing.",
       "effort": "Guardrail only",
       "next": "Preserve while adding challenge variation scoring.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json",
       "costContext": {
         "costClass": "guardrail",
         "expectedResources": "cpu, browser",
@@ -2168,22 +2168,22 @@
     {
       "Priority": 1,
       "Metric": "Audio identity, event feedback, and cue alignment",
-      "Current": "6.9/10",
+      "Current": "7/10",
       "Confidence": "medium-high",
       "Resolution": "21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features",
       "Cost / resources": "high; cpu, model-api, openai-api",
-      "Tracked spend": "278 runs; 200 min wall; 359.1 min CPU",
+      "Tracked spend": "266 runs; 185.8 min wall; 330 min CPU",
       "Major-gate target": "7.5-8.0",
       "Measurement status": "Measured release category; weakest axis",
       "Why this matters": "Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.",
       "Effort / time estimate": "High; 3-6 hrs local/model-assisted analysis",
       "Recommended next step": "Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json"
     },
     {
       "Priority": 2,
       "Metric": "Alien entry and challenge-stage novelty",
-      "Current": "7.8/10",
+      "Current": "8/10",
       "Confidence": "medium",
       "Resolution": "dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness",
       "Cost / resources": "estimated; cpu, browser",
@@ -2192,8 +2192,8 @@
       "Measurement status": "Dedicated long-cycle scorer; high-priority gameplay-authenticity gap",
       "Why this matters": "Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.",
       "Effort / time estimate": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
-      "Recommended next step": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
-      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json"
+      "Recommended next step": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 3,
@@ -2208,7 +2208,7 @@
       "Why this matters": "Controls whether long play feels like Galaga-like escalation rather than repeated pressure.",
       "Effort / time estimate": "Medium-high; 2-5 hrs",
       "Recommended next step": "Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.",
-      "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 4,
@@ -2223,7 +2223,7 @@
       "Why this matters": "Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.",
       "Effort / time estimate": "Medium-high; 2-5 hrs, then recurring low-cost guardrail",
       "Recommended next step": "Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 5,
@@ -2253,7 +2253,7 @@
       "Why this matters": "Pressure should be learnable and reproducible, not merely present in one run.",
       "Effort / time estimate": "Medium-high; prior runs ~12.8 min wall / 18.5 min CPU",
       "Recommended next step": "Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.",
-      "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 7,
@@ -2268,7 +2268,7 @@
       "Why this matters": "Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.",
       "Effort / time estimate": "Medium; 1-3 hrs plus visual review",
       "Recommended next step": "Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.",
-      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json"
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 8,
@@ -2283,7 +2283,7 @@
       "Why this matters": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "Effort / time estimate": "Medium-high; 2-4 hrs",
       "Recommended next step": "Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.",
-      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json"
+      "Evidence": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 9,
@@ -2298,7 +2298,7 @@
       "Why this matters": "Keeps the game learnable across skill levels and supports later-stage quality.",
       "Effort / time estimate": "Low-medium; 1-2 hrs",
       "Recommended next step": "Resolve remaining ordering edge case after higher-value audio/level-arc work.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 10,
@@ -2313,7 +2313,7 @@
       "Why this matters": "First impression and direct reference feel.",
       "Effort / time estimate": "Low-medium; 1-2 hrs",
       "Recommended next step": "Tune only after audio and level-arc priorities unless regressions appear.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 11,
@@ -2328,7 +2328,7 @@
       "Why this matters": "The cabinet frame is the constant product surface around every game.",
       "Effort / time estimate": "Medium; 1-3 hrs visual QA",
       "Recommended next step": "Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 12,
@@ -2343,7 +2343,7 @@
       "Why this matters": "Popup surfaces carry learning, scoring trust, feedback, and player records.",
       "Effort / time estimate": "Low-medium; 1-2 hrs",
       "Recommended next step": "Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 13,
@@ -2358,12 +2358,12 @@
       "Why this matters": "Protects user trust while pressure is increased.",
       "Effort / time estimate": "Guardrail; 30-90 min per risky gameplay cycle",
       "Recommended next step": "Keep as required guardrail for pressure/reward changes.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 14,
       "Metric": "Player movement conformance",
-      "Current": "9.8/10",
+      "Current": "10/10",
       "Confidence": "high-current-pass",
       "Resolution": "reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution",
       "Cost / resources": "guardrail; cpu, browser",
@@ -2373,7 +2373,7 @@
       "Why this matters": "Core control feel is already excellent.",
       "Effort / time estimate": "Guardrail only",
       "Recommended next step": "Do not tune unless a new reference metric proves a gap.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 15,
@@ -2388,7 +2388,7 @@
       "Why this matters": "Core combat response is already excellent.",
       "Effort / time estimate": "Guardrail only",
       "Recommended next step": "Protect during explosion/audio/event feedback work.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 16,
@@ -2403,7 +2403,7 @@
       "Why this matters": "Formation geometry is already locked.",
       "Effort / time estimate": "Guardrail only",
       "Recommended next step": "Protect during alien-entry visual work.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 17,
@@ -2418,7 +2418,7 @@
       "Why this matters": "Strong Galaga identity mechanic; should not regress while feedback improves.",
       "Effort / time estimate": "Guardrail only",
       "Recommended next step": "Use as release blocker for capture/rescue-adjacent audio or explosion changes.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     },
     {
       "Priority": 18,
@@ -2433,18 +2433,18 @@
       "Why this matters": "Timing is strong; variation is the gap, not baseline timing.",
       "Effort / time estimate": "Guardrail only",
       "Recommended next step": "Preserve while adding challenge variation scoring.",
-      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json"
+      "Evidence": "reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json"
     }
   ],
   "economicsSummary": {
     "latestOverallScore10": 9.1,
     "latestLevelArcScore10": 8.7,
-    "metricPointCount": 1274,
-    "deltaCount": 137,
-    "measuredRuns": 529,
-    "wallSeconds": 20963.963,
-    "cpuSeconds": 33657.35,
-    "artifactBytes": 851825818,
+    "metricPointCount": 1230,
+    "deltaCount": 134,
+    "measuredRuns": 517,
+    "wallSeconds": 20108.69,
+    "cpuSeconds": 31915.19,
+    "artifactBytes": 822354573,
     "computeApplication": {
       "gpuUseByPurpose": [
         {
@@ -2492,12 +2492,12 @@
       "cpuUseByPurpose": [
         {
           "purpose": "Audio conformance and cue feedback",
-          "runs": 379,
-          "wallSeconds": 17676.296,
-          "wallMinutes": 294.6,
-          "cpuSeconds": 31152.51,
-          "share": 0.9082,
-          "sharePercent": 90.8,
+          "runs": 367,
+          "wallSeconds": 16821.023,
+          "wallMinutes": 280.35,
+          "cpuSeconds": 29410.35,
+          "share": 0.9039,
+          "sharePercent": 90.4,
           "examples": [
             "Stage4 lane2 after bounded column5 cue",
             "Stage4 lane2 source-exact scenario after cue",
@@ -2511,8 +2511,8 @@
           "wallSeconds": 1497.208,
           "wallMinutes": 24.95,
           "cpuSeconds": 2167.49,
-          "share": 0.0769,
-          "sharePercent": 7.7,
+          "share": 0.0805,
+          "sharePercent": 8,
           "examples": [
             "Stage4 lane2 action precision baseline",
             "Stage4 lane2 action precision baseline",
@@ -2526,7 +2526,7 @@
           "wallSeconds": 285.753,
           "wallMinutes": 4.76,
           "cpuSeconds": 332.76,
-          "share": 0.0147,
+          "share": 0.0154,
           "sharePercent": 1.5,
           "examples": [
             "quality score after cadence generator no-keeper cycle",
@@ -2568,8 +2568,8 @@
         {
           "part": "Gameplay complexity and stage arc",
           "positiveScore10": 46.2,
-          "share": 0.7392,
-          "sharePercent": 73.9,
+          "share": 0.7404,
+          "sharePercent": 74,
           "axes": [
             "quality:challenge-timing",
             "quality:stage1-timing",
@@ -2585,8 +2585,8 @@
         {
           "part": "Core mechanics and control feel",
           "positiveScore10": 7.9,
-          "share": 0.1264,
-          "sharePercent": 12.6,
+          "share": 0.1266,
+          "sharePercent": 12.7,
           "axes": [
             "quality:movement"
           ],
@@ -2594,9 +2594,9 @@
         },
         {
           "part": "Audio feedback and event clarity",
-          "positiveScore10": 5.7,
-          "share": 0.0912,
-          "sharePercent": 9.1,
+          "positiveScore10": 5.6,
+          "share": 0.0897,
+          "sharePercent": 9,
           "axes": [
             "quality:audio"
           ],
@@ -2605,7 +2605,7 @@
         {
           "part": "Overall release-quality rollup",
           "positiveScore10": 2.7,
-          "share": 0.0432,
+          "share": 0.0433,
           "sharePercent": 4.3,
           "axes": [
             "overall-quality"
@@ -2615,8 +2615,8 @@
       ],
       "totals": {
         "gpuEquivalentWallSeconds": 1547,
-        "cpuLocalWallSeconds": 19463.963,
-        "positiveScore10Attributed": 62.5
+        "cpuLocalWallSeconds": 18608.69,
+        "positiveScore10Attributed": 62.4
       },
       "limitations": [
         "GPU-equivalent accounting includes declared Codex/OpenAI/model/API/GPU usage and manual ledger entries. The repo cannot automatically read every Codex chat token or quota draw.",
@@ -2625,27 +2625,27 @@
       ]
     },
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg"
     ]
   },
   "resourceSpendTable": [
     {
       "Resource": "cpu",
-      "Measured runs": 527,
-      "Wall time": "324.4 min",
-      "CPU time": "561 min"
+      "Measured runs": 515,
+      "Wall time": "310.1 min",
+      "CPU time": "531.9 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 200,
-      "Wall time": "210.6 min",
-      "CPU time": "369.2 min"
+      "Measured runs": 193,
+      "Wall time": "196.4 min",
+      "CPU time": "340.2 min"
     },
     {
       "Resource": "gpu-equivalent",
@@ -2675,9 +2675,9 @@
   "axisSpendTable": [
     {
       "Axis": "audio",
-      "Measured runs": 278,
-      "Wall time": "200 min",
-      "CPU time": "359.1 min"
+      "Measured runs": 266,
+      "Wall time": "185.8 min",
+      "CPU time": "330 min"
     },
     {
       "Axis": "audio-focus-candidate",
@@ -2726,26 +2726,26 @@
     {
       "Priority": 1,
       "Metric": "Audio identity, event feedback, and cue alignment",
-      "Current": "6.9/10",
+      "Current": "7/10",
       "Target": "7.5-8.0",
-      "Gap to target": "+0.6",
+      "Gap to target": "+0.5",
       "Estimated effort": "High; 3-6 hrs local/model-assisted analysis",
       "Expected resources": "cpu, model-api, openai-api",
-      "Tracked spend": "278 runs; 200 min wall; 359.1 min CPU",
+      "Tracked spend": "266 runs; 185.8 min wall; 330 min CPU",
       "Value / cost read": "Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.96.",
       "Next action": "Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher."
     },
     {
       "Priority": 2,
       "Metric": "Alien entry and challenge-stage novelty",
-      "Current": "7.8/10",
+      "Current": "8/10",
       "Target": "7.5 first gate; 9.0+ mature",
       "Gap to target": "at target",
       "Estimated effort": "High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass",
       "Expected resources": "cpu, browser",
       "Tracked spend": "177 runs; 24.6 min wall; 40.9 min CPU",
       "Value / cost read": "Estimated cost/value; dedicated investment candidate not yet generated.",
-      "Next action": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10."
+      "Next action": "Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10."
     },
     {
       "Priority": 3,
@@ -2850,8 +2850,8 @@
       "annotationStatus": "semantic-scored",
       "confidence": "medium-high",
       "linkedMetric": "Audio identity, event feedback, and cue alignment",
-      "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-14-1c788342-dirty-180248/report.json",
-      "next": "Tune the highest segment-level gap next: captureBeam tail. Rerun audio comparison and event-gap analysis after the change."
+      "anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-15-60326a33-dirty-124517/report.json",
+      "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "rank": 3,
@@ -2898,7 +2898,7 @@
       "annotationStatus": "scored",
       "confidence": "medium",
       "linkedMetric": "Boss entry and formation grammar",
-      "anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-14-1c788342/report.json",
+      "anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-60326a33/report.json",
       "next": "Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly."
     },
     {
@@ -2910,7 +2910,7 @@
       "annotationStatus": "scored",
       "confidence": "medium-high",
       "linkedMetric": "Level arc and encounter shape",
-      "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+      "anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
       "next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
     },
     {
@@ -2996,8 +2996,8 @@
       "Annotation status": "semantic-scored",
       "Confidence": "medium-high",
       "Linked metric": "Audio identity, event feedback, and cue alignment",
-      "Anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-14-1c788342-dirty-180248/report.json",
-      "Missing next": "Tune the highest segment-level gap next: captureBeam tail. Rerun audio comparison and event-gap analysis after the change."
+      "Anchor": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-15-60326a33-dirty-124517/report.json",
+      "Missing next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "Priority": 3,
@@ -3044,7 +3044,7 @@
       "Annotation status": "scored",
       "Confidence": "medium",
       "Linked metric": "Boss entry and formation grammar",
-      "Anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-14-1c788342/report.json",
+      "Anchor": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-60326a33/report.json",
       "Missing next": "Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly."
     },
     {
@@ -3056,7 +3056,7 @@
       "Annotation status": "scored",
       "Confidence": "medium-high",
       "Linked metric": "Level arc and encounter shape",
-      "Anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json",
+      "Anchor": "reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json",
       "Missing next": "Add more long-play reference windows and expert-route scoring for challenge/reward opportunities."
     },
     {

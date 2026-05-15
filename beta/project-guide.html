@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 14, 2026</span>
+              <span class="metaValue">May 15, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -636,6 +636,40 @@
     </section>
   
 
+    <section class="section" id="security-auth-replay-storage-lockdown">
+      <div class="sectionHeader">
+        <h2>Security, Auth, And Replay Storage Lock-Down</h2>
+        <p>The release-facing rule set for account, score, replay, and future high-score video posting work.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Posting Boundary</h3>
+      <p>Top-10 video posting is authenticated and authorized only. The browser may prompt a top-10 player to sign in, but uploads require a future server-owned path.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>No Browser Secrets</h3>
+      <p>No Supabase service-role material, OAuth client secret, YouTube upload token, or upload endpoint may ship in browser code. Arcade Music remains a playlist embed, not upload authority.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Replay Storage</h3>
+      <p>Replay video remains browser-local IndexedDB by default. A score can link to a local replay on the same device, but hosted replay/video posting needs explicit storage, auth, and RLS rules.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Release Gate</h3>
+      <p>`npm run harness:check:security-auth-replay-storage` is now part of publish preflight alongside the Supabase Data API contract gate.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
     <section class="section" id="docs-index">
       <div class="sectionHeader">
         <h2>Documentation Index</h2>
@@ -805,7 +839,7 @@ Template: <code>src/public/aurora-galactica.template.html</code></td><td><code>r
 
 <code>project-guide.html</code></td><td><code>tools/build/build-index.js#buildProjectGuide</code>
 
-Template: <code>src/project-guide.template.html</code></td><td><code>project-guide.json</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>PLAN.md</code>, <code>PRODUCT_ROADMAP.md</code>, <code>RELEASE_READINESS_REVIEW.md</code>, <code>EXTERNAL_SERVICES.md</code>, <code>SUPABASE_DATA_API_ACCESS.md</code>, <code>supabase/data-api-access-contract.sql</code>, <code>documentation-provenance.json</code></td><td>Guide overview and source document index: Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract. Documentation provenance: The hosted guide renders this manifest as a build-time table.</td></tr>
+Template: <code>src/project-guide.template.html</code></td><td><code>project-guide.json</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>PLAN.md</code>, <code>PRODUCT_ROADMAP.md</code>, <code>RELEASE_READINESS_REVIEW.md</code>, <code>EXTERNAL_SERVICES.md</code>, <code>SUPABASE_DATA_API_ACCESS.md</code>, <code>SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</code>, <code>supabase/data-api-access-contract.sql</code>, <code>documentation-provenance.json</code></td><td>Guide overview and source document index: Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract and the security/auth/replay storage lock-down. Documentation provenance: The hosted guide renders this manifest as a build-time table.</td></tr>
             
 
               <tr><td>Hosted Release Notes
@@ -1094,7 +1128,7 @@ npm run build</code></pre>
             <tbody>
               <tr><td>Bee / Zako scout</td><td><code>bee</code>, families <code>classic</code>, <code>scorpion</code>, <code>stingray</code>, <code>galboss</code></td><td>Basic formation alien; dives, fires, supplies early pressure, appears in challenge groups.</td><td>All regular stages and challenge stages.</td><td>Galaga Zako/scout behavior and cue family; current anchors include <code>reference-artifacts/analyses/galaga-stage-reference-video/README.md</code>, <code>reference-artifacts/analyses/challenge-stage-reference/README.md</code>, and <code>src/assets/reference-audio/galaga3-zako.m4a</code>.</td><td>Behavior/stage role: 7.8/10 medium via alien-entry/challenge scorer. As-displayed visual likeness: low-confidence proxy only.</td><td>Add extracted Galaga alien sprite/contact-sheet crop targets and score Aurora displayed sprites against them.</td></tr>
 <tr><td>Butterfly / escort alien</td><td><code>but</code>, families <code>classic</code>, <code>scorpion</code>, <code>stingray</code>, <code>galboss</code></td><td>Mid-value formation alien; dives more dangerously, escorts bosses in special attacks, participates in challenge set pieces.</td><td>All regular stages; high-value role in stages 4+.</td><td>Galaga butterfly/escort behavior; current anchors include boss/formation grammar and path-family reports under <code>reference-artifacts/analyses/formation-boss-grammar-conformance/</code> and <code>reference-artifacts/analyses/formation-boss-path-family-comparison/</code>.</td><td>Behavior/stage role: 7.8/10 medium; special-attack grammar contributes to 9.2/10 boss/formation score. Visual likeness pending.</td><td>Add per-role visual crop scoring and separate escort-path precision against Galaga reference windows.</td></tr>
-<tr><td>Boss Galaga / command boss</td><td><code>boss</code>, families <code>classic</code>, <code>stingray</code>, <code>galboss</code></td><td>Two-hit boss; captures player ship, carries captured fighter, leads special attacks, awards high dive/squadron points.</td><td>All regular stages; capture/rescue and special-attack windows.</td><td>Galaga boss, tractor-beam, capture/rescue, and boss-hit/death timing. Audio anchors include <code>galaga3-tractor-beam.m4a</code>, <code>galaga3-fighter-captured.m4a</code>, <code>galaga2-fighter-rescued-double-ship.m4a</code>, <code>galaga3-boss-death-sasori.m4a</code>.</td><td>Capture/rescue guardrails high; boss/formation grammar 9.2/10 medium; boss-hit/death audio is measured but still part of the 6.9/10 audio gap. First-hit damage now uses a compact spark/ring/cross flash rather than large destruction bursts.</td><td>Improve explosion/damage visual event authenticity and direct boss path precision from extracted reference paths.</td></tr>
+<tr><td>Boss Galaga / command boss</td><td><code>boss</code>, families <code>classic</code>, <code>stingray</code>, <code>galboss</code></td><td>Two-hit boss; captures player ship, carries captured fighter, leads special attacks, awards high dive/squadron points.</td><td>All regular stages; capture/rescue and special-attack windows.</td><td>Galaga boss, tractor-beam, capture/rescue, and boss-hit/death timing. Audio anchors include <code>galaga3-tractor-beam.m4a</code>, <code>galaga3-fighter-captured.m4a</code>, <code>galaga2-fighter-rescued-double-ship.m4a</code>, <code>galaga3-boss-damage-flagship-fighter-shot.m4a</code>, and <code>galaga3-boss-death-sasori.m4a</code>.</td><td>Capture/rescue guardrails high; boss/formation grammar 9.2/10 medium; boss-hit audio now uses the curated first-damage subwindow and moved measured event risk from 4.62/10 to 0.96/10. First-hit damage now uses a compact spark/ring/cross flash rather than large destruction bursts.</td><td>Improve explosion/damage visual event authenticity, boss final-death distinctness, and direct boss path precision from extracted reference paths.</td></tr>
 <tr><td>Challenge rogue / specialty alien</td><td><code>rogue</code></td><td>Challenge-stage novelty role used to create distinct set pieces and visible learning opportunities.</td><td>Challenge stages 7, 11, 15 in current evidence windows.</td><td>Galaga challenging-stage specialty waves and bonus-stage composition; current direct reference is challenge-stage timing/contact evidence.</td><td>Alien-entry/challenge variation scorer: 7.8/10. Challenge trajectory variation is still maxed at current broad scorer resolution, but arrival-versus-appearance is 6.8/10 and pattern novelty depth is 7.2/10.</td><td>Ground specialty alien introduction against actual Galaga challenge-stage contact sheets, then score first-visible arrival, entry side, target group, exit, and bonus-opportunity readability.</td></tr>
 <tr><td>Captured fighter</td><td>carried player fighter state on boss</td><td>Converts player state into risk/reward: destroy too early for loss, rescue for dual fighter.</td><td>Capture/rescue stages after boss capture.</td><td>Galaga capture/rescue audio and event flow; see <code>reference-artifacts/analyses/correspondence/capture-rescue/</code>.</td><td>Capture/rescue flow is a current guardrail pass; visual feedback still needs richer explosion/impact semantics.</td><td>Add catalog row to visual event/effects index once explosion conformance scorer exists.</td></tr>
             </tbody>
@@ -1107,12 +1141,12 @@ npm run build</code></pre>
               <tr><th>Cue family</th><th>Runtime cue</th><th>Gameplay meaning</th><th>Target reference</th><th>Current conformance</th><th>Gap / next action</th></tr>
             </thead>
             <tbody>
-              <tr><td>Start and stage entry</td><td><code>gameStart</code>, <code>formationArrival</code>, <code>stageTransition</code></td><td>Begins run and anchors formation arrival timing.</td><td><code>galaga2-game-start.m4a</code>, <code>galaga3-level-underscore.m4a</code>, <code>galaga-level-flag-v1.m4a</code>.</td><td>Stage timing strong; audio identity category is now 6.9/10. The latest local playtest showed <code>stageTransition</code> was too abbreviated, so the reference-backed phrase was widened to 3.35s while alignment guardrails stayed green.</td><td>Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow.</td></tr>
-<tr><td>Player and enemy fire</td><td><code>playerShot</code>, <code>enemyShot</code></td><td>Differentiates player action from enemy pressure.</td><td><code>galaga3-boss-damage-flagship-fighter-shot.m4a</code>, cue comparisons in <code>aurora-audio-theme-comparison</code>, and candidate segment evidence under <code>reference-artifacts/analyses/aurora-audio-cue-candidates/</code>.</td><td>Measured but still one of the weakest user-experience categories.</td><td>Improve cue distinctness, cooldown fit, and event alignment without masking hit feedback.</td></tr>
-<tr><td>Enemy impact/destruction</td><td><code>enemyHit</code>, <code>enemyBoom</code></td><td>Immediate feedback that a missile impacted or destroyed a normal alien.</td><td><code>galaga3-zako.m4a</code>; latest gap report in <code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code>.</td><td>Audio gap remains high-value; current user note says explosions are not authentic enough. Latest acoustic event score is 6.30/10 with no semantic cue failures.</td><td>Add event-specific explosion/impact scorer covering missile impact, alien death, ship impact, temporary immunity, and boss damage.</td></tr>
-<tr><td>Boss damage/destruction</td><td><code>bossHit</code>, <code>bossBoom</code></td><td>Shows multi-hit boss damage and final destruction clearly.</td><td><code>galaga3-boss-damage-flagship-fighter-shot.m4a</code>, <code>galaga3-boss-death-sasori.m4a</code>.</td><td>Measured at cue level but still needs stronger audiovisual event conformance; first-hit damage now uses a smaller damage flash instead of clunky full-explosion bursts.</td><td>Score first-hit flash, sound onset, hold/cadence, final explosion, and player comprehension.</td></tr>
+              <tr><td>Start and stage entry</td><td><code>gameStart</code>, <code>formationArrival</code>, <code>stageTransition</code></td><td>Begins run and anchors formation arrival timing.</td><td><code>galaga2-game-start.m4a</code>, <code>galaga3-level-underscore.m4a</code>, <code>galaga-level-flag-v1.m4a</code>.</td><td>Stage timing strong; audio identity category is now 7/10. The latest local playtest showed <code>stageTransition</code> was too abbreviated, so the reference-backed phrase was widened to 3.35s while alignment guardrails stayed green.</td><td>Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow.</td></tr>
+<tr><td>Player and enemy fire</td><td><code>playerShot</code>, <code>enemyShot</code></td><td>Differentiates player action from enemy pressure.</td><td><code>galaga3-boss-damage-flagship-fighter-shot.m4a</code>, cue comparisons in <code>aurora-audio-theme-comparison</code>, and candidate segment evidence under <code>reference-artifacts/analyses/aurora-audio-cue-candidates/</code>.</td><td><code>playerShot</code> now uses the measured 0.08s-0.32s player-fire subwindow in the early classic and Galaga reference audio themes, moving its event-gap risk from 9.37/10 to 1.0/10. <code>enemyShot</code> keeps its distinct measured threat-fire window.</td><td>Continue rapid-fire listening and scorer checks so player and enemy fire stay distinct without masking hit feedback.</td></tr>
+<tr><td>Enemy impact/destruction</td><td><code>enemyHit</code>, <code>enemyBoom</code></td><td>Immediate feedback that a missile impacted or destroyed a normal alien.</td><td><code>galaga3-zako.m4a</code>; latest gap report in <code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code>.</td><td>Audio gap remains high-value; current user note says explosions are not authentic enough. Latest acoustic event score is 6.73/10 with no semantic cue failures.</td><td>Add event-specific explosion/impact scorer covering missile impact, alien death, ship impact, temporary immunity, and boss damage.</td></tr>
+<tr><td>Boss damage/destruction</td><td><code>bossHit</code>, <code>bossBoom</code></td><td>Shows multi-hit boss damage and final destruction clearly.</td><td><code>galaga3-boss-damage-flagship-fighter-shot.m4a</code>, <code>galaga3-boss-death-sasori.m4a</code>.</td><td><code>bossHit</code> now uses the measured 1.149s-1.439s damage subwindow, cutting its event-gap risk to 0.96/10 while preserving cue alignment. First-hit damage still needs a stronger audiovisual score, and final boss destruction remains separately measured.</td><td>Score first-hit flash, sound onset, hold/cadence, final explosion, and player comprehension.</td></tr>
 <tr><td>Capture/rescue</td><td><code>captureBeam</code>, <code>captureSuccess</code>, <code>captureRetreat</code>, <code>rescueJoin</code>, <code>capturedFighterDestroyed</code></td><td>Explains the most important Galaga-style risk/reward loop.</td><td>Tractor beam, captured-fighter, capturing, rescued-double-ship, and captured-fighter-destroyed reference clips in <code>src/assets/reference-audio/</code>.</td><td>Flow guardrails pass; audio is reference-backed.</td><td>Improve event-rich logs and commentator/status hooks around capture and rescue.</td></tr>
-<tr><td>Challenge results</td><td><code>challengeTransition</code>, <code>challengeResults</code>, <code>challengePerfect</code></td><td>Marks bonus-stage entry and result/reward feedback.</td><td><code>galaga2-challenging-stage.m4a</code>, <code>galaga2-challenging-stage-results.m4a</code>, <code>galaga2-challenging-stage-perfect.m4a</code>.</td><td>Timing guardrails pass; <code>challengeTransition</code> now uses a 1.6s measured phrase, <code>challengeResults</code> uses 1.95s, and <code>challengePerfect</code> uses 2.15s. Challenge novelty and arrival authenticity remain a separate high-value gameplay gap.</td><td>Add score/result surface conformance and direct challenge-stage audio fit checks.</td></tr>
+<tr><td>Challenge results</td><td><code>challengeTransition</code>, <code>challengeResults</code>, <code>challengePerfect</code></td><td>Marks bonus-stage entry and result/reward feedback.</td><td><code>galaga2-challenging-stage.m4a</code>, <code>galaga2-challenging-stage-results.m4a</code>, <code>galaga2-challenging-stage-perfect.m4a</code>.</td><td>Timing guardrails pass; <code>challengeTransition</code> now uses a 1.6s measured phrase, <code>challengeResults</code> uses 1.95s, and <code>challengePerfect</code> uses 2.15s. <code>challengePerfect</code> is the current highest measured audio gap, but onset-only candidates are rejected by the ceremony-duration gate. Challenge novelty and arrival authenticity remain a separate high-value gameplay gap.</td><td>Add score/result surface conformance and direct challenge-stage audio fit checks using full-phrase reward candidates.</td></tr>
 <tr><td>High score / game over</td><td><code>gameOver</code>, <code>highScoreFirst</code>, <code>highScoreOther</code></td><td>End-of-run identity and arcade scoring ritual.</td><td><code>galaga-last-ship-destroyed-ambience.m4a</code>, <code>galaga3-name-entry-1st.m4a</code>, <code>galaga3-name-entry-2nd-5th.m4a</code>.</td><td>The latest local playtest found a final-death audio cutout. Runtime now plays/logs <code>gameOver</code> before export, trims the silent lead-in, and delays recording stop so the final tail is preserved.</td><td>Include initials prompt and leaderboard behavior in release-lane persona testing, and keep final-death audio tail in the release capture checklist.</td></tr>
             </tbody>
           </table>
@@ -1515,7 +1549,7 @@ npm run build</code></pre>
       <div class="docWrap">
         <p class="docMeta">Generated from <code>RELEASE_CONFORMANCE_DASHBOARD.md</code> during build.</p>
         <div class="markdown">
-          <p>Generated: <code>2026-05-14T18:06:13.295Z</code></p>
+          <p>Generated: <code>2026-05-15T12:53:10.491Z</code></p>
 <p>This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.</p>
 <p>Local dashboard: <code>http://127.0.0.1:4312/local-dev/conformance-dashboard.html</code> after <code>npm run local:resume</code>. Release-lane dashboard: <code>conformance-dashboard.html</code> is generated into <code>dist/dev</code>, copied through beta/production promotion, and published with the lane bundle.</p>
 <h3>Game Scope</h3>
@@ -1529,9 +1563,9 @@ npm run build</code></pre>
             </thead>
             <tbody>
               <tr><td>Overall quality</td><td>9.1/10</td><td>&gt;=9.3</td><td>Full score refresh after all major cycles</td></tr>
-<tr><td>Audio identity</td><td>6.9/10</td><td>&gt;=7.5</td><td>Primary user-experience gap</td></tr>
+<tr><td>Audio identity</td><td>7/10</td><td>&gt;=7.5</td><td>Primary user-experience gap</td></tr>
 <tr><td>Level arc</td><td>8.7/10</td><td>&gt;=8.8</td><td>Long-play gameplay-quality gate</td></tr>
-<tr><td>Alien entry and challenge-stage novelty</td><td>7.8/10</td><td>&gt;=7.5 first gate; &gt;=9.0 mature</td><td>New high-priority long-cycle gameplay-authenticity gate</td></tr>
+<tr><td>Alien entry and challenge-stage novelty</td><td>8/10</td><td>&gt;=7.5 first gate; &gt;=9.0 mature</td><td>New high-priority long-cycle gameplay-authenticity gate</td></tr>
 <tr><td>Boss entry and formation grammar</td><td>9.2/10</td><td>&gt;=8.0 first gate; &gt;=9.0 mature</td><td>New measured gate for stage choreography</td></tr>
 <tr><td>Alien entry / formations</td><td>10/10 measured</td><td>&gt;=9.2 with path/rack scorer</td><td>Now backed by dedicated alien-entry/challenge variation scorer</td></tr>
 <tr><td>Challenge variation</td><td>10/10 measured</td><td>&gt;=9.2 with dedicated scorer</td><td>New explicit gate</td></tr>
@@ -1565,24 +1599,24 @@ npm run build</code></pre>
               <tr><th>Priority</th><th>Metric</th><th>Current</th><th>Confidence</th><th>Resolution</th><th>Cost / resources</th><th>Tracked spend</th><th>Major-gate target</th><th>Measurement status</th><th>Why this matters</th><th>Effort / time estimate</th><th>Recommended next step</th><th>Evidence</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Audio identity, event feedback, and cue alignment</td><td>6.9/10</td><td>medium-high</td><td>21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features</td><td>high; cpu, model-api, openai-api</td><td>278 runs; 200 min wall; 359.1 min CPU</td><td>7.5-8.0</td><td>Measured release category; weakest axis</td><td>Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.</td><td>High; 3-6 hrs local/model-assisted analysis</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json</td></tr>
-<tr><td>2</td><td>Alien entry and challenge-stage novelty</td><td>7.8/10</td><td>medium</td><td>dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness</td><td>estimated; cpu, browser</td><td>177 runs; 24.6 min wall; 40.9 min CPU</td><td>7.5 first gate; 9.0+ mature</td><td>Dedicated long-cycle scorer; high-priority gameplay-authenticity gap</td><td>Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.</td><td>High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass</td><td>Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json</td></tr>
-<tr><td>3</td><td>Level arc and encounter shape</td><td>8.7/10</td><td>medium-high</td><td>multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence</td><td>low; cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>8.8-9.0</td><td>Measured release category</td><td>Controls whether long play feels like Galaga-like escalation rather than repeated pressure.</td><td>Medium-high; 2-5 hrs</td><td>Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>4</td><td>Boss entry and formation grammar</td><td>9.2/10</td><td>medium</td><td>first-class boss/formation scorer using stage-window event grammar, boss timing, escort composition, challenge identity, and explicit path/slot measurement debt</td><td>high; cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>8.0-8.5 first gate; 9.0+ with path/slot extraction</td><td>Measured release category; new first-class axis</td><td>Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.</td><td>Medium-high; 2-5 hrs, then recurring low-cost guardrail</td><td>Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
+              <tr><td>1</td><td>Audio identity, event feedback, and cue alignment</td><td>7/10</td><td>medium-high</td><td>21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features</td><td>high; cpu, model-api, openai-api</td><td>266 runs; 185.8 min wall; 330 min CPU</td><td>7.5-8.0</td><td>Measured release category; weakest axis</td><td>Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.</td><td>High; 3-6 hrs local/model-assisted analysis</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json</td></tr>
+<tr><td>2</td><td>Alien entry and challenge-stage novelty</td><td>8/10</td><td>medium</td><td>dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness</td><td>estimated; cpu, browser</td><td>177 runs; 24.6 min wall; 40.9 min CPU</td><td>7.5 first gate; 9.0+ mature</td><td>Dedicated long-cycle scorer; high-priority gameplay-authenticity gap</td><td>Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.</td><td>High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass</td><td>Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>3</td><td>Level arc and encounter shape</td><td>8.7/10</td><td>medium-high</td><td>multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence</td><td>low; cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>8.8-9.0</td><td>Measured release category</td><td>Controls whether long play feels like Galaga-like escalation rather than repeated pressure.</td><td>Medium-high; 2-5 hrs</td><td>Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>4</td><td>Boss entry and formation grammar</td><td>9.2/10</td><td>medium</td><td>first-class boss/formation scorer using stage-window event grammar, boss timing, escort composition, challenge identity, and explicit path/slot measurement debt</td><td>high; cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>8.0-8.5 first gate; 9.0+ with path/slot extraction</td><td>Measured release category; new first-class axis</td><td>Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.</td><td>Medium-high; 2-5 hrs, then recurring low-cost guardrail</td><td>Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
 <tr><td>5</td><td>Overall visual look and feel: gameplay, start page, typography complexity</td><td>8.6/10</td><td>medium-low</td><td>first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers</td><td>medium; cpu, browser, gpu</td><td>1 runs; 0.1 min wall; 0.1 min CPU</td><td>8.4-8.8</td><td>Measured visual scorer; medium-low confidence</td><td>A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere.</td><td>Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review</td><td>Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.</td><td>reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json</td></tr>
-<tr><td>6</td><td>Stage 4 pressure exact replay / pressure curve precision</td><td>6/10</td><td>medium</td><td>narrow pressure/loss replay windows; exact replay coverage still limited</td><td>medium; cpu, browser</td><td>28 runs; 12.8 min wall; 18.5 min CPU</td><td>8.2-8.6</td><td>Measured level-arc weak submetric</td><td>Pressure should be learnable and reproducible, not merely present in one run.</td><td>Medium-high; prior runs ~12.8 min wall / 18.5 min CPU</td><td>Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>7</td><td>Alien entry to levels: formation, timing, and methods</td><td>10/10</td><td>medium</td><td>composite proxy from opening timing, geometry, and movement grammar</td><td>estimated; cpu, browser</td><td>109 runs; 24.1 min wall; 32.1 min CPU</td><td>9.0-9.4 with path and rack-slot scorer</td><td>Dedicated alien-entry submetric</td><td>Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.</td><td>Medium; 1-3 hrs plus visual review</td><td>Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json</td></tr>
-<tr><td>8</td><td>Challenge-stage variation and new alien/formations introduction</td><td>10/10</td><td>medium</td><td>composite proxy from challenge timing, challenge identity, and non-repetition</td><td>estimated; cpu, browser</td><td>109 runs; 24.1 min wall; 32.1 min CPU</td><td>9.0-9.4 with dedicated scorer</td><td>Dedicated challenge trajectory/novelty submetric</td><td>Challenge stages should teach new motion/reward patterns, not only pause normal combat.</td><td>Medium-high; 2-4 hrs</td><td>Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-11-46e1b45c/report.json</td></tr>
-<tr><td>9</td><td>Progression and persona depth</td><td>8.4/10</td><td>medium</td><td>scorer-backed artifact with selected harness windows</td><td>estimated; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.1+</td><td>Measured release category</td><td>Keeps the game learnable across skill levels and supports later-stage quality.</td><td>Low-medium; 1-2 hrs</td><td>Resolve remaining ordering edge case after higher-value audio/level-arc work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>10</td><td>Stage 1 opening timing fidelity</td><td>8.5/10</td><td>medium</td><td>scorer-backed artifact with selected harness windows</td><td>medium; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>8.8-9.2</td><td>Measured release category</td><td>First impression and direct reference feel.</td><td>Low-medium; 1-2 hrs</td><td>Tune only after audio and level-arc priorities unless regressions appear.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>11</td><td>Arcade console frame UI style</td><td>9.2/10</td><td>medium</td><td>UI shell proxy; dedicated visual/modal rubric still needed</td><td>medium; cpu, browser, gpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.4-9.6</td><td>Measured as UI shell; needs separate arcade-frame style rubric</td><td>The cabinet frame is the constant product surface around every game.</td><td>Medium; 1-3 hrs visual QA</td><td>Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>12</td><td>Popup/help/scoring/leaderboard surface formatting</td><td>9.2/10</td><td>medium</td><td>UI shell proxy; dedicated visual/modal rubric still needed</td><td>medium; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.4-9.6</td><td>Measured through UI shell suite; needs modal-specific scoring</td><td>Popup surfaces carry learning, scoring trust, feedback, and player records.</td><td>Low-medium; 1-2 hrs</td><td>Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>13</td><td>Dive fairness and safety</td><td>9.1/10</td><td>medium-high</td><td>seed/persona safety guardrails and pressure-sensitive collision checks</td><td>guardrail; cpu</td><td>42 runs; 28.1 min wall; 36.3 min CPU</td><td>9.3+</td><td>Measured release category</td><td>Protects user trust while pressure is increased.</td><td>Guardrail; 30-90 min per risky gameplay cycle</td><td>Keep as required guardrail for pressure/reward changes.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>14</td><td>Player movement conformance</td><td>9.8/10</td><td>high-current-pass</td><td>reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Core control feel is already excellent.</td><td>Guardrail only</td><td>Do not tune unless a new reference metric proves a gap.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>15</td><td>Shot and hit responsiveness</td><td>10/10</td><td>high-current-pass</td><td>functional combat-response guardrails; audiovisual semantics are scored separately</td><td>guardrail; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Core combat response is already excellent.</td><td>Guardrail only</td><td>Protect during explosion/audio/event feedback work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>16</td><td>Stage 1 opening geometry fidelity</td><td>10/10</td><td>high-current-pass</td><td>opening formation geometry checks; later-stage entry variation is separate</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Formation geometry is already locked.</td><td>Guardrail only</td><td>Protect during alien-entry visual work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>17</td><td>Capture and rescue rule fidelity</td><td>10/10</td><td>high-current-pass</td><td>rule/state harness checks; feedback clarity and reward feel are separate</td><td>guardrail; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Strong Galaga identity mechanic; should not regress while feedback improves.</td><td>Guardrail only</td><td>Use as release blocker for capture/rescue-adjacent audio or explosion changes.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
-<tr><td>18</td><td>Challenge-stage timing fidelity</td><td>9.2/10</td><td>high-current-pass</td><td>challenge timing deltas within tolerance; variation and teaching value are separate</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 9.8+</td><td>Measured release category</td><td>Timing is strong; variation is the gap, not baseline timing.</td><td>Guardrail only</td><td>Preserve while adding challenge variation scoring.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</td></tr>
+<tr><td>6</td><td>Stage 4 pressure exact replay / pressure curve precision</td><td>6/10</td><td>medium</td><td>narrow pressure/loss replay windows; exact replay coverage still limited</td><td>medium; cpu, browser</td><td>28 runs; 12.8 min wall; 18.5 min CPU</td><td>8.2-8.6</td><td>Measured level-arc weak submetric</td><td>Pressure should be learnable and reproducible, not merely present in one run.</td><td>Medium-high; prior runs ~12.8 min wall / 18.5 min CPU</td><td>Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics.</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>7</td><td>Alien entry to levels: formation, timing, and methods</td><td>10/10</td><td>medium</td><td>composite proxy from opening timing, geometry, and movement grammar</td><td>estimated; cpu, browser</td><td>109 runs; 24.1 min wall; 32.1 min CPU</td><td>9.0-9.4 with path and rack-slot scorer</td><td>Dedicated alien-entry submetric</td><td>Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts.</td><td>Medium; 1-3 hrs plus visual review</td><td>Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>8</td><td>Challenge-stage variation and new alien/formations introduction</td><td>10/10</td><td>medium</td><td>composite proxy from challenge timing, challenge identity, and non-repetition</td><td>estimated; cpu, browser</td><td>109 runs; 24.1 min wall; 32.1 min CPU</td><td>9.0-9.4 with dedicated scorer</td><td>Dedicated challenge trajectory/novelty submetric</td><td>Challenge stages should teach new motion/reward patterns, not only pause normal combat.</td><td>Medium-high; 2-4 hrs</td><td>Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.</td><td>reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>9</td><td>Progression and persona depth</td><td>8.4/10</td><td>medium</td><td>scorer-backed artifact with selected harness windows</td><td>estimated; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.1+</td><td>Measured release category</td><td>Keeps the game learnable across skill levels and supports later-stage quality.</td><td>Low-medium; 1-2 hrs</td><td>Resolve remaining ordering edge case after higher-value audio/level-arc work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>10</td><td>Stage 1 opening timing fidelity</td><td>8.5/10</td><td>medium</td><td>scorer-backed artifact with selected harness windows</td><td>medium; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>8.8-9.2</td><td>Measured release category</td><td>First impression and direct reference feel.</td><td>Low-medium; 1-2 hrs</td><td>Tune only after audio and level-arc priorities unless regressions appear.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>11</td><td>Arcade console frame UI style</td><td>9.2/10</td><td>medium</td><td>UI shell proxy; dedicated visual/modal rubric still needed</td><td>medium; cpu, browser, gpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.4-9.6</td><td>Measured as UI shell; needs separate arcade-frame style rubric</td><td>The cabinet frame is the constant product surface around every game.</td><td>Medium; 1-3 hrs visual QA</td><td>Split frame style from generic shell integrity: rails, bezel density, labels, chroming, build/date treatment.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>12</td><td>Popup/help/scoring/leaderboard surface formatting</td><td>9.2/10</td><td>medium</td><td>UI shell proxy; dedicated visual/modal rubric still needed</td><td>medium; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>9.4-9.6</td><td>Measured through UI shell suite; needs modal-specific scoring</td><td>Popup surfaces carry learning, scoring trust, feedback, and player records.</td><td>Low-medium; 1-2 hrs</td><td>Add modal-specific scorer for help, scoring, feedback, account, leaderboard, and game-over result screens.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>13</td><td>Dive fairness and safety</td><td>9.1/10</td><td>medium-high</td><td>seed/persona safety guardrails and pressure-sensitive collision checks</td><td>guardrail; cpu</td><td>42 runs; 28.1 min wall; 36.3 min CPU</td><td>9.3+</td><td>Measured release category</td><td>Protects user trust while pressure is increased.</td><td>Guardrail; 30-90 min per risky gameplay cycle</td><td>Keep as required guardrail for pressure/reward changes.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>14</td><td>Player movement conformance</td><td>10/10</td><td>high-current-pass</td><td>reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Core control feel is already excellent.</td><td>Guardrail only</td><td>Do not tune unless a new reference metric proves a gap.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>15</td><td>Shot and hit responsiveness</td><td>10/10</td><td>high-current-pass</td><td>functional combat-response guardrails; audiovisual semantics are scored separately</td><td>guardrail; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Core combat response is already excellent.</td><td>Guardrail only</td><td>Protect during explosion/audio/event feedback work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>16</td><td>Stage 1 opening geometry fidelity</td><td>10/10</td><td>high-current-pass</td><td>opening formation geometry checks; later-stage entry variation is separate</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Formation geometry is already locked.</td><td>Guardrail only</td><td>Protect during alien-entry visual work.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>17</td><td>Capture and rescue rule fidelity</td><td>10/10</td><td>high-current-pass</td><td>rule/state harness checks; feedback clarity and reward feel are separate</td><td>guardrail; cpu</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 10</td><td>Measured release category</td><td>Strong Galaga identity mechanic; should not regress while feedback improves.</td><td>Guardrail only</td><td>Use as release blocker for capture/rescue-adjacent audio or explosion changes.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
+<tr><td>18</td><td>Challenge-stage timing fidelity</td><td>9.2/10</td><td>high-current-pass</td><td>challenge timing deltas within tolerance; variation and teaching value are separate</td><td>guardrail; cpu, browser</td><td>14 runs; 15.3 min wall; 17.7 min CPU</td><td>Maintain 9.8+</td><td>Measured release category</td><td>Timing is strong; variation is the gap, not baseline timing.</td><td>Guardrail only</td><td>Preserve while adding challenge variation scoring.</td><td>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</td></tr>
             </tbody>
           </table>
         </div>
@@ -1596,12 +1630,12 @@ npm run build</code></pre>
             <tbody>
               <tr><td>Latest overall conformance</td><td>9.1/10</td><td>Primary quality roll-up for release notes and scorecards</td></tr>
 <tr><td>Latest level-arc conformance</td><td>8.7/10</td><td>Long-play gameplay-shape gate</td></tr>
-<tr><td>Metric points scanned</td><td>1274</td><td>History depth behind score trends</td></tr>
-<tr><td>Score deltas found</td><td>137</td><td>Past-goal movement available for review</td></tr>
-<tr><td>Measured runs</td><td>529</td><td>Tracked harness/model/local compute work</td></tr>
-<tr><td>Tracked wall time</td><td>349.4 min</td><td>Human clock-time planning input</td></tr>
-<tr><td>Tracked CPU time</td><td>561 min</td><td>Local compute-cost planning input</td></tr>
-<tr><td>Tracked artifact growth</td><td>851.8 MB</td><td>Evidence volume and storage/review-cost proxy</td></tr>
+<tr><td>Metric points scanned</td><td>1230</td><td>History depth behind score trends</td></tr>
+<tr><td>Score deltas found</td><td>134</td><td>Past-goal movement available for review</td></tr>
+<tr><td>Measured runs</td><td>517</td><td>Tracked harness/model/local compute work</td></tr>
+<tr><td>Tracked wall time</td><td>335.1 min</td><td>Human clock-time planning input</td></tr>
+<tr><td>Tracked CPU time</td><td>531.9 min</td><td>Local compute-cost planning input</td></tr>
+<tr><td>Tracked artifact growth</td><td>822.4 MB</td><td>Evidence volume and storage/review-cost proxy</td></tr>
             </tbody>
           </table>
         </div>
@@ -1625,8 +1659,8 @@ npm run build</code></pre>
               <tr><th>Local CPU/browser purpose</th><th>Runs</th><th>Wall time</th><th>Share</th><th>Meaning</th></tr>
             </thead>
             <tbody>
-              <tr><td>Audio conformance and cue feedback</td><td>379</td><td>294.6 min</td><td>90.8%</td><td>Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding.</td></tr>
-<tr><td>Gameplay behavior and level complexity</td><td>138</td><td>25 min</td><td>7.7%</td><td>Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture.</td></tr>
+              <tr><td>Audio conformance and cue feedback</td><td>367</td><td>280.4 min</td><td>90.4%</td><td>Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding.</td></tr>
+<tr><td>Gameplay behavior and level complexity</td><td>138</td><td>25 min</td><td>8%</td><td>Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture.</td></tr>
 <tr><td>Harness, ingestion, and assessment logic</td><td>4</td><td>4.8 min</td><td>1.5%</td><td>Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion.</td></tr>
 <tr><td>Visual and video reference analysis</td><td>1</td><td>0.1 min</td><td>0%</td><td>Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability.</td></tr>
 <tr><td>Dashboard, docs, and release planning</td><td>5</td><td>0 min</td><td>0%</td><td>Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned.</td></tr>
@@ -1639,9 +1673,9 @@ npm run build</code></pre>
               <tr><th>Project part</th><th>Positive score movement</th><th>Share</th><th>Player/designer meaning</th></tr>
             </thead>
             <tbody>
-              <tr><td>Gameplay complexity and stage arc</td><td>+46.2</td><td>73.9%</td><td>Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve.</td></tr>
-<tr><td>Core mechanics and control feel</td><td>+7.9</td><td>12.6%</td><td>Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes.</td></tr>
-<tr><td>Audio feedback and event clarity</td><td>+5.7</td><td>9.1%</td><td>Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity.</td></tr>
+              <tr><td>Gameplay complexity and stage arc</td><td>+46.2</td><td>74%</td><td>Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve.</td></tr>
+<tr><td>Core mechanics and control feel</td><td>+7.9</td><td>12.7%</td><td>Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes.</td></tr>
+<tr><td>Audio feedback and event clarity</td><td>+5.6</td><td>9%</td><td>Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity.</td></tr>
 <tr><td>Overall release-quality rollup</td><td>+2.7</td><td>4.3%</td><td>Composite release score movement that reflects several subsystems at once.</td></tr>
             </tbody>
           </table>
@@ -1653,8 +1687,8 @@ npm run build</code></pre>
               <tr><th>Resource</th><th>Measured runs</th><th>Wall time</th><th>CPU time</th></tr>
             </thead>
             <tbody>
-              <tr><td>cpu</td><td>527</td><td>324.4 min</td><td>561 min</td></tr>
-<tr><td>browser</td><td>200</td><td>210.6 min</td><td>369.2 min</td></tr>
+              <tr><td>cpu</td><td>515</td><td>310.1 min</td><td>531.9 min</td></tr>
+<tr><td>browser</td><td>193</td><td>196.4 min</td><td>340.2 min</td></tr>
 <tr><td>gpu-equivalent</td><td>8</td><td>25.8 min</td><td>1.2 min</td></tr>
 <tr><td>codex</td><td>7</td><td>25.7 min</td><td>1.2 min</td></tr>
 <tr><td>model-api</td><td>2</td><td>25 min</td><td>0 min</td></tr>
@@ -1669,7 +1703,7 @@ npm run build</code></pre>
               <tr><th>Axis</th><th>Measured runs</th><th>Wall time</th><th>CPU time</th></tr>
             </thead>
             <tbody>
-              <tr><td>audio</td><td>278</td><td>200 min</td><td>359.1 min</td></tr>
+              <tr><td>audio</td><td>266</td><td>185.8 min</td><td>330 min</td></tr>
 <tr><td>audio-focus-candidate</td><td>27</td><td>66 min</td><td>121.8 min</td></tr>
 <tr><td>conformance-economics</td><td>95</td><td>46.4 min</td><td>30.7 min</td></tr>
 <tr><td>audio-theme-comparison</td><td>25</td><td>30.4 min</td><td>56.2 min</td></tr>
@@ -1687,8 +1721,8 @@ npm run build</code></pre>
               <tr><th>Priority</th><th>Metric</th><th>Current</th><th>Target</th><th>Gap to target</th><th>Estimated effort</th><th>Expected resources</th><th>Tracked spend</th><th>Value / cost read</th><th>Next action</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Audio identity, event feedback, and cue alignment</td><td>6.9/10</td><td>7.5-8.0</td><td>+0.6</td><td>High; 3-6 hrs local/model-assisted analysis</td><td>cpu, model-api, openai-api</td><td>278 runs; 200 min wall; 359.1 min CPU</td><td>Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.96.</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td></tr>
-<tr><td>2</td><td>Alien entry and challenge-stage novelty</td><td>7.8/10</td><td>7.5 first gate; 9.0+ mature</td><td>at target</td><td>High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass</td><td>cpu, browser</td><td>177 runs; 24.6 min wall; 40.9 min CPU</td><td>Estimated cost/value; dedicated investment candidate not yet generated.</td><td>Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.</td></tr>
+              <tr><td>1</td><td>Audio identity, event feedback, and cue alignment</td><td>7/10</td><td>7.5-8.0</td><td>+0.5</td><td>High; 3-6 hrs local/model-assisted analysis</td><td>cpu, model-api, openai-api</td><td>266 runs; 185.8 min wall; 330 min CPU</td><td>Expected lift 0.7/10 on metric, 0.058/10 overall; investment score 2.96.</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td></tr>
+<tr><td>2</td><td>Alien entry and challenge-stage novelty</td><td>8/10</td><td>7.5 first gate; 9.0+ mature</td><td>at target</td><td>High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass</td><td>cpu, browser</td><td>177 runs; 24.6 min wall; 40.9 min CPU</td><td>Estimated cost/value; dedicated investment candidate not yet generated.</td><td>Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.</td></tr>
 <tr><td>3</td><td>Level arc and encounter shape</td><td>8.7/10</td><td>8.8-9.0</td><td>+0.1</td><td>Medium-high; 2-5 hrs</td><td>cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>Expected lift 0.24/10 on metric, 0.02/10 overall; investment score 1.68.</td><td>Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning.</td></tr>
 <tr><td>4</td><td>Boss entry and formation grammar</td><td>9.2/10</td><td>8.0-8.5 first gate; 9.0+ with path/slot extraction</td><td>at target</td><td>Medium-high; 2-5 hrs, then recurring low-cost guardrail</td><td>cpu, browser</td><td>160 runs; 24 min wall; 39.7 min CPU</td><td>Expected lift 0.28/10 on metric, 0.023/10 overall; investment score 0.79.</td><td>Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.</td></tr>
 <tr><td>5</td><td>Overall visual look and feel: gameplay, start page, typography complexity</td><td>8.6/10</td><td>8.4-8.8</td><td>at target</td><td>Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review</td><td>cpu, browser, gpu</td><td>1 runs; 0.1 min wall; 0.1 min CPU</td><td>Expected lift 0.12/10 on metric, 0.01/10 overall; investment score 0.41.</td><td>Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.</td></tr>
@@ -1721,12 +1755,12 @@ npm run build</code></pre>
             </thead>
             <tbody>
               <tr><td>1</td><td>Galaga-family reference audio clips</td><td>audio identity / event feedback</td><td>reference m4a cue clips</td><td>50 clips</td><td>clipped, mapped, partially scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>src/assets/reference-audio</td><td>Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics.</td></tr>
-<tr><td>2</td><td>Aurora audio cue comparison and event-gap reports</td><td>audio cue scoring</td><td>waveform/spectral/alignment/semantic reports</td><td>21 compared cues; semantic 9.78/10; 0 attention rows</td><td>semantic-scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>reference-artifacts/analyses/aurora-audio-event-gap/2026-05-14-1c788342-dirty-180248/report.json</td><td>Tune the highest segment-level gap next: captureBeam tail. Rerun audio comparison and event-gap analysis after the change.</td></tr>
+<tr><td>2</td><td>Aurora audio cue comparison and event-gap reports</td><td>audio cue scoring</td><td>waveform/spectral/alignment/semantic reports</td><td>21 compared cues; semantic 9.78/10; 0 attention rows</td><td>semantic-scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>reference-artifacts/analyses/aurora-audio-event-gap/2026-05-15-60326a33-dirty-124517/report.json</td><td>Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change.</td></tr>
 <tr><td>3</td><td>Aurora Audio Conformance Lab v2</td><td>audio candidate loop / family promotion decisions</td><td>cue-family risk, candidate history, keeper decision, promotion gate</td><td>8/8 target cues swept; 2 keeper candidates tracked; runtime promotions 1</td><td>family-scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-11-b83393cd-dirty/report.json</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td></tr>
 <tr><td>4</td><td>Aurora audio cue contracts</td><td>audio semantic contract / theme latitude / promotion safety</td><td>cue contract readiness, theme lanes, runtime-trial blockers</td><td>8 contracts; readiness 9.1/10; blocked 7</td><td>contract-scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json</td><td>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</td></tr>
 <tr><td>5</td><td>Aurora stagePulse cadence pressure analysis</td><td>formation pressure / cadence audio</td><td>tracked cadence pressure axes from full audio comparison</td><td>pressure 1.4/10; weakest brightness-control</td><td>scored</td><td>medium-high</td><td>Audio identity, event feedback, and cue alignment</td><td>reference-artifacts/analyses/aurora-stage-pulse-cadence/2026-05-10-705e445c-dirty/report.json</td><td>Add a cadence-specific candidate generator that jointly optimizes low-band body, brightness control, zero-crossing calm, and gain. Promote only after both repeated focus gates and full audio-theme comparison improve.</td></tr>
-<tr><td>6</td><td>Boss entry and formation grammar scorer</td><td>formation grammar / boss entry / challenge identity</td><td>event grammar, timing, stage-signature, and measurement-debt report</td><td>11 boss/formation windows</td><td>scored</td><td>medium</td><td>Boss entry and formation grammar</td><td>reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-14-1c788342/report.json</td><td>Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.</td></tr>
-<tr><td>7</td><td>Level arc and encounter-shape evidence</td><td>level arc / challenge / reward</td><td>stage signatures, pressure windows, persona reports</td><td>6/6 stage families; 11/6 evidence windows</td><td>scored</td><td>medium-high</td><td>Level arc and encounter shape</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json</td><td>Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.</td></tr>
+<tr><td>6</td><td>Boss entry and formation grammar scorer</td><td>formation grammar / boss entry / challenge identity</td><td>event grammar, timing, stage-signature, and measurement-debt report</td><td>11 boss/formation windows</td><td>scored</td><td>medium</td><td>Boss entry and formation grammar</td><td>reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-60326a33/report.json</td><td>Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.</td></tr>
+<tr><td>7</td><td>Level arc and encounter-shape evidence</td><td>level arc / challenge / reward</td><td>stage signatures, pressure windows, persona reports</td><td>6/6 stage families; 11/6 evidence windows</td><td>scored</td><td>medium-high</td><td>Level arc and encounter shape</td><td>reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json</td><td>Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.</td></tr>
 <tr><td>8</td><td>Stage 4 pressure and loss-window diagnostics</td><td>pressure / fairness</td><td>loss windows, replay geometry, collision traces</td><td>3 promoted windows</td><td>mined, replay-diagnostic</td><td>medium</td><td>Stage 4 pressure exact replay / pressure curve precision</td><td>reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-fb2f674/report.json</td><td>Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.</td></tr>
 <tr><td>9</td><td>Aurora visual look screenshots</td><td>visual look / UI readability</td><td>browser screenshots plus DOM/canvas metrics</td><td>4 surfaces</td><td>first-pass scored</td><td>medium-low</td><td>Overall visual look and feel</td><td>reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json</td><td>Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.</td></tr>
 <tr><td>10</td><td>Aurora evidence-cycle windows</td><td>general ingestion framework</td><td>manifests, contact sheets, traces, event logs, audio timelines</td><td>4 planned windows</td><td>seed-plan-only</td><td>medium</td><td>Level arc / challenge variation / visual look</td><td>reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json</td><td>Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.</td></tr>
@@ -1736,19 +1770,19 @@ npm run build</code></pre>
           </table>
         </div>
 <h4>Charts</h4>
-<p><img alt="score-trends" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg"></p>
-<p><img alt="largest-score-deltas" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg"></p>
-<p><img alt="compute-minutes-by-resource" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg"></p>
-<p><img alt="cost-per-positive-score-point" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg"></p>
-<p><img alt="gpu-equivalent-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg"></p>
-<p><img alt="cpu-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg"></p>
-<p><img alt="gameplay-improvement-by-project-part" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg"></p>
+<p><img alt="score-trends" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg"></p>
+<p><img alt="largest-score-deltas" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg"></p>
+<p><img alt="compute-minutes-by-resource" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg"></p>
+<p><img alt="cost-per-positive-score-point" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg"></p>
+<p><img alt="gpu-equivalent-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg"></p>
+<p><img alt="cpu-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg"></p>
+<p><img alt="gameplay-improvement-by-project-part" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg"></p>
 <h3>New First-Class Axes Added</h3>
 <ul><li>Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.</li><li>Boss entry and formation grammar: boss timing, escort composition, formation settle evidence, challenge pattern identity, stage variation, and path/slot precision.</li><li>Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.</li><li>Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.</li><li>Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.</li><li>Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family.</li></ul>
 <h3>Maintenance Rules</h3>
 <ul><li>Refresh this artifact after each full quality score, investment-priority run, or major conformance loop.</li><li>Before a serious <code>/dev</code>, <code>/beta</code>, or <code>/production</code> release candidate, refresh <code>npm run harness:analyze:conformance-economics</code> and <code>npm run harness:build:release-conformance-dashboard</code> so release docs include conformance, resource/time, chart, past-goal, and next-goal reads.</li><li>Any long-cycle local compute or model/API/GPU-assisted assessment should be wrapped with <code>npm run harness:measure</code> and declared with its axis and resource classes.</li><li>Ship the read-only conformance dashboard with each <code>/dev</code>, <code>/beta</code>, and <code>/production</code> lane; keep raw ingestion workspaces and unreviewed evidence engineering-owned unless a Root-gated evidence browser is explicitly approved.</li><li>Treat rows marked estimated/composite as measurement debt: useful for planning, but not release-proof until backed by a harness.</li><li>Keep user-facing release gates separate from harness-learning wins. A rejected candidate still belongs in artifacts when it teaches the loop what not to keep.</li><li>Prefer work with a large score gap, high user-experience impact, reusable ingestion/harness value, and clear guardrails.</li></ul>
 <h3>Evidence Index</h3>
-<ul><li>Quality report: <code>reference-artifacts/analyses/quality-conformance/2026-05-14-1c788342/report.json</code></li><li>Investment priority report: <code>reference-artifacts/analyses/conformance-investment-priorities/2026-05-11-46e1b45c/report.json</code></li><li>Level-arc report: <code>reference-artifacts/analyses/level-arc-conformance/2026-05-14-1c788342/report.json</code></li><li>Economics report: <code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/report.json</code></li><li>Equal current quality-category weight: <code>0.083</code></li></ul>
+<ul><li>Quality report: <code>reference-artifacts/analyses/quality-conformance/2026-05-15-60326a33/report.json</code></li><li>Investment priority report: <code>reference-artifacts/analyses/conformance-investment-priorities/2026-05-11-46e1b45c/report.json</code></li><li>Level-arc report: <code>reference-artifacts/analyses/level-arc-conformance/2026-05-15-60326a33/report.json</code></li><li>Economics report: <code>reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/report.json</code></li><li>Equal current quality-category weight: <code>0.083</code></li></ul>
         </div>
       </div>
     </section>
@@ -2256,6 +2290,10 @@ npm run harness:build:dev-conformance-dashboard</code></pre>
 <p>This is the browser-native replay feature used by a player who launches the game in-browser with no extra setup.</p>
 <ul><li>Storage:<ul><li>browser-local <code>IndexedDB</code></li></ul></li><li>Contents:<ul><li>recent replay metadata</li><li>recent replay video blobs used by the in-game <code>🎞</code> replay surface</li></ul></li><li>Scope:<ul><li>local to that browser/profile on that device</li><li>not intended as the canonical developer artifact archive</li></ul></li></ul>
 <p>This is the right default for <code>dev</code>, <code>beta</code>, and <code>production</code> player use because it requires no filesystem access and works inside normal browser constraints.</p>
+<h4>Replay Storage Security Rule</h4>
+<p>Replay video remains browser-local <code>IndexedDB</code> by default. A local score row may link to a local replay only when that replay exists in the current browser profile. It is not a public cloud artifact, and it must not be treated as a trusted hosted replay/video record.</p>
+<p>Future high-score video or replay publishing requires a server-owned upload policy before any runtime upload path is enabled. That policy must document authorization, Supabase grants/RLS or storage rules, moderation/status fields, and the score/user/build linkage before release.</p>
+<p>Short rule: no hosted replay/video posting ships without a server-owned upload policy.</p>
 <h4>2. Exported Player Capture Files</h4>
 <p>This is the explicit user-facing export path for logs and downloaded recordings.</p>
 <ul><li>Current filenames:<ul><li><code>neo-galaga-session-*.json</code></li><li><code>neo-galaga-video-*.webm</code></li></ul></li><li>Destination:<ul><li>the browser download location</li><li>typically the user’s downloads directory</li><li>on macOS that is usually:<ul><li><code>~/Downloads/</code></li></ul></li></ul></li></ul>
@@ -2377,19 +2415,39 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
               <tr><th>Metric</th><th>Value</th></tr>
             </thead>
             <tbody>
-              <tr><td>Quality score audio category</td><td><code>6.9/10</code></td></tr>
+              <tr><td>Quality score audio category</td><td><code>7.0/10</code></td></tr>
 <tr><td>Overall quality score</td><td><code>9.1/10</code></td></tr>
 <tr><td>Semantic event score</td><td><code>9.78/10</code></td></tr>
-<tr><td>Acoustic event score</td><td><code>6.30/10</code></td></tr>
-<tr><td>Average worst segment risk</td><td><code>3.70/10</code></td></tr>
+<tr><td>Acoustic event score</td><td><code>6.73/10</code></td></tr>
+<tr><td>Average worst segment risk</td><td><code>3.27/10</code></td></tr>
 <tr><td>Cue-contract readiness</td><td><code>9.09/10</code></td></tr>
 <tr><td>Contracted priority cue families</td><td><code>8</code> cues</td></tr>
-<tr><td>Highest current audio gap</td><td><code>captureBeam</code> tail</td></tr>
-<tr><td>Focused candidate-loop coverage</td><td><code>enemyShot</code>, <code>challengePerfect</code>, and the contracted cue set</td></tr>
+<tr><td>Highest current audio gap</td><td><code>challengePerfect</code> onset</td></tr>
+<tr><td>Focused candidate-loop coverage</td><td><code>enemyShot</code>, <code>challengePerfect</code>, <code>bossHit</code>, <code>playerShot</code>, and the contracted cue set</td></tr>
             </tbody>
           </table>
         </div>
-<p>This means the process and runtime audio both moved forward, while audio still remains Aurora&#39;s weakest quality category. The latest runtime win is an <code>enemyShot</code> threat-fire cue promoted from a measured reference subwindow: fresh full-theme validation reduced average worst segment risk from <code>4.32/10</code> to <code>3.70/10</code>, kept cue alignment at <code>9/9</code>, and moved the highest residual segment gap away from enemy fire to <code>captureBeam</code> tail. The prior <code>challengePerfect</code> pass produced focused keepers, but both runtime candidates lowered the broader audio score, so no perfect-clear runtime cue was promoted. This is the intended guardrail: focused similarity is evidence, not release authority by itself.</p>
+<p>This means the process and runtime audio both moved forward, while audio still remains Aurora&#39;s weakest quality category. The latest post-beta runtime wins promoted measured reference subwindows for <code>bossHit</code> and <code>playerShot</code>. <code>playerShot</code> moved from the highest measured gap to a <code>1.0/10</code> event risk, and fresh full-theme validation reduced average worst segment risk from <code>3.55/10</code> to <code>3.27/10</code> while cue alignment stayed <code>9/9</code>. The earlier <code>enemyShot</code> threat-fire cue promotion remains in place. The prior <code>challengePerfect</code> pass produced focused low-risk subwindow candidates, but the post-beta harness now rejects onset-only reward cues below a <code>1.1s</code> scheduled duration ceremony floor. No perfect-clear runtime cue was promoted. This is the intended guardrail: focused similarity is evidence, not release authority by itself, and a cue that wins the onset comparison can still be wrong for the player if it abbreviates the reward/inter-level moment.</p>
+<p>Post-beta boss-hit pass:</p>
+<ul><li><code>bossHit</code> now uses the curated boss-damage subwindow from</li></ul>
+<p><code>galaga3-boss-damage-flagship-fighter-shot.m4a</code> (<code>clipStart: 1.149</code>, <code>clipDuration: 0.29</code>) in the Galaga reference audio theme.</p>
+<ul><li>This moved <code>bossHit</code> event-gap risk from <code>4.62/10</code> to <code>0.96/10</code> and worst</li></ul>
+<p>segment risk from <code>5.71/10</code> to <code>0.36/10</code>.</p>
+<ul><li>The broader audio read improved from <code>6.9/10</code> to <code>7.0/10</code>, acoustic event</li></ul>
+<p>score improved from <code>6.10/10</code> to <code>6.45/10</code>, cue alignment stayed <code>9/9</code>, and overall quality stayed <code>9.1/10</code>.</p>
+<ul><li>The next exposed measured gap is <code>playerShot</code> onset, but that should be</li></ul>
+<p>reviewed as a scorer/reference-window issue before runtime promotion because shot identity is a high-frequency, high-repetition player-control cue.</p>
+<p>Post-beta player-shot pass:</p>
+<ul><li>The focused <code>playerShot</code> loop now exists in</li></ul>
+<p><code>tools/harness/analyze-aurora-audio-focus-candidates.js</code> and records durable candidate evidence under <code>reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-shot.json</code>.</p>
+<ul><li>The measured keeper is the flagship/fighter-shot subwindow</li></ul>
+<p><code>clipStart: 0.08</code>, <code>clipDuration: 0.24</code>, <code>referenceVolume: 0.92</code>.</p>
+<ul><li>This moved <code>playerShot</code> event-gap risk from <code>9.37/10</code> to <code>1.0/10</code> and worst</li></ul>
+<p>segment risk from <code>8.39/10</code> to <code>2.56/10</code>.</p>
+<ul><li>The broader audio read stayed <code>7.0/10</code>, acoustic event score improved from</li></ul>
+<p><code>6.45/10</code> to <code>6.73/10</code>, cue alignment stayed <code>9/9</code>, runtime recovery passed, and overall quality stayed <code>9.1/10</code>.</p>
+<ul><li>The next exposed measured gap is again <code>challengePerfect</code> onset, but the</li></ul>
+<p>retained ceremony-duration guard means the next work should pursue a full-phrase/envelope-preserving reward strategy rather than a short onset clip.</p>
 <p>May 11 capture-stability and ship-loss trial pass:</p>
 <ul><li>Harness improvement kept: browser-backed audio captures now include an</li></ul>
 <p>explicit <code>80ms</code> recorder preroll, and candidate artifacts record capture attempt, byte length, capture duration, and preroll. This reduces the chance that short cue candidates are scored against <code>MediaRecorder</code> startup timing rather than the cue itself.</p>
@@ -2517,11 +2575,13 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
 <ul><li><code>captureBeam</code> tail modeling: build a focused candidate family for the</li></ul>
 <p>residual tail gap and explicitly measure whether the beam stays threatening without masking shot/hit cues</p>
 <ul><li><code>challengePerfect</code> runtime strategy: the focused loop found good acoustic</li></ul>
-<p>candidates, but full-theme promotion failed, so the next attempt should model mix position, tail budget, and ceremony duration before changing runtime</p>
+<p>onset candidates, but the new ceremony-duration gate rejects short subwindows for runtime promotion, so the next attempt should model full-phrase mix position, tail budget, and reward/inter-level ceremony before changing runtime</p>
 <ul><li><code>stagePulse</code> pressure-bed modeling: a stronger low-brightness, low-variance</li></ul>
 <p>generator that explicitly targets repeat stability, zero-crossing calm, cadence pressure, and action-cue masking before promotion precheck</p>
 <ul><li><code>challengeTransition</code> follow-up listening pass: the measured <code>1.6s</code> phrase is</li></ul>
 <p>now runtime-safe, so the next check should be human/gameplay review rather than further widening</p>
+<ul><li><code>challengePerfect</code> full-phrase review: the latest post-player-shot rollup</li></ul>
+<p>again exposes <code>challengePerfect</code> as the highest measured risk, but the keeper gate must preserve at least <code>1.1s</code> of reward ceremony</p>
 <ul><li><code>playerHit</code> tail/body composite monitoring: keep the calibrated layered cue as</li></ul>
 <p>a guardrail, and refine only if manual listening or future capture baselines show a player-facing weakness</p>
 <ul><li>Both tracks must preserve masking guards against <code>playerShot</code>, <code>enemyHit</code>,</li></ul>
@@ -3701,7 +3761,7 @@ npm run build</code></pre>
           <p>This is the durable tracking location for architecture-review and code-review learning across Aurora Galactica, Platinum, and future game-ingestion work.</p>
 <p>The goal is not only to catch issues before a hosted lane move. The goal is to notice repeated review patterns, decide which proposed fixes are accepted, and turn that learning into future harnesses, release checks, documentation rules, or simpler platform/game boundaries.</p>
 <h3>Current Snapshot</h3>
-<ul><li>generated: <code>2026-05-15T00:11:23.210Z</code></li><li>branch: <code>main</code></li><li>commit: <code>c9d9bb47</code></li><li>review cycles tracked: <code>3</code></li><li>issue notes tracked: <code>4</code></li><li>accepted changes tracked: <code>3</code></li><li>automatic packet findings tracked: <code>0</code></li></ul>
+<ul><li>generated: <code>2026-05-15T15:38:44.127Z</code></li><li>branch: <code>codex/macbook-post-beta-conformance-10h</code></li><li>commit: <code>ca76d48d</code></li><li>review cycles tracked: <code>3</code></li><li>issue notes tracked: <code>5</code></li><li>accepted changes tracked: <code>3</code></li><li>automatic packet findings tracked: <code>1</code></li></ul>
 <h3>How To Use This Ledger</h3>
 <ol><li>Run <code>npm run review:code</code> before hosted-dev movement or any substantial review.</li><li>Run <code>npm run review:ledger</code> after architecture/code-review notes are added,</li></ol>
 <p>accepted, rejected, or turned into follow-up checks.</p>
@@ -3738,7 +3798,7 @@ npm run build</code></pre>
             <tbody>
               <tr><td>historical</td><td>Platform architecture baseline</td><td>ARCHITECT_REVIEW_RESPONSE.md</td><td>standing</td><td>P0 0 / P1 0 / P2 4 / P3 0</td><td>Baseline concerns are partly covered and partly continuing maturity work.</td></tr>
 <tr><td>2026-05-14</td><td>Local-to-hosted-dev code review gate</td><td>CODE_REVIEW_MODEL.md</td><td>standing</td><td>P0 0 / P1 0 / P2 0 / P3 0</td><td>Accepted as a lightweight release-safety gate for development lane movement.</td></tr>
-<tr><td>2026-05-15</td><td>Current branch code review packet</td><td>reference-artifacts/analyses/code-review/latest.json</td><td>0</td><td>P0 0 / P1 0 / P2 0 / P3 0</td><td>Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items.</td></tr>
+<tr><td>2026-05-15</td><td>Current branch code review packet</td><td>reference-artifacts/analyses/code-review/latest.json</td><td>63</td><td>P0 0 / P1 0 / P2 1 / P3 0</td><td>Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items.</td></tr>
             </tbody>
           </table>
         </div>
@@ -3753,6 +3813,7 @@ npm run build</code></pre>
 <tr><td>P2</td><td>architecture-boundary</td><td>in_progress</td><td>architect-magic-constants</td><td>Some movement, render spacing, animation timing, and gameplay update values still need clearer structural ownership.</td><td>Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments.</td><td>dismissed: Remaining movement, render-spacing, animation-timing, and gameplay tuning constants are a next-cycle maintainability concern, not a blocker for the current production candidate when targeted gameplay and boundary checks pass.</td></tr>
 <tr><td>P2</td><td>harness-fragility</td><td>in_progress</td><td>architect-harness-fragility</td><td>Recorded-path harnesses can become brittle after motion and pacing changes.</td><td>Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract.</td><td>dismissed: Recorded-path fragility is acknowledged and retained as a harness-maturity concern. It does not block the current production candidate if the relevant release harnesses, documentation freshness check, and publish preflight pass.</td></tr>
 <tr><td>P2</td><td>conformance-evidence</td><td>in_progress</td><td>architect-enemy-spec</td><td>Enemy family definitions should become declarative enough to support new game ingestion and controlled experimentation.</td><td>Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs.</td><td>dismissed: Declarative enemy-family and attack-pattern specs remain important for 1.4.0 and later conformance work. This is not a production blocker for a reviewed candidate unless the release claims those specs as complete.</td></tr>
+<tr><td>P2</td><td>release-tooling</td><td>review_note</td><td>code-review-release-tooling-review</td><td>package.json: Release or npm script surface changed; verify lane authority and publish behavior.</td><td>Verify the flagged surface with the targeted review questions and recommended checks before lane movement.</td><td>addressed: The release-tooling changes are intentional: they add the review packet, review-learning ledger, public review documentation, and a production disposition gate. The review packet is current and publish preflight remains green for the dev lane.</td></tr>
             </tbody>
           </table>
         </div>
@@ -3768,6 +3829,7 @@ npm run build</code></pre>
 <tr><td>architecture-boundary</td><td>in_progress</td><td>architect-magic-constants-proposal</td><td>Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments.</td><td>Track this as continuing 1.4.0 platform maturity work.</td></tr>
 <tr><td>harness-fragility</td><td>in_progress</td><td>architect-harness-fragility-proposal</td><td>Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract.</td><td>Measured conformance work should leave more reusable harness logic behind than one-off replay checks.</td></tr>
 <tr><td>conformance-evidence</td><td>in_progress</td><td>architect-enemy-spec-proposal</td><td>Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs.</td><td>Use ingestion-backed specs before considering heavier persistence infrastructure.</td></tr>
+<tr><td>release-tooling</td><td>review_note</td><td>code-review-release-tooling-review-proposal</td><td>Verify the flagged surface with the targeted review questions and recommended checks before lane movement.</td><td>Accepted as a visible review note that does not block hosted-dev by itself.</td></tr>
             </tbody>
           </table>
         </div>
@@ -3791,7 +3853,7 @@ npm run build</code></pre>
               <tr><th>Id</th><th>Pattern</th><th>Response</th><th>Evidence</th></tr>
             </thead>
             <tbody>
-              <tr><td>release-tooling-churn</td><td>Changes to scripts or release tooling often look small but affect lane authority and publish behavior.</td><td>Require <code>npm run publish:check:dev</code> plus the review packet before hosted-dev movement.</td><td>Standing release gate rule.</td></tr>
+              <tr><td>release-tooling-churn</td><td>Changes to scripts or release tooling often look small but affect lane authority and publish behavior.</td><td>Require <code>npm run publish:check:dev</code> plus the review packet before hosted-dev movement.</td><td>Latest packet recommends publish preflight.</td></tr>
 <tr><td>generated-artifact-self-noise</td><td>Generated review artifacts can make review packets appear stale if they are treated as source inputs.</td><td>Exclude generated review artifact directories from packet freshness while keeping human-facing review docs in scope.</td><td>Code review and review-learning artifact directories are excluded from freshness checks.</td></tr>
 <tr><td>harness-before-subjective-tuning</td><td>Motion, audio, pacing, and transition polish can drift when tuned subjectively.</td><td>Start with reference evidence, extracted clips, timing windows, or semantic logs, then promote only measured keepers.</td><td>Matches the repo AGENTS.md instruction for game polish and fidelity work.</td></tr>
 <tr><td>review-notes-should-teach</td><td>One-off review comments lose value unless they become future prevention mechanisms.</td><td>Classify recurring findings and decide whether each should become a harness, release check, documentation rule, or code simplification.</td><td>This ledger tracks issue notes, proposed changes, accepted changes, and learning patterns.</td></tr>
@@ -3859,7 +3921,7 @@ npm run build</code></pre>
 <ol><li><strong>Correctness:</strong> Does the change preserve state transitions, deterministic</li></ol>
 <p>harness behavior, score/life rules, and release-lane assumptions?</p>
 <ol><li><strong>Security and privacy:</strong> Does it touch auth, Supabase, score submission,</li></ol>
-<p>YouTube/external posting, browser storage, tokens, user IDs, or embedded third-party content?</p>
+<p>YouTube/external posting, browser storage, tokens, user IDs, or embedded third-party content? For security/auth/replay storage lock-down, also verify <code>npm run harness:check:security-auth-replay-storage</code> and confirm no browser code ships upload credentials or server-owned secrets.</p>
 <ol><li><strong>Browser safety:</strong> Does it introduce unsafe HTML injection, autoplay/media</li></ol>
 <p>regressions, window/popup behavior, cross-origin fetches, or permission assumptions?</p>
 <ol><li><strong>Performance:</strong> Does it affect animation loops, canvas drawing, timers,</li></ol>
@@ -4011,6 +4073,14 @@ npm run build</code></pre>
 <ul><li>Service:<ul><li><code>https://api.web3forms.com/submit</code></li></ul></li><li>Used for:<ul><li>in-game bug reports</li><li>in-game feature requests</li></ul></li><li>Main runtime code:<ul><li><code>src/js/00-boot.js</code></li></ul></li></ul>
 <h4>YouTube Playlist Embed</h4>
 <ul><li>Status:<ul><li>optional, configured by <code>release-manifest.json</code> and overrideable with <code>ARCADE_MUSIC_PLAYLIST_ID</code> or <code>NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID</code> at build time</li></ul></li><li>Used for:<ul><li>opt-in Arcade Music playback from the right rail</li></ul></li><li>Boundary:<ul><li>the playlist embed is shell ambience, not Aurora reference audio</li><li>the game mute control remains scoped to game audio</li><li>high-score video upload credentials are not part of this client-side feature</li></ul></li><li>Main runtime code:<ul><li><code>src/js/01-runtime-shell.js</code></li></ul></li><li>Build token source:<ul><li><code>tools/build/build-index.js</code></li></ul></li></ul>
+<h4>High-Score Video Posting</h4>
+<ul><li>Status:<ul><li>planned only; no production upload path is currently enabled</li></ul></li><li>Intended use:<ul><li>signed-in, authorized top-10 players may eventually request high-score video</li></ul></li></ul>
+<p>posting to a shared channel</p>
+<ul><li>score pages may eventually link to approved hosted video/replay records</li></ul><ul><li>Boundary:<ul><li>upload must be server-owned</li><li>no client-side YouTube upload credential, OAuth client secret, refresh token,</li></ul></li></ul>
+<p>or service account material may ship in browser code</p>
+<ul><li>a browser top-10 prompt can encourage sign-in, but cannot itself authorize or</li></ul>
+<p>upload</p>
+<ul><li>Required gate before implementation:<ul><li><code>SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</code></li><li><code>SUPABASE_DATA_API_ACCESS.md</code></li><li><code>npm run harness:check:security-auth-replay-storage</code></li><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul></li></ul>
 <h3>Hosting And Delivery</h3>
 <h4>GitHub Pages</h4>
 <ul><li>Production:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/</code></li></ul></li><li>Beta:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/beta/</code></li></ul></li><li>Also hosts:<ul><li>player guide</li><li>project guide</li><li>release dashboard</li></ul></li><li>Used for:<ul><li>public delivery of the playable game and public documentation surfaces</li></ul></li><li>Main policy docs:<ul><li><code>README.md</code></li><li><code>RELEASE_POLICY.md</code></li></ul></li></ul>
@@ -4022,7 +4092,8 @@ npm run build</code></pre>
 <h3>Local-Only Or Browser-Native Systems</h3>
 <p>These are not external services.</p>
 <h4>Browser Storage</h4>
-<ul><li>Used for:<ul><li>local high scores</li><li>local settings</li><li>local replay catalog</li></ul></li><li>Backed by:<ul><li><code>localStorage</code></li><li><code>IndexedDB</code></li></ul></li></ul>
+<ul><li>Used for:<ul><li>local high scores</li><li>local settings</li><li>local replay catalog</li></ul></li><li>Backed by:<ul><li><code>localStorage</code></li><li><code>IndexedDB</code></li></ul></li><li>Security boundary:<ul><li>replay video remains browser-local until a server-owned upload policy,</li></ul></li></ul>
+<p>storage model, and release gate exist</p>
 <h4>Browser Recording</h4>
 <ul><li>Used for:<ul><li>native local replay capture</li></ul></li><li>Backed by:<ul><li><code>MediaRecorder</code></li></ul></li></ul>
 <h4>Local Dev Services</h4>
@@ -4088,6 +4159,54 @@ npm run build</code></pre>
 <p>Any new Supabase table used by the browser Data API must land with:</p>
 <ul><li>table purpose and ownership</li><li>explicit grants for <code>anon</code>, <code>authenticated</code>, and/or <code>service_role</code></li><li>RLS enabled unless there is a documented exception</li><li>policies that express the user-visible product rule</li><li>a harness/preflight update proving the table is present in this contract</li></ul>
 <p>For planned top-10 YouTube posting and replay-video metadata, this means no runtime feature work should merge until the data model and access policy are captured here.</p>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="security-auth-replay-storage-doc">
+      <div class="sectionHeader">
+        <h2>Security/Auth/Replay Storage Lock-Down</h2>
+        <p>Release-facing rules for authenticated top-10 video posting, browser-local replay storage, no browser upload credentials, and the publish preflight gate.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</code> during build.</p>
+        <div class="markdown">
+          <p>This is the release-facing lock-down rule set for account, score, replay, and future high-score video work. It exists because the next flashy platform features touch trust boundaries: authenticated players, top-10 score posting, local replay video, and possible future server storage.</p>
+<h3>Current Rule</h3>
+<p>Top-10 video posting is authenticated and authorized only. A top-10 local run may prompt the player to sign in, but posting eligibility requires a signed-in, email-confirmed account in an auth-enabled lane. The browser may show the prompt and local replay link; it must not upload to YouTube directly.</p>
+<p>No YouTube upload token or OAuth client secret ships in browser code. Arcade Music may embed a configured YouTube Music playlist through <code>youtube-nocookie.com</code>, but that is ambience playback, not upload authority.</p>
+<p>Replay video is browser-local IndexedDB by default. The current replay catalog is a local player feature, not canonical cloud storage and not a public publishing surface. Future hosted replay/video posting must use a server-owned upload policy with a documented data model, RLS posture, and explicit release gate.</p>
+<p>Production score trust remains separate from client-side display eligibility. The current browser can display local score/replay links and can submit the existing score payload through Supabase, but any future verified public video claim needs server-owned authorization and storage rules before it can be called trusted.</p>
+<h3>Lane Rules</h3>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Lane</th><th>Auth</th><th>Score Writes</th><th>Replay Storage</th><th>Video Posting</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>localhost</code></td><td>configured test pilots when Supabase is configured; harness can bypass</td><td>local by default; harness may force writes</td><td>browser-local IndexedDB</td><td>disabled until server-owned flow exists</td></tr>
+<tr><td>hosted <code>/dev</code></td><td>configured test pilots only</td><td>configured test pilots only</td><td>browser-local IndexedDB</td><td>gated prompt only</td></tr>
+<tr><td>hosted <code>/beta</code></td><td>configured test pilots only</td><td>configured test pilots only</td><td>browser-local IndexedDB</td><td>gated prompt only</td></tr>
+<tr><td>hosted <code>/production</code></td><td>public accounts, test pilot disabled</td><td>production score policy</td><td>browser-local IndexedDB</td><td>disabled until server-owned flow exists</td></tr>
+            </tbody>
+          </table>
+        </div>
+<h3>Required Gate</h3>
+<p>Run:</p>
+<pre><code data-lang="bash">npm run harness:check:security-auth-replay-storage</code></pre>
+<p>Publish preflight runs this check. It verifies:</p>
+<ul><li>browser source contains no Supabase service-role material</li><li>browser source contains no OAuth client secret or YouTube upload endpoint</li><li>top-10 video-posting eligibility requires signed-in confirmed auth</li><li>non-production auth is limited to configured test pilots</li><li>production disables configured test pilot accounts</li><li>replay storage remains browser-local IndexedDB</li><li>release docs expose the storage and auth boundaries</li></ul>
+<h3>Future Server-Owned Posting Gate</h3>
+<p>Before YouTube high-score posting or hosted replay/video storage can move past a prototype:</p>
+<ul><li>add the Supabase table/RPC/storage model to</li></ul>
+<p><code>supabase/data-api-access-contract.sql</code></p>
+<ul><li>document grants and RLS in <code>SUPABASE_DATA_API_ACCESS.md</code></li><li>keep upload credentials server-side only</li><li>bind the posted video to score id, game key, build label, replay id, user id,</li></ul>
+<p>and moderation/status fields</p>
+<ul><li>add a harness that proves unsigned users and unconfirmed users cannot request</li></ul>
+<p>posting</p>
+<ul><li>add a release note and dashboard row showing the trust model and remaining</li></ul>
+<p>risks</p>
         </div>
       </div>
     </section>
@@ -4179,6 +4298,12 @@ npm run build</code></pre>
 <ul><li>local <code>localhost</code><ul><li>active engineering lane</li></ul></li><li>hosted <code>/dev</code><ul><li>shared hosted integration preview</li></ul></li><li>hosted <code>/beta</code><ul><li>reviewed release candidate</li></ul></li><li>hosted <code>/production</code><ul><li>public stable promise</li></ul></li></ul>
 <p>See also:</p>
 <ul><li><a href="RELEASE_LANE_MODEL.md">RELEASE_LANE_MODEL.md</a></li></ul>
+<h3>Security/Auth/Replay Storage Rule</h3>
+<p>Account, score, replay, and high-score video features are release-sensitive surfaces. The maintained lock-down source is:</p>
+<ul><li><a href="SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md">SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</a></li></ul>
+<p>Publish preflight runs:</p>
+<pre><code data-lang="bash">npm run harness:check:security-auth-replay-storage</code></pre>
+<p>That gate keeps browser code free of service-role material, OAuth client secrets, and YouTube upload endpoints; confirms top-10 video posting eligibility is authenticated and confirmed-account only; preserves non-production test-pilot limits; and keeps replay video browser-local until a server-owned upload/storage policy exists.</p>
 <h3>Release Authority Rule</h3>
 <p>Aurora now uses a one-authority release model.</p>
 <p>That means:</p>
@@ -4418,6 +4543,9 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
     <li><a href="#supabase-data-api-contract">Supabase Data API Contract</a></li>
   
 
+    <li><a href="#security-auth-replay-storage-lockdown">Security, Auth, And Replay Storage Lock-Down</a></li>
+  
+
     <li><a href="#docs-index">Documentation Index</a></li>
   
 
@@ -4499,6 +4627,9 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
     <li><a href="#supabase-access-doc">Supabase Data API Access Source</a></li>
   
 
+    <li><a href="#security-auth-replay-storage-doc">Security/Auth/Replay Storage Lock-Down</a></li>
+  
+
     <li><a href="#release-policy-doc">Release Policy Source</a></li>
   
 
@@ -4507,7 +4638,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 14, 2026
+          Release 1.4.0.1 · Updated May 15, 2026
         </p>
       </aside>
     </main>
