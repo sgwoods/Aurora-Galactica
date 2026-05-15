@@ -399,7 +399,7 @@
           </div>
           <h1>Aurora Galactica And Platinum Project Guide</h1>
           <p>A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.</p>
-          <div class="goal"><strong>Current goal:</strong> Keep production trustworthy on the refreshed 1.3.0 public family while reviewing the deliberate 1.4.0 candidate family: improve Aurora&#39;s Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.</div>
+          <div class="goal"><strong>Current goal:</strong> Keep production trustworthy on the live 1.4.0 public family while shaping the next deliberate follow-through: improve Aurora&#39;s Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and keep turning ingestion plus local harnessing into a repeatable path for future games.</div>
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
@@ -415,7 +415,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">First 1.4.0 beta candidate</span>
+              <span class="metaValue">1.4.0 multi-game public release</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -440,7 +440,7 @@
 
     <article class="card">
       <h3>What Shipped</h3>
-      <p>`1.3.0` remains the current public Aurora / Platinum production family. Hosted `/dev` and hosted `/beta` now carry the first deliberate `1.4.0` candidate family as `1.4.0.1` and `1.4.0-beta.1`, while the release path keeps the shell, picker, release dashboards, and hosted docs part of the product.</p>
+      <p>`1.4.0` is now the current public Aurora / Platinum production family. Hosted `/dev` remains the visible `1.4.0.1` forward-review line, while hosted `/beta` remains the approved `1.4.0-beta.1` production-source lane and the release path keeps the shell, picker, release dashboards, and hosted docs part of the product.</p>
     </article>
   
 
@@ -458,7 +458,7 @@
 
     <article class="card">
       <h3>Current Focus</h3>
-      <p>The main work is now candidate advancement: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and first-class playable/conformance follow-through for Galaxy Guardians and future games.</p>
+      <p>The main work is now post-1.4.0 follow-through: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and first-class playable/conformance advancement for Galaxy Guardians and future games.</p>
     </article>
   
 </div>
@@ -540,10 +540,10 @@
     <li>hosted `/dev` is the shared integration preview and currently carries the visible `1.4.0.1` forward-review increment.</li>
   
 
-    <li>hosted `/beta` is the reviewed `1.4.0-beta.1` candidate lane.</li>
+    <li>hosted `/beta` is the approved `1.4.0-beta.1` production-source lane and the staging point for the next deliberate review cycle.</li>
   
 
-    <li>hosted `/production` is the public promise and should move only from an approved hosted `/beta` candidate.</li>
+    <li>hosted `/production` is the public promise and now carries the live `1.4.0` public family.</li>
   
 
     <li>A meaningful `x.y` release should now include a complete documentation pass before hosted `/production` promotion.</li>
@@ -2577,23 +2577,23 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
 <p>Best conformance/resource economics doc:</p>
 <ul><li><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></li><li><a href="QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></li><li><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li><li><a href="CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li><li><a href="RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></li></ul>
 <p>Release planning and readiness docs:</p>
-<ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="RELEASE_NOTE_1.4.0_BETA_1.md">RELEASE_NOTE_1.4.0_BETA_1.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
+<ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="RELEASE_NOTE_1.4.0_PRODUCTION.md">RELEASE_NOTE_1.4.0_PRODUCTION.md</a></li><li><a href="RELEASE_NOTE_1.4.0_BETA_1.md">RELEASE_NOTE_1.4.0_BETA_1.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
 <p>Best repo-role clarification:</p>
 <ul><li><a href="REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
 <h3>Current Release State</h3>
 <p>Current live release family:</p>
-<ul><li>hosted <code>/dev</code>:<ul><li>active <code>1.4.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code>:<ul><li>active <code>1.4.0-beta.1</code> reviewed candidate lane</li></ul></li><li>hosted <code>/production</code>:<ul><li>stable <code>1.3.0</code> public line</li></ul></li></ul>
+<ul><li>hosted <code>/dev</code>:<ul><li>active <code>1.4.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code>:<ul><li>active <code>1.4.0-beta.1</code> approved production-source lane</li></ul></li><li>hosted <code>/production</code>:<ul><li>live <code>1.4.0</code> public line</li></ul></li></ul>
 <p>What that means:</p>
-<ul><li>Aurora now ships as the first playable application on Platinum</li><li>the public production family remains <code>1.3.0</code>, while the next deliberate</li></ul>
-<p>release family is now being reviewed as <code>1.4.0.1</code> on hosted <code>/dev</code> and <code>1.4.0-beta.1</code> on hosted <code>/beta</code></p>
+<ul><li>Aurora now ships as the first playable application on Platinum</li><li>the public production family is now <code>1.4.0</code>, while hosted <code>/dev</code> remains the</li></ul>
+<p>visible <code>1.4.0.1</code> forward-review line and hosted <code>/beta</code> remains the approved <code>1.4.0-beta.1</code> production-source lane</p>
 <ul><li>hosted <code>/dev</code> remains the visible forward-review lane for the current beta</li></ul>
 <p>family</p>
 <ul><li>Galaxy Guardians is now part of the beta review story as a playable preview</li></ul>
 <p>with game-owned conformance and release identity</p>
 <ul><li>hosted <code>/dev</code>, hosted <code>/beta</code>, and hosted <code>/production</code> are now explicit lanes</li><li>the shell, picker, and shared docs are part of the product rather than just engineering scaffolding</li></ul>
 <p>Current go-forward focus:</p>
-<ul><li>keep the shipped <code>1.3.0</code> public line stable</li><li>use the hosted <code>1.4.0.1</code> <code>/dev</code> line and hosted <code>1.4.0-beta.1</code> <code>/beta</code></li></ul>
-<p>lane to review the next coherent minor-family candidate</p>
+<ul><li>keep the shipped <code>1.4.0</code> public line stable</li><li>use the hosted <code>1.4.0.1</code> <code>/dev</code> line and hosted <code>/beta</code> lane to shape the</li></ul>
+<p>next coherent follow-through candidate rather than blurring production and review work together</p>
 <ul><li>use <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
 <p>as the maintained overview of how Platinum, applications, ingestion, harnessing, conformance metrics, and resource economics fit together</p>
 <ul><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> for the</li></ul>
@@ -4308,13 +4308,13 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
         <p class="docMeta">Generated from <code>RELEASE_READINESS_REVIEW.md</code> during build.</p>
         <div class="markdown">
           <h3>Current Read</h3>
-<p>Aurora <code>1.3.0</code> remains the release currently live on hosted <code>/production</code>.</p>
+<p>Aurora <code>1.4.0</code> is now the release currently live on hosted <code>/production</code>.</p>
 <p>Verified May 14, 2026:</p>
-<ul><li>hosted <code>/production</code><ul><li>current live family: <code>1.3.0</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current reviewed family: <code>1.4.0 beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current forward review line: <code>1.4.0.1</code></li></ul></li></ul>
-<p>For exact active labels, use each lane&#39;s <code>build-info.json</code>. The important release truth is that hosted <code>/production</code> continues to carry the refreshed public <code>1.3.0</code> family sourced from the accepted <code>1.3.0.1</code> hosted-dev review bundle, while hosted <code>/dev</code> and hosted <code>/beta</code> now carry the first deliberate <code>1.4.0</code> candidate family.</p>
-<h3>What This Production Refresh Means</h3>
-<p>This is not a brand-new public SemVer family. It is a production refresh inside the <code>1.3.0</code> family.</p>
-<p>The fourth-segment <code>1.3.0.1</code> line remains the hosted-dev review signal. It was used to gather the current conformance/docs/dashboard bundle, review it on the authority machine, promote it through hosted <code>/beta</code>, and then refresh hosted <code>/production</code> without pretending this was the same kind of public jump as the original <code>1.3.0</code> fidelity-and-second-cabinet release.</p>
+<ul><li>hosted <code>/production</code><ul><li>current live family: <code>1.4.0</code></li></ul></li><li>hosted <code>/beta</code><ul><li>current reviewed family: <code>1.4.0 beta</code></li></ul></li><li>hosted <code>/dev</code><ul><li>current forward review line: <code>1.4.0.1</code></li></ul></li></ul>
+<p>For exact active labels, use each lane&#39;s <code>build-info.json</code>. The important release truth is that hosted <code>/production</code> now carries the deliberate public <code>1.4.0</code> family, while hosted <code>/dev</code> remains on the visible <code>1.4.0.1</code> forward-review line and hosted <code>/beta</code> remains the approved <code>1.4.0-beta.1</code> production-source lane.</p>
+<h3>What This Production Release Means</h3>
+<p>This is a real public SemVer family move. <code>1.4.0</code> is now the shipped public line on Platinum.</p>
+<p>The fourth-segment <code>1.4.0.1</code> line remains the hosted-dev review signal. It helped review the current family on the authority machine, while hosted <code>/beta</code> carried the approved <code>1.4.0-beta.1</code> source candidate that was promoted into hosted <code>/production</code>.</p>
 <p>Retrospective versioning note:</p>
 <ul><li>this same-family production refresh is now treated as an exception rather</li></ul>
 <p>than the preferred production model</p>
@@ -4506,7 +4506,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>First 1.4.0 beta candidate</strong><br>
+          Latest release note: <strong>1.4.0 multi-game public release</strong><br>
           Release 1.4.0.1 · Updated May 14, 2026
         </p>
       </aside>
