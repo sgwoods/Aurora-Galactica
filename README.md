@@ -101,6 +101,8 @@ Best release and testing gate doc:
 
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
 - [DEVELOPMENT_PRINCIPLES.md](DEVELOPMENT_PRINCIPLES.md)
+- [CODE_REVIEW_MODEL.md](CODE_REVIEW_MODEL.md)
+- [REVIEW_LEARNING_LEDGER.md](REVIEW_LEARNING_LEDGER.md)
 
 Best conformance/resource economics doc:
 
@@ -116,6 +118,8 @@ Release planning and readiness docs:
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [RELEASE_NOTE_1.4.0_PRODUCTION.md](RELEASE_NOTE_1.4.0_PRODUCTION.md)
+- [RELEASE_NOTE_1.4.0_BETA_1.md](RELEASE_NOTE_1.4.0_BETA_1.md)
 - [RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md](RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md)
 - [RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md](RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md)
 - [release-dashboard.json](release-dashboard.json)
@@ -130,35 +134,36 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.3.0.1` forward-review line
+  - active `1.4.0.1` forward-review line
 - hosted `/beta`:
-  - refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
-    bundle
+  - active `1.4.0-beta.1` approved production-source lane
 - hosted `/production`:
-  - refreshed `1.3.0` public line
+  - live `1.4.0` public line
 
 What that means:
 
 - Aurora now ships as the first playable application on Platinum
-- the current public family is still `1.3.0`, but it now carries the accepted
-  conformance/docs/dashboard refresh first assembled on hosted `/dev`
-- hosted `/dev` remains the visible forward-review lane through the
-  `1.3.0.1` increment
-- Galaxy Guardians is now part of the public Platinum story as a second-cabinet
-  sneak peek
+- the public production family is now `1.4.0`, while hosted `/dev` remains the
+  visible `1.4.0.1` forward-review line and hosted `/beta` remains the approved
+  `1.4.0-beta.1` production-source lane
+- hosted `/dev` remains the visible forward-review lane for the current beta
+  family
+- Galaxy Guardians is now part of the beta review story as a playable preview
+  with game-owned conformance and release identity
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
 - the shell, picker, and shared docs are part of the product rather than just engineering scaffolding
 
 Current go-forward focus:
 
-- keep the refreshed `1.3.0` public line stable
-- use the hosted `1.3.0.1` `/dev` line for the next coherent review bundle,
-  not for casual lane churn
+- keep the shipped `1.4.0` public line stable
+- use the hosted `1.4.0.1` `/dev` line and hosted `/beta` lane to shape the
+  next coherent follow-through candidate rather than blurring production and
+  review work together
 - use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
-  current readable quality table before shaping the `1.4.0` pickup
+  current readable quality table while reviewing the `1.4.0` candidate
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis

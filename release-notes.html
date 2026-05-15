@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Release Notes</title>
+  <style>
+:root{
+      --bg:#06111b;
+      --bg2:#10253b;
+      --bg3:#14354f;
+      --card:rgba(7,19,31,0.78);
+      --card2:rgba(255,255,255,0.05);
+      --line:rgba(144,210,255,0.18);
+      --text:#eef8ff;
+      --muted:#a1c7e0;
+      --soft:#84adc9;
+      --accent:#69e2a7;
+      --accent2:#7ac3ff;
+      --shadow:0 18px 40px rgba(0,0,0,0.28);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(105,226,167,0.16), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(122,195,255,0.2), transparent 28%),
+        linear-gradient(160deg,var(--bg),var(--bg2) 55%,var(--bg3));
+      min-height:100vh;
+    }
+    a{color:#d8f7ff}
+    .shell{
+      max-width:1280px;
+      margin:0 auto;
+      padding:34px 18px 72px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 280px;
+      gap:24px;
+      align-items:start;
+    }
+    .main{min-width:0}
+    .hero,.section,.toc{
+      border:1px solid rgba(177,222,255,0.16);
+      border-radius:28px;
+      background:
+        linear-gradient(160deg, rgba(12,34,54,0.88), rgba(7,19,31,0.72)),
+        radial-gradient(circle at 20% 0%, rgba(103,230,168,0.12), transparent 32%);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:34px 32px 28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      color:#d7ecff;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-0.04em;
+    }
+    .hero p{
+      max-width:900px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.65;
+      margin:0 0 16px;
+    }
+    .goal{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e7f6ff;
+      font-size:16px;
+      line-height:1.55;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .metaCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .metaLabel{
+      display:block;
+      color:#8fb3cc;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .metaValue{
+      font-size:18px;
+      font-weight:600;
+    }
+    .heroLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 16px;
+      border-radius:999px;
+      background:rgba(122,195,255,0.16);
+      border:1px solid rgba(122,195,255,0.3);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:.04em;
+    }
+    .section{
+      margin-top:20px;
+      padding:28px 26px 24px;
+    }
+    .sectionHeader{
+      margin-bottom:18px;
+      padding-bottom:14px;
+      border-bottom:1px solid var(--line);
+    }
+    .sectionHeader h2{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:-0.03em;
+    }
+    .sectionHeader p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .cardGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .card,.linkCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .card h3,.linkCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .card p,.linkCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+    .bulletList li{
+      position:relative;
+      padding:14px 16px 14px 42px;
+      border-radius:18px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList li::before{
+      content:"";
+      position:absolute;
+      left:16px;
+      top:18px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(122,195,255,0.08);
+    }
+    .linkGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .linkCard a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      margin-bottom:10px;
+      text-decoration:none;
+    }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
+    .docWrap{
+      padding:20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .docMeta{
+      margin:0 0 14px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .markdown h3,.markdown h4,.markdown h5{
+      margin:24px 0 10px;
+      letter-spacing:-0.02em;
+      color:#f2fbff;
+    }
+    .markdown h3{font-size:24px}
+    .markdown h4{font-size:20px}
+    .markdown h5{font-size:17px}
+    .markdown p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .markdown ul,.markdown ol{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      padding-left:22px;
+    }
+    .markdown li{
+      margin:0 0 8px;
+      line-height:1.65;
+    }
+    .markdown pre{
+      margin:0 0 16px;
+      padding:14px 16px;
+      overflow:auto;
+      border-radius:16px;
+      background:rgba(3,10,16,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f6ff;
+    }
+    .markdown pre code{
+      color:inherit;
+      font-size:13px;
+    }
+    .markdown img{
+      display:block;
+      max-width:100%;
+      margin:0 0 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      position:sticky;
+      top:20px;
+      padding:22px 20px 18px;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+    .toc p{
+      margin:0 0 14px;
+      color:var(--soft);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .toc ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      gap:10px;
+    }
+    .toc li a{
+      display:block;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      text-decoration:none;
+      color:#e9f7ff;
+      font-size:14px;
+      line-height:1.4;
+    }
+    .footer{
+      margin-top:18px;
+      color:#8db0c8;
+      font-size:13px;
+      line-height:1.6;
+    }
+    code{
+      font-family:"SFMono-Regular",Consolas,monospace;
+      color:#edf7ff;
+      font-size:.95em;
+    }
+    @media (max-width: 980px){
+      .shell{grid-template-columns:1fr}
+      .toc{position:static; order:-1}
+    }
+    @media (max-width: 720px){
+      .shell{padding:20px 14px 54px}
+      .hero,.section,.toc{padding:22px 20px}
+      .hero p{font-size:17px}
+    }
+    .releaseNoteMeta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+      margin:0 0 18px;
+    }
+    .releaseNoteCard{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .releaseNoteCard strong{
+      display:block;
+      margin-bottom:6px;
+      color:#eef8ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .releaseNoteCard span{
+      display:block;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .releaseNoteSummary{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+    .releaseNoteActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 18px;
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Release Notes</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+            <a class="homeLink" href="release-dashboard.html">Release Dashboard</a>
+          </div>
+          <h1>Aurora / Platinum Release Notes</h1>
+          <p>Readable hosted release notes for the public Aurora / Platinum milestones. Use this page from the release dashboard timeline when you want the fuller release story instead of the short milestone summary.</p>
+          <div class="goal"><strong>Latest note:</strong> 1.4.0 multi-game public release</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">1.4.0.1</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">development</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Entries</span>
+              <span class="metaValue">14</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">May 14, 2026</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="release-dashboard.html">Open release dashboard</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+          </div>
+        </section>
+        <section class="section" id="release-note-2026-05-14-1-4-0-1-4-0-multi-game-public-release">
+        <div class="sectionHeader">
+          <h2>1.4.0 multi-game public release</h2>
+          <p>Shipped the deliberate 1.4.0 public family on Platinum, promoting the reviewed beta candidate into hosted `/production` with the merged Galaxy Guardians playable/conformance tranche, player-two and watch-mode review work, replay/trophy follow-through, and side-by-side conformance/documentation surfaces.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.4.0</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>May 14, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.4.0_PRODUCTION.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Shipped the deliberate 1.4.0 public family on Platinum, promoting the reviewed beta candidate into hosted `/production` with the merged Galaxy Guardians playable/conformance tranche, player-two and watch-mode review work, replay/trophy follow-through, and side-by-side conformance/documentation surfaces.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.4.0_PRODUCTION.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: 2026-05-14</p>
+<h3>Summary</h3>
+<p><code>1.4.0</code> is now live on hosted <code>/production</code>.</p>
+<p>This is the first deliberate public <code>1.4.0</code> family for Aurora / Platinum. It promotes the reviewed beta candidate into the public line and turns the recent multi-game, conformance, persona, replay, and documentation work into the new production baseline.</p>
+<h3>What This Release Adds</h3>
+<ul><li><code>Aurora Galactica</code> remains the primary shipped playable game on Platinum, now</li></ul>
+<p>with the refreshed player-two persona mode, watch-mode persona behavior, commentator callout support, replay/trophy surface follow-through, and the current release/documentation discipline.</p>
+<ul><li><code>Galaxy Guardians</code> remains a preview-first sibling game, but it now carries a</li></ul>
+<p>stronger first-class playable/conformance posture inside the shipped public family instead of living only as an experimental side path.</p>
+<ul><li>The hosted conformance and project documentation surfaces now expose clearer</li></ul>
+<p>per-game and side-by-side entry points so Aurora and Guardians can be reviewed together from one public release story.</p>
+<ul><li>The release pipeline now carries the code-review packet plus review-learning</li></ul>
+<p>ledger forward as durable release evidence rather than ephemeral review-only state.</p>
+<h3>Production Posture</h3>
+<p>The important public contract after this release is:</p>
+<ul><li>hosted <code>/production</code> now carries <code>1.4.0</code></li><li>hosted <code>/beta</code> remains the staging lane for the next reviewed candidate cycle</li><li>hosted <code>/dev</code> remains the forward-review lane</li><li>root public pages and hosted docs now match the shipped <code>1.4.0</code> posture</li></ul>
+<h3>What Remains Next</h3>
+<p>Shipping <code>1.4.0</code> does not mean the work is complete.</p>
+<p>The next deliberate follow-through should focus on:</p>
+<ul><li>stronger Aurora conformance lifts in audio, stage pressure, and long-surface</li></ul>
+<p>feel</p>
+<ul><li>continued Galaxy Guardians advancement toward a more complete first-class</li></ul>
+<p>playable game</p>
+<ul><li>keeping Platinum clean as the reusable multi-game host rather than letting</li></ul>
+<p>application-specific behavior leak back into the shared shell</p></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-05-14-1-4-0-beta-1-first-1-4-0-beta-candidate">
+        <div class="sectionHeader">
+          <h2>First 1.4.0 beta candidate</h2>
+          <p>Cut the first deliberate 1.4.0 beta family from merged main, keeping production stable on 1.3.0 while moving hosted `/dev` and hosted `/beta` onto the next minor-candidate line with the full Guardians playable/conformance tranche, side-by-side game conformance entry points, and a cleaner multi-game release story.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.4.0-beta.1</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>May 14, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.4.0_BETA_1.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Cut the first deliberate 1.4.0 beta family from merged main, keeping production stable on 1.3.0 while moving hosted `/dev` and hosted `/beta` onto the next minor-candidate line with the full Guardians playable/conformance tranche, side-by-side game conformance entry points, and a cleaner multi-game release story.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.4.0_BETA_1.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: May 14, 2026</p>
+<p>Release track: first deliberate <code>1.4.0</code> beta candidate</p>
+<p>Source promotion path: merged <code>main</code> -&gt; hosted <code>/dev</code> <code>1.4.0.1</code> -&gt; hosted <code>/beta</code> <code>1.4.0-beta.1</code></p>
+<h3>Summary</h3>
+<p><code>1.4.0-beta.1</code> is the first deliberate post-<code>1.3.0</code> minor-family candidate. It keeps hosted <code>/production</code> stable on the refreshed public <code>1.3.0</code> line while moving hosted <code>/dev</code> and hosted <code>/beta</code> onto a coherent next-family review line.</p>
+<p>This candidate matters because it stops stretching the <code>1.3.0</code> story past its natural boundary. The bundle now being reviewed is no longer just a same-family refresh. It carries a fuller Galaxy Guardians playable/conformance tranche, side-by-side game conformance entry points, broader release-note and dashboard history, and a clearer multi-game product story for Platinum.</p>
+<h3>What This Beta Candidate Carries</h3>
+<ul><li>The first deliberate <code>1.4.0</code> lane identity:<ul><li>hosted <code>/dev</code>: <code>1.4.0.1</code></li><li>hosted <code>/beta</code>: <code>1.4.0-beta.1</code></li><li>hosted <code>/production</code>: remains <code>1.3.0</code></li></ul></li><li>A cleaner release story that preserves the distinction between the public</li></ul>
+<p>shipped line and the next candidate family.</p>
+<ul><li>The merged Galaxy Guardians work that makes the second cabinet more useful as</li></ul>
+<p>a real platform-validation target instead of only a shell proof.</p>
+<ul><li>Hosted conformance entry points that make Aurora, Galaxy Guardians, and the</li></ul>
+<p>compare view directly shareable from the documentation surfaces.</p>
+<ul><li>Backfilled release history and readable hosted release-note navigation so the</li></ul>
+<p>dashboard timeline can link to maintained detailed notes.</p>
+<h3>Galaxy Guardians In This Candidate</h3>
+<p>The most important product-level change in this family is the stronger Galaxy Guardians posture.</p>
+<p>The candidate now includes:</p>
+<ul><li>game-owned score, replay, and pilot-history identity instead of silently</li></ul>
+<p>borrowing Aurora surfaces</p>
+<ul><li>one-level completion and loss-result framing so the game behaves more like a</li></ul>
+<p>minimally complete playable experience</p>
+<ul><li>longer-surface and persona-oriented conformance planning rather than a</li></ul>
+<p>one-wave-only preview posture</p>
+<ul><li>the recent visual, audio, motion-pressure, and stage-surface passes now</li></ul>
+<p>merged into the candidate line</p>
+<ul><li>direct documentation and dashboard compare links so Guardians can be judged</li></ul>
+<p>beside Aurora instead of hidden behind a generic shared dashboard</p>
+<p>This still does not claim that Galaxy Guardians is a finished second shipped game. It does mean the candidate family now treats it as a serious playable preview and conformance program rather than a thin cabinet placeholder.</p>
+<h3>Release And Documentation Improvements</h3>
+<ul><li>The release dashboard now frames the active family honestly as <code>1.4.0</code></li></ul>
+<p>candidate work while keeping <code>1.3.0</code> as the stable public baseline.</p>
+<ul><li>Hosted release-note navigation now has broader history coverage and a</li></ul>
+<p>maintained source-doc path for milestone links.</p>
+<ul><li>The hosted project guide and public project page now surface direct Aurora</li></ul>
+<p>and Guardians conformance links plus a compare entry point.</p>
+<ul><li>Layered version domains remain explicit across the integrated bundle, the</li></ul>
+<p>Platinum platform, Aurora, and Galaxy Guardians.</p>
+<h3>Review Intent</h3>
+<p>This beta candidate should be reviewed for:</p>
+<ul><li>whether the <code>1.4.0</code> story is cleaner and more honest than continuing to</li></ul>
+<p>stretch <code>1.3.0</code></p>
+<ul><li>whether Galaxy Guardians is now materially more useful as a second real game</li></ul>
+<p>surface for platform validation</p>
+<ul><li>whether the current documentation and dashboard set explains the multi-game</li></ul>
+<p>product story clearly enough for the next public move</p>
+<ul><li>whether the remaining gaps are now production blockers or simply the next</li></ul>
+<p>deliberate investment queue</p>
+<h3>Known Remaining Questions</h3>
+<ul><li>Galaxy Guardians still needs deeper level-by-level feel, fairness, and late</li></ul>
+<p>stage survivability tuning before it should be described as fully mature.</p>
+<ul><li>Aurora still has high-value authenticity work in audio/event feedback, visual</li></ul>
+<p>grounding, and later-stage arcade depth.</p>
+<ul><li>Production remains intentionally on <code>1.3.0</code> until the <code>1.4.0</code> candidate is</li></ul>
+<p>accepted strongly enough to justify a real public move.</p>
+<h3>Next Decision</h3>
+<p>If <code>1.4.0-beta.1</code> is accepted, the next production conversation should be about whether this family deserves a real <code>1.4.0</code> public promotion, not whether it can be squeezed back into a same-story <code>1.3.x</code> label.</p></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-05-12-1-3-0-production-conformance-refresh">
+        <div class="sectionHeader">
+          <h2>Production conformance refresh</h2>
+          <p>Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.3.0</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>May 12, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: May 12, 2026</p>
+<p>Release track: production refresh inside the public <code>1.3.0</code> family</p>
+<p>Source promotion path: accepted <code>1.3.0.1</code> hosted-dev review bundle -&gt; hosted <code>/beta</code> -&gt; hosted <code>/production</code></p>
+<h3>Summary</h3>
+<p>This release keeps the public SemVer family at <code>1.3.0</code> while promoting the accepted <code>1.3.0.1</code> hosted-dev review bundle into the live hosted <code>/beta</code> and hosted <code>/production</code> lanes.</p>
+<p>That matters because the fourth-segment <code>1.3.0.1</code> line is a hosted-dev review signal, not the public package version. Public production still presents itself as <code>1.3.0+build...</code>, but it now carries the stronger conformance/documentation bundle that was previously isolated to hosted <code>/dev</code>.</p>
+<p>The public effect is a more trustworthy Aurora / Platinum release: stronger player-facing documentation, clearer provenance, a better measured conformance story, improved runtime ship-loss audio feedback, and a release package that explains not just what changed, but why the team believes it.</p>
+<p>Retrospective versioning note:</p>
+<ul><li>this production push remained in the public <code>1.3.0</code> family</li><li>going forward, a production bundle with this much game-quality improvement,</li></ul>
+<p>conformance lift, and ingestion/release-surface optimization should normally ship as at least a new <code>PATCH</code> release</p>
+<ul><li>same-version production reuse should be reserved for production-failure</li></ul>
+<p>repair rather than treated as the normal way to carry substantial value</p>
+<h3>What Players And Reviewers Get</h3>
+<ul><li>A production line that is better documented in public, not only better</li></ul>
+<p>described in engineering chat.</p>
+<ul><li>A measured calibrated ship-loss cue lift that preserves a fuller arcade-like</li></ul>
+<p>death phrase while keeping cue alignment guardrails intact.</p>
+<ul><li>Better protection around inter-level, final-loss, and game-over audio starts</li></ul>
+<p>so browser runtime capture no longer silently drops critical cue moments.</p>
+<ul><li>A public project page, project guide, release dashboard, and conformance</li></ul>
+<p>dashboard that now explain persistent artifact provenance, score movement, and resource economics as first-class parts of the product story.</p>
+<ul><li>Clearer layered release identity across the integrated release, the Platinum</li></ul>
+<p>host, Aurora, and Galaxy Guardians.</p>
+<h3>Main Production Improvements</h3>
+<h4>1. Conformance Story Is Public-Facing Now</h4>
+<p>The public project surfaces now describe the real conformance effort rather than only presenting a thin product shell.</p>
+<p>That includes:</p>
+<ul><li>provenance-backed generated documentation</li><li>release-facing conformance dashboards</li><li>resource-economics reporting</li><li>application artifact scoring</li><li>runtime static sprite-capture scoring</li><li>a clearer explanation of score meaning, confidence, and next investments</li></ul>
+<p>This means a future reader can inspect what the project believes, what evidence it is using, and what still remains weak without needing repository archaeology or prior chat context.</p>
+<h4>2. Audio/Event Feedback Improved With Measurement</h4>
+<p>The accepted runtime audio lift in this refresh is the calibrated layered <code>playerHit</code> ship-loss phrase.</p>
+<p>Why it shipped:</p>
+<ul><li>cue alignment remained green</li><li>semantic event scoring stayed strong</li><li>focused candidate gates held</li><li>browser-reference comparison improved</li><li>the player-facing moment became more arcade-complete than the prior shipped</li></ul>
+<p>line</p>
+<p>This does not claim the audio problem is solved. It does mean the public line now carries a real measured improvement rather than only pipeline/process work.</p>
+<h4>3. Documentation Provenance Is Enforced</h4>
+<p>Generated public pages now explicitly explain that they are assembled from persistent repository artifacts and maintained source docs.</p>
+<p>The provenance source is captured in <code>documentation-provenance.json</code> and rendered into the public project page and project guide. Release freshness checks now fail if that source map or those rendered sections disappear.</p>
+<p>That is important for a project whose long-term promise depends on repeatable ingestion, evidence-backed conformance work, and durable release reasoning.</p>
+<h4>4. Layered Release Identity Is Stronger</h4>
+<p>This refresh continues the move away from one flattened version story.</p>
+<p>The release now more clearly distinguishes:</p>
+<ul><li>integrated bundle identity</li><li>Platinum platform identity</li><li>game-owned release identity</li><li>build identity</li><li>hosted-dev review-line identity</li></ul>
+<p>Aurora remains the primary shipped game. Galaxy Guardians remains a preview application, but its pack-owned identity and release metadata are now kept more honestly aligned with the production-capable preview runtime.</p>
+<h3>Current Quality Read</h3>
+<p>Current maintained Aurora read for this refreshed public family:</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Area</th><th>Current Read</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Overall quality</td><td><code>9.2/10</code></td><td>Stronger than the older shipped <code>1.3.0</code> baseline.</td></tr>
+<tr><td>Audio identity and cue alignment</td><td><code>7.3/10</code></td><td>Still the weakest high-value category.</td></tr>
+<tr><td>Audio semantic event score</td><td><code>9.78/10</code></td><td>Meanings remain strong.</td></tr>
+<tr><td>Audio acoustic event score</td><td><code>6.31/10</code></td><td>Main residual runtime audio gap.</td></tr>
+<tr><td>Audio cue alignment</td><td><code>9/9</code></td><td>Alignment guardrail preserved.</td></tr>
+<tr><td>Level arc and encounter shape</td><td><code>8.8/10</code></td><td>Now a first-class release-facing category.</td></tr>
+<tr><td>Alien entry and challenge novelty</td><td><code>7.8/10</code></td><td>Strong next-cycle gameplay-authenticity target.</td></tr>
+<tr><td>Boss entry and formation grammar</td><td><code>9.2/10</code></td><td>Broadly strong, with room for tighter path/slot precision.</td></tr>
+<tr><td>UI, shell, and graphics integrity</td><td><code>9.2/10</code></td><td>Public-facing surfaces remain green after the doc/dashboard refresh.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>Important interpretation:</p>
+<ul><li><code>10/10</code> means maxed at current scorer resolution, not perfect arcade</li></ul>
+<p>imitation</p>
+<ul><li>a better scorer may lower a number while improving truthfulness</li><li>the project should keep treating confidence, resolution, and cost as part of</li></ul>
+<p>the release story, not as invisible background metadata</p>
+<h3>Release Evidence</h3>
+<p>This refreshed production line is supported by:</p>
+<ul><li>current conformance dashboard source and generated hosted dashboard</li><li>documentation freshness checks</li><li>provenance-backed public project pages and guides</li><li>application artifact scoring and runtime sprite-capture scoring</li><li>accepted beta promotion on the release-authority machine</li><li>production publish verification plus public project-page sync verification</li></ul>
+<p>The release is therefore not just &quot;the code seems okay.&quot; It is a documented, verified promotion with a public explanation of evidence and remaining gaps.</p>
+<h3>Accepted Gaps</h3>
+<p>This production refresh intentionally does not claim completion on:</p>
+<ul><li>audio identity beyond the improved ship-loss phrase</li><li>challenge-stage arrival authenticity and novelty depth</li><li>full temporal sprite-motion scoring</li><li>richer later-level pressure and reward texture</li><li>fully mature second-game conformance for Galaxy Guardians</li></ul>
+<p>Those are next-cycle targets, not hidden regressions.</p>
+<h3>Next Direction</h3>
+<p>Now that the refreshed <code>1.3.0</code> public family is live, the next coherent pickup is <code>1.4.0</code>.</p>
+<p>That next family should emphasize:</p>
+<ul><li>audio/event feedback beyond cue correctness</li><li>alien entry variation and challenge-stage novelty</li><li>level arc and encounter shape</li><li>boss/formation grammar precision</li><li>visual reference grounding</li><li>cleaner Platinum/application seams</li><li>ingestion-backed progress for Galaxy Guardians and future games</li></ul>
+<h3>Release Message</h3>
+<p>Short external framing:</p>
+<p>Aurora / Platinum <code>1.3.0</code> has been refreshed with stronger public documentation, a better measured conformance story, clearer artifact provenance, and a real audio/event-feedback lift while keeping the product honest about what still needs work for the <code>1.4.0</code> arcade-depth cycle.</p></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-05-11-1-3-0-1-hosted-dev-conformance-review-handoff">
+        <div class="sectionHeader">
+          <h2>Hosted dev conformance review handoff</h2>
+          <p>Prepared the post-production hosted-dev review increment with refreshed conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, persona distribution evidence, and a measured calibrated ship-loss audio cue improvement. This was the review bundle later accepted and promoted into the public 1.3.0 family.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.3.0.1</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>May 11, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Prepared the post-production hosted-dev review increment with refreshed conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, persona distribution evidence, and a measured calibrated ship-loss audio cue improvement. This was the review bundle later accepted and promoted into the public 1.3.0 family.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: May 11, 2026</p>
+<p>Release track: hosted-dev review increment</p>
+<p>Authority posture: MacBook may prepare, commit, push, merge, and publish hosted <code>/dev</code>; hosted <code>/beta</code> and <code>/production</code> remain authority-gated on <code>imacm1 / iMacM1</code> unless release authority is explicitly transferred.</p>
+<h3>Summary</h3>
+<p><code>1.3.0.1</code> is the first post-<code>1.3.0</code> review increment. It keeps production and beta stable on the shipped <code>1.3.0</code> family while using hosted <code>/dev</code> to review a coherent conformance bundle: refreshed dashboards and public docs, conformance economics, application artifact scoring, runtime sprite-capture scoring, and a measured audio/event-feedback lift. The latest documentation pass also adds persona distribution evidence so gameplay evaluation is explained with repeated seeded runs rather than a single representative playthrough.</p>
+<p>This is not a production promotion. It is the package to review before asking the release-authority machine to publish the next hosted <code>/beta</code> candidate.</p>
+<h3>Player-Visible Improvements</h3>
+<ul><li>Ship-loss feedback is more arcade-complete: the calibrated layered</li></ul>
+<p><code>playerHit</code> cue preserves a fuller death phrase while maintaining cue alignment, semantic event scoring, and overall quality guardrails.</p>
+<ul><li>Inter-level and final-loss audio reliability is better protected: critical</li></ul>
+<p>reference cues now have runtime-recovery coverage so transition, loss, game-over, and next-start cues actually begin in the browser runtime.</p>
+<ul><li>Start/wait-mode and boss-first-hit presentation have been cleaned up enough</li></ul>
+<p>that the current review bundle reads more coherent than the shipped baseline, while larger visual-authenticity work remains queued.</p>
+<ul><li>The conformance dashboard and public project documentation now expose more of</li></ul>
+<p>the real development story: what improved, what remains weak, what it cost, and what should be attacked next.</p>
+<h3>Conformance And Evidence</h3>
+<p>Current maintained Aurora read:</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Area</th><th>Current Read</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Overall quality</td><td><code>9.2/10</code></td><td>Current release-quality roll-up.</td></tr>
+<tr><td>Audio identity and cue alignment</td><td><code>7.3/10</code></td><td>Weakest high-value category, but improved after calibrated ship-loss promotion.</td></tr>
+<tr><td>Audio semantic event score</td><td><code>9.78/10</code></td><td>Event meanings remain strong.</td></tr>
+<tr><td>Audio acoustic event score</td><td><code>6.31/10</code></td><td>Still the main audio gap; highest current segment risk is <code>playerHit</code> tail.</td></tr>
+<tr><td>Audio cue alignment</td><td><code>9/9</code></td><td>Alignment guardrail preserved.</td></tr>
+<tr><td>Level arc and encounter shape</td><td><code>8.8/10</code></td><td>First-class long-play/gameplay-shape category.</td></tr>
+<tr><td>Alien entry and challenge novelty</td><td><code>7.8/10</code></td><td>High-priority gameplay-authenticity gap.</td></tr>
+<tr><td>Boss entry and formation grammar</td><td><code>9.2/10</code></td><td>Strong broad score, but direct path/slot reference precision remains next.</td></tr>
+<tr><td>Application artifact conformance</td><td>about <code>8.25/10</code></td><td>Aggregates sprites, audio, frame surfaces, text, level shape, and choreography.</td></tr>
+<tr><td>Runtime static sprite canvas score</td><td>about <code>6.2/10</code></td><td>Static pose only; active motion is explicitly unscored/planning.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>Important interpretation: a <code>10/10</code> metric means maxed at current scorer resolution, not perfect arcade imitation. Confidence and resolution are part of the release story because a better scorer may lower a score while improving the truthfulness of the project.</p>
+<h3>Platform And Harness Improvements</h3>
+<ul><li>Audio candidate work now leaves behind reusable cue-contract, focused</li></ul>
+<p>candidate, promotion-precheck, runtime-recapture, and event-gap artifacts.</p>
+<ul><li>Composite/layered audio cue scoring can evaluate scheduled onset/body/tail</li></ul>
+<p>windows instead of only the loudest active island.</p>
+<ul><li>Runtime sprite conformance can capture isolated live canvas crops and score</li></ul>
+<p>those visible pixels separately from documentation/catalog proxy scores.</p>
+<ul><li>Application artifact conformance now aggregates game-artifact surfaces beyond</li></ul>
+<p>aliens: sprites, sprite motion planning, audio cues, audio alignment, backgrounds, frame/popups/icons, fonts/text, level shape, and boss/formation choreography.</p>
+<ul><li>Persona performance distribution promotes 30 seeded full-run games per</li></ul>
+<p>generic Platinum persona into a maintained summary and chart covering score, stage reached, time alive, losses, and challenge hit rate.</p>
+<ul><li>Conformance economics tracks local CPU/browser spend, GPU-equivalent</li></ul>
+<p>Codex/OpenAI/API effort, artifact growth, and cost-per-score movement.</p>
+<h3>Documentation Refresh</h3>
+<p>The release documentation now treats the conformance project as a first-class product effort rather than an internal note. The key maintained surfaces are:</p>
+<ul><li><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></li><li><code>CONFORMANCE_METRICS_OVERVIEW.md</code></li><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li><li><code>CONFORMANCE_ECONOMICS.md</code></li><li><code>GAME_CONFORMANCE_CATALOG.md</code></li><li><code>AUDIO_CONFORMANCE_LAB.md</code></li><li><code>STRATEGIC_BETA_REVIEW.md</code></li><li>hosted project guide, application guide, conformance dashboard, release</li></ul>
+<p>dashboard, public project page, and <code>documentation-provenance.json</code></p>
+<p>The hosted public project page and project guide now render a documentation provenance section from <code>documentation-provenance.json</code>, and publish preflight checks fail if that source map or generated section disappears. Current scores, costs, release posture, game status, and artifact claims should therefore be changed in their persistent source artifacts first, then rebuilt into the visible pages.</p>
+<p>Documentation suggestions carried forward:</p>
+<ul><li>Add timeline charts that show conformance score movement beside CPU,</li></ul>
+<p>browser, GPU-equivalent model, and artifact-volume spend.</p>
+<ul><li>Add release-story charts that separate gameplay-facing gains from</li></ul>
+<p>measurement-facing gains.</p>
+<ul><li>Add confidence/resolution timelines so a score drop caused by a better</li></ul>
+<p>scorer is visibly different from a gameplay regression.</p>
+<ul><li>Add more drill-down from the public project page into game-specific alien,</li></ul>
+<p>audio, stage, persona, sprite, and artifact-conformance tables.</p>
+<ul><li>Keep persona evidence generic at the Platinum level, with each game mapping</li></ul>
+<p>those personas into its own controller, scenarios, and release blockers.</p>
+<ul><li>Add direct beta handoff checklists to make authority-gated release movement</li></ul>
+<p>easier to verify from any machine.</p>
+<h3>Known Gaps</h3>
+<ul><li>Audio remains the weakest high-value category. <code>stagePulse</code> needs a better</li></ul>
+<p>pressure-bed strategy, and the residual <code>playerHit</code> tail gap should be refined with calibrated browser-reference evidence.</p>
+<ul><li>Challenging stages still need stronger Galaga-like arrival, movement,</li></ul>
+<p>specialty-alien introduction, and bonus-opportunity novelty.</p>
+<ul><li>Static sprite scoring is useful but incomplete; sprite identity includes</li></ul>
+<p>flapping, pulsing, dive rotation, capture/rescue, carried-fighter, and dual-fighter transitions that need temporal harness windows.</p>
+<ul><li>Visual explosion and boss damage feedback are improved but still not fully</li></ul>
+<p>reference-authentic.</p>
+<ul><li>GPU-equivalent accounting is now conceptually represented, but Codex/model</li></ul>
+<p>effort still depends on deliberate manual ledger entries and usage snapshots.</p>
+<h3>Beta Handoff</h3>
+<p>If this hosted-dev review is accepted, the authority machine should:</p>
+<ol><li>pull <code>origin/main</code></li><li>run <code>npm run machine:bootstrap</code></li><li>run <code>npm run machine:status</code></li><li>run <code>npm run machine:doctor</code></li><li>confirm <code>npm run release:show-authority</code></li><li>run <code>npm run build</code></li><li>run <code>npm run harness:check:documentation-freshness</code></li><li>run <code>npm run publish:check:dev</code></li><li>inspect hosted <code>/dev</code></li><li>publish hosted <code>/beta</code> only from the authority machine</li><li>run hosted beta verification and update the strategic beta review with the</li></ol>
+<p>final lane stamp and any accepted gaps</p>
+<h3>Next Plan</h3>
+<p>Short term:</p>
+<ul><li>complete hosted-dev review and beta-request handoff</li><li>keep source docs, dashboard, release note, and public surfaces aligned</li></ul>
+<p>Medium term:</p>
+<ul><li>move audio from <code>7.3/10</code> toward <code>7.5+</code></li><li>attack alien entry, challenge-stage novelty, level arc, and direct</li></ul>
+<p>path/slot reference precision</p>
+<ul><li>add temporal sprite-motion scoring instead of relying on static crops</li></ul>
+<p>Longer term:</p>
+<ul><li>shape <code>1.4.0</code> as the arcade-depth family</li><li>keep Galaxy Guardians in ingestion-backed preview until its own conformance</li></ul>
+<p>package proves a real second game</p>
+<ul><li>continue shifting repeatable assessment into local CPU/browser harnesses while</li></ul>
+<p>using Codex/model work to design better evaluators, code, and review loops</p></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-05-05-1-3-0-fidelity-and-second-cabinet-release">
+        <div class="sectionHeader">
+          <h2>Fidelity and second-cabinet release</h2>
+          <p>Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.3.0</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>May 5, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.3.0_PRODUCTION.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.3.0_PRODUCTION.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Aurora Galactica&#39;s <code>1.3.0</code> production release is now live on Platinum.</p>
+<p>Suggested post text:</p>
+<p>Aurora Galactica <code>1.3.0</code> is live on Platinum.</p>
+<p>This is a meaningful release for the whole project, not just a small patch.</p>
+<p>What is new in <code>1.3.0</code>:</p>
+<ul><li>stronger Aurora movement, trust, and shell polish across the current public</li></ul>
+<p>build</p>
+<ul><li>clearer platform, build, and release identity across Platinum and its games</li><li>the first public <code>Galaxy Guardians</code> sneak peek inside Platinum&#39;s Choose Game</li></ul>
+<p>flow</p>
+<ul><li>cleaner release-lane discipline and pilot-account handling across dev, beta,</li></ul>
+<p>and production</p>
+<p><code>Galaxy Guardians</code> is the headline new arrival here. It is still a preview-first second-cabinet experience, not a fully shipped second game, but it now has a real public presence inside Platinum while Aurora remains the primary playable cabinet.</p>
+<p>Check it out:</p>
+<ul><li>live game:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/">Aurora Galactica on Platinum</a></li></ul></li><li>release dashboard:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Aurora release dashboard</a></li></ul></li><li>player guide:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/player-guide.html">Aurora player guide</a></li></ul></li></ul>
+<p>What comes next:</p>
+<ul><li><code>1.4.0</code> arcade-depth and platform-contract follow-through</li><li>deeper measured audio and movement fidelity work</li><li>continued <code>Galaxy Guardians</code> evidence, identity, and runtime maturation</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">
+        <div class="sectionHeader">
+          <h2>Trust and pilot-surface refresh</h2>
+          <p>Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.2.3</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 26, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.2.3_BUILD_532.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.2.3_BUILD_532.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Aurora Galactica&#39;s latest production refresh is now live on Platinum:</p>
+<ul><li>production label:<ul><li><code>1.2.3+build.532.sha.b959491</code></li></ul></li></ul>
+<p>Suggested post text:</p>
+<p>Aurora Galactica just received a strong <code>1.2.3</code> trust-and-pilot refresh on Platinum.</p>
+<p>This push focuses on making the current line easier to trust and smoother to use:</p>
+<ul><li>signed-in runs now keep pilot identity consistent through game over</li><li>recent local and pilot-record score views are clearer and more reliable</li><li>a last-life game-over runtime freeze is fixed</li><li>dock, panel, build-stamp, and login surfaces are cleaner and more stable</li><li>the multi-machine workflow and release discipline behind Aurora are much healthier</li></ul>
+<p>It is still the same core Aurora release family, but it is a noticeably stronger public build.</p>
+<p>Check out:</p>
+<ul><li>live game:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/">Aurora Galactica</a></li></ul></li><li>beta lane:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/beta/">Aurora beta</a></li></ul></li><li>release dashboard:<ul><li><a href="https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html">Aurora release dashboard</a></li></ul></li></ul>
+<p>What comes next:</p>
+<ul><li>deeper movement fidelity against real Galaga footage</li><li>stronger audio identity and atmosphere</li><li>richer harness/reference analysis</li><li>a Galaxians-style second-game proof on Platinum</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-09-1-2-3-aurora-score-surface-polish-patch">
+        <div class="sectionHeader">
+          <h2>Aurora score-surface polish patch</h2>
+          <p>Polished Aurora&#39;s score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.2.3</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 9, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Polished Aurora&#39;s score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: April 9, 2026</p>
+<p>Release track: production patch</p>
+<h3>Summary</h3>
+<p>This <code>1.2.3</code> patch polished Aurora&#39;s score and attract surfaces without reopening broad gameplay rules or shell ownership.</p>
+<p>The goal was to make the score story easier to read and easier to trust across recent builds.</p>
+<h3>What Changed</h3>
+<ul><li>wait-mode high-score boards now rotate in a clearer</li></ul>
+<p>validated-local-all sequence</p>
+<ul><li>leaderboard rows gained build/date context</li><li>a lightweight after-date filter was added so results are easier to inspect</li></ul>
+<p>against recent builds</p>
+<h3>Why It Mattered</h3>
+<p>This patch improved the credibility of the visible score surfaces.</p>
+<p>That might look smaller than gameplay tuning work, but score presentation is a core part of the arcade contract. If players cannot read or trust the board cleanly, the release line feels less real no matter how good the game logic is.</p>
+<h3>What Came Next</h3>
+<p>The next <code>1.2.3</code> work widened from score-surface polish toward:</p>
+<ul><li>pilot-surface trust fixes</li><li>login and panel polish</li><li>stronger release-lane discipline</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-09-1-2-2-runtime-freeze-hardening-and-bonus-ship-patch">
+        <div class="sectionHeader">
+          <h2>Runtime freeze hardening and bonus-ship patch</h2>
+          <p>Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.2.2</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 9, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: April 9, 2026</p>
+<p>Release track: production patch</p>
+<h3>Summary</h3>
+<p><code>1.2.2</code> hardened Aurora against silent late-run runtime failures while also shipping Aurora-scoped configurable bonus-ship awards.</p>
+<p>This was a stability-and-operations patch with a direct gameplay reward improvement layered on top.</p>
+<h3>What Changed</h3>
+<ul><li>trapped runtime loop exceptions instead of failing silently</li><li>surfaced export guidance when a frame fault occurs</li><li>fixed a restart-time async score-submit crash</li><li>added a targeted late-run ship-loss soak gate to the release path</li><li>shipped configurable first and recurring score-based bonus-ship awards for</li></ul>
+<p>Aurora</p>
+<h3>Why It Mattered</h3>
+<p>This patch made late-run failures more visible and more survivable both for players and for release review.</p>
+<p>That mattered because the deeper the game went, the more expensive silent runtime faults became. Hardening the runtime also set a cleaner base for later fidelity and conformance work.</p>
+<h3>What Came Next</h3>
+<p>Once runtime stability improved, the next quality step moved to:</p>
+<ul><li>clearer score and attract surfaces</li><li>more trustworthy leaderboard framing</li><li>better player-facing context around current builds</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-07-1-2-1-aurora-trust-fix-and-copy-boundary-patch">
+        <div class="sectionHeader">
+          <h2>Aurora trust-fix and copy-boundary patch</h2>
+          <p>Bundled the first Platinum fast-follow Aurora fixes: dual-fighter runs now continue correctly after a single-ship loss, challenge stages present as bonus stages without consuming normal stage numbering, end-of-run carry/capture visuals no longer leak under results, and startup/wait-mode shell copy now follows a clearer platform-versus-application ownership model.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.2.1</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 7, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.2.1_TRUST_FIX.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Bundled the first Platinum fast-follow Aurora fixes: dual-fighter runs now continue correctly after a single-ship loss, challenge stages present as bonus stages without consuming normal stage numbering, end-of-run carry/capture visuals no longer leak under results, and startup/wait-mode shell copy now follows a clearer platform-versus-application ownership model.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.2.1_TRUST_FIX.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: April 7, 2026</p>
+<p>Release track: production patch</p>
+<h3>Summary</h3>
+<p><code>1.2.1</code> was the first focused fast-follow patch after Platinum Release 1.</p>
+<p>It fixed several player-visible trust issues while also clarifying the boundary between platform-owned shell framing and application-owned game framing.</p>
+<h3>What Changed</h3>
+<ul><li>dual-fighter runs now continue correctly after a single-ship loss</li><li>challenge stages present as bonus stages without consuming normal stage</li></ul>
+<p>numbering</p>
+<ul><li>end-of-run carry/capture visuals no longer leak under results</li><li>startup and wait-mode copy follows a clearer platform-versus-application</li></ul>
+<p>ownership model</p>
+<h3>Why It Mattered</h3>
+<p>This patch made the newly framed Platinum/Aurora experience easier to trust.</p>
+<p>It did not try to widen the product story. It cleaned up correctness and copy discipline so the first platform milestone felt less brittle in public use.</p>
+<h3>What Came Next</h3>
+<p>The next step after trust-fix cleanup was runtime hardening:</p>
+<ul><li>protect against silent frame-loop failures</li><li>make restart-time score-submit behavior safer</li><li>improve release-time soak coverage</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-07-1-2-0-platinum-release-1">
+        <div class="sectionHeader">
+          <h2>Platinum Release 1</h2>
+          <p>Reframed Aurora Galactica as the first playable application on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted `/dev` alongside hosted `/beta` and hosted `/production`, and established the current hosted docs and release ladder around the Platinum launch.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.2.0</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 7, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Reframed Aurora Galactica as the first playable application on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted `/dev` alongside hosted `/beta` and hosted `/production`, and established the current hosted docs and release ladder around the Platinum launch.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: April 7, 2026</p>
+<p>Release track: minor public milestone</p>
+<h3>Summary</h3>
+<p><code>1.2.0</code> reframed Aurora Galactica as the first playable application on the Platinum platform.</p>
+<p>This was more than a patch line. It established the platform-owned shell, picker flow, hosted lane structure, and the first meaningful separation between the platform and the game it hosts.</p>
+<h3>What Changed</h3>
+<ul><li>Platinum became the visible host identity</li><li>Aurora became the first shipped application on Platinum</li><li>hosted <code>/dev</code>, <code>/beta</code>, and <code>/production</code> were formalized as distinct lanes</li><li>the hosted documentation and release ladder became part of the product model</li></ul>
+<h3>Why It Mattered</h3>
+<p>This release created the architectural and release framing that later made multi-game work, second-cabinet preview work, and layered platform/application versioning possible.</p>
+<p>Without <code>1.2.0</code>, later release discipline would have remained much flatter and less honest about what the platform owns versus what a game owns.</p>
+<h3>What Came Next</h3>
+<p>After Platinum Release 1, the follow-up work focused on:</p>
+<ul><li>fast trust fixes</li><li>clearer platform/application boundaries</li><li>runtime safety and late-run hardening</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-04-02-1-0-2-movement-regression-hotfix">
+        <div class="sectionHeader">
+          <h2>Movement regression hotfix</h2>
+          <p>Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.0.2</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>April 2, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: April 2, 2026</p>
+<p>Release track: production-failure hotfix</p>
+<h3>Summary</h3>
+<p><code>1.0.2</code> fixed the <code>1.0.1</code> production regression that repeatedly reset active lateral input during play.</p>
+<p>The effect in the live game was severe: normal ship movement no longer felt stable. This was exactly the kind of release that justifies immediate public repair work.</p>
+<h3>What Changed</h3>
+<ul><li>restored normal lateral ship movement in production</li><li>added stronger hotfix smoke coverage</li><li>added hosted-lane input probes so obvious control failures are easier to</li></ul>
+<p>catch before promotion</p>
+<h3>Why It Mattered</h3>
+<p>This was a production-repair release in the clearest sense.</p>
+<p>It did not broaden the product story. It repaired a live failure in the most important part of the arcade contract: moving the ship when the player asks it to move.</p>
+<h3>What Came Next</h3>
+<p>Once input reliability was restored, the release path could widen again toward:</p>
+<ul><li>platform framing</li><li>trust fixes</li><li>runtime hardening</li><li>larger public milestone packaging</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-03-31-1-0-1-input-and-feedback-hotfix">
+        <div class="sectionHeader">
+          <h2>Input and feedback hotfix</h2>
+          <p>Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.0.1</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>March 31, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.0.1_HOTFIX.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.0.1_HOTFIX.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: March 31, 2026</p>
+<p>Release track: production hotfix</p>
+<h3>Summary</h3>
+<p><code>1.0.1</code> tightened the live input model and a few key feedback surfaces right after launch.</p>
+<p>The main fix was replacing the fragile modifier-key left-handed path with always-available <code>A</code>/<code>Z</code> left and <code>D</code>/<code>C</code> right movement, plus a focus-loss reset so ships could not stay latched sideways when the browser lost focus.</p>
+<h3>What Changed</h3>
+<ul><li>simpler always-on alternate movement controls</li><li>focus-loss input reset</li><li>feedback delivery moved from FormSubmit to Web3Forms</li><li>success confirmation stayed visible long enough to read</li></ul>
+<h3>Why It Mattered</h3>
+<p>This release reduced avoidable control confusion in the live public line.</p>
+<p>At this stage, small input or feedback problems were much more damaging than they might look in code because they shaped the first public impression of whether Aurora felt responsive and trustworthy.</p>
+<h3>What Came Next</h3>
+<p>The next urgent priority after this hotfix was fixing a worse regression:</p>
+<ul><li>repeated active-input resets that broke normal ship movement in production</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-03-31-1-0-0-build-284-post-launch-score-submit-and-refresh-reminder-hotfix">
+        <div class="sectionHeader">
+          <h2>Post-launch score-submit and refresh-reminder hotfix</h2>
+          <p>Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.0.0+build.284</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>March 31, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.0.0_BUILD_284.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.0.0_BUILD_284.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: March 31, 2026</p>
+<p>Release track: post-launch production hotfix</p>
+<h3>Summary</h3>
+<p>This hotfix repaired an early production issue where signed-in runs could appear to save locally without inserting into the shared leaderboard.</p>
+<p>It also added a hosted refresh reminder so players on stale browser tabs had a clear path to pick up live fixes instead of silently staying on an older build.</p>
+<h3>What Changed</h3>
+<ul><li>remote score submission moved into the main game-over path</li><li>diagnostics were added around score-submit failures</li><li>a refresh reminder and one-click action were added for stale hosted sessions</li></ul>
+<h3>Why It Mattered</h3>
+<p>This was a trust repair release.</p>
+<p>The first production line only worked if shared scores actually represented what players had just earned. Fixing submit reliability and stale-tab behavior protected the legitimacy of the live leaderboard during the earliest public days of the game.</p>
+<h3>What Came Next</h3>
+<p>After score-submit reliability was repaired, the next hotfix focus moved to:</p>
+<ul><li>input clarity</li><li>control reliability</li><li>visible feedback polish</li></ul></div>
+        </div>
+      </section>
+<section class="section" id="release-note-2026-03-30-1-0-0-aurora-galactica-1-0-launch">
+        <div class="sectionHeader">
+          <h2>Aurora Galactica 1.0 launch</h2>
+          <p>Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring.</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>1.0.0</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>March 30, 2026</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>RELEASE_NOTE_1.0.0_LAUNCH.md</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring.</p>
+          <div class="releaseNoteActions">
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/09a4c633cf92d35660f1a5986a156ea9cab112f4/RELEASE_NOTE_1.0.0_LAUNCH.md">Open source markdown</a>
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          <div class="markdown"><p>Date: March 30, 2026</p>
+<p>Release track: first public production launch</p>
+<h3>Summary</h3>
+<p><code>1.0.0</code> was the first public Aurora Galactica launch.</p>
+<p>It established the core public game promise:</p>
+<ul><li>a polished four-stage arcade slice</li><li>capture and rescue play</li><li>dual-fighter runs</li><li>signed-in pilot identity</li><li>in-game replay viewing</li><li>score and help surfaces inside the frame</li><li>an actual beta-to-production release ladder</li></ul>
+<p>This was the moment Aurora stopped being only a local prototype and became a hosted public game with a real leaderboard, real pilot identity, and a real release process.</p>
+<h3>What Players Got</h3>
+<ul><li>the first stable public browser build</li><li>official shared scoring</li><li>player account and pilot framing</li><li>replay visibility for completed runs</li><li>the first production baseline for post-launch quality work</li></ul>
+<h3>Why It Mattered</h3>
+<p>This release set the initial product contract for everything that followed.</p>
+<p>Later work on trust, runtime hardening, fidelity, platform boundaries, second game experiments, and conformance only matters because this release created a real public line worth protecting and improving.</p>
+<h3>What Came Next</h3>
+<p>The immediate follow-up after launch was not a new feature family. It was stabilization:</p>
+<ul><li>repair score-submit issues</li><li>reduce stale-tab confusion</li><li>fix live control and movement regressions quickly</li><li>make the public release line trustworthy enough to tune further</li></ul></div>
+        </div>
+      </section>
+      </div>
+      <aside class="toc">
+        <h2>Release Index</h2>
+        <p>This page is generated from <code>release-notes.json</code> plus any linked detailed release-note Markdown documents committed in the repo.</p>
+        <ul>
+          
+    <li><a href="#release-note-2026-05-14-1-4-0-1-4-0-multi-game-public-release">1.4.0 · 1.4.0 multi-game public release</a></li>
+  
+
+    <li><a href="#release-note-2026-05-14-1-4-0-beta-1-first-1-4-0-beta-candidate">1.4.0-beta.1 · First 1.4.0 beta candidate</a></li>
+  
+
+    <li><a href="#release-note-2026-05-12-1-3-0-production-conformance-refresh">1.3.0 · Production conformance refresh</a></li>
+  
+
+    <li><a href="#release-note-2026-05-11-1-3-0-1-hosted-dev-conformance-review-handoff">1.3.0.1 · Hosted dev conformance review handoff</a></li>
+  
+
+    <li><a href="#release-note-2026-05-05-1-3-0-fidelity-and-second-cabinet-release">1.3.0 · Fidelity and second-cabinet release</a></li>
+  
+
+    <li><a href="#release-note-2026-04-26-1-2-3-trust-and-pilot-surface-refresh">1.2.3 · Trust and pilot-surface refresh</a></li>
+  
+
+    <li><a href="#release-note-2026-04-09-1-2-3-aurora-score-surface-polish-patch">1.2.3 · Aurora score-surface polish patch</a></li>
+  
+
+    <li><a href="#release-note-2026-04-09-1-2-2-runtime-freeze-hardening-and-bonus-ship-patch">1.2.2 · Runtime freeze hardening and bonus-ship patch</a></li>
+  
+
+    <li><a href="#release-note-2026-04-07-1-2-1-aurora-trust-fix-and-copy-boundary-patch">1.2.1 · Aurora trust-fix and copy-boundary patch</a></li>
+  
+
+    <li><a href="#release-note-2026-04-07-1-2-0-platinum-release-1">1.2.0 · Platinum Release 1</a></li>
+  
+
+    <li><a href="#release-note-2026-04-02-1-0-2-movement-regression-hotfix">1.0.2 · Movement regression hotfix</a></li>
+  
+
+    <li><a href="#release-note-2026-03-31-1-0-1-input-and-feedback-hotfix">1.0.1 · Input and feedback hotfix</a></li>
+  
+
+    <li><a href="#release-note-2026-03-31-1-0-0-build-284-post-launch-score-submit-and-refresh-reminder-hotfix">1.0.0+build.284 · Post-launch score-submit and refresh-reminder hotfix</a></li>
+  
+
+    <li><a href="#release-note-2026-03-30-1-0-0-aurora-galactica-1-0-launch">1.0.0 · Aurora Galactica 1.0 launch</a></li>
+  
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>1.4.0 multi-game public release</strong><br>
+          Release 1.4.0.1 · Updated May 14, 2026
+        </p>
+      </aside>
+    </main>
+</body>
+</html>
