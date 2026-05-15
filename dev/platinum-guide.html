@@ -477,7 +477,7 @@
 
     <article class="card">
       <h3>Shared Services</h3>
-      <p>Auth, leaderboard policy, feedback transport, and replay/session plumbing are shared platform services so applications do not each build their own service stack.</p>
+      <p>Auth, leaderboard policy, feedback transport, replay/session plumbing, and external-service access contracts are shared platform services so applications do not each build their own service stack.</p>
     </article>
   
 
@@ -534,6 +534,34 @@
     <li>The second application is still preview-only, so the platform contract has one full gameplay implementation and one partial proof rather than two complete applications.</li>
   
 </ul>
+    </section>
+  
+
+    <section class="section" id="service-access-contracts">
+      <div class="sectionHeader">
+        <h2>Service Access Contracts</h2>
+        <p>Shared services are part of Platinum&#39;s release contract, not just runtime convenience.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Supabase Data API</h3>
+      <p>Platinum uses Supabase Data API access for pilot auth-adjacent profiles and leaderboards. The access contract now lives in `SUPABASE_DATA_API_ACCESS.md` and `supabase/data-api-access-contract.sql`.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Preflight Coverage</h3>
+      <p>`npm run harness:check:supabase-data-api-contract` fails if runtime code references a Supabase table that is not represented in the SQL access contract. Publish preflight runs that gate.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Future Tables</h3>
+      <p>Replay-video metadata, YouTube posting records, and expanded pilot records belong behind explicit grants, RLS policies, and documented product ownership before they become hosted features.</p>
+    </article>
+  
+</div>
     </section>
   
 
@@ -633,6 +661,12 @@
     <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md">Testing And Release Gates</a>
       <p>Automation-first release discipline and documentation gate expectations.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/SUPABASE_DATA_API_ACCESS.md">Supabase Data API Access</a>
+      <p>Explicit grants, RLS posture, and release gate for Supabase-backed platform services.</p>
     </article>
   
 </div>
@@ -1255,6 +1289,13 @@
 <p>ingestion artifacts.</p>
 <ul><li>The integrated release bundle records enough conformance and ingestion</li></ul>
 <p>summary data to explain the release without exposing the whole engineering workspace.</p>
+<h3>Supabase Data API Access Gate</h3>
+<p>Platinum&#39;s auth, profile, and leaderboard paths use Supabase through the Data API. The maintained access contract is:</p>
+<ul><li><a href="SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<p>This is now a release-hardening gate because Supabase public-schema tables need explicit grants for new projects beginning May 30, 2026 and for existing projects by October 30, 2026.</p>
+<p>The source-level gate is:</p>
+<ul><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul>
+<p>The publish preflight runs this check. If runtime code adds a new <code>supabase.from(&#39;table&#39;)</code> surface, the release path should fail until that table has an explicit Data API contract, RLS posture, and policy explanation. This is especially important for upcoming top-10 YouTube posting, replay metadata, and expanded pilot-record features.</p>
 <h3>Gate Profiles By Change Type</h3>
 <p>We want:</p>
 <ul><li>fast iteration on <code>main</code></li><li>meaningful integration confidence on hosted <code>/dev</code></li><li>disciplined promotion into hosted <code>/beta</code></li><li>cautious promotion into hosted <code>/production</code></li></ul>
@@ -1343,7 +1384,9 @@
 <h4>Hosted <code>/beta</code></h4>
 <p>Hosted <code>/beta</code> is the real production gate.</p>
 <p>Before moving hosted <code>/beta</code> to hosted <code>/production</code>, we expect:</p>
-<ul><li><code>node tools/build/check-publish-ready.js --lane beta</code></li><li>hosted <code>/beta</code> publish success</li><li>hosted <code>/beta</code> live label verification</li><li>hosted <code>/beta</code> live-input verification when input or gameplay start behavior could be affected</li><li>targeted soak coverage for any open freeze or long-session stability risk</li><li>for the current late-run freeze family, that means:<ul><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul></li><li>completed documentation refresh for any meaningful <code>x.y</code> release</li></ul>
+<ul><li><code>node tools/build/check-publish-ready.js --lane beta</code></li><li>a completed review cycle:<ul><li><code>npm run review:cycle</code></li><li><code>npm run review:dispositions:check</code></li></ul></li><li>every architecture/code-review issue addressed or explicitly dismissed in</li></ul>
+<p><code>review-dispositions.json</code>, with rationale and evidence</p>
+<ul><li>hosted <code>/beta</code> publish success</li><li>hosted <code>/beta</code> live label verification</li><li>hosted <code>/beta</code> live-input verification when input or gameplay start behavior could be affected</li><li>targeted soak coverage for any open freeze or long-session stability risk</li><li>for the current late-run freeze family, that means:<ul><li><code>node tools/harness/check-late-run-ship-loss-soak.js</code></li></ul></li><li>completed documentation refresh for any meaningful <code>x.y</code> release</li></ul>
 <p>Hosted <code>/beta</code> should be strict by risk, not strict by volume:</p>
 <ul><li>application-only candidates should primarily run application and boundary</li></ul>
 <p>gates</p>
@@ -1366,6 +1409,58 @@
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
 <ul><li>platform guide:<ul><li><a href="PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="supabase-access-doc">
+      <div class="sectionHeader">
+        <h2>Supabase Data API Access Source</h2>
+        <p>Explicit grants, RLS posture, and publish-preflight gate for Supabase-backed platform services.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>SUPABASE_DATA_API_ACCESS.md</code> during build.</p>
+        <div class="markdown">
+          <p>Updated: May 14, 2026</p>
+<p>Supabase notified the project that public-schema tables will no longer be implicitly exposed to the Data API.</p>
+<p>The dates that matter are:</p>
+<ul><li><strong>May 30, 2026</strong>: new projects and new public tables in those projects need</li></ul>
+<p>explicit grants before <code>supabase-js</code>, PostgREST, or GraphQL can access them.</p>
+<ul><li><strong>October 30, 2026</strong>: existing projects must also rely on explicit grants.</li></ul>
+<p>Aurora / Platinum is affected because the browser runtime and release tooling use <code>supabase-js</code>, which talks to the Supabase Data API.</p>
+<h3>Current Data API Surface</h3>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Table</th><th>Runtime use</th><th>Required client access</th><th>Current owner</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>public.scores</code></td><td>shared leaderboard reads, validated leaderboard reads, production guest score submission, signed-in score submission, test-pilot score reset</td><td><code>anon</code>: <code>select</code>, <code>insert</code>; <code>authenticated</code>: <code>select</code>, <code>insert</code>, <code>delete</code>; <code>service_role</code>: maintenance access</td><td>Platinum shared service</td></tr>
+<tr><td><code>public.profiles</code></td><td>signed-in pilot initials and account profile record</td><td><code>authenticated</code>: <code>select</code>, <code>insert</code>, <code>update</code>; <code>service_role</code>: maintenance access</td><td>Platinum shared service</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>The maintained SQL access contract is:</p>
+<ul><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<p>The contract is intentionally not a full database schema. It records the browser-visible tables, required grants, and RLS policies that make the current runtime behavior reproducible.</p>
+<h3>Release Gate</h3>
+<p>The automated source gate is:</p>
+<pre><code data-lang="bash">npm run harness:check:supabase-data-api-contract</code></pre>
+<p>The checker verifies:</p>
+<ul><li>every <code>supabase.from(&#39;table&#39;)</code> runtime/tooling usage is represented in the</li></ul>
+<p>SQL contract</p>
+<ul><li><code>scores</code> and <code>profiles</code> have explicit role grants</li><li>RLS is enabled for both tables</li><li>the expected policy names are present</li><li>the maintained explainer document records the Supabase deadline dates and</li></ul>
+<p>links to the SQL contract</p>
+<p>Publish preflight also runs this gate, so a future branch that adds a table for features such as YouTube high-score posts, replay video metadata, or richer pilot records must update the Supabase access contract before it can move through the release path.</p>
+<h3>Current Risk Read</h3>
+<p>Existing hosted tables are not expected to break immediately from the May 30 change because Supabase says existing grants remain in place. The project risk is reproducibility: without committed grants and RLS policy expectations, a new project, a restored database, or a new feature table can fail even while local code looks correct.</p>
+<p>The October 30, 2026 deadline makes this a release-hardening concern rather than a someday cleanup item.</p>
+<p>There is a separate score-trust boundary to keep visible: the current browser client writes <code>is_verified</code> as part of signed-in score submission. The access contract preserves today&#39;s behavior, but a stronger future verified-score model should set that field through a server-owned path, trigger, or RPC rather than trusting client-supplied metadata.</p>
+<h3>Future Table Rule</h3>
+<p>Any new Supabase table used by the browser Data API must land with:</p>
+<ul><li>table purpose and ownership</li><li>explicit grants for <code>anon</code>, <code>authenticated</code>, and/or <code>service_role</code></li><li>RLS enabled unless there is a documented exception</li><li>policies that express the user-visible product rule</li><li>a harness/preflight update proving the table is present in this contract</li></ul>
+<p>For planned top-10 YouTube posting and replay-video metadata, this means no runtime feature work should merge until the data model and access policy are captured here.</p>
         </div>
       </div>
     </section>
@@ -1595,6 +1690,9 @@
     <li><a href="#boundary-notes">Remaining Boundary Notes</a></li>
   
 
+    <li><a href="#service-access-contracts">Service Access Contracts</a></li>
+  
+
     <li><a href="#persona-contract">Platform Persona Contract</a></li>
   
 
@@ -1617,6 +1715,9 @@
   
 
     <li><a href="#testing-doc">Testing And Release Gates Source</a></li>
+  
+
+    <li><a href="#supabase-access-doc">Supabase Data API Access Source</a></li>
   
 
     <li><a href="#launch-art-doc">Launch Art Direction Source</a></li>
