@@ -421,6 +421,7 @@
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
@@ -774,6 +775,18 @@
   
 
     <article class="linkCard">
+      <a href="white-paper.html">Hosted White Paper</a>
+      <p>Dedicated hosted narrative surface for the living white paper, citation ledger, and versioned white-paper release history.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">White Paper Project Area</a>
+      <p>Repo-owned working area for the white paper, including its release snapshots and citation ledger.</p>
+    </article>
+  
+
+    <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">Project State And Conformance Program</a>
       <p>Maintained top-level explanation of the platform, game, ingestion, harnessing, model-assisted workflow, and conformance program.</p>
     </article>
@@ -896,6 +909,13 @@ Template: <code>src/public/aurora-galactica.template.html</code></td><td><code>r
 Template: <code>src/project-guide.template.html</code></td><td><code>project-guide.json</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>PLAN.md</code>, <code>PRODUCT_ROADMAP.md</code>, <code>RELEASE_READINESS_REVIEW.md</code>, <code>EXTERNAL_SERVICES.md</code>, <code>SUPABASE_DATA_API_ACCESS.md</code>, <code>SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</code>, <code>supabase/data-api-access-contract.sql</code>, <code>documentation-provenance.json</code></td><td>Guide overview and source document index: Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract and the security/auth/replay storage lock-down. Documentation provenance: The hosted guide renders this manifest as a build-time table.</td></tr>
             
 
+              <tr><td>Hosted White Paper
+
+<code>white-paper.html</code></td><td><code>tools/build/build-index.js#buildWhitePaperGuide</code>
+
+Template: <code>src/project-guide.template.html</code></td><td><code>white-paper.json</code>, <code>WHITE_PAPER.md</code>, <code>white-paper/README.md</code>, <code>white-paper/ILLUSTRATION_PLAN.md</code>, <code>white-paper/CITATION_LEDGER.md</code>, <code>white-paper/releases/2026-05-16-v0.1.0/WHITE_PAPER.md</code>, <code>white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md</code></td><td>White-paper overview and project-area framing: The hosted page renders its guide framing from white-paper.json and the current narrative/citation sources from committed Markdown files. White-paper release memory: The hosted page links directly to the versioned white-paper release record so the narrative can be compared over time instead of being overwritten without memory.</td></tr>
+            
+
               <tr><td>Hosted Release Notes
 
 <code>release-notes.html</code></td><td><code>tools/build/build-index.js#buildReleaseNotesPage</code>
@@ -972,7 +992,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <ul><li>make Galaxy Guardians and later games arrive through ingestion-backed,</li></ul>
 <p>game-owned conformance packages</p>
 <h3>Current Conformance Read</h3>
-<p>The latest maintained score roll-up is in <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> and the release planning dashboard is in <a href="RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a>.</p>
+<p>The latest maintained score roll-up is in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> and the release planning dashboard is in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a>.</p>
 <p>Current Aurora read:</p>
 <ul><li>overall release-quality score: <code>9.2/10</code></li><li>weakest high-value category: audio identity and cue alignment, currently</li></ul>
 <p><code>7.3/10</code></p>
@@ -997,7 +1017,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
             </thead>
             <tbody>
               <tr><td>Aurora Galactica</td><td>First shipped Platinum application and current active investment target</td><td>Strong release-quality baseline with focused gaps in audio identity, level arc precision, boss/formation stage variation, visual reference grounding, and pressure replay precision</td><td>Move toward the <code>1.4.0</code> arcade-depth gate with better measured audio feedback, stage-by-stage shape, visual/reference comparison, and long-play pressure/reward evidence</td></tr>
-<tr><td>Galaxy Guardians</td><td>Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof</td><td>Preview metrics exist, public readiness is intentionally low, live dev/beta still expose a one-level public slice, and the branch now treats the deeper repeated-rack/persona work as an internal first-class conformance target with its own plan and aggregate process gate</td><td>Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through <a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a> and <a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, but keep public claims tied to the one-level playable slice until deeper stage-band depth is actually surfaced</td></tr>
+<tr><td>Galaxy Guardians</td><td>Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof</td><td>Preview metrics exist, public readiness is intentionally low, live dev/beta still expose a one-level public slice, and the branch now treats the deeper repeated-rack/persona work as an internal first-class conformance target with its own plan and aggregate process gate</td><td>Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a> and <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, but keep public claims tied to the one-level playable slice until deeper stage-band depth is actually surfaced</td></tr>
 <tr><td>Future games</td><td>Long-term repeatable ingestion target</td><td>Not yet active as playable work</td><td>Arrive through source manifests, reference windows, event logs, semantic profiles, score targets, and game-owned harnesses before design claims are made</td></tr>
             </tbody>
           </table>
@@ -1025,7 +1045,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <p>For Aurora, ingestion keeps improving the reference basis for Galaga-like quality: audio clips, stage openings, challenge timing, boss formation grammar, pressure windows, contact sheets, and visual look checks.</p>
 <p>For Galaxy Guardians, ingestion is even more central because the game should not become &quot;Aurora with different labels.&quot; Its first credible playable phases should come from Galaxian-style source windows, event logs, sprite/cue targets, and runtime correspondence checks.</p>
 <p>The maintained Galaxy-specific bridge between ingestion and release review is:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <p>For future games, ingestion should become the repeatable starting point rather than a manual design phase.</p>
 <h3>The Working Loop</h3>
 <p>The conformance process should keep cycling through this loop:</p>
@@ -1036,7 +1056,7 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
 <ol><li>convert model-assisted insight into persisted repo logic whenever possible</li><li>change game or platform behavior only where the evidence supports it</li><li>rerun scorecards and dashboards</li><li>document score movement, confidence, cost, and next investment</li></ol>
 <p>This loop is deliberately &quot;Karpathy-loop-like&quot; in spirit: inspect concrete examples, improve the dataset and evaluator, make a small candidate change, run it, study failures, and fold the learning back into the system.</p>
 <h3>Resource Economics</h3>
-<p>The standing resource documentation is <a href="CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a>.</p>
+<p>The standing resource documentation is <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a>.</p>
 <p>The project currently reads as heavily local-first:</p>
 <ul><li>local CPU/browser harnesses are doing the overwhelming majority of measured</li></ul>
 <p>conformance work</p>
@@ -1096,26 +1116,26 @@ Template: <code>tools/harness/build-dev-conformance-dashboard-page.js</code></td
             </thead>
             <tbody>
               <tr><td>Top-level project state and why this work matters</td><td>This document</td></tr>
-<tr><td>Current score table and metric targets</td><td><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></td></tr>
-<tr><td>At-a-glance priority queue and dashboard logic</td><td><a href="RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></td></tr>
-<tr><td>Resource usage, local CPU, GPU-equivalent model work, and cost-per-score</td><td><a href="CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></td></tr>
-<tr><td>Platform ownership and architecture</td><td><a href="PLATINUM.md">PLATINUM.md</a> and <a href="PLATINUM_ARCHITECTURE_OVERVIEW.md">PLATINUM_ARCHITECTURE_OVERVIEW.md</a></td></tr>
-<tr><td>Game/platform boundary</td><td><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></td></tr>
-<tr><td>Per-game alien, audio, stage, and persona catalog</td><td><a href="GAME_CONFORMANCE_CATALOG.md">GAME_CONFORMANCE_CATALOG.md</a></td></tr>
-<tr><td>Guardians stage arc, stage-band plan, and homage-variant guardrails</td><td><a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></td></tr>
+<tr><td>Current score table and metric targets</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></td></tr>
+<tr><td>At-a-glance priority queue and dashboard logic</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></td></tr>
+<tr><td>Resource usage, local CPU, GPU-equivalent model work, and cost-per-score</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></td></tr>
+<tr><td>Platform ownership and architecture</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM.md">PLATINUM.md</a> and <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM_ARCHITECTURE_OVERVIEW.md">PLATINUM_ARCHITECTURE_OVERVIEW.md</a></td></tr>
+<tr><td>Game/platform boundary</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></td></tr>
+<tr><td>Per-game alien, audio, stage, and persona catalog</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GAME_CONFORMANCE_CATALOG.md">GAME_CONFORMANCE_CATALOG.md</a></td></tr>
+<tr><td>Guardians stage arc, stage-band plan, and homage-variant guardrails</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></td></tr>
 <tr><td>Persona gameplay distribution evidence</td><td><a href="application-guide.html#persona-performance-distribution">Aurora Application Guide</a> and <code>reference-artifacts/analyses/persona-performance-distribution/latest.json</code></td></tr>
-<tr><td>Expert beta strategy review</td><td><a href="STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a></td></tr>
-<tr><td>Ingestion process</td><td><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></td></tr>
-<tr><td>Quality scoring model</td><td><a href="QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></td></tr>
-<tr><td>Current execution plan</td><td><a href="PLAN.md">PLAN.md</a></td></tr>
-<tr><td>Product roadmap</td><td><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></td></tr>
+<tr><td>Expert beta strategy review</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a></td></tr>
+<tr><td>Ingestion process</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></td></tr>
+<tr><td>Quality scoring model</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></td></tr>
+<tr><td>Current execution plan</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLAN.md">PLAN.md</a></td></tr>
+<tr><td>Product roadmap</td><td><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></td></tr>
             </tbody>
           </table>
         </div>
 <h3>Maintenance Rules</h3>
 <p>Refresh this document when any of these change:</p>
 <ul><li>release family or lane posture</li><li>primary conformance priorities</li><li>metric categories or interpretation rules</li><li>alien/audio/stage/persona catalog entries</li><li>ingestion&#39;s role in the project</li><li>platform/application boundary strategy</li><li>resource-economics policy</li><li>status of Aurora, Galaxy Guardians, or a future game</li><li>major hosted <code>/beta</code> pushes or beta-readiness decisions, which should also</li></ul>
-<p>refresh <a href="STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a></p>
+<p>refresh <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a></p>
 <p>Before a serious <code>/dev</code>, <code>/beta</code>, or <code>/production</code> candidate, refresh:</p>
 <pre><code data-lang="sh">npm run harness:build:conformance-metrics-overview
 npm run harness:analyze:conformance-economics
@@ -1306,7 +1326,7 @@ npm run build</code></pre>
         </div>
 <h4>Galaxy Guardians First-Class Promotion Targets</h4>
 <p>The maintained Galaxy-specific promotion plan is:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li></ul>
 <p>Near-term first-class promotion targets:</p>
 <ul><li>keep reference conformance at or above <code>7.7/10</code> while raising the</li></ul>
 <p>playtest-weighted score from <code>6.9/10</code> to at least the <code>7.0/10</code> compelling preview floor</p>
@@ -1351,7 +1371,7 @@ npm run build</code></pre>
 <ol><li>what later homage variants may change without destroying the original</li></ol>
 <p>Galaxian-family flavor</p>
 <p>This is a companion to:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
 <h3>Current Truth Boundary</h3>
 <p>Two things are true at once:</p>
 <ol><li>hosted <code>dev</code> and <code>beta</code> still expose a one-level visible public slice that</li></ol>
@@ -1365,7 +1385,7 @@ npm run build</code></pre>
 <p>The current stage-arc and homage work should stay grounded in the committed Galaxian reference bundle:</p>
 <ul><li><code>matt-hawkins-arcade-intro</code></li><li><code>arcades-lounge-level-5</code></li><li><code>nenriki-15-wave-session</code></li></ul>
 <p>These sources are already declared in:</p>
-<ul><li><a href="reference-artifacts/analyses/galaxian-reference/README.md">reference-artifacts/analyses/galaxian-reference/README.md</a></li><li><a href="reference-artifacts/analyses/galaxian-reference/source-manifest.json">reference-artifacts/analyses/galaxian-reference/source-manifest.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/reference-artifacts/analyses/galaxian-reference/README.md">reference-artifacts/analyses/galaxian-reference/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/reference-artifacts/analyses/galaxian-reference/source-manifest.json">reference-artifacts/analyses/galaxian-reference/source-manifest.json</a></li></ul>
 <p>Use them differently:</p>
 <ul><li><code>matt-hawkins-arcade-intro</code> for attract, <code>WAIT</code>, score-advance table, reserve</li></ul>
 <p>ships, flags, and the beginning of the first playable rack</p>
@@ -1995,13 +2015,13 @@ npm run build</code></pre>
           </table>
         </div>
 <h4>Charts</h4>
-<p><img alt="score-trends" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg"></p>
-<p><img alt="largest-score-deltas" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg"></p>
-<p><img alt="compute-minutes-by-resource" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg"></p>
-<p><img alt="cost-per-positive-score-point" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg"></p>
-<p><img alt="gpu-equivalent-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg"></p>
-<p><img alt="cpu-use-by-purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg"></p>
-<p><img alt="gameplay-improvement-by-project-part" src="reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg"></p>
+<p><img alt="score-trends" src="assets/catalog-media/a74d7d754c-score-trends.svg"></p>
+<p><img alt="largest-score-deltas" src="assets/catalog-media/46e6937848-largest-score-deltas.svg"></p>
+<p><img alt="compute-minutes-by-resource" src="assets/catalog-media/fc51a393ac-compute-minutes-by-resource.svg"></p>
+<p><img alt="cost-per-positive-score-point" src="assets/catalog-media/641e4dcb82-cost-per-positive-score-point.svg"></p>
+<p><img alt="gpu-equivalent-use-by-purpose" src="assets/catalog-media/3e85c2b567-gpu-equivalent-use-by-purpose.svg"></p>
+<p><img alt="cpu-use-by-purpose" src="assets/catalog-media/2f33bb97f8-cpu-use-by-purpose.svg"></p>
+<p><img alt="gameplay-improvement-by-project-part" src="assets/catalog-media/a7f113b884-gameplay-improvement-by-project-part.svg"></p>
 <h3>New First-Class Axes Added</h3>
 <ul><li>Alien entry to levels: formation layout, timing, path method, and whether different stages enter differently.</li><li>Boss entry and formation grammar: boss timing, escort composition, formation settle evidence, challenge pattern identity, stage variation, and path/slot precision.</li><li>Challenge-stage variation: new alien types, new entry formations/styles, path families, reward/result feedback, and teaching value.</li><li>Overall visual look and feel: gameplay readability, start/attract typography density, copy complexity, color discipline, and reference contact sheets.</li><li>Arcade console frame UI: cabinet frame, bezel/rails, build/date trust signals, button density, and arcade-style containment.</li><li>Popup/help/scoring surfaces: help, scoring, leaderboard, account, feedback, and game-over result formatting as their own modal-quality family.</li></ul>
 <h3>Maintenance Rules</h3>
@@ -2147,13 +2167,13 @@ npm run build</code></pre>
           </table>
         </div>
 <h3>Charts</h3>
-<p><img alt="Conformance score trends" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg"></p>
-<p><img alt="Largest score deltas" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg"></p>
-<p><img alt="Compute minutes by resource" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg"></p>
-<p><img alt="Cost per positive score point" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg"></p>
-<p><img alt="GPU-equivalent use by purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg"></p>
-<p><img alt="Local CPU use by purpose" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg"></p>
-<p><img alt="Gameplay improvement by project part" src="reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg"></p>
+<p><img alt="Conformance score trends" src="assets/catalog-media/f53bfb3f13-score-trends.svg"></p>
+<p><img alt="Largest score deltas" src="assets/catalog-media/af37d30cdd-largest-score-deltas.svg"></p>
+<p><img alt="Compute minutes by resource" src="assets/catalog-media/162dcb2290-compute-minutes-by-resource.svg"></p>
+<p><img alt="Cost per positive score point" src="assets/catalog-media/af6e8026f1-cost-per-positive-score-point.svg"></p>
+<p><img alt="GPU-equivalent use by purpose" src="assets/catalog-media/7b2ffc62e3-gpu-equivalent-use-by-purpose.svg"></p>
+<p><img alt="Local CPU use by purpose" src="assets/catalog-media/dfa7a63e24-cpu-use-by-purpose.svg"></p>
+<p><img alt="Gameplay improvement by project part" src="assets/catalog-media/404669a917-gameplay-improvement-by-project-part.svg"></p>
 <h3>Codex / OpenAI Accounting</h3>
 <ul><li>Latest Codex quota snapshot: 2026-05-08T17:14:03.471Z</li><li>General 5h left: 92%</li><li>General weekly left: 86%</li><li>Model 5h left: 100%</li><li>Model weekly left: 100%</li></ul>
 <div class="tableWrap">
@@ -2240,7 +2260,7 @@ npm run harness:build:dev-conformance-dashboard</code></pre>
 <p>The first proof does not need to cover a whole game.</p>
 <p>It should cover one small slice completely enough that the same pattern can be reused for other games.</p>
 <h3>Required Game Catalog Output</h3>
-<p>Every game that enters primary ingestion must receive a maintained catalog entry in <a href="GAME_CONFORMANCE_CATALOG.md">GAME_CONFORMANCE_CATALOG.md</a>. This is now a high-priority ingestion output, not a later release-writing task.</p>
+<p>Every game that enters primary ingestion must receive a maintained catalog entry in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GAME_CONFORMANCE_CATALOG.md">GAME_CONFORMANCE_CATALOG.md</a>. This is now a high-priority ingestion output, not a later release-writing task.</p>
 <p>The catalog must include:</p>
 <ul><li>an alien/enemy index with displayed names, roles, activity, stage presence,</li></ul>
 <p>target references, conformance scores, confidence, and next gaps</p>
@@ -2274,7 +2294,7 @@ npm run harness:build:dev-conformance-dashboard</code></pre>
 <p>browser review, and playtest-weighted review</p>
 <p>This should become the template for later windows and later games.</p>
 <p>The maintained first-class application review path for this example is now:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <h3>Pipeline Stages</h3>
 <h4>1. Source Discovery</h4>
 <p>Find candidate sources before tuning anything.</p>
@@ -2826,7 +2846,7 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
         <p class="docMeta">Generated from <code>README.md</code> during build.</p>
         <div class="markdown">
           <p><code>Aurora Galactica</code> is the first shipped playable application on the <code>Platinum</code> browser-arcade platform.</p>
-<p><img alt="Platinum Hero" src="reference-artifacts/diagrams/platinum/platinum-hero.svg"></p>
+<p><img alt="Platinum Hero" src="assets/catalog-media/27591edccd-platinum-hero.svg"></p>
 <h3>What This Repo Contains</h3>
 <p>This repo is the engineering source of truth for:</p>
 <ul><li>the <code>Platinum</code> platform</li><li>the <code>Aurora Galactica</code> application</li><li>the hosted documentation set</li><li>the build, promote, publish, and verification scripts for the release lanes</li></ul>
@@ -2846,25 +2866,27 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
 <h3>First-Class Hosted Documentation</h3>
 <p>The hosted documentation set should now move with the release lanes.</p>
 <p>Primary hosted docs on hosted <code>/production</code>:</p>
-<ul><li>project guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/project-guide.html</code></li></ul></li><li>Platinum guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html</code></li></ul></li><li>player guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/player-guide.html</code></li></ul></li><li>release dashboard:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html</code></li></ul></li></ul>
+<ul><li>project guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/project-guide.html</code></li></ul></li><li>white paper:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/white-paper.html</code></li></ul></li><li>Platinum guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html</code></li></ul></li><li>player guide:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/player-guide.html</code></li></ul></li><li>release dashboard:<ul><li><code>https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html</code></li></ul></li></ul>
 <p>Equivalent docs should also exist on hosted <code>/dev</code> and hosted <code>/beta</code>.</p>
 <h3>Canonical Source Docs</h3>
 <p>Best top-level state and conformance-program overview:</p>
-<ul><li><a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<p>Best living white paper and project-area narrative:</p>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/WHITE_PAPER.md">WHITE_PAPER.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <p>Best platform overview:</p>
-<ul><li><a href="PLATINUM.md">PLATINUM.md</a></li><li><a href="PLATINUM_ARCHITECTURE_OVERVIEW.md">PLATINUM_ARCHITECTURE_OVERVIEW.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM.md">PLATINUM.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM_ARCHITECTURE_OVERVIEW.md">PLATINUM_ARCHITECTURE_OVERVIEW.md</a></li></ul>
 <p>Best application-boundary doc:</p>
-<ul><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul>
 <p>Best repo technical map:</p>
-<ul><li><a href="ARCHITECTURE.md">ARCHITECTURE.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/ARCHITECTURE.md">ARCHITECTURE.md</a></li></ul>
 <p>Best release and testing gate doc:</p>
-<ul><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li><li><a href="CODE_REVIEW_MODEL.md">CODE_REVIEW_MODEL.md</a></li><li><a href="REVIEW_LEARNING_LEDGER.md">REVIEW_LEARNING_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CODE_REVIEW_MODEL.md">CODE_REVIEW_MODEL.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/REVIEW_LEARNING_LEDGER.md">REVIEW_LEARNING_LEDGER.md</a></li></ul>
 <p>Best conformance/resource economics doc:</p>
-<ul><li><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></li><li><a href="QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></li><li><a href="CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li><li><a href="CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li><li><a href="RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/QUALITY_CONFORMANCE_MODEL.md">QUALITY_CONFORMANCE_MODEL.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_CONFORMANCE_DASHBOARD.md">RELEASE_CONFORMANCE_DASHBOARD.md</a></li></ul>
 <p>Release planning and readiness docs:</p>
-<ul><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="RELEASE_NOTE_1.4.0_PRODUCTION.md">RELEASE_NOTE_1.4.0_PRODUCTION.md</a></li><li><a href="RELEASE_NOTE_1.4.0_BETA_1.md">RELEASE_NOTE_1.4.0_BETA_1.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLAN.md">PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.4.0_PRODUCTION.md">RELEASE_NOTE_1.4.0_PRODUCTION.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.4.0_BETA_1.md">RELEASE_NOTE_1.4.0_BETA_1.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-dashboard.json">release-dashboard.json</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-notes.json">release-notes.json</a></li></ul>
 <p>Best repo-role clarification:</p>
-<ul><li><a href="REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
 <h3>Current Release State</h3>
 <p>Current live release family:</p>
 <ul><li>hosted <code>/dev</code>:<ul><li>active <code>1.4.0.1</code> forward-review line</li></ul></li><li>hosted <code>/beta</code>:<ul><li>active <code>1.4.0-beta.1</code> approved production-source lane</li></ul></li><li>hosted <code>/production</code>:<ul><li>live <code>1.4.0</code> public line</li></ul></li></ul>
@@ -2879,9 +2901,9 @@ npm run harness:check:platinum-audio-conformance-lab -- --game galaxy-guardians-
 <p>Current go-forward focus:</p>
 <ul><li>keep the shipped <code>1.4.0</code> public line stable</li><li>use the hosted <code>1.4.0.1</code> <code>/dev</code> line and hosted <code>/beta</code> lane to shape the</li></ul>
 <p>next coherent follow-through candidate rather than blurring production and review work together</p>
-<ul><li>use <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<ul><li>use <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
 <p>as the maintained overview of how Platinum, applications, ingestion, harnessing, conformance metrics, and resource economics fit together</p>
-<ul><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> for the</li></ul>
+<ul><li>use <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> for the</li></ul>
 <p>current readable quality table while reviewing the <code>1.4.0</code> candidate</p>
 <ul><li>use the multi-machine bootstrap and release-authority workflow</li><li>keep folding in the other machine&#39;s Galaxians-style second-game work and</li></ul>
 <p>stronger harness/reference analysis</p>
@@ -2913,12 +2935,12 @@ npm run build</code></pre>
 <ol><li>generate or promote evidence</li><li>update the maintained catalog/dashboard/source doc that explains it</li><li>run <code>npm run build</code></li><li>let <code>npm run publish:check:dev</code>, <code>npm run publish:check:beta</code>, or</li></ol>
 <p><code>npm run publish:check:production</code> verify that the explanation is visible</p>
 <p>See:</p>
-<ul><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul>
 <h3>Related Visuals</h3>
-<p><img alt="Platinum Platform Stack" src="reference-artifacts/diagrams/platinum/platinum-platform-stack.svg"></p>
-<p><img alt="Platinum vs Game Packs" src="reference-artifacts/diagrams/platinum/platinum-pack-separation.svg"></p>
-<p><img alt="Aurora Pack Card" src="reference-artifacts/diagrams/platinum/aurora-pack-card.svg"></p>
-<p><img alt="Galaxy Guardians Pack Card" src="reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg"></p>
+<p><img alt="Platinum Platform Stack" src="assets/catalog-media/4061865b08-platinum-platform-stack.svg"></p>
+<p><img alt="Platinum vs Game Packs" src="assets/catalog-media/ddf35ae0ce-platinum-pack-separation.svg"></p>
+<p><img alt="Aurora Pack Card" src="assets/catalog-media/32ab558bba-aurora-pack-card.svg"></p>
+<p><img alt="Galaxy Guardians Pack Card" src="assets/catalog-media/74d2115059-galaxy-guardians-pack-card.svg"></p>
         </div>
       </div>
     </section>
@@ -2946,10 +2968,10 @@ npm run build</code></pre>
 <p>deliberate <code>1.4.0</code> pickup?&quot; to &quot;what must be improved, verified, or cut before <code>1.4.0</code> is strong enough for production?&quot;</p>
 <ul><li>the post-release work should now be treated as intentional carry-forward, not</li></ul>
 <p>as rediscovery after the ship is already done</p>
-<p>Top-level program framing is now maintained in <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>. Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion, harnesses, dashboards, release lanes, Codex/model assistance, and local resource economics fit together.</p>
+<p>Top-level program framing is now maintained in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>. Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion, harnesses, dashboards, release lanes, Codex/model assistance, and local resource economics fit together.</p>
 <h3>Active Workstreams</h3>
 <h4>1. <code>1.3.0</code> Production Stabilization</h4>
-<ul><li>keep the refreshed <code>1.3.0</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> as the</li></ul>
+<ul><li>keep the refreshed <code>1.3.0</code> production line trustworthy</li><li>keep release docs, scorecards, and committed evidence current</li><li>keep the public project surfaces in sync with the real shipped state</li><li>use <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a> as the</li></ul>
 <p>readable current quality map before choosing beta-shaping work</p>
 <h4>2. Multi-Machine Release Discipline</h4>
 <ul><li>make new-machine bring-up one practical bootstrap command</li><li>keep a committed one-authority release model</li><li>keep beta and production promotion blocked unless the authority contract is</li></ul>
@@ -2992,13 +3014,13 @@ npm run build</code></pre>
 <p>unrelated work does not cause avoidable regressions</p>
 <h4>7. Second-Application Proof</h4>
 <ul><li>promote <code>Galaxy Guardians</code> from preview-only framing into a minimally</li></ul>
-<p>complete one-level playable game on the dedicated post-production branch <a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></p>
+<p>complete one-level playable game on the dedicated post-production branch <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></p>
 <ul><li>keep the broader Galaxy first-class conformance target readable through</li></ul>
-<p><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, so ingestion, gameplay completeness, and release review do not drift apart</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, so ingestion, gameplay completeness, and release review do not drift apart</p>
 <ul><li>keep the new longer-surface and persona review model readable through</li></ul>
-<p><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, so Guardians can be judged internally by real repeated-rack stage bands while live dev/beta stay honestly framed as a one-level public slice until that deeper surface is actually productized</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, so Guardians can be judged internally by real repeated-rack stage bands while live dev/beta stay honestly framed as a one-level public slice until that deeper surface is actually productized</p>
 <ul><li>keep the maintained game-arc and homage-variant grammar readable through</li></ul>
-<p><a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a>, so stage-by-stage conformance work and later homage variants grow from one preserved source-grounded shape instead of ad hoc tuning</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a>, so stage-by-stage conformance work and later homage variants grow from one preserved source-grounded shape instead of ad hoc tuning</p>
 <ul><li>treat the obvious current one-level baseline misses as first-class work:</li></ul>
 <p><code>WAIT</code>/headline treatment, score-advance table, rack march cadence, explosion states, swarm palettes, moving starfield motion, missile-ready ship state, reserve ships, stage-flag graphics, and bottom-pass-through re-entry from the top instead of simple pop-in return</p>
 <ul><li>make Guardians sit in the full Platinum frame with parity to Aurora for</li></ul>
@@ -3024,11 +3046,11 @@ npm run build</code></pre>
 <ol><li>use the new Guardians playable branch to force score, replay, result, and</li></ol>
 <p>platform validation across two games rather than one</p>
 <ol><li>keep</li></ol>
-<p><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a> and <code>harness:check:galaxy-guardians-first-class-conformance</code> healthy so Galaxy review discipline approaches Aurora&#39;s</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a> and <code>harness:check:galaxy-guardians-first-class-conformance</code> healthy so Galaxy review discipline approaches Aurora&#39;s</p>
 <ol><li>prioritize level-by-level arcade depth as the next major product pillar,</li></ol>
-<p>using <a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a> as the maintained map from opening slice to deeper repeated-rack play and future homage variants</p>
+<p>using <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a> as the maintained map from opening slice to deeper repeated-rack play and future homage variants</p>
 <ol><li>make shared gameplay-video publishing an early evidence/product capability</li><li>continue narrow trust fixes from the open issue stream</li><li>execute the measured Galaga long-cycle quality plan in</li></ol>
-<p><a href="AURORA_GALAGA_LONG_CYCLE_REVIEW.md">AURORA_GALAGA_LONG_CYCLE_REVIEW.md</a> before broad gameplay, complexity, or graphical tuning</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/AURORA_GALAGA_LONG_CYCLE_REVIEW.md">AURORA_GALAGA_LONG_CYCLE_REVIEW.md</a> before broad gameplay, complexity, or graphical tuning</p>
 <p>Current conformance read:</p>
 <ul><li>overall Aurora quality is <code>9.1/10</code> across the current scored categories</li><li>audio identity and cue alignment is the weakest category at <code>6.9/10</code>; the</li></ul>
 <p>audio process is stronger than the rounded runtime score, with cue-contract readiness at <code>9.09/10</code>, semantic event score at <code>9.78/10</code>, acoustic event score at <code>6.30/10</code>, average worst segment risk at <code>3.70/10</code>, and <code>captureBeam</code> tail now the highest current audio segment gap</p>
@@ -3064,11 +3086,11 @@ npm run build</code></pre>
 <ul><li>the shipped <code>1.3.0</code> family is now the stable public baseline while <code>main</code></li></ul>
 <p>begins the next minor-cycle work</p>
 <ul><li>the longer release-family phasing plan is tracked in</li></ul>
-<p><a href="LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></p>
 <ul><li>the concrete first level-expansion execution plan is tracked in</li></ul>
-<p><a href="LEVEL_BY_LEVEL_EXPANSION_PLAN.md">LEVEL_BY_LEVEL_EXPANSION_PLAN.md</a></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/LEVEL_BY_LEVEL_EXPANSION_PLAN.md">LEVEL_BY_LEVEL_EXPANSION_PLAN.md</a></p>
 <ul><li>beta-readiness and long-horizon strategic review is tracked in</li></ul>
-<p><a href="STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a> and should be refreshed after each major hosted <code>/beta</code> push</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/STRATEGIC_BETA_REVIEW.md">STRATEGIC_BETA_REVIEW.md</a> and should be refreshed after each major hosted <code>/beta</code> push</p>
 <h3>Post-1.3.0 Pickup</h3>
 <p>After <code>1.3.0</code> ships, the plan should pick up in this order:</p>
 <ol><li>Short term: keep the refreshed <code>1.3.0</code> public line trustworthy while</li></ol>
@@ -3121,7 +3143,7 @@ npm run build</code></pre>
 <p>operations</p>
 <ul><li>growing Platinum into a host for more than one serious game experience</li><li>making release identity, testing, and tracking separable across the</li></ul>
 <p>integrated bundle, the platform, and each game</p>
-<p>The maintained top-level explanation of this program is <a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>.</p>
+<p>The maintained top-level explanation of this program is <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a>.</p>
 <h3>Near-Term Release Direction</h3>
 <h4>Stabilize <code>1.3.0</code></h4>
 <p>Goals:</p>
@@ -3153,14 +3175,14 @@ npm run build</code></pre>
 <ul><li>alien entry, challenge-stage novelty, and level-arc progression</li><li>movement fidelity as a guardrail plus targeted browser/manual review</li><li>gameplay trust fixes</li><li>platform-contract follow-through after the first layered release/version pass</li><li>level-by-level expansion planning</li><li>challenging-stage and later-level depth</li><li>shared-video evidence and publishing foundations</li><li>the branch-level <code>Galaxy Guardians</code> cleanup that turns the current preview</li></ul>
 <p>slice into a minimally complete one-level playable game with its own scores, endings, and platform-validation value</p>
 <ul><li>the first-class Galaxy conformance pass in</li></ul>
-<p><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, including the aggregate parity gate <code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, including the aggregate parity gate <code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
 <ul><li>incorporate the other machine&#39;s Galaxians-style sibling work and stronger</li></ul>
 <p>harness/reference analysis into the main line deliberately</p>
 <h4>Long-Term Release Families</h4>
 <p>The first high-level phasing pass for the next major Aurora and Platinum milestones is tracked in:</p>
-<ul><li><a href="LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/LONG_TERM_RELEASE_ROADMAP.md">LONG_TERM_RELEASE_ROADMAP.md</a></li></ul>
 <p>The concrete first execution plan for level-by-level arcade depth is tracked in:</p>
-<ul><li><a href="LEVEL_BY_LEVEL_EXPANSION_PLAN.md">LEVEL_BY_LEVEL_EXPANSION_PLAN.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/LEVEL_BY_LEVEL_EXPANSION_PLAN.md">LEVEL_BY_LEVEL_EXPANSION_PLAN.md</a></li></ul>
 <p>Current decision:</p>
 <ul><li>keep <code>1.x</code> focused on making Aurora excellent and preparing Platinum for a</li></ul>
 <p>second real game</p>
@@ -3188,7 +3210,7 @@ npm run build</code></pre>
 <p>so active-game controls visually live with cabinet choice, not platform tools</p>
 <p>Current conformance read:</p>
 <ul><li>see the generated score/target roll-up in</li></ul>
-<p><a href="CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRICS_OVERVIEW.md">CONFORMANCE_METRICS_OVERVIEW.md</a></p>
 <ul><li>overall Aurora quality is <code>9.1/10</code> across the current scored categories</li><li>audio identity and cue alignment is the weakest category at <code>6.9/10</code>; the</li></ul>
 <p>process is stronger than the rounded runtime score, with cue-contract readiness at <code>9.09/10</code>, semantic event score at <code>9.78/10</code>, and acoustic event score at <code>6.30/10</code></p>
 <ul><li>level arc and encounter shape is now a high-priority scored category at</li></ul>
@@ -3198,13 +3220,13 @@ npm run build</code></pre>
 <ul><li>latest audio investment produced both runtime reliability and measured</li></ul>
 <p>candidate-loop value: normal inter-level/result phrases are guarded against clipping, final loss clears active transition beds before game-over ambience, the runtime-recovery harness verifies that critical reference cues actually start, the calibrated layered <code>playerHit</code> ship-loss cue remains in runtime, and a measured <code>enemyShot</code> threat-fire subwindow was promoted after focused gates, recapture, alignment, and quality guardrails. <code>challengePerfect</code> produced focused keepers but failed full-theme quality promotion, and <code>captureBeam</code> tail is now the highest current segment gap.</p>
 <ul><li>the next major Aurora quality cycle is tracked in</li></ul>
-<p><a href="AURORA_GALAGA_LONG_CYCLE_REVIEW.md">AURORA_GALAGA_LONG_CYCLE_REVIEW.md</a>, with a baseline artifact at <code>reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json</code> and the Track 1 movement finding at <code>reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json</code></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/AURORA_GALAGA_LONG_CYCLE_REVIEW.md">AURORA_GALAGA_LONG_CYCLE_REVIEW.md</a>, with a baseline artifact at <code>reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json</code> and the Track 1 movement finding at <code>reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json</code></p>
 <ul><li>Guardians preview gates are green as pass/fail 0.1 evidence, but they are not</li></ul>
 <p>yet part of the Aurora numeric roll-up</p>
 <ul><li>Guardians evidence-weighted reference conformance is now <code>7.7/10</code>, while the</li></ul>
 <p>stricter playtest-weighted score is <code>6.9/10</code>, and the new longer-surface review is <code>7.0/10</code>; cue-target gates now require labeled square/noise windows, mixed-source cue candidates, component sprite targets, waveform/spectrogram previews, the reusable Platinum audio conformance lab output, and a real longer-surface/persona review instead of only one-level preview claims</p>
 <ul><li>the maintained Galaxy-first-class target and investment strategy now lives in</li></ul>
-<p><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, with the current longer-surface/persona execution layer in <a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, and the maintained stage-arc and homage-variant grammar in <a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a>, with a standing aggregate process gate in <code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>, with the current longer-surface/persona execution layer in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a>, and the maintained stage-arc and homage-variant grammar in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a>, with a standing aggregate process gate in <code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
 <ul><li>current cluster targets are <code>9.2/10</code> for Aurora and <code>7.7/10</code> reference /</li></ul>
 <p><code>6.9/10</code> playtest for Guardians in the <code>1.3</code> Fidelity and Trust lane, rising toward <code>9.5/10</code> and <code>9.0/10</code> reference / <code>8.8/10</code> playtest by the <code>2.0</code> multi-game Platinum candidate lane</p>
 <h3>Main Investment Themes</h3>
@@ -3505,7 +3527,7 @@ npm run build</code></pre>
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <p>Current branch-level next step:</p>
-<ul><li><a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
 <p>capture, bug reports, and Arcade Music/SFX controls</p>
 <ul><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
 <p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
@@ -3594,10 +3616,10 @@ npm run build</code></pre>
 <ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
 <p>scattered preview harness set</p>
 <ul><li>a readable game arc and stage-band progression that can later support</li></ul>
-<p>source-grounded homage variants without losing the original flavor, as now described in <a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
+<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
 <p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>Current hosted-lane playable-preview coverage:</p>
 <ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
@@ -3769,7 +3791,7 @@ npm run build</code></pre>
 <p>leave a clear follow-up path toward automation</p>
 <p>This is how we stay agile without relying on memory-only fixes.</p>
 <p>See also:</p>
-<ul><li><a href="DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
@@ -3782,7 +3804,7 @@ npm run build</code></pre>
 <ol><li>hosted <code>/production</code></li></ol>
 <ul><li>official public promise</li><li>should only move from an approved hosted <code>/beta</code> candidate</li></ul>
 <p>See also:</p>
-<ul><li><a href="MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="release-authority.json">release-authority.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-authority.json">release-authority.json</a></li></ul>
 <h3>Release Scope Model</h3>
 <p>We now need to think about release work in three scopes, not one:</p>
 <ol><li><code>platform candidate</code></li></ol>
@@ -3842,7 +3864,7 @@ npm run build</code></pre>
 <ul><li><code>npm run harness:check:galaxy-guardians-visual-readability</code></li><li><code>npm run harness:check:galaxy-guardians-audio-character</code></li><li><code>npm run harness:check:gameplay-adapter-boundaries</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li></ul>
 <p>The standing aggregate process gate is:</p>
 <ul><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
-<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
+<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
 <p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
@@ -3879,7 +3901,7 @@ npm run build</code></pre>
 <p>summary data to explain the release without exposing the whole engineering workspace.</p>
 <h3>Supabase Data API Access Gate</h3>
 <p>Platinum&#39;s auth, profile, and leaderboard paths use Supabase through the Data API. The maintained access contract is:</p>
-<ul><li><a href="SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>This is now a release-hardening gate because Supabase public-schema tables need explicit grants for new projects beginning May 30, 2026 and for existing projects by October 30, 2026.</p>
 <p>The source-level gate is:</p>
 <ul><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul>
@@ -3919,9 +3941,9 @@ npm run build</code></pre>
 <ul><li><code>npm run harness:score:quality-conformance</code> is the current Aurora numeric</li></ul>
 <p>roll-up gate.</p>
 <ul><li>The readable current table and next-gap interpretation live in</li></ul>
-<p><a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
 <ul><li>When this roll-up changes materially, update</li></ul>
-<p><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
 <ul><li><code>node tools/harness/check-galaxy-guardians-visual-readability.js</code> when the</li></ul>
 <p>changed surface touches Guardians sprites, role palettes, preview rendering, hit feedback, or gameplay-scale visual identity.</p>
 <h4>Profile C: Boundary change</h4>
@@ -3996,7 +4018,7 @@ npm run build</code></pre>
 <ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><a href="PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -4392,7 +4414,7 @@ npm run build</code></pre>
           </table>
         </div>
 <p>The maintained SQL access contract is:</p>
-<ul><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>The contract is intentionally not a full database schema. It records the browser-visible tables, required grants, and RLS policies that make the current runtime behavior reproducible.</p>
 <h3>Release Gate</h3>
 <p>The automated source gate is:</p>
@@ -4538,21 +4560,21 @@ npm run build</code></pre>
 <p>Repository roles:</p>
 <ul><li>source of truth for engineering, issues, and planning:<ul><li><a href="https://github.com/sgwoods/Codex-Test1">sgwoods/Codex-Test1</a></li></ul></li><li>public release host and GitHub Pages deployment:<ul><li><a href="https://github.com/sgwoods/Aurora-Galactica">sgwoods/Aurora-Galactica</a></li></ul></li></ul>
 <p>See also:</p>
-<ul><li><a href="REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/REPOSITORY_ROLE_MAP.md">REPOSITORY_ROLE_MAP.md</a></li></ul>
 <h3>External Service Access Rule</h3>
 <p>External-service permissions are release artifacts when they affect runtime behavior.</p>
 <p>For Supabase, the current source of truth is:</p>
-<ul><li><a href="SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>The publish preflight runs <code>npm run harness:check:supabase-data-api-contract</code>. That gate exists because Platinum uses Supabase Data API access for auth-backed profiles and leaderboards, and Supabase public-schema table access now requires explicit grants. Any new browser-visible table, including future replay video or YouTube posting metadata, must land with grants, RLS posture, and policy documentation before it can move through hosted <code>/dev</code>, <code>/beta</code>, or <code>/production</code>.</p>
 <p>The intended lane model is:</p>
 <ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
 <p>Meaning:</p>
 <ul><li>local <code>localhost</code><ul><li>active engineering lane</li></ul></li><li>hosted <code>/dev</code><ul><li>shared hosted integration preview</li></ul></li><li>hosted <code>/beta</code><ul><li>reviewed release candidate</li></ul></li><li>hosted <code>/production</code><ul><li>public stable promise</li></ul></li></ul>
 <p>See also:</p>
-<ul><li><a href="RELEASE_LANE_MODEL.md">RELEASE_LANE_MODEL.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_LANE_MODEL.md">RELEASE_LANE_MODEL.md</a></li></ul>
 <h3>Security/Auth/Replay Storage Rule</h3>
 <p>Account, score, replay, and high-score video features are release-sensitive surfaces. The maintained lock-down source is:</p>
-<ul><li><a href="SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md">SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md">SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md</a></li></ul>
 <p>Publish preflight runs:</p>
 <pre><code data-lang="bash">npm run harness:check:security-auth-replay-storage</code></pre>
 <p>That gate keeps browser code free of service-role material, OAuth client secrets, and YouTube upload endpoints; confirms top-10 video posting eligibility is authenticated and confirmed-account only; preserves non-production test-pilot limits; and keeps replay video browser-local until a server-owned upload/storage policy exists.</p>
@@ -4560,7 +4582,7 @@ npm run build</code></pre>
 <p>Aurora now uses a one-authority release model.</p>
 <p>That means:</p>
 <ul><li>topic branches and ordinary development may happen from more than one machine</li><li><code>main</code> remains the only integration branch</li><li>hosted <code>/beta</code> and hosted <code>/production</code> may only be published from the</li></ul>
-<p>machine recorded in <a href="release-authority.json">release-authority.json</a></p>
+<p>machine recorded in <a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-authority.json">release-authority.json</a></p>
 <p>Current versioning read for the next cycle:</p>
 <ul><li>the shipped <code>1.3.0</code> family is now the stable public baseline</li><li>hosted <code>/dev</code> now carries the first <code>1.4.0.1</code> forward-review line for the</li></ul>
 <p>next minor-family candidate</p>
@@ -4729,7 +4751,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
 <p>and quality artifacts rather than chat-only release state</p>
 <h3>Evidence Supporting The Refreshed Public Line</h3>
 <p>The refreshed public family is supported by these durable sources:</p>
-<ul><li>quality roll-up:<ul><li><code>reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd</code></li></ul></li><li>conformance dashboard source:<ul><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li></ul></li><li>conformance economics source:<ul><li><code>CONFORMANCE_ECONOMICS.md</code></li></ul></li><li>public-document provenance source:<ul><li><code>documentation-provenance.json</code></li></ul></li><li>strategic lane review:<ul><li><code>STRATEGIC_BETA_REVIEW.md</code></li></ul></li><li>detailed public refresh note:<ul><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li></ul></li></ul>
+<ul><li>quality roll-up:<ul><li><code>reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd</code></li></ul></li><li>conformance dashboard source:<ul><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li></ul></li><li>conformance economics source:<ul><li><code>CONFORMANCE_ECONOMICS.md</code></li></ul></li><li>public-document provenance source:<ul><li><code>documentation-provenance.json</code></li></ul></li><li>strategic lane review:<ul><li><code>STRATEGIC_BETA_REVIEW.md</code></li></ul></li><li>detailed public refresh note:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li></ul></li></ul>
 <p>The refreshed line also has direct verification evidence:</p>
 <ul><li><code>npm run build</code></li><li><code>npm run harness:check:documentation-freshness</code></li><li><code>npm run publish:check:beta</code></li><li><code>npm run publish:verify:beta</code></li><li><code>npm run approve:beta</code></li><li><code>npm run publish:check:production</code></li><li><code>npm run publish:verify:production</code></li><li><code>npm run verify:public</code></li></ul>
 <h3>Code Review And Boundary Read</h3>
@@ -4744,7 +4766,7 @@ npm run release:claim-authority -- --machine-id &lt;id&gt; --label &quot;&lt;lab
 <p>These are no longer ship blockers for the refreshed public line. They are the correct <code>1.4.0</code> and later follow-through targets.</p>
 <h3>Documentation Contract For Production</h3>
 <p>The refreshed <code>1.3.0</code> public line depends on these docs being current and committed:</p>
-<ul><li><a href="README.md">README.md</a></li><li><a href="PLAN.md">PLAN.md</a></li><li><a href="PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="GO_FORWARD_EXECUTION_PLAN.md">GO_FORWARD_EXECUTION_PLAN.md</a></li><li><a href="PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li><li><a href="PLATINUM.md">PLATINUM.md</a></li><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a></li><li><a href="BETA_TO_PRODUCTION_PLAN.md">BETA_TO_PRODUCTION_PLAN.md</a></li><li><a href="CODE_REVIEW_MODEL.md">CODE_REVIEW_MODEL.md</a></li><li><a href="REVIEW_LEARNING_LEDGER.md">REVIEW_LEARNING_LEDGER.md</a></li><li><a href="RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="release-dashboard.json">release-dashboard.json</a></li><li><a href="release-notes.json">release-notes.json</a></li><li><a href="release-manifest.json">release-manifest.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/README.md">README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLAN.md">PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PRODUCT_ROADMAP.md">PRODUCT_ROADMAP.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/GO_FORWARD_EXECUTION_PLAN.md">GO_FORWARD_EXECUTION_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PLATINUM.md">PLATINUM.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/TESTING_AND_RELEASE_GATES.md">TESTING_AND_RELEASE_GATES.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/BETA_TO_PRODUCTION_PLAN.md">BETA_TO_PRODUCTION_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CODE_REVIEW_MODEL.md">CODE_REVIEW_MODEL.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/REVIEW_LEARNING_LEDGER.md">REVIEW_LEARNING_LEDGER.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-dashboard.json">release-dashboard.json</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-notes.json">release-notes.json</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/release-manifest.json">release-manifest.json</a></li></ul>
 <h3>Current Follow-Up Work</h3>
 <p>The refreshed <code>1.3.0</code> production push is complete. The follow-up work now is:</p>
 <ol><li>keep the refreshed public <code>1.3.0</code> line trustworthy</li><li>use hosted <code>/dev</code> and hosted <code>/beta</code> to review the live <code>1.4.0</code> candidate</li></ol>

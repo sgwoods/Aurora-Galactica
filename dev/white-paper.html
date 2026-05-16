@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora / Platinum White Paper</title>
+  <style>
+:root{
+      --bg:#06111b;
+      --bg2:#10253b;
+      --bg3:#14354f;
+      --card:rgba(7,19,31,0.78);
+      --card2:rgba(255,255,255,0.05);
+      --line:rgba(144,210,255,0.18);
+      --text:#eef8ff;
+      --muted:#a1c7e0;
+      --soft:#84adc9;
+      --accent:#69e2a7;
+      --accent2:#7ac3ff;
+      --shadow:0 18px 40px rgba(0,0,0,0.28);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(105,226,167,0.16), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(122,195,255,0.2), transparent 28%),
+        linear-gradient(160deg,var(--bg),var(--bg2) 55%,var(--bg3));
+      min-height:100vh;
+    }
+    a{color:#d8f7ff}
+    .shell{
+      max-width:1280px;
+      margin:0 auto;
+      padding:34px 18px 72px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 280px;
+      gap:24px;
+      align-items:start;
+    }
+    .main{min-width:0}
+    .hero,.section,.toc{
+      border:1px solid rgba(177,222,255,0.16);
+      border-radius:28px;
+      background:
+        linear-gradient(160deg, rgba(12,34,54,0.88), rgba(7,19,31,0.72)),
+        radial-gradient(circle at 20% 0%, rgba(103,230,168,0.12), transparent 32%);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:34px 32px 28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      color:#d7ecff;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .homeLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,0.28);
+      background:rgba(122,195,255,0.12);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.04em;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-0.04em;
+    }
+    .hero p{
+      max-width:900px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.65;
+      margin:0 0 16px;
+    }
+    .goal{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e7f6ff;
+      font-size:16px;
+      line-height:1.55;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .metaCard{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .metaLabel{
+      display:block;
+      color:#8fb3cc;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .metaValue{
+      font-size:18px;
+      font-weight:600;
+    }
+    .heroLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 16px;
+      border-radius:999px;
+      background:rgba(122,195,255,0.16);
+      border:1px solid rgba(122,195,255,0.3);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:.04em;
+    }
+    .section{
+      margin-top:20px;
+      padding:28px 26px 24px;
+    }
+    .sectionHeader{
+      margin-bottom:18px;
+      padding-bottom:14px;
+      border-bottom:1px solid var(--line);
+    }
+    .sectionHeader h2{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:-0.03em;
+    }
+    .sectionHeader p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .cardGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .card,.linkCard{
+      padding:18px;
+      border-radius:20px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .card h3,.linkCard h3{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .card p,.linkCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+    .bulletList li{
+      position:relative;
+      padding:14px 16px 14px 42px;
+      border-radius:18px;
+      background:var(--card2);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .bulletList li::before{
+      content:"";
+      position:absolute;
+      left:16px;
+      top:18px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(122,195,255,0.08);
+    }
+    .linkGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .linkCard a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      margin-bottom:10px;
+      text-decoration:none;
+    }
+    .tableWrap{
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .dataTable{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    .dataTable th,
+    .dataTable td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .dataTable th{
+      position:sticky;
+      top:0;
+      background:rgba(7,19,31,0.96);
+      color:#e8f7ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      z-index:1;
+    }
+    .dataTable td{
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    .dataTable tbody tr:last-child td{
+      border-bottom:none;
+    }
+    .dataTable code{
+      color:#f1fbff;
+      font-size:12px;
+      background:rgba(255,255,255,0.06);
+      padding:2px 6px;
+      border-radius:999px;
+    }
+    .docWrap{
+      padding:20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .docMeta{
+      margin:0 0 14px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .markdown h3,.markdown h4,.markdown h5{
+      margin:24px 0 10px;
+      letter-spacing:-0.02em;
+      color:#f2fbff;
+    }
+    .markdown h3{font-size:24px}
+    .markdown h4{font-size:20px}
+    .markdown h5{font-size:17px}
+    .markdown p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .markdown ul,.markdown ol{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      padding-left:22px;
+    }
+    .markdown li{
+      margin:0 0 8px;
+      line-height:1.65;
+    }
+    .markdown pre{
+      margin:0 0 16px;
+      padding:14px 16px;
+      overflow:auto;
+      border-radius:16px;
+      background:rgba(3,10,16,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f6ff;
+    }
+    .markdown pre code{
+      color:inherit;
+      font-size:13px;
+    }
+    .markdown img{
+      display:block;
+      max-width:100%;
+      margin:0 0 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      position:sticky;
+      top:20px;
+      padding:22px 20px 18px;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+    .toc p{
+      margin:0 0 14px;
+      color:var(--soft);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .toc ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      gap:10px;
+    }
+    .toc li a{
+      display:block;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      text-decoration:none;
+      color:#e9f7ff;
+      font-size:14px;
+      line-height:1.4;
+    }
+    .footer{
+      margin-top:18px;
+      color:#8db0c8;
+      font-size:13px;
+      line-height:1.6;
+    }
+    code{
+      font-family:"SFMono-Regular",Consolas,monospace;
+      color:#edf7ff;
+      font-size:.95em;
+    }
+    @media (max-width: 980px){
+      .shell{grid-template-columns:1fr}
+      .toc{position:static; order:-1}
+    }
+    @media (max-width: 720px){
+      .shell{padding:20px 14px 54px}
+      .hero,.section,.toc{padding:22px 20px}
+      .hero p{font-size:17px}
+    }
+.markdown .mermaid{
+      display:block;
+      margin:0 0 18px;
+      padding:12px 0;
+      overflow:auto;
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">White Paper</span>
+            <a class="homeLink" href="project-guide.html">Project Guide</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+          </div>
+          <h1>Aurora / Platinum White Paper</h1>
+          <p>A hosted, human-readable home for the living white paper: what this project is trying to prove, how Platinum and the games fit together, why the conformance program exists, and how the narrative is versioned over time.</p>
+          <div class="goal"><strong>Current goal:</strong> Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, recover key citations, and use the surrounding hosted docs for deeper detail rather than overloading the paper itself.</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">1.4.0.1</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">development</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">May 16, 2026</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">1.4.0 multi-game public release</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">Open white-paper project area</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">Open Markdown source</a>
+          </div>
+        </section>
+        
+    <section class="section" id="white-paper-project-area">
+      <div class="sectionHeader">
+        <h2>White Paper Project Area</h2>
+        <p>Where this work lives in the repo and how it should be maintained.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Living Draft</h3>
+      <p>The current narrative source of truth is `WHITE_PAPER.md`. It should keep moving with the project instead of becoming a one-off summary.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Project Area</h3>
+      <p>The `white-paper/` directory is the durable project area for supporting material: the working-area README, citation ledger, and versioned white-paper releases.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Release Memory</h3>
+      <p>Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` so the narrative can be compared over time just like the software.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Hosted Surface</h3>
+      <p>This generated page is the ongoing hosted, human-readable form. It should stay wired into the same documentation family as the project guide, platform guide, player guide, and release dashboard.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="reader-shape">
+      <div class="sectionHeader">
+        <h2>Reader Shape</h2>
+        <p>Who this page is for and how it should balance readability with depth.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>Broad Technical Reader</h3>
+      <p>Assume curiosity, technical interest, and some builder intuition, but do not assume deep platform, browser, arcade, or conformance-program expertise.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Readable Main Narrative</h3>
+      <p>The white paper should explain the thesis, architecture, release discipline, evidence program, and AI method clearly without becoming a complete internal manual.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Deeper Surfaces Nearby</h3>
+      <p>Hosted guides, dashboards, release notes, and source docs should provide the extra detail so the main paper can stay focused and persuasive.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="hosted-entry-points">
+      <div class="sectionHeader">
+        <h2>Hosted Entry Points</h2>
+        <p>The main ways a reader should enter the white-paper story and related project surfaces.</p>
+      </div>
+      <div class="linkGrid">
+
+    <article class="linkCard">
+      <a href="#white-paper-current-doc">Current White Paper Draft</a>
+      <p>Jump directly to the current rendered white paper inside this hosted page.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="#white-paper-citation-ledger-doc">Citation Ledger</a>
+      <p>See the maintained list of outside ideas, reference families, and methodological influences.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="project-guide.html">Project Guide</a>
+      <p>Return to the broader hosted project map for Platinum, Aurora, Galaxy Guardians, ingestion, conformance, and release state.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="public-project-page.html">Lane Project Page</a>
+      <p>Read the shorter public-facing project summary for the current lane.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="conformance-dashboard.html">Conformance Dashboard</a>
+      <p>Open the live score, confidence, cost, and investment dashboard when the narrative needs the measured readout.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">White Paper Project Source</a>
+      <p>Open the repo-owned white-paper project area in GitHub.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">White Paper Markdown Source</a>
+      <p>Open the current Markdown source directly.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="white-paper-release-history">
+      <div class="sectionHeader">
+        <h2>White Paper Release History</h2>
+        <p>The first durable release pattern for preserving the narrative over time.</p>
+      </div>
+      <div class="linkGrid">
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/white-paper/releases/2026-05-16-v0.1.0/WHITE_PAPER.md">v0.1.0 Snapshot</a>
+      <p>The first seeded snapshot of the white paper in browsable release form.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="https://github.com/sgwoods/Codex-Test1/blob/main/white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md">v0.1.0 Release Notes</a>
+      <p>Short note describing what the first white-paper release established and what should happen next.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="v1-release-path">
+      <div class="sectionHeader">
+        <h2>V1 Release Path</h2>
+        <p>The next best steps for turning the current seed into a true v1 white-paper release.</p>
+      </div>
+      <ul class="bulletList">
+
+    <li>Tighten the audience voice so the v1 paper reads clearly as a public-facing promotional and methodological document, not only as an internal orientation memo.</li>
+  
+
+    <li>Recover and cite the earlier Karpathy-style assessment directly so the methodology section can point to a precise prior observation instead of only a conceptual placeholder.</li>
+  
+
+    <li>Add selected screenshots or rendered excerpts from the hosted dashboard, project page, and game surfaces so the paper shows the artifacts it talks about.</li>
+  
+
+    <li>Add a compact internal bibliography that points readers to the canonical source docs: project state, ingestion framework, conformance economics, release policy, and application/platform guides.</li>
+  
+
+    <li>Sharpen the historical arc from 1.0.0 launch to 1.2.0 platform framing to 1.4.0 multi-game and conformance maturity so the story reads as a clear progression.</li>
+  
+
+    <li>Decide which claims should be explicitly public and promotional versus which should remain engineering-facing detail, then trim or regroup sections accordingly.</li>
+  
+
+    <li>Connect the v1 paper to one stable release-quality evidence pack so the narrative and the measurable artifacts can be reviewed side by side.</li>
+  
+
+    <li>Add a concise section on what this project teaches about generative-AI-assisted software practice beyond games, with examples tied to actual repo artifacts.</li>
+  
+
+    <li>Cut the first intentional white-paper v1 snapshot under `white-paper/releases/` once the citations, visuals, and public voice are all coherent enough to stand alone.</li>
+  
+</ul>
+    </section>
+  
+        
+    <section class="section" id="white-paper-current-doc">
+      <div class="sectionHeader">
+        <h2>Current White Paper Draft</h2>
+        <p>The living white paper as it exists in the repo today, rendered into the same hosted-document family as the other project guides.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>WHITE_PAPER.md</code> during build.</p>
+        <div class="markdown">
+          <p>Status: living white paper Current draft: <code>v0.2.0-draft</code> Date: <code>2026-05-16</code> Audience: broad technical readers, interested builders, collaborators, future reviewers, and public-facing project storytelling</p>
+<p>This document is the maintained narrative explanation of what this project is doing, why it is being built this way, and how the approach evolves over time. It is intended to be both a promotional piece and a disciplined reminder to the team: the software, the evidence program, the release process, and the generative-AI workflow all matter together.</p>
+<p>See also:</p>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<p><img alt="Platinum Hero" src="assets/catalog-media/27591edccd-platinum-hero.svg"></p>
+<h3>Overview / Preamble</h3>
+<p>This project is not only a browser game repo.</p>
+<p>It is a deliberate attempt to build a professional software program around a harder claim:</p>
+<ul><li>that generative AI can help produce serious, well-released software</li><li>that aggressive iteration does not need to mean careless iteration</li><li>that reference-driven quality can be pursued with explicit evidence instead</li></ul>
+<p>of vague taste alone</p>
+<ul><li>that local harnesses, release lanes, review packets, and durable artifacts can</li></ul>
+<p>keep AI-assisted work honest</p>
+<p><code>Platinum</code> is the reusable browser-arcade host. <code>Aurora Galactica</code> is the first shipped application on that host. <code>Galaxy Guardians</code> is the second-game proof that the platform, ingestion program, and conformance discipline can grow beyond a single title.</p>
+<p>The larger point is not &quot;we used AI to make a game.&quot;</p>
+<p>The larger point is that we are building a system in which:</p>
+<ul><li>the product is real</li><li>the releases are real</li><li>the documentation is real</li><li>the tests and harnesses are real</li><li>the evidence is real</li><li>and the model-assisted work is useful because it is forced to leave behind</li></ul>
+<p>rerunnable artifacts</p>
+<h3>Section Overview</h3>
+<ul><li><code>1. Thesis</code>: what this project is trying to prove.</li><li><code>2. Program snapshot</code>: where Platinum, Aurora, and Galaxy Guardians stand</li></ul>
+<p>right now.</p>
+<ul><li><code>3. Five-layer operating model</code>: platform, games, ingestion, harnesses, and</li></ul>
+<p>release economics as one program.</p>
+<ul><li><code>4. Ingestion strategy</code>: how external evidence becomes structured game truth.</li><li><code>5. Harnessing and conformance</code>: how we measure quality instead of asserting</li></ul>
+<p>it.</p>
+<ul><li><code>6. Release discipline</code>: how dev, beta, and production remain explicit and</li></ul>
+<p>professional.</p>
+<ul><li><code>7. Generative AI role</code>: how model work accelerates the project without</li></ul>
+<p>replacing evidence.</p>
+<ul><li><code>8. Historical evolution</code>: how the project moved from launch to platform to</li></ul>
+<p>multi-game conformance.</p>
+<ul><li><code>9. Citation program</code>: how outside ideas and source work should be tracked.</li><li><code>10. Living-paper policy</code>: how this white paper should be maintained and</li></ul>
+<p>released over time.</p>
+<h3>How To Read This Paper</h3>
+<p>This page is meant to be the readable narrative layer, not the whole archive.</p>
+<ul><li>Read this paper for the story, the method, and the architectural shape of the</li></ul>
+<p>project.</p>
+<ul><li>Use the diagrams, screenshots, and charts here as anchors, not as the full</li></ul>
+<p>evidence pack.</p>
+<ul><li>If you want implementation detail, detailed metrics, or release-by-release</li></ul>
+<p>operational context, jump into the linked hosted documentation rather than making this paper carry everything.</p>
+<p>Useful deeper surfaces:</p>
+<ul><li><a href="project-guide.html">project-guide.html</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="conformance-dashboard.html">conformance-dashboard.html</a></li><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li></ul>
+<h3>First Draft</h3>
+<h4>1. Thesis</h4>
+<p>The core thesis of this project is that generative-AI-assisted software can be built aggressively without becoming hand-wavy, fragile, or unprofessional.</p>
+<p>That requires a few non-negotiable rules:</p>
+<ul><li>the software must ship as a real public product, not just as a demo</li><li>improvements must be tied to evidence whenever the question is measurable</li><li>platform boundaries must stay explicit so reuse is deliberate rather than</li></ul>
+<p>accidental</p>
+<ul><li>release claims must be backed by committed docs, review artifacts, and</li></ul>
+<p>rerunnable checks</p>
+<ul><li>model work should increase leverage, but repeated assessment should</li></ul>
+<p>increasingly move into local CPU/browser harnesses</p>
+<p>This is why Platinum, Aurora, Galaxy Guardians, ingestion, harnesses, scorecards, review packets, and release notes belong in the same story.</p>
+<p><img alt="Current Aurora gameplay surface" src="assets/catalog-media/eca4336268-export.mov.png"></p>
+<p>The image above is intentionally simple: it reminds the reader that all of the process, evidence, and release discipline in this paper exist in service of a real playable artifact, not only a methodology exercise.</p>
+<p>Further detail:</p>
+<ul><li><a href="application-guide.html">application-guide.html</a></li><li><a href="release-notes.html">release-notes.html</a></li></ul>
+<h4>2. Program Snapshot</h4>
+<p>As of <code>2026-05-16</code>, the project can be described in one page:</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Area</th><th>Current role</th><th>Why it matters</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Platinum</code></td><td>Shipped browser-arcade host platform</td><td>Proves that reusable shell, services, lane model, and release discipline can exist without absorbing game-specific truth.</td></tr>
+<tr><td><code>Aurora Galactica</code></td><td>First shipped playable Platinum application</td><td>Serves as the strongest current proof that the platform can host a real public game and improve its conformance over time.</td></tr>
+<tr><td><code>Galaxy Guardians</code></td><td>Preview-first second-game and first-class ingestion/conformance target</td><td>Proves that the platform and the evidence program can support a second game without simply cloning Aurora.</td></tr>
+<tr><td>Ingestion framework</td><td>Source-to-structured-evidence pipeline</td><td>Keeps new-game and fidelity work anchored in manifests, clips, event logs, waveforms, contact sheets, and provenance.</td></tr>
+<tr><td>Harness and conformance system</td><td>Scorecards, correspondence checks, dashboards, and gates</td><td>Turns quality claims into measurable, reviewable outputs.</td></tr>
+<tr><td>Release and economics program</td><td>Lane discipline, review packets, docs refresh, local-vs-cloud resource accounting</td><td>Makes the project look and behave like a professional release program rather than an endless prototype.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>Current maintained metric read:</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Scope</th><th>Current read</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Aurora Galactica</code></td><td><code>9.2/10</code> release-quality conformance</td><td>Strong shipped baseline with known high-value gaps, especially audio identity and later depth.</td></tr>
+<tr><td><code>Galaxy Guardians</code> reference preview</td><td><code>7.6/10</code></td><td>Credible second-game proof, but intentionally not presented as production-ready parity.</td></tr>
+<tr><td><code>Galaxy Guardians</code> playtest-weighted preview</td><td><code>6.9/10</code></td><td>Useful reminder that a game can have process maturity before it has public-readiness maturity.</td></tr>
+<tr><td>Local-vs-cloud resource split</td><td>about <code>92.8%</code> local wall, about <code>7.4%</code> declared GPU-equivalent wall</td><td>Shows the intended operating doctrine: repeated measurement local, model help strategic.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p><img alt="Aurora Pack Card" src="assets/catalog-media/32ab558bba-aurora-pack-card.svg"></p>
+<p><img alt="Galaxy Guardians Pack Card" src="assets/catalog-media/74d2115059-galaxy-guardians-pack-card.svg"></p>
+<p>These pack views help a broad reader understand one of the project’s central claims: <code>Aurora Galactica</code> and <code>Galaxy Guardians</code> are not supposed to be two skins on one game. They are meant to be separate applications living on one host platform.</p>
+<p>&gt; TODO illustration: &gt; Choose a small three-panel progression strip that shows how the public face &gt; of the project evolved from <code>1.0.0</code> launch to <code>1.2.0</code> Platinum framing to &gt; <code>1.4.0</code> multi-game posture. The most illustrative version may be gameplay &gt; first, shell first, or docs/release-surface first, and we should pick that &gt; deliberately rather than guessing.</p>
+<p>Further detail:</p>
+<ul><li><a href="project-guide.html">project-guide.html</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li></ul>
+<h4>3. Five-Layer Operating Model</h4>
+<p>The repo already describes the work as a layered system. The white paper should make that model legible at a glance.</p>
+<div class="mermaid">flowchart TD
+    A[&quot;Reference games, videos, manuals, and source artifacts&quot;] --&gt; B[&quot;Ingestion framework&quot;]
+    B --&gt; C[&quot;Game-owned evidence: manifests, windows, event logs, cue catalogs, stage summaries&quot;]
+    C --&gt; D[&quot;Applications: Aurora Galactica and Galaxy Guardians&quot;]
+    D --&gt; E[&quot;Harnesses, scorecards, correspondence reports, dashboards&quot;]
+    E --&gt; F[&quot;Release lanes, docs, review packets, and public claims&quot;]
+    F --&gt; G[&quot;Observed gaps, player feedback, and next investment choices&quot;]
+    G --&gt; B
+    H[&quot;Platinum platform&quot;] --&gt; D
+    H --&gt; E
+    H --&gt; F</div>
+<p><img alt="Platinum Platform Stack" src="assets/catalog-media/4061865b08-platinum-platform-stack.svg"></p>
+<p><img alt="Platinum Pack Separation" src="assets/catalog-media/ddf35ae0ce-platinum-pack-separation.svg"></p>
+<p>The important discipline is separation of ownership:</p>
+<ul><li><code>Platinum</code> owns shell, hosting, shared services, contracts, and release</li></ul>
+<p>framing.</p>
+<ul><li>Games own rules, scoring, progression, audiovisual identity, and their own</li></ul>
+<p>conformance truth.</p>
+<ul><li>Ingestion owns provenance and structured evidence.</li><li>Harnesses own repeatable evaluation.</li><li>Release discipline owns the public promise.</li></ul>
+<p>When those layers blur, the project becomes harder to explain, harder to test, and easier to accidentally fake.</p>
+<p>Further detail:</p>
+<ul><li><a href="project-guide.html#platform-vs-applications">project-guide.html#platform-vs-applications</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<h4>4. Ingestion Strategy</h4>
+<p>Ingestion is the front half of engineering, not a side notebook.</p>
+<p>The project does not want new games or fidelity improvements to come mainly from memory, vibes, or post-hoc rationalization. Instead, it wants evidence to arrive in structured forms that can be reused:</p>
+<ul><li>source manifests</li><li>preserved clips and windows</li><li>frame contact sheets</li><li>waveforms and spectrograms</li><li>reference-side event logs</li><li>semantic annotations</li><li>confidence notes</li><li>scorer and correspondence targets</li></ul>
+<p>For <code>Aurora</code>, this keeps Galaga-like timing, audio, pressure, and stage-shape questions grounded in real artifacts.</p>
+<p>For <code>Galaxy Guardians</code>, ingestion matters even more. It is the mechanism that prevents the second game from turning into &quot;Aurora with different labels.&quot; The game should become more complete by promoting <code>Galaxian</code> evidence into game-owned scoring, wave timing, sprite identity, audio expectations, and runtime correspondence checks.</p>
+<p>In short:</p>
+<ul><li>external artifacts teach the game</li><li>ingestion turns artifacts into structured evidence</li><li>the application implements against that evidence</li><li>Platinum stays the host rather than the hidden author of the game</li></ul>
+<p><img alt="Galaga stage-opening reference contact sheet" src="assets/catalog-media/3b90ac5133-opening-contact-tight.png"></p>
+<p><img alt="Galaxian reference contact sheet" src="assets/catalog-media/4bf02bc598-contact-sheet-reference-window.jpg"></p>
+<p>These reference contact sheets are useful because they show the project’s ingestion claim in a form a non-expert can understand quickly. We are not only describing classic arcade behavior; we are collecting windows, studying them, and turning them into reusable evidence.</p>
+<p>&gt; TODO illustration: &gt; Pick the single best “ingestion in action” image for v1. The strongest option &gt; might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged &gt; comparison between raw source footage and the structured artifact family that &gt; comes out of it.</p>
+<p>Further detail:</p>
+<ul><li><a href="project-guide.html#classic-arcade-ingestion-framework-doc">project-guide.html#classic-arcade-ingestion-framework-doc</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
+<h4>5. Harnessing And Conformance</h4>
+<p>This project is serious about the difference between &quot;better&quot; and &quot;better by a rerunnable measure.&quot;</p>
+<p>The conformance system exists so that quality can be described with more precision than a mood:</p>
+<ul><li>timing correspondence</li><li>sequence correspondence</li><li>outcome correspondence</li><li>spatial correspondence</li><li>visual correspondence</li><li>audio correspondence</li><li>persona and progression correspondence</li></ul>
+<p>The current Aurora scorecard turns this into a twelve-category quality model. That matters for two reasons.</p>
+<p>First, it helps choose investments that are actually player-visible.</p>
+<p>Second, it protects the team from false confidence. A <code>10/10</code> is explicitly not &quot;perfect&quot;; it means &quot;maxed at current scorer resolution.&quot; Better evidence or a better evaluator can lower a score while making the project more truthful.</p>
+<p>The harness program also stays intentionally classified:</p>
+<ul><li><code>platform</code> harnesses protect shell, hosting, docs, and shared services</li><li><code>application</code> harnesses protect game-specific rules and behavior</li><li><code>boundary</code> harnesses protect the seam between Platinum and the games</li></ul>
+<p>Representative committed commands in this strategy include:</p>
+<ul><li><code>npm run harness:measure</code></li><li><code>npm run review:code</code></li><li><code>npm run review:ledger</code></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<p>This is the deeper quality claim of the project: bugs, polish, and release readiness should increasingly move from memory and opinion into explicit checks, artifacts, and dashboards.</p>
+<p><img alt="Conformance score trends" src="assets/catalog-media/f53bfb3f13-score-trends.svg"></p>
+<p><img alt="Persona performance distribution" src="assets/catalog-media/bd48a34cbd-performance-lines.svg"></p>
+<p>The value of these charts is not only that they look rigorous. They show that the project tries to externalize quality questions into surfaces that can be inspected, debated, and rerun.</p>
+<p>Further detail:</p>
+<ul><li><a href="conformance-dashboard.html">conformance-dashboard.html</a></li><li><a href="project-guide.html#release-conformance-dashboard-doc">project-guide.html#release-conformance-dashboard-doc</a></li><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li></ul>
+<h4>6. Release Discipline And Professionalism</h4>
+<p>The project treats release engineering as part of product quality.</p>
+<p>That means the release lanes are not cosmetic:</p>
+<ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
+<p>Each lane carries a different stability promise, documentation expectation, and testing posture. The project is intentionally trying to behave like a software program with real public accountability:</p>
+<ul><li>release notes are first-class</li><li>docs are part of the release surface</li><li>review packets and review-learning ledgers are durable evidence</li><li>production claims should come from an approved beta lineage</li><li>major releases should refresh dashboards, scorecards, and strategic docs</li></ul>
+<p>This matters because AI-assisted speed is only impressive if the public result still feels trustworthy.</p>
+<p>Further detail:</p>
+<ul><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#testing-doc">project-guide.html#testing-doc</a></li><li><a href="project-guide.html#code-review-model-doc">project-guide.html#code-review-model-doc</a></li></ul>
+<h4>7. How Generative AI Fits</h4>
+<p>The project does use generative AI heavily, but not as a substitute for engineering structure.</p>
+<p>The intended operating doctrine is:</p>
+<ul><li>use models to design evaluators, synthesize options, write code, review code,</li></ul>
+<p>summarize evidence, and tighten the next decision</p>
+<ul><li>use local CPU/browser harnesses for repeated measurement, sweeps, and</li></ul>
+<p>regression checks</p>
+<ul><li>convert model-assisted insight into committed repo artifacts whenever</li></ul>
+<p>possible</p>
+<ul><li>log resource use and compare spend against score movement</li><li>keep human review, public release notes, and versioned documentation in the</li></ul>
+<p>loop</p>
+<p>The repo already describes one part of this explicitly as a &quot;Karpathy-loop-like&quot; pattern:</p>
+<ul><li>inspect concrete examples</li><li>improve the dataset and evaluator</li><li>make a small candidate change</li><li>run it</li><li>study failures</li><li>fold the learning back into the system</li></ul>
+<p>That is a strong fit for the broader project identity. The point is not merely to ask a model for code. The point is to build a system in which model help leaves behind better evaluators, better artifacts, and cheaper future decisions.</p>
+<p><img alt="Compute minutes by resource" src="assets/catalog-media/162dcb2290-compute-minutes-by-resource.svg"></p>
+<p><img alt="Cost per positive score point" src="assets/catalog-media/af6e8026f1-cost-per-positive-score-point.svg"></p>
+<p>These charts help keep the AI story grounded. The point is not only that model assistance exists; it is that the project is trying to compare that assistance with local repeatable measurement and with visible quality movement.</p>
+<p>Further detail:</p>
+<ul><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li></ul>
+<h4>8. Working Loop</h4>
+<p>The operating loop of this project is more important than any single feature.</p>
+<div class="mermaid">flowchart LR
+    A[&quot;Choose highest-value gap&quot;] --&gt; B[&quot;Gather or refine reference evidence&quot;]
+    B --&gt; C[&quot;Build or tighten scorer / harness&quot;]
+    C --&gt; D[&quot;Run local measurement&quot;]
+    D --&gt; E[&quot;Use Codex/model help for implementation, synthesis, and review&quot;]
+    E --&gt; F[&quot;Promote keepers into code, docs, and artifacts&quot;]
+    F --&gt; G[&quot;Refresh scorecards, release docs, and priorities&quot;]
+    G --&gt; A</div>
+<p>This loop explains how the project tries to be both aggressive and controlled. The aggressiveness comes from fast iteration and model-assisted leverage. The control comes from evidence, harnesses, explicit ownership boundaries, and release discipline.</p>
+<p>&gt; TODO illustration: &gt; Add one compact “question -&gt; evidence -&gt; harness -&gt; change -&gt; rerun” visual &gt; from a real case study. Audio cue alignment, stage-opening timing, or a &gt; Galaxy Guardians reference-promotion slice are the strongest current &gt; candidates, but we should choose the one that is most legible to a broad &gt; reader.</p>
+<h4>9. Historical Evolution So Far</h4>
+<p>The release notes already show a clear arc, and the white paper should make it easy to retell.</p>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Release</th><th>Meaning</th><th>Strategic shift</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>1.0.0</code></td><td>First public Aurora launch</td><td>The project became a real public product with live scoring, pilot identity, replay visibility, and a real release ladder.</td></tr>
+<tr><td><code>1.2.0</code></td><td>Platinum Release 1</td><td>Aurora was reframed as the first application on a reusable platform, making platform/application separation explicit.</td></tr>
+<tr><td><code>1.4.0</code></td><td>Current multi-game and conformance baseline</td><td>The public line now carries stronger documentation, review evidence, persona/replay follow-through, and a clearer Galaxy Guardians posture.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p>This means the project has already moved through three meaningful phases:</p>
+<ol><li>prove a public game can ship</li><li>prove the host platform is real</li><li>prove multi-game and conformance maturity can become part of the release</li></ol>
+<p>identity</p>
+<p>The next phase should be to prove that this method scales:</p>
+<ul><li>deeper Aurora conformance</li><li>stronger Galaxy Guardians first-class completeness</li><li>cleaner shared Platinum operations</li><li>more reusable ingestion and assessment infrastructure</li></ul>
+<p>&gt; TODO illustration: &gt; Build a release-history gallery with one screenshot or architectural surface &gt; per milestone. The current paper names the milestones clearly, but a short &gt; visual strip would make the progression easier to absorb at a glance.</p>
+<p>Further detail:</p>
+<ul><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#release-note-140-beta-1-doc">project-guide.html#release-note-140-beta-1-doc</a></li><li><a href="project-guide.html#release-note-130-production-refresh-doc">project-guide.html#release-note-130-production-refresh-doc</a></li></ul>
+<h4>10. Citation Program</h4>
+<p>This white paper should not quietly absorb ideas from other work without naming them.</p>
+<p>We want a maintained citation program that records:</p>
+<ul><li>what outside work or source material influenced us</li><li>how we used it</li><li>what we learned from it</li><li>what changed in the repo because of it</li><li>what still needs to be recovered, linked, or tightened</li></ul>
+<p>The living ledger for that work starts here:</p>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<p>The first open citation debt is the prior standalone assessment of the Karpathy-style research/evaluator loop. The repo contains the conceptual thread already, but the older assessment should be recovered and linked directly in a future white-paper release rather than reconstructed from memory.</p>
+<p>Further detail:</p>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<h4>11. Why This Project Matters</h4>
+<p>The project matters because it is trying to demonstrate a concrete alternative to two weak extremes.</p>
+<p>It is not:</p>
+<ul><li>slow, ceremonial process that kills iteration</li><li>or fast AI-assisted output that cannot explain or defend itself</li></ul>
+<p>Instead, it aims for a middle path:</p>
+<ul><li>ambitious shipping</li><li>real public releases</li><li>strong platform boundaries</li><li>evidence-backed improvement</li><li>local-first repeated measurement</li><li>model-assisted leverage</li><li>versioned documentation and release storytelling</li></ul>
+<p>If that works, the result is more than a good arcade project. It becomes a useful pattern for how generative AI can participate in professional software work without dissolving quality standards.</p>
+<p>This is also why the paper should remain readable. A broad technical reader does not need every source artifact inline. They need a coherent narrative, selected visual proof, and obvious places to go next if they want more depth.</p>
+<h4>12. Living White Paper Policy</h4>
+<p>This document should evolve the same way the project evolves: intentionally, versioned, and with historical memory preserved.</p>
+<p>Working policy:</p>
+<ul><li><code>WHITE_PAPER.md</code> is the current living draft</li><li>meaningful revisions should be snapshotted under <code>white-paper/releases/</code></li><li>each snapshot should preserve the exact white paper text for that release</li><li>the citation ledger should be updated when outside work materially changes the</li></ul>
+<p>project story</p>
+<ul><li>every meaningful software release does not need a new white paper release, but</li></ul>
+<p>every strategic narrative shift probably does</p>
+<p>Good triggers for a new white paper release:</p>
+<ul><li>a major public release family</li><li>a major shift in the conformance program</li><li>a stronger second-game milestone</li><li>a meaningful change in the AI/harness/evidence operating model</li><li>recovery of an important citation or conceptual influence</li></ul>
+<h3>Immediate Next Additions</h3>
+<ul><li>Recover and link the earlier Karpathy-style assessment if it exists outside</li></ul>
+<p>this repo.</p>
+<ul><li>Add a compact bibliography of internal canonical docs and public release</li></ul>
+<p>notes.</p>
+<ul><li>Add one deliberate progression gallery for milestone history and one deliberate</li></ul>
+<p>“evidence in action” case-study image once we decide which examples explain the project most clearly.</p>
+<ul><li>Keep the audience tuned for a broad technical and builder readership: assume</li></ul>
+<p>interest, assume intelligence, but do not assume deep prior expertise.</p>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="white-paper-citation-ledger-doc">
+      <div class="sectionHeader">
+        <h2>Citation Ledger</h2>
+        <p>Maintained list of outside ideas, source families, how they were used, and what still needs to be recovered or tightened.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/CITATION_LEDGER.md</code> during build.</p>
+        <div class="markdown">
+          <p>This ledger tracks source families, methodological influences, and outside ideas that materially shape the project story.</p>
+<p>The goal is not only to cite things. The goal is to record:</p>
+<ul><li>what influenced the work</li><li>how that influence showed up in the repo</li><li>what the team learned from it</li><li>what citation or linkage debt still remains</li></ul>
+<h3>Status Key</h3>
+<ul><li><code>linked</code>: the reference is represented clearly enough in the repo today</li><li><code>partial</code>: the idea is present, but the exact earlier note, external source,</li></ul>
+<p>or final public citation still needs to be recovered or tightened</p>
+<ul><li><code>queued</code>: important enough to track now, but not yet integrated well enough</li></ul>
+<p>to claim as a polished citation</p>
+<h3>Current Entries</h3>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Reference</th><th>Kind</th><th>How we use it</th><th>What we learned</th><th>Current repo anchor</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Karpathy-style evaluator loop and earlier project assessment</td><td>conceptual / methodological</td><td>Shapes the idea that we should inspect concrete examples, improve evaluators, make small candidate changes, rerun, and study failures instead of tuning only by opinion.</td><td>Better evaluators can be as important as better runtime code. A stricter scorer can lower a score while making the project more truthful.</td><td><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>CONFORMANCE_ECONOMICS.md</code>, <code>RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</code></td><td><code>partial</code></td></tr>
+<tr><td>Galaga gameplay footage, manuals, clips, and extracted artifacts</td><td>reference corpus</td><td>Grounds Aurora timing, audio, stage cadence, visual comparison, and correspondence work in preserved material.</td><td>Manual impressions are useful, but clipped windows, event logs, and aligned audio/visual artifacts make fidelity work reviewable and reusable.</td><td><code>reference-artifacts/</code>, <code>VIDEO_ALIGNMENT_PROGRAM.md</code>, <code>CORRESPONDENCE_FRAMEWORK.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Galaxian gameplay footage and sibling-game source package</td><td>reference corpus</td><td>Grounds Galaxy Guardians in its own source lineage so the game can become a true sibling application rather than a relabeled Aurora variant.</td><td>Ingestion is most valuable when it arrives before design hardens. Second-game credibility depends on game-owned evidence, not borrowed first-game behavior.</td><td><code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code>, <code>APPLICATIONS_ON_PLATINUM.md</code>, <code>CONFORMANCE_METRICS_OVERVIEW.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Review packet and review-learning ledger model</td><td>operational discipline</td><td>Makes AI-assisted and fast-moving changes reviewable through durable packets, issue categories, and production dispositions.</td><td>Review value compounds when repeated findings become harnesses, release checks, or documented non-goals instead of disappearing into chat.</td><td><code>CODE_REVIEW_MODEL.md</code>, <code>REVIEW_LEARNING_LEDGER.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Local-first compute doctrine for conformance work</td><td>operating doctrine</td><td>Pushes repeated measurement into local CPU/browser harnesses while reserving model work for strategy, synthesis, evaluator design, and selected analysis.</td><td>The project becomes cheaper and more trustworthy when model assistance leaves behind committed local logic and measurable artifacts.</td><td><code>CONFORMANCE_ECONOMICS.md</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></td><td><code>linked</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+<h3>Open Citation Debt</h3>
+<ul><li>Recover the earlier standalone Karpathy-related assessment and replace the</li></ul>
+<p>current conceptual placeholder with a precise internal or external citation.</p>
+<ul><li>Decide which outside frameworks deserve public-facing mention in the white</li></ul>
+<p>paper versus remaining internal working influences.</p>
+<ul><li>Add a compact bibliography format once the white paper is ready for wider</li></ul>
+<p>circulation beyond the repo.</p>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="white-paper-illustration-plan-doc">
+      <div class="sectionHeader">
+        <h2>Illustration Plan</h2>
+        <p>Working list of selected visuals, candidate deeper assets, and the open illustration choices that still need deliberate discussion.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/ILLUSTRATION_PLAN.md</code> during build.</p>
+        <div class="markdown">
+          <p>This document tracks the visuals that support the white paper, the deeper reference materials that should stay nearby in hosted docs, and the places where we still need to choose the most illustrative image or chart deliberately.</p>
+<h3>Selection Rules</h3>
+<ul><li>Prefer visuals that a broad technical or builder reader can interpret quickly.</li><li>Use the main paper for orientation-quality visuals, not for every supporting</li></ul>
+<p>artifact.</p>
+<ul><li>Put deeper evidence families in the hosted guides, dashboards, and linked</li></ul>
+<p>source documents instead of overloading the main narrative.</p>
+<ul><li>When a visual choice is ambiguous, keep a placeholder in the paper and record</li></ul>
+<p>the decision debt here.</p>
+<h3>Current In-Paper Visuals</h3>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>White-paper section</th><th>Current asset</th><th>Why it works</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Overview / thesis</td><td><code>reference-artifacts/diagrams/platinum/platinum-hero.svg</code></td><td>Gives the paper an immediate project identity and platform-level frame.</td></tr>
+<tr><td>Thesis</td><td><code>export.mov.png</code></td><td>Shows that the evidence and release program serve a real playable artifact.</td></tr>
+<tr><td>Program snapshot</td><td><code>reference-artifacts/diagrams/platinum/aurora-pack-card.svg</code></td><td>Makes Aurora legible as an application on the platform.</td></tr>
+<tr><td>Program snapshot</td><td><code>reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg</code></td><td>Shows second-game identity without requiring a long explanation.</td></tr>
+<tr><td>Five-layer operating model</td><td><code>reference-artifacts/diagrams/platinum/platinum-platform-stack.svg</code></td><td>Reinforces platform-versus-application separation.</td></tr>
+<tr><td>Five-layer operating model</td><td><code>reference-artifacts/diagrams/platinum/platinum-pack-separation.svg</code></td><td>Helps explain ownership boundaries at a glance.</td></tr>
+<tr><td>Ingestion strategy</td><td><code>reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png</code></td><td>Makes ingestion concrete through a visible reference-study artifact.</td></tr>
+<tr><td>Ingestion strategy</td><td><code>reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg</code></td><td>Supports the claim that Galaxy Guardians is grounded in its own source family.</td></tr>
+<tr><td>Harnessing and conformance</td><td><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg</code></td><td>Turns progress into an at-a-glance measurable story.</td></tr>
+<tr><td>Harnessing and conformance</td><td><code>reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg</code></td><td>Shows that quality is evaluated across viewpoints, not through one metric alone.</td></tr>
+<tr><td>Release and economics</td><td><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg</code></td><td>Makes local-first measurement strategy visible.</td></tr>
+<tr><td>Release and economics</td><td><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg</code></td><td>Connects release ambition to investment discipline.</td></tr>
+            </tbody>
+          </table>
+        </div>
+<h3>Deeper Supporting Visuals</h3>
+<p>These are better linked from hosted guides or follow-on detail pages than pushed directly into the main narrative unless a specific section needs them.</p>
+<ul><li><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg</code></li><li><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg</code></li><li><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg</code></li><li><code>reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg</code></li><li>hosted <code>conformance-dashboard.html</code></li><li>hosted <code>release-dashboard.html</code></li><li>hosted <code>project-guide.html</code></li><li>hosted <code>public-project-page.html</code></li></ul>
+<h3>Open Illustration TODOs</h3>
+<h4>Release-history progression strip</h4>
+<ul><li>White-paper placeholder exists.</li><li>Best candidate still needs discussion:</li><li><code>1.0.0</code> public game surface</li><li><code>1.2.0</code> Platinum framing surface</li><li><code>1.4.0</code> multi-game and conformance surface</li><li>Decision question: should the strip emphasize gameplay evolution, platform</li></ul>
+<p>architecture, or public release/documentation maturity?</p>
+<h4>Ingestion in action</h4>
+<ul><li>White-paper placeholder exists.</li><li>Best candidate still needs discussion:</li><li>contact sheet only</li><li>waveform plus contact sheet pair</li><li>raw source clip to structured artifact pipeline graphic</li><li>Decision question: what most clearly teaches the ingestion idea to a</li></ul>
+<p>non-expert reader in one glance?</p>
+<h4>Evidence loop case study</h4>
+<ul><li>White-paper placeholder exists.</li><li>Best candidate still needs discussion:</li><li>question -&gt; artifact -&gt; harness -&gt; result graphic</li><li>screenshot pair showing before and after measured correction</li><li>release-note excerpt plus chart plus artifact collage</li><li>Decision question: which single case study best shows how AI-assisted work is</li></ul>
+<p>kept honest by rerunnable evidence?</p>
+<h4>Milestone gallery</h4>
+<ul><li>White-paper placeholder exists.</li><li>Best candidate still needs discussion:</li><li>one screenshot per milestone release</li><li>one diagram per maturity phase</li><li>one mixed gallery of game, platform, and dashboard surfaces</li><li>Decision question: should the gallery feel product-led, architecture-led, or</li></ul>
+<p>release-led?</p>
+<h3>Likely Next Additions</h3>
+<ul><li>Add one screenshot from the hosted conformance dashboard.</li><li>Add one screenshot from the hosted release dashboard.</li><li>Add one architectural illustration that shows ingestion, games, Platinum, and</li></ul>
+<p>release lanes on a single page.</p>
+<ul><li>Add one progression visual based on preserved historical release surfaces.</li></ul>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="white-paper-working-area-doc">
+      <div class="sectionHeader">
+        <h2>White Paper Working Area</h2>
+        <p>How the project area is organized and when new narrative snapshots should be cut.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/README.md</code> during build.</p>
+        <div class="markdown">
+          <p>This directory holds the durable support files for the project white paper.</p>
+<h3>Purpose</h3>
+<p>The white paper is meant to be both:</p>
+<ul><li>a maintained promotional explanation of what Platinum, Aurora, Galaxy</li></ul>
+<p>Guardians, ingestion, harnessing, conformance, and release discipline are trying to achieve</p>
+<ul><li>a durable internal reminder of what the project is doing, why it is doing it,</li></ul>
+<p>and how the method evolves over time</p>
+<h3>Structure</h3>
+<ul><li><code>../WHITE_PAPER.md</code><ul><li>current living draft</li></ul></li><li><code>CITATION_LEDGER.md</code><ul><li>maintained list of outside ideas, source families, and project learnings</li></ul></li><li><code>ILLUSTRATION_PLAN.md</code><ul><li>selected visuals, candidate deeper assets, and open illustration decisions</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/WHITE_PAPER.md</code><ul><li>exact snapshot of the white paper for a given release</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/RELEASE_NOTES.md</code><ul><li>short explanation of what changed in that white paper release</li></ul></li></ul>
+<h3>Maintenance Rules</h3>
+<ul><li>Update <code>../WHITE_PAPER.md</code> directly while shaping the next narrative draft.</li><li>Cut a new snapshot when the white paper changes in a strategically meaningful</li></ul>
+<p>way.</p>
+<ul><li>Prefer one snapshot per meaningful narrative release rather than one snapshot</li></ul>
+<p>per tiny wording edit.</p>
+<ul><li>Keep the citation ledger current whenever outside work, source material, or</li></ul>
+<p>methodological influences materially shape the paper.</p>
+<ul><li>Keep the illustration plan current whenever a new screenshot, chart, diagram,</li></ul>
+<p>or hosted-detail surface becomes important to the white-paper story.</p>
+<h3>Suggested White Paper Release Triggers</h3>
+<ul><li>major public release family change</li><li>major conformance-program reframing</li><li>significant Galaxy Guardians maturity change</li><li>meaningful new evidence or economics story</li><li>recovery of an important prior assessment or external citation</li></ul>
+<h3>Current Snapshot</h3>
+<p>The first seeded snapshot is:</p>
+<ul><li><code>releases/2026-05-16-v0.1.0/</code></li></ul>
+<p>This establishes the initial narrative baseline, the release structure, and the citation ledger.</p>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="white-paper-v010-release-notes-doc">
+      <div class="sectionHeader">
+        <h2>White Paper v0.1.0 Release Notes</h2>
+        <p>Release note for the first seeded white-paper snapshot.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md</code> during build.</p>
+        <div class="markdown">
+          <p>Release: <code>2026-05-16-v0.1.0</code> Date: <code>2026-05-16</code> Type: foundational narrative release</p>
+<h3>Summary</h3>
+<p>This is the first seeded release of the project white paper.</p>
+<p>It establishes:</p>
+<ul><li>a single maintained narrative for Platinum, Aurora, Galaxy Guardians,</li></ul>
+<p>ingestion, harnessing, conformance, release discipline, and AI-assisted engineering</p>
+<ul><li>a dedicated citation ledger</li><li>a release structure for preserving historical white paper versions over time</li></ul>
+<h3>What This Release Adds</h3>
+<ul><li>a preamble explaining the broader project claim</li><li>a section-by-section first draft of the white paper</li><li>diagrams and visual anchors for the operating model</li><li>an initial timeline of major project phases</li><li>a clear note that the earlier Karpathy-style assessment still needs to be</li></ul>
+<p>recovered and linked directly</p>
+<h3>Recommended Next Pass</h3>
+<ul><li>tighten the audience voice depending on whether the next target is public</li></ul>
+<p>promotion, collaborator onboarding, or AI-method storytelling</p>
+<ul><li>add selected screenshots or dashboard graphics</li><li>recover the missing prior citation material</li><li>revise the paper alongside the next strategic release or conformance shift</li></ul>
+        </div>
+      </div>
+    </section>
+  
+      </div>
+      <aside class="toc">
+        <h2>White Paper Index</h2>
+        <p>This page is generated during the normal build so the hosted white paper stays aligned with the repo-owned project area, release posture, and current narrative draft.</p>
+        <ul>
+          
+    <li><a href="#white-paper-project-area">White Paper Project Area</a></li>
+  
+
+    <li><a href="#reader-shape">Reader Shape</a></li>
+  
+
+    <li><a href="#hosted-entry-points">Hosted Entry Points</a></li>
+  
+
+    <li><a href="#white-paper-release-history">White Paper Release History</a></li>
+  
+
+    <li><a href="#v1-release-path">V1 Release Path</a></li>
+  
+
+    <li><a href="#white-paper-current-doc">Current White Paper Draft</a></li>
+  
+
+    <li><a href="#white-paper-citation-ledger-doc">Citation Ledger</a></li>
+  
+
+    <li><a href="#white-paper-illustration-plan-doc">Illustration Plan</a></li>
+  
+
+    <li><a href="#white-paper-working-area-doc">White Paper Working Area</a></li>
+  
+
+    <li><a href="#white-paper-v010-release-notes-doc">White Paper v0.1.0 Release Notes</a></li>
+  
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>1.4.0 multi-game public release</strong><br>
+          Release 1.4.0.1 · Updated May 16, 2026
+        </p>
+      </aside>
+    </main>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        securityLevel: 'loose',
+        theme: 'dark'
+      });
+    </script>
+</body>
+</html>
