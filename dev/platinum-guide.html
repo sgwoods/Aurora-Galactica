@@ -411,7 +411,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 15, 2026</span>
+              <span class="metaValue">May 16, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -730,13 +730,14 @@
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
-<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li></ul>
+<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li><li>shared replay/video-capture/export path as it matures</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>
 <p>Platinum currently depends on a shared application contract that is real in practice even though it still needs further formalization.</p>
 <p>The main contract areas are:</p>
-<ul><li>game-pack identity</li><li>game-pack version and platform-compatibility fields</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
+<ul><li>game-pack identity</li><li>game-pack version and platform-compatibility fields</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li><li>application-aware use of pilot sign-in, scores, replay/video capture,</li></ul>
+<p>bug-report transport, and music controls inside the shared frame</p>
 <p>See also:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>Applications On Platinum</h3>
@@ -747,6 +748,9 @@
 <p>own score identity, ending flow, and platform-validation value</p>
 <p>The application-side separation is documented in:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
+<p>As the second game firms up, Platinum should prove not only that it can host a different ruleset, but that it can host that game through the same class of platform-owned frame capabilities Aurora already uses:</p>
+<ul><li>pilot sign-in and pilot-card surfaces</li><li>high scores, leaderboard, trophy, and pilot-record surfaces</li><li>replay and future video-capture/export surfaces</li><li>bug-report and feedback transport surfaces</li><li>Arcade Music, SFX, and volume/mute controls</li></ul>
+<p>These should feel like platform capabilities with game-aware rendering, not Aurora-only conveniences.</p>
 <h3>Platform Is Host, Not Prison</h3>
 <p>Platinum is the current host and public release shell.</p>
 <p>It should not become the only imaginable way a game can exist.</p>
@@ -932,7 +936,9 @@
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <p>Current branch-level next step:</p>
-<ul><li><a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
+<ul><li><a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
+<p>capture, bug reports, and Arcade Music/SFX controls</p>
+<ul><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
 <p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
 <h3>Application Responsibilities</h3>
 <p>A Platinum application should own:</p>
@@ -940,6 +946,8 @@
 <p>game-owned persona expectations in <code>GAME_CONFORMANCE_CATALOG.md</code></p>
 <ul><li>application identity on the front door such as title and feature line</li><li>its own version line and changelog</li><li>its own conformance artifacts and readiness gates</li><li>its own harnesses for game behavior</li><li>its own longer-surface review logic when the game grows beyond a single</li></ul>
 <p>playable slice</p>
+<ul><li>its own clean mapping into shared platform surfaces such as high scores,</li></ul>
+<p>pilot records, replay/video capture, bug reports, and music controls</p>
 <ul><li>optional shell preferences that remain within the platform shell contract</li></ul>
 <p>A Platinum application should not own:</p>
 <ul><li>the shared hosted release ladder or authority mechanism</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li><li>startup and wait-mode shell copy that promotes the platform or other applications</li></ul>
@@ -974,6 +982,11 @@
 <p>The shell front door now needs a firmer split than it had during the single-game era.</p>
 <p>The direction is:</p>
 <ul><li>platform copy explains the host, hosted lanes, docs, and cross-application surfaces</li><li>application copy explains gameplay, identity, and game-specific flavor</li><li>preview-only applications may override platform copy only when the override is still about preview status rather than gameplay rules</li></ul>
+<h4>Shared frame parity</h4>
+<p>The shell should not make Aurora feel first-class while other games feel like guests.</p>
+<p>For Guardians to count as a serious second application, the shared frame should support it across the same families of platform capability Aurora already uses:</p>
+<ul><li>pilot sign-in and pilot-card framing</li><li>high-score, leaderboard, trophy, and pilot-record surfaces</li><li>replay and future video-capture/export surfaces</li><li>bug-report and feedback transport surfaces</li><li>Arcade Music, SFX, and mute/volume controls</li></ul>
+<p>Those surfaces remain platform-owned, but they must become application-aware and game-key-clean instead of implicitly assuming Aurora.</p>
 <h4>Shared naming residue</h4>
 <p>Some older names remain Aurora-shaped even when they are now functionally part of the platform.</p>
 <p>These should be treated as transitional, not as permission to blur the boundary again.</p>
@@ -1011,6 +1024,8 @@
 <p>The next application proof is maturing the first playable slice into a minimally complete game loop. That means the existing lifecycle path should now grow beyond preview-only framing and earn:</p>
 <ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
 <p>scattered preview harness set</p>
+<ul><li>a readable game arc and stage-band progression that can later support</li></ul>
+<p>source-grounded homage variants without losing the original flavor, as now described in <a href="GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
 <p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
 <ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
@@ -1244,7 +1259,9 @@
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
 <p>Harness work should also follow the project reference program:</p>
-<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
+<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>when committed reference artifacts can settle a question, prefer that over</li></ul>
+<p>human-only evaluation</p>
+<ul><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Galaxy first-class parity</h3>
 <p><code>Galaxy Guardians</code> now has enough harness surface that we should treat it as a first-class parity program, not only as a preview experiment.</p>
 <p>That means every serious Galaxy review should preserve all three layers:</p>
@@ -1271,6 +1288,8 @@
 <p>not buried only in Platinum-specific release logic</p>
 <ul><li>use Platinum as the host contract and tooling surface for launch, not as a</li></ul>
 <p>substitute for game-owned reference truth</p>
+<ul><li>treat human observation as fallback confirmation when the evidence package</li></ul>
+<p>still cannot encode the question, not as the default baseline</p>
 <p>For a new game, the first playable slice should cite:</p>
 <ul><li>source manifest</li><li>selected reference windows</li><li>event log or semantic profile</li><li>initial conformance targets</li><li>candidate harness plan</li><li>explicit confidence and known gaps</li></ul>
 <p>If a release candidate includes a new or materially changed game behavior, its release notes and dashboard should identify which ingestion package or correspondence artifact grounds the claim.</p>
@@ -1728,7 +1747,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 15, 2026
+          Release 1.4.0.1 · Updated May 16, 2026
         </p>
       </aside>
     </main>
