@@ -377,20 +377,165 @@
       color:#edf7ff;
       font-size:.95em;
     }
+    .markdown blockquote{
+      margin:0 0 16px;
+      padding:14px 16px 14px 18px;
+      border-left:4px solid rgba(122,195,255,0.55);
+      border-radius:18px;
+      background:rgba(122,195,255,0.08);
+    }
+    .markdown blockquote p:last-child{
+      margin-bottom:0;
+    }
     @media (max-width: 980px){
       .shell{grid-template-columns:1fr}
-      .toc{position:static; order:-1}
+      .toc{position:static; order:0}
     }
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
       .hero,.section,.toc{padding:22px 20px}
       .hero p{font-size:17px}
     }
-.markdown .mermaid{
+@page{
+      size:Letter;
+      margin:0.55in;
+    }
+    .whitePaperMetaCard{
+      border-color:rgba(105,226,167,0.22);
+      background:rgba(105,226,167,0.08);
+    }
+    .whitePaperMetaCard .metaLabel{
+      color:#bcefd4;
+    }
+    .whitePaperDocAction{
+      border-color:rgba(105,226,167,0.34);
+      background:rgba(105,226,167,0.14);
+    }
+    .markdown .mermaid{
       display:block;
       margin:0 0 18px;
       padding:12px 0;
       overflow:auto;
+    }
+    .markdown .mermaid svg{
+      max-width:100%;
+      height:auto;
+    }
+    @media print{
+      html,body{
+        background:#fff !important;
+        color:#161616 !important;
+        overflow:visible;
+      }
+      body{
+        font-family:Georgia,"Times New Roman",serif;
+      }
+      .shell{
+        display:block;
+        max-width:none;
+        padding:0;
+      }
+      .hero,
+      .section,
+      .docWrap,
+      .card,
+      .linkCard,
+      .bulletList li,
+      .tableWrap{
+        background:#fff !important;
+        box-shadow:none !important;
+        border-color:#d7d7d7 !important;
+      }
+      .hero,
+      .section{
+        margin:0 0 0.24in;
+        padding:0 0 0.12in;
+        break-inside:auto;
+      }
+      .heroTop .homeLink,
+      .heroLinks,
+      .toc{
+        display:none !important;
+      }
+      .hero h1,
+      .sectionHeader h2,
+      .markdown h3,
+      .markdown h4,
+      .markdown h5,
+      .card h3,
+      .linkCard h3{
+        color:#111 !important;
+      }
+      .hero p,
+      .goal,
+      .metaCard,
+      .sectionHeader p,
+      .card p,
+      .linkCard p,
+      .bulletList li,
+      .markdown p,
+      .markdown li,
+      .markdown blockquote,
+      .docMeta,
+      .footer{
+        color:#2b2b2b !important;
+      }
+      .metaCard,
+      .whitePaperMetaCard{
+        background:#f5f7f9 !important;
+        border-color:#d7d7d7 !important;
+      }
+      .goal{
+        background:#f5f7f9 !important;
+        border-color:#d7d7d7 !important;
+      }
+      .markdown img,
+      .markdown .mermaid,
+      .markdown blockquote,
+      .markdown pre,
+      .tableWrap{
+        break-inside:avoid-page;
+        page-break-inside:avoid;
+      }
+      .markdown img{
+        max-height:8.4in;
+        border-color:#d7d7d7;
+        box-shadow:none;
+      }
+      .markdown pre{
+        background:#f5f7f9;
+        color:#111;
+        border-color:#d7d7d7;
+      }
+      .markdown blockquote{
+        background:#f5f7f9;
+        border-left-color:#4f88b4;
+      }
+      .tableWrap{
+        overflow:visible;
+        background:#fff;
+      }
+      .dataTable{
+        min-width:0;
+      }
+      .dataTable th{
+        position:static;
+        background:#eef3f7;
+        color:#111;
+      }
+      .dataTable td{
+        color:#222;
+        background:#fff;
+      }
+      code,
+      .dataTable code{
+        color:#111 !important;
+        background:#f0f0f0 !important;
+      }
+      a{
+        color:#0c5b91 !important;
+        text-decoration:underline;
+      }
     }
   </style>
 </head>
@@ -405,8 +550,16 @@
           </div>
           <h1>Aurora / Platinum White Paper</h1>
           <p>A hosted, human-readable home for the living white paper: what this project is trying to prove, how Platinum and the games fit together, why the conformance program exists, and how the narrative is versioned over time.</p>
-          <div class="goal"><strong>Current goal:</strong> Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, recover key citations, and use the surrounding hosted docs for deeper detail rather than overloading the paper itself.</div>
+          <div class="goal"><strong>Current goal:</strong> Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, maintain a printable PDF with explicit version/date metadata, and keep related-work and reviewer-minded checks part of the same release surface.</div>
           <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">White Paper Version</span>
+              <span class="metaValue">v0.3.0-draft</span>
+            </div>
+            <div class="metaCard whitePaperMetaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">2026-05-16</span>
+            </div>
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
               <span class="metaValue">1.4.0.1</span>
@@ -416,8 +569,12 @@
               <span class="metaValue">development</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 16, 2026</span>
+              <span class="metaLabel">White Paper Status</span>
+              <span class="metaValue">living white paper</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Built</span>
+              <span class="metaValue">May 17, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -426,9 +583,13 @@
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button whitePaperDocAction" href="white-paper.pdf">Open current lane PDF</a>
+            <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="project-guide.html">Open project guide</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+            <a class="button" href="#white-paper-related-work-doc">Open related work log</a>
+            <a class="button" href="#white-paper-reviewer-checklist-doc">Open reviewer checklist</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">Open white-paper project area</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">Open Markdown source</a>
           </div>
@@ -455,7 +616,7 @@
 
     <article class="card">
       <h3>Release Memory</h3>
-      <p>Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` so the narrative can be compared over time just like the software.</p>
+      <p>Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` with the Markdown, PDF, and PDF metadata preserved together so the narrative can be compared over time just like the software.</p>
     </article>
   
 
@@ -516,6 +677,18 @@
   
 
     <article class="linkCard">
+      <a href="white-paper.pdf">Current White Paper PDF</a>
+      <p>Open the current lane PDF version of the white paper with explicit version/date metadata.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="white-paper-pdf.json">PDF Metadata</a>
+      <p>Inspect the generated metadata for the current lane PDF artifact.</p>
+    </article>
+  
+
+    <article class="linkCard">
       <a href="project-guide.html">Project Guide</a>
       <p>Return to the broader hosted project map for Platinum, Aurora, Galaxy Guardians, ingestion, conformance, and release state.</p>
     </article>
@@ -542,6 +715,34 @@
     <article class="linkCard">
       <a href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">White Paper Markdown Source</a>
       <p>Open the current Markdown source directly.</p>
+    </article>
+  
+</div>
+    </section>
+  
+
+    <section class="section" id="review-posture">
+      <div class="sectionHeader">
+        <h2>Review Posture</h2>
+        <p>How the white paper should be reviewed as a release surface instead of treated like an unreviewed note.</p>
+      </div>
+      <div class="cardGrid">
+
+    <article class="card">
+      <h3>HTML Matters</h3>
+      <p>The hosted page should read well on desktop and mobile, keep diagrams and screenshots legible, and avoid accidental raw Markdown leakage or repetitive section structure.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>PDF Matters</h3>
+      <p>The printable/exportable PDF should carry explicit version/date information and avoid bad page breaks, oversized dark backgrounds, or weak diagram reproduction.</p>
+    </article>
+  
+
+    <article class="card">
+      <h3>Reviewer Mentality</h3>
+      <p>Reviewers should tighten repetition, question weak claims, verify references, and treat the white paper as part of the release promise rather than as detached commentary.</p>
     </article>
   
 </div>
@@ -598,6 +799,12 @@
     <li>Connect the v1 paper to one stable release-quality evidence pack so the narrative and the measurable artifacts can be reviewed side by side.</li>
   
 
+    <li>Keep the hosted HTML page and lane PDF under the same reviewer checklist so presentation quality, page breaks, and visual clarity improve intentionally over time.</li>
+  
+
+    <li>Refresh the related-work log periodically with focused external searches and short relevance notes instead of letting public references accumulate haphazardly.</li>
+  
+
     <li>Add a concise section on what this project teaches about generative-AI-assisted software practice beyond games, with examples tied to actual repo artifacts.</li>
   
 
@@ -615,10 +822,10 @@
       <div class="docWrap">
         <p class="docMeta">Generated from <code>WHITE_PAPER.md</code> during build.</p>
         <div class="markdown">
-          <p>Status: living white paper Current draft: <code>v0.2.0-draft</code> Date: <code>2026-05-16</code> Audience: broad technical readers, interested builders, collaborators, future reviewers, and public-facing project storytelling</p>
+          <p>Status: living white paper Current draft: <code>v0.3.0-draft</code> Date: <code>2026-05-16</code> Audience: broad technical readers, interested builders, collaborators, future reviewers, and public-facing project storytelling</p>
 <p>This document is the maintained narrative explanation of what this project is doing, why it is being built this way, and how the approach evolves over time. It is intended to be both a promotional piece and a disciplined reminder to the team: the software, the evidence program, the release process, and the generative-AI workflow all matter together.</p>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <p><img alt="Platinum Hero" src="assets/catalog-media/27591edccd-platinum-hero.svg"></p>
 <h3>Overview / Preamble</h3>
 <p>This project is not only a browser game repo.</p>
@@ -656,7 +863,7 @@
 <ul><li>If you want implementation detail, detailed metrics, or release-by-release</li></ul>
 <p>operational context, jump into the linked hosted documentation rather than making this paper carry everything.</p>
 <p>Useful deeper surfaces:</p>
-<ul><li><a href="project-guide.html">project-guide.html</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="conformance-dashboard.html">conformance-dashboard.html</a></li><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li></ul>
+<ul><li><a href="project-guide.html">project-guide.html</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="conformance-dashboard.html">conformance-dashboard.html</a></li><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="white-paper.pdf">white-paper.pdf</a></li></ul>
 <h3>First Draft</h3>
 <h4>1. Thesis</h4>
 <p>The core thesis of this project is that generative-AI-assisted software can be built aggressively without becoming hand-wavy, fragile, or unprofessional.</p>
@@ -706,7 +913,7 @@
 <p><img alt="Aurora Pack Card" src="assets/catalog-media/32ab558bba-aurora-pack-card.svg"></p>
 <p><img alt="Galaxy Guardians Pack Card" src="assets/catalog-media/74d2115059-galaxy-guardians-pack-card.svg"></p>
 <p>These pack views help a broad reader understand one of the project’s central claims: <code>Aurora Galactica</code> and <code>Galaxy Guardians</code> are not supposed to be two skins on one game. They are meant to be separate applications living on one host platform.</p>
-<p>&gt; TODO illustration: &gt; Choose a small three-panel progression strip that shows how the public face &gt; of the project evolved from <code>1.0.0</code> launch to <code>1.2.0</code> Platinum framing to &gt; <code>1.4.0</code> multi-game posture. The most illustrative version may be gameplay &gt; first, shell first, or docs/release-surface first, and we should pick that &gt; deliberately rather than guessing.</p>
+<blockquote><p>TODO illustration: Choose a small three-panel progression strip that shows how the public face of the project evolved from <code>1.0.0</code> launch to <code>1.2.0</code> Platinum framing to <code>1.4.0</code> multi-game posture. The most illustrative version may be gameplay first, shell first, or docs/release-surface first, and we should pick that deliberately rather than guessing.</p></blockquote>
 <p>Further detail:</p>
 <ul><li><a href="project-guide.html">project-guide.html</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li></ul>
 <h4>3. Five-Layer Operating Model</h4>
@@ -732,7 +939,7 @@
 <ul><li>Ingestion owns provenance and structured evidence.</li><li>Harnesses own repeatable evaluation.</li><li>Release discipline owns the public promise.</li></ul>
 <p>When those layers blur, the project becomes harder to explain, harder to test, and easier to accidentally fake.</p>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#platform-vs-applications">project-guide.html#platform-vs-applications</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<ul><li><a href="project-guide.html#platform-vs-applications">project-guide.html#platform-vs-applications</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
 <h4>4. Ingestion Strategy</h4>
 <p>Ingestion is the front half of engineering, not a side notebook.</p>
 <p>The project does not want new games or fidelity improvements to come mainly from memory, vibes, or post-hoc rationalization. Instead, it wants evidence to arrive in structured forms that can be reused:</p>
@@ -744,9 +951,9 @@
 <p><img alt="Galaga stage-opening reference contact sheet" src="assets/catalog-media/3b90ac5133-opening-contact-tight.png"></p>
 <p><img alt="Galaxian reference contact sheet" src="assets/catalog-media/4bf02bc598-contact-sheet-reference-window.jpg"></p>
 <p>These reference contact sheets are useful because they show the project’s ingestion claim in a form a non-expert can understand quickly. We are not only describing classic arcade behavior; we are collecting windows, studying them, and turning them into reusable evidence.</p>
-<p>&gt; TODO illustration: &gt; Pick the single best “ingestion in action” image for v1. The strongest option &gt; might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged &gt; comparison between raw source footage and the structured artifact family that &gt; comes out of it.</p>
+<blockquote><p>TODO illustration: Pick the single best “ingestion in action” image for v1. The strongest option might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged comparison between raw source footage and the structured artifact family that comes out of it.</p></blockquote>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#classic-arcade-ingestion-framework-doc">project-guide.html#classic-arcade-ingestion-framework-doc</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
+<ul><li><a href="project-guide.html#classic-arcade-ingestion-framework-doc">project-guide.html#classic-arcade-ingestion-framework-doc</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
 <h4>5. Harnessing And Conformance</h4>
 <p>This project is serious about the difference between &quot;better&quot; and &quot;better by a rerunnable measure.&quot;</p>
 <p>The conformance system exists so that quality can be described with more precision than a mood:</p>
@@ -769,10 +976,13 @@
 <p>That means the release lanes are not cosmetic:</p>
 <ol><li>local <code>localhost</code></li><li>hosted <code>/dev</code></li><li>hosted <code>/beta</code></li><li>hosted <code>/production</code></li></ol>
 <p>Each lane carries a different stability promise, documentation expectation, and testing posture. The project is intentionally trying to behave like a software program with real public accountability:</p>
-<ul><li>release notes are first-class</li><li>docs are part of the release surface</li><li>review packets and review-learning ledgers are durable evidence</li><li>production claims should come from an approved beta lineage</li><li>major releases should refresh dashboards, scorecards, and strategic docs</li></ul>
+<ul><li>release notes are first-class</li><li>docs are part of the release surface</li><li>review packets and review-learning ledgers are durable evidence</li><li>the white paper must read well both as hosted HTML and as printable PDF</li><li>production claims should come from an approved beta lineage</li><li>major releases should refresh dashboards, scorecards, and strategic docs</li></ul>
 <p>This matters because AI-assisted speed is only impressive if the public result still feels trustworthy.</p>
+<p>The &quot;reviewer&quot; mentality should therefore be explicit. The paper is not done just because the words are present. The release surface should also be reviewed for:</p>
+<ul><li>repeated ideas that can be tightened</li><li>diagrams or images that create awkward whitespace or weak page breaks</li><li>TODOs that are unclear or more revealing of indecision than of real planning</li><li>HTML reading flow on desktop and mobile</li><li>PDF export quality, especially around image scale, table breaks, and diagram</li></ul>
+<p>legibility</p>
 <p>Further detail:</p>
-<ul><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#testing-doc">project-guide.html#testing-doc</a></li><li><a href="project-guide.html#code-review-model-doc">project-guide.html#code-review-model-doc</a></li></ul>
+<ul><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#testing-doc">project-guide.html#testing-doc</a></li><li><a href="project-guide.html#code-review-model-doc">project-guide.html#code-review-model-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/REVIEWER_CHECKLIST.md">white-paper/REVIEWER_CHECKLIST.md</a></li></ul>
 <h4>7. How Generative AI Fits</h4>
 <p>The project does use generative AI heavily, but not as a substitute for engineering structure.</p>
 <p>The intended operating doctrine is:</p>
@@ -791,7 +1001,7 @@
 <p><img alt="Cost per positive score point" src="assets/catalog-media/af6e8026f1-cost-per-positive-score-point.svg"></p>
 <p>These charts help keep the AI story grounded. The point is not only that model assistance exists; it is that the project is trying to compare that assistance with local repeatable measurement and with visible quality movement.</p>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li></ul>
+<ul><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li></ul>
 <h4>8. Working Loop</h4>
 <p>The operating loop of this project is more important than any single feature.</p>
 <div class="mermaid">flowchart LR
@@ -803,7 +1013,7 @@
     F --&gt; G[&quot;Refresh scorecards, release docs, and priorities&quot;]
     G --&gt; A</div>
 <p>This loop explains how the project tries to be both aggressive and controlled. The aggressiveness comes from fast iteration and model-assisted leverage. The control comes from evidence, harnesses, explicit ownership boundaries, and release discipline.</p>
-<p>&gt; TODO illustration: &gt; Add one compact “question -&gt; evidence -&gt; harness -&gt; change -&gt; rerun” visual &gt; from a real case study. Audio cue alignment, stage-opening timing, or a &gt; Galaxy Guardians reference-promotion slice are the strongest current &gt; candidates, but we should choose the one that is most legible to a broad &gt; reader.</p>
+<blockquote><p>TODO illustration: Add one compact “question -&gt; evidence -&gt; harness -&gt; change -&gt; rerun” visual from a real case study. Audio cue alignment, stage-opening timing, or a Galaxy Guardians reference-promotion slice are the strongest current candidates, but we should choose the one that is most legible to a broad reader.</p></blockquote>
 <h4>9. Historical Evolution So Far</h4>
 <p>The release notes already show a clear arc, and the white paper should make it easy to retell.</p>
 <div class="tableWrap">
@@ -823,7 +1033,7 @@
 <p>identity</p>
 <p>The next phase should be to prove that this method scales:</p>
 <ul><li>deeper Aurora conformance</li><li>stronger Galaxy Guardians first-class completeness</li><li>cleaner shared Platinum operations</li><li>more reusable ingestion and assessment infrastructure</li></ul>
-<p>&gt; TODO illustration: &gt; Build a release-history gallery with one screenshot or architectural surface &gt; per milestone. The current paper names the milestones clearly, but a short &gt; visual strip would make the progression easier to absorb at a glance.</p>
+<blockquote><p>TODO illustration: Build a release-history gallery with one screenshot or architectural surface per milestone. The current paper names the milestones clearly, but a short visual strip would make the progression easier to absorb at a glance.</p></blockquote>
 <p>Further detail:</p>
 <ul><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#release-note-140-beta-1-doc">project-guide.html#release-note-140-beta-1-doc</a></li><li><a href="project-guide.html#release-note-130-production-refresh-doc">project-guide.html#release-note-130-production-refresh-doc</a></li></ul>
 <h4>10. Citation Program</h4>
@@ -831,11 +1041,18 @@
 <p>We want a maintained citation program that records:</p>
 <ul><li>what outside work or source material influenced us</li><li>how we used it</li><li>what we learned from it</li><li>what changed in the repo because of it</li><li>what still needs to be recovered, linked, or tightened</li></ul>
 <p>The living ledger for that work starts here:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <p>The first open citation debt is the prior standalone assessment of the Karpathy-style research/evaluator loop. The repo contains the conceptual thread already, but the older assessment should be recovered and linked directly in a future white-paper release rather than reconstructed from memory.</p>
 <p>Further detail:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/4b494735f0d4c3d5cf9c9e6afa8923c369bbef5e/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
-<h4>11. Why This Project Matters</h4>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<h4>11. Related Work</h4>
+<p>This project should periodically stop and look outward.</p>
+<p>The right pattern is not to stuff the paper with literature. The right pattern is to do focused searches, add high-signal sources, explain their relevance in plain language, and keep the public references linked to a maintained log.</p>
+<p>Current seeded related-work set:</p>
+<ul><li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic, &quot;Building effective agents&quot; (2024-12-19)</a>: relevant because it argues for simple, composable agent patterns and evaluator-optimizer loops rather than ornamental workflow complexity.</li><li><a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Anthropic, &quot;Writing effective tools for agents - with agents&quot; (2025-09-11)</a>: relevant because our harnesses, scripts, and release tools are all explicit contracts between model assistance and deterministic system behavior.</li><li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Anthropic, &quot;Demystifying evals for AI agents&quot; (2026-01-09)</a>: relevant because it reinforces our investment in transcripts, graders, repeated trials, and measurable evaluator quality instead of anecdotal confidence.</li><li><a href="https://www.anthropic.com/engineering/building-trustworthy-agents">Anthropic, &quot;Trustworthy agents in practice&quot; (2026-04-09)</a>: relevant because it frames guardrails, reviews, and operator-visible controls as part of the product surface, not only as implementation details.</li></ul>
+<p>Maintained deeper log:</p>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/56a9d6b986eb5e774510da7273977b8f89ce8c29/white-paper/RELATED_WORK.md">white-paper/RELATED_WORK.md</a></li></ul>
+<h4>12. Why This Project Matters</h4>
 <p>The project matters because it is trying to demonstrate a concrete alternative to two weak extremes.</p>
 <p>It is not:</p>
 <ul><li>slow, ceremonial process that kills iteration</li><li>or fast AI-assisted output that cannot explain or defend itself</li></ul>
@@ -843,11 +1060,19 @@
 <ul><li>ambitious shipping</li><li>real public releases</li><li>strong platform boundaries</li><li>evidence-backed improvement</li><li>local-first repeated measurement</li><li>model-assisted leverage</li><li>versioned documentation and release storytelling</li></ul>
 <p>If that works, the result is more than a good arcade project. It becomes a useful pattern for how generative AI can participate in professional software work without dissolving quality standards.</p>
 <p>This is also why the paper should remain readable. A broad technical reader does not need every source artifact inline. They need a coherent narrative, selected visual proof, and obvious places to go next if they want more depth.</p>
-<h4>12. Living White Paper Policy</h4>
+<h4>13. Living White Paper Policy</h4>
 <p>This document should evolve the same way the project evolves: intentionally, versioned, and with historical memory preserved.</p>
 <p>Working policy:</p>
-<ul><li><code>WHITE_PAPER.md</code> is the current living draft</li><li>meaningful revisions should be snapshotted under <code>white-paper/releases/</code></li><li>each snapshot should preserve the exact white paper text for that release</li><li>the citation ledger should be updated when outside work materially changes the</li></ul>
+<ul><li><code>WHITE_PAPER.md</code> is the current living draft</li><li>the hosted HTML and printable PDF should be kept aligned as two views of the</li></ul>
+<p>same maintained release surface</p>
+<ul><li>meaningful revisions should be snapshotted under <code>white-paper/releases/</code></li><li>each snapshot should preserve the exact white paper text for that release</li><li>when a release PDF exists, the snapshot should preserve the Markdown, PDF,</li></ul>
+<p>and generated PDF metadata together</p>
+<ul><li>the citation ledger should be updated when outside work materially changes the</li></ul>
 <p>project story</p>
+<ul><li>the related-work log should be refreshed periodically with focused online</li></ul>
+<p>searches and brief relevance commentary</p>
+<ul><li>reviewer-checklist expectations should be treated as part of release quality,</li></ul>
+<p>not optional cleanup</p>
 <ul><li>every meaningful software release does not need a new white paper release, but</li></ul>
 <p>every strategic narrative shift probably does</p>
 <p>Good triggers for a new white paper release:</p>
@@ -859,6 +1084,8 @@
 <p>notes.</p>
 <ul><li>Add one deliberate progression gallery for milestone history and one deliberate</li></ul>
 <p>“evidence in action” case-study image once we decide which examples explain the project most clearly.</p>
+<ul><li>Keep the HTML and PDF release surfaces under reviewer scrutiny so that spacing,</li></ul>
+<p>diagrams, repeated ideas, and print behavior all improve with the narrative.</p>
 <ul><li>Keep the audience tuned for a broad technical and builder readership: assume</li></ul>
 <p>interest, assume intelligence, but do not assume deep prior expertise.</p>
         </div>
@@ -890,6 +1117,10 @@
             </thead>
             <tbody>
               <tr><td>Karpathy-style evaluator loop and earlier project assessment</td><td>conceptual / methodological</td><td>Shapes the idea that we should inspect concrete examples, improve evaluators, make small candidate changes, rerun, and study failures instead of tuning only by opinion.</td><td>Better evaluators can be as important as better runtime code. A stricter scorer can lower a score while making the project more truthful.</td><td><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code>, <code>CONFORMANCE_ECONOMICS.md</code>, <code>RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md</code></td><td><code>partial</code></td></tr>
+<tr><td>Anthropic, &quot;Building effective agents&quot; (2024-12-19)</td><td>external methodological reference</td><td>Reinforces the idea that agentic systems should prefer simple, composable loops and explicit evaluator structures instead of ornamental complexity.</td><td>Simpler loops become more legible when the evaluator, harness, and release artifacts are visible to reviewers.</td><td><code>WHITE_PAPER.md</code>, <code>white-paper/RELATED_WORK.md</code>, <code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Anthropic, &quot;Writing effective tools for agents - with agents&quot; (2025-09-11)</td><td>external methodological reference</td><td>Supports our view that tools are explicit contracts and that agent quality depends heavily on the quality, shape, and reviewability of those tools.</td><td>Better tools and better tool descriptions are a form of product quality, not only implementation detail.</td><td><code>WHITE_PAPER.md</code>, <code>white-paper/RELATED_WORK.md</code>, <code>TESTING_AND_RELEASE_GATES.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Anthropic, &quot;Demystifying evals for AI agents&quot; (2026-01-09)</td><td>external evaluation reference</td><td>Supports our investment in repeated trials, transcripts, graders, and explicit evaluation design for agent-assisted work.</td><td>Evals become more useful when they are cheap to rerun, narrow in scope, and part of the everyday engineering loop.</td><td><code>WHITE_PAPER.md</code>, <code>white-paper/RELATED_WORK.md</code>, <code>CONFORMANCE_ECONOMICS.md</code></td><td><code>linked</code></td></tr>
+<tr><td>Anthropic, &quot;Trustworthy agents in practice&quot; (2026-04-09)</td><td>external governance / operations reference</td><td>Aligns with our insistence that guardrails, human review, release notes, and reviewer-visible controls are part of the product and release surface.</td><td>Trustworthiness is easier to discuss honestly when it is backed by durable checks and visible operational policy.</td><td><code>WHITE_PAPER.md</code>, <code>white-paper/RELATED_WORK.md</code>, <code>RELEASE_POLICY.md</code>, <code>CODE_REVIEW_MODEL.md</code></td><td><code>linked</code></td></tr>
 <tr><td>Galaga gameplay footage, manuals, clips, and extracted artifacts</td><td>reference corpus</td><td>Grounds Aurora timing, audio, stage cadence, visual comparison, and correspondence work in preserved material.</td><td>Manual impressions are useful, but clipped windows, event logs, and aligned audio/visual artifacts make fidelity work reviewable and reusable.</td><td><code>reference-artifacts/</code>, <code>VIDEO_ALIGNMENT_PROGRAM.md</code>, <code>CORRESPONDENCE_FRAMEWORK.md</code></td><td><code>linked</code></td></tr>
 <tr><td>Galaxian gameplay footage and sibling-game source package</td><td>reference corpus</td><td>Grounds Galaxy Guardians in its own source lineage so the game can become a true sibling application rather than a relabeled Aurora variant.</td><td>Ingestion is most valuable when it arrives before design hardens. Second-game credibility depends on game-owned evidence, not borrowed first-game behavior.</td><td><code>CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</code>, <code>APPLICATIONS_ON_PLATINUM.md</code>, <code>CONFORMANCE_METRICS_OVERVIEW.md</code></td><td><code>linked</code></td></tr>
 <tr><td>Review packet and review-learning ledger model</td><td>operational discipline</td><td>Makes AI-assisted and fast-moving changes reviewable through durable packets, issue categories, and production dispositions.</td><td>Review value compounds when repeated findings become harnesses, release checks, or documented non-goals instead of disappearing into chat.</td><td><code>CODE_REVIEW_MODEL.md</code>, <code>REVIEW_LEARNING_LEDGER.md</code></td><td><code>linked</code></td></tr>
@@ -902,8 +1133,8 @@
 <p>current conceptual placeholder with a precise internal or external citation.</p>
 <ul><li>Decide which outside frameworks deserve public-facing mention in the white</li></ul>
 <p>paper versus remaining internal working influences.</p>
-<ul><li>Add a compact bibliography format once the white paper is ready for wider</li></ul>
-<p>circulation beyond the repo.</p>
+<ul><li>Keep a dated related-work refresh cadence so public references are added on</li></ul>
+<p>purpose rather than only when remembered opportunistically.</p>
         </div>
       </div>
     </section>
@@ -972,6 +1203,74 @@
     </section>
   
 
+    <section class="section" id="white-paper-related-work-doc">
+      <div class="sectionHeader">
+        <h2>Related Work Log</h2>
+        <p>Dated log of external references, why they matter here, and when they should be refreshed.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/RELATED_WORK.md</code> during build.</p>
+        <div class="markdown">
+          <p>This log tracks external work worth preserving alongside the white paper.</p>
+<p>It is deliberately narrower than a literature survey. The goal is to keep a small, high-signal set of references that help explain why this project looks the way it does.</p>
+<h3>Working Rule</h3>
+<ul><li>Prefer focused, occasional searches over bulk accumulation.</li><li>Prefer primary or close-to-primary sources when the topic is methodological.</li><li>Record why the work matters here, not only that it exists.</li><li>Update the main white paper only with the most relevant current items; keep</li></ul>
+<p>the longer memory here.</p>
+<h3>Current Seed Set</h3>
+<div class="tableWrap">
+          <table class="dataTable">
+            <thead>
+              <tr><th>Date added</th><th>Work</th><th>Relevance here</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>2026-05-16</code></td><td>Anthropic, *Building effective agents* (<code>2024-12-19</code>)</td><td>Supports our preference for simple loops, visible evaluator structure, and avoiding ornamental agent complexity.</td><td><a href="https://www.anthropic.com/engineering/building-effective-agents">Source</a></td></tr>
+<tr><td><code>2026-05-16</code></td><td>Anthropic, *Writing effective tools for agents - with agents* (<code>2025-09-11</code>)</td><td>Closely matches our view that harnesses, scripts, and release tools are explicit contracts between model assistance and deterministic behavior.</td><td><a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Source</a></td></tr>
+<tr><td><code>2026-05-16</code></td><td>Anthropic, *Demystifying evals for AI agents* (<code>2026-01-09</code>)</td><td>Reinforces our investment in evals, reruns, transcripts, graders, and narrow measurable questions.</td><td><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Source</a></td></tr>
+<tr><td><code>2026-05-16</code></td><td>Anthropic, *Trustworthy agents in practice* (<code>2026-04-09</code>)</td><td>Supports the idea that controls, guardrails, human review, and operator-visible release process are product concerns, not only policy concerns.</td><td><a href="https://www.anthropic.com/engineering/building-trustworthy-agents">Source</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+<h3>Refresh Triggers</h3>
+<ul><li>major white-paper revision</li><li>major release-policy or conformance-process revision</li><li>meaningful new methodological influence worth naming publicly</li><li>significant change in the broader agent/evals/tooling conversation that bears</li></ul>
+<p>directly on this project</p>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="section" id="white-paper-reviewer-checklist-doc">
+      <div class="sectionHeader">
+        <h2>Reviewer Checklist</h2>
+        <p>Release-minded checklist for reading the white paper critically across narrative, HTML, PDF, and related-work quality.</p>
+      </div>
+      <div class="docWrap">
+        <p class="docMeta">Generated from <code>white-paper/REVIEWER_CHECKLIST.md</code> during build.</p>
+        <div class="markdown">
+          <p>This checklist is meant to make the reviewer mentality explicit.</p>
+<p>The white paper is part of the release surface. It should be reviewed with the same seriousness as other user-visible documentation and release artifacts.</p>
+<h3>Core Stance</h3>
+<ul><li>Read as a reviewer, not as the author.</li><li>Prefer tighter and clearer over longer and more complete.</li><li>Challenge repetition, overclaiming, weak evidence links, and vague diagrams.</li><li>Treat HTML presentation, PDF presentation, and narrative quality as one</li></ul>
+<p>release concern.</p>
+<h3>Narrative Review</h3>
+<ul><li>Is the thesis clear in the first page?</li><li>Does each section earn its length?</li><li>Are repeated ideas tightened rather than restated?</li><li>Are claims linked to evidence, docs, or clearly named future work?</li><li>Does the paper stay readable for a broad technical or builder audience?</li></ul>
+<h3>HTML Review</h3>
+<ul><li>Does the hosted page read well on desktop and mobile?</li><li>Does the hero lead the page clearly before the supporting surfaces?</li><li>Are diagrams, tables, and screenshots legible without awkward empty runs?</li><li>Do callouts render intentionally instead of leaking raw Markdown markers?</li><li>Are deeper-detail links obvious without overwhelming the page?</li></ul>
+<h3>PDF Review</h3>
+<ul><li>Does the PDF show the white-paper version and updated date clearly?</li><li>Are page breaks reasonable around diagrams, images, tables, and callouts?</li><li>Are any sections visually repetitive or too sparse when printed?</li><li>Is the print styling readable and professional rather than a dark-theme dump?</li><li>Do diagrams and screenshots stay large enough to be useful?</li></ul>
+<h3>Release Review</h3>
+<ul><li>Run <code>npm run white-paper:review</code> for the active dev draft.</li><li>Run <code>npm run white-paper:review:beta</code> or</li></ul>
+<p><code>npm run white-paper:review:production</code> before publishing those lanes.</p>
+<ul><li>Treat the review command as responsible for refreshing the code-review packet</li></ul>
+<p>and passing the review gate, not only for rendering a PDF.</p>
+<ul><li>Commit the refreshed review packet before the clean-tree publish step.</li><li>Confirm the generated PDF metadata matches the white-paper version/date.</li><li>Verify the live lane carries both <code>white-paper.html</code> and <code>white-paper.pdf</code></li></ul>
+<p>after publish.</p>
+<h3>Related Work Review</h3>
+<ul><li>If outside work materially shaped the draft, is it logged?</li><li>If a web refresh was done, are the selected items high-signal and relevant?</li><li>Is the related-work section in the main paper still concise?</li><li>Does the deeper log explain relevance instead of just listing links?</li></ul>
+        </div>
+      </div>
+    </section>
+  
+
     <section class="section" id="white-paper-working-area-doc">
       <div class="sectionHeader">
         <h2>White Paper Working Area</h2>
@@ -988,16 +1287,28 @@
 <ul><li>a durable internal reminder of what the project is doing, why it is doing it,</li></ul>
 <p>and how the method evolves over time</p>
 <h3>Structure</h3>
-<ul><li><code>../WHITE_PAPER.md</code><ul><li>current living draft</li></ul></li><li><code>CITATION_LEDGER.md</code><ul><li>maintained list of outside ideas, source families, and project learnings</li></ul></li><li><code>ILLUSTRATION_PLAN.md</code><ul><li>selected visuals, candidate deeper assets, and open illustration decisions</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/WHITE_PAPER.md</code><ul><li>exact snapshot of the white paper for a given release</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/RELEASE_NOTES.md</code><ul><li>short explanation of what changed in that white paper release</li></ul></li></ul>
+<ul><li><code>../WHITE_PAPER.md</code><ul><li>current living draft</li></ul></li><li><code>CITATION_LEDGER.md</code><ul><li>maintained list of outside ideas, source families, and project learnings</li></ul></li><li><code>ILLUSTRATION_PLAN.md</code><ul><li>selected visuals, candidate deeper assets, and open illustration decisions</li></ul></li><li><code>RELATED_WORK.md</code><ul><li>dated log of external/public work, why it matters here, and where it fits</li></ul></li><li><code>REVIEWER_CHECKLIST.md</code><ul><li>release-minded checklist for HTML, PDF, narrative, and citation review</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/WHITE_PAPER.md</code><ul><li>exact snapshot of the white paper for a given release</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/WHITE_PAPER.pdf</code><ul><li>printable/exportable snapshot for that white-paper release when available</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/WHITE_PAPER_PDF_METADATA.json</code><ul><li>version/date/build metadata for the release PDF snapshot when available</li></ul></li><li><code>releases/&lt;date&gt;-v&lt;version&gt;/RELEASE_NOTES.md</code><ul><li>short explanation of what changed in that white paper release</li></ul></li></ul>
 <h3>Maintenance Rules</h3>
 <ul><li>Update <code>../WHITE_PAPER.md</code> directly while shaping the next narrative draft.</li><li>Cut a new snapshot when the white paper changes in a strategically meaningful</li></ul>
 <p>way.</p>
 <ul><li>Prefer one snapshot per meaningful narrative release rather than one snapshot</li></ul>
 <p>per tiny wording edit.</p>
+<ul><li>When cutting a snapshot, preserve the Markdown, the generated PDF, and the</li></ul>
+<p>PDF metadata together whenever the release PDF exists.</p>
 <ul><li>Keep the citation ledger current whenever outside work, source material, or</li></ul>
 <p>methodological influences materially shape the paper.</p>
 <ul><li>Keep the illustration plan current whenever a new screenshot, chart, diagram,</li></ul>
 <p>or hosted-detail surface becomes important to the white-paper story.</p>
+<ul><li>Keep the related-work log current when a focused web refresh produces a</li></ul>
+<p>source worth preserving for future readers.</p>
+<ul><li>Treat HTML and PDF presentation review as part of release quality, not only as</li></ul>
+<p>a late formatting pass.</p>
+<h3>Maintained Release Surfaces</h3>
+<ul><li><code>dist/&lt;lane&gt;/white-paper.html</code><ul><li>hosted readable white-paper surface for a release lane</li></ul></li><li><code>dist/&lt;lane&gt;/white-paper.pdf</code><ul><li>printable/exportable white-paper surface for a release lane</li></ul></li><li><code>dist/&lt;lane&gt;/white-paper-pdf.json</code><ul><li>version, date-updated, lane, and build metadata for the generated PDF</li></ul></li></ul>
+<h3>Suggested Review Commands</h3>
+<ul><li><code>npm run white-paper:review</code><ul><li>refresh the dev-lane PDF, reviewer packet, review gate, and presentation</li></ul></li></ul>
+<p>checks together</p>
+<ul><li><code>npm run white-paper:review:beta</code><ul><li>run the same white-paper review spine for the beta lane</li></ul></li><li><code>npm run white-paper:review:production</code><ul><li>run the same white-paper review spine for the production lane</li></ul></li></ul>
 <h3>Suggested White Paper Release Triggers</h3>
 <ul><li>major public release family change</li><li>major conformance-program reframing</li><li>significant Galaxy Guardians maturity change</li><li>meaningful new evidence or economics story</li><li>recovery of an important prior assessment or external citation</li></ul>
 <h3>Current Snapshot</h3>
@@ -1050,6 +1361,9 @@
     <li><a href="#hosted-entry-points">Hosted Entry Points</a></li>
   
 
+    <li><a href="#review-posture">Review Posture</a></li>
+  
+
     <li><a href="#white-paper-release-history">White Paper Release History</a></li>
   
 
@@ -1065,6 +1379,12 @@
     <li><a href="#white-paper-illustration-plan-doc">Illustration Plan</a></li>
   
 
+    <li><a href="#white-paper-related-work-doc">Related Work Log</a></li>
+  
+
+    <li><a href="#white-paper-reviewer-checklist-doc">Reviewer Checklist</a></li>
+  
+
     <li><a href="#white-paper-working-area-doc">White Paper Working Area</a></li>
   
 
@@ -1073,7 +1393,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 16, 2026
+          Release 1.4.0.1 · Updated May 17, 2026
         </p>
       </aside>
     </main>
