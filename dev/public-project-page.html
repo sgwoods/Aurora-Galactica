@@ -298,6 +298,50 @@
             display: block;
         }
 
+        .challengeDisclosure {
+            display: block;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .challengeDisclosure summary {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(220px, .9fr) auto;
+            gap: 18px;
+            padding: 16px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .challengeDisclosure summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .challengeDisclosure summary::after {
+            content: "+";
+            color: var(--accent);
+            font-weight: 900;
+            justify-self: end;
+        }
+
+        .challengeDisclosure[open] summary::after {
+            content: "-";
+        }
+
+        .challengeInlineDetail {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+
+        .challengeInlineDetail div {
+            padding: 12px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.075);
+        }
+
         .investmentMeta {
             justify-content: flex-end;
         }
@@ -355,6 +399,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .challengeDisclosure summary,
+            .challengeInlineDetail {
+                grid-template-columns: 1fr;
+            }
+
             .investmentMeta {
                 justify-content: flex-start;
             }
@@ -362,7 +411,7 @@
     </style>
 </head>
 <body>
-    <!-- public-sync: release=1.4.0.1 label=1.4.0.1+build.780.sha.6d76050d commit=6d76050d1ee7f4452c2306d8c4ee7f3d809be687 template=c028a0ffa840 synced=2026-05-17T18:30:17Z -->
+    <!-- public-sync: release=1.4.0.1 label=1.4.0.1+build.816.sha.e583b558 commit=e583b55892207f6f71ed7a3c125adac6ea091d27 template=a0e232bdc57c synced=2026-05-18T12:16:54Z -->
     <main class="shell">
         <section class="hero">
             <div class="heroTop">
@@ -384,7 +433,7 @@
                 </div>
                 <div class="metaCard">
                     <span class="metaLabel">Build Timestamp</span>
-                    <span class="metaValue">May 17 2026, 2:30 PM EDT</span>
+                    <span class="metaValue">May 18 2026, 8:16 AM EDT</span>
                     <div class="metaNote">Timestamp of the build artifact for this release location, not necessarily the final public portfolio sync time.</div>
                 </div>
                 <div class="metaCard">
@@ -509,25 +558,25 @@
 
                 <article class="miniMetric">
                     <span>Overall quality</span>
-                    <strong>9.1/10</strong>
+                    <strong>8.8/10</strong>
                     <small>Target &gt;=9.3</small>
                 </article>
 
                 <article class="miniMetric">
                     <span>Audio identity</span>
-                    <strong>7/10</strong>
+                    <strong>7.3/10</strong>
                     <small>Target &gt;=7.5</small>
                 </article>
 
                 <article class="miniMetric">
                     <span>Level arc</span>
-                    <strong>8.7/10</strong>
+                    <strong>8.8/10</strong>
                     <small>Target &gt;=8.8</small>
                 </article>
 
                 <article class="miniMetric">
                     <span>Boss entry and formation grammar</span>
-                    <strong>9.2/10</strong>
+                    <strong>9.4/10</strong>
                     <small>Target &gt;=8.0 first gate; &gt;=9.0 mature</small>
                 </article>
             </div>
@@ -535,10 +584,23 @@
 
                 <article class="scoreRow gap">
                     <div class="scoreHeader">
-                        <span class="scoreName">Audio identity, event feedback, and cue alignment</span>
-                        <span class="scoreValue">7/10</span>
+                        <span class="scoreName">Challenge-stage set-piece conformance: movement, graphics, alien novelty</span>
+                        <span class="scoreValue">3.8/10</span>
                     </div>
-                    <div class="barTrack" aria-hidden="true"><span style="width: 70%"></span></div>
+                    <div class="barTrack" aria-hidden="true"><span style="width: 38%"></span></div>
+                    <p>The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.</p>
+                    <div class="scoreMeta">
+                        <span>Confidence: medium-high for gap direction; medium-low for exact lift estimate</span>
+                        <span>Target: 3.5 first honest gate; 6.0 after three authored challenges; 9.0+ mature</span>
+                    </div>
+                </article>
+
+                <article class="scoreRow gap">
+                    <div class="scoreHeader">
+                        <span class="scoreName">Audio identity, event feedback, and cue alignment</span>
+                        <span class="scoreValue">7.3/10</span>
+                    </div>
+                    <div class="barTrack" aria-hidden="true"><span style="width: 73%"></span></div>
                     <p>Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback.</p>
                     <div class="scoreMeta">
                         <span>Confidence: medium-high</span>
@@ -548,11 +610,11 @@
 
                 <article class="scoreRow watch">
                     <div class="scoreHeader">
-                        <span class="scoreName">Alien entry and challenge-stage novelty</span>
-                        <span class="scoreValue">8/10</span>
+                        <span class="scoreName">Alien entry and broad challenge-stage novelty</span>
+                        <span class="scoreValue">8.2/10</span>
                     </div>
-                    <div class="barTrack" aria-hidden="true"><span style="width: 80%"></span></div>
-                    <p>Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction are not yet sufficiently varied or reference-grounded; this is a first-order Galaga conformance gap.</p>
+                    <div class="barTrack" aria-hidden="true"><span style="width: 82%"></span></div>
+                    <p>Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction still need stronger reference grounding; this broad metric should not mask the stricter challenge-stage gap.</p>
                     <div class="scoreMeta">
                         <span>Confidence: medium</span>
                         <span>Target: 7.5 first gate; 9.0+ mature</span>
@@ -562,9 +624,9 @@
                 <article class="scoreRow watch">
                     <div class="scoreHeader">
                         <span class="scoreName">Level arc and encounter shape</span>
-                        <span class="scoreValue">8.7/10</span>
+                        <span class="scoreValue">8.8/10</span>
                     </div>
-                    <div class="barTrack" aria-hidden="true"><span style="width: 87%"></span></div>
+                    <div class="barTrack" aria-hidden="true"><span style="width: 88%"></span></div>
                     <p>Controls whether long play feels like Galaga-like escalation rather than repeated pressure.</p>
                     <div class="scoreMeta">
                         <span>Confidence: medium-high</span>
@@ -575,9 +637,9 @@
                 <article class="scoreRow strong">
                     <div class="scoreHeader">
                         <span class="scoreName">Boss entry and formation grammar</span>
-                        <span class="scoreValue">9.2/10</span>
+                        <span class="scoreValue">9.4/10</span>
                     </div>
-                    <div class="barTrack" aria-hidden="true"><span style="width: 92%"></span></div>
+                    <div class="barTrack" aria-hidden="true"><span style="width: 94%"></span></div>
                     <p>Boss entries, escorts, formation settling, and challenge set pieces are core Galaga choreography and directly affect whether stages feel authored.</p>
                     <div class="scoreMeta">
                         <span>Confidence: medium</span>
@@ -597,19 +659,6 @@
                         <span>Target: 8.4-8.8</span>
                     </div>
                 </article>
-
-                <article class="scoreRow gap">
-                    <div class="scoreHeader">
-                        <span class="scoreName">Stage 4 pressure exact replay / pressure curve precision</span>
-                        <span class="scoreValue">6/10</span>
-                    </div>
-                    <div class="barTrack" aria-hidden="true"><span style="width: 60%"></span></div>
-                    <p>Pressure should be learnable and reproducible, not merely present in one run.</p>
-                    <div class="scoreMeta">
-                        <span>Confidence: medium</span>
-                        <span>Target: 8.2-8.6</span>
-                    </div>
-                </article>
             </div>
         </section>
 
@@ -620,22 +669,22 @@
 
                 <article class="miniMetric">
                     <span>Measured runs</span>
-                    <strong>517</strong>
+                    <strong>786</strong>
                     <small>Harness and analysis executions in the current economics rollup.</small>
                 </article>
                 <article class="miniMetric">
                     <span>Wall time</span>
-                    <strong>335.1 min</strong>
+                    <strong>808.6 min</strong>
                     <small>Elapsed local time captured by conformance jobs.</small>
                 </article>
                 <article class="miniMetric">
                     <span>CPU time</span>
-                    <strong>531.9 min</strong>
+                    <strong>874.4 min</strong>
                     <small>Local compute used by the measurable assessment loop.</small>
                 </article>
                 <article class="miniMetric">
                     <span>Artifacts</span>
-                    <strong>784.3 MB</strong>
+                    <strong>1210.5 MB</strong>
                     <small>Persisted evidence: traces, reports, frames, audio and charts.</small>
                 </article>
             </div>
@@ -643,24 +692,36 @@
 
                 <article class="investmentRow">
                     <div>
-                        <strong>Audio identity, event feedback, and cue alignment</strong>
-                        <p>Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</p>
+                        <strong>Challenge-stage set-piece conformance: movement, graphics, alien novelty</strong>
+                        <p>Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.</p>
                     </div>
                     <div class="investmentMeta">
-                        <span>high; cpu, model-api, openai-api</span>
-                        <span>266 runs; 185.8 min wall; 330 min CPU</span>
-                        <span>Value score: 2.96</span>
+                        <span>estimated; cpu, browser, gpu</span>
+                        <span>161 runs; 24 min wall; 39.7 min CPU</span>
+                        <span>Value score: 0.00</span>
                     </div>
                 </article>
 
                 <article class="investmentRow">
                     <div>
-                        <strong>Alien entry and challenge-stage novelty</strong>
-                        <p>Attack Reference-grounded path precision readiness: Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.</p>
+                        <strong>Audio identity, event feedback, and cue alignment</strong>
+                        <p>Challenge Perfect runtime trial rejected perfect-clean-onset-soft-tail; do not directly promote the focused keeper. Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>high; cpu, model-api, openai-api</span>
+                        <span>309 runs; 253.7 min wall; 459.4 min CPU</span>
+                        <span>Value score: 3.00</span>
+                    </div>
+                </article>
+
+                <article class="investmentRow">
+                    <div>
+                        <strong>Alien entry and broad challenge-stage novelty</strong>
+                        <p>Attack Regular-entry geometry separation: Minimum regular geometry distance 0.083; mean regular geometry distance 0.127; closest pair mid-run-entry-variant / late-run-cleanup-or-failure.</p>
                     </div>
                     <div class="investmentMeta">
                         <span>estimated; cpu, browser</span>
-                        <span>177 runs; 24.6 min wall; 40.9 min CPU</span>
+                        <span>111 runs; 25.3 min wall; 33.6 min CPU</span>
                         <span>Value score: 0.00</span>
                     </div>
                 </article>
@@ -672,7 +733,7 @@
                     </div>
                     <div class="investmentMeta">
                         <span>low; cpu, browser</span>
-                        <span>160 runs; 24 min wall; 39.7 min CPU</span>
+                        <span>161 runs; 24 min wall; 39.7 min CPU</span>
                         <span>Value score: 1.68</span>
                     </div>
                 </article>
@@ -680,24 +741,12 @@
                 <article class="investmentRow">
                     <div>
                         <strong>Boss entry and formation grammar</strong>
-                        <p>Advance Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; capped score 6.8/10 until direct reference labels land.</p>
+                        <p>Label boss, escort, rack-settle, and challenge path families from Galaga reference contact sheets or video traces, then replace heuristic coverage with direct shape-distance scoring.</p>
                     </div>
                     <div class="investmentMeta">
                         <span>high; cpu, browser</span>
-                        <span>160 runs; 24 min wall; 39.7 min CPU</span>
-                        <span>Value score: 0.79</span>
-                    </div>
-                </article>
-
-                <article class="investmentRow">
-                    <div>
-                        <strong>Overall visual look and feel: gameplay, start page, typography complexity</strong>
-                        <p>Promote reference-backed visual contact sheets and add sprite/popup/style sub-scorers.</p>
-                    </div>
-                    <div class="investmentMeta">
-                        <span>medium; cpu, browser, gpu</span>
-                        <span>1 runs; 0.1 min wall; 0.1 min CPU</span>
-                        <span>Value score: 0.41</span>
+                        <span>161 runs; 24 min wall; 39.7 min CPU</span>
+                        <span>Value score: 0.76</span>
                     </div>
                 </article>
             </div>
@@ -716,7 +765,13 @@
                 <article class="card emphasis">
                     <h3>Ingestion coverage</h3>
                     <p>Ingestion turns reference media and Aurora runtime captures into repeatable evidence: clips, contact sheets, traces, event logs, labels, scores, confidence, and next missing annotations.</p>
-                    <p class="smallText">Sources: 12 families; high confidence: 6; scored or promoted: 10.</p>
+                    <p class="smallText">Sources: 16 families; high confidence: 10; scored or promoted: 11.</p>
+                </article>
+
+                <article class="card emphasis">
+                    <h3>Galaga target artifact coverage</h3>
+                    <p><strong>5.1/10 overall</strong>; <strong>4.5/10 challenge-stage readiness</strong>. Aurora now has media-backed windows for all tracked Galaga challenge stages, including Challenges 4-8. The bottleneck has moved from source acquisition to precision: each window needs five-group frame labels for entry side, path family, scoreable band, exit side, alien family, and perfect-bonus opportunity before direct trajectory scoring should rise.</p>
+                    <p class="smallText">Critical open sources: 4; missing late challenge windows: 0.</p>
                 </article>
 
                 <article class="card">
@@ -733,14 +788,14 @@
 
                 <article class="card">
                     <h3>Aurora Audio Conformance Lab v2</h3>
-                    <p>audio candidate loop / family promotion decisions: 8/8 target cues swept; 2 keeper candidates tracked; runtime promotions 1. family-scored; confidence medium-high.</p>
-                    <p class="smallText">Next: Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</p>
+                    <p>audio candidate loop / family promotion decisions: 8/8 target cues swept; 2 keeper candidates tracked; runtime promotions 0; rejected runtime trials 3. family-scored; confidence medium-high.</p>
+                    <p class="smallText">Next: challengePerfect: Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together.</p>
                 </article>
 
                 <article class="card">
                     <h3>Aurora audio cue contracts</h3>
-                    <p>audio semantic contract / theme latitude / promotion safety: 8 contracts; readiness 9.1/10; blocked 7. contract-scored; confidence medium-high.</p>
-                    <p class="smallText">Next: Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher.</p>
+                    <p>audio semantic contract / theme latitude / promotion safety: 8 contracts; readiness 9.3/10; blocked 5; rejected trials 3. contract-scored; confidence medium-high.</p>
+                    <p class="smallText">Next: Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together.</p>
                 </article>
             </div>
             <div class="links">
@@ -758,14 +813,14 @@
                 <article class="card">
                     <h3>Aurora Galactica</h3>
                     <p><strong>Active conformance investment.</strong> Aurora is the shipped first Platinum game and the current subject of long-cycle conformance scoring.</p>
-                    <p class="smallText"><strong>Key gates:</strong> Overall quality: 9.1/10; Audio identity: 7/10; Level arc: 8.7/10; Alien entry and challenge-stage novelty: 8/10.</p>
-                    <p class="smallText"><strong>Next work:</strong> Audio identity, event feedback, and cue alignment (7/10); Alien entry and challenge-stage novelty (8/10); Level arc and encounter shape (8.7/10).</p>
-                    <p class="smallText"><strong>Live artifacts:</strong> src/assets/reference-audio; reference-artifacts/analyses/aurora-audio-event-gap/2026-05-15-60326a33-dirty-124517/report.json.</p>
+                    <p class="smallText"><strong>Key gates:</strong> Overall quality: 8.8/10; Audio identity: 7.3/10; Challenge-stage set-piece conformance: 3.8/10; Level arc: 8.8/10.</p>
+                    <p class="smallText"><strong>Next work:</strong> Challenge-stage set-piece conformance: movement, graphics, alien novelty (3.8/10); Audio identity, event feedback, and cue alignment (7.3/10); Alien entry and broad challenge-stage novelty (8.2/10).</p>
+                    <p class="smallText"><strong>Live artifacts:</strong> src/assets/reference-audio; reference-artifacts/analyses/aurora-audio-event-gap/2026-05-18-6d76050d-dirty-113930/report.json.</p>
                 </article>
 
                 <article class="card">
                     <h3>Galaxy Guardians</h3>
-                    <p><strong>Preview / ingestion.</strong> Useful playable-preview evidence now extends beyond the one-level public slice. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, longer-surface stage-band review, persona review runs, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts; the highest-leverage next work is still stage-five-and-beyond collision fairness, later-band clear consistency, and another human-reviewed audio/browser pass.</p>
+                    <p><strong>Preview / ingestion.</strong> Useful playable-preview evidence now extends beyond the one-level public slice. The score table, wave progression, visible attract/score-table surfaces, frame-motion proxy, object-track proxy, runtime-vs-reference movement comparison, longer-surface stage-band review, persona review runs, stage-rank pressure contract, sprite-reference extraction, component sprite targets, waveform/spectrogram audio comparison, stricter measured cue targets, labeled cue-window previews, reusable audio conformance lab, and playtest-weighted conformance review now exist as non-production preview contracts. The best-return next work is now the opening-slice baseline package, measured rack/starfield/re-entry motion, platform-frame parity, and only then deeper later-band fairness and selective cue cleanup.</p>
                     <p class="smallText"><strong>Key gates:</strong> Preview reference conformance: 7.6/10; Playtest-weighted conformance: 6.9/10; Public release readiness: 4.2/10; Audio conformance lab: 8.5/10.</p>
                     <p class="smallText"><strong>Next work:</strong> Preview reference conformance (7.6/10); Playable-preview conformance and feel (6.9/10); Audio lab cue identity (8.5/10).</p>
                     <p class="smallText"><strong>Live artifacts:</strong> reference-artifacts/analyses/galaxy-guardians-identity; reference-artifacts/analyses/audio-conformance-lab/galaxy-guardians-preview/audio-conformance-lab-0.1.json.</p>
@@ -779,6 +834,186 @@
                 <a class="button" href="project-guide.html#game-conformance-catalog-doc">Read full generated catalog</a>
                 <a class="button" href="application-guide.html#stage-conformance-summary">Open stage summary tables</a>
                 <a class="button" href="platinum-guide.html#persona-contract">Open platform persona contract</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Challenge-stage critical analysis</h2>
+            <p class="narrative">Challenge stages are being treated as a first-class Galaga conformance problem, not a generic level-arc footnote. The current analysis separates the rule baseline from the richer player experience: challenging stages should not shoot or kill the ship, but they also need memorable alien movement, visible arrival and exit patterns, alien-family variation, and high-bonus learning opportunities.</p>
+            <div class="scoreChart">
+
+                <article class="card emphasis">
+                    <h3>Challenge-stage critical read</h3>
+                    <p><strong>3.8/10 interesting factor</strong> and <strong>3.8/10 conformance</strong>. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 3.4/10, strict graphics is 4.3/10, alien/stage novelty is 3.4/10, player shot opportunity is 5.1/10, active sprite-motion now includes object-tracked runtime pixel/silhouette evidence but not yet Galaga target-crop sequence comparison, and late challenge references are still first-pass group labels rather than full object tracks. Diagnostic legacy coverage was 6.9/10, which is why the old read was too generous.</p>
+                    <p class="smallText">A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.</p>
+                </article>
+
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
+                    <div>
+                        <strong>Challenging Stage 1 (Levels 3-4): 3.7/10 interest</strong>
+                        <p>first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 3.3/10, graphics 4.1/10, alien novelty 3.4/10, shot opportunity 5.7/10.</p>
+                        <p class="smallText"><strong>Target:</strong> First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Internal marker: 3</span>
+                        <span>Path: first-challenge-peel</span>
+                        <span>Best ref: challenge-1-late-wave-group-4 (8.7/10)</span>
+                    </div>
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>Strict movement score 3.3/10 against challenge-1-late-wave-group-4: y-range fit 1, path-length fit 0.68, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 8.7/10 against challenge-1-late-wave-group-4; xRange 1.4, yRange 0.5081, pathLength 0.4901.</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>Strict graphics score 4.1/10. Current visible family/type labels are present and Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 40 object-tracked silhouette track(s). Graphics remain capped at 4.6/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.</p>
+                            <p class="smallText">Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 2 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 1/5 path signatures; average within-wave spawn span 0.48s.</p>
+                            <p class="smallText"><strong>Group identity:</strong> 7.2/10. 5/5 wave type signatures and 1/5 path signatures; average within-wave spawn span 0.48s.</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>Movement conformance is only 3.3/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</p>
+                            <p class="smallText">Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
+                    <div>
+                        <strong>Challenging Stage 2 (Levels 7-8): 3.7/10 interest</strong>
+                        <p>scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 3.4/10, graphics 3.9/10, alien novelty 3.4/10, shot opportunity 4.9/10.</p>
+                        <p class="smallText"><strong>Target:</strong> Second challenge should feel denser and more novel than challenge 1 while staying nonlethal and non-shooting.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Internal marker: 7</span>
+                        <span>Path: cross-sweep</span>
+                        <span>Best ref: challenge-2-arrival-group-1 (9.4/10)</span>
+                    </div>
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>Strict movement score 3.4/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 9.4/10 against challenge-2-arrival-group-1; xRange 1.3571, yRange 0.7703, pathLength 0.9567.</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>Strict graphics score 3.9/10. Current visible family/type labels are present and Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 39 object-tracked silhouette track(s). Graphics remain capped at 4.6/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.</p>
+                            <p class="smallText">Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.</p>
+                            <p class="smallText"><strong>Group identity:</strong> 8.3/10. 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>Movement conformance is only 3.4/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</p>
+                            <p class="smallText">Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
+                    <div>
+                        <strong>Challenging Stage 3 (Levels 11-12): 3.8/10 interest</strong>
+                        <p>stingray-crown-hook-hybrid / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly; strict movement 3.5/10, graphics 4.4/10, alien novelty 3.4/10, shot opportunity 4.7/10.</p>
+                        <p class="smallText"><strong>Target:</strong> Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Internal marker: 11</span>
+                        <span>Path: hook-arc</span>
+                        <span>Best ref: challenge-3-arrival-group-1 (9.6/10)</span>
+                    </div>
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>Strict movement score 3.5/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 9.6/10 against challenge-3-arrival-group-1; xRange 1.5143, yRange 0.7166, pathLength 1.0442.</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>Strict graphics score 4.4/10. Current visible family/type labels are present and Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 36 object-tracked silhouette track(s). Graphics remain capped at 4.6/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.</p>
+                            <p class="smallText">Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and dragonfly visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s.</p>
+                            <p class="smallText"><strong>Group identity:</strong> 8/10. 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s.</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>Movement conformance is only 3.5/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</p>
+                            <p class="smallText">Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
+                    <div>
+                        <strong>Challenging Stage 4 (Levels 15-16): 3.9/10 interest</strong>
+                        <p>pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 3.7/10, graphics 4.4/10, alien novelty 3.4/10, shot opportunity 5.1/10.</p>
+                        <p class="smallText"><strong>Target:</strong> Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Internal marker: 15</span>
+                        <span>Path: pink-serpentine</span>
+                        <span>Best ref: challenge-4-pink-serpentine-group-5 (10/10)</span>
+                    </div>
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>Strict movement score 3.7/10 against challenge-4-pink-serpentine-group-5: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 10/10 against challenge-4-pink-serpentine-group-5; xRange 1.5286, yRange 0.7946, pathLength 1.0557.</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>Strict graphics score 4.4/10. Current visible family/type labels are present and Runtime sprite-motion hook observed 2 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 37 object-tracked silhouette track(s). Graphics remain capped at 4.6/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.</p>
+                            <p class="smallText">Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and galboss visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.3s.</p>
+                            <p class="smallText"><strong>Group identity:</strong> 7.7/10. 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.3s.</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>Movement conformance is only 3.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</p>
+                            <p class="smallText">Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
+                    <div>
+                        <strong>Challenging Stage 5 (Levels 19-20): 4/10 interest</strong>
+                        <p>pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 3.7/10, graphics 4.5/10, alien novelty 3.4/10, shot opportunity 5.3/10.</p>
+                        <p class="smallText"><strong>Target:</strong> Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Internal marker: 19</span>
+                        <span>Path: pink-green-cascade</span>
+                        <span>Best ref: challenge-5-pink-green-cascade-group-1 (10/10)</span>
+                    </div>
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>Strict movement score 3.7/10 against challenge-5-pink-green-cascade-group-1: y-range fit 1, path-length fit 0.85, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 10/10 against challenge-5-pink-green-cascade-group-1; xRange 1.5429, yRange 0.5295, pathLength 0.8627.</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>Strict graphics score 4.5/10. Current visible family/type labels are present and Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 38 object-tracked silhouette track(s). Graphics remain capped at 4.6/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.</p>
+                            <p class="smallText">Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and galboss visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.25s.</p>
+                            <p class="smallText"><strong>Group identity:</strong> 7.5/10. 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.25s.</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>Movement conformance is only 3.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</p>
+                            <p class="smallText">Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="links">
+                <a class="button" href="project-guide.html#challenge-stage-conformance-effort">Open living effort summary</a>
+                <a class="button" href="project-guide.html#challenge-stage-conformance-analysis-doc">Open rendered report</a>
+                <a class="button" href="application-guide.html#challenge-stage-conformance">Open challenge-stage deep dive</a>
+                <a class="button" href="application-guide.html#stage-conformance-summary">Open stage summary</a>
+                <a class="button" href="conformance-dashboard.html#conformance">Open conformance dashboard</a>
             </div>
         </section>
 
@@ -805,7 +1040,7 @@
                 </article>
                 <article class="miniMetric">
                     <span>Issue notes</span>
-                    <strong>5</strong>
+                    <strong>6</strong>
                     <small>Tracked findings, observations, and in-progress review concerns.</small>
                 </article>
                 <article class="miniMetric">
@@ -816,7 +1051,7 @@
                 <article class="miniMetric">
                     <span>Blocking findings</span>
                     <strong>P0 0 / P1 0</strong>
-                    <small>P0/P1 findings block hosted-dev movement. Production dispositions: 2 addressed, 3 dismissed, 0 missing.</small>
+                    <small>P0/P1 findings block hosted-dev movement. Production dispositions: 2 addressed, 3 dismissed, 1 missing.</small>
                 </article>
             </div>
             <div class="scoreChart">
@@ -874,6 +1109,20 @@
                         <span>Status: in_progress</span>
                         <span>Source: ARCHITECT_REVIEW_RESPONSE.md</span>
                         <span>Review decision: Use ingestion-backed specs before considering heavier persistence infrastructure.</span>
+                    </div>
+                </article>
+
+                <article class="investmentRow">
+                    <div>
+                        <strong>P2 - architecture-boundary - code-review-platform-game-boundary-review</strong>
+                        <p>src/js/13-gameplay-adapter-registry.js: Gameplay or pack registry changed; run platform/game boundary harnesses and review pack ownership.</p>
+                        <p class="smallText"><strong>Proposed:</strong> Verify the flagged surface with the targeted review questions and recommended checks before lane movement.</p>
+                        <p class="smallText"><strong>Production disposition:</strong> missing - Requires explicit addressed/dismissed decision before production.</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Status: review_note</span>
+                        <span>Source: reference-artifacts/analyses/code-review/latest.json</span>
+                        <span>Review decision: Accepted as a visible review note that does not block hosted-dev by itself.</span>
                     </div>
                 </article>
 
@@ -951,7 +1200,7 @@
                     <div class="investmentMeta">
                         <span>Builder: tools/build/build-index.js#buildProjectGuide</span>
                         <span>Sections: Guide overview and source document index; Documentation provenance</span>
-                        <span>Persistent Inputs: project-guide.json; PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md; PLAN.md; PRODUCT_ROADMAP.md</span>
+                        <span>Persistent Inputs: project-guide.json; PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md; CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md; GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md</span>
                     </div>
                 </article>
 
@@ -984,7 +1233,7 @@
                 <article class="investmentRow">
                     <div>
                         <strong>Aurora Application Guide</strong>
-                        <p>Aurora-owned audio, visual, alien, stage, artifact-conformance, and persona catalog.</p>
+                        <p>Aurora-owned audio, visual, alien, stage, target-artifact, artifact-conformance, and persona catalog.</p>
                         <p class="smallText"><strong>Generated as:</strong> application-guide.html.</p>
                     </div>
                     <div class="investmentMeta">
@@ -1032,7 +1281,7 @@
                 <a class="button" href="project-guide.html#classic-arcade-ingestion-framework-doc">Classic arcade ingestion framework</a>
                 <a class="button" href="project-guide.html#artifact-policy-doc">Artifact policy</a>
             </div>
-            <p class="footer">Development lane project-page summary generated from lane build artifacts. Date label: May 17, 2026.</p>
+            <p class="footer">Development lane project-page summary generated from lane build artifacts. Date label: May 18, 2026.</p>
         </section>
     </main>
 </body>

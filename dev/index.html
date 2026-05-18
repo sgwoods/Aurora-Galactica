@@ -232,9 +232,9 @@ mask:
 #audioMixPanel label{color:#bff6ff}
 #commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
-#graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
+#graphicsPanel select,#testPanel input,#testPanel select{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
-#testPanel input{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
+#testPanel input,#testPanel select{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 .settingsRangeStack{display:flex;flex-direction:column;gap:10px;padding:8px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(5,14,26,.52)}
 .settingsRangeRow{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}
 .settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -244,7 +244,9 @@ mask:
 .settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
 .settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
 .settingsToggleHint{font-size:11px;line-height:1.25;color:#d7c38b}
-#testStage,#testShips{max-width:240px}
+#testStage,#testShips,#testStartKind,#testChallengeStage{max-width:240px}
+#testChallengeStageField.isInactive{opacity:.48}
+.settingsInlineHint{font-size:11px;line-height:1.25;color:#9fd0af}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
 #rootModeHint{color:#9fd0af}
@@ -252,7 +254,7 @@ mask:
 #testPanel.locked .settingsFieldGrid,
 #testPanel.locked #testRow,
 #testPanel.locked #testHint{opacity:.52}
-#testPanel.locked input:disabled{cursor:not-allowed}
+#testPanel.locked input:disabled,#testPanel.locked select:disabled{cursor:not-allowed}
 #testRow{display:flex;align-items:center;gap:8px;margin-top:8px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
@@ -880,8 +882,20 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       </div>
       <div class="settingsFieldGrid">
         <div class="settingsField settingsFieldCompact">
-          <label for="testStage">Start Stage</label>
+          <label for="testStartKind">Start Type</label>
+          <select id="testStartKind">
+            <option value="level" selected>Level</option>
+            <option value="challenge">Challenging Stage</option>
+          </select>
+        </div>
+        <div class="settingsField settingsFieldCompact">
+          <label for="testStage">Start Level</label>
           <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
+        </div>
+        <div id="testChallengeStageField" class="settingsField settingsFieldCompact">
+          <label for="testChallengeStage">Challenging Stage</label>
+          <input id="testChallengeStage" type="number" min="1" max="24" step="1" value="1" />
+          <div id="testChallengeStageHint" class="settingsInlineHint">Challenging Stage 1 (Levels 3-4)</div>
         </div>
         <div class="settingsField settingsFieldCompact">
           <label for="testShips">Starting Ships</label>
@@ -896,18 +910,15 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <input id="testExtendRecurring" type="number" min="0" max="999999" step="1000" value="70000" />
         </div>
       </div>
-      <div id="testRow">
-        <input id="testChallenge" type="checkbox" />
-        <label for="testChallenge">Force challenge opening</label>
-      </div>
-      <div id="testHint">Applies on next game start only. Set either score to 0 to disable that bonus-ship award.</div>
+      <input id="testChallenge" type="checkbox" hidden aria-hidden="true" />
+      <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 1 (Levels 3-4), not Level 4. Set either score to 0 to disable that bonus-ship award.</div>
     </div>
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">May 17 2026, 2:30 PM EDT</span>
-      <span id="settingsState">main@6d76050d clean</span>
+      <span id="settingsRelease">May 18 2026, 8:16 AM EDT</span>
+      <span id="settingsState">main@e583b558 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1205,7 +1216,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">May 17 2026, 2:30 PM EDT</span>
+    <span id="buildStampRelease">May 18 2026, 8:16 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1427,7 +1438,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStage=document.getElementById('testStage'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1455,7 +1466,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-15T12%3A53%3A10.491Z%22%2C%22commit%22%3A%2260326a33%22%2C%22branch%22%3A%22codex%2Fmacbook-post-beta-conformance-10h%22%2C%22overallCurrent%22%3A%229.1%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.7%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Stage%204%20pressure%20exact%20replay%20%2F%20pressure%20curve%20precision%22%2C%22weakestCurrent%22%3A%226%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-18T11%3A39%3A39.364Z%22%2C%22commit%22%3A%226d76050d%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.8%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%223.8%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1902,7 +1913,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.780.sha.6d76050d',commit:'6d76050d1ee7f4452c2306d8c4ee7f3d809be687',branch:'main',dirty:false,released:'May 17 2026, 2:30 PM EDT',state:'main@6d76050d clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.816.sha.e583b558',commit:'e583b55892207f6f71ed7a3c125adac6ea091d27',branch:'main',dirty:false,released:'May 18 2026, 8:16 AM EDT',state:'main@e583b558 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2669,13 +2680,39 @@ const stageTune=(s,ch)=>{
  return typeof tune==='function'?tune(s):tune;
 };
 const stageFlightTune=s=>stageRuleSet(s).flight;
+function currentStageCadenceSafe(){
+ try{return currentGamePack()?.stageCadence||{}}
+ catch{return {}}
+}
 function challengeStagesBefore(stage){
  const n=Math.max(1, stage|0);
- const cadence=currentGamePack()?.stageCadence||{};
+ const cadence=currentStageCadenceSafe();
  const first=Math.max(1, cadence.challengeFirstStage||3);
  const every=Math.max(1, cadence.challengeEvery||4);
  if(n<=first)return 0;
  return 1+Math.floor((n-1-first)/every);
+}
+function challengeStageNumberForInternalStage(stage){
+ const n=Math.max(1,stage|0);
+ const cadence=currentStageCadenceSafe();
+ const first=Math.max(1,cadence.challengeFirstStage||3);
+ const every=Math.max(1,cadence.challengeEvery||4);
+ if(n<first)return 0;
+ return 1+Math.floor((n-first)/every);
+}
+function internalStageForChallengeStageNumber(challengeStage){
+ const n=cl(+challengeStage||1,1,99)|0;
+ const cadence=currentStageCadenceSafe();
+ const first=Math.max(1,cadence.challengeFirstStage||3);
+ const every=Math.max(1,cadence.challengeEvery||4);
+ return first+(n-1)*every;
+}
+function challengeStageDisplayLabel(stageOrChallengeNumber,opts={}){
+ const input=Math.max(1,+stageOrChallengeNumber||1)|0;
+ const fromChallengeNumber=!!opts.challengeNumber;
+ const challengeNumber=fromChallengeNumber?input:Math.max(1,challengeStageNumberForInternalStage(input)||1);
+ const marker=fromChallengeNumber?internalStageForChallengeStageNumber(challengeNumber):input;
+ return `Challenging Stage ${challengeNumber} (Levels ${marker}-${marker+1})`;
 }
 function displayStageNumber(stage,challenge=isChallengeStage(stage)){
  const n=Math.max(1, stage|0);
@@ -2696,14 +2733,24 @@ function currentStartStageMode(){
  const mode=String(window.__platinumStartStageMode||window.__auroraStartStageMode||'display').toLowerCase();
  return mode==='internal'?'internal':'display';
 }
+function sanitizeStartKind(value=''){
+ const next=String(value||'level').trim().toLowerCase();
+ return next==='challenge'?'challenge':'level';
+}
 function resolveGameplayStartStage(cfg={}){
  const requestedStage=cl(+cfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0;
+ const challengeStage=cl(+cfg.challengeStage||DEFAULT_TEST_CFG.challengeStage||1,1,99)|0;
  const stageMode=currentStartStageMode();
+ const startKind=sanitizeStartKind(cfg.startKind||(cfg.challenge?'challenge':'level'));
+ if(stageMode==='display'&&startKind==='challenge'){
+  const stage=internalStageForChallengeStageNumber(challengeStage);
+  return {requestedStage:challengeStage,stage,stageMode,forceChallenge:1,startKind,challengeStage,displayLabel:challengeStageDisplayLabel(challengeStage,{challengeNumber:1})};
+ }
  const forceChallenge=!!cfg.challenge;
  const stage=stageMode==='display'&&!forceChallenge
   ? internalRegularStageForDisplayedStage(requestedStage)
   : requestedStage;
- return {requestedStage,stage,stageMode,forceChallenge};
+ return {requestedStage,stage,stageMode,forceChallenge,startKind:'level',challengeStage};
 }
 const shotCap=()=>S.t?S.t.shotCap:0;
 const recTime=()=>{
@@ -2993,7 +3040,9 @@ if((initialBoard[0]?.score||0)>S.best){
  writePref(scoreBestKey(),String(S.best));
 }
 const DEFAULT_TEST_CFG=Object.freeze({
+ startKind:'level',
  stage:1,
+ challengeStage:1,
  ships:3,
  extendFirst:20000,
  extendRecurring:70000,
@@ -3014,7 +3063,9 @@ function effectiveStartStateCfg(cfg){
  const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
  if(!productionStartStateLocked())return base;
  return Object.assign(base,{
+  startKind:DEFAULT_TEST_CFG.startKind,
   stage:DEFAULT_TEST_CFG.stage,
+  challengeStage:DEFAULT_TEST_CFG.challengeStage,
   ships:DEFAULT_TEST_CFG.ships,
   extendFirst:DEFAULT_TEST_CFG.extendFirst,
   extendRecurring:DEFAULT_TEST_CFG.extendRecurring,
@@ -3039,15 +3090,19 @@ function sanitizeStarfieldMultiplier(value,fallback=1){
 }
 function applyTestCfgToControls(cfg){
  const startCfg=effectiveStartStateCfg(cfg);
+ const startKind=sanitizeStartKind(startCfg.startKind||(startCfg.challenge?'challenge':'level'));
+ if(testStartKind)testStartKind.value=startKind;
  if(testStage)testStage.value=startCfg.stage;
+ if(testChallengeStage)testChallengeStage.value=startCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage;
  if(testShips)testShips.value=startCfg.ships;
  if(testExtendFirst)testExtendFirst.value=startCfg.extendFirst;
  if(testExtendRecurring)testExtendRecurring.value=startCfg.extendRecurring;
- if(testChallenge)testChallenge.checked=startCfg.challenge;
+ if(testChallenge)testChallenge.checked=startKind==='challenge'||!!startCfg.challenge;
  if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
+ syncChallengeStartControls();
 }
 function syncDeveloperToolsUi(){
  const locked=productionStartStateLocked();
@@ -3056,13 +3111,26 @@ function syncDeveloperToolsUi(){
   ? 'Start-state controls locked to shipped defaults.'
   : 'Root mode active. Start-state controls restored.';
  if(testPanel)testPanel.classList.toggle('locked',locked);
- for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
+ for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
   if(el)el.disabled=locked;
  }
  if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+ syncChallengeStartControls();
+}
+function syncChallengeStartControls(){
+ const cfg=testCfgCache||loadTestCfg();
+ const startKind=sanitizeStartKind(testStartKind?.value||cfg.startKind||(cfg.challenge?'challenge':'level'));
+ const challengeStage=cl(+testChallengeStage?.value||cfg.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0;
+ if(testChallengeStageField)testChallengeStageField.classList.toggle('isInactive',startKind!=='challenge');
+ if(testChallengeStage) {
+  testChallengeStage.disabled=productionStartStateLocked()||startKind!=='challenge';
+  testChallengeStage.setAttribute('aria-disabled',testChallengeStage.disabled?'true':'false');
+ }
+ if(testChallengeStageHint)testChallengeStageHint.textContent=challengeStageDisplayLabel(challengeStage,{challengeNumber:true});
+ if(testChallenge)testChallenge.checked=startKind==='challenge';
 }
 function syncAudioMixControls(){
  const gamePct=volumePercent(gameSoundVolume);
@@ -3230,12 +3298,15 @@ function loadTestCfg(){
   const raw=JSON.parse(readPref(TEST_PREF_KEY)||'{}');
   const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:DEFAULT_TEST_CFG.extendFirst;
   const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:DEFAULT_TEST_CFG.extendRecurring;
+  const startKind=sanitizeStartKind(raw.startKind||(raw.challenge?'challenge':'level'));
   testCfgCache={
+   startKind,
    stage:cl(+raw.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+   challengeStage:cl(+raw.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
    ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
    extendFirst,
    extendRecurring,
-   challenge:!!raw.challenge,
+   challenge:startKind==='challenge'||!!raw.challenge,
    audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
    starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
@@ -3250,21 +3321,27 @@ function saveTestCfg(){
  const currentCfg=testCfgCache||loadTestCfg();
  const startCfg=productionStartStateLocked()
   ? {
+    startKind:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')),
     stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
+    challengeStage:cl(+currentCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
     extendFirst:cl(Math.max(0,+currentCfg.extendFirst||0),0,999999)|0,
     extendRecurring:cl(Math.max(0,+currentCfg.extendRecurring||0),0,999999)|0,
-    challenge:!!currentCfg.challenge
+    challenge:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level'))==='challenge'||!!currentCfg.challenge
    }
   : {
+    startKind:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level')),
     stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
+    challengeStage:cl(+testChallengeStage?.value||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
     extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
     extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-    challenge:!!testChallenge.checked
+    challenge:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level'))==='challenge'
    };
  const cfg={
+  startKind:startCfg.startKind,
   stage:startCfg.stage,
+  challengeStage:startCfg.challengeStage,
   ships:startCfg.ships,
   extendFirst:startCfg.extendFirst,
   extendRecurring:startCfg.extendRecurring,
@@ -3838,8 +3915,8 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
-for(const el of [testStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
+for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;
  testCfgCache=null;
@@ -5811,7 +5888,7 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -7091,11 +7168,12 @@ function updateChallengeEnemy(e,dt){
  // Challenge-stage fidelity is intentionally isolated here so we can tune the
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
+	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
+	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
-	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
 	 const topY=38+wave*14+row*8;
@@ -7104,9 +7182,29 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
+	   e.y=topY+q*2.8*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.8+p+wave*.64)*20*arcAmp;
+	   e.y=topY+q*8*dropAmp+Math.sin(q*Math.PI*3.4+p)*8*arcAmp;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*(1.6+wave*.22)+p+slot*.3)*28*arcAmp;
+	   e.y=topY+q*(10+wave*1.2)*dropAmp+Math.sin(q*Math.PI*2.4+p)*7*arcAmp;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const rung=slot%2?-1:1;
+	   e.x=startX+(laneX-startX)*q+sweep*((q-.5)*12+rung*(9+q*5))*arcAmp;
+	   e.y=topY+q*(38+slot*5)*dropAmp+row*5;
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   e.y=topY+q*(48+slot*8)*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*3.4+p+slot*.4)*24*arcAmp;
+	   e.y=topY+q*6*dropAmp+Math.cos(q*Math.PI*2+p)*10*arcAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2+p)*9*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*2.2+p)*6*arcAmp;
@@ -7122,10 +7220,32 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(q*glide);
+	   e.y=topY+q*4.2*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const cascade=slot%2?-1:1;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
 	   e.y=topY+q*(10+slot*1.5)*dropAmp+Math.sin(q*8.4+p+wave*.35)*3.4+Math.max(0,q-.42)*cascade*9;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*3.2+p)*50+Math.sin(q*Math.PI*.8)*32)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(52+slot*8)*dropAmp+Math.sin(q*9.2+p+wave*.4)*6.5;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   const cascade=slot%2?-1:1;
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.5+p)*42+Math.sin(q*Math.PI*(1.1+wave*.1))*25)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(64+slot*10)*dropAmp+Math.sin(q*8.8+p)*4+Math.max(0,q-.45)*cascade*12;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const rung=slot%2?-1:1;
+	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0);
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(188+slot*27)*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   const leader=e.t==='boss'?1:.72;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.05+p*.35)*34+Math.sin(q*Math.PI)*18)*fm.challengeSweep*arcAmp*leader;
@@ -7142,10 +7262,32 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(glide+q*(44+slot*4));
+	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;
 	   e.y=topY+12+q*224*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.2+p)*26-q*92)*fm.challengeSweep*arcAmp;
+	   e.y=topY+20+q*214*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   const exit=sweep*(slot%2?-1:1);
+	   e.x=laneX+exit*(26+q*104)*fm.challengeSweep*arcAmp+Math.sin(q*10.5+p+wave)*5;
+	   e.y=topY+16+q*228*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const exit=sweep*(slot%2?-1:1);
+	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
+	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
+	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
+	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
@@ -8182,27 +8324,35 @@ function spawnChallenge(){
  for(let i=0;i<total;i++){
   const lane=i%layout.enemiesPerGroup;
   const wave=(i/layout.enemiesPerGroup)|0;
-  const t=layout.laneTypes[lane]||'bee';
+  const waveLaneTypes=Array.isArray(layout.groupLaneTypes)&&layout.groupLaneTypes[wave]
+   ? layout.groupLaneTypes[wave]
+   : layout.laneTypes;
+  const wavePathFamilies=Array.isArray(layout.groupPathFamilies)?layout.groupPathFamilies:null;
+  const waveVisualFamilies=Array.isArray(layout.groupVisualFamilies)?layout.groupVisualFamilies:null;
+  const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
+  const pathFamily=wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
+  const challengeFamily=waveVisualFamilies?.[wave]||layout.visualFamily||profile.challengeFamily;
+  const waveProfile=challengeFamily===profile.challengeFamily?profile:Object.assign({},profile,{challengeFamily});
   S.e.push(makePackChallengeEnemyState({
    gamePack:currentGamePack(),
    type:t,
    lane,
-   profile,
+   profile:waveProfile,
    x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,
    y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,
    wave,
    side,
    slot,
    row,
-	   group:wave,
-	   sweep:wave%2?-1:1,
-	   upperBandY,
-   pathFamily:layout.pathFamily||'classic-lane-wave',
+   group:wave,
+   sweep:wave%2?-1:1,
+   upperBandY,
+   pathFamily,
    arcAmp:layout.arcAmp||1,
    dropAmp:layout.dropAmp||1,
-	   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
-	  }));
+   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
+  }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
@@ -9403,7 +9553,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
  captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),
  captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400}),
  captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
- rescueJoin:referenceAudioCue('assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',{cooldownMs:1800}),
+ rescueJoin:referenceAudioCue('assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a',{cooldownMs:1800,referenceVolume:.86,clipStart:2.399,clipDuration:.18}),
  extendAward:referenceAudioCue('assets/reference-audio/galaga3-extra-fighter.m4a',{cooldownMs:2200}),
  playerHit:referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{cooldownMs:1800,clipStart:.1,clipDuration:1.75}),
  capturedFighterDestroyed:referenceAudioCue('assets/reference-audio/galaga3-captured-fighter-destroyed.m4a',{cooldownMs:1600}),
@@ -9874,17 +10024,28 @@ const AURORA_STAGE_CADENCE=Object.freeze({
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
-  id:'classic-lane-wave',
-  pathFamily:'classic-lane-wave',
+  id:'first-challenge-peel',
+  pathFamily:'first-challenge-peel',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.5,
-  spawnOffsetX:44,
-  waveSpacingY:13,
+  upperBandRatio:.47,
+  spawnOffsetX:56,
+  waveSpacingY:12,
   rowSpacingY:8,
-  waveDelay:1.52,
-  slotDelay:.18,
-  laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
+  waveDelay:1.46,
+  slotDelay:.16,
+  arcAmp:.78,
+  dropAmp:.68,
+  laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
+   Object.freeze(['but','but','but','but','bee','bee','bee','bee']),
+   Object.freeze(['bee','bee','but','but','but','but','bee','bee']),
+   Object.freeze(['but','bee','bee','but','but','bee','bee','but']),
+   Object.freeze(['bee','but','bee','but','but','bee','but','bee'])
+  ]),
+  groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
+  groupPathFamilies:Object.freeze(['first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel'])
  }),
  Object.freeze({
   fromStage:7,
@@ -9900,55 +10061,166 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.14,
   arcAmp:1.22,
   dropAmp:1.02,
-  laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but'])
+  laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+   Object.freeze(['bee','rogue','but','boss','boss','but','rogue','bee']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss']),
+   Object.freeze(['rogue','bee','boss','but','but','boss','bee','rogue']),
+   Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
+  ]),
+  groupVisualFamilies:Object.freeze(['classic','classic','scorpion','scorpion','stingray']),
+  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
  }),
  Object.freeze({
   fromStage:11,
-  id:'stingray-hook-arc',
+  id:'stingray-crown-hook-hybrid',
   pathFamily:'hook-arc',
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.46,
-  spawnOffsetX:58,
+  spawnOffsetX:72,
   waveSpacingY:11,
   rowSpacingY:8,
   waveDelay:1.28,
   slotDelay:.12,
-  arcAmp:1.48,
-  dropAmp:1.08,
-  laneTypes:Object.freeze(['rogue','but','boss','bee','boss','bee','but','rogue'])
+  arcAmp:2.08,
+  dropAmp:1.02,
+  laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
+   Object.freeze(['boss','boss','but','rogue','bee','but','rogue','boss']),
+   Object.freeze(['rogue','boss','bee','but','boss','but','bee','rogue']),
+   Object.freeze(['but','rogue','boss','boss','boss','boss','rogue','but']),
+   Object.freeze(['boss','bee','rogue','but','but','rogue','bee','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','stingray','galboss','dragonfly']),
+  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc'])
  }),
  Object.freeze({
   fromStage:15,
-  id:'boss-led-late-loop',
-  pathFamily:'boss-led-loop',
+  id:'pink-serpentine-late',
+  pathFamily:'pink-serpentine',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.44,
-  spawnOffsetX:62,
+  upperBandRatio:.43,
+  spawnOffsetX:74,
   waveSpacingY:10,
   rowSpacingY:9,
-  waveDelay:1.18,
+  waveDelay:1.22,
   slotDelay:.1,
-  arcAmp:1.62,
-  dropAmp:1.12,
-  laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee'])
+  arcAmp:1.68,
+  dropAmp:1.08,
+  laneTypes:Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+   Object.freeze(['bee','but','boss','rogue','rogue','boss','but','bee']),
+   Object.freeze(['rogue','bee','but','boss','boss','but','bee','rogue']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['galboss','galboss','dragonfly','galboss','dragonfly']),
+  groupPathFamilies:Object.freeze(['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'])
  }),
  Object.freeze({
   fromStage:19,
-  id:'crown-split-cascade',
-  pathFamily:'crown-split-cascade',
+  id:'pink-green-cascade',
+  pathFamily:'pink-green-cascade',
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.42,
-  spawnOffsetX:68,
+  spawnOffsetX:76,
   waveSpacingY:9,
   rowSpacingY:8,
   waveDelay:1.1,
   slotDelay:.085,
-  arcAmp:1.78,
-  dropAmp:1.18,
-  laneTypes:Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss'])
+  arcAmp:1.86,
+  dropAmp:1.22,
+  laneTypes:Object.freeze(['rogue','boss','but','bee','boss','but','bee','rogue']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['rogue','boss','but','bee','boss','but','bee','rogue']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss']),
+   Object.freeze(['bee','rogue','boss','but','but','boss','rogue','bee']),
+   Object.freeze(['but','bee','rogue','boss','boss','rogue','bee','but']),
+   Object.freeze(['boss','rogue','bee','but','but','bee','rogue','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['galboss','dragonfly','crown','dragonfly','galboss']),
+  groupPathFamilies:Object.freeze(['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'])
+ }),
+ Object.freeze({
+  fromStage:23,
+  id:'green-ladder-split',
+  pathFamily:'green-ladder-split',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.41,
+  spawnOffsetX:80,
+  waveSpacingY:9,
+  rowSpacingY:8,
+  waveDelay:1.04,
+  slotDelay:.08,
+  arcAmp:1.58,
+  dropAmp:1.34,
+  laneTypes:Object.freeze(['bee','but','rogue','boss','boss','rogue','but','bee']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['bee','but','rogue','boss','boss','rogue','but','bee']),
+   Object.freeze(['but','bee','boss','rogue','rogue','boss','bee','but']),
+   Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['bee','rogue','boss','but','but','boss','rogue','bee'])
+  ]),
+  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','dragonfly','mosquito','dragonfly']),
+  groupPathFamilies:Object.freeze(['green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split'])
+ }),
+ Object.freeze({
+  fromStage:27,
+  id:'yellow-diagonal-fan',
+  pathFamily:'yellow-diagonal-fan',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.4,
+  spawnOffsetX:84,
+  waveSpacingY:8,
+  rowSpacingY:8,
+  waveDelay:1,
+  slotDelay:.075,
+  arcAmp:1.88,
+  dropAmp:1.6,
+  laneTypes:Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
+   Object.freeze(['bee','boss','rogue','but','but','rogue','boss','bee']),
+   Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but']),
+   Object.freeze(['rogue','but','bee','boss','boss','bee','but','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['crown','crown','crown','crown','crown']),
+  groupPathFamilies:Object.freeze(['yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan'])
+ }),
+ Object.freeze({
+  fromStage:31,
+  id:'blue-purple-finale',
+  pathFamily:'blue-purple-finale',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.4,
+  spawnOffsetX:86,
+  waveSpacingY:8,
+  rowSpacingY:7,
+  waveDelay:.96,
+  slotDelay:.07,
+  arcAmp:1.8,
+  dropAmp:1.26,
+  laneTypes:Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['bee','but','boss','rogue','rogue','boss','but','bee']),
+   Object.freeze(['but','bee','rogue','boss','boss','rogue','bee','but']),
+   Object.freeze(['boss','but','rogue','bee','bee','rogue','but','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['stingray','mosquito','stingray','mosquito','galboss']),
+  groupPathFamilies:Object.freeze(['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'])
  })
 ]);
 
@@ -11955,14 +12227,18 @@ function currentGamePackStagePresentation(stage,challenge){
   else break;
  }
  const shownStage=formatDisplayedStage(stage,challenge);
+ const challengeNumber=typeof challengeStageNumberForInternalStage==='function'
+  ? challengeStageNumberForInternalStage(stage)
+  : '';
+ const challengeBracket=challenge?`LEVELS ${stage}-${stage+1}`:'';
  const atmosphereTheme=theme?.atmosphereTheme||theme?.backgroundMode||pack.frontDoor?.atmosphereTheme||'classic-arcade';
  return Object.assign({},theme,{
   atmosphereTheme,
   backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:challenge?'challenge':'stage'}),
-  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
-  stageLabel:challenge?'BONUS STAGE':`STAGE ${shownStage}`,
-  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
-  transitionSub:challenge?'BONUS STAGE':'NEXT PHASE'
+  challengeTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  stageLabel:challenge?challengeBracket:`STAGE ${shownStage}`,
+  transitionTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  transitionSub:challenge?challengeBracket:'NEXT PHASE'
  });
 }
 
@@ -12061,16 +12337,29 @@ function currentGamePackFormationLayout(stage){
 function currentGamePackChallengeLayout(stage){
  const pack=currentGamePack();
  const stageNumber=Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1);
- if(typeof pack.challengeLayoutForStage==='function')return pack.challengeLayoutForStage(stageNumber);
- if(Array.isArray(pack.challengeLayouts)){
-  let layout=pack.challengeLayouts[0];
+ let layout=null;
+ if(typeof pack.challengeLayoutForStage==='function')layout=pack.challengeLayoutForStage(stageNumber);
+ else if(Array.isArray(pack.challengeLayouts)){
+  layout=pack.challengeLayouts[0];
   for(const candidate of pack.challengeLayouts){
    if(stageNumber>=candidate.fromStage)layout=candidate;
    else break;
   }
-  return layout;
+ }else layout=pack.challengeLayout;
+ const harnessOverride=typeof S!=='undefined'&&S.harnessChallengeLayoutOverride
+  ? S.harnessChallengeLayoutOverride
+  : null;
+ const overrideLayout=harnessOverride&&(!Number.isFinite(+harnessOverride.stage)||+harnessOverride.stage===stageNumber)
+  ? harnessOverride.layout
+  : null;
+ if(overrideLayout&&typeof overrideLayout==='object'){
+  return Object.assign({},layout||{},overrideLayout,{
+   laneTypes:Array.isArray(overrideLayout.laneTypes)?overrideLayout.laneTypes:(layout?.laneTypes||[]),
+   groupLaneTypes:Array.isArray(overrideLayout.groupLaneTypes)?overrideLayout.groupLaneTypes:(layout?.groupLaneTypes||[]),
+   groupPathFamilies:Array.isArray(overrideLayout.groupPathFamilies)?overrideLayout.groupPathFamilies:(layout?.groupPathFamilies||[])
+  });
  }
- return pack.challengeLayout;
+ return layout;
 }
 
 function currentGamePackFrameAccentTheme(stagePresentation){
@@ -14245,13 +14534,16 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
+  const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
+  if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
   testStage.value=cl(+cfg.stage||1,1,99)|0;
+  if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
   testShips.value=cl(+cfg.ships||3,1,9)|0;
   testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
   testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
-  testChallenge.checked=!!cfg.challenge;
+  testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
@@ -15282,7 +15574,7 @@ window.__galagaHarness__={
   return {
    stage:S.stage,
    challenge:!!S.challenge,
-	   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null,
+	   layout:S.harnessChallengeLayoutSnapshot||(typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null),
 	  enemies:active.map(e=>({
 	   id:e.id,
 	   type:e.t,
@@ -15295,6 +15587,8 @@ window.__galagaHarness__={
    spawn:+(+e.spawn||0).toFixed(2),
    spawnPlan:+(+e.spawnPlan||0).toFixed(2),
    tm:+(+e.tm||0).toFixed(3),
+   flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,
+   animationPhase:+(((+e.tm||0)*11+(+e.ph||0))%(Math.PI*2)).toFixed(3),
    x:+(+e.x||0).toFixed(2),
    y:+(+e.y||0).toFixed(2)
   }))
@@ -15692,7 +15986,15 @@ window.__galagaHarness__={
   p.returning=0;
   p.capBoss=null;
 	  p.capT=0;
+	  S.harnessChallengeLayoutSnapshot=null;
+	  S.harnessChallengeLayoutOverride=cfg.layoutOverride&&typeof cfg.layoutOverride==='object'
+	   ? {stage:S.stage,layout:cfg.layoutOverride}
+	   : null;
 	  spawnStage();
+	  S.harnessChallengeLayoutSnapshot=typeof currentGamePackChallengeLayout==='function'
+	   ? currentGamePackChallengeLayout(S.stage)
+	   : null;
+	  S.harnessChallengeLayoutOverride=null;
 	  const challengeSpawnBase=Math.min(...S.e.filter(e=>e?.ch&&e.hp>0).map(e=>+e.spawnPlan||0));
 	  for(const e of S.e){
 	   if(!e?.ch||e.hp<=0)continue;
@@ -15826,12 +16128,15 @@ window.__galagaHarness__={
   syncRecordUi();
  },
  setTest(cfg={}){
-  const currentCfg=loadTestCfg();
+ const currentCfg=loadTestCfg();
+  const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
+  if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
   testStage.value=cl(+cfg.stage||1,1,99)|0;
+ if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
  testShips.value=cl(+cfg.ships||3,1,9)|0;
  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
- testChallenge.checked=!!cfg.challenge;
+ testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);

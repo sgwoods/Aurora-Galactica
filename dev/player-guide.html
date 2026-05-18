@@ -289,6 +289,146 @@
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .challengeStageTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -421,7 +561,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 17, 2026</span>
+              <span class="metaValue">May 18, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -629,7 +769,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 17, 2026
+          Release 1.4.0.1 · Updated May 18, 2026
         </p>
       </aside>
     </main>

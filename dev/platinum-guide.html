@@ -289,6 +289,146 @@
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .challengeStageTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -421,7 +561,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 17, 2026</span>
+              <span class="metaValue">May 18, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -947,7 +1087,7 @@
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <p>Current branch-level next step:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
 <p>capture, bug reports, and Arcade Music/SFX controls</p>
 <ul><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
 <p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
@@ -1036,10 +1176,10 @@
 <ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
 <p>scattered preview harness set</p>
 <ul><li>a readable game arc and stage-band progression that can later support</li></ul>
-<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
+<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
 <p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>Current hosted-lane playable-preview coverage:</p>
 <ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
@@ -1211,7 +1351,7 @@
 <p>leave a clear follow-up path toward automation</p>
 <p>This is how we stay agile without relying on memory-only fixes.</p>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
@@ -1224,7 +1364,7 @@
 <ol><li>hosted <code>/production</code></li></ol>
 <ul><li>official public promise</li><li>should only move from an approved hosted <code>/beta</code> candidate</li></ul>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/release-authority.json">release-authority.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/release-authority.json">release-authority.json</a></li></ul>
 <h3>Release Scope Model</h3>
 <p>We now need to think about release work in three scopes, not one:</p>
 <ol><li><code>platform candidate</code></li></ol>
@@ -1284,7 +1424,7 @@
 <ul><li><code>npm run harness:check:galaxy-guardians-visual-readability</code></li><li><code>npm run harness:check:galaxy-guardians-audio-character</code></li><li><code>npm run harness:check:gameplay-adapter-boundaries</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li></ul>
 <p>The standing aggregate process gate is:</p>
 <ul><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
-<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
+<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
 <p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
@@ -1321,7 +1461,7 @@
 <p>summary data to explain the release without exposing the whole engineering workspace.</p>
 <h3>Supabase Data API Access Gate</h3>
 <p>Platinum&#39;s auth, profile, and leaderboard paths use Supabase through the Data API. The maintained access contract is:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>This is now a release-hardening gate because Supabase public-schema tables need explicit grants for new projects beginning May 30, 2026 and for existing projects by October 30, 2026.</p>
 <p>The source-level gate is:</p>
 <ul><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul>
@@ -1361,9 +1501,9 @@
 <ul><li><code>npm run harness:score:quality-conformance</code> is the current Aurora numeric</li></ul>
 <p>roll-up gate.</p>
 <ul><li>The readable current table and next-gap interpretation live in</li></ul>
-<p><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
 <ul><li>When this roll-up changes materially, update</li></ul>
-<p><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
 <ul><li><code>node tools/harness/check-galaxy-guardians-visual-readability.js</code> when the</li></ul>
 <p>changed surface touches Guardians sprites, role palettes, preview rendering, hit feedback, or gameplay-scale visual identity.</p>
 <h4>Profile C: Boundary change</h4>
@@ -1438,7 +1578,7 @@
 <ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1472,7 +1612,7 @@
           </table>
         </div>
 <p>The maintained SQL access contract is:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>The contract is intentionally not a full database schema. It records the browser-visible tables, required grants, and RLS policies that make the current runtime behavior reproducible.</p>
 <h3>Release Gate</h3>
 <p>The automated source gate is:</p>
@@ -1758,7 +1898,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 17, 2026
+          Release 1.4.0.1 · Updated May 18, 2026
         </p>
       </aside>
     </main>

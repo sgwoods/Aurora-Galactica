@@ -289,6 +289,146 @@
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .challengeStageTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -462,7 +602,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 17, 2026</span>
+              <span class="metaValue">May 18, 2026</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -494,7 +634,7 @@
           </div>
           <p class="releaseNoteSummary">Shipped the deliberate 1.4.0 public family on Platinum, promoting the reviewed beta candidate into hosted `/production` with the merged Galaxy Guardians playable/conformance tranche, player-two and watch-mode review work, replay/trophy follow-through, and side-by-side conformance/documentation surfaces.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.4.0_PRODUCTION.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.4.0_PRODUCTION.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: 2026-05-14</p>
@@ -546,7 +686,7 @@
           </div>
           <p class="releaseNoteSummary">Cut the first deliberate 1.4.0 beta family from merged main, keeping production stable on 1.3.0 while moving hosted `/dev` and hosted `/beta` onto the next minor-candidate line with the full Guardians playable/conformance tranche, side-by-side game conformance entry points, and a cleaner multi-game release story.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.4.0_BETA_1.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.4.0_BETA_1.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: May 14, 2026</p>
@@ -630,7 +770,7 @@
           </div>
           <p class="releaseNoteSummary">Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: May 12, 2026</p>
@@ -741,7 +881,7 @@
           </div>
           <p class="releaseNoteSummary">Prepared the post-production hosted-dev review increment with refreshed conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, persona distribution evidence, and a measured calibrated ship-loss audio cue improvement. This was the review bundle later accepted and promoted into the public 1.3.0 family.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: May 11, 2026</p>
@@ -863,7 +1003,7 @@
           </div>
           <p class="releaseNoteSummary">Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.3.0_PRODUCTION.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.3.0_PRODUCTION.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Aurora Galactica&#39;s <code>1.3.0</code> production release is now live on Platinum.</p>
@@ -906,7 +1046,7 @@
           </div>
           <p class="releaseNoteSummary">Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.2.3_BUILD_532.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.2.3_BUILD_532.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Aurora Galactica&#39;s latest production refresh is now live on Platinum:</p>
@@ -944,7 +1084,7 @@
           </div>
           <p class="releaseNoteSummary">Polished Aurora&#39;s score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: April 9, 2026</p>
@@ -987,7 +1127,7 @@
           </div>
           <p class="releaseNoteSummary">Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: April 9, 2026</p>
@@ -1028,7 +1168,7 @@
           </div>
           <p class="releaseNoteSummary">Bundled the first Platinum fast-follow Aurora fixes: dual-fighter runs now continue correctly after a single-ship loss, challenge stages present as bonus stages without consuming normal stage numbering, end-of-run carry/capture visuals no longer leak under results, and startup/wait-mode shell copy now follows a clearer platform-versus-application ownership model.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.2.1_TRUST_FIX.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.2.1_TRUST_FIX.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: April 7, 2026</p>
@@ -1071,7 +1211,7 @@
           </div>
           <p class="releaseNoteSummary">Reframed Aurora Galactica as the first playable application on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted `/dev` alongside hosted `/beta` and hosted `/production`, and established the current hosted docs and release ladder around the Platinum launch.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: April 7, 2026</p>
@@ -1111,7 +1251,7 @@
           </div>
           <p class="releaseNoteSummary">Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: April 2, 2026</p>
@@ -1152,7 +1292,7 @@
           </div>
           <p class="releaseNoteSummary">Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.0.1_HOTFIX.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.0.1_HOTFIX.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: March 31, 2026</p>
@@ -1192,7 +1332,7 @@
           </div>
           <p class="releaseNoteSummary">Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.0.0_BUILD_284.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.0.0_BUILD_284.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: March 31, 2026</p>
@@ -1232,7 +1372,7 @@
           </div>
           <p class="releaseNoteSummary">Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring.</p>
           <div class="releaseNoteActions">
-            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/6d76050d1ee7f4452c2306d8c4ee7f3d809be687/RELEASE_NOTE_1.0.0_LAUNCH.md">Open source markdown</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/e583b55892207f6f71ed7a3c125adac6ea091d27/RELEASE_NOTE_1.0.0_LAUNCH.md">Open source markdown</a>
             <a class="button" href="release-dashboard.html">Back to release dashboard</a>
           </div>
           <div class="markdown"><p>Date: March 30, 2026</p>
@@ -1302,7 +1442,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 17, 2026
+          Release 1.4.0.1 · Updated May 18, 2026
         </p>
       </aside>
     </main>
