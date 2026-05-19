@@ -289,6 +289,231 @@
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail,
+    .levelVisualDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList,
+    .levelVisualList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary,
+    .levelVisualSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small,
+    .levelVisualTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -377,9 +602,19 @@
       color:#edf7ff;
       font-size:.95em;
     }
+    .markdown blockquote{
+      margin:0 0 16px;
+      padding:14px 16px 14px 18px;
+      border-left:4px solid rgba(122,195,255,0.55);
+      border-radius:18px;
+      background:rgba(122,195,255,0.08);
+    }
+    .markdown blockquote p:last-child{
+      margin-bottom:0;
+    }
     @media (max-width: 980px){
       .shell{grid-template-columns:1fr}
-      .toc{position:static; order:-1}
+      .toc{position:static; order:0}
     }
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
@@ -411,7 +646,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 15, 2026</span>
+              <span class="metaValue">May 19, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -422,6 +657,7 @@
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Play production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Play beta build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
@@ -618,7 +854,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 15, 2026
+          Release 1.4.0.1 · Updated May 19, 2026
         </p>
       </aside>
     </main>
