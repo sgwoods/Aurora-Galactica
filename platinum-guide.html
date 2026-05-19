@@ -289,6 +289,231 @@
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail,
+    .levelVisualDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList,
+    .levelVisualList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary,
+    .levelVisualSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small,
+    .levelVisualTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -377,9 +602,19 @@
       color:#edf7ff;
       font-size:.95em;
     }
+    .markdown blockquote{
+      margin:0 0 16px;
+      padding:14px 16px 14px 18px;
+      border-left:4px solid rgba(122,195,255,0.55);
+      border-radius:18px;
+      background:rgba(122,195,255,0.08);
+    }
+    .markdown blockquote p:last-child{
+      margin-bottom:0;
+    }
     @media (max-width: 980px){
       .shell{grid-template-columns:1fr}
-      .toc{position:static; order:-1}
+      .toc{position:static; order:0}
     }
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
@@ -411,16 +646,17 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 14, 2026</span>
+              <span class="metaValue">May 19, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">1.4.0 multi-game public release</span>
+              <span class="metaValue">Forward conformance measurement and sprite-readability guardrail pass</span>
             </div>
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
@@ -730,13 +966,14 @@
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/00-boot.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/15-game-picker.js</code></li></ul>
 <h4>Shared services</h4>
 <p>Platinum owns shared service boundaries that should not be rewritten for each pack:</p>
-<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li></ul>
+<ul><li>auth and pilot-session adapters</li><li>leaderboard fetch and submit policy</li><li>feedback transport policy</li><li>replay/session plumbing</li><li>opt-in Arcade Music playback policy</li><li>shared replay/video-capture/export path as it matures</li></ul>
 <p>This is implemented primarily through:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/03-platform-services.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/04-leaderboard-ui.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/11-leaderboard-service.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/12-auth-session.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/02-replay-telemetry.js</code></li></ul>
 <h4>Shared contracts</h4>
 <p>Platinum currently depends on a shared application contract that is real in practice even though it still needs further formalization.</p>
 <p>The main contract areas are:</p>
-<ul><li>game-pack identity</li><li>game-pack version and platform-compatibility fields</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li></ul>
+<ul><li>game-pack identity</li><li>game-pack version and platform-compatibility fields</li><li>shell theme selection</li><li>supported capabilities</li><li>entity model compatibility</li><li>stage and scoring hooks</li><li>application-owned front-door identity surfaces shown by the shell</li><li>platform-owned startup, wait-mode, and release-cycle shell copy</li><li>application-aware use of pilot sign-in, scores, replay/video capture,</li></ul>
+<p>bug-report transport, and music controls inside the shared frame</p>
 <p>See also:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/src/js/13-aurora-game-pack.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/src/js/14-entity-model.js</code></li><li><code>/Users/steven/Documents/Codex-Test1/PLATINUM_INTERFACE_REVIEW.md</code></li></ul>
 <h3>Applications On Platinum</h3>
@@ -747,6 +984,9 @@
 <p>own score identity, ending flow, and platform-validation value</p>
 <p>The application-side separation is documented in:</p>
 <ul><li><code>/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md</code></li></ul>
+<p>As the second game firms up, Platinum should prove not only that it can host a different ruleset, but that it can host that game through the same class of platform-owned frame capabilities Aurora already uses:</p>
+<ul><li>pilot sign-in and pilot-card surfaces</li><li>high scores, leaderboard, trophy, and pilot-record surfaces</li><li>replay and future video-capture/export surfaces</li><li>bug-report and feedback transport surfaces</li><li>Arcade Music, SFX, and volume/mute controls</li></ul>
+<p>These should feel like platform capabilities with game-aware rendering, not Aurora-only conveniences.</p>
 <h3>Platform Is Host, Not Prison</h3>
 <p>Platinum is the current host and public release shell.</p>
 <p>It should not become the only imaginable way a game can exist.</p>
@@ -932,7 +1172,9 @@
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <p>Current branch-level next step:</p>
-<ul><li><a href="GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
+<p>capture, bug reports, and Arcade Music/SFX controls</p>
+<ul><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
 <p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
 <h3>Application Responsibilities</h3>
 <p>A Platinum application should own:</p>
@@ -940,6 +1182,8 @@
 <p>game-owned persona expectations in <code>GAME_CONFORMANCE_CATALOG.md</code></p>
 <ul><li>application identity on the front door such as title and feature line</li><li>its own version line and changelog</li><li>its own conformance artifacts and readiness gates</li><li>its own harnesses for game behavior</li><li>its own longer-surface review logic when the game grows beyond a single</li></ul>
 <p>playable slice</p>
+<ul><li>its own clean mapping into shared platform surfaces such as high scores,</li></ul>
+<p>pilot records, replay/video capture, bug reports, and music controls</p>
 <ul><li>optional shell preferences that remain within the platform shell contract</li></ul>
 <p>A Platinum application should not own:</p>
 <ul><li>the shared hosted release ladder or authority mechanism</li><li>the shared hosted docs system</li><li>shared auth or score transport policy</li><li>shell layout regions</li><li>lane publishing rules</li><li>platform-only boot and pack-selection behavior</li><li>startup and wait-mode shell copy that promotes the platform or other applications</li></ul>
@@ -974,6 +1218,11 @@
 <p>The shell front door now needs a firmer split than it had during the single-game era.</p>
 <p>The direction is:</p>
 <ul><li>platform copy explains the host, hosted lanes, docs, and cross-application surfaces</li><li>application copy explains gameplay, identity, and game-specific flavor</li><li>preview-only applications may override platform copy only when the override is still about preview status rather than gameplay rules</li></ul>
+<h4>Shared frame parity</h4>
+<p>The shell should not make Aurora feel first-class while other games feel like guests.</p>
+<p>For Guardians to count as a serious second application, the shared frame should support it across the same families of platform capability Aurora already uses:</p>
+<ul><li>pilot sign-in and pilot-card framing</li><li>high-score, leaderboard, trophy, and pilot-record surfaces</li><li>replay and future video-capture/export surfaces</li><li>bug-report and feedback transport surfaces</li><li>Arcade Music, SFX, and mute/volume controls</li></ul>
+<p>Those surfaces remain platform-owned, but they must become application-aware and game-key-clean instead of implicitly assuming Aurora.</p>
 <h4>Shared naming residue</h4>
 <p>Some older names remain Aurora-shaped even when they are now functionally part of the platform.</p>
 <p>These should be treated as transitional, not as permission to blur the boundary again.</p>
@@ -1011,9 +1260,11 @@
 <p>The next application proof is maturing the first playable slice into a minimally complete game loop. That means the existing lifecycle path should now grow beyond preview-only framing and earn:</p>
 <ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
 <p>scattered preview harness set</p>
+<ul><li>a readable game arc and stage-band progression that can later support</li></ul>
+<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
 <p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
-<ul><li><a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>Current hosted-lane playable-preview coverage:</p>
 <ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
@@ -1185,7 +1436,7 @@
 <p>leave a clear follow-up path toward automation</p>
 <p>This is how we stay agile without relying on memory-only fixes.</p>
 <p>See also:</p>
-<ul><li><a href="DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
@@ -1198,7 +1449,7 @@
 <ol><li>hosted <code>/production</code></li></ol>
 <ul><li>official public promise</li><li>should only move from an approved hosted <code>/beta</code> candidate</li></ul>
 <p>See also:</p>
-<ul><li><a href="MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="release-authority.json">release-authority.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/release-authority.json">release-authority.json</a></li></ul>
 <h3>Release Scope Model</h3>
 <p>We now need to think about release work in three scopes, not one:</p>
 <ol><li><code>platform candidate</code></li></ol>
@@ -1220,6 +1471,15 @@
 <ul><li><code>release-notes.json</code></li><li><code>release-dashboard.json</code></li><li>detailed release note for the candidate family</li><li><code>README.md</code></li><li><code>PLAN.md</code></li><li><code>PRODUCT_ROADMAP.md</code></li><li><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></li><li><code>CONFORMANCE_METRICS_OVERVIEW.md</code></li><li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li><li><code>CONFORMANCE_ECONOMICS.md</code></li><li><code>RELEASE_POLICY.md</code></li><li><code>RELEASE_READINESS_REVIEW.md</code></li><li><code>ARCHITECTURE.md</code></li><li><code>PLATINUM.md</code></li><li><code>APPLICATIONS_ON_PLATINUM.md</code></li><li>this testing and release gate document</li><li>hosted <code>project-guide.html</code></li><li>hosted <code>platinum-guide.html</code></li><li>hosted <code>player-guide.html</code></li></ul>
 <p>This was not enforced strongly enough before <code>1.2.0</code> reached hosted <code>/production</code>.</p>
 <p>From now on, it should be treated as part of the release contract.</p>
+<h3>Release Conformance Documentation Freshness</h3>
+<p>Release-facing conformance surfaces now have a stricter rule:</p>
+<ul><li>if hosted docs or dashboards claim a current conformance read, the underlying</li></ul>
+<p>release-owned analysis artifacts must be intentionally refreshed as part of release prep</p>
+<ul><li>specifically:<ul><li><code>reference-artifacts/analyses/conformance-economics/latest.json</code></li><li><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code></li><li><code>reference-artifacts/analyses/application-artifact-conformance/latest.json</code></li></ul></li></ul>
+<p>The practical refresh path is:</p>
+<ul><li><code>npm run harness:refresh:release-conformance-docs</code></li><li><code>npm run build</code></li></ul>
+<p>Then commit the refreshed artifacts before any serious <code>/dev</code>, <code>/beta</code>, or <code>/production</code> publish attempt.</p>
+<p>The publish preflight and documentation-freshness checks should now fail if those release-owned conformance artifacts are obviously stale against the current release-prep head.</p>
 <h3>Front-Door Copy Gate</h3>
 <p>Startup, initiation, and wait-mode copy is part of the release surface.</p>
 <p>For any candidate where front-door copy changes, we should verify:</p>
@@ -1244,7 +1504,9 @@
 <ul><li><code>node tools/harness/check-platinum-pack-boot.js</code></li><li><code>node tools/harness/check-game-picker-shell.js</code></li><li><code>node tools/harness/check-front-door-copy-surface.js</code></li></ul>
 <p>The release process should prefer running the smallest relevant set of checks that covers the actual risk, rather than running every check for every change.</p>
 <p>Harness work should also follow the project reference program:</p>
-<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>platform/application seam changes should prove that the boundary still holds</li></ul>
+<ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>when committed reference artifacts can settle a question, prefer that over</li></ul>
+<p>human-only evaluation</p>
+<ul><li>platform/application seam changes should prove that the boundary still holds</li></ul>
 <h3>Galaxy first-class parity</h3>
 <p><code>Galaxy Guardians</code> now has enough harness surface that we should treat it as a first-class parity program, not only as a preview experiment.</p>
 <p>That means every serious Galaxy review should preserve all three layers:</p>
@@ -1256,7 +1518,7 @@
 <ul><li><code>npm run harness:check:galaxy-guardians-visual-readability</code></li><li><code>npm run harness:check:galaxy-guardians-audio-character</code></li><li><code>npm run harness:check:gameplay-adapter-boundaries</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li></ul>
 <p>The standing aggregate process gate is:</p>
 <ul><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
-<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
+<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
 <p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
@@ -1271,6 +1533,8 @@
 <p>not buried only in Platinum-specific release logic</p>
 <ul><li>use Platinum as the host contract and tooling surface for launch, not as a</li></ul>
 <p>substitute for game-owned reference truth</p>
+<ul><li>treat human observation as fallback confirmation when the evidence package</li></ul>
+<p>still cannot encode the question, not as the default baseline</p>
 <p>For a new game, the first playable slice should cite:</p>
 <ul><li>source manifest</li><li>selected reference windows</li><li>event log or semantic profile</li><li>initial conformance targets</li><li>candidate harness plan</li><li>explicit confidence and known gaps</li></ul>
 <p>If a release candidate includes a new or materially changed game behavior, its release notes and dashboard should identify which ingestion package or correspondence artifact grounds the claim.</p>
@@ -1291,7 +1555,7 @@
 <p>summary data to explain the release without exposing the whole engineering workspace.</p>
 <h3>Supabase Data API Access Gate</h3>
 <p>Platinum&#39;s auth, profile, and leaderboard paths use Supabase through the Data API. The maintained access contract is:</p>
-<ul><li><a href="SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>This is now a release-hardening gate because Supabase public-schema tables need explicit grants for new projects beginning May 30, 2026 and for existing projects by October 30, 2026.</p>
 <p>The source-level gate is:</p>
 <ul><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul>
@@ -1331,9 +1595,9 @@
 <ul><li><code>npm run harness:score:quality-conformance</code> is the current Aurora numeric</li></ul>
 <p>roll-up gate.</p>
 <ul><li>The readable current table and next-gap interpretation live in</li></ul>
-<p><a href="CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
 <ul><li>When this roll-up changes materially, update</li></ul>
-<p><a href="QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
 <ul><li><code>node tools/harness/check-galaxy-guardians-visual-readability.js</code> when the</li></ul>
 <p>changed surface touches Guardians sprites, role palettes, preview rendering, hit feedback, or gameplay-scale visual identity.</p>
 <h4>Profile C: Boundary change</h4>
@@ -1408,7 +1672,7 @@
 <ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><a href="PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1442,7 +1706,7 @@
           </table>
         </div>
 <p>The maintained SQL access contract is:</p>
-<ul><li><a href="supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/d24dd75c21f937ca97b4d64de5ea2242baa373a9/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>The contract is intentionally not a full database schema. It records the browser-visible tables, required grants, and RLS policies that make the current runtime behavior reproducible.</p>
 <h3>Release Gate</h3>
 <p>The automated source gate is:</p>
@@ -1727,8 +1991,8 @@
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 14, 2026
+          Latest release note: <strong>Forward conformance measurement and sprite-readability guardrail pass</strong><br>
+          Release 1.4.0.1 · Updated May 19, 2026
         </p>
       </aside>
     </main>
