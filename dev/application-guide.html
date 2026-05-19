@@ -2900,8 +2900,8 @@
 
     <tr>
       <td><strong>Sprites: live runtime canvas capture vs inferred Galaga pixel models</strong><br><span class="docMeta">Measured from isolated live canvas crops</span></td>
-      <td><strong>5.8/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against isolated live-rendered canvas captures</span></td>
-      <td>8 live sprite captures; weakest runtime sprite but-line 4.8/10; capture mode isolated-live-canvas-sprite-crops.</td>
+      <td><strong>6.6/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against isolated live-rendered canvas captures</span></td>
+      <td>8 live sprite captures; weakest runtime sprite rogue-fighter 6.1/10; capture mode isolated-live-canvas-sprite-crops.</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
       <td>Expand from static isolated poses into animation-phase, dive-rotation, formation-context, and capture/rescue runtime sprite windows.</td>
     </tr>
@@ -2909,8 +2909,8 @@
 
     <tr>
       <td><strong>Sprites: live runtime crops vs promoted Galaga target crops</strong><br><span class="docMeta">first-pass-normalized-image-grid-comparison</span></td>
-      <td><strong>4.5/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against promoted multi-pose target crop library</span></td>
-      <td>8 live runtime crop PNGs compared against 33 promoted target crops; weakest player-fighter 4/10; best matched target player-fighter-single-front. Target-relative cadence sequence score 5.3/10 across 3 sequence window(s).</td>
+      <td><strong>5.4/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against promoted multi-pose target crop library</span></td>
+      <td>8 live runtime crop PNGs compared against 33 promoted target crops; weakest challenge-dragonfly 2.6/10; best matched target challenge-green-family-front. Target-relative cadence sequence score 5.5/10 across 3 sequence window(s).</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code></td>
       <td>Use the top candidate mismatch and target-sequence data to update sprite geometry, flap cadence, target mappings, and composite targets; then expand to dive, capture/rescue, projectile, explosion, tractor beam, and challenge-stage specialty motion.</td>
     </tr>
@@ -2919,7 +2919,7 @@
     <tr>
       <td><strong>Sprite motion: flapping, pulsing, dive poses, and transition animation</strong><br><span class="docMeta">First temporal phase windows captured; full motion score still pending</span></td>
       <td><strong>4/4 planned motion axes covered</strong><br><span class="docMeta">Target: Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions</span></td>
-      <td>Static live-canvas pose score exists at 5.8/10; 4/4 planned motion axes have at least seed coverage. Covered: two-phase flap/pulse static sprite delta for bee, butterfly, and boss families; full flap-cycle cadence windows for bee, butterfly, and boss families; forced dive/rotation pose silhouettes for bee, butterfly, and boss families; capture-beam, carried-fighter, and dual-fighter transition seed poses. Full roadmap: flap-cycle cadence and alternating wing/body pixels over full temporal windows; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.</td>
+      <td>Static live-canvas pose score exists at 6.6/10; 4/4 planned motion axes have at least seed coverage. Covered: two-phase flap/pulse static sprite delta for bee, butterfly, and boss families; full flap-cycle cadence windows for bee, butterfly, and boss families; forced dive/rotation pose silhouettes for bee, butterfly, and boss families; capture-beam, carried-fighter, and dual-fighter transition seed poses. Full roadmap: flap-cycle cadence and alternating wing/body pixels over full temporal windows; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
       <td>Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.</td>
     </tr>
@@ -2944,11 +2944,11 @@
   
 
     <tr>
-      <td><strong>Reference sprite targets: promoted sheet pose crops</strong><br><span class="docMeta">First-pass source-sheet target library; target-library-ready-runtime-comparison-pending</span></td>
+      <td><strong>Reference sprite targets: promoted sheet pose crops</strong><br><span class="docMeta">First-pass source-sheet target library; trusted-core-formation-targets-ready-runtime-comparison-pending</span></td>
       <td><strong>33 promoted crops across 7 role sets</strong><br><span class="docMeta">Target: Multi-pose target sets for player, bee, butterfly, boss, challenge aliens, projectiles, explosions, and tractor beam</span></td>
-      <td>33 exact 1x source-sheet crops; roles bee-zako, boss-galaga, butterfly-escort, challenge-specialty-aliens, player-fighter, projectiles-and-impacts, tractor-beam; source-pixel exact yes.</td>
+      <td>33 exact 1x source-sheet crops; roles bee-zako, boss-galaga, butterfly-escort, challenge-specialty-aliens, player-fighter, projectiles-and-impacts, tractor-beam; source-pixel exact pending.</td>
       <td><code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code></td>
-      <td>Compare Aurora live runtime crops against these promoted multi-pose targets and add temporal windows for flap, dive, damage, capture, rescue, and challenge-stage specialty motion.</td>
+      <td>Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites.</td>
     </tr>
   
 
@@ -2956,7 +2956,7 @@
       <td><strong>Audio cues: runtime cue assets vs Galaga-family references</strong><br><span class="docMeta">Primary user-experience gap</span></td>
       <td><strong>7.3/10</strong><br><span class="docMeta">Target: &gt;=7.5</span></td>
       <td>21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.</td>
-      <td><code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code><br><code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json</code></td>
+      <td><code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code><br><code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json</code></td>
       <td>Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change.</td>
     </tr>
   
@@ -2965,7 +2965,7 @@
       <td><strong>Audio timing and event alignment</strong><br><span class="docMeta">Guardrail measured in quality conformance</span></td>
       <td><strong>9/9 checks passed</strong><br><span class="docMeta">Target: All event-alignment checks pass with low drift</span></td>
       <td>Worst current delta 6.31 ms; worst drift from baseline 0 ms.</td>
-      <td><code>reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json</code></td>
+      <td><code>reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json</code></td>
       <td>Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips.</td>
     </tr>
   
@@ -2983,7 +2983,7 @@
       <td><strong>Frame, popups, shell controls, and icons</strong><br><span class="docMeta">Split from generic UI shell before final gate</span></td>
       <td><strong>9.2/10</strong><br><span class="docMeta">Target: &gt;=9.4</span></td>
       <td>12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.</td>
-      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json</code><br><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
+      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json</code><br><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
       <td>Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures.</td>
     </tr>
   
@@ -3579,13 +3579,573 @@
           </div>
         </section>
 
+        <section class="section" id="galaga-alien-motion-reference">
+          <div class="sectionHeader">
+            <h2>Alien Motion Reference</h2>
+            <p>Segmented Galaga alien video reference for pulse cadence, role taxonomy, and clean human-readable sprite identity. This sits between static crop extraction and gameplay trajectory scoring: it helps us see whether the sprite identities move and pulse like the target before we promote a conformance claim.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ingested-reference-motion-taxonomy. User-supplied Galaga alien motion/pulse video ingested as a durable sprite-motion reference for taxonomy, pulse cadence, and clean role-silhouette review.</p>
+            <p><strong>Conformance use:</strong> This artifact is stronger for human-readable taxonomy, pulse cadence, and clean silhouette targets than the currently polluted crop boxes in some rows. It should not replace source-sheet exact crops alone; it should validate and correct target crops, then seed temporal pulse/cadence scoring.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-motion-reference/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_MOTION_REFERENCE.md</code>. <strong>Generated:</strong> 2026-05-19T16:46:29.967Z.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Duration</span><strong>20.533s</strong><span>30 fps</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame Size</span><strong>576x576</strong><span>source video pixels</span></div>
+              <div class="metricCard"><span class="metricLabel">Role Families</span><strong>11</strong><span>taxonomy rows</span></div>
+              <div class="metricCard"><span class="metricLabel">Next Fix</span><strong>clean crops</strong><span>boss, bee, butterfly first</span></div>
+            </div>
+          </div>
+          <div class="catalogMedia" style="margin-top:16px;">
+            <div class="catalogMediaGrid">
+              
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Segmented alien pulse reference video</span>
+      <video class="catalogMediaVideo" controls preload="metadata" poster="assets/catalog-media/2f9f74f3c9-alien-pulse-contact-sheet-1fps.png" aria-label="Segmented alien pulse reference video">
+        <source src="assets/catalog-media/dd51c4ec79-galaga-alien-pulse-reference.mp4" type="video/mp4">
+        Your browser cannot play this evidence video. Open <a href="assets/catalog-media/dd51c4ec79-galaga-alien-pulse-reference.mp4">the clip</a> directly.
+      </video>
+      <span class="catalogMediaNote">User-supplied segmented Galaga alien reference showing named roles and pulse/motion phases.</span>
+    </div>
+  
+              
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Alien pulse contact sheet</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/2f9f74f3c9-alien-pulse-contact-sheet-1fps.png" alt="Alien pulse contact sheet" loading="lazy">
+      <details class="catalogMediaExpand isContactSheet">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>Alien pulse contact sheet</strong>
+            <p>Contact sheets are supporting visual evidence for scanning motion shape, frame progression, and density. They are not the primary score explanation; use the surrounding target/current/conformance text for the human-readable judgment, and scroll this panel at native scale when the pixels matter.</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="" src="assets/catalog-media/2f9f74f3c9-alien-pulse-contact-sheet-1fps.png" alt="Alien pulse contact sheet expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">1 fps review sheet for quickly scanning the whole segmented video.</span>
+    </div>
+  
+              
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">Alien pulse motion sheet</span>
+      <img class="catalogMediaImg" src="assets/catalog-media/659836d1ec-alien-pulse-motion-sheet-2fps.png" alt="Alien pulse motion sheet" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>Alien pulse motion sheet</strong>
+            <p>2 fps review sheet for inspecting pulse cadence and transition frames.</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="" src="assets/catalog-media/659836d1ec-alien-pulse-motion-sheet-2fps.png" alt="Alien pulse motion sheet expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">2 fps review sheet for inspecting pulse cadence and transition frames.</span>
+    </div>
+  
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Reference Use</th>
+                  <th>Next Extraction</th>
+                  <th>Priority Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Fighter</strong><br><span class="docMeta"><code>player-fighter</code><br>Player fighter, captured fighter, dual fighter</span></td>
+      <td>Clean player silhouette, red/white/blue color placement, capture/rescue meaning, dual-fighter context.</td>
+      <td>Extract front, captured-red, and dual-fighter pulse/context crops.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bee</strong><br><span class="docMeta"><code>bee-zako</code><br>Zako, attack drone</span></td>
+      <td>Formation drone role, flank/wing pulse, small high-count enemy identity.</td>
+      <td>Extract closed/open pulse frames and score against Aurora bee-line cadence.</td>
+      <td>High priority: core formation aliens need clean pulse pairs.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Butterfly</strong><br><span class="docMeta"><code>butterfly-escort</code><br>Leader convoy, escort</span></td>
+      <td>Red/white/blue block silhouette and leader-escort pulse identity.</td>
+      <td>Extract closed/open pulse frames and dive silhouette target.</td>
+      <td>High priority: core formation aliens need clean pulse pairs.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Boss</strong><br><span class="docMeta"><code>boss-galaga</code><br>Boss Galaga, squad leader</span></td>
+      <td>Boss wing/body shape, open/closed pulse, capture-beam host context, two-hit target identity.</td>
+      <td>Replace polluted boss crop targets with clean pulse frames and damage-state placeholders.</td>
+      <td>Highest priority: current target evidence has visible crop pollution.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Scorpion</strong><br><span class="docMeta"><code>scorpion</code><br>Morph target</span></td>
+      <td>Later-round morph target taxonomy and distinctive yellow/cyan/red silhouette.</td>
+      <td>Extract morph target front pose and any pulse frame available.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bosconian-style morph</strong><br><span class="docMeta"><code>bosconian</code><br>Bosconian, green morph target</span></td>
+      <td>Later-round morph novelty role and green/yellow/red color grammar.</td>
+      <td>Extract front pose for role taxonomy and future morph scoring.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Galaxian</strong><br><span class="docMeta"><code>galaxian</code><br>Galaxian morph target</span></td>
+      <td>Later-round morph novelty and classic Galaxian callback silhouette.</td>
+      <td>Extract front pose and compare to Aurora specialty enemy families.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Dragonfly</strong><br><span class="docMeta"><code>dragonfly</code><br>Challenge-round bonus target</span></td>
+      <td>Challenge-only alien identity and non-combat bonus-stage target shape.</td>
+      <td>Extract front pose and challenge-stage movement/pulse sample.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Satellite</strong><br><span class="docMeta"><code>satellite</code><br>Challenge-round bonus target</span></td>
+      <td>Challenge-only alien identity, rotation-like silhouette, and late-stage novelty.</td>
+      <td>Extract front/rotation pulse sequence for challenge-stage scoring.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Starship</strong><br><span class="docMeta"><code>starship</code><br>Challenge-round bonus target</span></td>
+      <td>Challenge-only alien identity and large blue/red target silhouette.</td>
+      <td>Extract front pose and compare against Aurora challenge-mosquito/starship proxies.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Tractor Beam</strong><br><span class="docMeta"><code>tractor-beam</code><br>Capture beam</span></td>
+      <td>Beam geometry and capture-state screen grammar.</td>
+      <td>Extract beam width sequence for capture lifecycle visual scoring.</td>
+      <td>Use after core formation roles are corrected.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-target-evidence-audit">
+          <div class="sectionHeader">
+            <h2>Trusted Target Evidence Audit</h2>
+            <p>Human review found that some visually precise target crops were precise about the wrong thing: polluted sheet cells, partial neighboring sprites, or ambiguous evidence. This audit separates trusted target evidence from provisional planning evidence before scores drive more runtime sprite work.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> trusted-target-manifest-active. <strong>Next best step:</strong> Regenerate runtime-vs-target scoring against the trusted Boss, Bee, and Butterfly primary targets, then promote player-fighter and temporal pulse-pair targets.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-evidence-audit/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_TARGET_EVIDENCE_AUDIT.md</code>. <strong>Generated:</strong> 2026-05-19T18:24:11.146Z.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Audited Roles</span><strong>4</strong><span>Boss, Bee, Butterfly, Fighter first</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Primaries</span><strong>4</strong><span>usable for scoring now</span></div>
+              <div class="metricCard"><span class="metricLabel">Motion Crops</span><strong>6</strong><span>cleaned from segmented video</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Cells</span><strong>18</strong><span>do not overclaim</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Evidence</th>
+                  <th>Previous Risk</th>
+                  <th>Scoring Use</th>
+                  <th>Player Meaning</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Boss Galaga</strong><br><span class="docMeta"><code>boss-galaga</code><br>trusted-primary-target-available<br>confidence: medium-high</span></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/1ae3a56f4a-boss-galaga-formation-front.png" alt="boss-galaga-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-formation-front</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/1ae3a56f4a-boss-galaga-formation-front.png" alt="boss-galaga-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-flap-a</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/3f1722514a-boss-galaga-flap-a.png" alt="boss-galaga-flap-a" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-flap-a</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3f1722514a-boss-galaga-flap-a.png" alt="boss-galaga-flap-a expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-flap-b</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/4b38f42402-boss-galaga-flap-b.png" alt="boss-galaga-flap-b" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-flap-b</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/4b38f42402-boss-galaga-flap-b.png" alt="boss-galaga-flap-b expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  </td>
+      <td>The prior sheet-cell primary crop visibly included neighboring/polluted pixels and was misleading in the Application Guide.</td>
+      <td>Primary target for boss-line runtime comparison; sheet dive cells remain provisional until recropped from gameplay/motion windows.</td>
+      <td>Boss identity needs to read as the capture-beam host and high-value threat before motion and damage states are tuned.</td>
+      <td>Promote clean boss dive, damage, tractor-beam host, and captured-fighter paired frames.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bee / Zako</strong><br><span class="docMeta"><code>bee-zako</code><br>trusted-primary-target-available<br>confidence: medium</span></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">bee-zako-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/e0ad372e6a-bee-zako-formation-front.png" alt="bee-zako-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>bee-zako-formation-front</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/e0ad372e6a-bee-zako-formation-front.png" alt="bee-zako-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  </td>
+      <td>The prior sheet-cell crop was usable as a source-sheet hint but too small and ambiguous as a primary visible target.</td>
+      <td>Primary formation target for bee-line; flap and dive sheet cells remain provisional evidence.</td>
+      <td>Bee sprites set the baseline fleet texture and need to stay readable during formation rows and fast challenge-stage entries.</td>
+      <td>Extract target pulse pairs and dive silhouettes from clean temporal windows.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Butterfly / Escort</strong><br><span class="docMeta"><code>butterfly-escort</code><br>trusted-primary-target-available<br>confidence: medium</span></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">butterfly-escort-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/7b57a2b1e9-butterfly-escort-formation-front.png" alt="butterfly-escort-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>butterfly-escort-formation-front</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7b57a2b1e9-butterfly-escort-formation-front.png" alt="butterfly-escort-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  </td>
+      <td>The prior sheet-cell crop was not reliable enough for a human-readable target row.</td>
+      <td>Primary formation target for but-line; flap and dive sheet cells remain provisional evidence.</td>
+      <td>Butterflies are the player’s main convoy-shape cue; their red/white/blue block silhouette must be recognizable at speed.</td>
+      <td>Extract target pulse pairs and dive/escort turns from gameplay/motion windows.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Player Fighter</strong><br><span class="docMeta"><code>player-fighter</code><br>trusted-primary-target-available<br>confidence: medium-high</span></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">player-fighter-single-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/80f8ae28df-player-fighter-single-front.png" alt="player-fighter-single-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>player-fighter-single-front</strong>
+            <p>accepted-trusted-motion-reference; frame 10s</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/80f8ae28df-player-fighter-single-front.png" alt="player-fighter-single-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference; frame 10s</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">player-fighter-dual-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/af543c23ff-player-fighter-dual-front.png" alt="player-fighter-dual-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>player-fighter-dual-front</strong>
+            <p>accepted-trusted-motion-reference-composite</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/af543c23ff-player-fighter-dual-front.png" alt="player-fighter-dual-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference-composite</span>
+    </div>
+  </td>
+      <td>Player ship proportions were corrected in runtime, but the earlier target crop lane still leaned on a tiny provisional source-sheet cell.</td>
+      <td>Primary target for player-fighter runtime comparison and the derived dual-fighter composite; turn/capture poses remain provisional.</td>
+      <td>The fighter must feel smaller, crisp, and separate from reserve icons while preserving shot alignment and dual-fighter readability.</td>
+      <td>Promote clean turn, captured, carried, rescue, and dual-fighter spacing evidence from true target gameplay windows.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-alien-temporal-targets">
+          <div class="sectionHeader">
+            <h2>Alien Temporal Targets</h2>
+            <p>Temporal sprite identity is now treated separately from static sprite identity. These rows define the pose sequences the runtime cadence scorer uses for Boss, Bee, and Butterfly, while clearly marking which parts are trusted motion-reference evidence and which parts are still provisional.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> mixed-confidence-temporal-target-sequences. <strong>Next best step:</strong> Promote true frame-timed Bee and Butterfly flap windows, then replace provisional source-sheet flap cells in this temporal target artifact.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>. <strong>Generated:</strong> 2026-05-19T18:24:11.103Z.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Temporal Rows</span><strong>3</strong><span>Boss, Bee, Butterfly</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Links</span><strong>5</strong><span>motion-reference crops</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Links</span><strong>4</strong><span>need better windows</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame-Timed Rows</span><strong>0</strong><span>target timing still pending</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Temporal Target</th>
+                  <th>Pose Sequence</th>
+                  <th>Evidence</th>
+                  <th>Source Read</th>
+                  <th>Scoring Use</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+    <tr>
+      <td><strong>Boss Galaga Pulse Pair</strong><br><span class="docMeta"><code>boss-line</code><br>trusted-color-pulse-pair-not-frame-timed<br>confidence: medium-high</span></td>
+      <td><code>formation-front</code><br><code>flap-a</code><br><code>flap-b</code><br><code>flap-b</code><br><code>flap-a</code><br><code>formation-front</code></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/1ae3a56f4a-boss-galaga-formation-front.png" alt="boss-galaga-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-formation-front</strong>
+            <p>accepted-trusted-motion-reference</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/1ae3a56f4a-boss-galaga-formation-front.png" alt="boss-galaga-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-flap-a</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/3f1722514a-boss-galaga-flap-a.png" alt="boss-galaga-flap-a" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-flap-a</strong>
+            <p>accepted-trusted-motion-reference</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3f1722514a-boss-galaga-flap-a.png" alt="boss-galaga-flap-a expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">boss-galaga-flap-b</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/4b38f42402-boss-galaga-flap-b.png" alt="boss-galaga-flap-b" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>boss-galaga-flap-b</strong>
+            <p>accepted-trusted-motion-reference</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/4b38f42402-boss-galaga-flap-b.png" alt="boss-galaga-flap-b expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference</span>
+    </div>
+  </td>
+      <td>Uses two cleaned boss identities visible in the segmented alien motion reference as a trusted color/pulse target pair.</td>
+      <td>Good enough to score role/color pulse and broad cadence transitions; not yet exact frame timing.</td>
+      <td>Extract a true frame-labeled boss animation window from gameplay or ROM-derived frame evidence.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Bee / Zako Pulse Pair</strong><br><span class="docMeta"><code>bee-line</code><br>mixed-trusted-formation-plus-provisional-flap-pair<br>confidence: medium-low</span></td>
+      <td><code>formation-front</code><br><code>flap-a</code><br><code>flap-b</code><br><code>flap-b</code><br><code>flap-a</code><br><code>formation-front</code></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">bee-zako-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/e0ad372e6a-bee-zako-formation-front.png" alt="bee-zako-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>bee-zako-formation-front</strong>
+            <p>accepted-trusted-motion-reference</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/e0ad372e6a-bee-zako-formation-front.png" alt="bee-zako-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">bee-zako-flap-a</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/67f3134c3b-bee-zako-flap-a.png" alt="bee-zako-flap-a" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>bee-zako-flap-a</strong>
+            <p>provisional-source-sheet-cell</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/67f3134c3b-bee-zako-flap-a.png" alt="bee-zako-flap-a expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">provisional-source-sheet-cell</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">bee-zako-flap-b</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/35a22aca41-bee-zako-flap-b.png" alt="bee-zako-flap-b" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>bee-zako-flap-b</strong>
+            <p>provisional-source-sheet-cell</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/35a22aca41-bee-zako-flap-b.png" alt="bee-zako-flap-b expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">provisional-source-sheet-cell</span>
+    </div>
+  </td>
+      <td>Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.</td>
+      <td>Useful for exposing Aurora Bee geometry and cadence gaps, but not sufficient for a final temporal conformance claim.</td>
+      <td>Promote clean Bee flap frames from a true animated target window.</td>
+    </tr>
+  
+
+    <tr>
+      <td><strong>Butterfly / Escort Pulse Pair</strong><br><span class="docMeta"><code>but-line</code><br>mixed-trusted-formation-plus-provisional-flap-pair<br>confidence: medium-low</span></td>
+      <td><code>formation-front</code><br><code>flap-a</code><br><code>flap-b</code><br><code>flap-b</code><br><code>flap-a</code><br><code>formation-front</code></td>
+      <td>
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">butterfly-escort-formation-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/7b57a2b1e9-butterfly-escort-formation-front.png" alt="butterfly-escort-formation-front" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>butterfly-escort-formation-front</strong>
+            <p>accepted-trusted-motion-reference</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7b57a2b1e9-butterfly-escort-formation-front.png" alt="butterfly-escort-formation-front expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">accepted-trusted-motion-reference</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">butterfly-escort-flap-a</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/89f59c897b-butterfly-escort-flap-a.png" alt="butterfly-escort-flap-a" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>butterfly-escort-flap-a</strong>
+            <p>provisional-source-sheet-cell</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/89f59c897b-butterfly-escort-flap-a.png" alt="butterfly-escort-flap-a expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">provisional-source-sheet-cell</span>
+    </div>
+  
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">butterfly-escort-flap-b</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/3196a5a1bc-butterfly-escort-flap-b.png" alt="butterfly-escort-flap-b" loading="lazy">
+      <details class="catalogMediaExpand">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>butterfly-escort-flap-b</strong>
+            <p>provisional-source-sheet-cell</p>
+          </div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3196a5a1bc-butterfly-escort-flap-b.png" alt="butterfly-escort-flap-b expanded" loading="lazy"></div>
+        </div>
+      </details>
+      <span class="catalogMediaNote">provisional-source-sheet-cell</span>
+    </div>
+  </td>
+      <td>Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.</td>
+      <td>Useful for exposing Aurora Butterfly geometry and cadence gaps, but not sufficient for a final temporal conformance claim.</td>
+      <td>Promote clean Butterfly flap frames from a true animated target window.</td>
+    </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="section" id="sprite-conformance-variation-plan">
           <div class="sectionHeader">
             <h2>Sprite Conformance Plan</h2>
             <p>Build one repeatable sprite pipeline that can reach high measured reference conformance, then branch into production-safe Aurora and future-game visual themes without losing the era, motion, and gameplay readability characteristics of the source.</p>
           </div>
           <div class="docWrap">
-            <p><strong>Plan status:</strong> active-plan. <strong>Next best step:</strong> Use the first-pass runtime-vs-promoted-target-crop and impact/explosion mismatch data to improve Aurora sprite geometry, event feedback, and target mappings; then add target-frame temporal scoring for flap, dive, damage, capture, rescue, projectile, explosion, and challenge-stage specialty behavior.</p>
+            <p><strong>Plan status:</strong> active-plan. <strong>Next best step:</strong> Promote a clean player-fighter target-crop, add temporal pulse-pair targets for Boss/Bee/Butterfly, then tune Aurora runtime-vs-target sprite geometry against the corrected target library before the next beta handoff.</p>
             <p>This plan separates the internal reference-conformance lane from the Aurora production theme lane. The goal is to ingest and measure toward a conforming experience, then let Aurora and later Platinum games ship distinctive original visual styles that preserve era, motion, role readability, and gameplay meaning.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/ingestion/sprite-conformance-variation-plan/plan-0.1.json</code>. <strong>Readable plan:</strong> <code>SPRITE_CONFORMANCE_VARIATION_STRATEGY.md</code>.</p>
           </div>
@@ -3828,13 +4388,13 @@
           </div>
           <div class="docWrap" style="margin-top:16px;">
             <h3>Promoted Galaga Target Crops</h3>
-            <p>The first exact source-sheet crop library is now promoted from the preview grids. These crops are target-lane evidence for measurement and review; they are not public production art. Aurora live runtime sprites are now compared against this multi-pose library, and the next lift is deeper temporal windows for flap cadence, dive rotation, beam, explosion, capture, and challenge-stage motion.</p>
-            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TARGET_CROPS.md</code>. <strong>Generated:</strong> 2026-05-18T18:33:26.280Z.</p>
+            <p>The target crop library now combines trusted cleaned motion-reference crops for the core Boss, Bee, and Butterfly formation targets with provisional source-sheet pose crops for broader planning coverage. These crops are target-lane evidence for measurement and review; they are not public production art. Aurora live runtime sprites are compared against this multi-pose library, and the next lift is deeper temporal windows for flap cadence, dive rotation, beam, explosion, capture, and challenge-stage motion.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TARGET_CROPS.md</code>. <strong>Generated:</strong> 2026-05-19T18:23:33.733Z.</p>
             <div class="metricGrid">
-              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>33</strong><span>exact source-sheet images</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>33</strong><span>trusted plus provisional images</span></div>
               <div class="metricCard"><span class="metricLabel">Role Sets</span><strong>7</strong><span>player, aliens, effects, beam</span></div>
-              <div class="metricCard"><span class="metricLabel">Source Pixels</span><strong>1x exact</strong><span>no generated interpolation</span></div>
-              <div class="metricCard"><span class="metricLabel">Scoring Status</span><strong>target-library-ready-runtime-comparison-pending</strong><span>runtime comparison next</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Motion Crops</span><strong>6</strong><span>cleaned from video reference</span></div>
+              <div class="metricCard"><span class="metricLabel">Scoring Status</span><strong>trusted-core-formation-targets-ready-runtime-comparison-pending</strong><span>runtime comparison next</span></div>
             </div>
           </div>
           <div class="tableWrap" style="margin-top:16px;">
@@ -3922,7 +4482,7 @@
               <tbody>
                 
     <tr>
-      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>single-ship-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -3933,22 +4493,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>single-ship-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/80f8ae28df-player-fighter-single-front.png" alt="single-ship-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r1 c8<br><span class="docMeta"><code>112:0 16x16</code></span></td>
-      <td>96 lit px; B, R, W</td>
-      <td>Best first-pass front-facing fighter cell in the supplied sheet. Dual-fighter remains a composite scoring target.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>248:430 82x64</code></span></td>
+      <td>894 lit px; B, G, R, W, Y</td>
+      <td>Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target.</td>
     </tr>
   
 
     <tr>
-      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>player-fighter</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>turn-left</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -3959,12 +4519,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>turn-left</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/881d7654cf-player-fighter-turn-left.png" alt="turn-left expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r1 c6<br><span class="docMeta"><code>80:0 16x16</code></span></td>
@@ -3974,7 +4534,7 @@
   
 
     <tr>
-      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>player-fighter</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>turn-right</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -3985,12 +4545,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>turn-right</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7dbea50450-player-fighter-turn-right.png" alt="turn-right expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r1 c7<br><span class="docMeta"><code>96:0 16x16</code></span></td>
@@ -4000,7 +4560,7 @@
   
 
     <tr>
-      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>formation-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4011,22 +4571,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>formation-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/e0ad372e6a-bee-zako-formation-front.png" alt="formation-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r6 c8<br><span class="docMeta"><code>112:80 16x16</code></span></td>
-      <td>64 lit px; B, R, W, Y</td>
-      <td>Front-like bee/Zako cell for formation readability.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>384:86 58x54</code></span></td>
+      <td>766 lit px; B, G, M, R, W, Y</td>
+      <td>Trusted clean bee/Zako formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.</td>
     </tr>
   
 
     <tr>
-      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>bee-zako</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>flap-a</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4037,12 +4597,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-a</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/67f3134c3b-bee-zako-flap-a.png" alt="flap-a expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r6 c6<br><span class="docMeta"><code>80:80 16x16</code></span></td>
@@ -4052,7 +4612,7 @@
   
 
     <tr>
-      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>bee-zako</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>flap-b</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4063,12 +4623,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-b</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/35a22aca41-bee-zako-flap-b.png" alt="flap-b expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r6 c7<br><span class="docMeta"><code>96:80 16x16</code></span></td>
@@ -4078,7 +4638,7 @@
   
 
     <tr>
-      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>bee-zako</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-left</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4089,12 +4649,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-left</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3044456273-bee-zako-dive-left.png" alt="dive-left expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r6 c1<br><span class="docMeta"><code>0:80 16x16</code></span></td>
@@ -4104,7 +4664,7 @@
   
 
     <tr>
-      <td><strong>bee-zako</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>bee-zako</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-right</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4115,12 +4675,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-right</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/17d27e052a-bee-zako-dive-right.png" alt="dive-right expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r6 c2<br><span class="docMeta"><code>16:80 16x16</code></span></td>
@@ -4130,7 +4690,7 @@
   
 
     <tr>
-      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>formation-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4141,22 +4701,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>formation-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7b57a2b1e9-butterfly-escort-formation-front.png" alt="formation-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r5 c8<br><span class="docMeta"><code>112:64 16x16</code></span></td>
-      <td>75 lit px; B, M, R, W</td>
-      <td>Front-like butterfly/escort cell for formation readability.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>225:95 62x42</code></span></td>
+      <td>677 lit px; B, G, R, W, Y</td>
+      <td>Trusted clean butterfly/escort formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.</td>
     </tr>
   
 
     <tr>
-      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>butterfly-escort</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>flap-a</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4167,12 +4727,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-a</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/89f59c897b-butterfly-escort-flap-a.png" alt="flap-a expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r5 c6<br><span class="docMeta"><code>80:64 16x16</code></span></td>
@@ -4182,7 +4742,7 @@
   
 
     <tr>
-      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>butterfly-escort</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>flap-b</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4193,12 +4753,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-b</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3196a5a1bc-butterfly-escort-flap-b.png" alt="flap-b expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r5 c7<br><span class="docMeta"><code>96:64 16x16</code></span></td>
@@ -4208,7 +4768,7 @@
   
 
     <tr>
-      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>butterfly-escort</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-left</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4219,12 +4779,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-left</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/334136c561-butterfly-escort-dive-left.png" alt="dive-left expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r5 c1<br><span class="docMeta"><code>0:64 16x16</code></span></td>
@@ -4234,7 +4794,7 @@
   
 
     <tr>
-      <td><strong>butterfly-escort</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>butterfly-escort</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-right</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4245,12 +4805,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-right</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/138c7994da-butterfly-escort-dive-right.png" alt="dive-right expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r5 c2<br><span class="docMeta"><code>16:64 16x16</code></span></td>
@@ -4260,7 +4820,7 @@
   
 
     <tr>
-      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>formation-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4271,22 +4831,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>formation-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/1ae3a56f4a-boss-galaga-formation-front.png" alt="formation-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r3 c8<br><span class="docMeta"><code>112:32 16x16</code></span></td>
-      <td>104 lit px; B, G, R, Y</td>
-      <td>Front-like boss/command-ship cell for formation and capture-beam host readability.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>22:78 60x62</code></span></td>
+      <td>1174 lit px; B, G, M, R, Y</td>
+      <td>Trusted clean teal boss formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.</td>
     </tr>
   
 
     <tr>
-      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>flap-a</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4297,22 +4857,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-a</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3f1722514a-boss-galaga-flap-a.png" alt="flap-a expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r3 c6<br><span class="docMeta"><code>80:32 16x16</code></span></td>
-      <td>64 lit px; G, R, Y</td>
-      <td>Boss wing/pose phase candidate.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>22:78 60x62</code></span></td>
+      <td>1174 lit px; B, G, M, R, Y</td>
+      <td>Trusted clean boss pulse/pose phase A from the segmented alien motion reference.</td>
     </tr>
   
 
     <tr>
-      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-trusted-motion-reference</span></td>
       <td><code>flap-b</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4323,22 +4883,22 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>flap-b</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/4b38f42402-boss-galaga-flap-b.png" alt="flap-b expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.</span>
     </div>
   </td>
-      <td>left-primary-sprite-grid r3 c7<br><span class="docMeta"><code>96:32 16x16</code></span></td>
-      <td>76 lit px; B, G, R, Y</td>
-      <td>Alternating boss wing/pose phase candidate.</td>
+      <td>segmented-alien-motion-reference<br><span class="docMeta"><code>86:78 60x62</code></span></td>
+      <td>1298 lit px; B, M</td>
+      <td>Trusted clean purple boss pulse/pose phase B from the segmented alien motion reference.</td>
     </tr>
   
 
     <tr>
-      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>boss-galaga</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-left</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4349,12 +4909,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-left</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/9b3e5a250a-boss-galaga-dive-left.png" alt="dive-left expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r3 c1<br><span class="docMeta"><code>0:32 16x16</code></span></td>
@@ -4364,7 +4924,7 @@
   
 
     <tr>
-      <td><strong>boss-galaga</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>boss-galaga</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>dive-right</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4375,12 +4935,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dive-right</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/4bb94dcf0d-boss-galaga-dive-right.png" alt="dive-right expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r3 c2<br><span class="docMeta"><code>16:32 16x16</code></span></td>
@@ -4390,7 +4950,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>green-family-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4401,12 +4961,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>green-family-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/48530ac28d-challenge-green-family-front.png" alt="green-family-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r8 c7<br><span class="docMeta"><code>96:112 16x16</code></span></td>
@@ -4416,7 +4976,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>green-family-dive</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4427,12 +4987,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>green-family-dive</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/c43ae94170-challenge-green-family-dive.png" alt="green-family-dive expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r8 c1<br><span class="docMeta"><code>0:112 16x16</code></span></td>
@@ -4442,7 +5002,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>yellow-family-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4453,12 +5013,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>yellow-family-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/e2741fdd4a-challenge-yellow-family-front.png" alt="yellow-family-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r9 c7<br><span class="docMeta"><code>96:128 16x16</code></span></td>
@@ -4468,7 +5028,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>yellow-family-dive</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4479,12 +5039,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>yellow-family-dive</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/197bb51b54-challenge-yellow-family-dive.png" alt="yellow-family-dive expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>left-primary-sprite-grid r9 c1<br><span class="docMeta"><code>0:128 16x16</code></span></td>
@@ -4494,7 +5054,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>magenta-family-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4505,12 +5065,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>magenta-family-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/c8d2a3afb2-challenge-magenta-family-front.png" alt="magenta-family-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>center-alien-pose-grid r10 c3<br><span class="docMeta"><code>177:192 16x16</code></span></td>
@@ -4520,7 +5080,7 @@
   
 
     <tr>
-      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>challenge-specialty-aliens</strong><br><span class="docMeta">provisional-source-sheet-cell</span></td>
       <td><code>blue-yellow-family-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4531,12 +5091,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>blue-yellow-family-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/998177223c-challenge-blue-yellow-family-front.png" alt="blue-yellow-family-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>center-alien-pose-grid r10 c6<br><span class="docMeta"><code>225:192 16x16</code></span></td>
@@ -4546,7 +5106,7 @@
   
 
     <tr>
-      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>enemy-explosion-small</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4557,12 +5117,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>enemy-explosion-small</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3cb01314fd-impact-explosion-small.png" alt="enemy-explosion-small expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>top-effects-and-capture-icons<br><span class="docMeta"><code>177:0 32x32</code></span></td>
@@ -4572,7 +5132,7 @@
   
 
     <tr>
-      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>boss-explosion-large</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4583,12 +5143,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>boss-explosion-large</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/65b5b49699-impact-explosion-large.png" alt="boss-explosion-large expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>top-effects-and-capture-icons<br><span class="docMeta"><code>209:0 32x32</code></span></td>
@@ -4598,7 +5158,7 @@
   
 
     <tr>
-      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>player-shot</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4609,12 +5169,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>player-shot</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/c3c7e2ef08-projectile-player-shot.png" alt="player-shot expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>304:120 16x16</code></span></td>
@@ -4624,7 +5184,7 @@
   
 
     <tr>
-      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>enemy-shot</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4635,12 +5195,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>enemy-shot</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/4165216ace-projectile-enemy-shot.png" alt="enemy-shot expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>304:136 16x16</code></span></td>
@@ -4650,7 +5210,7 @@
   
 
     <tr>
-      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>projectiles-and-impacts</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>diagonal-shot</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4661,12 +5221,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>diagonal-shot</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/368450181a-projectile-diagonal-shot.png" alt="diagonal-shot expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>320:120 16x16</code></span></td>
@@ -4676,7 +5236,7 @@
   
 
     <tr>
-      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>beam-wide</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4687,12 +5247,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>beam-wide</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/9c6e3c61c1-tractor-beam-wide.png" alt="beam-wide expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>288:34 50x84</code></span></td>
@@ -4702,7 +5262,7 @@
   
 
     <tr>
-      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>beam-mid</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4713,12 +5273,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>beam-mid</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/88a833d4bc-tractor-beam-mid.png" alt="beam-mid expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>342:34 50x84</code></span></td>
@@ -4728,7 +5288,7 @@
   
 
     <tr>
-      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-first-pass</span></td>
+      <td><strong>tractor-beam</strong><br><span class="docMeta">accepted-source-sheet-crop</span></td>
       <td><code>beam-narrow</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4739,12 +5299,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>beam-narrow</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/c77beda496-tractor-beam-narrow.png" alt="beam-narrow expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
       <td>right-tractor-beam-and-scoring<br><span class="docMeta"><code>396:34 50x84</code></span></td>
@@ -4754,7 +5314,7 @@
   
 
     <tr>
-      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-first-pass-composite</span></td>
+      <td><strong>player-fighter</strong><br><span class="docMeta">accepted-trusted-motion-reference-composite</span></td>
       <td><code>dual-fighter-front</code></td>
       <td>
     <div class="catalogMediaItem">
@@ -4765,17 +5325,17 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>dual-fighter-front</strong>
-            <p>Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</p>
+            <p>Target crop promoted from the supplied Galaga general sprite sheet.</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/af543c23ff-player-fighter-dual-front.png" alt="dual-fighter-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.</span>
+      <span class="catalogMediaNote">Target crop promoted from the supplied Galaga general sprite sheet.</span>
     </div>
   </td>
-      <td>derived-composite<br><span class="docMeta"><code>0:0 38x16</code></span></td>
-      <td>192 lit px; B, C, G, R, W</td>
-      <td>Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels.</td>
+      <td>derived-composite<br><span class="docMeta"><code>0:0 114x45</code></span></td>
+      <td>1798 lit px; B, C, G, R, W, Y</td>
+      <td>Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions.</td>
     </tr>
   
               </tbody>
@@ -4784,12 +5344,12 @@
           <div class="docWrap" style="margin-top:16px;">
             <h3>Aurora Runtime Versus Target Crops</h3>
             <p>This is the stricter live-rendered sprite read: each Aurora canvas crop is compared against accepted Galaga target crops after semantic role filtering. Low values here are not failures of the plan; they are the exact gaps the next sprite passes should attack.</p>
-            <p class="docMeta"><strong>Runtime artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>. <strong>Direct target artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code>. <strong>Generated:</strong> 2026-05-18T21:49:42.954Z.</p>
+            <p class="docMeta"><strong>Runtime artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>. <strong>Direct target artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code>. <strong>Generated:</strong> 2026-05-19T18:36:25.499Z.</p>
             <div class="metricGrid">
-              <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>5.8/10</strong><span>8 live canvas crop(s)</span></div>
-              <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>4.5/10</strong><span>33 target crop(s)</span></div>
-              <div class="metricCard"><span class="metricLabel">Target Sequence Score</span><strong>5.3/10</strong><span>3 cadence sequence(s)</span></div>
-              <div class="metricCard"><span class="metricLabel">Weakest Direct Match</span><strong>player-fighter</strong><span>4.0/10</span></div>
+              <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>6.6/10</strong><span>8 live canvas crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>5.4/10</strong><span>33 target crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Sequence Score</span><strong>5.5/10</strong><span>3 cadence sequence(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Weakest Direct Match</span><strong>challenge-dragonfly</strong><span>2.6/10</span></div>
               <div class="metricCard"><span class="metricLabel">Motion Axes Covered</span><strong>4/4</strong><span>3 phase pair(s); 3 cadence window(s)</span></div>
             </div>
           </div>
@@ -4807,7 +5367,7 @@
               <tbody>
                 
     <tr>
-      <td><strong>player-fighter</strong><br><span class="docMeta">runtime model 7.7/10</span></td>
+      <td><strong>player-fighter</strong><br><span class="docMeta">runtime model 7.3/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -4842,13 +5402,13 @@
       <span class="catalogMediaNote">player-fighter / single-ship-front</span>
     </div>
   </td>
-      <td><strong>4.0/10</strong><br><span class="docMeta">candidates: 1; role filter: <code>player-fighter</code></span></td>
-      <td>Jaccard 0.1788; silhouette 0.5693; color 0.8238.</td>
+      <td><strong>6.4/10</strong><br><span class="docMeta">candidates: 1; role filter: <code>player-fighter</code></span></td>
+      <td>Jaccard 0.5928; silhouette 0.7236; color 0.6731.</td>
     </tr>
   
 
     <tr>
-      <td><strong>dual-fighter</strong><br><span class="docMeta">runtime model 6.6/10</span></td>
+      <td><strong>dual-fighter</strong><br><span class="docMeta">runtime model 6.5/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -4883,13 +5443,13 @@
       <span class="catalogMediaNote">player-fighter / dual-fighter-front</span>
     </div>
   </td>
-      <td><strong>5.3/10</strong><br><span class="docMeta">candidates: 1; role filter: <code>player-fighter</code></span></td>
-      <td>Jaccard 0.3709; silhouette 0.7217; color 0.8074.</td>
+      <td><strong>6.9/10</strong><br><span class="docMeta">candidates: 1; role filter: <code>player-fighter</code></span></td>
+      <td>Jaccard 0.6706; silhouette 0.7822; color 0.6733.</td>
     </tr>
   
 
     <tr>
-      <td><strong>bee-line</strong><br><span class="docMeta">runtime model 5.0/10</span></td>
+      <td><strong>bee-line</strong><br><span class="docMeta">runtime model 6.3/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -4924,13 +5484,13 @@
       <span class="catalogMediaNote">bee-zako / formation-front</span>
     </div>
   </td>
-      <td><strong>4.7/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>bee-zako</code></span></td>
-      <td>Jaccard 0.2301; silhouette 0.7354; color 0.8471.</td>
+      <td><strong>6.6/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>bee-zako</code></span></td>
+      <td>Jaccard 0.6193; silhouette 0.7227; color 0.784.</td>
     </tr>
   
 
     <tr>
-      <td><strong>but-line</strong><br><span class="docMeta">runtime model 4.8/10</span></td>
+      <td><strong>but-line</strong><br><span class="docMeta">runtime model 6.5/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -4965,13 +5525,13 @@
       <span class="catalogMediaNote">butterfly-escort / formation-front</span>
     </div>
   </td>
-      <td><strong>4.8/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>butterfly-escort</code></span></td>
-      <td>Jaccard 0.2397; silhouette 0.7119; color 0.8376.</td>
+      <td><strong>6.1/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>butterfly-escort</code></span></td>
+      <td>Jaccard 0.5683; silhouette 0.6201; color 0.7967.</td>
     </tr>
   
 
     <tr>
-      <td><strong>boss-line</strong><br><span class="docMeta">runtime model 5.0/10</span></td>
+      <td><strong>boss-line</strong><br><span class="docMeta">runtime model 6.5/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -5006,13 +5566,13 @@
       <span class="catalogMediaNote">boss-galaga / formation-front</span>
     </div>
   </td>
-      <td><strong>4.0/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>boss-galaga</code></span></td>
-      <td>Jaccard 0.1982; silhouette 0.5732; color 0.7637.</td>
+      <td><strong>5.5/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>boss-galaga</code></span></td>
+      <td>Jaccard 0.5154; silhouette 0.6318; color 0.6785.</td>
     </tr>
   
 
     <tr>
-      <td><strong>rogue-fighter</strong><br><span class="docMeta">runtime model 6.3/10</span></td>
+      <td><strong>rogue-fighter</strong><br><span class="docMeta">runtime model 6.1/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -5047,13 +5607,13 @@
       <span class="catalogMediaNote">player-fighter / single-ship-front</span>
     </div>
   </td>
-      <td><strong>4.0/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>player-fighter</code> <code>boss-galaga</code></span></td>
-      <td>Jaccard 0.1788; silhouette 0.5693; color 0.8238.</td>
+      <td><strong>6.4/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>player-fighter</code> <code>boss-galaga</code></span></td>
+      <td>Jaccard 0.5942; silhouette 0.7246; color 0.6587.</td>
     </tr>
   
 
     <tr>
-      <td><strong>challenge-dragonfly</strong><br><span class="docMeta">runtime model 5.4/10</span></td>
+      <td><strong>challenge-dragonfly</strong><br><span class="docMeta">runtime model 6.5/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -5088,13 +5648,13 @@
       <span class="catalogMediaNote">challenge-specialty-aliens / green-family-front</span>
     </div>
   </td>
-      <td><strong>4.5/10</strong><br><span class="docMeta">candidates: 4; role filter: <code>challenge-specialty-aliens</code></span></td>
-      <td>Jaccard 0.2041; silhouette 0.8096; color 0.7649.</td>
+      <td><strong>2.6/10</strong><br><span class="docMeta">candidates: 4; role filter: <code>challenge-specialty-aliens</code></span></td>
+      <td>Jaccard 0.0538; silhouette 0.5195; color 0.586.</td>
     </tr>
   
 
     <tr>
-      <td><strong>challenge-mosquito</strong><br><span class="docMeta">runtime model 5.2/10</span></td>
+      <td><strong>challenge-mosquito</strong><br><span class="docMeta">runtime model 6.4/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -5114,23 +5674,23 @@
   </td>
       <td>
     <div class="catalogMediaItem">
-      <span class="catalogMediaLabel">challenge-yellow-family-front</span>
-      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/e2741fdd4a-challenge-yellow-family-front.png" alt="challenge-yellow-family-front" loading="lazy">
+      <span class="catalogMediaLabel">challenge-green-family-front</span>
+      <img class="catalogMediaImg isPixelated" src="assets/catalog-media/48530ac28d-challenge-green-family-front.png" alt="challenge-green-family-front" loading="lazy">
       <details class="catalogMediaExpand">
         <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
-            <strong>challenge-yellow-family-front</strong>
-            <p>challenge-specialty-aliens / yellow-family-front</p>
+            <strong>challenge-green-family-front</strong>
+            <p>challenge-specialty-aliens / green-family-front</p>
           </div>
-          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/e2741fdd4a-challenge-yellow-family-front.png" alt="challenge-yellow-family-front expanded" loading="lazy"></div>
+          <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/48530ac28d-challenge-green-family-front.png" alt="challenge-green-family-front expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">challenge-specialty-aliens / yellow-family-front</span>
+      <span class="catalogMediaNote">challenge-specialty-aliens / green-family-front</span>
     </div>
   </td>
-      <td><strong>4.5/10</strong><br><span class="docMeta">candidates: 4; role filter: <code>challenge-specialty-aliens</code></span></td>
-      <td>Jaccard 0.2172; silhouette 0.7783; color 0.7255.</td>
+      <td><strong>2.7/10</strong><br><span class="docMeta">candidates: 4; role filter: <code>challenge-specialty-aliens</code></span></td>
+      <td>Jaccard 0.0304; silhouette 0.5322; color 0.6614.</td>
     </tr>
   
               </tbody>
@@ -5185,8 +5745,8 @@
       <span class="catalogMediaNote">Harness-captured open flap phase.</span>
     </div>
   </td>
-      <td><strong>10</strong> filled-cell delta<br><span class="docMeta">224 lit-pixel delta; score delta 0.11</span></td>
-      <td>Captured closed/open flap phases for bee-line; lit-pixel delta 224, filled-cell delta 10.</td>
+      <td><strong>83</strong> filled-cell delta<br><span class="docMeta">128 lit-pixel delta; score delta 0.1</span></td>
+      <td>Captured closed/open flap phases for bee-line; lit-pixel delta 128, filled-cell delta 83.</td>
     </tr>
   
 
@@ -5226,8 +5786,8 @@
       <span class="catalogMediaNote">Harness-captured open flap phase.</span>
     </div>
   </td>
-      <td><strong>106</strong> filled-cell delta<br><span class="docMeta">176 lit-pixel delta; score delta 0.45</span></td>
-      <td>Captured closed/open flap phases for but-line; lit-pixel delta 176, filled-cell delta 106.</td>
+      <td><strong>12</strong> filled-cell delta<br><span class="docMeta">72 lit-pixel delta; score delta 0.04</span></td>
+      <td>Captured closed/open flap phases for but-line; lit-pixel delta 72, filled-cell delta 12.</td>
     </tr>
   
 
@@ -5267,8 +5827,8 @@
       <span class="catalogMediaNote">Harness-captured open flap phase.</span>
     </div>
   </td>
-      <td><strong>111</strong> filled-cell delta<br><span class="docMeta">416 lit-pixel delta; score delta 0.01</span></td>
-      <td>Captured closed/open flap phases for boss-line; lit-pixel delta 416, filled-cell delta 111.</td>
+      <td><strong>37</strong> filled-cell delta<br><span class="docMeta">256 lit-pixel delta; score delta 0.22</span></td>
+      <td>Captured closed/open flap phases for boss-line; lit-pixel delta 256, filled-cell delta 37.</td>
     </tr>
   
               </tbody>
@@ -5298,12 +5858,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 0</strong>
-            <p>tm 0; score 5.0/10</p>
+            <p>tm 0; score 6.3/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/eb45e44600-bee-line-cadence-00.png" alt="Frame 0 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0; score 5.0/10</span>
+      <span class="catalogMediaNote">tm 0; score 6.3/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5314,12 +5874,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 4</strong>
-            <p>tm 0.22; score 5.1/10</p>
+            <p>tm 0.22; score 6.4/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/3eb936ba32-bee-line-cadence-04.png" alt="Frame 4 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.22; score 5.1/10</span>
+      <span class="catalogMediaNote">tm 0.22; score 6.4/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5330,17 +5890,17 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 7</strong>
-            <p>tm 0.385; score 5.0/10</p>
+            <p>tm 0.385; score 6.3/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/5b3afc1ab2-bee-line-cadence-07.png" alt="Frame 7 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.385; score 5.0/10</span>
+      <span class="catalogMediaNote">tm 0.385; score 6.3/10</span>
     </div>
   </div></div></td>
-      <td><strong>0.11</strong> score range<br><span class="docMeta">64 avg adjacent lit-pixel delta</span></td>
-      <td>2.86 avg adjacent filled-cell delta</td>
-      <td>Captured 8 cadence frames for bee-line; average adjacent lit-pixel delta 64, filled-cell delta 2.9. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
+      <td><strong>0.1</strong> score range<br><span class="docMeta">36.57 avg adjacent lit-pixel delta</span></td>
+      <td>23.71 avg adjacent filled-cell delta</td>
+      <td>Captured 8 cadence frames for bee-line; average adjacent lit-pixel delta 36.6, filled-cell delta 23.7. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
     </tr>
   
 
@@ -5355,12 +5915,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 0</strong>
-            <p>tm 0; score 4.8/10</p>
+            <p>tm 0; score 7.0/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/5546e62a75-but-line-cadence-00.png" alt="Frame 0 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0; score 4.8/10</span>
+      <span class="catalogMediaNote">tm 0; score 7.0/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5371,12 +5931,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 4</strong>
-            <p>tm 0.22; score 4.4/10</p>
+            <p>tm 0.22; score 7.0/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7d486496d6-but-line-cadence-04.png" alt="Frame 4 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.22; score 4.4/10</span>
+      <span class="catalogMediaNote">tm 0.22; score 7.0/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5387,17 +5947,17 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 7</strong>
-            <p>tm 0.385; score 4.8/10</p>
+            <p>tm 0.385; score 7.0/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/52e51c382b-but-line-cadence-07.png" alt="Frame 7 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.385; score 4.8/10</span>
+      <span class="catalogMediaNote">tm 0.385; score 7.0/10</span>
     </div>
   </div></div></td>
-      <td><strong>0.45</strong> score range<br><span class="docMeta">50.29 avg adjacent lit-pixel delta</span></td>
-      <td>30.29 avg adjacent filled-cell delta</td>
-      <td>Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 50.3, filled-cell delta 30.3. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
+      <td><strong>0.04</strong> score range<br><span class="docMeta">20.57 avg adjacent lit-pixel delta</span></td>
+      <td>3.43 avg adjacent filled-cell delta</td>
+      <td>Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 20.6, filled-cell delta 3.4. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
     </tr>
   
 
@@ -5412,12 +5972,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 0</strong>
-            <p>tm 0; score 5.0/10</p>
+            <p>tm 0; score 6.5/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/994f9bfed7-boss-line-cadence-00.png" alt="Frame 0 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0; score 5.0/10</span>
+      <span class="catalogMediaNote">tm 0; score 6.5/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5428,12 +5988,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 4</strong>
-            <p>tm 0.22; score 5.0/10</p>
+            <p>tm 0.22; score 6.2/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/caa3d64d73-boss-line-cadence-04.png" alt="Frame 4 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.22; score 5.0/10</span>
+      <span class="catalogMediaNote">tm 0.22; score 6.2/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5444,17 +6004,17 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 7</strong>
-            <p>tm 0.385; score 5.0/10</p>
+            <p>tm 0.385; score 6.5/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/548497c94e-boss-line-cadence-07.png" alt="Frame 7 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.385; score 5.0/10</span>
+      <span class="catalogMediaNote">tm 0.385; score 6.5/10</span>
     </div>
   </div></div></td>
-      <td><strong>0.01</strong> score range<br><span class="docMeta">118.86 avg adjacent lit-pixel delta</span></td>
-      <td>31.71 avg adjacent filled-cell delta</td>
-      <td>Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 118.9, filled-cell delta 31.7. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
+      <td><strong>0.22</strong> score range<br><span class="docMeta">73.14 avg adjacent lit-pixel delta</span></td>
+      <td>10.57 avg adjacent filled-cell delta</td>
+      <td>Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 73.1, filled-cell delta 10.6. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
     </tr>
   
               </tbody>
@@ -5525,7 +6085,7 @@
       <span class="catalogMediaNote">expected formation-front; best target formation-front</span>
     </div>
   </div></div></td>
-      <td><strong>5.2/10</strong><br><span class="docMeta">avg frame 3.8/10; pose coverage 100%</span></td>
+      <td><strong>5.3/10</strong><br><span class="docMeta">avg frame 3.9/10; pose coverage 100%</span></td>
       <td>bee-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.</td>
     </tr>
   
@@ -5582,7 +6142,7 @@
       <span class="catalogMediaNote">expected formation-front; best target formation-front</span>
     </div>
   </div></div></td>
-      <td><strong>5.5/10</strong><br><span class="docMeta">avg frame 4.2/10; pose coverage 100%</span></td>
+      <td><strong>4.9/10</strong><br><span class="docMeta">avg frame 3.5/10; pose coverage 100%</span></td>
       <td>but-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.</td>
     </tr>
   
@@ -5639,7 +6199,7 @@
       <span class="catalogMediaNote">expected formation-front; best target formation-front</span>
     </div>
   </div></div></td>
-      <td><strong>5.2/10</strong><br><span class="docMeta">avg frame 3.8/10; pose coverage 100%</span></td>
+      <td><strong>6.3/10</strong><br><span class="docMeta">avg frame 5.3/10; pose coverage 100%</span></td>
       <td>boss-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.</td>
     </tr>
   
@@ -5677,7 +6237,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>6.0/10</strong><br><span class="docMeta">filled 298; lit 1033</span></td>
+      <td><strong>6.9/10</strong><br><span class="docMeta">filled 453; lit 2269</span></td>
       <td>Captured bee-line-dive-left with forced dive vector (-88, 134) so rotation silhouette can be tracked over time.</td>
     </tr>
   
@@ -5701,7 +6261,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>5.5/10</strong><br><span class="docMeta">filled 285; lit 1173</span></td>
+      <td><strong>6.7/10</strong><br><span class="docMeta">filled 505; lit 4747</span></td>
       <td>Captured but-line-dive-right with forced dive vector (88, 134) so rotation silhouette can be tracked over time.</td>
     </tr>
   
@@ -5725,7 +6285,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>6.5/10</strong><br><span class="docMeta">filled 268; lit 1651</span></td>
+      <td><strong>6.2/10</strong><br><span class="docMeta">filled 472; lit 2659</span></td>
       <td>Captured boss-line-dive-left with forced dive vector (-70, 118) so rotation silhouette can be tracked over time.</td>
     </tr>
   
@@ -5749,7 +6309,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>5.3/10</strong><br><span class="docMeta">filled 688; lit 20482</span></td>
+      <td><strong>5.3/10</strong><br><span class="docMeta">filled 598; lit 23042</span></td>
       <td>Captured boss-capture-beam as a first transition-state measurement seed.</td>
     </tr>
   
@@ -5773,7 +6333,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>5.3/10</strong><br><span class="docMeta">filled 358; lit 2912</span></td>
+      <td><strong>5.7/10</strong><br><span class="docMeta">filled 474; lit 5058</span></td>
       <td>Captured boss-carrying-fighter as a first transition-state measurement seed.</td>
     </tr>
   
@@ -5797,7 +6357,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>6.6/10</strong><br><span class="docMeta">filled 803; lit 2720</span></td>
+      <td><strong>6.5/10</strong><br><span class="docMeta">filled 1268; lit 4608</span></td>
       <td>Captured dual-fighter-transition as a first transition-state measurement seed.</td>
     </tr>
   
@@ -6046,7 +6606,7 @@
     <tr>
       <td><strong>1. Source Manifest</strong><br><span class="docMeta"><code>source-manifest</code></span></td>
       <td>Register lawful target sources and classify them as scoring targets, human-review context, secondary validation, or planning-only references.</td>
-      <td>Galaga alien close-ups are ingested and classified; general sprite sheet is the strongest current target candidate.</td>
+      <td>Galaga alien close-ups are ingested and classified; general sprite sheet is the strongest current static target candidate; a segmented alien motion/pulse video is now registered as a target-validation and temporal-reference source.</td>
       <td>Keep source authority explicit when new sprite sheets, gameplay clips, posters, or manual screenshots enter the project.</td>
     </tr>
   
@@ -6054,16 +6614,16 @@
     <tr>
       <td><strong>2. Crop-Box Manifest</strong><br><span class="docMeta"><code>crop-box-manifest</code></span></td>
       <td>Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.</td>
-      <td>First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and accepted first-pass per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json.</td>
-      <td>Review any disputed source-sheet cells, then keep the promoted crop library current as new target sources or better source crops are ingested.</td>
+      <td>First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json. Human review found polluted crop evidence for the original boss/bee/butterfly target rows, so the library now separates trusted cleaned motion-reference crops from provisional source-sheet cells and records that decision in reference-artifacts/analyses/galaga-target-evidence-audit/latest.json.</td>
+      <td>Regenerate runtime-vs-target scoring against the trusted boss, bee, and butterfly crops, then promote clean player-fighter and temporal pulse-pair targets before making additional runtime sprite changes.</td>
     </tr>
   
 
     <tr>
       <td><strong>3. Pose And Motion Targets</strong><br><span class="docMeta"><code>pose-and-motion-targets</code></span></td>
       <td>Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.</td>
-      <td>Static model and runtime crop scoring exist, and a 33-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops.</td>
-      <td>Promote target-frame temporal sequences for flap cadence, projectile/impact/explosion lifecycle, damage pulse, and challenge specialty motion before raising mature sprite conformance claims.</td>
+      <td>Static model and runtime crop scoring exist, and a 33-crop/7-role promoted target library now supplies multi-pose static targets. Primary Boss/Bee/Butterfly/Fighter crops are trusted cleaned motion-reference targets; remaining source-sheet cells are provisional until recropped or replaced by temporal windows. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam. Temporal target rows now exist at reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json, with Boss stronger than Bee/Butterfly because the latter still depend on provisional flap cells.</td>
+      <td>Replace provisional Bee and Butterfly flap cells with clean frame-timed target windows, then score Aurora runtime cadence against those target sequences.</td>
     </tr>
   
 
@@ -6078,7 +6638,7 @@
     <tr>
       <td><strong>5. Scoring And Gates</strong><br><span class="docMeta"><code>scoring-and-gates</code></span></td>
       <td>Score static crops, active motion, stage context, player meaning, and shipped-theme originality separately.</td>
-      <td>Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator reads 4.48/10 and exposes the direct visible geometry gap. Impact/explosion feedback now has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.</td>
+      <td>Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator now reads 4.33/10 after replacing polluted Boss/Bee/Butterfly targets with trusted motion-reference crops. That score decrease is useful: it removes false confidence and exposes the direct visible geometry gap. Impact/explosion feedback has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.</td>
       <td>Move direct target sprite score toward 5.5+ before the next beta claim, keep challenge-stage set-piece conformance above 5.0 before claiming a beta conformance lift, and add confidence/resolution plus temporal target scoring.</td>
     </tr>
   
@@ -24740,6 +25300,15 @@
   
 
     <li><a href="#alien-visual-reference-pack">Alien Visual References</a></li>
+  
+
+    <li><a href="#galaga-alien-motion-reference">Alien Motion Reference</a></li>
+  
+
+    <li><a href="#galaga-target-evidence-audit">Trusted Target Audit</a></li>
+  
+
+    <li><a href="#galaga-alien-temporal-targets">Alien Temporal Targets</a></li>
   
 
     <li><a href="#sprite-conformance-variation-plan">Sprite Conformance Plan</a></li>

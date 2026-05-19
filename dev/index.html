@@ -936,8 +936,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">May 19 2026, 10:08 AM EDT</span>
-      <span id="settingsState">codex/macbook-conformance-investment-review@c3183c73 clean</span>
+      <span id="settingsRelease">May 19 2026, 3:20 PM EDT</span>
+      <span id="settingsState">main@5dfcc9a9 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1235,7 +1235,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">May 19 2026, 10:08 AM EDT</span>
+    <span id="buildStampRelease">May 19 2026, 3:20 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1932,7 +1932,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.836.sha.c3183c73',commit:'c3183c73a6bbcc7cc329c3d0ebbd087355f00cad',branch:'codex/macbook-conformance-investment-review',dirty:false,released:'May 19 2026, 10:08 AM EDT',state:'codex/macbook-conformance-investment-review@c3183c73 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.848.sha.5dfcc9a9',commit:'5dfcc9a9df2cc66ba18b77fa3745e55cf14b81fa',branch:'main',dirty:false,released:'May 19 2026, 3:20 PM EDT',state:'main@5dfcc9a9 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -3933,7 +3933,7 @@ function rs(){
  c.width=innerWidth*DPR;c.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
  ctx.imageSmoothingEnabled=false;
  syncStarfieldProfile();
- VIS.gx=17;VIS.gy=14;VIS.playerBottom=20;VIS.beamLen=300;VIS.formTop=28;
+ VIS.gx=17;VIS.gy=14;VIS.playerBottom=25;VIS.beamLen=300;VIS.formTop=28;
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
 addEventListener('resize',rs);
@@ -6755,14 +6755,14 @@ function runHarnessPlayer(dt,p,cfg){
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
  p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
- const hp=playerHitbox();
+ const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
  const axis=attractMoveAxis(p);
  const targetVx=axis*p.s*.68;
  const blend=Math.min(1,p.accel*dt*.82);
  p.vx+=(targetVx-p.vx)*blend;
  if(!axis&&Math.abs(p.vx)<8)p.vx=0;
- p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
- if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+ p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+ if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
@@ -6782,7 +6782,7 @@ function updatePlayerControl(dt,p){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
   else{
-   const hp=playerHitbox();
+   const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
    const rightHeld=keyHeldMs(...rightCodes);
    const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
@@ -6795,8 +6795,8 @@ function updatePlayerControl(dt,p){
    const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
    p.vx+=(targetVx-p.vx)*blend;
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;
-   p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
-   if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+   p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+   if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();
@@ -14091,6 +14091,14 @@ const TARGET_EXPLOSION_PALETTE=Object.freeze({
  M:'#ff43e6'
 });
 
+const AURORA_CONFORMANCE_PIXELS=Object.freeze({
+ butterfly:Object.freeze({
+  a:[[0,1],[1,1],[10,1],[11,1],[0,2],[1,2],[10,2],[11,2],[0,3],[1,3],[10,3],[11,3],[0,4],[1,4],[10,4],[11,4],[0,5],[1,5],[2,5],[3,5],[8,5],[9,5],[10,5],[11,5],[0,6],[1,6],[10,6],[11,6],[0,7],[1,7],[10,7],[11,7],[0,8],[1,8],[10,8],[11,8]],
+  b:[[4,2],[5,2],[6,2],[7,2],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[4,5],[5,5],[6,5],[7,5],[4,6],[5,6],[6,6],[7,6]],
+  c:[[5,0],[7,0],[5,1],[7,1],[4,6],[5,6],[6,6],[7,6],[4,7],[5,7],[6,7],[7,7],[5,8],[6,8],[5,9],[6,9]]
+ })
+});
+
 const TARGET_PIXEL_ASPECT_X=1.14;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
@@ -14159,8 +14167,8 @@ function enemyPalette(e,flap,hot){
   case 'mosquito':
    return{a:flap?'#ff8c70':'#ffab85',b:hot?'#ffd24c':'#ffe179',c:'#74f4ff',pat:FAMILY_PIXELS.mosquito};
   default:
-   if(e.t==='bee')return{a:flap?'#ff4c4c':'#f02f34',b:hot?'#ffffff':'#e8f4ff',c:'#2f8cff',pat:null};
-   if(e.t==='but')return{a:flap?'#2f73ff':'#1f62de',b:hot?'#fff27d':'#ffd94e',c:'#ff3f4f',pat:null};
+   if(e.t==='bee')return{a:flap?'#2f73ff':'#1f62de',b:hot?'#fff27d':'#ffd94e',c:'#ff3f4f',pat:null};
+   if(e.t==='but')return{a:flap?'#ff4c4c':'#f02f34',b:hot?'#ffffff':'#e8f4ff',c:'#2f8cff',pat:null};
    if(e.t==='rogue')return{a:flap?'#ffffff':'#f4f8ff',b:hot?'#ff6a75':'#ff3347',c:'#5ca8ff',pat:null};
    return damaged?{a:flap?'#7ab5ff':'#add7ff',b:hot?'#ffe177':'#ffe89c',c:'#ff58b4',pat:null}:{a:e.hp>1?(flap?'#31c99d':'#12a987'):(flap?'#64ddc5':'#46c7b0'),b:hot?'#fff27a':'#ffd84c',c:'#f04c30',pat:null};
  }
@@ -14184,6 +14192,37 @@ function enemyCollisionHitbox(e){
 }
 
 function playerHitbox(){return{w:7,h:6};}
+function playerMovementHalfWidth(subject=null){
+ const dual=subject===true||!!subject?.dual;
+ return dual?18:11;
+}
+
+const AURORA_SHIP_GLYPH_BOUNDS=Object.freeze({
+ left:-8,
+ right:8,
+ top:-7,
+ bottom:7
+});
+
+function shipGlyphBoundsAt(x,y,s=1){
+ return{
+  left:x+AURORA_SHIP_GLYPH_BOUNDS.left*s,
+  right:x+AURORA_SHIP_GLYPH_BOUNDS.right*s,
+  top:y+AURORA_SHIP_GLYPH_BOUNDS.top*s,
+  bottom:y+AURORA_SHIP_GLYPH_BOUNDS.bottom*s
+ };
+}
+
+function mergeBounds(a,b){
+ if(!a)return b;
+ if(!b)return a;
+ return{
+  left:Math.min(a.left,b.left),
+  right:Math.max(a.right,b.right),
+  top:Math.min(a.top,b.top),
+  bottom:Math.max(a.bottom,b.bottom)
+ };
+}
 
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
@@ -14191,24 +14230,12 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
   return;
  }
- drawAuroraShipGlyph(0,0,Math.max(1,s),colA,colB);
+ drawAuroraShipGlyph(0,0,Math.max(.5,s),colA,colB);
 }
 
 function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
  const ps=2*s;
- ctx.fillStyle=colA;
- ctx.fillRect(x-ps*1.5,y-ps*8,ps*3,ps*5);
- ctx.fillRect(x-ps*4.5,y-ps*3,ps*9,ps*4);
- ctx.fillRect(x-ps*6.5,y-ps,ps*2,ps);
- ctx.fillRect(x+ps*4.5,y-ps,ps*2,ps);
- ctx.fillRect(x-ps*5.5,y,ps*11,ps*2);
- ctx.fillStyle=colB;
- ctx.fillRect(x-ps*5.5,y-ps*2,ps*2,ps*4);
- ctx.fillRect(x+ps*3.5,y-ps*2,ps*2,ps*4);
- ctx.fillStyle='#ff3448';
- ctx.fillRect(x-ps*4.5,y-ps*6,ps*1.5,ps*2.8);
- ctx.fillRect(x+ps*3,y-ps*6,ps*1.5,ps*2.8);
- ctx.fillRect(x-ps*1.1,y-ps*1.4,ps*2.2,ps*2);
+ drawPix(x-ps*4,y-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff3448',P.ship.c);
 }
 
 function endOfRunOverlayActive(){
@@ -14251,8 +14278,8 @@ function drawEnemy(e){
  if(!drewTarget){
   if(e.fam==='dragonfly')drawPix(-ps*4.5,-ps*3.5,ps,P.dragonfly.a,pal.a,pal.b,P.dragonfly.b,pal.c,P.dragonfly.c);
   else if(e.fam==='mosquito')drawPix(-ps*4.5,-ps*3.5,ps,P.mosquito.a,pal.a,pal.b,P.mosquito.b,pal.c,P.mosquito.c);
-  else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
-  else if(e.t==='but')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+  else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+  else if(e.t==='but')drawPix(-ps*6,-ps*5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
   else if(e.t==='rogue')drawPix(-ps*4,-ps*3.5,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
   else drawPix(-ps*4.5,-ps*3.5,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
   drawEnemyFlapAccent(e,ps,pal,flap);
@@ -14322,19 +14349,25 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  ctx.save();
  ctx.translate(Math.round(x),Math.round(y));
  if(ghost)ctx.globalAlpha=.52;
+ let bounds=null;
  if(!referencePixelSpritesEnabled()){
   if(dual){
-   drawAuroraShipGlyph(-10.5,0,1,'#eaf7ff','#ff4a5c');
-   drawAuroraShipGlyph(10.5,0,1,'#eaf7ff','#78d8ff');
+   drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
+   drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
+   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,1),shipGlyphBoundsAt(x+9.5,y,1));
   }else{
    drawAuroraShipGlyph(0,0,1);
+   bounds=shipGlyphBoundsAt(x,y,1);
   }
  }else if(dual){
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
+  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,1),shipGlyphBoundsAt(x+10.5,y,1));
  }else{
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
+  bounds=shipGlyphBoundsAt(x,y,1);
  }
+ if(!ghost)window.__platinumRenderDebug.playerBounds=bounds;
  ctx.restore();
 }
 
@@ -14494,8 +14527,10 @@ function drawReserveShips(lives){
    ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
    ctx.fill();
    drawMiniShip(.88,'#fff6d2','#ffd34d');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.88));
   }else{
    drawMiniShip(.82,'#f4f8ff','#ff3347');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.82));
   }
   ctx.restore();
   reserve--;
@@ -14560,6 +14595,8 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.carryDraws.length=0;
  window.__platinumRenderDebug.captureTetherVisible=false;
  window.__platinumRenderDebug.capturedGhostVisible=false;
+ window.__platinumRenderDebug.playerBounds=null;
+ window.__platinumRenderDebug.reserveShipBounds=[];
  ctx.save();
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
@@ -15769,7 +15806,9 @@ window.__galagaHarness__={
     starfieldIntensityScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldIntensityScale||0),
     starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0),
     spriteRenderMode:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.spriteRenderMode||'auto',
-    referencePixelSprites:!!((window.__platinumRenderDebug||window.__auroraRenderDebug)?.referencePixelSprites)
+    referencePixelSprites:!!((window.__platinumRenderDebug||window.__auroraRenderDebug)?.referencePixelSprites),
+    playerBounds:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.playerBounds||null,
+    reserveShipBounds:[...((window.__platinumRenderDebug||window.__auroraRenderDebug)?.reserveShipBounds||[])]
    },
   graphics:graphics?{
     graphicsTheme:graphics.graphicsTheme||'auto',
@@ -16297,6 +16336,49 @@ window.__galagaHarness__={
   S.harnessSpriteRuntimeCapture=0;
   if(typeof draw==='function')draw();
   return this.spriteRuntimeState();
+ },
+ playerVisualContract(cfg={}){
+  return{
+   playfield:{w:PLAY_W,h:PLAY_H},
+   playerBottom:+(VIS.playerBottom||0),
+   playerStartY:+(PLAY_H-(VIS.playerBottom||0)),
+   singleMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:false}):playerHitbox().w,
+   dualMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:true}):playerHitbox().w
+  };
+ },
+ playerReserveVisualLayout(cfg={}){
+  S.harnessSpriteRuntimeCapture=0;
+  S.lives=Math.max(0,Math.min(8,Number.isFinite(+cfg.reserveShips)?+cfg.reserveShips:2));
+  const margin=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:!!cfg.dual})+2:12;
+  Object.assign(S.p,{
+   x:cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:PLAY_W/2,margin,PLAY_W-margin),
+   y:Number.isFinite(+cfg.playerY)?+cfg.playerY:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:cfg.dual?1:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  if(typeof draw==='function')draw();
+  const render=this.state().renderDebug||{};
+  const player=render.playerBounds||null;
+  const reserve=render.reserveShipBounds||[];
+  return{
+   ok:!!player,
+   playfield:{w:PLAY_W,h:PLAY_H},
+   player,
+   reserve,
+   minReserveGap:reserve.length&&player?Math.min(...reserve.map(box=>+(box.top-player.bottom).toFixed(2))):null,
+   minReservePairGap:reserve.length>1?Math.min(...reserve.slice(1).map((box,i)=>+(box.left-reserve[i].right).toFixed(2))):null,
+   leftClearance:player?+player.left.toFixed(2):null,
+   rightClearance:player?+(PLAY_W-player.right).toFixed(2):null,
+   bottomClearance:player?+(PLAY_H-player.bottom).toFixed(2):null
+  };
  },
  setupImpactRuntimeCapture(cfg={}){
   const kind=String(cfg.kind||'enemy-boom');
