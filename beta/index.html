@@ -936,8 +936,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane production beta</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">May 19 2026, 3:26 PM EDT</span>
-      <span id="settingsState">beta@8fe67692 clean</span>
+      <span id="settingsRelease">May 19 2026, 4:52 PM EDT</span>
+      <span id="settingsState">beta@0538fb9d clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -945,8 +945,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">1.4.0 multi-game public release</span>
-      <span id="settingsNotesBody">Shipped the deliberate 1.4.0 public family on Platinum, promoting the reviewed beta candidate into hosted `/production` with the merged Galaxy Guardians playable/conformance tranche, player-two and watch-mode review work, replay/trophy follow-through, and side-by-side conformance/documentation surfaces.</span>
+      <span id="settingsNotesTitle">Forward conformance measurement and sprite-readability guardrail pass</span>
+      <span id="settingsNotesBody">Prepared the next hosted-dev review story around evidence-backed conformance work: reference-pixel sprite scale fixes, runtime sprite comparison, formation readability measurement, explicit stage-1 choreography debt, and clearer documentation of how ingestion, harnessing, and local/AI resource accounting should carry into Galaxy Guardians and future games.</span>
     </div>
   </div>
 </div>
@@ -1235,7 +1235,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">May 19 2026, 3:26 PM EDT</span>
+    <span id="buildStampRelease">May 19 2026, 4:52 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1932,7 +1932,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0-beta.1',versionLine:'1.4.0-beta.1',label:'1.4.0-beta.1+build.849.sha.8fe67692.beta',commit:'8fe67692949995f6723ac79c2cd211c979204051',branch:'beta',dirty:false,released:'May 19 2026, 3:26 PM EDT',state:'beta@8fe67692 clean',releaseChannel:'production beta',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0-beta.1',versionLine:'1.4.0-beta.1',label:'1.4.0-beta.1+build.855.sha.0538fb9d.beta',commit:'0538fb9d7ea42c4477b4201943ba26d42a10ab56',branch:'beta',dirty:false,released:'May 19 2026, 4:52 PM EDT',state:'beta@0538fb9d clean',releaseChannel:'production beta',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -8371,7 +8371,11 @@ function spawnFormation(){
 	  });
 	  e.pathFamily=regularEntryPathFamily(S.stage);
 	  e.entryMirror=(S.stage>=8&&c>=cols/2)?-1:1;
-	  e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+	  const entryOrder=entry.indexOf(c);
+	  const stage1Spawn=entryOrder*.62+r*1.45+(r>1 ? 1.45 : 0)+(t==='boss' ? .18 : 0);
+	  const earlySpawn=r*.08+c*.03;
+	  const laterSpawn=entryOrder*.18+r*.58+(r>1 ? .42 : 0)+(t==='boss' ? .08 : 0);
+	  e.spawn=(S.stage===1?stage1Spawn:(S.stage>=4?laterSpawn:earlySpawn))+baseEntryDelay;
   if(S.stage>=8&&S.stage<12&&!S.challenge){
    if(t==='but'&&(c<=1||c>=8))e.cool=.16+(c<=1?c:9-c)*.12;
    else if(t==='but')e.cool+=.55;
@@ -10065,10 +10069,10 @@ const AURORA_STAGE_THEME_PROGRESSION=Object.freeze([
 ]);
 
 const AURORA_FORMATION_LAYOUTS=Object.freeze([
- {fromStage:1,gx:17,gy:14,oy:28},
- {fromStage:4,gx:16.4,gy:13.4,oy:28},
- {fromStage:6,gx:15.8,gy:12.9,oy:27},
- {fromStage:8,gx:15.2,gy:12.4,oy:27}
+ {fromStage:1,gx:20,gy:18,oy:30},
+ {fromStage:4,gx:20,gy:18,oy:30},
+ {fromStage:6,gx:20,gy:18,oy:30},
+ {fromStage:8,gx:20,gy:18,oy:30}
 ]);
 
 const AURORA_FRAME_ACCENTS=Object.freeze({
@@ -14093,13 +14097,15 @@ const TARGET_EXPLOSION_PALETTE=Object.freeze({
 
 const AURORA_CONFORMANCE_PIXELS=Object.freeze({
  butterfly:Object.freeze({
-  a:[[0,1],[1,1],[10,1],[11,1],[0,2],[1,2],[10,2],[11,2],[0,3],[1,3],[10,3],[11,3],[0,4],[1,4],[10,4],[11,4],[0,5],[1,5],[2,5],[3,5],[8,5],[9,5],[10,5],[11,5],[0,6],[1,6],[10,6],[11,6],[0,7],[1,7],[10,7],[11,7],[0,8],[1,8],[10,8],[11,8]],
-  b:[[4,2],[5,2],[6,2],[7,2],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[4,5],[5,5],[6,5],[7,5],[4,6],[5,6],[6,6],[7,6]],
-  c:[[5,0],[7,0],[5,1],[7,1],[4,6],[5,6],[6,6],[7,6],[4,7],[5,7],[6,7],[7,7],[5,8],[6,8],[5,9],[6,9]]
+  a:[[0,0],[7,0],[0,1],[1,1],[6,1],[7,1],[0,2],[1,2],[6,2],[7,2],[0,3],[1,3],[6,3],[7,3],[0,4],[1,4],[6,4],[7,4],[0,5],[1,5],[6,5],[7,5]],
+  b:[[3,0],[4,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[3,3],[4,3],[3,4],[4,4]],
+  c:[[3,5],[4,5],[2,6],[3,6],[4,6],[5,6]]
  })
 });
 
 const TARGET_PIXEL_ASPECT_X=1.14;
+const TARGET_REFERENCE_ENEMY_SCALE=0.84;
+const TARGET_REFERENCE_BOSS_SCALE=0.88;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
@@ -14134,14 +14140,14 @@ function referencePixelSpritesEnabled(){
 
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,1);
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,1);
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,1);
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,1);
- if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,1);
- if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,1);
- if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,1);
- if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
+ if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE);
+ if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ENEMY_SCALE);
  return false;
 }
 
@@ -14279,7 +14285,7 @@ function drawEnemy(e){
   if(e.fam==='dragonfly')drawPix(-ps*4.5,-ps*3.5,ps,P.dragonfly.a,pal.a,pal.b,P.dragonfly.b,pal.c,P.dragonfly.c);
   else if(e.fam==='mosquito')drawPix(-ps*4.5,-ps*3.5,ps,P.mosquito.a,pal.a,pal.b,P.mosquito.b,pal.c,P.mosquito.c);
   else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
-  else if(e.t==='but')drawPix(-ps*6,-ps*5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
+  else if(e.t==='but')drawPix(-ps*4,-ps*3.5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
   else if(e.t==='rogue')drawPix(-ps*4,-ps*3.5,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
   else drawPix(-ps*4.5,-ps*3.5,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
   drawEnemyFlapAccent(e,ps,pal,flap);
