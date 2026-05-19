@@ -1007,7 +1007,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">1.4.0 multi-game public release</span>
+              <span class="metaValue">Forward conformance measurement and sprite-readability guardrail pass</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -2900,7 +2900,7 @@
 
     <tr>
       <td><strong>Sprites: live runtime canvas capture vs inferred Galaga pixel models</strong><br><span class="docMeta">Measured from isolated live canvas crops</span></td>
-      <td><strong>6.6/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against isolated live-rendered canvas captures</span></td>
+      <td><strong>6.5/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against isolated live-rendered canvas captures</span></td>
       <td>8 live sprite captures; weakest runtime sprite rogue-fighter 6.1/10; capture mode isolated-live-canvas-sprite-crops.</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
       <td>Expand from static isolated poses into animation-phase, dive-rotation, formation-context, and capture/rescue runtime sprite windows.</td>
@@ -2909,7 +2909,7 @@
 
     <tr>
       <td><strong>Sprites: live runtime crops vs promoted Galaga target crops</strong><br><span class="docMeta">first-pass-normalized-image-grid-comparison</span></td>
-      <td><strong>5.4/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against promoted multi-pose target crop library</span></td>
+      <td><strong>5.5/10</strong><br><span class="docMeta">Target: &gt;=8.5/10 against promoted multi-pose target crop library</span></td>
       <td>8 live runtime crop PNGs compared against 33 promoted target crops; weakest challenge-dragonfly 2.6/10; best matched target challenge-green-family-front. Target-relative cadence sequence score 5.5/10 across 3 sequence window(s).</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code></td>
       <td>Use the top candidate mismatch and target-sequence data to update sprite geometry, flap cadence, target mappings, and composite targets; then expand to dive, capture/rescue, projectile, explosion, tractor beam, and challenge-stage specialty motion.</td>
@@ -2919,7 +2919,7 @@
     <tr>
       <td><strong>Sprite motion: flapping, pulsing, dive poses, and transition animation</strong><br><span class="docMeta">First temporal phase windows captured; full motion score still pending</span></td>
       <td><strong>4/4 planned motion axes covered</strong><br><span class="docMeta">Target: Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions</span></td>
-      <td>Static live-canvas pose score exists at 6.6/10; 4/4 planned motion axes have at least seed coverage. Covered: two-phase flap/pulse static sprite delta for bee, butterfly, and boss families; full flap-cycle cadence windows for bee, butterfly, and boss families; forced dive/rotation pose silhouettes for bee, butterfly, and boss families; capture-beam, carried-fighter, and dual-fighter transition seed poses. Full roadmap: flap-cycle cadence and alternating wing/body pixels over full temporal windows; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.</td>
+      <td>Static live-canvas pose score exists at 6.5/10; 4/4 planned motion axes have at least seed coverage. Covered: two-phase flap/pulse static sprite delta for bee, butterfly, and boss families; full flap-cycle cadence windows for bee, butterfly, and boss families; forced dive/rotation pose silhouettes for bee, butterfly, and boss families; capture-beam, carried-fighter, and dual-fighter transition seed poses. Full roadmap: flap-cycle cadence and alternating wing/body pixels over full temporal windows; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.</td>
       <td><code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code></td>
       <td>Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.</td>
     </tr>
@@ -5344,10 +5344,10 @@
           <div class="docWrap" style="margin-top:16px;">
             <h3>Aurora Runtime Versus Target Crops</h3>
             <p>This is the stricter live-rendered sprite read: each Aurora canvas crop is compared against accepted Galaga target crops after semantic role filtering. Low values here are not failures of the plan; they are the exact gaps the next sprite passes should attack.</p>
-            <p class="docMeta"><strong>Runtime artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>. <strong>Direct target artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code>. <strong>Generated:</strong> 2026-05-19T18:36:25.499Z.</p>
+            <p class="docMeta"><strong>Runtime artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>. <strong>Direct target artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code>. <strong>Generated:</strong> 2026-05-19T19:26:12.706Z.</p>
             <div class="metricGrid">
-              <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>6.6/10</strong><span>8 live canvas crop(s)</span></div>
-              <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>5.4/10</strong><span>33 target crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>6.5/10</strong><span>8 live canvas crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>5.5/10</strong><span>33 target crop(s)</span></div>
               <div class="metricCard"><span class="metricLabel">Target Sequence Score</span><strong>5.5/10</strong><span>3 cadence sequence(s)</span></div>
               <div class="metricCard"><span class="metricLabel">Weakest Direct Match</span><strong>challenge-dragonfly</strong><span>2.6/10</span></div>
               <div class="metricCard"><span class="metricLabel">Motion Axes Covered</span><strong>4/4</strong><span>3 phase pair(s); 3 cadence window(s)</span></div>
@@ -5490,7 +5490,7 @@
   
 
     <tr>
-      <td><strong>but-line</strong><br><span class="docMeta">runtime model 6.5/10</span></td>
+      <td><strong>but-line</strong><br><span class="docMeta">runtime model 6.6/10</span></td>
       <td>
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">Aurora runtime crop</span>
@@ -5525,8 +5525,8 @@
       <span class="catalogMediaNote">butterfly-escort / formation-front</span>
     </div>
   </td>
-      <td><strong>6.1/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>butterfly-escort</code></span></td>
-      <td>Jaccard 0.5683; silhouette 0.6201; color 0.7967.</td>
+      <td><strong>6.7/10</strong><br><span class="docMeta">candidates: 3; role filter: <code>butterfly-escort</code></span></td>
+      <td>Jaccard 0.6339; silhouette 0.6797; color 0.8303.</td>
     </tr>
   
 
@@ -5786,8 +5786,8 @@
       <span class="catalogMediaNote">Harness-captured open flap phase.</span>
     </div>
   </td>
-      <td><strong>12</strong> filled-cell delta<br><span class="docMeta">72 lit-pixel delta; score delta 0.04</span></td>
-      <td>Captured closed/open flap phases for but-line; lit-pixel delta 72, filled-cell delta 12.</td>
+      <td><strong>68</strong> filled-cell delta<br><span class="docMeta">264 lit-pixel delta; score delta 0.92</span></td>
+      <td>Captured closed/open flap phases for but-line; lit-pixel delta 264, filled-cell delta 68.</td>
     </tr>
   
 
@@ -5915,12 +5915,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 0</strong>
-            <p>tm 0; score 7.0/10</p>
+            <p>tm 0; score 6.6/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/5546e62a75-but-line-cadence-00.png" alt="Frame 0 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0; score 7.0/10</span>
+      <span class="catalogMediaNote">tm 0; score 6.6/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5931,12 +5931,12 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 4</strong>
-            <p>tm 0.22; score 7.0/10</p>
+            <p>tm 0.22; score 7.5/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/7d486496d6-but-line-cadence-04.png" alt="Frame 4 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.22; score 7.0/10</span>
+      <span class="catalogMediaNote">tm 0.22; score 7.5/10</span>
     </div>
   
     <div class="catalogMediaItem">
@@ -5947,17 +5947,17 @@
         <div class="catalogMediaExpanded">
           <div class="catalogMediaExpandedHeader">
             <strong>Frame 7</strong>
-            <p>tm 0.385; score 7.0/10</p>
+            <p>tm 0.385; score 6.6/10</p>
           </div>
           <div class="catalogMediaExpandedScroll"><img class="isPixelated" src="assets/catalog-media/52e51c382b-but-line-cadence-07.png" alt="Frame 7 expanded" loading="lazy"></div>
         </div>
       </details>
-      <span class="catalogMediaNote">tm 0.385; score 7.0/10</span>
+      <span class="catalogMediaNote">tm 0.385; score 6.6/10</span>
     </div>
   </div></div></td>
-      <td><strong>0.04</strong> score range<br><span class="docMeta">20.57 avg adjacent lit-pixel delta</span></td>
-      <td>3.43 avg adjacent filled-cell delta</td>
-      <td>Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 20.6, filled-cell delta 3.4. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
+      <td><strong>0.92</strong> score range<br><span class="docMeta">75.43 avg adjacent lit-pixel delta</span></td>
+      <td>19.43 avg adjacent filled-cell delta</td>
+      <td>Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 75.4, filled-cell delta 19.4. This measures visible runtime motion, but not yet Galaga target-frame cadence.</td>
     </tr>
   
 
@@ -6142,7 +6142,7 @@
       <span class="catalogMediaNote">expected formation-front; best target formation-front</span>
     </div>
   </div></div></td>
-      <td><strong>4.9/10</strong><br><span class="docMeta">avg frame 3.5/10; pose coverage 100%</span></td>
+      <td><strong>5.0/10</strong><br><span class="docMeta">avg frame 3.6/10; pose coverage 100%</span></td>
       <td>but-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.</td>
     </tr>
   
@@ -6261,7 +6261,7 @@
       <span class="catalogMediaNote">Harness-captured runtime pose seed for active sprite-motion conformance.</span>
     </div>
   </td>
-      <td><strong>6.7/10</strong><br><span class="docMeta">filled 505; lit 4747</span></td>
+      <td><strong>6.7/10</strong><br><span class="docMeta">filled 542; lit 2776</span></td>
       <td>Captured but-line-dive-right with forced dive vector (88, 134) so rotation silhouette can be tracked over time.</td>
     </tr>
   
@@ -25342,7 +25342,7 @@
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>1.4.0 multi-game public release</strong><br>
+          Latest release note: <strong>Forward conformance measurement and sprite-readability guardrail pass</strong><br>
           Release 1.4.0.1 · Updated May 19, 2026
         </p>
       </aside>
