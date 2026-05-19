@@ -295,19 +295,22 @@
       margin-top:14px;
     }
     .inlineDocPreview,
-    .challengeStageDetail{
+    .challengeStageDetail,
+    .levelVisualDetail{
       border:1px solid rgba(255,255,255,0.10);
       background:rgba(7,19,31,0.72);
       border-radius:18px;
       overflow:hidden;
     }
     .inlineDocPreview summary,
-    .challengeStageDetail summary{
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
       cursor:pointer;
       list-style:none;
     }
     .inlineDocPreview summary::-webkit-details-marker,
-    .challengeStageDetail summary::-webkit-details-marker{
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
       display:none;
     }
     .inlineDocPreview summary{
@@ -316,14 +319,16 @@
       font-weight:800;
     }
     .inlineDocPreview summary::after,
-    .challengeStageDetail summary::after{
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
       content:"+";
       float:right;
       color:var(--accent);
       font-weight:900;
     }
     .inlineDocPreview[open] summary::after,
-    .challengeStageDetail[open] summary::after{
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
       content:"-";
     }
     .inlineDocPreviewBody{
@@ -332,11 +337,13 @@
       font-size:14px;
       line-height:1.6;
     }
-    .challengeStageList{
+    .challengeStageList,
+    .levelVisualList{
       display:grid;
       gap:12px;
     }
-    .challengeStageSummary{
+    .challengeStageSummary,
+    .levelVisualSummary{
       display:grid;
       grid-template-columns:minmax(220px,1fr) auto auto;
       gap:12px;
@@ -344,15 +351,32 @@
       padding:14px 16px;
       color:#f2fbff;
     }
-    .challengeStageTitle{
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
       display:flex;
       flex-direction:column;
       gap:3px;
       font-weight:900;
     }
-    .challengeStageTitle small{
+    .challengeStageTitle small,
+    .levelVisualTitle small{
       color:var(--soft);
       font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
       line-height:1.35;
     }
     .scorePill{
@@ -369,19 +393,74 @@
       font-weight:900;
       white-space:nowrap;
     }
-    .challengeStageDetailBody{
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
       display:grid;
       gap:14px;
       padding:0 16px 16px;
     }
     .challengeCompareGrid,
-    .challengeAxisGrid{
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:12px;
     }
     .challengeAxisGrid{
       grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
     }
     .challengeEvidenceCard{
       min-width:0;
@@ -422,7 +501,13 @@
     @media (max-width: 980px){
       .challengeStageSummary,
       .challengeCompareGrid,
-      .challengeAxisGrid{
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
         grid-template-columns:1fr;
       }
       .scorePill{
@@ -714,7 +799,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Built</span>
-              <span class="metaValue">May 18, 2026</span>
+              <span class="metaValue">May 19, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -965,7 +1050,7 @@
           <p>Status: living white paper Current draft: <code>v0.3.0-draft</code> Date: <code>2026-05-16</code> Audience: broad technical readers, interested builders, collaborators, future reviewers, and public-facing project storytelling</p>
 <p>This document is the maintained narrative explanation of what this project is doing, why it is being built this way, and how the approach evolves over time. It is intended to be both a promotional piece and a disciplined reminder to the team: the software, the evidence program, the release process, and the generative-AI workflow all matter together.</p>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/README.md">white-paper/README.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <p><img alt="Platinum Hero" src="assets/catalog-media/27591edccd-platinum-hero.svg"></p>
 <h3>Overview / Preamble</h3>
 <p>This project is not only a browser game repo.</p>
@@ -1079,7 +1164,7 @@
 <ul><li>Ingestion owns provenance and structured evidence.</li><li>Harnesses own repeatable evaluation.</li><li>Release discipline owns the public promise.</li></ul>
 <p>When those layers blur, the project becomes harder to explain, harder to test, and easier to accidentally fake.</p>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#platform-vs-applications">project-guide.html#platform-vs-applications</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
+<ul><li><a href="project-guide.html#platform-vs-applications">project-guide.html#platform-vs-applications</a></li><li><a href="platinum-guide.html">platinum-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md">PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</a></li></ul>
 <h4>4. Ingestion Strategy</h4>
 <p>Ingestion is the front half of engineering, not a side notebook.</p>
 <p>The project does not want new games or fidelity improvements to come mainly from memory, vibes, or post-hoc rationalization. Instead, it wants evidence to arrive in structured forms that can be reused:</p>
@@ -1093,7 +1178,7 @@
 <p>These reference contact sheets are useful because they show the project’s ingestion claim in a form a non-expert can understand quickly. We are not only describing classic arcade behavior; we are collecting windows, studying them, and turning them into reusable evidence.</p>
 <blockquote><p>TODO illustration: Pick the single best “ingestion in action” image for v1. The strongest option might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged comparison between raw source footage and the structured artifact family that comes out of it.</p></blockquote>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#classic-arcade-ingestion-framework-doc">project-guide.html#classic-arcade-ingestion-framework-doc</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
+<ul><li><a href="project-guide.html#classic-arcade-ingestion-framework-doc">project-guide.html#classic-arcade-ingestion-framework-doc</a></li><li><a href="application-guide.html">application-guide.html</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md">CLASSIC_ARCADE_INGESTION_FRAMEWORK.md</a></li></ul>
 <h4>5. Harnessing And Conformance</h4>
 <p>This project is serious about the difference between &quot;better&quot; and &quot;better by a rerunnable measure.&quot;</p>
 <p>The conformance system exists so that quality can be described with more precision than a mood:</p>
@@ -1122,7 +1207,7 @@
 <ul><li>repeated ideas that can be tightened</li><li>diagrams or images that create awkward whitespace or weak page breaks</li><li>TODOs that are unclear or more revealing of indecision than of real planning</li><li>HTML reading flow on desktop and mobile</li><li>PDF export quality, especially around image scale, table breaks, and diagram</li></ul>
 <p>legibility</p>
 <p>Further detail:</p>
-<ul><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#testing-doc">project-guide.html#testing-doc</a></li><li><a href="project-guide.html#code-review-model-doc">project-guide.html#code-review-model-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/REVIEWER_CHECKLIST.md">white-paper/REVIEWER_CHECKLIST.md</a></li></ul>
+<ul><li><a href="release-dashboard.html">release-dashboard.html</a></li><li><a href="release-notes.html">release-notes.html</a></li><li><a href="project-guide.html#testing-doc">project-guide.html#testing-doc</a></li><li><a href="project-guide.html#code-review-model-doc">project-guide.html#code-review-model-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/REVIEWER_CHECKLIST.md">white-paper/REVIEWER_CHECKLIST.md</a></li></ul>
 <h4>7. How Generative AI Fits</h4>
 <p>The project does use generative AI heavily, but not as a substitute for engineering structure.</p>
 <p>The intended operating doctrine is:</p>
@@ -1141,7 +1226,7 @@
 <p><img alt="Cost per positive score point" src="assets/catalog-media/af6e8026f1-cost-per-positive-score-point.svg"></p>
 <p>These charts help keep the AI story grounded. The point is not only that model assistance exists; it is that the project is trying to compare that assistance with local repeatable measurement and with visible quality movement.</p>
 <p>Further detail:</p>
-<ul><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li></ul>
+<ul><li><a href="project-guide.html#conformance-economics-doc">project-guide.html#conformance-economics-doc</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/CONFORMANCE_ECONOMICS.md">CONFORMANCE_ECONOMICS.md</a></li></ul>
 <h4>8. Working Loop</h4>
 <p>The operating loop of this project is more important than any single feature.</p>
 <div class="mermaid">flowchart LR
@@ -1181,17 +1266,17 @@
 <p>We want a maintained citation program that records:</p>
 <ul><li>what outside work or source material influenced us</li><li>how we used it</li><li>what we learned from it</li><li>what changed in the repo because of it</li><li>what still needs to be recovered, linked, or tightened</li></ul>
 <p>The living ledger for that work starts here:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <p>The first open citation debt is the prior standalone assessment of the Karpathy-style research/evaluator loop. The repo contains the conceptual thread already, but the older assessment should be recovered and linked directly in a future white-paper release rather than reconstructed from memory.</p>
 <p>Further detail:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/CITATION_LEDGER.md">white-paper/CITATION_LEDGER.md</a></li></ul>
 <h4>11. Related Work</h4>
 <p>This project should periodically stop and look outward.</p>
 <p>The right pattern is not to stuff the paper with literature. The right pattern is to do focused searches, add high-signal sources, explain their relevance in plain language, and keep the public references linked to a maintained log.</p>
 <p>Current seeded related-work set:</p>
 <ul><li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic, &quot;Building effective agents&quot; (2024-12-19)</a>: relevant because it argues for simple, composable agent patterns and evaluator-optimizer loops rather than ornamental workflow complexity.</li><li><a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Anthropic, &quot;Writing effective tools for agents - with agents&quot; (2025-09-11)</a>: relevant because our harnesses, scripts, and release tools are all explicit contracts between model assistance and deterministic system behavior.</li><li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Anthropic, &quot;Demystifying evals for AI agents&quot; (2026-01-09)</a>: relevant because it reinforces our investment in transcripts, graders, repeated trials, and measurable evaluator quality instead of anecdotal confidence.</li><li><a href="https://www.anthropic.com/engineering/building-trustworthy-agents">Anthropic, &quot;Trustworthy agents in practice&quot; (2026-04-09)</a>: relevant because it frames guardrails, reviews, and operator-visible controls as part of the product surface, not only as implementation details.</li></ul>
 <p>Maintained deeper log:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1b30577c6e8876ea97186ad1a90da661670aaeb9/white-paper/RELATED_WORK.md">white-paper/RELATED_WORK.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/c3183c73a6bbcc7cc329c3d0ebbd087355f00cad/white-paper/RELATED_WORK.md">white-paper/RELATED_WORK.md</a></li></ul>
 <h4>12. Why This Project Matters</h4>
 <p>The project matters because it is trying to demonstrate a concrete alternative to two weak extremes.</p>
 <p>It is not:</p>
@@ -1533,7 +1618,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 18, 2026
+          Release 1.4.0.1 · Updated May 19, 2026
         </p>
       </aside>
     </main>

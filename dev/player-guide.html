@@ -295,19 +295,22 @@
       margin-top:14px;
     }
     .inlineDocPreview,
-    .challengeStageDetail{
+    .challengeStageDetail,
+    .levelVisualDetail{
       border:1px solid rgba(255,255,255,0.10);
       background:rgba(7,19,31,0.72);
       border-radius:18px;
       overflow:hidden;
     }
     .inlineDocPreview summary,
-    .challengeStageDetail summary{
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
       cursor:pointer;
       list-style:none;
     }
     .inlineDocPreview summary::-webkit-details-marker,
-    .challengeStageDetail summary::-webkit-details-marker{
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
       display:none;
     }
     .inlineDocPreview summary{
@@ -316,14 +319,16 @@
       font-weight:800;
     }
     .inlineDocPreview summary::after,
-    .challengeStageDetail summary::after{
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
       content:"+";
       float:right;
       color:var(--accent);
       font-weight:900;
     }
     .inlineDocPreview[open] summary::after,
-    .challengeStageDetail[open] summary::after{
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
       content:"-";
     }
     .inlineDocPreviewBody{
@@ -332,11 +337,13 @@
       font-size:14px;
       line-height:1.6;
     }
-    .challengeStageList{
+    .challengeStageList,
+    .levelVisualList{
       display:grid;
       gap:12px;
     }
-    .challengeStageSummary{
+    .challengeStageSummary,
+    .levelVisualSummary{
       display:grid;
       grid-template-columns:minmax(220px,1fr) auto auto;
       gap:12px;
@@ -344,15 +351,32 @@
       padding:14px 16px;
       color:#f2fbff;
     }
-    .challengeStageTitle{
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
       display:flex;
       flex-direction:column;
       gap:3px;
       font-weight:900;
     }
-    .challengeStageTitle small{
+    .challengeStageTitle small,
+    .levelVisualTitle small{
       color:var(--soft);
       font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
       line-height:1.35;
     }
     .scorePill{
@@ -369,19 +393,74 @@
       font-weight:900;
       white-space:nowrap;
     }
-    .challengeStageDetailBody{
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
       display:grid;
       gap:14px;
       padding:0 16px 16px;
     }
     .challengeCompareGrid,
-    .challengeAxisGrid{
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:12px;
     }
     .challengeAxisGrid{
       grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
     }
     .challengeEvidenceCard{
       min-width:0;
@@ -422,7 +501,13 @@
     @media (max-width: 980px){
       .challengeStageSummary,
       .challengeCompareGrid,
-      .challengeAxisGrid{
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
         grid-template-columns:1fr;
       }
       .scorePill{
@@ -561,7 +646,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 18, 2026</span>
+              <span class="metaValue">May 19, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -769,7 +854,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>1.4.0 multi-game public release</strong><br>
-          Release 1.4.0.1 · Updated May 18, 2026
+          Release 1.4.0.1 · Updated May 19, 2026
         </p>
       </aside>
     </main>
