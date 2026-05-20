@@ -173,6 +173,118 @@
             font-size: 18px;
         }
 
+        .releaseNoteMeta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .releaseNoteMetaCard {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.075);
+        }
+
+        .releaseNoteMetaCard strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #8fb3cc;
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .releaseNoteDetail {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .releaseNoteDetail .markdown {
+            display: grid;
+            gap: 14px;
+        }
+
+        .releaseNoteDetail .markdown > :first-child {
+            margin-top: 0;
+        }
+
+        .releaseNoteDetail .markdown h2,
+        .releaseNoteDetail .markdown h3,
+        .releaseNoteDetail .markdown h4 {
+            margin: 8px 0 0;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .releaseNoteDetail .markdown p,
+        .releaseNoteDetail .markdown li {
+            color: #deefff;
+            line-height: 1.65;
+        }
+
+        .releaseNoteDetail .markdown ul,
+        .releaseNoteDetail .markdown ol {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .releaseNoteDetail .markdown blockquote {
+            margin: 0;
+            padding: 14px 16px;
+            border-left: 3px solid rgba(121, 184, 255, 0.4);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .releaseNoteDetail .markdown code {
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            font-family: "SFMono-Regular", "SF Mono", ui-monospace, monospace;
+            font-size: 0.95em;
+        }
+
+        .releaseNoteDetail .markdown pre {
+            margin: 0;
+            padding: 14px 16px;
+            overflow-x: auto;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .releaseNoteDetail .markdown pre code {
+            padding: 0;
+            background: transparent;
+        }
+
+        .releaseNoteDetail .markdown .tableWrap {
+            overflow-x: auto;
+        }
+
+        .releaseNoteDetail .markdown table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .releaseNoteDetail .markdown th,
+        .releaseNoteDetail .markdown td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .releaseNoteDetail .markdown img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .narrative {
             max-width: 900px;
             margin: 0 0 18px;
@@ -411,7 +523,7 @@
     </style>
 </head>
 <body>
-    <!-- public-sync: release=1.4.0.1 label=1.4.0+build.891.sha.54b276b9 commit=54b276b99ab03ced312e7314d303d8ea9152d5e1 template=740a2d6be57f synced=2026-05-20T15:40:44Z -->
+    <!-- public-sync: release=1.4.0.1 label=1.4.0+build.894.sha.1dc23d8a commit=1dc23d8ab4f01769928f73ad40b619eb01f718ae template=04e796b54392 synced=2026-05-20T16:07:03Z -->
     <main class="shell">
         <section class="hero">
             <div class="heroTop">
@@ -433,7 +545,7 @@
                 </div>
                 <div class="metaCard">
                     <span class="metaLabel">Build Timestamp</span>
-                    <span class="metaValue">May 20 2026, 11:40 AM EDT</span>
+                    <span class="metaValue">May 20 2026, 12:07 PM EDT</span>
                     <div class="metaNote">Timestamp of the build artifact for this release location, not necessarily the final public portfolio sync time.</div>
                 </div>
                 <div class="metaCard">
@@ -1025,14 +1137,16 @@
             </div>
         </section>
 
-        <section class="panel">
+        <section class="panel" id="latest-release-note">
             <h2>Latest release note</h2>
             <div class="card">
                 <h3>Production follow-through, white paper, and conformance refresh</h3>
                 <p>Refreshed the public 1.4.0 family with a stronger outward-facing project story, a hosted white paper and PDF, deeper Aurora challenge/sprite/cadence evidence, clearer Galaxy Guardians preview framing, tighter release-review discipline, and better aligned public documentation across the game, platform, and project layers.</p>
                 <div class="links">
-                    <a class="button" href="releases.html">Open full release notes</a>
+<a class="button" href="public-project-page.html#latest-release-note">Open release notes</a>
+<a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/RELEASE_NOTE_1.4.0_PRODUCTION_FOLLOW_THROUGH.md">Open source markdown</a>
                 </div>
+
             </div>
         </section>
 
@@ -1272,7 +1386,7 @@
                 <a class="button" href="index.html">Open this lane build</a>
                 <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Open beta build</a>
                 <a class="button" href="release-dashboard.html">Open release dashboard</a>
-                <a class="button" href="releases.html">Open release notes</a>
+                <a class="button" href="public-project-page.html#latest-release-note">Open release notes</a>
                 <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
                 <a class="button" href="project-guide.html">Open project guide</a>
                 <a class="button" href="application-guide.html">Open application guide</a>
