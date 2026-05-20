@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "artifactType": "release-conformance-dashboard",
-  "generatedAt": "2026-05-19T21:55:51.707Z",
-  "commit": "95995f49",
+  "generatedAt": "2026-05-20T12:53:08.019Z",
+  "commit": "20ebcc8f",
   "branch": "main",
   "dirty": true,
   "activeGameKey": "aurora-galactica",
@@ -28,7 +28,7 @@
         },
         {
           "Gate": "Challenge-stage set-piece conformance",
-          "Current": "4.2/10",
+          "Current": "4.3/10",
           "Target": ">=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature",
           "Notes": "Strict movement/graphics/alien-novelty gate; safety does not inflate this score"
         },
@@ -64,7 +64,7 @@
         },
         {
           "Gate": "Challenge variation",
-          "Current": "4.2/10 measured",
+          "Current": "4.3/10 measured",
           "Target": ">=9.2 with dedicated scorer",
           "Notes": "Dedicated stage-by-stage challenge conformance gate"
         },
@@ -101,14 +101,14 @@
             "resolution": "strict stage-by-stage challenge scorer using 1/10 baseline for interest, movement, and graphics; no-shot/no-kill is treated as a guardrail rather than score inflation",
             "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 4.2,
-          "current": "4.2/10",
+          "score10": 4.3,
+          "current": "4.3/10",
           "target": ">=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature",
           "status": "Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap",
           "why": "The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.",
           "effort": "High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling",
           "next": "Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.",
-          "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+          "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
           "costContext": {
             "costClass": "high",
             "expectedResources": "cpu, browser, gpu",
@@ -123,7 +123,7 @@
             "expectedLift10": 1.8,
             "expectedOverallLift10": 0.138,
             "investmentScore": 8.4,
-            "gapToTarget": "+0.8",
+            "gapToTarget": "+0.7",
             "summary": "high; cpu, browser, gpu",
             "valueCostRead": "Expected lift 1.8/10 on metric, 0.138/10 overall; investment score 8.4."
           }
@@ -457,14 +457,14 @@
             "resolution": "strict dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition",
             "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
           },
-          "score10": 4.2,
-          "current": "4.2/10",
+          "score10": 4.3,
+          "current": "4.3/10",
           "target": "9.0-9.4 with dedicated scorer",
           "status": "Dedicated stage-by-stage challenge conformance report",
           "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
           "effort": "Medium-high; 2-4 hrs",
-          "next": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.5/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
-          "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+          "next": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+          "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
           "costContext": {
             "costClass": "estimated",
             "expectedResources": "cpu, browser",
@@ -479,7 +479,7 @@
             "expectedLift10": null,
             "expectedOverallLift10": null,
             "investmentScore": null,
-            "gapToTarget": "+4.8",
+            "gapToTarget": "+4.7",
             "summary": "estimated; cpu, browser",
             "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
           }
@@ -881,10 +881,10 @@
         "latestLevelArcScore10": 8.8,
         "metricPointCount": 1253,
         "deltaCount": 137,
-        "measuredRuns": 848,
-        "wallSeconds": 57086.332,
-        "cpuSeconds": 56811.18,
-        "artifactBytes": 1426423309,
+        "measuredRuns": 859,
+        "wallSeconds": 57126.462,
+        "cpuSeconds": 56876.75,
+        "artifactBytes": 1428920614,
         "computeApplication": {
           "gpuUseByPurpose": [
             {
@@ -950,8 +950,8 @@
               "wallSeconds": 30250.28,
               "wallMinutes": 504.17,
               "cpuSeconds": 48646.62,
-              "share": 0.8597,
-              "sharePercent": 86,
+              "share": 0.8587,
+              "sharePercent": 85.9,
               "examples": [
                 "Stage4 lane2 after bounded column5 cue",
                 "Stage4 lane2 source-exact scenario after cue",
@@ -961,12 +961,12 @@
             },
             {
               "purpose": "Gameplay behavior and level complexity",
-              "runs": 306,
-              "wallSeconds": 4306.24,
-              "wallMinutes": 71.77,
-              "cpuSeconds": 7435.2,
-              "share": 0.1224,
-              "sharePercent": 12.2,
+              "runs": 312,
+              "wallSeconds": 4342.046,
+              "wallMinutes": 72.37,
+              "cpuSeconds": 7495.05,
+              "share": 0.1233,
+              "sharePercent": 12.3,
               "examples": [
                 "Stage4 lane2 action precision baseline",
                 "Stage4 lane2 action precision baseline",
@@ -991,11 +991,11 @@
             },
             {
               "purpose": "Visual and video reference analysis",
-              "runs": 10,
-              "wallSeconds": 18.109,
-              "wallMinutes": 0.3,
-              "cpuSeconds": 22.96,
-              "share": 0.0005,
+              "runs": 15,
+              "wallSeconds": 22.433,
+              "wallMinutes": 0.37,
+              "cpuSeconds": 28.68,
+              "share": 0.0006,
               "sharePercent": 0.1,
               "examples": [
                 "First Aurora visual look conformance scorer baseline",
@@ -1079,7 +1079,7 @@
           ],
           "totals": {
             "gpuEquivalentWallSeconds": 21947.178,
-            "cpuLocalWallSeconds": 35186.332,
+            "cpuLocalWallSeconds": 35226.462,
             "positiveScore10Attributed": 63.9
           },
           "limitations": [
@@ -1089,13 +1089,13 @@
           ]
         },
         "charts": [
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/score-trends.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/largest-score-deltas.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/compute-minutes-by-resource.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cost-per-positive-score-point.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gpu-equivalent-use-by-purpose.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cpu-use-by-purpose.svg",
-          "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gameplay-improvement-by-project-part.svg"
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/score-trends.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/largest-score-deltas.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/compute-minutes-by-resource.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/cost-per-positive-score-point.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/gpu-equivalent-use-by-purpose.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/cpu-use-by-purpose.svg",
+          "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/gameplay-improvement-by-project-part.svg"
         ],
         "retrospective": {
           "generatedAt": "2026-05-18T12:43:17.737Z",
@@ -1520,10 +1520,10 @@
         "quality": "reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json",
         "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json",
         "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json",
-        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/report.json",
+        "economics": "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/report.json",
         "conformanceInvestmentRetrospective": "reference-artifacts/analyses/conformance-investment-retrospective/2026-05-18-e583b558/report.json",
         "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-16-82fd62cb/report.json",
-        "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+        "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
         "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-17-f9e7374c-dirty/report.json",
         "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
         "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
@@ -1751,10 +1751,10 @@
     "quality": "reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json",
     "investmentPriority": "reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json",
     "levelArc": "reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json",
-    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/report.json",
+    "economics": "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/report.json",
     "conformanceInvestmentRetrospective": "reference-artifacts/analyses/conformance-investment-retrospective/2026-05-18-e583b558/report.json",
     "alienEntryChallenge": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-16-82fd62cb/report.json",
-    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
     "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-17-f9e7374c-dirty/report.json",
     "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json",
@@ -1782,7 +1782,7 @@
     },
     {
       "Gate": "Challenge-stage set-piece conformance",
-      "Current": "4.2/10",
+      "Current": "4.3/10",
       "Target": ">=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature",
       "Notes": "Strict movement/graphics/alien-novelty gate; safety does not inflate this score"
     },
@@ -1818,7 +1818,7 @@
     },
     {
       "Gate": "Challenge variation",
-      "Current": "4.2/10 measured",
+      "Current": "4.3/10 measured",
       "Target": ">=9.2 with dedicated scorer",
       "Notes": "Dedicated stage-by-stage challenge conformance gate"
     },
@@ -1855,14 +1855,14 @@
         "resolution": "strict stage-by-stage challenge scorer using 1/10 baseline for interest, movement, and graphics; no-shot/no-kill is treated as a guardrail rather than score inflation",
         "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
       },
-      "score10": 4.2,
-      "current": "4.2/10",
+      "score10": 4.3,
+      "current": "4.3/10",
       "target": ">=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature",
       "status": "Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap",
       "why": "The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.",
       "effort": "High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling",
       "next": "Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.",
-      "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+      "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
       "costContext": {
         "costClass": "high",
         "expectedResources": "cpu, browser, gpu",
@@ -1877,7 +1877,7 @@
         "expectedLift10": 1.8,
         "expectedOverallLift10": 0.138,
         "investmentScore": 8.4,
-        "gapToTarget": "+0.8",
+        "gapToTarget": "+0.7",
         "summary": "high; cpu, browser, gpu",
         "valueCostRead": "Expected lift 1.8/10 on metric, 0.138/10 overall; investment score 8.4."
       }
@@ -2211,14 +2211,14 @@
         "resolution": "strict dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition",
         "scoreMeaning": "Major conformance gap or immature metric requiring stronger evidence before release confidence."
       },
-      "score10": 4.2,
-      "current": "4.2/10",
+      "score10": 4.3,
+      "current": "4.3/10",
       "target": "9.0-9.4 with dedicated scorer",
       "status": "Dedicated stage-by-stage challenge conformance report",
       "why": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "effort": "Medium-high; 2-4 hrs",
-      "next": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.5/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
-      "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json",
+      "next": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+      "evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json",
       "costContext": {
         "costClass": "estimated",
         "expectedResources": "cpu, browser",
@@ -2233,7 +2233,7 @@
         "expectedLift10": null,
         "expectedOverallLift10": null,
         "investmentScore": null,
-        "gapToTarget": "+4.8",
+        "gapToTarget": "+4.7",
         "summary": "estimated; cpu, browser",
         "valueCostRead": "Estimated cost/value; dedicated investment candidate not yet generated."
       }
@@ -2634,7 +2634,7 @@
     {
       "Priority": 1,
       "Metric": "Challenge-stage set-piece conformance: movement, graphics, alien novelty",
-      "Current": "4.2/10",
+      "Current": "4.3/10",
       "Confidence": "medium-high for gap direction; medium-low for exact lift estimate",
       "Resolution": "strict stage-by-stage challenge scorer using 1/10 baseline for interest, movement, and graphics; no-shot/no-kill is treated as a guardrail rather than score inflation",
       "Cost / resources": "high; cpu, browser, gpu",
@@ -2644,7 +2644,7 @@
       "Why this matters": "The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.",
       "Effort / time estimate": "High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling",
       "Recommended next step": "Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.",
-      "Evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json"
+      "Evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json"
     },
     {
       "Priority": 2,
@@ -2769,7 +2769,7 @@
     {
       "Priority": 9,
       "Metric": "Challenge-stage variation and new alien/formations introduction",
-      "Current": "4.2/10",
+      "Current": "4.3/10",
       "Confidence": "medium",
       "Resolution": "strict dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition",
       "Cost / resources": "estimated; cpu, browser",
@@ -2778,8 +2778,8 @@
       "Measurement status": "Dedicated stage-by-stage challenge conformance report",
       "Why this matters": "Challenge stages should teach new motion/reward patterns, not only pause normal combat.",
       "Effort / time estimate": "Medium-high; 2-4 hrs",
-      "Recommended next step": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.5/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
-      "Evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json"
+      "Recommended next step": "Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+      "Evidence": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-246f53bd/report.json"
     },
     {
       "Priority": 10,
@@ -2937,10 +2937,10 @@
     "latestLevelArcScore10": 8.8,
     "metricPointCount": 1253,
     "deltaCount": 137,
-    "measuredRuns": 848,
-    "wallSeconds": 57086.332,
-    "cpuSeconds": 56811.18,
-    "artifactBytes": 1426423309,
+    "measuredRuns": 859,
+    "wallSeconds": 57126.462,
+    "cpuSeconds": 56876.75,
+    "artifactBytes": 1428920614,
     "computeApplication": {
       "gpuUseByPurpose": [
         {
@@ -3006,8 +3006,8 @@
           "wallSeconds": 30250.28,
           "wallMinutes": 504.17,
           "cpuSeconds": 48646.62,
-          "share": 0.8597,
-          "sharePercent": 86,
+          "share": 0.8587,
+          "sharePercent": 85.9,
           "examples": [
             "Stage4 lane2 after bounded column5 cue",
             "Stage4 lane2 source-exact scenario after cue",
@@ -3017,12 +3017,12 @@
         },
         {
           "purpose": "Gameplay behavior and level complexity",
-          "runs": 306,
-          "wallSeconds": 4306.24,
-          "wallMinutes": 71.77,
-          "cpuSeconds": 7435.2,
-          "share": 0.1224,
-          "sharePercent": 12.2,
+          "runs": 312,
+          "wallSeconds": 4342.046,
+          "wallMinutes": 72.37,
+          "cpuSeconds": 7495.05,
+          "share": 0.1233,
+          "sharePercent": 12.3,
           "examples": [
             "Stage4 lane2 action precision baseline",
             "Stage4 lane2 action precision baseline",
@@ -3047,11 +3047,11 @@
         },
         {
           "purpose": "Visual and video reference analysis",
-          "runs": 10,
-          "wallSeconds": 18.109,
-          "wallMinutes": 0.3,
-          "cpuSeconds": 22.96,
-          "share": 0.0005,
+          "runs": 15,
+          "wallSeconds": 22.433,
+          "wallMinutes": 0.37,
+          "cpuSeconds": 28.68,
+          "share": 0.0006,
           "sharePercent": 0.1,
           "examples": [
             "First Aurora visual look conformance scorer baseline",
@@ -3135,7 +3135,7 @@
       ],
       "totals": {
         "gpuEquivalentWallSeconds": 21947.178,
-        "cpuLocalWallSeconds": 35186.332,
+        "cpuLocalWallSeconds": 35226.462,
         "positiveScore10Attributed": 63.9
       },
       "limitations": [
@@ -3145,13 +3145,13 @@
       ]
     },
     "charts": [
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/score-trends.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/largest-score-deltas.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/compute-minutes-by-resource.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cost-per-positive-score-point.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gpu-equivalent-use-by-purpose.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cpu-use-by-purpose.svg",
-      "reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gameplay-improvement-by-project-part.svg"
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/score-trends.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/largest-score-deltas.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/compute-minutes-by-resource.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/cost-per-positive-score-point.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/gpu-equivalent-use-by-purpose.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/cpu-use-by-purpose.svg",
+      "reference-artifacts/analyses/conformance-economics/2026-05-20-20ebcc8f/gameplay-improvement-by-project-part.svg"
     ],
     "retrospective": {
       "generatedAt": "2026-05-18T12:43:17.737Z",
@@ -3373,15 +3373,15 @@
     },
     {
       "Resource": "cpu",
-      "Measured runs": 810,
-      "Wall time": "556.7 min",
-      "CPU time": "894.3 min"
+      "Measured runs": 820,
+      "Wall time": "557.3 min",
+      "CPU time": "895.4 min"
     },
     {
       "Resource": "browser",
-      "Measured runs": 304,
-      "Wall time": "410.4 min",
-      "CPU time": "633.8 min"
+      "Measured runs": 305,
+      "Wall time": "410.5 min",
+      "CPU time": "633.9 min"
     },
     {
       "Resource": "codex",
@@ -3458,19 +3458,19 @@
       "CPU time": "0 min"
     },
     {
-      "Axis": "audio-theme-comparison",
-      "Measured runs": 39,
-      "Wall time": "84.2 min",
-      "CPU time": "100.1 min"
+      "Axis": "challenge-stage",
+      "Measured runs": 96,
+      "Wall time": "84.7 min",
+      "CPU time": "16.9 min"
     }
   ],
   "nextGoalEstimateTable": [
     {
       "Priority": 1,
       "Metric": "Challenge-stage set-piece conformance: movement, graphics, alien novelty",
-      "Current": "4.2/10",
+      "Current": "4.3/10",
       "Target": ">=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature",
-      "Gap to target": "+0.8",
+      "Gap to target": "+0.7",
       "Estimated effort": "High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling",
       "Expected resources": "cpu, browser, gpu",
       "Tracked spend": "161 runs; 24 min wall; 39.7 min CPU",
