@@ -146,8 +146,24 @@ mask:
 #msg .startScoreAdvance span{text-align:right;white-space:nowrap}
 #msg .startScoreAdvance .scoreTitle{grid-column:1/-1;text-align:center;color:#f4fbff;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.06em}
 #msg .startScoreAdvance .scoreLabel{text-align:left;color:#f4fbff;font-weight:700}
+#msg .startScoreAdvance .scoreLabelText{display:inline-block}
 #msg .startScoreAdvance .scoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
+#msg .startScoreAdvance .scoreValue{text-align:right}
 #msg .startScoreAdvance .scoreMuted{color:rgba(223,247,255,.68)}
+#msg .startMissionWrap.guardiansMission{gap:.1em;margin:.16em auto 0;max-width:min(100%,23em)}
+#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.56em;line-height:1.08;letter-spacing:.12em}
+#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.39em;line-height:1.12;letter-spacing:.06em}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(1){color:#ffd4a8}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(2){color:#ffb997}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(3){color:#ffe39a}
+#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.35em,auto) repeat(4,minmax(2.85em,auto));gap:.04em .34em;width:min(100%,24.2em);margin:.16em auto 0;font-size:.34em;line-height:1.12}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.18em;margin-bottom:.04em}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabel{color:#f7fbff}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.35em;overflow:hidden;text-overflow:ellipsis}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreHead{color:#ffb765}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueDive{color:#ffe39a}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortOne{color:#7bd6ff}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortTwo{color:#ff9f64}
 #msg .resultsTable{display:grid;grid-template-columns:auto auto;gap:.16em 1.2em;justify-content:center;font-size:.82em;line-height:1.18;text-align:right}
 #msg .resultsLabel{color:#ff6f66;text-align:left}
 #msg .resultsValue{color:#f4f7ff;min-width:4.5em}
@@ -318,6 +334,17 @@ mask:
 .gamePreviewScoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 .gamePreviewScoreLabel{color:#f4fbff;font-weight:700}
 .gamePreviewScoreCell{text-align:right;white-space:nowrap}
+#gamePreviewMission.guardiansMission{gap:4px;padding:7px 10px}
+#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.12em}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(2){color:#ffd4a8}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(3){color:#ffb997}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(4){color:#ffe39a}
+#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(82px,1fr) repeat(4,minmax(38px,auto));gap:3px 6px;padding:7px 9px;font-size:9px;line-height:1.14}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.18em}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreHead{color:#ffb765}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:nth-child(6n+4){color:#ffe39a}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell.gamePreviewScoreEscort{color:#7bd6ff}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:last-child{color:#ff9f64}
 #gamePreviewMilestones{display:grid;gap:6px;margin-top:2px}
 .gamePreviewMilestone{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(136,245,255,.14);background:rgba(8,18,35,.62);padding:7px 9px;font:400 11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff}
 .gamePreviewMilestone b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#ffe39a}
@@ -338,6 +365,8 @@ mask:
  #gamePreviewMission{gap:2px;padding:4px 6px;font-size:8px;line-height:1.08}
  #gamePreviewScoreTable{grid-template-columns:minmax(68px,1fr) repeat(3,minmax(32px,auto));gap:1px 4px;padding:4px 6px;font-size:7px;line-height:1.06}
  .gamePreviewScoreEscort{display:none}
+ #gamePreviewMission.guardiansMission{padding:4px 6px}
+ #gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(68px,1fr) repeat(3,minmax(32px,auto));gap:1px 4px;padding:4px 6px;font-size:7px;line-height:1.06}
  #gamePreviewMilestones{gap:4px}
  .gamePreviewMilestone{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px;padding:2px 5px;font-size:8px;line-height:1.06}
  .gamePreviewMilestone span{min-width:0;overflow-wrap:anywhere}
@@ -947,8 +976,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">May 23 2026, 11:01 AM EDT</span>
-      <span id="settingsState">main@365e2766 clean</span>
+      <span id="settingsRelease">May 23 2026, 11:27 AM EDT</span>
+      <span id="settingsState">main@91aa425b clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1246,7 +1275,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">May 23 2026, 11:01 AM EDT</span>
+    <span id="buildStampRelease">May 23 2026, 11:27 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1496,7 +1525,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-23T14%3A56%3A43.776Z%22%2C%22commit%22%3A%2297e91409%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%229.2%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-23T15%3A26%3A57.678Z%22%2C%22commit%22%3A%228d5aff6c%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%229.2%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1943,7 +1972,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.904.sha.365e2766',commit:'365e2766f297a7e8bcbf0b8c8ca85476511b576a',branch:'main',dirty:false,released:'May 23 2026, 11:01 AM EDT',state:'main@365e2766 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.909.sha.91aa425b',commit:'91aa425b11e6906f416964215db2a14cb25c3d5a',branch:'main',dirty:false,released:'May 23 2026, 11:27 AM EDT',state:'main@91aa425b clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -3573,11 +3602,20 @@ function syncPlatformSplashUi(){
  }
 }
 function escapeGamePreviewHtml(value=''){
- return String(value)
+  return String(value)
   .replaceAll('&','&amp;')
   .replaceAll('<','&lt;')
   .replaceAll('>','&gt;')
   .replaceAll('"','&quot;');
+}
+
+function previewClassSuffix(value=''){
+  return String(value||'')
+    .trim()
+    .replace(/[^a-zA-Z0-9_-]+/g,' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .join(' ');
 }
 function previewScoreValue(value){
  return Number.isFinite(+value)?String(+value):'';
@@ -3609,6 +3647,8 @@ function syncGamePreviewUi(){
  if(gamePreviewMission){
   const mission=preview.attractMission||null;
   const lines=Array.isArray(mission?.lines)?mission.lines:[];
+  const missionClass=previewClassSuffix(mission?.layoutClass||mission?.className||'');
+  gamePreviewMission.className=missionClass?missionClass:'';
   gamePreviewMission.innerHTML=mission
    ? `<span class="gamePreviewMissionTitle">${escapeGamePreviewHtml(mission.title||'MISSION')}</span>${lines.map(line=>`<span class="gamePreviewMissionLine">${escapeGamePreviewHtml(line)}</span>`).join('')}`
    : '';
@@ -3617,6 +3657,8 @@ function syncGamePreviewUi(){
 	if(gamePreviewScoreTable){
 	 const rows=Array.isArray(preview.scoreAdvanceTable)?preview.scoreAdvanceTable.filter(row=>row&&row.role!=='player'):[];
 	 const presentation=preview.scoreAdvancePresentation&&typeof preview.scoreAdvancePresentation==='object'?preview.scoreAdvancePresentation:{};
+  const tableClass=previewClassSuffix(presentation.layoutClass||presentation.className||'');
+  gamePreviewScoreTable.className=tableClass?tableClass:'';
 	 const title=escapeGamePreviewHtml(presentation.title||'SCORE ADVANCE TABLE');
 	 const labelHeader=escapeGamePreviewHtml(presentation.labelHeader||'Alien');
 	 const formationHeader=escapeGamePreviewHtml(presentation.formationHeader||'Rack');
@@ -3632,7 +3674,7 @@ function syncGamePreviewUi(){
 	   `<span class="gamePreviewScoreHead gamePreviewScoreCell gamePreviewScoreEscort">${oneEscortHeader}</span>`,
 	   `<span class="gamePreviewScoreHead gamePreviewScoreCell">${twoEscortHeader}</span>`,
 	   ...rows.flatMap(row=>[
-	    `<span class="gamePreviewScoreLabel">${escapeGamePreviewHtml(row.label||row.role||'Signal')}</span>`,
+	    `<span class="gamePreviewScoreLabel">${escapeGamePreviewHtml(row.scoreLabel||row.label||row.role||'Signal')}</span>`,
 	    `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.formationPoints))}</span>`,
      `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.divePoints))}</span>`,
      `<span class="gamePreviewScoreCell gamePreviewScoreEscort">${escapeGamePreviewHtml(previewScoreValue(row.oneEscortDivePoints)||'-')}</span>`,
@@ -10589,7 +10631,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:32,
    driftMin:-6,
    driftMax:6,
-   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff'])
+   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#f6f0ff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
+   'signal-escort':Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
+   'signal-scout':Object.freeze({core:'#72baff',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
+   'player-interceptor':Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -10617,7 +10665,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:34,
    driftMin:-7,
    driftMax:7,
-   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59f6c2','#d8f0ff'])
+   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffe49c',wing:'#ff8c5a',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ffdf6f'}),
+   'signal-escort':Object.freeze({core:'#ff846d',wing:'#fff0d8',accent:'#7bd6ff',eye:'#ffffff',flare:'#ffe06d'}),
+   'signal-scout':Object.freeze({core:'#82c2ff',wing:'#5f83ff',accent:'#ffd86d',eye:'#f8fbff',flare:'#ff8c5a'}),
+   'player-interceptor':Object.freeze({core:'#e9fbff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff8c5a'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -10645,7 +10699,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:38,
    driftMin:-8,
    driftMax:8,
-   palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#58f2a3','#ffd86d','#ff7b76'])
+   palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#7a6dff','#ffd86d','#ff7b76'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffe39a',wing:'#ff7b76',accent:'#7bd6ff',eye:'#fff7c2',flare:'#5f83ff'}),
+   'signal-escort':Object.freeze({core:'#ff7b76',wing:'#d8f0ff',accent:'#7a6dff',eye:'#ffffff',flare:'#ffd86d'}),
+   'signal-scout':Object.freeze({core:'#7bd6ff',wing:'#5f83ff',accent:'#ffd86d',eye:'#f8fbff',flare:'#7a6dff'}),
+   'player-interceptor':Object.freeze({core:'#e9fbff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff7b76'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -10673,7 +10733,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:42,
    driftMin:-9,
    driftMax:9,
-   palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#4af26d'])
+   palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#6a7dff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#fff0a5',wing:'#ff9b54',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff5b5b'}),
+   'signal-escort':Object.freeze({core:'#ff8d63',wing:'#ffe7cf',accent:'#7bd6ff',eye:'#ffffff',flare:'#ffd86d'}),
+   'signal-scout':Object.freeze({core:'#92cbff',wing:'#6a7dff',accent:'#ffd86d',eye:'#f8fbff',flare:'#ff5b5b'}),
+   'player-interceptor':Object.freeze({core:'#f1fdff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff5b5b'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -10700,7 +10766,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Flagship',
   role:'flagship',
   silhouette:'crowned-command-ship',
-  palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
+  palette:Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
   pixelRows:Object.freeze([
    '...A.A...',
    '...CCC...',
@@ -10718,7 +10784,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Escort',
   role:'escort',
   silhouette:'red-arrow-escort',
-  palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
+  palette:Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
   pixelRows:Object.freeze([
    '..ACC..',
    'WWCCCCC',
@@ -10734,7 +10800,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Scout',
   role:'scout',
   silhouette:'cyan-wing-scout',
-  palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
+  palette:Object.freeze({core:'#72baff',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
    '.CCCCC.',
    'ACCCACA',
@@ -10944,12 +11010,14 @@ const GUARDIANS_SCORE_ADVANCE_PRESENTATION=Object.freeze({
  diveHeader:'CHARGER',
  oneEscortHeader:'+1',
  twoEscortHeader:'+2',
+ layoutClass:'guardiansScoreAdvance',
  referenceIntent:'Use canonical CONVOY / CHARGER score-table framing while preserving Guardians-specific escorted-dive columns and live scoring values.'
 });
 
 const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  id:'guardians-attract-mission-0.1',
  title:'WE ARE THE GALAXY GUARDIANS',
+ layoutClass:'guardiansMission',
  lines:Object.freeze([
   'MISSION: DESTROY ALIENS',
   'WATCH FOR FLAGSHIP CHARGER DIVES',
@@ -13537,6 +13605,15 @@ function collectMessageLines(...parts){
  return lines;
 }
 
+function messageClassSuffix(value=''){
+ return String(value||'')
+  .trim()
+  .replace(/[^a-zA-Z0-9_-]+/g,' ')
+  .split(/\s+/)
+  .filter(Boolean)
+  .join(' ');
+}
+
 function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
  const body=[];
  if(title)body.push(`<span class="boardTitle">${escapeMessageHtml(title)}</span>`);
@@ -13552,13 +13629,15 @@ function buildStartMissionHtml(mission=null){
  if(!mission)return '';
  const lines=Array.isArray(mission.lines)?mission.lines:[];
  const title=mission.title||'MISSION';
- return `<span class="startMissionWrap"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
+ const className=messageClassSuffix(mission.layoutClass||mission.className||'');
+ return `<span class="startMissionWrap${className?` ${className}`:''}"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
 }
 
 function buildStartScoreAdvanceHtml(rows=[],presentation=null){
  const scoreRows=Array.isArray(rows)?rows.filter(row=>row&&row.role!=='player'):[];
  if(!scoreRows.length)return '';
  const headers=presentation&&typeof presentation==='object'?presentation:{};
+ const className=messageClassSuffix(headers.layoutClass||headers.className||'');
  const value=valueIn=>{
   const number=+valueIn;
   return Number.isFinite(number)?String(number):'-';
@@ -13569,12 +13648,12 @@ function buildStartScoreAdvanceHtml(rows=[],presentation=null){
  const diveHeader=headers.diveHeader||'Dive';
  const oneEscortHeader=headers.oneEscortHeader||'+1';
  const twoEscortHeader=headers.twoEscortHeader||'+2';
- return `<span class="startScoreAdvance"><span class="scoreTitle">${escapeMessageHtml(title)}</span><span class="scoreHead scoreLabel">${escapeMessageHtml(labelHeader)}</span><span class="scoreHead">${escapeMessageHtml(formationHeader)}</span><span class="scoreHead">${escapeMessageHtml(diveHeader)}</span><span class="scoreHead">${escapeMessageHtml(oneEscortHeader)}</span><span class="scoreHead">${escapeMessageHtml(twoEscortHeader)}</span>${scoreRows.map(row=>[
-  `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
-  `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
-  `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,
-  `<span class="${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
-  `<span class="${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
+ return `<span class="startScoreAdvance${className?` ${className}`:''}"><span class="scoreTitle">${escapeMessageHtml(title)}</span><span class="scoreHead scoreLabel">${escapeMessageHtml(labelHeader)}</span><span class="scoreHead scoreValueFormation">${escapeMessageHtml(formationHeader)}</span><span class="scoreHead scoreValueDive">${escapeMessageHtml(diveHeader)}</span><span class="scoreHead scoreValueEscort scoreValueEscortOne">${escapeMessageHtml(oneEscortHeader)}</span><span class="scoreHead scoreValueEscort scoreValueEscortTwo">${escapeMessageHtml(twoEscortHeader)}</span>${scoreRows.map(row=>[
+  `<span class="scoreLabel"><span class="scoreLabelText">${escapeMessageHtml(row.scoreLabel||row.label||row.role||'Signal')}</span></span>`,
+  `<span class="scoreValue scoreValueFormation">${escapeMessageHtml(value(row.formationPoints))}</span>`,
+  `<span class="scoreValue scoreValueDive">${escapeMessageHtml(value(row.divePoints))}</span>`,
+  `<span class="scoreValue scoreValueEscort scoreValueEscortOne ${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
+  `<span class="scoreValue scoreValueEscort scoreValueEscortTwo ${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
  ].join('')).join('')}</span>`;
 }
 
@@ -14917,12 +14996,30 @@ function galaxyGuardiansPreviewVisual(id){
  return catalog[id]||null;
 }
 
+function resolveGalaxyGuardiansPreviewTheme(stage=1){
+ const stagePresentation=typeof currentGamePackStagePresentation==='function'
+  ? currentGamePackStagePresentation(Math.max(1,+stage||1),0)
+  : null;
+ const themeId=stagePresentation?.atmosphereTheme||GALAXY_GUARDIANS_PACK?.frontDoor?.atmosphereTheme||'signal-rack';
+ return (GALAXY_GUARDIANS_PACK?.atmosphereThemes&&GALAXY_GUARDIANS_PACK.atmosphereThemes[themeId])
+  || GALAXY_GUARDIANS_PACK?.atmosphereThemes?.['signal-rack']
+  || null;
+}
+
+function resolveGalaxyGuardiansPreviewPalette(visual,theme){
+ if(!visual)return {};
+ const overrides=(theme&&theme.previewPalettes&&typeof theme.previewPalettes==='object')
+  ? (theme.previewPalettes[visual.id]||theme.previewPalettes[visual.role]||null)
+  : null;
+ return Object.assign({},visual.palette||{},overrides||{});
+}
+
 function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  if(!visual?.pixelRows)return;
  const rows=visual.pixelRows;
  const width=Math.max(...rows.map(row=>row.length));
  const height=rows.length;
- const palette=visual.palette||{};
+ const palette=(opts.palette&&typeof opts.palette==='object')?opts.palette:(visual.palette||{});
  const core=opts.core||palette.core||'#dff7ff';
  const wing=opts.wing||palette.wing||core;
  const accent=opts.accent||palette.accent||core;
@@ -14956,8 +15053,8 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  ctx.restore();
 }
 
-function syncGalaxyGuardiansPreviewStarfield(){
- const themeId=GALAXY_GUARDIANS_PACK?.frontDoor?.atmosphereTheme||'signal-rack';
+function syncGalaxyGuardiansPreviewStarfield(stage=1){
+ const theme=resolveGalaxyGuardiansPreviewTheme(stage);
  const profile=Object.assign({
   id:'guardians-signal-stars',
   count:104,
@@ -14972,7 +15069,7 @@ function syncGalaxyGuardiansPreviewStarfield(){
   driftMin:-6,
   driftMax:6,
   palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff']
- }, GALAXY_GUARDIANS_PACK?.atmosphereThemes?.[themeId]?.starfield||{});
+ }, theme?.starfield||{});
  const sig=JSON.stringify(profile);
  if(S.guardiansPreviewStarfieldSig===sig&&S.st.length===profile.count)return profile;
  S.guardiansPreviewStarfieldSig=sig;
@@ -15028,12 +15125,13 @@ function drawGalaxyGuardiansPreviewBackdrop(t){
  ctx.fillRect(0,PLAY_H-38,PLAY_W,1);
 }
 
-function drawGalaxyGuardiansPlayer(player){
+function drawGalaxyGuardiansPlayer(player,theme){
  const visual=galaxyGuardiansPreviewVisual(GALAXY_GUARDIANS_RUNTIME_PROFILE.playerVisualId);
+ const palette=resolveGalaxyGuardiansPreviewPalette(visual,theme);
  ctx.save();
  ctx.shadowColor='#7bd6ff';
  ctx.shadowBlur=3;
- drawGalaxyGuardiansPixelRows(visual,player.x,player.y,1.8);
+ drawGalaxyGuardiansPixelRows(visual,player.x,player.y,1.8,{ palette });
  ctx.restore();
  const readyMissileVisible=!player.shot;
  if(readyMissileVisible){
@@ -15051,33 +15149,45 @@ function drawGalaxyGuardiansPlayer(player){
  return readyMissileVisible;
 }
 
-function drawGalaxyGuardiansHitFlashes(state){
+function drawGalaxyGuardiansHitFlashes(state,theme){
+ const flashPalettes=(theme&&theme.previewPalettes&&typeof theme.previewPalettes==='object')?theme.previewPalettes:{};
+ const roleVisualIdForFlash={flagship:'signal-flagship',escort:'signal-escort',scout:'signal-scout'};
+ const burstVectors={
+  scout:[[-4,0],[4,0],[0,-4],[0,4],[-3,-3],[3,-3],[-3,3],[3,3]],
+  escort:[[-5,0],[5,0],[0,-5],[0,5],[-4,-3],[4,-3],[-4,3],[4,3],[-1,-6],[1,6]],
+  flagship:[[-6,0],[6,0],[0,-6],[0,6],[-5,-4],[5,-4],[-5,4],[5,4],[-2,-7],[2,-7],[-2,7],[2,7]]
+ };
  ctx.save();
  for(const flash of state.hitFlashes||[]){
-   const life=Math.max(0,Math.min(1,(+flash.t||0)/Math.max(.001,+flash.duration||.2)));
-  const r=flash.role==='flagship'?15:flash.role==='escort'?11:9;
-  const burst=flash.role==='flagship'?8:6;
-  ctx.globalAlpha=.22+.5*life;
-  ctx.strokeStyle=flash.color||'#dff7ff';
-  ctx.lineWidth=1.3;
-  ctx.shadowColor=flash.color||'#dff7ff';
-  ctx.shadowBlur=10*life;
-  for(let i=0;i<burst;i++){
-   const ang=(Math.PI*2*i)/burst+(1-life)*.18;
-   const inner=r*.28;
-   const outer=r*(1.2-life*.18);
-   ctx.beginPath();
-   ctx.moveTo(flash.x+Math.cos(ang)*inner,flash.y+Math.sin(ang)*inner);
-   ctx.lineTo(flash.x+Math.cos(ang)*outer,flash.y+Math.sin(ang)*outer);
-   ctx.stroke();
+  const life=Math.max(0,Math.min(1,(+flash.t||0)/Math.max(.001,+flash.duration||.2)));
+  const visualId=roleVisualIdForFlash[flash.role]||'signal-scout';
+  const palette=Object.assign(
+   { core:'#dff7ff', wing:'#7bd6ff', accent:'#ffdf6f', eye:'#ffffff', flare:'#ff5b5b' },
+   flashPalettes[visualId]||{}
+  );
+  const points=burstVectors[flash.role]||burstVectors.scout;
+  const pixel=flash.role==='flagship'?3:(flash.role==='escort'?2.5:2.25);
+  ctx.shadowColor=palette.core;
+  ctx.shadowBlur=12*life;
+  ctx.globalAlpha=.16+.32*life;
+  ctx.fillStyle=palette.flare||flash.color||'#ffdf6f';
+  ctx.fillRect(Math.round(flash.x)-6,Math.round(flash.y)-6,12,12);
+  ctx.globalAlpha=.26+.4*life;
+  for(let i=0;i<points.length;i++){
+   const [dx,dy]=points[i];
+   const drift=(1-life)*(flash.role==='flagship'?2.6:2.1);
+   const px=Math.round(flash.x+dx*(.42+life*.74)+(dx===0?Math.sin(i+life)*drift:0));
+   const py=Math.round(flash.y+dy*(.42+life*.74)+(dy===0?Math.cos(i+life)*drift:0));
+   ctx.fillStyle=i%3===0?(palette.flare||'#ffdf6f'):(i%2===0?(palette.accent||'#7bd6ff'):(palette.wing||'#dff7ff'));
+   ctx.fillRect(px,py,Math.ceil(pixel),Math.ceil(pixel));
   }
-  ctx.globalAlpha=.25+.35*life;
-  ctx.beginPath();
-  ctx.arc(flash.x,flash.y,Math.max(2,r*(.55-life*.18)),0,Math.PI*2);
-  ctx.stroke();
-  ctx.globalAlpha=.38+.4*life;
-  ctx.fillStyle=flash.role==='flagship'?'#fff7c2':flash.role==='escort'?'#ffdf6f':'#dff7ff';
-  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-1,3,3);
+  ctx.globalAlpha=.44+.28*life;
+  ctx.fillStyle=palette.eye||'#ffffff';
+  ctx.fillRect(Math.round(flash.x)-2,Math.round(flash.y)-2,4,4);
+  ctx.globalAlpha=.34+.22*life;
+  ctx.fillStyle=palette.core||flash.color||'#dff7ff';
+  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-5,2,10);
+  ctx.fillRect(Math.round(flash.x)-5,Math.round(flash.y)-1,10,2);
  }
  ctx.restore();
 }
@@ -15100,20 +15210,21 @@ function drawGalaxyGuardiansEnemyShots(state){
  ctx.restore();
 }
 
-function drawGalaxyGuardiansAlien(alien,t){
+function drawGalaxyGuardiansAlien(alien,t,theme){
  const visual=galaxyGuardiansPreviewVisual(alien.visualId);
  if(!visual)return;
+ const palette=resolveGalaxyGuardiansPreviewPalette(visual,theme);
  const cell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
  ctx.save();
  ctx.translate(Math.round(alien.x),Math.round(alien.y));
- ctx.shadowColor=alien.role==='flagship'?'#ffdf6f':alien.role==='escort'?'#ff5b5b':'#42f285';
+ ctx.shadowColor=palette.flare||palette.accent||palette.core||'#7bd6ff';
  ctx.shadowBlur=alien.mode==='diving'?4:1.5;
  if(alien.mode==='diving'){
   const lean=Math.sin(alien.diveT*5)*.18+alien.diveSide*.08;
   ctx.rotate(lean);
  }
  const bob=alien.mode==='formation'?Math.sin(t*3+alien.row)*1.1:0;
- drawGalaxyGuardiansPixelRows(visual,0,bob,cell);
+ drawGalaxyGuardiansPixelRows(visual,0,bob,cell,{ palette });
  ctx.restore();
  if(alien.mode==='diving'){
   ctx.save();
@@ -15225,12 +15336,13 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  ctx.rect(0,0,PLAY_W,PLAY_H);
  ctx.clip();
  const t=state.t;
- const starfield=syncGalaxyGuardiansPreviewStarfield();
+ const previewTheme=resolveGalaxyGuardiansPreviewTheme(summary.stage||state.stage||1);
+ const starfield=syncGalaxyGuardiansPreviewStarfield(summary.stage||state.stage||1);
  drawGalaxyGuardiansPreviewBackdrop(t);
- for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t);
-  drawGalaxyGuardiansHitFlashes(state);
+ for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t,previewTheme);
+ drawGalaxyGuardiansHitFlashes(state,previewTheme);
  drawGalaxyGuardiansEnemyShots(state);
- const readyMissileVisible=state.player.visible!==false?drawGalaxyGuardiansPlayer(state.player):false;
+ const readyMissileVisible=state.player.visible!==false?drawGalaxyGuardiansPlayer(state.player,previewTheme):false;
  const hud=drawGalaxyGuardiansPreviewHud(summary,state);
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
@@ -15251,6 +15363,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
   hudLabels:['1UP','HIGH SCORE'],
   readyMissileVisible:!!readyMissileVisible,
   wrappingCount:+(summary.wrappingCount||0),
+  stageThemeId:previewTheme?.id||'signal-rack',
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
   starfieldCount:S.st.length,
   starfieldLeadSample:(S.st||[]).slice(0,4).map(star=>({
