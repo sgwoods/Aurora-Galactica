@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platinum Artifact Collection And Analysis Dashboard</title>
+  <style>
+
+    :root{
+      color-scheme: dark;
+      --bg:#061120;
+      --bg2:#0b1b31;
+      --panel:#0f213c;
+      --panel-soft:rgba(17,35,64,0.88);
+      --line:rgba(124,182,255,0.24);
+      --line-strong:rgba(255,205,96,0.48);
+      --text:#edf5ff;
+      --muted:#9db5d4;
+      --accent:#7ee3ff;
+      --gold:#ffcf63;
+      --red:#ff6c67;
+      --green:#89f0a2;
+      --shadow:0 24px 60px rgba(0,0,0,0.42);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(126,227,255,0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,207,99,0.12), transparent 24%),
+        linear-gradient(180deg, #07101b 0%, #081528 38%, #091b32 100%);
+    }
+    a{color:inherit}
+    .shell{
+      width:min(1440px, calc(100vw - 32px));
+      margin:0 auto;
+      padding:24px 0 40px;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:28px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(10,28,52,0.96), rgba(6,17,32,0.96));
+      box-shadow:var(--shadow);
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -30% 50%;
+      height:220px;
+      background:radial-gradient(circle, rgba(126,227,255,0.18), transparent 62%);
+      pointer-events:none;
+    }
+    .heroTop{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .eyebrow,
+    .statusChip,
+    .phaseChip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(8,22,41,0.68);
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+    .eyebrow{color:var(--accent)}
+    h1{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 3.8vw, 3.6rem);
+      line-height:1.04;
+      letter-spacing:0.01em;
+    }
+    .strapline{
+      max-width:78ch;
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.6;
+    }
+    .goal{
+      margin-top:18px;
+      padding:16px 18px;
+      border:1px solid rgba(255,207,99,0.26);
+      border-radius:18px;
+      background:rgba(255,207,99,0.08);
+      color:#fff0c7;
+    }
+    .heroActions,
+    .sectionActions,
+    .detailLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 15px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(14,31,58,0.94);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 14px 28px rgba(0,0,0,0.22);
+    }
+    .button.primary{
+      border-color:rgba(255,207,99,0.42);
+      background:linear-gradient(180deg, rgba(92,65,12,0.96), rgba(59,41,6,0.96));
+      color:#ffebbb;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .statCard{
+      padding:16px 18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--panel-soft);
+    }
+    .statCard strong{
+      display:block;
+      font-size:1.35rem;
+      margin-bottom:8px;
+      color:var(--accent);
+    }
+    .statCard span{
+      display:block;
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.5;
+    }
+    .viewTabs,
+    .detailTabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .viewTabs{
+      margin:22px 0 18px;
+    }
+    .tabButton{
+      cursor:pointer;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:11px 14px;
+      background:rgba(10,23,43,0.76);
+      color:var(--muted);
+      font-weight:700;
+    }
+    .tabButton.active{
+      color:#fff7d8;
+      border-color:var(--line-strong);
+      background:rgba(90,64,12,0.42);
+    }
+    .view{
+      display:none;
+    }
+    .view.active{
+      display:block;
+    }
+    .dashboardLayout{
+      display:grid;
+      grid-template-columns:minmax(280px, 340px) minmax(0, 1fr);
+      gap:18px;
+      align-items:start;
+    }
+    .panel{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:var(--panel-soft);
+      box-shadow:var(--shadow);
+    }
+    .panelHeader{
+      padding:20px 22px 10px;
+    }
+    .panelHeader h2,
+    .panelHeader h3{
+      margin:0;
+      font-size:1.1rem;
+    }
+    .panelHeader p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.55;
+    }
+    .gameSelector{
+      padding:0 14px 16px;
+    }
+    .gameSelectorButton{
+      width:100%;
+      text-align:left;
+      margin-top:12px;
+      padding:16px 16px 14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(7,18,33,0.9);
+      color:var(--text);
+      cursor:pointer;
+    }
+    .gameSelectorButton.active{
+      border-color:var(--line-strong);
+      background:linear-gradient(180deg, rgba(76,57,13,0.42), rgba(20,23,33,0.92));
+    }
+    .gameSelectorButton strong{
+      display:block;
+      font-size:1rem;
+      margin-bottom:6px;
+    }
+    .gameSelectorButton p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.92rem;
+      line-height:1.45;
+    }
+    .gameSelectorMeta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+    }
+    .detailPanel{
+      padding:22px;
+    }
+    .detailHeading{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .detailHeading h2{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:2rem;
+    }
+    .detailHeading p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:74ch;
+    }
+    .scoreGrid,
+    .phaseGrid,
+    .artifactGroupGrid,
+    .planGrid,
+    .huntGrid,
+    .docGrid,
+    .familyGrid,
+    .previewGrid{
+      display:grid;
+      gap:14px;
+    }
+    .scoreGrid{
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      margin-top:18px;
+    }
+    .scoreCard,
+    .phaseCard,
+    .artifactCard,
+    .planCard,
+    .docCard,
+    .familyCard,
+    .huntCard,
+    .previewCard{
+      padding:16px 18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(7,18,34,0.88);
+    }
+    .scoreCard strong,
+    .phaseCard strong,
+    .artifactCard strong,
+    .planCard strong,
+    .docCard strong,
+    .familyCard strong,
+    .huntCard strong,
+    .previewCard strong{
+      display:block;
+      margin-bottom:8px;
+    }
+    .scoreValue{
+      display:block;
+      font-size:1.26rem;
+      color:var(--accent);
+      margin-bottom:8px;
+      font-weight:800;
+    }
+    .phaseGrid{
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      margin-top:18px;
+    }
+    .artifactGroupGrid,
+    .planGrid,
+    .docGrid,
+    .familyGrid,
+    .previewGrid{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      margin-top:18px;
+    }
+    .artifactItems,
+    .deliverableList,
+    .simpleList{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+    .linkList{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    .linkRow{
+      display:block;
+      padding:12px 14px;
+      border:1px solid rgba(124,182,255,0.18);
+      border-radius:14px;
+      text-decoration:none;
+      background:rgba(13,30,56,0.74);
+    }
+    .linkRow span{
+      display:block;
+      color:var(--muted);
+      margin-top:5px;
+      line-height:1.45;
+      font-size:0.92rem;
+    }
+    .previewCard img{
+      width:100%;
+      display:block;
+      border-radius:12px;
+      margin-top:12px;
+      border:1px solid rgba(124,182,255,0.14);
+      background:#07111f;
+    }
+    .metaBar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .viewSection{
+      padding:22px;
+    }
+    .viewSection + .viewSection{
+      margin-top:18px;
+    }
+    .sectionIntro{
+      margin-top:10px;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:82ch;
+    }
+    .footerNote{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      line-height:1.5;
+    }
+    @media (max-width: 1120px){
+      .dashboardLayout,
+      .stats,
+      .scoreGrid,
+      .phaseGrid,
+      .artifactGroupGrid,
+      .planGrid,
+      .docGrid,
+      .familyGrid,
+      .previewGrid{
+        grid-template-columns:1fr 1fr;
+      }
+      .dashboardLayout{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 760px){
+      .shell{
+        width:min(100vw - 16px, 100%);
+        padding:12px 0 24px;
+      }
+      .hero,
+      .detailPanel,
+      .viewSection{
+        padding:18px;
+      }
+      .stats,
+      .scoreGrid,
+      .phaseGrid,
+      .artifactGroupGrid,
+      .planGrid,
+      .docGrid,
+      .familyGrid,
+      .previewGrid{
+        grid-template-columns:1fr;
+      }
+      h1{
+        font-size:2rem;
+      }
+    }
+  
+  </style>
+</head>
+<body>
+
+    <main class="shell">
+      <section class="hero">
+        <div class="heroTop">
+          <span class="eyebrow">Artifact Collection And Analysis</span>
+          <span class="statusChip">Lane development</span>
+          <span class="statusChip">Build 1.4.0.1+build.963.sha.594f41bc</span>
+        </div>
+        <h1>Platinum Artifact Collection And Analysis Dashboard</h1>
+        <p class="strapline">A dashboard-first intake and decision cockpit for current games and future additions: gather source artifacts, analyze them, turn them into a Platinum-focused instantiation plan, and keep conformance work grounded in durable evidence.</p>
+        <div class="goal"><strong>Current goal:</strong> Make artifact collection and analysis the front door for every game on Platinum, with Aurora and Galaxy Guardians visible today and Windigo Invaders entering through a measured, source-first intake path.</div>
+        <div class="heroActions">
+          <a class="button primary" href="index.html">Open current lane build</a>
+          <a class="button" href="release-dashboard.html">Open release dashboard</a>
+          <a class="button" href="project-guide.html">Open project guide</a>
+          <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+          <a class="button" href="platinum-guide.html">Open Platinum guide</a>
+          <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
+        </div>
+        <div class="stats">
+          
+            <article class="statCard">
+              <strong>3</strong>
+              <span><b>Games in dashboard</b><br>Current games plus the next intake target.</span>
+            </article>
+          
+            <article class="statCard">
+              <strong>6</strong>
+              <span><b>Intake phases tracked</b><br>Collection through release review.</span>
+            </article>
+          
+            <article class="statCard">
+              <strong>6</strong>
+              <span><b>Artifact families to seek</b><br>The current standing evidence vocabulary.</span>
+            </article>
+          
+            <article class="statCard">
+              <strong>Windigo Invaders</strong>
+              <span><b>Current next-game target</b><br>Space Invaders lineage entering through source-first intake.</span>
+            </article>
+          
+        </div>
+      </section>
+
+      <div class="viewTabs">
+        <button class="tabButton active" type="button" data-view-tab="games">Games</button>
+        <button class="tabButton" type="button" data-view-tab="process">Process</button>
+        <button class="tabButton" type="button" data-view-tab="artifact-hunt">Artifact Hunt</button>
+      </div>
+
+      <section class="view active" data-view-panel="games">
+        <div class="dashboardLayout">
+          <aside class="panel">
+            <div class="panelHeader">
+              <h2>Game Intake Status</h2>
+              <p>Select a game to review its current artifact set, intake posture, instantiation plan, and remaining evidence gaps.</p>
+            </div>
+            <div id="gameSelector" class="gameSelector"></div>
+          </aside>
+
+          <section class="panel detailPanel">
+            <div class="detailHeading">
+              <div>
+                <div class="heroTop">
+                  <span id="gameStatus" class="statusChip">--</span>
+                  <span id="gameLineage" class="statusChip">--</span>
+                </div>
+                <h2 id="gameTitle">--</h2>
+                <p id="gameThemeRead">--</p>
+              </div>
+            </div>
+            <div class="goal"><strong>Decision read:</strong> <span id="gameDecision"></span></div>
+            <div id="detailLinks" class="detailLinks"></div>
+            <div class="detailTabs" style="margin-top:18px;">
+              <button class="tabButton active" type="button" data-detail-tab="overview">Overview</button>
+              <button class="tabButton" type="button" data-detail-tab="artifacts">Artifacts</button>
+              <button class="tabButton" type="button" data-detail-tab="plan">Platinum Instantiation Plan</button>
+              <button class="tabButton" type="button" data-detail-tab="gaps">Gaps And Hunts</button>
+            </div>
+
+            <div class="view active" data-detail-panel="overview">
+              <div id="scoreGrid" class="scoreGrid"></div>
+              <div id="phaseGrid" class="phaseGrid"></div>
+            </div>
+
+            <div class="view" data-detail-panel="artifacts">
+              <div id="artifactGroups" class="artifactGroupGrid"></div>
+              <div id="previewGrid" class="previewGrid"></div>
+            </div>
+
+            <div class="view" data-detail-panel="plan">
+              <div id="planGrid" class="planGrid"></div>
+            </div>
+
+            <div class="view" data-detail-panel="gaps">
+              <div id="gapGrid" class="huntGrid"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" data-view-panel="process">
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Process Frame</h2>
+            <p class="sectionIntro">This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.</p>
+          </div>
+          <div class="phaseGrid">
+            
+              <article class="phaseCard">
+                <strong>Artifact Collection</strong>
+                <span>Accession real source materials first: gameplay video, manuals, score tables, stills, cabinet art, and written reference pages.</span>
+                <ul class="simpleList">
+                  <li>preserved-source packages</li><li>checksums and manifests</li><li>source inventory updates</li>
+                </ul>
+              </article>
+            
+              <article class="phaseCard">
+                <strong>Analysis</strong>
+                <span>Turn sources into reviewable windows and evidence: contact sheets, waveforms, semantic notes, timing slices, and confidence gaps.</span>
+                <ul class="simpleList">
+                  <li>reference-lineage analysis folders</li><li>first-pass readmes</li><li>preview artifacts</li>
+                </ul>
+              </article>
+            
+              <article class="phaseCard">
+                <strong>Platinum Instantiation Plan</strong>
+                <span>Convert evidence into an explicit game plan that separates Platinum-owned host work from game-owned rules, timing, audio, and identity.</span>
+                <ul class="simpleList">
+                  <li>game-owned plan tracks</li><li>platform extension candidates</li><li>priority artifact hunts</li>
+                </ul>
+              </article>
+            
+              <article class="phaseCard">
+                <strong>Implementation</strong>
+                <span>Build only the smallest evidence-backed slice needed to prove the game on Platinum.</span>
+                <ul class="simpleList">
+                  <li>runtime slice</li><li>pack contracts</li><li>capture and review harnesses</li>
+                </ul>
+              </article>
+            
+              <article class="phaseCard">
+                <strong>Conformance</strong>
+                <span>Measure the game against its source lineage with runtime artifacts, personas, and visible review surfaces.</span>
+                <ul class="simpleList">
+                  <li>game-specific scorecards</li><li>runtime captures</li><li>hosted conformance views</li>
+                </ul>
+              </article>
+            
+              <article class="phaseCard">
+                <strong>Release Review</strong>
+                <span>Decide whether the game is ready for public claims, beta review, or continued private iteration.</span>
+                <ul class="simpleList">
+                  <li>release-lane posture</li><li>user-facing readiness read</li><li>next best moves</li>
+                </ul>
+              </article>
+            
+          </div>
+        </section>
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Core Source Docs</h2>
+            <p class="sectionIntro">These repo-owned docs define the reusable intake rules and should stay current as the dashboard becomes the main decision cockpit for future games.</p>
+          </div>
+          <div id="processDocs" class="docGrid"></div>
+        </section>
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Platform Extensions</h2>
+            <p class="sectionIntro">These are the generic capabilities we should keep strengthening so a third game can enter with better timing, audio, and artifact fidelity on day one.</p>
+          </div>
+          <div id="platformExtensions" class="familyGrid"></div>
+        </section>
+      </section>
+
+      <section class="view" data-view-panel="artifact-hunt">
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Artifact Families To Seek</h2>
+            <p class="sectionIntro">The dashboard should help us notice what is missing before we build. These are the current artifact families that matter most for accurate game ingestion.</p>
+          </div>
+          <div id="processFamilies" class="familyGrid"></div>
+        </section>
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Standing Artifact Hunts</h2>
+            <p class="sectionIntro">When a game feels weak or under-explained, start here before tuning blindly.</p>
+          </div>
+          <div id="globalHunts" class="huntGrid"></div>
+        </section>
+      </section>
+
+      <p class="footerNote">
+        This hosted dashboard is generated from <code>ingestion-dashboard.json</code> plus committed artifact manifests and reference outputs. The intended rule going forward is simple: new game materials should land here first, then expand outward into deeper conformance pages and runtime work only after the intake picture is credible.
+      </p>
+    </main>
+    <script id="ingestionDashboardData" type="application/json">{"title":"Platinum Artifact Collection And Analysis Dashboard","strapline":"A dashboard-first intake and decision cockpit for current games and future additions: gather source artifacts, analyze them, turn them into a Platinum-focused instantiation plan, and keep conformance work grounded in durable evidence.","currentGoal":"Make artifact collection and analysis the front door for every game on Platinum, with Aurora and Galaxy Guardians visible today and Windigo Invaders entering through a measured, source-first intake path.","dashboardRead":"This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.","phaseDefinitions":[{"id":"collect","label":"Artifact Collection","purpose":"Accession real source materials first: gameplay video, manuals, score tables, stills, cabinet art, and written reference pages.","outputs":["preserved-source packages","checksums and manifests","source inventory updates"]},{"id":"analyze","label":"Analysis","purpose":"Turn sources into reviewable windows and evidence: contact sheets, waveforms, semantic notes, timing slices, and confidence gaps.","outputs":["reference-lineage analysis folders","first-pass readmes","preview artifacts"]},{"id":"plan","label":"Platinum Instantiation Plan","purpose":"Convert evidence into an explicit game plan that separates Platinum-owned host work from game-owned rules, timing, audio, and identity.","outputs":["game-owned plan tracks","platform extension candidates","priority artifact hunts"]},{"id":"implement","label":"Implementation","purpose":"Build only the smallest evidence-backed slice needed to prove the game on Platinum.","outputs":["runtime slice","pack contracts","capture and review harnesses"]},{"id":"conformance","label":"Conformance","purpose":"Measure the game against its source lineage with runtime artifacts, personas, and visible review surfaces.","outputs":["game-specific scorecards","runtime captures","hosted conformance views"]},{"id":"release","label":"Release Review","purpose":"Decide whether the game is ready for public claims, beta review, or continued private iteration.","outputs":["release-lane posture","user-facing readiness read","next best moves"]}],"artifactFamilies":[{"label":"Gameplay video","detail":"Longplay, attract, operator, and targeted scenario windows with clear provenance and usable audio."},{"label":"Manuals and rule documents","detail":"Operator sheets, score tables, cabinet docs, and written descriptions of mechanics and progression."},{"label":"Still-image references","detail":"Cabinet, bezel, title, score-table, sprite-family, cannon/ship, bunker, and HUD references."},{"label":"Audio references","detail":"Isolated or cleaner windows for cue identity, tempo, density, and game-event timing."},{"label":"Semantic timing windows","detail":"Event-labeled clips for start, fire, hit, descent, failure, transition, and results moments."},{"label":"Runtime correspondence captures","detail":"Persona-driven or manual recordings from Platinum that can be reviewed against the reference set."}],"globalDocs":[{"label":"Classic Arcade Ingestion Framework","hrefType":"repoDoc","href":"CLASSIC_ARCADE_INGESTION_FRAMEWORK.md","detail":"Canonical source-first intake process for future games.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md"},{"label":"Game Conformance Catalog","hrefType":"repoDoc","href":"GAME_CONFORMANCE_CATALOG.md","detail":"Cross-game maintained index for enemies, audio, stages, and personas.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/GAME_CONFORMANCE_CATALOG.md"},{"label":"Reference Media Inventory","hrefType":"repoDoc","href":"REFERENCE_MEDIA_INVENTORY.md","detail":"Shared media inventory and source-of-truth reference ledger.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/REFERENCE_MEDIA_INVENTORY.md"},{"label":"Platinum Audio Conformance Framework","hrefType":"repoDoc","href":"PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md","detail":"Generic audio intake, scene review, and live-mix framework for any future game.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md"}],"globalHunts":["Find manual and score-table sources early so scoring, bonus, and staging do not remain implied.","Prefer at least one longplay plus one cleaner short-window video per game line.","Promote audio windows that match real gameplay scenes, not only isolated cue existence.","Keep every game's plan explicit about what Platinum owns versus what the game owns.","If a missing artifact family repeatedly blocks conformance, add it to the standing intake requirement set."],"platformExtensions":[{"title":"Generic preserved-source package contract","detail":"Every new game should enter through the same manifest, checksum, preview-artifact, and README pattern used here for Windigo Invaders."},{"title":"Generic audio scene and live-mix review","detail":"The new audio scene/live-mix analyzers should remain game-configured so a third game can use them without bespoke platform rewrites."},{"title":"Persona capture and review rail","detail":"Future games should inherit the same persona-driven capture, review, and replay discipline once their rules are mature enough."}],"games":[{"gameKey":"aurora-galactica","title":"Aurora Galactica","status":"Live first application","lineage":"Galaga-inspired first shipped Platinum game","themeRead":"The most mature current game. Intake and conformance should stay visible because future games should inherit the process, not just the runtime.","phaseStatus":[{"phaseId":"collect","state":"strong","summary":"Reference and extracted media families are established."},{"phaseId":"analyze","state":"strong","summary":"Challenge, sprite, motion, and artifact scoring are already active."},{"phaseId":"plan","state":"strong","summary":"Measured quality gaps are explicit and documented."},{"phaseId":"implement","state":"strong","summary":"Playable production-family game on Platinum."},{"phaseId":"conformance","state":"active","summary":"Still improving challenge-stage and motion fidelity."},{"phaseId":"release","state":"active","summary":"Public family live, `/dev` remains the review lane."}],"headlineScores":[{"label":"Application artifact conformance","value":"7.55/10","detail":"Average current artifact row score."},{"label":"Challenge-stage conformance","value":"4.2/10","detail":"Still the clearest weak user-facing area."},{"label":"Weakest artifact row","value":"Impact explosion visual feedback","detail":"Current broad artifact weakest row."}],"decisionRead":"Aurora should continue using this dashboard as the visible intake and quality cockpit, but the other machine can keep driving the deeper challenge-stage work while this repo retains the authoritative status surface.","hostedLinks":[{"label":"Aurora conformance dashboard","hrefType":"hosted","href":"conformance-dashboard.html?game=aurora-galactica#conformance","detail":"Direct Aurora conformance view on the current lane.","resolvedHref":"conformance-dashboard.html?game=aurora-galactica#conformance"},{"label":"Aurora application guide","hrefType":"hosted","href":"application-guide.html","detail":"Aurora-specific game, audio, stage, and persona guide.","resolvedHref":"application-guide.html"}],"artifactGroups":[{"title":"Current authority artifacts","items":[{"label":"Application artifact conformance","hrefType":"artifact","href":"reference-artifacts/analyses/application-artifact-conformance/latest.json","detail":"Primary Aurora artifact-level scoring rollup.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/application-artifact-conformance/latest.json"},{"label":"Challenge-stage conformance","hrefType":"artifact","href":"reference-artifacts/analyses/challenge-stage-conformance/latest.json","detail":"Current strict challenge-stage scoring and explanation.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/challenge-stage-conformance/latest.json"},{"label":"Aurora sprite motion correspondence","hrefType":"artifact","href":"reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json","detail":"Current motion correspondence scorer for visible alien cadence.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json"}]},{"title":"Process and plan anchors","items":[{"label":"Project guide","hrefType":"hosted","href":"project-guide.html","detail":"Hosted release/process/status guide.","resolvedHref":"project-guide.html"},{"label":"Game conformance catalog","hrefType":"repoDoc","href":"GAME_CONFORMANCE_CATALOG.md","detail":"Cross-game maintained catalog including Aurora.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/GAME_CONFORMANCE_CATALOG.md"}]}],"planTracks":[{"title":"Keep Aurora as the process template","goal":"Future games should inherit Aurora's measurement discipline without inheriting Aurora-specific truth.","deliverables":["Maintain cross-game catalog rows","Keep hosted docs aligned with current conformance artifacts","Preserve audio and motion harnesses as generic platform contracts where possible"]}],"nextArtifacts":["More exact challenge-stage set-piece windows","Stronger motion-reference windows for flap cadence and challenge novelty","Better boss and explosion lifecycle visual references"],"previews":[]},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","status":"Playable sibling preview","lineage":"Galaxian-style second-game ingestion proof on Platinum","themeRead":"The current visible second-game proof. It is strong enough to deserve deeper artifact discipline, but still weak enough that the dashboard should keep missing evidence and risk areas visible.","phaseStatus":[{"phaseId":"collect","state":"strong","summary":"Multiple Galaxian-family sources and extracted windows already exist."},{"phaseId":"analyze","state":"active","summary":"Audio, movement, long-surface, and visual identity artifacts are now substantial."},{"phaseId":"plan","state":"active","summary":"Top-ten and audio sprint plans exist, but deeper play quality still needs work."},{"phaseId":"implement","state":"active","summary":"Playable preview on Platinum with game-owned identity."},{"phaseId":"conformance","state":"active","summary":"Reference and playtest reads are honest and still below public-release confidence."},{"phaseId":"release","state":"preview","summary":"Useful as a review artifact, not yet a mature standalone public promise."}],"headlineScores":[{"label":"Reference conformance","value":"7.6/10","detail":"Broad current reference-backed score."},{"label":"Playtest-weighted conformance","value":"6.9/10","detail":"Current felt/read score."},{"label":"Public readiness","value":"4.2/10","detail":"Still too low for a strong public promise."},{"label":"Audio reference comparison","value":"8.3/10","detail":"Good coverage, still weak direct acoustic proxy fit."},{"label":"Audio live mix","value":"9.9/10","detail":"Live mix is now strong; source-faithful match is the remaining gap."}],"decisionRead":"Guardians should use this dashboard as the main cross-artifact intake and planning cockpit while deeper runtime quality work continues. The current best return remains midrun fairness plus serious audio conformance work, backed by the new generic audio framework.","hostedLinks":[{"label":"Guardians conformance dashboard","hrefType":"hosted","href":"conformance-dashboard.html?game=galaxy-guardians#conformance","detail":"Direct Guardians conformance view on the current lane.","resolvedHref":"conformance-dashboard.html?game=galaxy-guardians#conformance"},{"label":"Guardians project guide entry points","hrefType":"hosted","href":"project-guide.html#guardians-resume-state","detail":"Resume note, opening baseline, long-surface review, and first-class plan.","resolvedHref":"project-guide.html#guardians-resume-state"}],"artifactGroups":[{"title":"Current authority artifacts","items":[{"label":"Reference conformance rollup","hrefType":"artifact","href":"reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json","detail":"Current headline reference and readiness scores.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json"},{"label":"Playtest conformance review","hrefType":"artifact","href":"reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json","detail":"Current player-feel weighted review.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json"},{"label":"Long-surface conformance","hrefType":"artifact","href":"reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json","detail":"Stage-band survivability and deeper-play review.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json"},{"label":"Audio scene review","hrefType":"artifact","href":"reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-0.1.json","detail":"Scene-by-scene gameplay sound review artifact.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-0.1.json"},{"label":"Audio live mix","hrefType":"artifact","href":"reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-0.1.json","detail":"Gameplay mix density and continuity artifact.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-0.1.json"}]},{"title":"Current plan anchors","items":[{"label":"Guardians audio conformance sprint plan","hrefType":"repoDoc","href":"GUARDIANS_AUDIO_CONFORMANCE_SPRINT_PLAN_2026-05-31.md","detail":"Current serious audio-improvement plan.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/GUARDIANS_AUDIO_CONFORMANCE_SPRINT_PLAN_2026-05-31.md"},{"label":"Guardians safe-lane and persona subplan","hrefType":"repoDoc","href":"GUARDIANS_SAFE_LANE_AND_PERSONA_SUBPLAN_2026-05-31.md","detail":"Recent fairness, harness, and persona capture work.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/GUARDIANS_SAFE_LANE_AND_PERSONA_SUBPLAN_2026-05-31.md"},{"label":"Top 10 Guardians quality plan","hrefType":"repoDoc","href":"TOP_10_GUARDIANS_USER_QUALITY_FORWARD_PLAN_2026-05-31.md","detail":"Current ordered improvement queue.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/TOP_10_GUARDIANS_USER_QUALITY_FORWARD_PLAN_2026-05-31.md"}]}],"planTracks":[{"title":"Audio authenticity sprint","goal":"Make gameplay sound more source-faithful, not just technically busy.","deliverables":["Scene review and live-mix acceptance gates","Recurring pressure family refit","Shot, dive, hit, and loss family rebuilds against reference windows"]},{"title":"Deeper-play fairness","goal":"Improve stage-five-and-beyond survivability without restoring fake-safe lanes.","deliverables":["Stage-band fairness lab","Lower-field readability review","Persona-driven capture and review"]}],"nextArtifacts":["Cleaner isolated Galaxian cabinet audio windows","More stage-five-and-beyond professional review captures","Direct alien pulse and flap reference windows","Additional score-popup and hit-value reference windows"],"previews":[]},{"gameKey":"windigo-invaders","title":"Windigo Invaders","status":"Next intake target","lineage":"Space Invaders-derived future Platinum game, themed eventually around the Windigo legend","themeRead":"This should enter through evidence first. The goal is not to rush a derivative shell, but to build the strongest artifact package and Platinum instantiation plan before design decisions harden.","phaseStatus":[{"phaseId":"collect","state":"active","summary":"First gameplay source accessioned and preserved."},{"phaseId":"analyze","state":"active","summary":"First contact sheet and waveform generated."},{"phaseId":"plan","state":"next","summary":"Need a Platinum-focused instantiation plan from the source evidence."},{"phaseId":"implement","state":"waiting","summary":"Do not build runtime slices before the initial evidence package is strong enough."},{"phaseId":"conformance","state":"waiting","summary":"Scorers should come after the first explicit plan and runtime slice."},{"phaseId":"release","state":"waiting","summary":"No public claim yet; this is still in intake."}],"headlineScores":[{"label":"Current phase","value":"Artifact collection and analysis","detail":"The game is intentionally still pre-runtime."},{"label":"Seed source count","value":"1","detail":"One preserved gameplay source is now in-repo."},{"label":"First-pass previews","value":"2","detail":"Contact sheet plus audio waveform generated."}],"decisionRead":"The next best spend is on artifact breadth, not code. We should use this dashboard to decide what missing source families matter most before we commit to game-specific runtime assumptions.","hostedLinks":[{"label":"Project guide","hrefType":"hosted","href":"project-guide.html","detail":"Current cross-game release and process guide.","resolvedHref":"project-guide.html"},{"label":"Platinum guide","hrefType":"hosted","href":"platinum-guide.html","detail":"Current platform ownership and contract guide.","resolvedHref":"platinum-guide.html"},{"label":"Windigo instantiation plan","hrefType":"repoDoc","href":"WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md","detail":"Repo-owned plan for turning the source lineage into a Platinum game.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md"}],"artifactGroups":[{"title":"Seed source package","items":[{"label":"Preserved source package","hrefType":"artifact","href":"reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/README.md","detail":"Original source accession, checksum, and measured media facts.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/README.md"},{"label":"Preserved source manifest","hrefType":"artifact","href":"reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/source-manifest.json","detail":"Machine-readable source manifest for the first intake seed.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/source-manifest.json"}]},{"title":"First-pass analysis","items":[{"label":"Reference-lineage overview","hrefType":"artifact","href":"reference-artifacts/analyses/space-invaders-reference/README.md","detail":"Current lineage overview and next artifact families to add.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/README.md"},{"label":"First-pass source analysis","hrefType":"artifact","href":"reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md","detail":"Current source-specific notes and generated previews.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md"}]},{"title":"Planning anchors","items":[{"label":"Windigo instantiation plan","hrefType":"repoDoc","href":"WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md","detail":"First explicit Platinum-owned versus game-owned plan for the Space Invaders line.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md"},{"label":"Classic arcade ingestion framework","hrefType":"repoDoc","href":"CLASSIC_ARCADE_INGESTION_FRAMEWORK.md","detail":"The standing intake workflow that Windigo should follow.","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/CLASSIC_ARCADE_INGESTION_FRAMEWORK.md"}]}],"planTracks":[{"title":"Build the initial Platinum instantiation plan","goal":"Separate what Platinum will host from what Windigo Invaders must own as game truth.","deliverables":["Game-owned rules and score-table plan","Stage, bunker, cannon, and invader-family inventory","Audio, march, descent, and game-over timing targets"]},{"title":"Expand the artifact inventory before coding","goal":"Give the first runtime slice enough evidence that it feels deliberate rather than memory-driven.","deliverables":["Manual and score-table artifacts","Cleaner audio windows","Higher-resolution gameplay windows","Still-image references for title, bunkers, cannon, and invader rows"]}],"nextArtifacts":["Operator manual or rules page","Score-table and bonus references","Higher-resolution gameplay with cleaner audio","Cabinet, bezel, and title stills","Event-labeled timing clips for fire, hit, descent, and game over"],"previews":[{"label":"Gameplay contact sheet","detail":"First contact-sheet read from the preserved 23-minute session.","hrefType":"artifact","href":"reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg","previewHrefType":"rawArtifact","previewHref":"reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg","mediaKind":"image","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg","resolvedPreviewHref":"https://raw.githubusercontent.com/sgwoods/Codex-Test1/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg"},{"label":"Audio waveform","detail":"First waveform read from the preserved 23-minute session.","hrefType":"artifact","href":"reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png","previewHrefType":"rawArtifact","previewHref":"reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png","mediaKind":"image","resolvedHref":"https://github.com/sgwoods/Codex-Test1/blob/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png","resolvedPreviewHref":"https://raw.githubusercontent.com/sgwoods/Codex-Test1/594f41bcd0d20660f59889151311f9986a1c74fc/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png"}]}],"buildMeta":{"lane":"development","buildLabel":"1.4.0.1+build.963.sha.594f41bc","buildCommit":"594f41bcd0d20660f59889151311f9986a1c74fc","pageBuiltAt":"2026-05-31T21:59:30.271Z"},"counts":{"games":3,"phases":6,"artifactFamilies":6}}</script>
+    <script>
+    (function(){
+      const data = JSON.parse(document.getElementById('ingestionDashboardData').textContent);
+      const gameSelector = document.getElementById('gameSelector');
+      const gameTitle = document.getElementById('gameTitle');
+      const gameLineage = document.getElementById('gameLineage');
+      const gameThemeRead = document.getElementById('gameThemeRead');
+      const gameStatus = document.getElementById('gameStatus');
+      const gameDecision = document.getElementById('gameDecision');
+      const scoreGrid = document.getElementById('scoreGrid');
+      const phaseGrid = document.getElementById('phaseGrid');
+      const detailLinks = document.getElementById('detailLinks');
+      const artifactGroups = document.getElementById('artifactGroups');
+      const planGrid = document.getElementById('planGrid');
+      const gapGrid = document.getElementById('gapGrid');
+      const previewGrid = document.getElementById('previewGrid');
+      const detailTabs = Array.from(document.querySelectorAll('[data-detail-tab]'));
+      const detailPanels = Array.from(document.querySelectorAll('[data-detail-panel]'));
+      const viewTabs = Array.from(document.querySelectorAll('[data-view-tab]'));
+      const viewPanels = Array.from(document.querySelectorAll('[data-view-panel]'));
+      let activeGameKey = data.games[0] ? data.games[0].gameKey : '';
+      let activeDetailTab = 'overview';
+
+      function escapeHtml(value){
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function gameByKey(key){
+        return data.games.find((game) => game.gameKey === key) || data.games[0];
+      }
+
+      function chipClass(state){
+        return 'phaseChip';
+      }
+
+      function renderSelector(){
+        gameSelector.innerHTML = data.games.map((game) => {
+          const summary = (game.phaseStatus || []).find((entry) => entry.phaseId === 'plan') || game.phaseStatus[0] || { state: '--', summary: '' };
+          return `
+            <button class="gameSelectorButton${game.gameKey === activeGameKey ? ' active' : ''}" data-game-key="${escapeHtml(game.gameKey)}" type="button">
+              <strong>${escapeHtml(game.title)}</strong>
+              <p>${escapeHtml(game.status)}</p>
+              <div class="gameSelectorMeta">
+                <span>${escapeHtml(summary.state || '--')}</span>
+                <span>${escapeHtml(summary.phaseId || '')}</span>
+              </div>
+            </button>
+          `;
+        }).join('');
+        Array.from(gameSelector.querySelectorAll('[data-game-key]')).forEach((button) => {
+          button.addEventListener('click', () => {
+            activeGameKey = button.getAttribute('data-game-key');
+            renderSelector();
+            renderDetail();
+          });
+        });
+      }
+
+      function renderScoreCards(game){
+        scoreGrid.innerHTML = (game.headlineScores || []).map((entry) => `
+          <article class="scoreCard">
+            <strong>${escapeHtml(entry.label || '')}</strong>
+            <span class="scoreValue">${escapeHtml(entry.value || '')}</span>
+            <span>${escapeHtml(entry.detail || '')}</span>
+          </article>
+        `).join('');
+      }
+
+      function renderPhaseCards(game){
+        phaseGrid.innerHTML = (game.phaseStatus || []).map((entry) => `
+          <article class="phaseCard">
+            <span class="${chipClass(entry.state)}">${escapeHtml(entry.state || '')}</span>
+            <strong>${escapeHtml(entry.phaseId || '')}</strong>
+            <span>${escapeHtml(entry.summary || '')}</span>
+          </article>
+        `).join('');
+      }
+
+      function renderDetailLinks(game){
+        detailLinks.innerHTML = (game.hostedLinks || []).map((entry) => `
+          <a class="button" href="${escapeHtml(entry.resolvedHref || '#')}">${escapeHtml(entry.label || '')}</a>
+        `).join('');
+      }
+
+      function renderArtifactGroups(game){
+        artifactGroups.innerHTML = (game.artifactGroups || []).map((group) => `
+          <article class="artifactCard">
+            <strong>${escapeHtml(group.title || '')}</strong>
+            <div class="linkList">
+              ${(group.items || []).map((item) => `
+                <a class="linkRow" href="${escapeHtml(item.resolvedHref || '#')}">
+                  <strong>${escapeHtml(item.label || '')}</strong>
+                  <span>${escapeHtml(item.detail || '')}</span>
+                </a>
+              `).join('')}
+            </div>
+          </article>
+        `).join('');
+      }
+
+      function renderPlanTracks(game){
+        planGrid.innerHTML = (game.planTracks || []).map((track) => `
+          <article class="planCard">
+            <strong>${escapeHtml(track.title || '')}</strong>
+            <span>${escapeHtml(track.goal || '')}</span>
+            <ul class="deliverableList">
+              ${(track.deliverables || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+            </ul>
+          </article>
+        `).join('');
+      }
+
+      function renderGaps(game){
+        gapGrid.innerHTML = (game.nextArtifacts || []).map((item) => `
+          <article class="huntCard">
+            <strong>Needed artifact</strong>
+            <span>${escapeHtml(item)}</span>
+          </article>
+        `).join('');
+      }
+
+      function renderPreviews(game){
+        if(!(game.previews || []).length){
+          previewGrid.innerHTML = '<article class="previewCard"><strong>No preview artifacts surfaced yet</strong><span>Use this slot for contact sheets, waveforms, semantic timelines, or other quick-look review assets as each game matures.</span></article>';
+          return;
+        }
+        previewGrid.innerHTML = game.previews.map((item) => `
+          <article class="previewCard">
+            <strong>${escapeHtml(item.label || '')}</strong>
+            <span>${escapeHtml(item.detail || '')}</span>
+            ${item.mediaKind === 'image' ? `<img src="${escapeHtml(item.resolvedPreviewHref || '')}" alt="${escapeHtml(item.label || '')}">` : ''}
+            <div class="sectionActions">
+              <a class="button" href="${escapeHtml(item.resolvedHref || '#')}">Open artifact</a>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      function setDetailTab(tabId){
+        activeDetailTab = tabId;
+        detailTabs.forEach((button) => {
+          button.classList.toggle('active', button.getAttribute('data-detail-tab') === tabId);
+        });
+        detailPanels.forEach((panel) => {
+          panel.classList.toggle('active', panel.getAttribute('data-detail-panel') === tabId);
+        });
+      }
+
+      function renderDetail(){
+        const game = gameByKey(activeGameKey);
+        gameTitle.textContent = game.title || '';
+        gameLineage.textContent = game.lineage || '';
+        gameThemeRead.textContent = game.themeRead || '';
+        gameStatus.textContent = game.status || '';
+        gameDecision.textContent = game.decisionRead || '';
+        renderScoreCards(game);
+        renderPhaseCards(game);
+        renderDetailLinks(game);
+        renderArtifactGroups(game);
+        renderPlanTracks(game);
+        renderGaps(game);
+        renderPreviews(game);
+        setDetailTab(activeDetailTab);
+      }
+
+      function renderProcessDocs(){
+        document.getElementById('processDocs').innerHTML = (data.globalDocs || []).map((item) => `
+          <article class="docCard">
+            <strong>${escapeHtml(item.label || '')}</strong>
+            <span>${escapeHtml(item.detail || '')}</span>
+            <div class="sectionActions">
+              <a class="button" href="${escapeHtml(item.resolvedHref || '#')}">Open source</a>
+            </div>
+          </article>
+        `).join('');
+        document.getElementById('processFamilies').innerHTML = (data.artifactFamilies || []).map((item) => `
+          <article class="familyCard">
+            <strong>${escapeHtml(item.label || '')}</strong>
+            <span>${escapeHtml(item.detail || '')}</span>
+          </article>
+        `).join('');
+        document.getElementById('platformExtensions').innerHTML = (data.platformExtensions || []).map((item) => `
+          <article class="familyCard">
+            <strong>${escapeHtml(item.title || '')}</strong>
+            <span>${escapeHtml(item.detail || '')}</span>
+          </article>
+        `).join('');
+        document.getElementById('globalHunts').innerHTML = (data.globalHunts || []).map((item) => `
+          <article class="huntCard">
+            <strong>Standing hunt</strong>
+            <span>${escapeHtml(item)}</span>
+          </article>
+        `).join('');
+      }
+
+      viewTabs.forEach((button) => {
+        button.addEventListener('click', () => {
+          const target = button.getAttribute('data-view-tab');
+          viewTabs.forEach((entry) => entry.classList.toggle('active', entry === button));
+          viewPanels.forEach((panel) => panel.classList.toggle('active', panel.getAttribute('data-view-panel') === target));
+        });
+      });
+
+      detailTabs.forEach((button) => {
+        button.addEventListener('click', () => setDetailTab(button.getAttribute('data-detail-tab')));
+      });
+
+      renderSelector();
+      renderDetail();
+      renderProcessDocs();
+      setDetailTab('overview');
+    })();
+  </script>
+  
+</body>
+</html>
