@@ -70,6 +70,12 @@ mask:
 #playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
 #cabinetRightFrame,#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:0;background:transparent;box-shadow:none}
 #cabinetRightFrame::before,#cabinetRightFrame::after,#cabinetLeftFrame::before,#cabinetLeftFrame::after{display:none}
+body.arcadeFullscreenActive #cabinetShell,
+body.arcadeFullscreenActive #cabinetRightFrame,
+body.arcadeFullscreenActive #cabinetLeftFrame,
+body.arcadeFullscreenActive #buildStamp{display:none!important}
+body.arcadeFullscreenActive #playfieldFrame{box-shadow:0 0 0 1px rgba(122,215,255,.22),0 0 36px rgba(10,32,54,.28);background:transparent}
+body.arcadeFullscreenActive #msg{bottom:10px}
 #hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:14px;padding:4px 10px 0;min-height:var(--hud-band-height,30px);font-size:clamp(14px,.96vw,21px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
 #hud::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--hud-band-height,30px) + var(--hud-band-fade,30px));background:linear-gradient(180deg,rgba(0,0,0,.82),rgba(0,0,0,.48) 58%,rgba(0,0,0,0));z-index:-1}
 #left,#center,#right{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -150,16 +156,16 @@ mask:
 #msg .startScoreAdvance .scoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 #msg .startScoreAdvance .scoreValue{text-align:right}
 #msg .startScoreAdvance .scoreMuted{color:rgba(223,247,255,.68)}
-#msg .startMissionWrap.guardiansMission{gap:.08em;margin:.14em auto 0;max-width:min(100%,22.4em)}
-#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.57em;line-height:1.06;letter-spacing:.135em}
-#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.385em;line-height:1.1;letter-spacing:.072em}
+#msg .startMissionWrap.guardiansMission{gap:.1em;margin:.16em auto 0;max-width:min(100%,23.2em)}
+#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.585em;line-height:1.05;letter-spacing:.145em}
+#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.395em;line-height:1.12;letter-spacing:.076em}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(1){color:#ffd4a8}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(2){color:#ffb997}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(3){color:#ffe39a}
-#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.4em,auto) repeat(4,minmax(2.78em,auto));gap:.03em .3em;width:min(100%,23.6em);margin:.14em auto 0;font-size:.335em;line-height:1.1}
-#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.195em;margin-bottom:.03em}
+#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.7em,auto) repeat(4,minmax(2.94em,auto));gap:.04em .34em;width:min(100%,24.2em);margin:.16em auto 0;font-size:.345em;line-height:1.12}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.2em;margin-bottom:.04em}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreLabel{color:#f7fbff}
-#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.35em;overflow:hidden;text-overflow:ellipsis}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.6em;overflow:hidden;text-overflow:ellipsis}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreHead{color:#ffb765}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreValueDive{color:#ffe39a}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortOne{color:#7bd6ff}
@@ -248,8 +254,8 @@ mask:
 #audioMixPanel label{color:#bff6ff}
 #commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
-#graphicsPanel select,#testPanel input,#testPanel select{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
-#graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
+#graphicsPanel select,#audioMixPanel select,#testPanel input,#testPanel select{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
+#graphicsPanel select,#audioMixPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input,#testPanel select{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 .settingsRangeStack{display:flex;flex-direction:column;gap:10px;padding:8px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(5,14,26,.52)}
 .settingsRangeRow{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}
@@ -261,6 +267,8 @@ mask:
 .settingsMusicSourceGame{font-size:12px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere}
 .settingsMusicSourceSource{font:700 11px/1.2 "Courier New",Consolas,monospace;color:#ffe39a;text-align:right;text-transform:uppercase}
 .settingsMusicSourceId{grid-column:1/-1;font:11px/1.25 "Courier New",Consolas,monospace;color:#9eefff;white-space:normal;overflow-wrap:anywhere;background:rgba(0,0,0,.18);padding:4px 6px;border-radius:3px}
+.settingsMusicSourceMetaLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.62);letter-spacing:.08em;text-transform:uppercase}
+.settingsMusicSourceMetaValue{font:11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff;white-space:normal;overflow-wrap:anywhere}
 .settingsToggleRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border:1px solid rgba(255,216,109,.18);background:rgba(28,21,5,.42);cursor:pointer}
 .settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
 .settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
@@ -334,13 +342,13 @@ mask:
 .gamePreviewScoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 .gamePreviewScoreLabel{color:#f4fbff;font-weight:700}
 .gamePreviewScoreCell{text-align:right;white-space:nowrap}
-#gamePreviewMission.guardiansMission{gap:3px;padding:7px 10px}
-#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.14em}
+#gamePreviewMission.guardiansMission{gap:4px;padding:8px 11px}
+#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.15em}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(2){color:#ffd4a8}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(3){color:#ffb997}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(4){color:#ffe39a}
-#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(82px,1fr) repeat(4,minmax(38px,auto));gap:2px 6px;padding:7px 9px;font-size:9px;line-height:1.12}
-#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.2em}
+#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(86px,1fr) repeat(4,minmax(40px,auto));gap:3px 7px;padding:8px 10px;font-size:9px;line-height:1.14}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.22em}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreHead{color:#ffb765}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:nth-child(6n+4){color:#ffe39a}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell.gamePreviewScoreEscort{color:#7bd6ff}
@@ -427,8 +435,18 @@ mask:
 #arcadeMusicToggleBtn[data-music-muted="true"] .dockIcon{animation:none;filter:grayscale(.8) drop-shadow(0 0 8px rgba(255,227,154,.18));opacity:.72}
 #arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
 @keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
-#arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
-#arcadeMusicFrameHost iframe{display:block;width:200px;height:200px;border:0}
+#arcadeMusicFrameHost{
+ position:fixed;
+ left:-9999px;
+ top:0;
+ width:240px;
+ height:240px;
+ overflow:hidden;
+ opacity:1;
+ pointer-events:none;
+ z-index:0
+}
+#arcadeMusicFrameHost iframe{display:block;width:240px;height:240px;border:0}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
@@ -611,6 +629,13 @@ mask:
 #leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
 #leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta{gap:1px}
+#leaderboardPanelTable .scoreCell.meta.hasReplay{cursor:pointer}
+#leaderboardPanelTable .scoreCell.meta.hasReplay:hover,
+#leaderboardPanelTable .scoreCell.meta.hasReplay:focus-visible{
+ outline:none;
+ color:#f9fcff;
+ text-shadow:0 0 8px rgba(255,216,109,.16);
+}
 #leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
 #leaderboardPanelTable .scoreCell.meta .scoreMetaFooter{display:flex;align-items:center;gap:6px;min-width:0}
 #leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}
@@ -843,23 +868,35 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
             <label for="musicVolume">Music Volume</label>
             <span id="musicVolumeValue" class="settingsRangeValue">--</span>
           </div>
-          <input id="musicVolume" type="range" min="0" max="100" step="1" value="72" />
+          <input id="musicVolume" type="range" min="0" max="100" step="1" value="80" />
         </div>
         <div class="settingsRangeRow">
           <div class="settingsRangeHeader">
             <label for="gameSoundVolume">Game Sound</label>
             <span id="gameSoundVolumeValue" class="settingsRangeValue">--</span>
           </div>
-          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="68" />
+          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="20" />
         </div>
       </div>
+      <div class="settingsField settingsFieldCompact">
+        <label for="arcadeMusicPlaylistSelect">Playlist For This Game</label>
+        <select id="arcadeMusicPlaylistSelect">
+          <option value="__DEFAULT__">Platform default (Default)</option>
+          <option value="PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo">Embeddable Arcade Jukebox</option>
+          <option value="PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-">Galaxy Guardians Original Playlist</option>
+        </select>
+      </div>
       <div id="arcadeMusicPlaylistCard" class="settingsMusicSource" aria-live="polite">
-        <span class="settingsMusicSourceLabel">Active Game Playlist</span>
+        <span class="settingsMusicSourceLabel">Arcade Music Mapping</span>
         <span id="arcadeMusicPlaylistGame" class="settingsMusicSourceGame">--</span>
         <span id="arcadeMusicPlaylistSource" class="settingsMusicSourceSource">--</span>
         <code id="arcadeMusicPlaylistId" class="settingsMusicSourceId">--</code>
+        <span class="settingsMusicSourceMetaLabel">Platform default</span>
+        <code id="arcadeMusicPlatformPlaylistId" class="settingsMusicSourceMetaValue">--</code>
+        <span class="settingsMusicSourceMetaLabel">Game override</span>
+        <span id="arcadeMusicGameOverride" class="settingsMusicSourceMetaValue">--</span>
       </div>
-      <div class="settingsHint">Audio mix changes apply live and are logged with the active session for production tuning.</div>
+      <div class="settingsHint">Saved separately for the active game. If YouTube blocks a track, the player will skip ahead automatically.</div>
     </div>
     <div id="commentatorPanel" class="settingsSection">
       <h4>Game Updates</h4>
@@ -867,6 +904,14 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <input id="commentatorToggle" type="checkbox" checked />
         <span class="settingsToggleLabel">Commentator</span>
         <span class="settingsToggleHint">Occasional gameplay callouts in the message window.</span>
+      </label>
+    </div>
+    <div id="displayPanel" class="settingsSection">
+      <h4>Display</h4>
+      <label class="settingsToggleRow" for="arcadeFullscreenAutoToggle">
+        <input id="arcadeFullscreenAutoToggle" type="checkbox" checked />
+        <span class="settingsToggleLabel">Arcade Fullscreen On Play</span>
+        <span class="settingsToggleHint">Enter/Play expands the cabinet into an arcade-size playfield. Press F during play to toggle console/fullscreen.</span>
       </label>
     </div>
     <div id="graphicsPanel" class="settingsSection">
@@ -976,8 +1021,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">May 28 2026, 6:10 PM EDT</span>
-      <span id="settingsState">main@19db4fa4 clean</span>
+      <span id="settingsRelease">May 31 2026, 10:46 AM EDT</span>
+      <span id="settingsState">main@2594496c clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1032,6 +1077,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <div class="controlRow"><span class="controlKeys">Arrow Right / D / C</span><span class="controlAction">Move right</span></div>
           <div class="controlRow"><span class="controlKeys">Space</span><span class="controlAction">Fire</span></div>
           <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
+          <div class="controlRow"><span class="controlKeys">F</span><span class="controlAction">Toggle arcade fullscreen / console view</span></div>
           <div class="controlRow"><span class="controlKeys">🎞</span><span class="controlAction">Open recent replays saved on this device</span></div>
           <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
           <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
@@ -1275,7 +1321,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">May 28 2026, 6:10 PM EDT</span>
+    <span id="buildStampRelease">May 31 2026, 10:46 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1497,7 +1543,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1525,7 +1571,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-28T22%3A07%3A34.612Z%22%2C%22commit%22%3A%22f5548699%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.8%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2F127.0.0.1%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-05-31T13%3A55%3A33.624Z%22%2C%22commit%22%3A%22a9ef2321%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227.1%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.2%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1727,8 +1773,10 @@ const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
 const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
+const ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicPlaylistOverrides`;
 const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
 const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
+const ARCADE_FULLSCREEN_AUTO_PREF_KEY=`${STORAGE_PREFIX}ArcadeFullscreenAuto`;
 const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
 const PLAYER_TWO_PERSONA_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoPersona`;
 const WATCH_MODE_PERSONA_PREF_KEY=`${STORAGE_PREFIX}WatchModePersona`;
@@ -1747,6 +1795,7 @@ const LEGACY_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [ARCADE_FULLSCREEN_AUTO_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}ArcadeFullscreenAuto`,
  [PLAYER_TWO_MODE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}WatchModePersona`,
@@ -1767,6 +1816,7 @@ const PLATFORM_STORAGE_KEYS={
  [ARCADE_MUSIC_MUTED_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicMuted`,
  [GAME_SOUND_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}GameSoundVolume`,
  [ARCADE_MUSIC_VOLUME_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeMusicVolume`,
+ [ARCADE_FULLSCREEN_AUTO_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}ArcadeFullscreenAuto`,
  [PLAYER_TWO_MODE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}WatchModePersona`,
@@ -1775,8 +1825,12 @@ const PLATFORM_STORAGE_KEYS={
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
-const DEFAULT_GAME_SOUND_VOLUME=.68;
-const DEFAULT_ARCADE_MUSIC_VOLUME=.72;
+const DEFAULT_GAME_SOUND_VOLUME=.20;
+const DEFAULT_ARCADE_MUSIC_VOLUME=.80;
+const ARCADE_MUSIC_BACKUP_PLAYLIST_ID='PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo';
+const ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
+const ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+const ARCADE_MUSIC_SELECTOR_DEFAULT='__DEFAULT__';
 function clampVolumeValue(value,fallback=1){
  const n=+value;
  return Number.isFinite(n)?Math.max(0,Math.min(1,n)):fallback;
@@ -1798,8 +1852,11 @@ let audioMuted=readPref(AUDIO_MUTED_PREF_KEY)==='1';
 let arcadeMusicMuted=readPref(ARCADE_MUSIC_MUTED_PREF_KEY)==='1';
 let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
 let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
+let arcadeFullscreenAuto=readPref(ARCADE_FULLSCREEN_AUTO_PREF_KEY)!=='0';
+let arcadeFullscreenActive=0;
 const ARCADE_MUSIC_PLAYLIST_ID="PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH";
-const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
+const arcadeMusicRequestedPref=readPref(ARCADE_MUSIC_PREF_KEY);
+const ARCADE_MUSIC={state:'off',requested:arcadeMusicRequestedPref==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1830,6 +1887,57 @@ function removePref(key){
   const platformKey=PLATFORM_STORAGE_KEYS[key];
   if(platformKey)localStorage.removeItem(platformKey);
  }catch{}
+}
+function readJsonPref(key,fallback){
+ const raw=readPref(key);
+ if(!raw)return fallback;
+ try{
+  const parsed=JSON.parse(raw);
+  return parsed&&typeof parsed==='object'?parsed:fallback;
+ }catch{
+  return fallback;
+ }
+}
+let arcadeMusicPlaylistOverrides=readJsonPref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY,{});
+function arcadeMusicPlaylistOptions(){
+ const defaultLabel=String(BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Platform default').trim()||'Platform default';
+ const defaultPlaylistId=sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
+ const options=[
+  { value:ARCADE_MUSIC_SELECTOR_DEFAULT, playlistId:defaultPlaylistId, label:`${defaultLabel} (Default)` }
+ ];
+ if(ARCADE_MUSIC_BACKUP_PLAYLIST_ID&&ARCADE_MUSIC_BACKUP_PLAYLIST_ID!==defaultPlaylistId){
+  options.push({ value:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, playlistId:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, label:'Embeddable Arcade Jukebox' });
+ }
+ if(ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
+  options.push({ value:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, label:'Aurora Original Playlist' });
+ }
+ if(ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
+  options.push({ value:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, label:'Galaxy Guardians Original Playlist' });
+ }
+ return options.map(option=>Object.freeze(option));
+}
+function arcadeMusicPlaylistOverrideForGame(gameKey=''){
+ const key=String(gameKey||'').trim();
+ if(!key)return '';
+ const value=sanitizeArcadeMusicPlaylistId(arcadeMusicPlaylistOverrides?.[key]||'');
+ return value||'';
+}
+function currentArcadeMusicPlaylistSelectValue(gameKey=''){
+ const override=arcadeMusicPlaylistOverrideForGame(gameKey);
+ return override||ARCADE_MUSIC_SELECTOR_DEFAULT;
+}
+function setArcadeMusicPlaylistOverrideForGame(gameKey='',value=''){
+ const key=String(gameKey||'').trim();
+ if(!key)return;
+ const nextValue=value===ARCADE_MUSIC_SELECTOR_DEFAULT?'':sanitizeArcadeMusicPlaylistId(value);
+ const nextOverrides=Object.assign({},arcadeMusicPlaylistOverrides||{});
+ if(nextValue)nextOverrides[key]=nextValue;
+ else delete nextOverrides[key];
+ arcadeMusicPlaylistOverrides=nextOverrides;
+ if(Object.keys(nextOverrides).length)writePref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY,JSON.stringify(nextOverrides));
+ else removePref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY);
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+ if(typeof syncArcadeMusicForGamePackChange==='function')syncArcadeMusicForGamePackChange();
 }
 function loadSystemLog(){
  try{
@@ -1972,7 +2080,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.932.sha.19db4fa4',commit:'19db4fa4c75b9e915bac7b54153e93e1bdd38f2a',branch:'main',dirty:false,released:'May 28 2026, 6:10 PM EDT',state:'main@19db4fa4 clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.959.sha.2594496c',commit:'2594496c6f4854f50515c518a164857915b346b8',branch:'main',dirty:false,released:'May 31 2026, 10:46 AM EDT',state:'main@2594496c clean',releaseChannel:'development',platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2029,6 +2137,7 @@ const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0,platformTrackToastTimer=0;
+let openingAudioReadyAnnounced=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
 let platformSplashOpen=0,platformSplashPrevPaused=0;
 let gamePreviewOpen=0,gamePreviewPrevPaused=0;
@@ -2078,6 +2187,7 @@ const AC=()=>{
  sfx.keep.start();
  sfx.bus.connect(A.destination);
  sfx.bus.connect(sfx.tap);
+ syncAudioDebugState();
  return A;
 };
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
@@ -2085,6 +2195,13 @@ if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDeb
 if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0,startedHistory:[],blockedHistory:[]};
 if(!Array.isArray(window.__platinumAudioDebug.reference.startedHistory))window.__platinumAudioDebug.reference.startedHistory=[];
 if(!Array.isArray(window.__platinumAudioDebug.reference.blockedHistory))window.__platinumAudioDebug.reference.blockedHistory=[];
+function syncAudioDebugState(){
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ if(!debug)return;
+ debug.interactionUnlocked=!!aud;
+ debug.audioContextState=String(sfx?.a?.state||'');
+ debug.soundEffectsMuted=!!audioMuted;
+}
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
@@ -2451,13 +2568,35 @@ const sfx={
  },
  attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
 };
+syncAudioDebugState();
 
-function unlockAudioFromInteraction(){
+function announceOpeningAudioReady(opts={}){
+ const source=String(opts.source||'interaction').trim()||'interaction';
+ if(openingAudioReadyAnnounced&&!opts.force)return;
+ openingAudioReadyAnnounced=1;
+ const prompt=audioMuted
+  ? 'Sound effects muted. Use the speaker control to unmute.'
+  : 'Sound effects on. Launching game audio.';
+ showToast(prompt);
+ if(typeof logEvent==='function')logEvent('opening_audio_ready',{
+  source,
+  muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  started:!!started
+ });
+}
+function unlockAudioFromInteraction(opts={}){
+ const wasAud=!!aud;
+ const wasSuspended=!!(sfx.a&&sfx.a.state==='suspended');
  aud=1;
  try{
   AC();
   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
  }catch{}
+ if(typeof maybeResumeRequestedArcadeMusic==='function')maybeResumeRequestedArcadeMusic({silent:true,source:String(opts.source||'interaction')});
+ syncAudioDebugState();
+ setTimeout(syncAudioDebugState,0);
+ if(opts.announce&&(!wasAud||wasSuspended||opts.force))announceOpeningAudioReady(opts);
 }
 
 window.__auroraDocsPreview=window.__platinumDocsPreview={
@@ -2582,14 +2721,14 @@ function scoreGameTitleForKey(gameKey='',fallback=''){
 }
 
 function currentScoreStorageGameKey(){
- const saved=String(readPref(GAME_PACK_PREF_KEY)||'').trim();
- if(saved)return normalizeScoreRecordGameKey(saved);
  try{
   if(typeof currentGamePackKey==='function'){
    const active=String(currentGamePackKey()||'').trim();
    if(active)return normalizeScoreRecordGameKey(active);
   }
  }catch{}
+ const saved=String(readPref(GAME_PACK_PREF_KEY)||'').trim();
+ if(saved)return normalizeScoreRecordGameKey(saved);
  return DEFAULT_SCORE_GAME_KEY;
 }
 
@@ -2710,6 +2849,8 @@ function syncStarfieldProfile(opts={}){
  const twinkleAmp=Math.max(0,Math.min(.5,+profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp));
  const speedMin=Math.max(2,+profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin);
  const speedMax=Math.max(speedMin,+profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax);
+ const driftMin=Math.min(+profile.driftMin||0,+profile.driftMax||0);
+ const driftMax=Math.max(+profile.driftMin||0,+profile.driftMax||0);
  for(let i=0;i<count;i++){
   S.st.push({
    x:auxRnd(PLAY_W),
@@ -2720,10 +2861,33 @@ function syncStarfieldProfile(opts={}){
    alpha:auxRnd(alphaMax,alphaMin),
    twMin:auxRnd(Math.min(1,twinkleMin+.04),Math.max(.18,twinkleMin-.04)),
    twAmp:auxRnd(Math.min(.4,twinkleAmp+.04),Math.max(.04,twinkleAmp-.04)),
-   vy:auxRnd(speedMax,speedMin)
+   vy:auxRnd(speedMax,speedMin),
+   vx:auxRnd(driftMax,driftMin),
+   depth:auxRnd(1.22,.88),
+   lead:auxRandUnit()<.14
   });
  }
  return profile;
+}
+
+function advanceSharedStarfield(dt,opts={}){
+ const width=+opts.width||PLAY_W;
+ const height=+opts.height||PLAY_H;
+ const speedStageLift=Number.isFinite(+opts.speedStageLift)?+opts.speedStageLift:((+S.stage||0)*.12);
+ for(const s of S.st){
+  if(!s)continue;
+  s.tw=(+s.tw||0)+dt*(1.2+(s.twAmp||.16)*4);
+  const depth=+s.depth||1;
+  s.y+=(((+s.vy||14)+speedStageLift)*dt)*depth;
+  s.x+=((+s.vx||0)*dt)*depth;
+  const size=+s.s||1;
+  if(s.x>width+size)s.x=-size;
+  else if(s.x<-size)s.x=width+size;
+  if(s.y>height+size){
+   s.y=-size;
+   s.x=auxRnd(width);
+  }
+ }
 }
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
@@ -3257,9 +3421,22 @@ function syncAudioMixControls(){
  const playlistGameEl=document.getElementById('arcadeMusicPlaylistGame');
  const playlistSourceEl=document.getElementById('arcadeMusicPlaylistSource');
  const playlistIdEl=document.getElementById('arcadeMusicPlaylistId');
+ const playlistPlatformEl=document.getElementById('arcadeMusicPlatformPlaylistId');
+ const playlistOverrideEl=document.getElementById('arcadeMusicGameOverride');
+ if(arcadeMusicPlaylistSelect){
+  const desiredOptions=arcadeMusicPlaylistOptions();
+  const currentMarkup=Array.from(arcadeMusicPlaylistSelect.options).map(option=>`${option.value}:${option.textContent}`).join('|');
+  const desiredMarkup=desiredOptions.map(option=>`${option.value}:${option.label}`).join('|');
+  if(currentMarkup!==desiredMarkup){
+   arcadeMusicPlaylistSelect.innerHTML=desiredOptions.map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+  }
+  arcadeMusicPlaylistSelect.value=currentArcadeMusicPlaylistSelectValue(playlistConfig?.gameKey||'');
+ }
  if(playlistGameEl)playlistGameEl.textContent=playlistConfig?.gameTitle||'Current game';
- if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
+ if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='selection'?'Developer override':playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
  if(playlistIdEl)playlistIdEl.textContent=playlistConfig?.playlistId||'No playlist configured';
+ if(playlistPlatformEl)playlistPlatformEl.textContent=playlistConfig?.platformPlaylistId||'No platform default configured';
+ if(playlistOverrideEl)playlistOverrideEl.textContent=playlistConfig?.selectionPlaylistId||playlistConfig?.gamePlaylistId||'Inherits platform default';
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
  if(debug)debug.mix={
   gameSoundVolume:+gameSoundVolume.toFixed(3),
@@ -3304,6 +3481,72 @@ function setArcadeMusicVolume(value,opts={}){
  syncAudioMixControls();
  if(opts.log)logAudioMixSettingChange('arcade_music_volume',opts.source||'developer_panel');
 }
+function syncArcadeFullscreenControls(){
+ if(arcadeFullscreenAutoToggle){
+  arcadeFullscreenAutoToggle.checked=!!arcadeFullscreenAuto;
+  arcadeFullscreenAutoToggle.setAttribute('aria-checked',arcadeFullscreenAuto?'true':'false');
+ }
+ if(document.body)document.body.classList.toggle('arcadeFullscreenActive',!!arcadeFullscreenActive);
+ window.__platinumFullscreenDebug={
+  auto:!!arcadeFullscreenAuto,
+  active:!!arcadeFullscreenActive,
+  browserFullscreen:!!document.fullscreenElement
+ };
+}
+function setArcadeFullscreenAuto(value,opts={}){
+ arcadeFullscreenAuto=value?1:0;
+ writePref(ARCADE_FULLSCREEN_AUTO_PREF_KEY,arcadeFullscreenAuto?'1':'0');
+ syncArcadeFullscreenControls();
+ if(opts.log&&typeof logEvent==='function')logEvent('arcade_fullscreen_setting_changed',{enabled:!!arcadeFullscreenAuto,source:String(opts.source||'developer_panel')});
+}
+function isArcadeFullscreenLayout(){
+ return !!arcadeFullscreenActive;
+}
+function requestBrowserFullscreenForArcade(){
+ if(document.fullscreenElement||!document.documentElement?.requestFullscreen)return;
+ try{
+  const p=document.documentElement.requestFullscreen({navigationUI:'hide'});
+  if(p&&typeof p.catch==='function')p.catch(()=>{});
+ }catch{}
+}
+function enterArcadeFullscreenMode(source='manual',opts={}){
+ if(arcadeFullscreenActive){
+  if(opts.requestBrowserFullscreen!==false)requestBrowserFullscreenForArcade();
+  return;
+ }
+ arcadeFullscreenActive=1;
+ syncArcadeFullscreenControls();
+ if(opts.requestBrowserFullscreen!==false)requestBrowserFullscreenForArcade();
+ if(typeof logEvent==='function')logEvent('arcade_fullscreen_enter',{source:String(source||'manual'),browserRequest:opts.requestBrowserFullscreen!==false});
+ if(typeof draw==='function')draw();
+}
+function exitArcadeFullscreenMode(source='manual',opts={}){
+ if(!arcadeFullscreenActive&&!document.fullscreenElement)return;
+ arcadeFullscreenActive=0;
+ syncArcadeFullscreenControls();
+ if(opts.exitBrowser!==false&&document.fullscreenElement&&document.exitFullscreen){
+  try{
+   const p=document.exitFullscreen();
+   if(p&&typeof p.catch==='function')p.catch(()=>{});
+  }catch{}
+ }
+ if(typeof logEvent==='function')logEvent('arcade_fullscreen_exit',{source:String(source||'manual'),browserExit:opts.exitBrowser!==false});
+ if(typeof draw==='function')draw();
+}
+function toggleFullscreen(source='hotkey'){
+ if(arcadeFullscreenActive||document.fullscreenElement)exitArcadeFullscreenMode(source);
+ else enterArcadeFullscreenMode(source);
+}
+document.addEventListener('fullscreenchange',()=>{
+ if(!document.fullscreenElement&&arcadeFullscreenActive)exitArcadeFullscreenMode('browser_escape',{exitBrowser:false});
+ else syncArcadeFullscreenControls();
+});
+window.__platinumFullscreen={
+ state:()=>({auto:!!arcadeFullscreenAuto,active:!!arcadeFullscreenActive,browserFullscreen:!!document.fullscreenElement}),
+ setAuto:(value,opts={})=>setArcadeFullscreenAuto(!!value,opts),
+ setMode:(value,opts={})=>value?enterArcadeFullscreenMode(opts.source||'harness',opts):exitArcadeFullscreenMode(opts.source||'harness',opts),
+ toggle:(source='harness')=>toggleFullscreen(source)
+};
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
@@ -3496,6 +3739,7 @@ function syncSettingsUi(){
  syncDeveloperToolsUi();
  syncAudioMixControls();
  if(typeof syncCommentatorControls==='function')syncCommentatorControls();
+ syncArcadeFullscreenControls();
  syncConformanceDashboardUi();
  syncAudioDebugUi();
 }
@@ -3505,7 +3749,7 @@ function isLocalDashboardHost(){
  return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
 }
 function conformanceDashboardUrl(){
- if(isLocalDashboardHost())return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ if(isLocalDashboardHost())return 'http://localhost:4312/local-dev/conformance-dashboard.html';
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}conformance-dashboard.html`;
 }
 function syncConformanceDashboardUi(){
@@ -3533,7 +3777,7 @@ function syncConformanceDashboardUi(){
  }
  if(conformanceDashboardHint){
   conformanceDashboardHint.textContent=local
-   ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
+   ? 'Open the full live dashboard at http://localhost:4312/local-dev/conformance-dashboard.html. Refresh it with npm run dev:conformance-dashboard during long cycles.'
    : 'Open the bundled read-only dashboard for this release lane. Raw ingestion workspaces remain engineering-owned.';
  }
 }
@@ -3742,7 +3986,7 @@ function openSettings(){
  syncPauseUi();
 }
 function logViewerUrl(){
- return 'http://127.0.0.1:4311/';
+ return 'http://localhost:4311/';
 }
 function projectGuideUrl(){
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
@@ -4025,7 +4269,6 @@ function rs(){
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
 addEventListener('resize',rs);
-function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 settingsBtn.addEventListener('click',()=>{if(settingsOpen)closeSettings();else openSettings();});
 if(settingsPanelClose)settingsPanelClose.addEventListener('click',closeSettings);
 if(openViewerBtn)openViewerBtn.addEventListener('click',()=>{openLogViewer();closeSettings();});
@@ -4057,10 +4300,19 @@ if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
 }
+if(arcadeMusicPlaylistSelect){
+ arcadeMusicPlaylistSelect.addEventListener('change',()=>{
+  const pack=typeof currentGamePack==='function'?currentGamePack():null;
+  const gameKey=String(pack?.metadata?.gameKey||'').trim();
+  if(!gameKey)return;
+  setArcadeMusicPlaylistOverrideForGame(gameKey,arcadeMusicPlaylistSelect.value||ARCADE_MUSIC_SELECTOR_DEFAULT);
+ });
+}
 if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
+if(arcadeFullscreenAutoToggle)arcadeFullscreenAutoToggle.addEventListener('change',()=>setArcadeFullscreenAuto(arcadeFullscreenAutoToggle.checked,{log:1,source:'developer_panel'}));
 for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
@@ -4113,6 +4365,7 @@ addEventListener('keydown',e=>{
  if(gamePickerOpen){if(e.code==='Escape'){e.preventDefault();closeGamePicker();}return;}
  if(typeof isMoviePanelOpen==='function'&&isMoviePanelOpen()){if(e.code==='Escape'){e.preventDefault();closeMoviePanel();}return;}
  if(settingsOpen&&e.code==='Escape'){e.preventDefault();closeSettings();return;}
+ if(!typingTarget&&arcadeFullscreenActive&&e.code==='Escape'){e.preventDefault();exitArcadeFullscreenMode('escape_key');return;}
  if(typeof closeAccountPanel==='function'&&e.code==='Escape')closeAccountPanel();
  if(!typingTarget&&e.code==='KeyL'){e.preventDefault();exportSession();return;}
  if(!typingTarget&&e.code==='KeyX'&&(started||ATTRACT.active)){e.preventDefault();exportAndReturnToWaitMode('manual_hotkey');return;}
@@ -4123,7 +4376,7 @@ addEventListener('keydown',e=>{
  keys[e.code]=1;
  if(!wasDown)keyState[e.code]={downAt:now,upAt:0};
  if([...movementControlCodes(),'Space'].includes(e.code))e.preventDefault();
- if(e.code==='KeyF')toggleFullscreen();
+ if(e.code==='KeyF'){e.preventDefault();toggleFullscreen('hotkey');return;}
  if(e.code==='KeyU')S.ultra=S.ultra?0:1;
  if(e.code==='KeyT'){
   e.preventDefault();
@@ -4197,13 +4450,17 @@ addEventListener('keydown',e=>{
   }
  }
  if(!started&&typeof handlePlayerTwoWaitKey==='function'&&handlePlayerTwoWaitKey(e))return;
- if(!started&&e.code==='Enter')launchCurrentGameFromWaitMode(e);
+if(!started&&e.code==='Enter'){
+ launchCurrentGameFromWaitMode(e);
+ return;
+}
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
 function launchCurrentGameFromWaitMode(e=null){
+ unlockAudioFromInteraction({announce:1,source:'wait_launch'});
  const packCanStart=typeof currentGamePackCanStart==='function'
   ? currentGamePackCanStart()
   : typeof currentGamePackHasPlayableAdapter==='function'
@@ -4214,6 +4471,7 @@ function launchCurrentGameFromWaitMode(e=null){
   restorePlayableGamePackForLaunch();
  }
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode)submitGameOverScore();
+ if(arcadeFullscreenAuto)enterArcadeFullscreenMode('auto_play',{requestBrowserFullscreen:!!e});
  stopAttractLoop();start();
  return true;
 }
@@ -4241,8 +4499,12 @@ addEventListener('pointerdown',e=>{
  closeSettings();
 });
 syncTestUi();
+syncArcadeFullscreenControls();
 syncBuildStampUi();
+if(typeof loadArcadeMusicApi==='function')setTimeout(()=>loadArcadeMusicApi().catch(()=>{}),0);
 startHostedBuildUpdateChecks();
+window.currentScoreStorageGameKey=currentScoreStorageGameKey;
+window.currentScoreStorageGameTitle=currentScoreStorageGameTitle;
 window.openPlatformSplash=openPlatformSplash;
 window.closePlatformSplash=closePlatformSplash;
 window.openGamePreview=openGamePreview;
@@ -4254,6 +4516,7 @@ window.__platinumArcadeMusic={
  setPlaylistForHarness(id=''){
   ARCADE_MUSIC.playlistOverride=sanitizeArcadeMusicPlaylistId(id);
   syncArcadeMusicUi();
+  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
   return arcadeMusicState();
  },
  noteTrackForHarness(title='Harness Track',artist='Harness Band'){
@@ -4354,16 +4617,22 @@ function arcadeMusicResolvedConfig(){
  const media=pack?.media||pack?.metadata?.media||{};
  const platformPlaylistId=arcadeMusicPlatformDefaultPlaylistId();
  const gamePlaylistId=sanitizeArcadeMusicPlaylistId(media.arcadeMusicPlaylistId);
+ const selectionPlaylistId=typeof arcadeMusicPlaylistOverrideForGame==='function'?sanitizeArcadeMusicPlaylistId(arcadeMusicPlaylistOverrideForGame(gameKey)):'';
  const harnessPlaylistId=sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC.playlistOverride);
  const base=Object.freeze({
-  playlistId:gamePlaylistId||platformPlaylistId,
-  playlistSource:gamePlaylistId?'game':'platform',
-  playlistLabel:String(media.arcadeMusicPlaylistLabel||(gamePlaylistId?`${gameTitle} arcade music`:BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Default Platinum Arcade Music')).trim(),
+  playlistId:selectionPlaylistId||gamePlaylistId||platformPlaylistId,
+  playlistSource:selectionPlaylistId?'selection':(gamePlaylistId?'game':'platform'),
+  playlistLabel:String(
+   selectionPlaylistId
+    ?'Developer-selected arcade music'
+    :(media.arcadeMusicPlaylistLabel||(gamePlaylistId?`${gameTitle} arcade music`:BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Default Platinum Arcade Music'))
+  ).trim(),
   gameKey,
   gameTitle,
   platformPlaylistId,
   gamePlaylistId,
-  configured:!!(gamePlaylistId||platformPlaylistId),
+  selectionPlaylistId,
+  configured:!!(selectionPlaylistId||gamePlaylistId||platformPlaylistId),
   harnessOverrideActive:false
  });
  if(harnessPlaylistId&&arcadeMusicHarnessOverrideAllowed()){
@@ -4391,13 +4660,14 @@ function arcadeMusicState(){
   playlistLabel:config.playlistLabel,
   platformPlaylistId:config.platformPlaylistId,
   gamePlaylistId:config.gamePlaylistId,
+  selectionPlaylistId:config.selectionPlaylistId,
   gameKey:config.gameKey,
   gameTitle:config.gameTitle,
   activePlaylistId:ARCADE_MUSIC.activePlaylistId||'',
   activePlaylistSource:ARCADE_MUSIC.activePlaylistSource||'',
   arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
   arcadeMusicMuted:!!arcadeMusicMuted,
-  audible:!!((ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')&&!arcadeMusicMuted&&arcadeMusicVolume>0),
+  audible:!!(ARCADE_MUSIC.state==='playing'&&!arcadeMusicMuted&&arcadeMusicVolume>0),
   gameSoundVolume:+gameSoundVolume.toFixed(3),
   lastTrack:ARCADE_MUSIC.lastTrack||null
  };
@@ -4405,59 +4675,171 @@ function arcadeMusicState(){
 function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
  const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const playing=ARCADE_MUSIC.state==='playing';
  const config=arcadeMusicResolvedConfig();
  const unavailable=ARCADE_MUSIC.state==='unavailable'||!config.playlistId;
- const muted=active&&!!arcadeMusicMuted;
+ const muted=playing&&!!arcadeMusicMuted;
  arcadeMusicToggleBtn.dataset.musicState=active?(muted?'muted':ARCADE_MUSIC.state):(unavailable?'unavailable':'off');
- arcadeMusicToggleBtn.dataset.musicPlaying=active?'true':'false';
+ arcadeMusicToggleBtn.dataset.musicPlaying=playing?'true':'false';
  arcadeMusicToggleBtn.dataset.musicMuted=muted?'true':'false';
  arcadeMusicToggleBtn.dataset.configured=config.playlistId?'true':'false';
  arcadeMusicToggleBtn.dataset.playlistSource=config.playlistSource||'';
  arcadeMusicToggleBtn.setAttribute('aria-pressed',muted?'true':'false');
- const label=unavailable?'Arcade Music unavailable':(!active?'Start Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'));
+ const label=unavailable
+  ?'Arcade Music unavailable'
+  :(!active
+   ?'Start Arcade Music'
+   :(ARCADE_MUSIC.state==='loading'
+    ?'Starting Arcade Music'
+    :(muted?'Unmute Arcade Music':'Mute Arcade Music')));
  arcadeMusicToggleBtn.setAttribute('aria-label',label);
  arcadeMusicToggleBtn.title=label;
  arcadeMusicToggleBtn.dataset.actionTip=label;
- arcadeMusicToggleBtn.classList.toggle('active',active&&!muted);
+ arcadeMusicToggleBtn.classList.toggle('active',playing&&!muted);
  arcadeMusicToggleBtn.classList.toggle('muted',muted);
  const icon=arcadeMusicToggleBtn.querySelector('.dockIcon');
- if(icon)icon.textContent=active&&!muted?'🎶':'🎵';
+ if(icon)icon.textContent=playing&&!muted?'🎶':'🎵';
 }
 function arcadeMusicEmbedUrl(playlistId){
  const origin=(location&&location.origin&&location.origin!=='null')?`&origin=${encodeURIComponent(location.origin)}`:'';
- return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&listType=playlist&autoplay=1&playsinline=1&enablejsapi=1&rel=0${origin}`;
+ return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&listType=playlist&autoplay=1&playsinline=1&enablejsapi=1&rel=0${origin}`;
 }
-function arcadeMusicPostMessage(payload={}){
- const frame=ARCADE_MUSIC.iframe||(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe'));
- if(!frame||!frame.contentWindow)return false;
+let arcadeMusicApiPromise=null;
+function loadArcadeMusicApi(){
+ if(window.YT&&typeof window.YT.Player==='function')return Promise.resolve(window.YT);
+ if(arcadeMusicApiPromise)return arcadeMusicApiPromise;
+ arcadeMusicApiPromise=new Promise((resolve,reject)=>{
+  const priorReady=typeof window.onYouTubeIframeAPIReady==='function'?window.onYouTubeIframeAPIReady:null;
+  const ready=()=>{
+   try{
+    if(priorReady)priorReady();
+   }catch{}
+   if(window.YT&&typeof window.YT.Player==='function')resolve(window.YT);
+  };
+  window.onYouTubeIframeAPIReady=ready;
+  const existing=document.getElementById('youtubeIframeApiScript');
+  if(existing){
+   setTimeout(ready,0);
+   return;
+  }
+  const script=document.createElement('script');
+  script.id='youtubeIframeApiScript';
+  script.src='https://www.youtube.com/iframe_api';
+  script.async=true;
+  script.onerror=()=>reject(new Error('YouTube iframe API failed to load'));
+  document.head.appendChild(script);
+  setTimeout(()=>{
+   if(window.YT&&typeof window.YT.Player==='function')resolve(window.YT);
+  },1200);
+ });
+ return arcadeMusicApiPromise;
+}
+function clearArcadeMusicStartupTimeout(){
+ const timerId=+ARCADE_MUSIC.startupTimeoutId||0;
+ if(timerId)clearTimeout(timerId);
+ ARCADE_MUSIC.startupTimeoutId=0;
+}
+function scheduleArcadeMusicStartupTimeout(){
+ clearArcadeMusicStartupTimeout();
+ const mountToken=+ARCADE_MUSIC.mountToken||0;
+ ARCADE_MUSIC.startupTimeoutId=setTimeout(()=>{
+  if(!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken||ARCADE_MUSIC.state==='playing')return;
+  ARCADE_MUSIC.state='unavailable';
+  syncArcadeMusicUi();
+  if(typeof console!=='undefined'&&typeof console.warn==='function'){
+   console.warn('[Arcade Music] Timed out waiting for playable YouTube content.', {
+    playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+    playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource
+   });
+  }
+  if(typeof logEvent==='function')logEvent('arcade_music_error',{
+   reason:'startup_timeout',
+   playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+   playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource,
+   blockedTrackAttempts:+ARCADE_MUSIC.blockedTrackSkipCount||0
+  });
+ },18000);
+}
+function destroyArcadeMusicPlayer(){
+ clearArcadeMusicStartupTimeout();
+ const player=ARCADE_MUSIC.player;
+ if(player&&typeof player.destroy==='function'){
+  try{player.destroy()}catch{}
+ }
+ ARCADE_MUSIC.player=null;
+ if(arcadeMusicFrameHost)arcadeMusicFrameHost.innerHTML='';
+ ARCADE_MUSIC.iframe=null;
+}
+function noteArcadeMusicFrame(){
+ ARCADE_MUSIC.iframe=arcadeMusicFrameHost?arcadeMusicFrameHost.querySelector('iframe'):null;
+}
+function syncArcadeMusicTrackFromPlayer(source='youtube_player_api'){
+ const player=ARCADE_MUSIC.player;
+ if(!player||typeof player.getVideoData!=='function')return false;
  try{
-  frame.contentWindow.postMessage(JSON.stringify(Object.assign({id:'arcadeMusicFrame'},payload)),'*');
-  return true;
+  return acceptArcadeMusicTrack(player.getVideoData()||{},source);
  }catch{
   return false;
  }
 }
-function arcadeMusicCommand(func='',args=[]){
- if(!func)return false;
- return arcadeMusicPostMessage({event:'command',func,args:Array.isArray(args)?args:[]});
-}
 function applyArcadeMusicVolume(){
  const pct=volumePercent(arcadeMusicVolume);
- arcadeMusicCommand('setVolume',[pct]);
- arcadeMusicCommand(pct>0&&!arcadeMusicMuted?'unMute':'mute',[]);
+ const player=ARCADE_MUSIC.player;
+ if(player){
+  try{player.setVolume(pct)}catch{}
+  try{
+   if(pct>0&&!arcadeMusicMuted)player.unMute();
+   else player.mute();
+  }catch{}
+ }
  return pct;
 }
-function primeArcadeMusicPlayerApi(){
- arcadeMusicPostMessage({event:'listening'});
- arcadeMusicCommand('addEventListener',['onStateChange']);
- arcadeMusicCommand('addEventListener',['onReady']);
- applyArcadeMusicVolume();
- arcadeMusicCommand('getVideoData',[]);
+function currentArcadeMusicPlaylistIndex(player=ARCADE_MUSIC.player){
+ if(!player||typeof player.getPlaylistIndex!=='function')return Math.max(0,+ARCADE_MUSIC.playlistIndex||0);
+ try{
+  const index=Number(player.getPlaylistIndex());
+  if(Number.isFinite(index)&&index>=0)return index;
+ }catch{}
+ return Math.max(0,+ARCADE_MUSIC.playlistIndex||0);
 }
-function onArcadeMusicFrameLoaded(){
- ARCADE_MUSIC.state='playing';
+function loadArcadeMusicPlaylistIndex(player=ARCADE_MUSIC.player,index=0){
+ const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
+ if(!player||!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
+ const nextIndex=Math.max(0,Math.floor(index||0));
+ const playlistConfig={
+  listType:'playlist',
+  list:playlistId,
+  index:nextIndex
+ };
+ ARCADE_MUSIC.playlistIndex=nextIndex;
+ if(typeof player.loadPlaylist==='function'){
+  try{
+   player.loadPlaylist(playlistConfig);
+   return true;
+  }catch{}
+ }
+ if(typeof player.cuePlaylist==='function'){
+  try{
+   player.cuePlaylist(playlistConfig);
+   try{player.playVideo?.()}catch{}
+   return true;
+  }catch{}
+ }
+ return false;
+}
+function handleArcadeMusicPlayerReady(event){
+ const player=event?.target||null;
+ if(player)ARCADE_MUSIC.player=player;
+ noteArcadeMusicFrame();
+ ARCADE_MUSIC.state='loading';
  syncArcadeMusicUi();
- [80,350,1100,2600].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
+ applyArcadeMusicVolume();
+ if(ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01'){
+  try{player?.playVideo?.()}catch{}
+ }else{
+  loadArcadeMusicPlaylistIndex(player,0);
+ }
+ scheduleArcadeMusicStartupTimeout();
 }
 function normalizeArcadeMusicTrack(videoData={}){
  const title=String(videoData.title||videoData.video_title||videoData.videoTitle||'').trim();
@@ -4483,39 +4865,107 @@ function acceptArcadeMusicTrack(videoData={},source='youtube_player'){
  });
  return true;
 }
-function parseArcadeMusicMessage(data){
- if(!data)return null;
- if(typeof data==='object')return data;
- if(typeof data!=='string')return null;
- try{return JSON.parse(data)}catch{return null}
+function skipArcadeMusicBlockedTrack(code=0,eventTarget=null){
+ const player=eventTarget||ARCADE_MUSIC.player;
+ if(!player)return false;
+ const skipCount=(+ARCADE_MUSIC.blockedTrackSkipCount||0)+1;
+ ARCADE_MUSIC.blockedTrackSkipCount=skipCount;
+ if(skipCount>40)return false;
+ const currentIndex=currentArcadeMusicPlaylistIndex(player);
+ const nextIndex=currentIndex+1;
+ ARCADE_MUSIC.state='loading';
+ syncArcadeMusicUi();
+ if(typeof console!=='undefined'&&typeof console.warn==='function'){
+  console.warn('[Arcade Music] Skipping blocked YouTube track.', {
+   code,
+   attempt:skipCount,
+   playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+   playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource
+  });
+ }
+ if(typeof logEvent==='function')logEvent('arcade_music_skip_blocked_video',{
+  code,
+  attempt:skipCount,
+  fromIndex:currentIndex,
+  nextIndex,
+  playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+  playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource
+ });
+ if(typeof player.playVideoAt==='function'){
+  ARCADE_MUSIC.playlistIndex=nextIndex;
+  try{
+   player.playVideoAt(nextIndex);
+   scheduleArcadeMusicStartupTimeout();
+   return true;
+  }catch{}
+ }
+ if(loadArcadeMusicPlaylistIndex(player,nextIndex)){
+  scheduleArcadeMusicStartupTimeout();
+  return true;
+ }
+ if(typeof player.nextVideo!=='function')return false;
+ try{
+  player.nextVideo();
+  scheduleArcadeMusicStartupTimeout();
+  return true;
+ }catch{
+  return false;
+ }
 }
-function handleArcadeMusicPlayerMessage(event){
- const origin=String(event?.origin||'').toLowerCase();
- let host='';
- try{host=origin?new URL(origin).hostname:''}catch{}
- if(origin&&!/(^|\.)youtube(?:-nocookie)?\.com$/.test(host))return;
- const data=parseArcadeMusicMessage(event?.data);
- if(!data||typeof data!=='object')return;
- if(data.id&&data.id!=='arcadeMusicFrame')return;
- if(data.event==='onReady')primeArcadeMusicPlayerApi();
- const info=data.info&&typeof data.info==='object'?data.info:null;
- const videoData=info?.videoData||data.videoData||null;
- if(videoData)acceptArcadeMusicTrack(videoData,'youtube_info_delivery');
- if(info&&Number.isFinite(+info.playerState)&&+info.playerState===1){
+function handleArcadeMusicPlayerStateChange(event){
+ const player=event?.target||ARCADE_MUSIC.player||null;
+ const stateCode=Number(event?.data);
+ if(player)ARCADE_MUSIC.player=player;
+ noteArcadeMusicFrame();
+ if(stateCode===1){
+  clearArcadeMusicStartupTimeout();
+  ARCADE_MUSIC.blockedTrackSkipCount=0;
+  ARCADE_MUSIC.playlistIndex=currentArcadeMusicPlaylistIndex(player);
+  syncArcadeMusicTrackFromPlayer('youtube_player_state');
   if(ARCADE_MUSIC.state!=='playing'){
    ARCADE_MUSIC.state='playing';
    syncArcadeMusicUi();
   }
-  arcadeMusicCommand('getVideoData',[]);
+  return;
+ }
+ if(stateCode===-1||stateCode===3||stateCode===5){
+  if(ARCADE_MUSIC.requested){
+   if(stateCode===5&&ARCADE_MUSIC.activePlaylistId!=='PLarcadeMusicHarness01'){
+    ARCADE_MUSIC.playlistIndex=currentArcadeMusicPlaylistIndex(player);
+    try{player?.playVideo?.()}catch{}
+   }
+   ARCADE_MUSIC.state='loading';
+   syncArcadeMusicUi();
+  }
+  return;
  }
 }
-if(typeof window!=='undefined'&&!window.__platinumArcadeMusicMessageListener){
- window.__platinumArcadeMusicMessageListener=1;
- window.addEventListener('message',handleArcadeMusicPlayerMessage);
+function handleArcadeMusicPlayerError(event){
+ const code=Number(event?.data)||0;
+ const player=event?.target||ARCADE_MUSIC.player||null;
+ if(skipArcadeMusicBlockedTrack(code,player))return;
+ clearArcadeMusicStartupTimeout();
+ ARCADE_MUSIC.state='unavailable';
+ syncArcadeMusicUi();
+ if(typeof console!=='undefined'&&typeof console.warn==='function'){
+  console.warn('[Arcade Music] YouTube player could not recover playlist playback.', {
+   code,
+   playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+   playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource,
+   blockedTrackAttempts:+ARCADE_MUSIC.blockedTrackSkipCount||0
+  });
+ }
+ if(typeof logEvent==='function')logEvent('arcade_music_error',{
+  code,
+  playlistId:ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId(),
+  playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource,
+  blockedTrackAttempts:+ARCADE_MUSIC.blockedTrackSkipCount||0
+ });
 }
 function startArcadeMusic(opts={}){
  const config=arcadeMusicResolvedConfig();
  const playlistId=config.playlistId;
+ const preserveMute=!!opts.preserveMute;
  if(!playlistId){
   ARCADE_MUSIC.state='unavailable';
   ARCADE_MUSIC.requested=false;
@@ -4526,35 +4976,80 @@ function startArcadeMusic(opts={}){
   return false;
  }
  if(!arcadeMusicFrameHost)return false;
- arcadeMusicMuted=false;
- writePref(ARCADE_MUSIC_MUTED_PREF_KEY,'0');
- arcadeMusicFrameHost.innerHTML='';
- const frame=document.createElement('iframe');
- frame.id='arcadeMusicFrame';
- frame.title='Arcade Music playlist';
- frame.tabIndex=-1;
- frame.allow='autoplay; encrypted-media; picture-in-picture';
- frame.referrerPolicy='strict-origin-when-cross-origin';
- frame.src=arcadeMusicEmbedUrl(playlistId);
- frame.addEventListener('load',onArcadeMusicFrameLoaded,{once:true});
- arcadeMusicFrameHost.appendChild(frame);
- ARCADE_MUSIC.iframe=frame;
+ if(!preserveMute){
+  arcadeMusicMuted=false;
+  writePref(ARCADE_MUSIC_MUTED_PREF_KEY,'0');
+ }
+ const mountToken=(+ARCADE_MUSIC.mountToken||0)+1;
+ ARCADE_MUSIC.mountToken=mountToken;
+ destroyArcadeMusicPlayer();
+ const playerHost=document.createElement('div');
+ playerHost.id='arcadeMusicFrame';
+ playerHost.setAttribute('aria-hidden','true');
+ arcadeMusicFrameHost.appendChild(playerHost);
  ARCADE_MUSIC.activePlaylistId=playlistId;
  ARCADE_MUSIC.activePlaylistSource=config.playlistSource||'';
  ARCADE_MUSIC.lastTrackSignature='';
  ARCADE_MUSIC.lastTrack=null;
- ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.blockedTrackSkipCount=0;
+  ARCADE_MUSIC.playlistIndex=0;
+ ARCADE_MUSIC.state='loading';
  ARCADE_MUSIC.requested=true;
  writePref(ARCADE_MUSIC_PREF_KEY,'1');
  syncArcadeMusicUi();
- [120,600,1800].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
  if(!opts.silent)showToast('Arcade Music on');
  if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,playlistId,playlistSource:config.playlistSource,gameKey:config.gameKey,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),arcadeMusicMuted:!!arcadeMusicMuted,gameSoundVolume:+gameSoundVolume.toFixed(3),soundEffectsMuted:!!audioMuted,source:String(opts.source||'dock')});
+ scheduleArcadeMusicStartupTimeout();
+ loadArcadeMusicApi().then(()=>{
+  if(ARCADE_MUSIC.mountToken!==mountToken||!ARCADE_MUSIC.requested)return;
+  if(!window.YT||typeof window.YT.Player!=='function')throw new Error('YouTube iframe API unavailable');
+  const origin=(location&&location.origin&&location.origin!=='null')?location.origin:undefined;
+  const useHarnessVideo=playlistId==='PLarcadeMusicHarness01';
+  const playerConfig={
+   host:'https://www.youtube.com',
+   width:'240',
+   height:'240',
+   playerVars:useHarnessVideo
+   ?{
+      autoplay:1,
+      playsinline:1,
+      rel:0,
+      controls:0,
+      modestbranding:1,
+      iv_load_policy:3,
+     origin
+     }
+    :{
+      autoplay:1,
+      listType:'playlist',
+      list:playlistId,
+      playsinline:1,
+      rel:0,
+      controls:0,
+      modestbranding:1,
+      iv_load_policy:3,
+      origin
+     },
+    events:{
+     onReady:handleArcadeMusicPlayerReady,
+     onStateChange:handleArcadeMusicPlayerStateChange,
+     onError:handleArcadeMusicPlayerError
+    }
+  };
+  if(useHarnessVideo)playerConfig.videoId='M7lc1UVf-VE';
+  ARCADE_MUSIC.player=new window.YT.Player('arcadeMusicFrame',playerConfig);
+ }).catch(err=>{
+  if(ARCADE_MUSIC.mountToken!==mountToken)return;
+  clearArcadeMusicStartupTimeout();
+  ARCADE_MUSIC.state='unavailable';
+  syncArcadeMusicUi();
+  if(typeof logEvent==='function')logEvent('arcade_music_error',{message:String(err?.message||err||'Arcade Music init failed')});
+ });
  return true;
 }
 function stopArcadeMusic(opts={}){
- if(arcadeMusicFrameHost)arcadeMusicFrameHost.innerHTML='';
- ARCADE_MUSIC.iframe=null;
+ ARCADE_MUSIC.mountToken=(+ARCADE_MUSIC.mountToken||0)+1;
+ destroyArcadeMusicPlayer();
  ARCADE_MUSIC.state='off';
  ARCADE_MUSIC.requested=false;
  ARCADE_MUSIC.activePlaylistId='';
@@ -4593,29 +5088,29 @@ function toggleArcadeMusicMute(){
 function toggleArcadeMusic(){
  toggleArcadeMusicMute();
 }
+function maybeResumeRequestedArcadeMusic(opts={}){
+ const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ if(active||!ARCADE_MUSIC.requested)return false;
+ if(opts.requireInteraction!==false&&!aud)return false;
+ const config=arcadeMusicResolvedConfig();
+ if(!config.playlistId||!arcadeMusicFrameHost)return false;
+ return startArcadeMusic({
+  silent:opts.silent!==undefined?!!opts.silent:true,
+  source:String(opts.source||'restore'),
+  preserveMute:opts.preserveMute!==undefined?!!opts.preserveMute:true
+ });
+}
 function syncArcadeMusicForGamePackChange(){
  const config=arcadeMusicResolvedConfig();
  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  syncArcadeMusicUi();
- const frame=ARCADE_MUSIC.iframe||(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe'));
- const active=!!(frame&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'));
- if(!active||!config.playlistId||ARCADE_MUSIC.activePlaylistId===config.playlistId)return;
- ARCADE_MUSIC.activePlaylistId=config.playlistId;
- ARCADE_MUSIC.activePlaylistSource=config.playlistSource||'';
- ARCADE_MUSIC.lastTrackSignature='';
- ARCADE_MUSIC.lastTrack=null;
- ARCADE_MUSIC.state='loading';
- frame.addEventListener('load',onArcadeMusicFrameLoaded,{once:true});
- frame.src=arcadeMusicEmbedUrl(config.playlistId);
- syncArcadeMusicUi();
- if(typeof logEvent==='function')logEvent('arcade_music_playlist_changed',{
-  playlistId:config.playlistId,
-  playlistSource:config.playlistSource,
-  gameKey:config.gameKey,
-  gameTitle:config.gameTitle,
-  arcadeMusicMuted:!!arcadeMusicMuted,
-  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3)
- });
+ const active=!!(ARCADE_MUSIC.requested&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'||ARCADE_MUSIC.state==='unavailable'));
+ if(!active){
+  maybeResumeRequestedArcadeMusic({silent:true,source:'pack_change'});
+  return;
+ }
+ if(!config.playlistId||ARCADE_MUSIC.activePlaylistId===config.playlistId)return;
+ startArcadeMusic({silent:true,source:'pack_change',preserveMute:true});
 }
 function syncPauseUi(){
  if(!pauseToggleBtn)return;
@@ -4647,6 +5142,7 @@ function toggleGameplayPause(){
 function setAudioMuted(next,opts={}){
  audioMuted=!!next;
  writePref(AUDIO_MUTED_PREF_KEY,audioMuted?'1':'0');
+ if(typeof syncAudioDebugState==='function')syncAudioDebugState();
  syncAudioUi();
  if(!opts.silent)showToast(audioMuted?'Sound effects muted':'Sound effects on');
  if(!opts.silent&&typeof logEvent==='function')logEvent('audio_mute_changed',Object.assign({muted:!!audioMuted,soundEffectsMuted:!!audioMuted},typeof audioMixTelemetryBase==='function'?audioMixTelemetryBase():{}));
@@ -5022,7 +5518,9 @@ function currentReplayMeta(){
 }
 async function persistLocalReplay(blob,meta){
  if(!blob||!meta||!localReplaySupported())return;
- if(meta.attract||meta.reason!=='game_start'||meta.duration<3)return;
+ const replayReason=String(meta.reason||'').trim();
+ const playableStartReason=replayReason==='game_start'||replayReason==='guardians_dev_preview_start';
+ if(meta.attract||!playableStartReason||meta.duration<3)return;
  try{
   await window.AuroraReplayStore.saveReplay(Object.assign({},meta,{
    blob,
@@ -5041,6 +5539,7 @@ function stopRunRecording(){
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
  VIDEO_REC.rec=null;
+ try{if(rec.state==='recording'&&typeof rec.requestData==='function')rec.requestData();}catch{}
  try{rec.stop();}catch{}
  syncRecordUi();
 }
@@ -5100,7 +5599,7 @@ function startRunRecording(){
   VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
- rec.start(1000);
+ rec.start(250);
  VIDEO_REC.rec=rec;
  VIDEO_REC.active=1;
  syncRecordUi();
@@ -5704,7 +6203,7 @@ function renderLeaderboardPanel(){
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
   const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
-  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
+  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}"${replay?` data-replay-id="${escapeLeaderboardHtml(replay.id)}" tabindex="0" role="button"`:''} title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(replay?`${fullMeta} replay available`:fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
@@ -6573,6 +7072,10 @@ function currentPilotCardState(){
  const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
  const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
  const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
+ const gameTitle=typeof currentScoreStorageGameTitle==='function'
+  ? String(currentScoreStorageGameTitle()||'Current Cabinet').trim()
+  : 'Current Cabinet';
+ const gameHudLabel=gameTitle.toUpperCase();
  const p2=S.playerTwo;
  if(S.watchMode){
   const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
@@ -6581,14 +7084,14 @@ function currentPilotCardState(){
    icon:'🛰',
    dockLabel:'WATCH',
    dockStatus:persona.label,
-   dockTitle:`Watch Mode: ${persona.label} pilot onboard`,
-   panelTitle:'PILOT ONBOARD',
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard for ${gameTitle}`,
+   panelTitle:`${gameHudLabel} WATCH`,
    panelSub:'WATCH MODE PERSONA',
    callsign:`${persona.label} IS FLYING`,
-   status:`${persona.description} Score not recorded.`,
-   summary:'Watch Mode is a persona-controlled demonstration run. Scores and videos are not eligible for posting.',
+   status:`${persona.description} ${gameTitle} score not recorded.`,
+   summary:`Watch Mode is a persona-controlled ${gameTitle} demonstration run. Scores and videos are not eligible for posting.`,
    email:'Controller: Persona pilot',
-   userId:`Role: ${persona.initials} watch pilot`,
+   userId:`Role: ${persona.initials} ${gameTitle} watch pilot`,
    hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
    signedIn
   };
@@ -6602,14 +7105,14 @@ function currentPilotCardState(){
    icon:'🧑‍🚀',
    dockLabel:active?'2UP PLAY':ready?'2UP READY':'2UP DONE',
    dockStatus:persona.label,
-   dockTitle:`2UP ${persona.label} rival pilot ${active?'flying':ready?'ready':'complete'}`,
-   panelTitle:active?'2UP RIVAL ONBOARD':ready?'2UP RIVAL READY':'2UP RIVAL RESULTS',
+   dockTitle:`2UP ${persona.label} rival ${active?'flying':ready?'ready':'complete'} in ${gameTitle}`,
+   panelTitle:active?`${gameHudLabel} 2UP LIVE`:ready?`${gameHudLabel} 2UP READY`:`${gameHudLabel} 2UP RESULTS`,
    panelSub:'PERSONA RIVAL PILOT',
    callsign:`2UP ${persona.label}`,
-   status:`${persona.description} Human 1UP score is the only scoreboard entry.`,
-   summary:active?'Persona rival is flying now. This turn is comparison-only and will not post a score.':ready?'Persona rival is queued for the next turn. Press 2 from results to start it.':'Persona rival turn is complete. Only the human 1UP score remains eligible.',
+   status:`${persona.description} Human 1UP ${gameTitle} score is the only scoreboard entry.`,
+   summary:active?`Persona rival is flying ${gameTitle} now. This turn is comparison-only and will not post a score.`:ready?`Persona rival is queued for the next ${gameTitle} turn. Press 2 from results to start it.`:`Persona rival ${gameTitle} turn is complete. Only the human 1UP score remains eligible.`,
    email:'Controller: Persona rival',
-   userId:`Role: ${persona.initials} 2UP rival`,
+   userId:`Role: ${persona.initials} ${gameTitle} 2UP rival`,
    hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
    signedIn
   };
@@ -6621,14 +7124,14 @@ function currentPilotCardState(){
    icon:'🧑‍🚀',
    dockLabel:signedIn?'1UP PILOT':'1UP',
    dockStatus:signedIn?humanId:'LOCAL',
-   dockTitle:signedIn?`${humanId} onboard; ${persona.label} 2UP queued`:`Local 1UP pilot; ${persona.label} 2UP queued`,
-   panelTitle:'1UP PILOT',
+   dockTitle:signedIn?`${humanId} onboard for ${gameTitle}; ${persona.label} 2UP queued`:`Local 1UP ${gameTitle} pilot; ${persona.label} 2UP queued`,
+   panelTitle:`${gameHudLabel} 1UP`,
    panelSub:'HUMAN TURN ACTIVE',
    callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
-   status:`2UP ${persona.label} rival is queued after the human turn. Human score only.`,
-   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. 2UP rival scores do not post.`:'Local score path active. Sign in to post verified human scores.',
+   status:`2UP ${persona.label} rival is queued after the human ${gameTitle} turn. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} 2UP rival scores do not post.`:`Local ${gameTitle} score path active. Sign in to post verified human scores.`,
    email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
-   userId:`Queued rival: ${persona.label}`,
+   userId:`Queued rival: ${persona.label} for ${gameTitle}`,
    hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
    signedIn
   };
@@ -6636,14 +7139,14 @@ function currentPilotCardState(){
  return{
   mode:signedIn?'human-signed-in':'human-local',
   icon:'🧑‍🚀',
-  dockLabel:signedIn?'ONBOARD':'SIGN IN',
+   dockLabel:signedIn?'ONBOARD':'SIGN IN',
   dockStatus:signedIn?humanId:'Pilot offline',
-  dockTitle:signedIn?`${humanId} onboard`:'Pilot Sign In',
-  panelTitle:'PILOT INFORMATION',
+  dockTitle:signedIn?`${humanId} onboard for ${gameTitle}`:`${gameTitle} Pilot Sign In`,
+  panelTitle:`${gameHudLabel} PILOT`,
   panelSub:'QUICK PILOT REFERENCE',
   callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
-  status:signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.',
-  summary:'',
+  status:signedIn?`${gameTitle} pilot identity active. Scores and records are summarized below.`:`Sign in for synced ${gameTitle} records, or keep flying locally.`,
+  summary:signedIn?`This pilot card summarizes your current ${gameTitle} identity, records, and posting state.`:`Local ${gameTitle} score path is available now. Sign in when you want synced records and verified posting.`,
   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
   userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
@@ -7051,7 +7554,7 @@ const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
 const TEST_ACCOUNT_USER_ID='';
 const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
 const TEST_ACCOUNT_USER_IDS=[];
-const HARNESS_SUPABASE_BYPASS=location.hostname==='127.0.0.1'&&!!readPref(SEED_PREF_KEY);
+const HARNESS_SUPABASE_BYPASS=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
@@ -7277,6 +7780,9 @@ async function openReplayFromPilotRecordsTarget(target){
 async function openReplayFromLeaderboardTarget(target){
  return openReplayFromScoreTarget(target,{closeLeaderboard:true,source:'leaderboard'});
 }
+function leaderboardReplayTargetForEvent(target){
+ return target?.closest?.('.leaderboardReplayBtn,.scoreCell.meta.hasReplay')||null;
+}
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
  const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
  if(!btn)return;
@@ -7301,15 +7807,25 @@ if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
  openReplayFromPilotRecordsTarget(row);
 });
 if(leaderboardPanel)leaderboardPanel.addEventListener('click',e=>{
- const btn=e.target.closest('.leaderboardReplayBtn');
+ const btn=leaderboardReplayTargetForEvent(e.target);
  if(!btn)return;
+ if(btn.classList.contains('scoreCell')&&e.target.closest('.leaderboardReplayBtn'))return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('pointerup',e=>{
+ const btn=leaderboardReplayTargetForEvent(e.target);
+ if(!btn)return;
+ if(typeof e.button==='number'&&e.button!==0)return;
+ if(btn.classList.contains('scoreCell')&&e.target.closest('.leaderboardReplayBtn'))return;
  e.preventDefault();
  e.stopPropagation();
  openReplayFromLeaderboardTarget(btn);
 });
 if(leaderboardPanel)leaderboardPanel.addEventListener('keydown',e=>{
  if(e.key!=='Enter'&&e.key!==' ')return;
- const btn=e.target.closest('.leaderboardReplayBtn');
+ const btn=leaderboardReplayTargetForEvent(e.target);
  if(!btn)return;
  e.preventDefault();
  e.stopPropagation();
@@ -8664,15 +9180,21 @@ function finalizeChallengeClear(){
  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
  if(typeof commentatorEvent==='function')commentatorEvent(perfect?'challenge_perfect':'challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,bonusTotal});
  S.bannerMode='challengeResult';
- S.banner=1.15;
+ const challengeResultsTiming=usesReferenceTimingModel()
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
+ const resultBannerWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultBannerWindow',S.stage,1.15)
+  : (challengeResultsTiming?.resultBannerWindow??1.15);
+ const resultHoldWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
+  : (challengeResultsTiming?.resultHoldWindow??1.45);
+ S.banner=resultBannerWindow;
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=1.45;
+ S.postChallengeT=resultHoldWindow;
  if(usesReferenceTimingModel()){
-  const challengeResultsTiming=usesReferenceTimingModel()
-   ? currentGamePackReferenceTiming('challengeResults')
-   : null;
   clearReferenceTransitionCueWindow();
   S.challengeResultPerfect=perfect>0?1:0;
   S.challengeResultCueT=challengeResultsTiming?.resultCueDelay??0.34;
@@ -8872,8 +9394,14 @@ function queueStageTransition(mode='normal'){
   : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
  S.transitionMode=mode;
+ const nextChallengeWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','nextChallengeWindow',S.stage,3.05)
+  : (challengeResultsTiming?.nextChallengeWindow||3.05);
+ const nextStageWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','nextStageWindow',S.stage,2.5)
+  : (challengeResultsTiming?.nextStageWindow||2.5);
  S.nextStageT=mode==='challengeResult'
-  ? (nextIsChallenge?(challengeResultsTiming?.nextChallengeWindow||3.05):(challengeResultsTiming?.nextStageWindow||2.5))
+  ? (nextIsChallenge?nextChallengeWindow:nextStageWindow)
   : (nextIsChallenge?(challengeEntryTiming?.transitionWindow||3.75):3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;
@@ -9001,7 +9529,7 @@ function updateAuroraGameplay(dt){
     ATTRACT.scoreViewTimer=ATTRACT.scoreViewDwell||4.5;
     logEvent('attract_score_view',{cycle:ATTRACT.cycle,view:ATTRACT.scoreViews[ATTRACT.scoreViewIndex],index:ATTRACT.scoreViewIndex});
    }
-   for(const s of S.st){s.tw+=dt*(1.2+(s.twAmp||.16)*4);s.y+=(s.vy||12)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
+   if(typeof advanceSharedStarfield==='function')advanceSharedStarfield(dt,{ speedStageLift:0 });
    if(!ATTRACT.timer)startAttractDemo();
    return;
   }
@@ -9027,7 +9555,7 @@ function updateAuroraGameplay(dt){
  }else S.nextStageT=remaining;
   return
  }
- for(const s of S.st){s.tw+=dt*(1.2+(s.twAmp||.16)*4);s.y+=((s.vy||14)+S.stage*.12)*dt;if(s.y>PLAY_H+4){s.y=-4;s.x=auxRnd(PLAY_W)}}
+ if(typeof advanceSharedStarfield==='function')advanceSharedStarfield(dt,{ speedStageLift:(+S.stage||0)*.12 });
  p.cd=Math.max(0,p.cd-dt);p.inv=Math.max(0,p.inv-dt);p.spawn=Math.max(0,p.spawn-dt);S.banner=Math.max(0,S.banner-dt);S.fireCD=Math.max(0,S.fireCD-dt);S.extendFlashT=Math.max(0,S.extendFlashT-dt);
  if(S.postChallengeT>0){
   if(S.postChallengeT<=dt){
@@ -9991,9 +10519,13 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  nextStageWindow:2.95,
-  nextCueLeadBeforeSpawn:1.55,
-  cadenceHoldAfterSpawn:1.24
+  resultHoldWindow:4.25,
+  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
+  resultBannerWindow:4.25,
+  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
+  nextStageWindow:7.35,
+  nextCueLeadBeforeSpawn:3.15,
+  cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
   cueDelay:.12,
@@ -10078,16 +10610,16 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
   clipDuration:1.6,
   stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect','stageTransition'])
  }),
- challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
-  cooldownMs:2400,
+challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
+  cooldownMs:4300,
   clipStart:0,
-  clipDuration:1.95,
+  clipDuration:4,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{
-  cooldownMs:2400,
+  cooldownMs:4300,
   clipStart:0,
-  clipDuration:2.15,
+  clipDuration:4,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{
@@ -10544,6 +11076,14 @@ const AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS=Object.freeze([
  Object.freeze({sourceTrackId:'target-track-142',sourceSampleCount:16,durationS:2.5,laneSpreadX:8.95,rowSpreadY:9.58,pathScaleX:1.856,pathScaleY:1.721,sourceCenterX:.5503,sourceCenterY:.2624,exitVy:174.3,points:Object.freeze([{t:0,x:.5003,y:.2186},{t:.62,x:.5683,y:.1825},{t:.75,x:.5633,y:.1909},{t:1,x:.5681,y:.1826},{t:1.25,x:.5681,y:.1648},{t:1.37,x:.5681,y:.1648},{t:1.62,x:.5728,y:.2007},{t:1.87,x:.5585,y:.3449},{t:2,x:.5403,y:.4148},{t:2.5,x:.4948,y:.5596}])})
 ]);
 
+const AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS=Object.freeze([
+ Object.freeze({sourceTrackId:'target-track-3',sourceSampleCount:11,durationS:1.25,laneSpreadX:8.93,rowSpreadY:8.92,pathScaleX:1.201,pathScaleY:1.303,sourceCenterX:.912,sourceCenterY:.5695,exitVy:197.9,points:Object.freeze([{t:0,x:.9443,y:.7338},{t:.13,x:.9383,y:.7226},{t:.25,x:.9304,y:.741},{t:.38,x:.9313,y:.7412},{t:.5,x:.9398,y:.6677},{t:.75,x:.931,y:.5524},{t:.88,x:.9157,y:.4814},{t:1,x:.8988,y:.4093},{t:1.13,x:.8649,y:.3427},{t:1.25,x:.8251,y:.3034}])}),
+ Object.freeze({sourceTrackId:'target-track-16',sourceSampleCount:16,durationS:2.38,laneSpreadX:11.14,rowSpreadY:9,pathScaleX:5.501,pathScaleY:3.727,sourceCenterX:.5469,sourceCenterY:.531,exitVy:153.6,points:Object.freeze([{t:0,x:.5376,y:.6506},{t:.63,x:.5368,y:.5857},{t:.75,x:.537,y:.6079},{t:1.13,x:.6029,y:.5},{t:1.38,x:.5428,y:.4944},{t:1.5,x:.5423,y:.4943},{t:1.75,x:.5423,y:.4944},{t:2,x:.5423,y:.4943},{t:2.13,x:.5431,y:.4943},{t:2.38,x:.5423,y:.4943}])}),
+ Object.freeze({sourceTrackId:'target-track-37',sourceSampleCount:20,durationS:2.5,laneSpreadX:12.65,rowSpreadY:9.33,pathScaleX:5.6,pathScaleY:2.505,sourceCenterX:.5464,sourceCenterY:.4543,exitVy:171.4,points:Object.freeze([{t:0,x:.5594,y:.2678},{t:.25,x:.5454,y:.3206},{t:.5,x:.5459,y:.373},{t:.75,x:.5466,y:.4463},{t:1,x:.5532,y:.5219},{t:1.5,x:.5426,y:.5227},{t:1.75,x:.5435,y:.5227},{t:2,x:.5423,y:.5226},{t:2.25,x:.5425,y:.5227},{t:2.5,x:.5425,y:.5227}])}),
+ Object.freeze({sourceTrackId:'target-track-77',sourceSampleCount:17,durationS:2.25,laneSpreadX:12.1,rowSpreadY:9.51,pathScaleX:5.6,pathScaleY:3.325,sourceCenterX:.4336,sourceCenterY:.3411,exitVy:173.9,points:Object.freeze([{t:0,x:.4092,y:.4859},{t:.25,x:.4316,y:.432},{t:.5,x:.438,y:.3912},{t:.62,x:.433,y:.3917},{t:1.12,x:.4372,y:.285},{t:1.37,x:.4374,y:.285},{t:1.62,x:.4374,y:.285},{t:1.75,x:.4372,y:.2849},{t:2,x:.4375,y:.285},{t:2.25,x:.4379,y:.2855}])}),
+ Object.freeze({sourceTrackId:'target-track-85',sourceSampleCount:15,durationS:2.12,laneSpreadX:8.91,rowSpreadY:9.78,pathScaleX:3.019,pathScaleY:2.582,sourceCenterX:.5667,sourceCenterY:.3041,exitVy:164.9,points:Object.freeze([{t:0,x:.5601,y:.2402},{t:.62,x:.5745,y:.2236},{t:.75,x:.5745,y:.2231},{t:1,x:.5744,y:.2127},{t:1.12,x:.575,y:.2049},{t:1.37,x:.5742,y:.2602},{t:1.5,x:.5744,y:.3325},{t:1.75,x:.5792,y:.436},{t:1.87,x:.5479,y:.481},{t:2.12,x:.5324,y:.4269}])})
+]);
+
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
@@ -10556,10 +11096,11 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   waveSpacingY:15,
   rowSpacingY:9,
   waveDelay:2.2,
-  slotDelay:.16,
-  groupSpawnOffsets:Object.freeze([0,3.2,5.95,8.75,11.6]),
+  slotDelay:.18,
+  groupSpawnOffsets:Object.freeze([0,3.4,6.25,9.1,12.1]),
   arcAmp:1.12,
   dropAmp:1.02,
+  groupSpeedScales:Object.freeze([1,1,1,1,1]),
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
@@ -10615,9 +11156,12 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:2.08,
   dropAmp:1.02,
-  groupArcAmps:Object.freeze([1.78,1.34,1.52,1.18,1.44]),
-  groupDropAmps:Object.freeze([.9,.98,1.08,1.06,1.12]),
-  groupSpeedScales:Object.freeze([1.24,1.22,1.18,1.14,1.12]),
+  groupSpawnOffsets:Object.freeze([0,.88,4.38,7.88,12.13]),
+  groupArcAmps:Object.freeze([1.1,1.46,1.7,1.69,1.22]),
+  groupDropAmps:Object.freeze([1.54,1.42,1.54,1.58,1.6]),
+  groupSpeedScales:Object.freeze([2.65,2.3,1.72,1.38,1.84]),
+  groupLowerFieldBiases:Object.freeze([135,0,19,29,0]),
+  groupYOffsets:Object.freeze([48,0,0,0,0]),
   laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
@@ -10627,7 +11171,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['boss','bee','rogue','but','but','rogue','bee','boss'])
   ]),
   groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','stingray','galboss','dragonfly']),
-  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc'])
+  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc']),
+  groupReferencePaths:AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS
  }),
  Object.freeze({
   fromStage:15,
@@ -10892,6 +11437,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMax:9,
    palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#ffd4a8','#f6f0ff'])
   }),
+  palette:Object.freeze(['#ffe39a','#ff7668','#7bd6ff','#5a6dff','#f6f0ff','#ffd4a8']),
+  backdrop:Object.freeze({
+   top:'#0c1330',
+   mid:'#080d1c',
+   bottom:'#000000',
+   horizon:'rgba(255,91,91,.18)',
+   lowerGlow:'rgba(123,214,255,.14)',
+   scan:'rgba(255,227,154,.1)'
+  }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
    'signal-escort':Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
@@ -10925,6 +11479,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMin:-8,
    driftMax:8,
    palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff','#fff8d9'])
+  }),
+  palette:Object.freeze(['#fff2c8','#ffb060','#ff785a','#8bd7ff','#63a7ff','#fff7e1']),
+  backdrop:Object.freeze({
+   top:'#1a1024',
+   mid:'#100714',
+   bottom:'#020103',
+   horizon:'rgba(255,176,96,.18)',
+   lowerGlow:'rgba(123,214,255,.12)',
+   scan:'rgba(255,245,205,.08)'
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffe49c',wing:'#ff8c5a',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ffdf6f'}),
@@ -10960,6 +11523,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMax:8,
    palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#7a6dff','#ffd86d','#ff7b76'])
   }),
+  palette:Object.freeze(['#dff7ff','#72c8ff','#5b86ff','#8970ff','#ffd86d','#ff7f78']),
+  backdrop:Object.freeze({
+   top:'#08162b',
+   mid:'#060d1c',
+   bottom:'#010207',
+   horizon:'rgba(123,214,255,.16)',
+   lowerGlow:'rgba(137,112,255,.14)',
+   scan:'rgba(255,216,109,.08)'
+  }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffe39a',wing:'#ff7b76',accent:'#7bd6ff',eye:'#fff7c2',flare:'#5f83ff'}),
    'signal-escort':Object.freeze({core:'#ff7b76',wing:'#d8f0ff',accent:'#7a6dff',eye:'#ffffff',flare:'#ffd86d'}),
@@ -10988,11 +11560,20 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    alphaMax:.96,
    twinkleMin:.72,
    twinkleAmp:.24,
-   speedMin:22,
+   speedMin:20,
    speedMax:42,
    driftMin:-9,
    driftMax:9,
    palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#6a7dff'])
+  }),
+  palette:Object.freeze(['#fff2b0','#ffb55c','#ff6b59','#7bd6ff','#6a7dff','#ffd8a6']),
+  backdrop:Object.freeze({
+   top:'#1b0910',
+   mid:'#12060c',
+   bottom:'#020102',
+   horizon:'rgba(255,107,89,.2)',
+   lowerGlow:'rgba(255,216,109,.12)',
+   scan:'rgba(123,214,255,.08)'
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#fff0a5',wing:'#ff9b54',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff5b5b'}),
@@ -11111,8 +11692,8 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
   id:'guardians-signal',
   label:'Guardians Signal',
   cues:Object.freeze({
-   gameStart:Object.freeze({seq:[520,420,320,240],step:.035,wave:'square',volume:.011,slide:-42,lpHz:2500}),
-   formationPulse:Object.freeze({tones:Object.freeze([{freq:122,duration:.08,wave:'square',volume:.006,slide:18,lpHz:1400},{freq:244,duration:.05,wave:'square',volume:.007,slide:-28,lpHz:2200,delay:.018},{freq:366,duration:.032,wave:'square',volume:.0045,slide:-44,lpHz:2800,delay:.05}])}),
+   gameStart:Object.freeze({seq:[294,392,494,659,784],step:.038,wave:'square',volume:.0132,slide:24,lpHz:3200}),
+   formationPulse:Object.freeze({tones:Object.freeze([{freq:118,duration:.088,wave:'square',volume:.0072,slide:20,lpHz:1500},{freq:236,duration:.058,wave:'square',volume:.0082,slide:-26,lpHz:2350,delay:.014},{freq:354,duration:.04,wave:'square',volume:.0058,slide:-42,lpHz:2950,delay:.046},{freq:472,duration:.026,wave:'square',volume:.0039,slide:-58,lpHz:3600,delay:.07}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:2660,duration:.032,wave:'square',volume:.014,slide:-780,detune:.004,lpHz:7600},{freq:2050,duration:.058,wave:'square',volume:.0135,slide:-620,detune:-.004,lpHz:6400,delay:.006}]),noise:Object.freeze([{duration:.028,volume:.0048,hp:4600,delay:0}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:960,duration:.04,wave:'square',volume:.012,slide:-280,detune:.004,lpHz:3600},{freq:620,duration:.08,wave:'square',volume:.0092,slide:-180,detune:-.004,lpHz:2500,delay:.008}]),noise:Object.freeze([{duration:.024,volume:.0024,hp:1500,delay:.01}])}),
    scoutDive:Object.freeze({tones:Object.freeze([{freq:1520,duration:.07,wave:'square',volume:.0105,slide:-520,detune:.006,lpHz:4300},{freq:1180,duration:.12,wave:'square',volume:.0082,slide:-420,detune:-.005,lpHz:3400,delay:.035},{freq:860,duration:.1,wave:'square',volume:.0055,slide:-300,detune:.003,lpHz:2600,delay:.12}]),noise:Object.freeze([{duration:.06,volume:.004,hp:1250,delay:.02}])}),
@@ -11128,12 +11709,12 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
    bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.068,wave:'square',volume:.013,slide:-120,lpHz:3600}])}),
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.04,wave:'square',volume:.009,slide:-320,lpHz:3900},{freq:220,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2100,delay:.014}])}),
    bossBoom:Object.freeze({tones:Object.freeze([{freq:360,duration:.05,wave:'square',volume:.011,slide:-300,lpHz:3900},{freq:180,duration:.12,wave:'triangle',volume:.009,slide:-90,lpHz:2000,delay:.018}])}),
-   stagePulse:Object.freeze({variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.003,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.008,slide:-10,lpHz:3000,delay:.012}])})])}),
+   stagePulse:Object.freeze({variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.0036,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.0084,slide:-10,lpHz:3000,delay:.012}])})])}),
    stageTransition:Object.freeze({seq:[294,392,523,784],step:.052,wave:'square',volume:.012,slide:22,lpHz:3600}),
-   attractEnter:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({seq:[294,392,494,659],step:.06,wave:'square',volume:.009,slide:12,lpHz:3100,allowIdle:1}),demo:Object.freeze({seq:[247,330,440,587],step:.066,wave:'square',volume:.008,slide:10,lpHz:2900,allowIdle:1})})}),
-   attractPulse:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:330,duration:.06,wave:'square',volume:.005,slide:6,lpHz:2500}])})])}),demo:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:294,duration:.065,wave:'square',volume:.0048,slide:5,lpHz:2300}])})])})})}),
+   attractEnter:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({seq:[247,330,440,587,659],step:.056,wave:'square',volume:.0115,slide:18,lpHz:3300,allowIdle:1}),demo:Object.freeze({seq:[220,294,392,523],step:.064,wave:'square',volume:.0092,slide:14,lpHz:3000,allowIdle:1})})}),
+   attractPulse:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:294,duration:.05,wave:'square',volume:.0062,slide:10,lpHz:2400},{freq:440,duration:.028,wave:'square',volume:.0042,slide:-18,lpHz:3200,delay:.02}])})])}),demo:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:262,duration:.055,wave:'square',volume:.0054,slide:8,lpHz:2200},{freq:392,duration:.026,wave:'square',volume:.0038,slide:-15,lpHz:2900,delay:.018}])})])})})}),
    uiTick:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'square',volume:.004,slide:-110,lpHz:5400}])}),
-   uiConfirm:Object.freeze({seq:[660,880],step:.04,wave:'square',volume:.008,slide:30,lpHz:4200}),
+   uiConfirm:Object.freeze({seq:[740,988,1318],step:.032,wave:'square',volume:.0096,slide:26,lpHz:4600}),
    playerHit:Object.freeze({tones:Object.freeze([{freq:210,duration:.13,wave:'square',volume:.018,slide:-220,lpHz:2200}])}),
    gameOver:Object.freeze({seq:[392,294,247,196,147],step:.086,wave:'square',volume:.014,slide:-72,lpHz:2200})
   })
@@ -11317,7 +11898,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
   title:'GALAXY GUARDIANS',
-  featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   ARCADE PRESSURE',
+  featureLine:'SINGLE SHOT   FLAGSHIP ESCORTS   TOP REENTRY',
   shellFrameTheme:'guardians-preview',
   frameAccent:'signal-crimson',
   atmosphereTheme:'signal-rack'
@@ -11329,7 +11910,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  preview:Object.freeze({
   banner:'SNEAK PEEK',
   title:'Galaxy Guardians',
-  subtitle:'SECOND GAME PREVIEW ON PLATINUM',
+  subtitle:'SECOND GAME CABINET PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
   cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on the hosted release lanes.',
@@ -11882,6 +12463,11 @@ function updateGalaxyGuardiansDevPreview(dt){
   ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
+ if(typeof advanceGalaxyGuardiansPreviewStarfield==='function'){
+  advanceGalaxyGuardiansPreviewStarfield(dt);
+ }else if(typeof advanceSharedStarfield==='function'){
+  advanceSharedStarfield(dt,{ speedStageLift:(+S.stage||0)*.12 });
+ }
  playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
@@ -11895,8 +12481,10 @@ function updateGalaxyGuardiansDevPreview(dt){
 
 function galaxyGuardiansCueNameForRuntimeEvent(event){
  if(!event)return '';
+ if(event.type==='formation_entry_start')return 'formationPulse';
  if(event.type==='player_shot_fired')return 'playerShot';
  if(event.type==='enemy_shot')return 'enemyShot';
+ if(event.type==='rack_pulse')return 'stagePulse';
  if(event.type==='alien_dive_start')return 'scoutDive';
  if(event.type==='flagship_dive_start')return 'flagshipDive';
  if(event.type==='escort_join')return 'escortJoin';
@@ -12016,6 +12604,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   'player_shot_fired',
   'player_shot_resolved',
   'enemy_shot',
+  'rack_pulse',
   'enemy_wrap_or_return',
  'player_lost',
  'game_over',
@@ -12060,6 +12649,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
+  rackPulseIntervalBase:2.24,
   topReentryVy:70,
   topReentryAccel:8.4,
   topReentrySwayAmplitude:12,
@@ -12125,6 +12715,7 @@ function guardiansRuntimeRules(stateOrStage=1){
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
   enemyShotVy:+(base.enemyShotVy*shotScale).toFixed(3),
   enemyShotMaxLive:Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2)),
+  rackPulseIntervalBase:+(base.rackPulseIntervalBase*Math.max(.64,1-rank*.055)).toFixed(3),
   formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
   topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),
   topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3)
@@ -12143,6 +12734,21 @@ function guardiansMarchOffset(state,alien){
  const next=sequence[(index+1)%sequence.length];
  const blend=frac<.76?0:Math.min(1,(frac-.76)/.24);
  return (current+(next-current)*blend)*amp;
+}
+
+function guardiansBoundThreatX(rules,x=0){
+ const visibleInset=12;
+ const softBleed=4;
+ const min=visibleInset;
+ const max=Math.max(min,rules.playfieldWidth-visibleInset);
+ const value=+x||0;
+ if(value<min){
+  return min-Math.min(softBleed,(min-value)*.18);
+ }
+ if(value>max){
+  return max+Math.min(softBleed,(value-max)*.18);
+ }
+ return value;
 }
 
 function guardiansBeginTopReentry(state,alien){
@@ -12241,6 +12847,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   nextDiveAt:0,
   nextFlagshipAt:0,
   nextEnemyShotAt:0,
+  nextRackPulseAt:0,
   player:{
    x:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2,
    y:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-40,
@@ -12252,6 +12859,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   aliens:createGalaxyGuardiansFormation(),
   enemyShots:[],
   hitFlashes:[],
+  clearFlashT:0,
   events:[],
   forbiddenAuroraCapabilities:GALAXY_GUARDIANS_RUNTIME_PROFILE.forbiddenAuroraCapabilities,
   evidenceProfile:GALAXY_GUARDIANS_RUNTIME_PROFILE.evidenceProfile,
@@ -12263,6 +12871,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
  state.nextDiveAt=rules.firstScoutDiveDelay;
  state.nextFlagshipAt=rules.flagshipEscortDelay;
  state.nextEnemyShotAt=rules.firstEnemyShotDelay;
+ state.nextRackPulseAt=rules.formationEntryCompleteAt+.34;
  guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
  return state;
 }
@@ -12359,6 +12968,7 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset',opts={}){
  }
  state.enemyShots.length=0;
  state.hitFlashes.length=0;
+ state.clearFlashT=0;
  state.waveClearT=0;
  state.waveClearStage=0;
  state.player.shot=null;
@@ -12374,6 +12984,7 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset',opts={}){
  state.nextDiveAt=state.t+(preserveAliens?Math.max(.85,rules.firstScoutDiveDelay*.52):rules.firstScoutDiveDelay);
  state.nextFlagshipAt=state.t+(preserveAliens?Math.max(2.2,rules.flagshipEscortDelay*.6):rules.flagshipEscortDelay);
  state.nextEnemyShotAt=state.t+(preserveAliens?Math.max(1.1,rules.firstEnemyShotDelay*.6):rules.firstEnemyShotDelay);
+ state.nextRackPulseAt=state.t+(preserveAliens?Math.max(.92,rules.rackPulseIntervalBase*.58):rules.formationEntryCompleteAt+.34);
  guardiansRuntimeEvent(state,'wave_reset',{reason,aliens:state.aliens.filter(alien=>alien.hp>0).length,preserveAliens:preserveAliens?1:0});
  if(!preserveAliens)guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',reason,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
 }
@@ -12382,6 +12993,7 @@ function clearGalaxyGuardiansWave(state){
  if(state.gameOver||state.waveClearT>0)return false;
  if(liveGuardiansAliens(state).length>0)return false;
  state.waveClearT=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.waveClearDelay;
+ state.clearFlashT=.42;
  state.waveClearStage=state.stage;
  state.player.shot=null;
  state.enemyShots.length=0;
@@ -12515,6 +13127,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  state.t+=dt;
  p.cooldown=Math.max(0,p.cooldown-dt);
  p.inv=Math.max(0,(+p.inv||0)-dt);
+ state.clearFlashT=Math.max(0,(+state.clearFlashT||0)-dt);
  if(Array.isArray(state.hitFlashes)&&state.hitFlashes.length){
   state.hitFlashes=state.hitFlashes
    .map(flash=>Object.assign({},flash,{t:Math.max(0,(+flash.t||0)-dt)}))
@@ -12551,6 +13164,14 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  if(state.t>=state.nextEnemyShotAt){
   fireGuardiansEnemyShot(state);
   state.nextEnemyShotAt=state.t+rules.enemyShotIntervalBase+state.rng()*rules.enemyShotIntervalJitter;
+ }
+ if(entry.complete&&state.t>=state.nextRackPulseAt){
+  guardiansRuntimeEvent(state,'rack_pulse',{
+   stage:state.stage,
+   liveAliens:state.aliens.filter(alien=>alien.hp>0).length,
+   audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id
+  });
+  state.nextRackPulseAt=state.t+rules.rackPulseIntervalBase;
  }
  for(const alien of state.aliens){
   if(alien.hp<=0)continue;
@@ -12600,7 +13221,10 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    alien.y=leader.y+rules.escortYOffset+Math.max(0,alien.diveT)*4;
   }else{
    const q=Math.max(0,alien.diveT);
-   alien.x=alien.diveStartX+Math.sin(q*rules.diveSwayHz)*rules.diveSwayAmplitude*alien.diveSide+alien.diveSide*q*rules.diveSideDrift;
+   alien.x=guardiansBoundThreatX(
+    rules,
+    alien.diveStartX+Math.sin(q*rules.diveSwayHz)*rules.diveSwayAmplitude*alien.diveSide+alien.diveSide*q*rules.diveSideDrift
+   );
    alien.y=alien.diveStartY+q*rules.diveBaseVy+q*q*rules.diveAccel;
   }
   if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
@@ -12631,11 +13255,11 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   for(const alien of state.aliens){
    if(alien.hp<=0)continue;
    if(Math.abs(alien.x-p.shot.x)<=8&&Math.abs(alien.y-p.shot.y)<=7){
-    alien.hp=0;
-    const points=guardiansAlienPoints(alien);
-    state.score+=points;
-    state.stats.hits=(+state.stats.hits||0)+1;
-    const hitDuration=alien.role==='flagship' ? .34 : (alien.role==='escort' ? .24 : .18);
+   alien.hp=0;
+   const points=guardiansAlienPoints(alien);
+   state.score+=points;
+   state.stats.hits=(+state.stats.hits||0)+1;
+    const hitDuration=alien.role==='flagship' ? .4 : (alien.role==='escort' ? .28 : .2);
     state.hitFlashes.push({
      role:alien.role,
      visualId:alien.visualId,
@@ -12643,7 +13267,16 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
      y:alien.y,
      t:hitDuration,
      duration:hitDuration,
-     color:alien.role==='flagship'?'#ffdf6f':alien.role==='escort'?'#ff5b5b':'#42f285'
+     color:alien.role==='flagship'?'#fff2a4':alien.role==='escort'?'#ff7b70':'#7bd6ff',
+     accentColor:alien.role==='flagship'?'#7bd6ff':alien.role==='escort'?'#ffe39a':'#42f285',
+     flareColor:alien.role==='flagship'?'#ff9b54':alien.role==='escort'?'#7bd6ff':'#ffdf6f',
+     burstScale:alien.role==='flagship'?1.46:(alien.role==='escort'?1.18:1),
+     streaks:alien.role==='flagship'?12:(alien.role==='escort'?10:8),
+     ringRadius:alien.role==='flagship'?11:(alien.role==='escort'?8.5:6.5),
+     sparkInset:alien.role==='flagship'?1.6:(alien.role==='escort'?1.3:1.1),
+     points,
+     mode:alien.mode,
+     showScore:alien.mode==='diving'||alien.role==='flagship'||alien.role==='escort'
     });
     guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.hitAudioCue||'',points,score:state.score});
     resolved=1;
@@ -12687,6 +13320,7 @@ function summarizeGalaxyGuardiansRuntime(state){
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
   waveClearPending:state.waveClearT>0,
   waveClearT:+(+state.waveClearT||0).toFixed(3),
+  clearFlashT:+(+state.clearFlashT||0).toFixed(3),
   wrappingCount:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='wrapping').length,
   stats:{
    shots:+(state.stats?.shots||0),
@@ -12919,6 +13553,20 @@ function currentGamePackAudioCue(cueName,opts={}){
 function currentGamePackReferenceTiming(key=''){
  const timings=currentGamePack().referenceTimings||{};
  return timings[String(key||'').trim()]||null;
+}
+
+function currentGamePackReferenceTimingField(key,field,stage,fallback=null){
+ const timing=currentGamePackReferenceTiming(key)||{};
+ const challengeNumber=typeof challengeStageNumberForInternalStage==='function'
+  ? challengeStageNumberForInternalStage(Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1))
+  : 0;
+ const byChallenge=Array.isArray(timing[`${field}ByChallenge`])?timing[`${field}ByChallenge`]:null;
+ if(byChallenge&&challengeNumber>0&&Number.isFinite(+byChallenge[challengeNumber-1]))return +byChallenge[challengeNumber-1];
+ const nested=timing.byChallenge&&challengeNumber>0?timing.byChallenge[challengeNumber]:null;
+ if(nested&&Number.isFinite(+nested[field]))return +nested[field];
+ const value=timing[field];
+ if(Number.isFinite(+value))return +value;
+ return fallback;
 }
 
 function currentGamePackFormationLayout(stage){
@@ -13990,9 +14638,11 @@ function syncCabinetShellLayout({
  railW,
  railH,
  waitScoreOverlay,
- framedOverlayOpen
+ framedOverlayOpen,
+ arcadeFullscreenActive=0
 }){
  applyStageChromeTheme();
+ if(document.body)document.body.classList.toggle('arcadeFullscreenActive',!!arcadeFullscreenActive);
  if(hud){
   const hudLeft=ox+DISPLAY_SHELL.hudInsetX;
   const hudTop=oy+DISPLAY_SHELL.hudInsetTop;
@@ -14023,7 +14673,7 @@ function syncCabinetShellLayout({
   movieOverlayPanel.style.height=`${viewH}px`;
  }
  if(cabinetShell){
-  cabinetShell.style.display='block';
+  cabinetShell.style.display=arcadeFullscreenActive?'none':'block';
   cabinetShell.style.left=`${shellX}px`;
   cabinetShell.style.top=`${shellY}px`;
   cabinetShell.style.width=`${shellW}px`;
@@ -14034,7 +14684,7 @@ function syncCabinetShellLayout({
   cabinetShell.style.setProperty('--shell-bottom',`${shellPadB}px`);
  }
  if(cabinetRightFrame){
-  if(railW>0){
+  if(!arcadeFullscreenActive&&railW>0){
    cabinetRightFrame.style.display='block';
    cabinetRightFrame.style.left=`${railLeft}px`;
    cabinetRightFrame.style.top=`${railTop}px`;
@@ -14043,7 +14693,7 @@ function syncCabinetShellLayout({
   }else cabinetRightFrame.style.display='none';
  }
  if(cabinetLeftFrame){
-  if(railW>0){
+  if(!arcadeFullscreenActive&&railW>0){
    const leftRail=Math.floor(shellX+Math.max(0,(shellPadL-railW)/2));
    cabinetLeftFrame.style.display='block';
    cabinetLeftFrame.style.left=`${leftRail}px`;
@@ -14261,6 +14911,35 @@ function currentGameBoardRenderer(){
 
 function draw(){
  const sh=S.shake*8,dx=auxRnd(sh,-sh),dy=auxRnd(sh,-sh);
+ const arcadeFullscreenActive=typeof isArcadeFullscreenLayout==='function'&&isArcadeFullscreenLayout();
+ if(arcadeFullscreenActive){
+  const pad=Math.max(4,Math.floor(Math.min(innerWidth,innerHeight)*.008));
+  const availW=Math.max(PLAY_W,innerWidth-pad*2);
+  const availH=Math.max(PLAY_H,innerHeight-pad*2);
+  const fit=Math.max(1,Math.min(availW/PLAY_W,availH/PLAY_H));
+  const scale=Math.max(1,fit);
+  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
+  const ox=Math.floor((innerWidth-viewW)/2);
+  const oy=Math.floor((innerHeight-viewH)/2);
+  syncCabinetShellLayout({
+   ox,oy,viewW,viewH,scale,
+   shellX:0,shellY:0,shellW:innerWidth,shellH:innerHeight,
+   shellPadL:0,shellPadT:0,shellPadR:0,shellPadB:0,
+   railLeft:0,railTop:0,railW:0,railH:0,
+   waitScoreOverlay:0,
+   framedOverlayOpen:!!((typeof LEADERBOARD!=='undefined'&&(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen))||(typeof platformMessagePanelOpen!=='undefined'&&!!platformMessagePanelOpen)),
+   arcadeFullscreenActive:1
+  });
+  const boardRenderer=currentGameBoardRenderer();
+  if(boardRenderer){
+   if(window.__platinumRenderDebug)window.__platinumRenderDebug.boardRendererKey=boardRenderer.gameKey;
+   boardRenderer.draw({ox,oy,scale,dx,dy});
+  }else{
+   throw new Error('No Platinum game board renderer is registered.');
+  }
+  syncHudAndShellMessages({ox,oy,viewW,viewH});
+  return;
+ }
  const compactCabinet=innerWidth<1500||innerHeight<980;
  const outerPadX=Math.max(10,Math.floor(innerWidth*(compactCabinet?.012:.016)));
  const outerPadTop=Math.max(10,Math.floor(innerHeight*(compactCabinet?.01:.014)));
@@ -14293,7 +14972,7 @@ function draw(){
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,
  shellPadL,shellPadT,shellPadR,shellPadB,railLeft,railTop,railW,railH,
-  waitScoreOverlay,framedOverlayOpen
+  waitScoreOverlay,framedOverlayOpen,arcadeFullscreenActive:0
  });
  const boardRenderer=currentGameBoardRenderer();
  if(boardRenderer){
@@ -14355,22 +15034,18 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'BBBB...R...BBB.'
  ]),
  beeOpen:Object.freeze([
-  'BBBBR...........',
-  'RWWWRRR.........',
-  'RWWWWRR.........',
-  'RRBBBRRR........',
-  'RRBBB.RR........',
-  'R..B............',
-  'R...............',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '......B.........',
-  '..Y...B.........',
-  '.RYRYB..........'
+  '.BB....Y....B..',
+  '.BB..YYYRY.BB..',
+  '..BBRRRYRYBB...',
+  '...BBRRYRRB....',
+  '....YYYYYY.....',
+  '...BBBYYYBB....',
+  '..BBBBRRRBBB...',
+  '.BBBBRRRR.BBBB.',
+  'BBBBBYYYY.BBBBB',
+  'BBBBBRRRR.BBBBB',
+  'BBBB..RRR..BBBB',
+  'BBBB...R...BBB.'
  ]),
  but:Object.freeze([
   '.................',
@@ -14393,22 +15068,24 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   '.................'
  ]),
  butOpen:Object.freeze([
-  '.MM.M..BB......B',
-  '..M.M.BBB.....BB',
-  '.......BB.....BM',
-  'BB....BB......BM',
-  'BBB...B.......BM',
-  '.BBB.B........BB',
-  '...B...........B',
-  '................',
-  '................',
-  '................',
-  '................',
-  '.....R..........',
-  '.....R..........',
-  '..B..R.........R',
-  'BWRW..R........R',
-  'RBBBBRR........R'
+  '.................',
+  '.RR...........RR.',
+  '.RR...BB.BB...RR.',
+  '.RR...BB.BB...RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWWWWWWWW.RR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '....RRBBBBBRR....',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR...B...RRRR.',
+  '.................'
  ]),
  boss:Object.freeze([
   '.GGRRRGG.RRR.',
@@ -14429,22 +15106,22 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'RB..R.R..BR..'
  ]),
  bossOpen:Object.freeze([
-  '.GG.R........RRR',
-  '.............RR.',
-  '.............R..',
-  '................',
-  '................',
-  '................',
-  '..B..B..........',
-  'BBRRB...........',
-  'RBRR............',
-  'RBBBBBB.........',
-  'BYBYYBBB.B......',
-  'YYYYYBBBB.......',
-  'YYYYYY.BB....BB.',
-  'BYYYY..BB....B..',
-  '.YR.R..BB....B..',
-  '..R.R.BBB....BB.'
+  '..GG.R.R.GG.....',
+  '.GGG.R.R.GGG....',
+  '.GGRR...RRGG....',
+  'GG.R.....R.GG...',
+  'GG.........GG...',
+  '.GG..B.B..GG....',
+  '..GBRB.RBRG.....',
+  '..BBRRBRRBB.....',
+  '.BBBYYBYYBBB....',
+  'BBYYYYYYYYYBB...',
+  'BBYYYYYYYYYBBB..',
+  'BBYYYYYYYYYBB...',
+  '.BB.R...R.BB....',
+  '.B..R...R..B....',
+  '....R...R.......',
+  '...RR...RR......'
  ]),
  challengeGreen:Object.freeze([
   'R.R.C.C.........',
@@ -14621,8 +15298,16 @@ const AURORA_CONFORMANCE_PIXELS=Object.freeze({
 });
 
 const TARGET_PIXEL_ASPECT_X=1.14;
-const TARGET_REFERENCE_ENEMY_SCALE=0.84;
-const TARGET_REFERENCE_BOSS_SCALE=0.88;
+const TARGET_REFERENCE_BEE_SCALE=0.90;
+const TARGET_REFERENCE_BUTTERFLY_SCALE=0.76;
+const TARGET_REFERENCE_CHALLENGE_SCALE=0.90;
+const TARGET_REFERENCE_BOSS_SCALE=0.78;
+const TARGET_REFERENCE_ROGUE_SCALE=0.94;
+const TARGET_REFERENCE_BEE_X_SCALE=0.68;
+const TARGET_REFERENCE_BUTTERFLY_X_SCALE=0.82;
+const TARGET_REFERENCE_CHALLENGE_X_SCALE=0.70;
+const TARGET_REFERENCE_BOSS_X_SCALE=1.10;
+const PLAYER_FIGHTER_VISUAL_SCALE=0.94;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
@@ -14657,14 +15342,14 @@ function referencePixelSpritesEnabled(){
 
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE);
- if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_BEE_SCALE,0,0,{xScale:TARGET_REFERENCE_BEE_X_SCALE});
+ if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_BUTTERFLY_SCALE,0,0,{xScale:TARGET_REFERENCE_BUTTERFLY_X_SCALE});
+ if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE,0,0,{xScale:TARGET_REFERENCE_BOSS_X_SCALE});
+ if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ROGUE_SCALE,0,0,{xScale:1.08});
  return false;
 }
 
@@ -14736,6 +15421,10 @@ function shipGlyphBoundsAt(x,y,s=1){
  };
 }
 
+function playerFighterVisualScale(s=1){
+ return Math.max(.42,s*PLAYER_FIGHTER_VISUAL_SCALE);
+}
+
 function mergeBounds(a,b){
  if(!a)return b;
  if(!b)return a;
@@ -14747,18 +15436,19 @@ function mergeBounds(a,b){
  };
 }
 
-function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+function drawFighterSprite(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
- if(referencePixelSpritesEnabled()){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
-  return;
- }
- drawAuroraShipGlyph(0,0,Math.max(.5,s),colA,colB);
+ const visualScale=playerFighterVisualScale(s);
+ drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,visualScale,x,y,{xScale:1.08});
+ return visualScale;
+}
+
+function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+ return drawFighterSprite(0,0,Math.max(.5,s),colA,colB);
 }
 
 function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
- const ps=2*s;
- drawPix(x-ps*4,y-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff3448',P.ship.c);
+ return drawFighterSprite(x,y,Math.max(.5,s),colA,colB);
 }
 
 function endOfRunOverlayActive(){
@@ -14811,17 +15501,30 @@ function drawEnemy(e){
   const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
   ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
   if(e.t==='boss'){
+   const sparkScale=.28+Math.min(.18,e.hitT*.28);
+   drawTargetExplosionSprite('explosionSmall',sparkScale);
+   ctx.globalAlpha=Math.min(.78,hitAlpha*.72);
    ctx.fillStyle='#fff8c4';
-   ctx.fillRect(-17,-13,34,26);
-   ctx.fillStyle='#ffffff';
-   ctx.fillRect(-12,-3,24,6);
-   ctx.fillRect(-3,-10,6,20);
+   ctx.fillRect(-12,-2,24,4);
+   ctx.fillRect(-2,-10,4,20);
    ctx.fillStyle='#ff92d8';
-   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-8,-1,16,2);
    ctx.fillRect(-1,-7,2,14);
+   ctx.globalAlpha=Math.min(.86,hitAlpha*.8);
    ctx.strokeStyle='#e2f7ff';
    ctx.lineWidth=1;
-   ctx.strokeRect(-18.5,-14.5,37,29);
+   ctx.beginPath();
+   ctx.moveTo(-15,-9);
+   ctx.lineTo(-9,-13);
+   ctx.lineTo(-4,-9);
+   ctx.moveTo(15,-9);
+   ctx.lineTo(9,-13);
+   ctx.lineTo(4,-9);
+   ctx.moveTo(-14,10);
+   ctx.lineTo(-7,13);
+   ctx.moveTo(14,10);
+   ctx.lineTo(7,13);
+   ctx.stroke();
   }else{
    ctx.fillStyle='rgba(255,255,255,.72)';
    ctx.fillRect(-12,-10,24,20);
@@ -14875,20 +15578,20 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  let bounds=null;
  if(!referencePixelSpritesEnabled()){
   if(dual){
-   drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
-   drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
-   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,1),shipGlyphBoundsAt(x+9.5,y,1));
+   const leftScale=drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
+   const rightScale=drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
+   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,leftScale),shipGlyphBoundsAt(x+9.5,y,rightScale));
   }else{
-   drawAuroraShipGlyph(0,0,1);
-   bounds=shipGlyphBoundsAt(x,y,1);
+   const visualScale=drawAuroraShipGlyph(0,0,1);
+   bounds=shipGlyphBoundsAt(x,y,visualScale);
   }
  }else if(dual){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
-  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,1),shipGlyphBoundsAt(x+10.5,y,1));
+  const leftScale=drawFighterSprite(-10.5,0,1,'#f4f8ff','#5ca8ff');
+  const rightScale=drawFighterSprite(10.5,0,1,'#f4f8ff','#5ca8ff');
+  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,leftScale),shipGlyphBoundsAt(x+10.5,y,rightScale));
  }else{
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
-  bounds=shipGlyphBoundsAt(x,y,1);
+  const visualScale=drawFighterSprite(0,0,1,'#f4f8ff','#5ca8ff');
+  bounds=shipGlyphBoundsAt(x,y,visualScale);
  }
  if(!ghost)window.__platinumRenderDebug.playerBounds=bounds;
  ctx.restore();
@@ -15049,11 +15752,11 @@ function drawReserveShips(lives){
    ctx.beginPath();
    ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
    ctx.fill();
-   drawMiniShip(.88,'#fff6d2','#ffd34d');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.88));
+   const visualScale=drawMiniShip(.88,'#fff6d2','#ffd34d');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }else{
-   drawMiniShip(.82,'#f4f8ff','#ff3347');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.82));
+   const visualScale=drawMiniShip(.82,'#f4f8ff','#ff3347');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }
   ctx.restore();
   reserve--;
@@ -15148,6 +15851,12 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.starfieldCount=S.st.length;
  window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
  window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
+ window.__platinumRenderDebug.starfieldLeadSample=(S.st||[]).slice(0,4).map(star=>({
+  x:+(+star.x||0).toFixed(2),
+  y:+(+star.y||0).toFixed(2),
+  vy:+(+star.vy||0).toFixed(2),
+  vx:+(+star.vx||0).toFixed(2)
+ }));
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.sprite==='explosionSmall'||f.sprite==='explosionLarge'){
@@ -15261,7 +15970,7 @@ function resetGalaxyGuardiansPreviewRenderState(seed=1979){
   ? createGalaxyGuardiansRuntimeState({stage:1,ships:3,seed})
   : null;
  galaxyGuardiansPreviewLastT=0;
- galaxyGuardiansPreviewFireT=.32;
+ galaxyGuardiansPreviewFireT=.38;
  return galaxyGuardiansPreviewState;
 }
 
@@ -15285,43 +15994,109 @@ function resolveGalaxyGuardiansPreviewPalette(visual,theme){
  const overrides=(theme&&theme.previewPalettes&&typeof theme.previewPalettes==='object')
   ? (theme.previewPalettes[visual.id]||theme.previewPalettes[visual.role]||null)
   : null;
- return Object.assign({},visual.palette||{},overrides||{});
+ const base=Object.assign({},visual.palette||{});
+ if(!overrides)return base;
+ const merged=Object.assign({},base,overrides||{});
+ if(base.core)merged.core=base.core;
+ if(base.wing)merged.wing=base.wing;
+ return merged;
+}
+
+function applyGalaxyGuardiansStageOneRowPalette(alien,palette){
+ if(!alien||!palette)return palette;
+ const row=Math.max(0,+alien.row||0);
+ if(row===0){
+  return Object.assign({},palette,{
+   core:'#ffe26a',
+   wing:'#ff5b5b',
+   accent:'#7bd6ff',
+   flare:'#fff2a4'
+  });
+ }
+ if(row===1){
+  return Object.assign({},palette,{
+   core:'#ff7468',
+   wing:'#f6f0ff',
+   accent:'#ffd86d',
+   flare:'#ffb38a'
+  });
+ }
+ if(row===2){
+  return Object.assign({},palette,{
+   core:'#b68cff',
+   wing:'#f2e6ff',
+   accent:'#ffd86d',
+   flare:'#7bd6ff'
+  });
+ }
+ if(row===3){
+  return Object.assign({},palette,{
+   core:'#99beff',
+   wing:'#6f78ff',
+   accent:'#dff7ff',
+   flare:'#ffd86d'
+  });
+ }
+ return Object.assign({},palette,{
+  core:'#7bc6ff',
+  wing:'#4b7dff',
+  accent:'#f4f8ff',
+  flare:'#ff5b5b'
+ });
+}
+
+function resolveGalaxyGuardiansPreviewStarfieldProfile(stage=1){
+ const theme=resolveGalaxyGuardiansPreviewTheme(stage);
+ const graphics=typeof currentGraphicsOverrides==='function'
+  ? currentGraphicsOverrides()
+  : { starfieldIntensity:1, starfieldSpeed:1 };
+ const intensityScale=typeof sanitizeStarfieldMultiplier==='function'
+  ? sanitizeStarfieldMultiplier(graphics.starfieldIntensity,1)
+  : Math.max(.25,+graphics.starfieldIntensity||1);
+ const speedScale=typeof sanitizeStarfieldMultiplier==='function'
+  ? sanitizeStarfieldMultiplier(graphics.starfieldSpeed,1)
+  : Math.max(.25,+graphics.starfieldSpeed||1);
+ const profile=Object.assign({
+  id:'guardians-signal-stars',
+  count:116,
+  sizeMin:.78,
+  sizeMax:1.58,
+  alphaMin:.34,
+  alphaMax:.92,
+  twinkleMin:.78,
+  twinkleAmp:.22,
+  speedMin:18,
+  speedMax:38,
+  driftMin:-9,
+  driftMax:9,
+  palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff','#ffd4a8','#59a8ff']
+ }, theme?.starfield||{});
+ profile.alphaMin=Math.min(1,Math.max(.08,profile.alphaMin*intensityScale));
+ profile.alphaMax=Math.min(1,Math.max(profile.alphaMin,profile.alphaMax*intensityScale));
+ profile.speedMin=Math.max(2,profile.speedMin*speedScale);
+ profile.speedMax=Math.max(profile.speedMin,profile.speedMax*speedScale);
+ profile.intensityScale=intensityScale;
+ profile.speedScale=speedScale;
+ return profile;
 }
 
 function blendGalaxyGuardiansStagePalette(alien,palette,theme,stage=1){
  if(!alien||!theme||!Array.isArray(theme.palette)||!theme.palette.length)return palette;
+ const stageIndex=Math.max(1,+stage||1);
+ const basePalette=stageIndex<=1
+  ? applyGalaxyGuardiansStageOneRowPalette(alien,Object.assign({},palette))
+  : Object.assign({},palette);
+ if(stageIndex<=1)return basePalette;
  const source=theme.palette.filter(Boolean);
- if(!source.length)return palette;
- const idx=(alien.row*3+alien.col+Math.max(1,+stage||1))%source.length;
+ if(!source.length)return basePalette;
+ const roleOffset=alien.role==='flagship'?0:alien.role==='escort'?2:4;
+ const idx=(stageIndex-1+roleOffset)%source.length;
  const pick=offset=>source[(idx+offset+source.length)%source.length];
- if(alien.role==='scout'){
-  return Object.assign({},palette,{
-   core:pick(0),
-   wing:pick(1),
-   accent:pick(3),
-   flare:pick(4),
-   eye:palette.eye||'#ffffff'
-  });
- }
- if(alien.role==='escort'){
-  return Object.assign({},palette,{
-   core:pick(1),
-   wing:pick(2),
-   accent:pick(4),
-   flare:pick(0),
-   eye:palette.eye||'#ffffff'
-  });
- }
- if(alien.role==='flagship'){
-  return Object.assign({},palette,{
-   core:pick(0),
-   wing:pick(5),
-   accent:pick(2),
-   flare:pick(3),
-   eye:palette.eye||'#ffffff'
-  });
- }
- return palette;
+ return Object.assign({},basePalette,{
+  accent:pick(0),
+  flare:pick(1),
+  eye:palette.eye||'#ffffff'
+ });
 }
 
 function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
@@ -15335,6 +16110,9 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  const accent=opts.accent||palette.accent||core;
  const eye=opts.eye||palette.eye||'#ffffff';
  const flare=opts.flare||palette.flare||accent;
+ const pulseFrame=Math.max(0,Math.min(1,+opts.pulseFrame||0));
+ const pulseX=Math.max(.2,+opts.pulseX||1);
+ const pulseY=Math.max(.2,+opts.pulseY||1);
  const colorForPixel=(ch,edge,center)=>{
   if(ch==='C')return core;
   if(ch==='W')return wing;
@@ -15360,26 +16138,33 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
   ctx.fillRect(Math.floor(width*.33)*cell,Math.floor(height*.38)*cell,cell,cell);
   ctx.fillRect(Math.ceil(width*.58)*cell,Math.floor(height*.38)*cell,cell,cell);
  }
+ if(pulseFrame>.08){
+  const wingReach=Math.max(1,Math.round(pulseFrame*(1.8+pulseX*2.4)));
+  const glowHeight=Math.max(1,Math.round(pulseFrame*(1.4+pulseY*1.85)));
+  const midY=Math.round(height*.38)*cell;
+  const centerX=Math.round((width-1)*.5)*cell;
+  const outerPad=Math.max(1,Math.round(pulseFrame*1.6));
+  ctx.globalAlpha=.18+.24*pulseFrame;
+  ctx.fillStyle=flare;
+  ctx.fillRect(-wingReach,midY-cell,wingReach,Math.max(cell+1,glowHeight+1));
+  ctx.fillRect(width*cell,midY-cell,wingReach,Math.max(cell+1,glowHeight+1));
+  ctx.globalAlpha=.26+.28*pulseFrame;
+  ctx.fillStyle=accent;
+  ctx.fillRect(centerX,Math.max(0,midY-cell-glowHeight-outerPad),Math.max(1,cell),glowHeight+outerPad+1);
+  if(height>=6){
+   const lowerY=Math.min((height-1)*cell,midY+cell);
+   ctx.fillRect(centerX,lowerY,Math.max(1,cell),glowHeight+outerPad+1);
+  }
+  ctx.globalAlpha=.14+.12*pulseFrame;
+  ctx.fillStyle=core;
+  ctx.fillRect(Math.max(0,centerX-cell*2),Math.max(0,midY-glowHeight),Math.max(1,cell*4),Math.max(1,glowHeight*2));
+  ctx.globalAlpha=1;
+ }
  ctx.restore();
 }
 
 function syncGalaxyGuardiansPreviewStarfield(stage=1){
- const theme=resolveGalaxyGuardiansPreviewTheme(stage);
- const profile=Object.assign({
-  id:'guardians-signal-stars',
-  count:116,
-  sizeMin:.78,
-  sizeMax:1.62,
-  alphaMin:.34,
-  alphaMax:.92,
-  twinkleMin:.78,
-  twinkleAmp:.22,
-  speedMin:18,
-  speedMax:40,
-  driftMin:-9,
-  driftMax:9,
-  palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff','#ffd4a8','#59a8ff']
- }, theme?.starfield||{});
+ const profile=resolveGalaxyGuardiansPreviewStarfieldProfile(stage);
  const sig=JSON.stringify(profile);
  if(S.guardiansPreviewStarfieldSig===sig&&S.st.length===profile.count)return profile;
  S.guardiansPreviewStarfieldSig=sig;
@@ -15398,7 +16183,10 @@ function syncGalaxyGuardiansPreviewStarfield(stage=1){
    twAmp:rand(Math.min(.4,profile.twinkleAmp+.04),Math.max(.04,profile.twinkleAmp-.04)),
    vy:rand(profile.speedMax,profile.speedMin),
    vx:rand(profile.driftMax||0,profile.driftMin||0),
-   depth:rand(.92,1.24)
+   depth:rand(.94,1.28),
+   glow:rand(1.2,.4),
+   lead:randUnit()<.18,
+   trailGain:rand(1.32,.9)
   });
  }
  return profile;
@@ -15409,8 +16197,8 @@ function advanceGalaxyGuardiansPreviewStarfield(dt){
   if(!s)continue;
   s.tw=(+s.tw||0)+dt*1.9;
   const depth=+s.depth||1;
-  s.y+=(+s.vy||12)*dt*.74*depth;
-  s.x+=(+s.vx||0)*dt*.42*depth;
+  s.y+=(+s.vy||12)*dt*.92*depth;
+  s.x+=(+s.vx||0)*dt*.58*depth;
   if(s.x>PLAY_W+(+s.s||1))s.x=-((+s.s||1)+((s.vx||0)%5));
   else if(s.x<-(+s.s||1))s.x=PLAY_W+((+s.s||1)+Math.abs((s.vx||0)%5));
   if(s.y>PLAY_H+(+s.s||1)){
@@ -15420,18 +16208,50 @@ function advanceGalaxyGuardiansPreviewStarfield(dt){
  }
 }
 
-function drawGalaxyGuardiansPreviewBackdrop(t){
+function drawGalaxyGuardiansPreviewBackdrop(t,theme){
+ theme=theme||resolveGalaxyGuardiansPreviewTheme(1)||{};
+ const backdrop=theme.backdrop||{};
+ const top=backdrop.top||'#0e1836';
+ const mid=backdrop.mid||'#030611';
+ const bottom=backdrop.bottom||'#000000';
+ const horizon=backdrop.horizon||'rgba(255,91,91,.16)';
+ const lowerGlow=backdrop.lowerGlow||'rgba(123,214,255,.12)';
+ const scan=backdrop.scan||'rgba(255,255,255,.05)';
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ const sky=ctx.createLinearGradient(0,0,0,PLAY_H);
+ sky.addColorStop(0,top);
+ sky.addColorStop(.52,mid);
+ sky.addColorStop(1,bottom);
+ ctx.fillStyle=sky;
+ ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ ctx.globalAlpha=.36+.08*Math.sin(t*.24);
+ ctx.fillStyle=horizon;
+ ctx.fillRect(0,PLAY_H-108,PLAY_W,58);
+ ctx.globalAlpha=.24+.06*Math.cos(t*.31);
+ ctx.fillStyle=lowerGlow;
+ ctx.fillRect(0,PLAY_H-62,PLAY_W,26);
  for(const s of S.st){
   const pulse=(s.twMin||.88)+Math.sin(s.tw+t*.9)*(s.twAmp||.16);
-  ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
+  const alpha=Math.max(.12,Math.min(1,(s.alpha||.62)*pulse));
+  const size=Math.max(1,Math.round(+s.s||1));
+  const trail=Math.max(size,Math.min(6,Math.round((((+s.vy||12)/13)-.4)*(+s.trailGain||1))));
+  const x=Math.round(s.x);
+  const y=Math.round(s.y);
+  const glowPad=size>1?1:0;
+  ctx.globalAlpha=alpha*.1*(1+Math.min(.7,+s.glow||0));
   ctx.fillStyle=s.c;
-  const trail=Math.max(0,Math.min(5,Math.round(((+s.vy||12)/14)-1)));
-  ctx.fillRect(s.x,Math.round(s.y-trail*.45),s.s,Math.max(s.s,trail+s.s*.72));
+  ctx.fillRect(x-glowPad,y-glowPad,size+glowPad*2,size+glowPad*2);
+  ctx.globalAlpha=alpha;
+  ctx.fillRect(x,y-trail,size,trail+size);
+  if(s.lead){
+   ctx.globalAlpha=Math.min(1,alpha*.82);
+   ctx.fillRect(x-size,y,size*2+1,size);
+   ctx.fillRect(x,y-size,size,size*2+1);
+  }
  }
  ctx.globalAlpha=1;
- ctx.fillStyle='rgba(255,255,255,.04)';
+ ctx.fillStyle=scan;
  ctx.fillRect(0,18,PLAY_W,1);
  ctx.fillRect(0,PLAY_H-38,PLAY_W,1);
 }
@@ -15477,32 +16297,93 @@ function drawGalaxyGuardiansHitFlashes(state,theme){
    flashPalettes[visualId]||{}
   );
   const points=burstVectors[flash.role]||burstVectors.scout;
-  const pixel=flash.role==='flagship'?3.25:(flash.role==='escort'?2.65:2.3);
-  ctx.shadowColor=palette.core;
-  ctx.shadowBlur=14*life;
-  ctx.globalAlpha=.12+.28*life;
-  ctx.fillStyle=palette.flare||flash.color||'#ffdf6f';
-  ctx.fillRect(Math.round(flash.x)-7,Math.round(flash.y)-7,14,14);
+  const pixel=(flash.role==='flagship'?3.25:(flash.role==='escort'?2.65:2.3))*(+flash.burstScale||1);
+  const ringRadius=(+flash.ringRadius||7)*(1-life*.25);
+  const coreColor=flash.color||palette.core||'#dff7ff';
+  const accentColor=flash.accentColor||palette.accent||'#7bd6ff';
+  const flareColor=flash.flareColor||palette.flare||'#ffdf6f';
+  const streaks=Math.max(6,+flash.streaks||8);
+  const sparkInset=+flash.sparkInset||1.1;
+  ctx.shadowColor=coreColor;
+  ctx.shadowBlur=18*life;
+  ctx.globalAlpha=.1+.18*life;
+  ctx.fillStyle=flareColor;
+  ctx.fillRect(Math.round(flash.x)-8,Math.round(flash.y)-8,16,16);
+  ctx.globalAlpha=.18+.34*life;
+  ctx.strokeStyle=accentColor;
+  ctx.lineWidth=1.2;
+  ctx.beginPath();
+  ctx.arc(flash.x,flash.y,ringRadius,0,Math.PI*2);
+  ctx.stroke();
+  ctx.globalAlpha=.36+.34*life;
+  ctx.fillStyle=flareColor;
+  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-Math.round(ringRadius),2,Math.round(ringRadius*2));
+  ctx.fillRect(Math.round(flash.x)-Math.round(ringRadius),Math.round(flash.y)-1,Math.round(ringRadius*2),2);
   ctx.globalAlpha=.26+.4*life;
   for(let i=0;i<points.length;i++){
    const [dx,dy]=points[i];
    const drift=(1-life)*(flash.role==='flagship'?2.6:2.1);
    const px=Math.round(flash.x+dx*(.42+life*.74)+(dx===0?Math.sin(i+life)*drift:0));
    const py=Math.round(flash.y+dy*(.42+life*.74)+(dy===0?Math.cos(i+life)*drift:0));
-   ctx.fillStyle=i%3===0?(palette.flare||'#ffdf6f'):(i%2===0?(palette.accent||'#7bd6ff'):(palette.wing||'#dff7ff'));
+   ctx.fillStyle=i%3===0?flareColor:(i%2===0?accentColor:(palette.wing||'#dff7ff'));
    ctx.fillRect(px,py,Math.ceil(pixel),Math.ceil(pixel));
+  }
+  ctx.globalAlpha=.32+.3*life;
+  for(let i=0;i<streaks;i++){
+   const theta=(Math.PI*2*i)/streaks+life*.22;
+   const inner=ringRadius*sparkInset*.42;
+   const outer=ringRadius*(1.28+(i%2)*.24);
+   ctx.strokeStyle=i%2===0?accentColor:flareColor;
+   ctx.beginPath();
+   ctx.moveTo(flash.x+Math.cos(theta)*inner,flash.y+Math.sin(theta)*inner);
+   ctx.lineTo(flash.x+Math.cos(theta)*outer,flash.y+Math.sin(theta)*outer);
+   ctx.stroke();
   }
   ctx.globalAlpha=.44+.28*life;
   ctx.fillStyle=palette.eye||'#ffffff';
   ctx.fillRect(Math.round(flash.x)-2,Math.round(flash.y)-2,4,4);
   ctx.globalAlpha=.34+.22*life;
-  ctx.fillStyle=palette.core||flash.color||'#dff7ff';
+  ctx.fillStyle=palette.core||coreColor;
   ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-5,2,10);
   ctx.fillRect(Math.round(flash.x)-5,Math.round(flash.y)-1,10,2);
   ctx.globalAlpha=.18+.18*life;
-  ctx.strokeStyle=palette.accent||'#7bd6ff';
+  ctx.strokeStyle=accentColor;
   ctx.strokeRect(Math.round(flash.x)-4.5,Math.round(flash.y)-4.5,9,9);
+  if(flash.showScore&&flash.points){
+   const progress=1-life;
+   ctx.globalAlpha=.24+.74*life;
+   ctx.font=`${flash.role==='flagship'?9:8}px "Courier New", Consolas, monospace`;
+   ctx.textAlign='center';
+   ctx.textBaseline='bottom';
+   ctx.fillStyle=flash.role==='flagship'?'#ffe39a':(flash.role==='escort'?'#ffd9a8':'#dff7ff');
+   ctx.shadowColor=flareColor;
+   ctx.shadowBlur=10*life;
+   ctx.fillText(String(flash.points),Math.round(flash.x),Math.round(flash.y)-10-progress*(flash.role==='flagship'?18:12));
+   ctx.textAlign='start';
+   ctx.textBaseline='alphabetic';
+  }
  }
+ ctx.restore();
+}
+
+function drawGalaxyGuardiansClearTransition(state,theme){
+ const clearT=+state.waveClearT||0;
+ const flashT=+state.clearFlashT||0;
+ if(clearT<=0&&flashT<=0)return;
+ const backdrop=theme?.backdrop||{};
+ const horizon=backdrop.horizon||'rgba(255,91,91,.18)';
+ const lowerGlow=backdrop.lowerGlow||'rgba(123,214,255,.14)';
+ const sweep=Math.max(clearT,flashT);
+ ctx.save();
+ ctx.globalAlpha=Math.min(.42,.16+sweep*.34);
+ ctx.fillStyle=horizon;
+ ctx.fillRect(0,PLAY_H-132,PLAY_W,18);
+ ctx.globalAlpha=Math.min(.32,.08+sweep*.4);
+ ctx.fillStyle=lowerGlow;
+ ctx.fillRect(0,PLAY_H-86,PLAY_W,40);
+ ctx.globalAlpha=Math.min(.5,.16+sweep*.52);
+ ctx.fillStyle='rgba(255,242,164,.92)';
+ ctx.fillRect(0,PLAY_H-40,PLAY_W,3);
  ctx.restore();
 }
 
@@ -15533,17 +16414,30 @@ function drawGalaxyGuardiansAlien(alien,t,theme,stage=1){
   theme,
   stage
  );
- const cell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
+ const baseCell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
+ const pulseProfile=typeof stageBandProfile==='function'?stageBandProfile(stage,0):null;
+ const pulsePhase=alien.mode==='formation'
+  ? (Math.sin((t*(6.1+((+pulseProfile?.pulseX||1)*.28)))+alien.row*.82+alien.col*.34)+1)*.5
+  : 0;
+ const pulseScale=alien.mode==='formation'
+  ? 1+(pulsePhase*(alien.role==='flagship'?.16:(alien.role==='escort'?.13:.11)))
+  : 1;
+ const cell=baseCell*pulseScale;
  ctx.save();
  ctx.translate(Math.round(alien.x),Math.round(alien.y));
  ctx.shadowColor=palette.flare||palette.accent||palette.core||'#7bd6ff';
- ctx.shadowBlur=alien.mode==='diving'?4:1.5;
+ ctx.shadowBlur=alien.mode==='diving'?4:(2.4+pulsePhase*5.2);
  if(alien.mode==='diving'){
   const lean=Math.sin(alien.diveT*5)*.18+alien.diveSide*.08;
   ctx.rotate(lean);
  }
  const bob=alien.mode==='formation'?Math.sin(t*3.4+alien.row)*1.15:0;
- drawGalaxyGuardiansPixelRows(visual,0,bob,cell,{ palette });
+ drawGalaxyGuardiansPixelRows(visual,0,bob,cell,{
+  palette,
+  pulseFrame:Math.min(1,pulsePhase*1.18),
+  pulseX:pulseProfile?.pulseX||1,
+  pulseY:pulseProfile?.pulseY||1
+ });
  ctx.restore();
  if(alien.mode==='diving'){
   ctx.save();
@@ -15596,22 +16490,26 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.save();
  ctx.font='7px "Courier New", Consolas, monospace';
  ctx.textBaseline='top';
- ctx.fillStyle='#ff5b73';
- ctx.fillText('1UP',18,16);
- ctx.fillStyle='#dff7ff';
- ctx.fillText(String(summary.score||0).padStart(6,'0'),48,16);
- ctx.fillStyle='#dff7ff';
- ctx.fillText('HIGH SCORE',104,16);
- ctx.fillStyle='#ffdf6f';
- ctx.fillText(String(Math.max(summary.score||0,+S.best||0)).padStart(6,'0'),170,16);
+ ctx.shadowBlur=4;
  ctx.fillStyle='#7bd6ff';
- ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,232,16);
- ctx.fillStyle='rgba(216,236,255,.82)';
+ ctx.shadowColor='rgba(123,214,255,.34)';
+ ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
+ ctx.shadowBlur=0;
+ ctx.fillStyle='rgba(216,236,255,.84)';
  ctx.fillText('CREDIT 0',12,PLAY_H-20);
+ ctx.textAlign='center';
  ctx.fillStyle='#ffdf6f';
- ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'WE ARE THE GALAXY GUARDIANS',48,PLAY_H-28);
- ctx.fillStyle='#7bd6ff';
- ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  TOP REENTRY',26,PLAY_H-17);
+ ctx.shadowBlur=6;
+ ctx.shadowColor='rgba(255,223,111,.32)';
+ ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'WE ARE THE GALAXY GUARDIANS',PLAY_W*.5,PLAY_H-29);
+ ctx.font='6px "Courier New", Consolas, monospace';
+ ctx.fillStyle=summary.gameOver?'#dff7ff':'#ffb997';
+ ctx.shadowBlur=3;
+ ctx.shadowColor='rgba(255,185,151,.28)';
+ ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  TOP REENTRY',PLAY_W*.5,PLAY_H-19);
+ ctx.fillStyle='rgba(123,214,255,.96)';
+ ctx.shadowColor='rgba(123,214,255,.26)';
+ ctx.fillText(summary.gameOver?'RETURN TO PLATINUM SELECT':'MOVING STARFIELD  LIVE FORMATION PRESSURE',PLAY_W*.5,PLAY_H-11);
  ctx.restore();
  return {
   reserveShipCount:drawGalaxyGuardiansPreviewReserveShips(state.lives||0),
@@ -15657,9 +16555,10 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  const t=state.t;
  const previewTheme=resolveGalaxyGuardiansPreviewTheme(summary.stage||state.stage||1);
  const starfield=syncGalaxyGuardiansPreviewStarfield(summary.stage||state.stage||1);
- drawGalaxyGuardiansPreviewBackdrop(t);
+ drawGalaxyGuardiansPreviewBackdrop(t,previewTheme);
  for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t,previewTheme,summary.stage||state.stage||1);
  drawGalaxyGuardiansHitFlashes(state,previewTheme);
+ drawGalaxyGuardiansClearTransition(state,previewTheme);
  drawGalaxyGuardiansEnemyShots(state);
  const readyMissileVisible=state.player.visible!==false?drawGalaxyGuardiansPlayer(state.player,previewTheme):false;
  const hud=drawGalaxyGuardiansPreviewHud(summary,state);
@@ -15668,18 +16567,29 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.renderTick=(window.__platinumRenderDebug.renderTick||0)+1;
  window.__platinumRenderDebug.backgroundMode='guardians-dev-preview';
  window.__platinumRenderDebug.starfieldProfile=starfield?.id||'guardians-signal-stars';
+ window.__platinumRenderDebug.starfieldCount=S.st.length;
+ window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
+ window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
+ window.__platinumRenderDebug.starfieldLeadSample=(S.st||[]).slice(0,4).map(star=>({
+  x:+(+star.x||0).toFixed(2),
+  y:+(+star.y||0).toFixed(2),
+  vy:+(+star.vy||0).toFixed(2),
+  vx:+(+star.vx||0).toFixed(2)
+ }));
  Object.assign(window.__galaxyGuardiansPreviewRenderDebug,{
-  renderTick:(window.__galaxyGuardiansPreviewRenderDebug.renderTick||0)+1,
-  renderMode:'galaxy-guardians-dev-preview',
+ renderTick:(window.__galaxyGuardiansPreviewRenderDebug.renderTick||0)+1,
+ renderMode:'galaxy-guardians-dev-preview',
   visualIds:summary.visualIds,
   audioCueIds:summary.audioCueIds,
   alienCount:summary.alienCount,
   enemyShotCount:summary.enemyShotCount,
   hitFlashCount:summary.hitFlashCount,
   score:summary.score,
+  bestScore:+(+S.best||0),
+  scoreStorageGameKey:typeof currentScoreStorageGameKey==='function'?currentScoreStorageGameKey():'',
   reserveShipCount:hud.reserveShipCount,
   stageFlagCount:hud.stageFlagCount,
-  hudLabels:['1UP','HIGH SCORE'],
+  hudLabels:['STAGE'],
   readyMissileVisible:!!readyMissileVisible,
   wrappingCount:+(summary.wrappingCount||0),
   stageThemeId:previewTheme?.id||'signal-rack',
@@ -15691,12 +16601,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
   ).core)).size,
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
   starfieldCount:S.st.length,
-  starfieldLeadSample:(S.st||[]).slice(0,4).map(star=>({
-   x:+(+star.x||0).toFixed(2),
-   y:+(+star.y||0).toFixed(2),
-   vy:+(+star.vy||0).toFixed(2),
-   vx:+(+star.vx||0).toFixed(2)
-  }))
+  starfieldLeadSample:[...(window.__platinumRenderDebug.starfieldLeadSample||[])]
  });
 }
 
@@ -15773,6 +16678,67 @@ window.__galagaHarness__={
   }
  }
 },
+ async prepareSegmentCaptureAudio(cfg={}){
+  const diagnostics={
+   requested:1,
+   contextStateBefore:null,
+   contextStateAfter:null,
+   tapAvailableBefore:!!sfx.tap,
+   tapAvailableAfter:false,
+   trackStates:[],
+   warning:''
+  };
+  let cleanupId='';
+  try{
+   const A=AC();
+   diagnostics.contextStateBefore=String(A.state||'');
+   if(typeof unlockAudioFromInteraction==='function')unlockAudioFromInteraction();
+   if(A&&typeof A.resume==='function')await A.resume().catch(()=>{});
+   diagnostics.contextStateAfter=String(A.state||'');
+   diagnostics.tapAvailableAfter=!!sfx.tap;
+   const gain=A.createGain();
+   const osc=A.createOscillator();
+   gain.gain.value=Number.isFinite(+cfg.keepAliveGain)?Math.max(0,Math.min(.01,+cfg.keepAliveGain)):.00035;
+   osc.type='sine';
+   osc.frequency.value=Number.isFinite(+cfg.keepAliveHz)?Math.max(1,Math.min(80,+cfg.keepAliveHz)):23;
+   osc.connect(gain);
+   gain.connect(sfx.tap);
+   osc.start();
+   cleanupId=`segment-audio-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+   window.__platinumHarnessAudioCaptureCleanups=window.__platinumHarnessAudioCaptureCleanups||Object.create(null);
+   window.__platinumHarnessAudioCaptureCleanups[cleanupId]=()=>{
+    try{osc.stop();}catch{}
+    try{osc.disconnect();}catch{}
+    try{gain.disconnect();}catch{}
+   };
+   const tracks=Array.from(sfx.tap?.stream?.getAudioTracks?.()||[]);
+   diagnostics.trackStates=tracks.map(track=>({
+    kind:String(track.kind||''),
+    enabled:!!track.enabled,
+    muted:!!track.muted,
+    readyState:String(track.readyState||'')
+   }));
+   if(!tracks.length)diagnostics.warning='Audio graph was initialized, but the MediaStreamDestination exposed no audio tracks.';
+   return {ok:!!tracks.length,cleanupId,trackCount:tracks.length,tracks,diagnostics};
+  }catch(err){
+   if(cleanupId&&window.__platinumHarnessAudioCaptureCleanups?.[cleanupId]){
+    try{window.__platinumHarnessAudioCaptureCleanups[cleanupId]();}catch{}
+    delete window.__platinumHarnessAudioCaptureCleanups[cleanupId];
+   }
+   diagnostics.warning=String(err?.message||err||'Audio capture preparation failed.');
+   return {ok:false,cleanupId:'',trackCount:0,tracks:[],diagnostics};
+  }
+ },
+ finishSegmentCaptureAudio(cleanupId=''){
+  const id=String(cleanupId||'');
+  const cleanups=window.__platinumHarnessAudioCaptureCleanups;
+  if(id&&cleanups?.[id]){
+   try{cleanups[id]();}catch{}
+   delete cleanups[id];
+   return true;
+  }
+  return false;
+ },
  setControlledClock(enabled=1){
   if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!enabled);
   return !!enabled;
@@ -17265,6 +18231,7 @@ window.__galagaHarness__={
   return true;
  },
  setupChallengeMotionProfileTest(cfg={}){
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(1);
   started=1;
   paused=0;
   ATTRACT.active=0;
