@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platinum, Aurora, And The Conformance Project</title>
+  <style>:root{
+      --bg:#07111f;
+      --bg2:#0f1d31;
+      --panel:#111a2c;
+      --panel2:#162237;
+      --line:rgba(167,197,255,.22);
+      --text:#eff6ff;
+      --muted:#a7b4c8;
+      --cyan:#67e8f9;
+      --gold:#fcd34d;
+      --green:#86efac;
+      --red:#f87171;
+      --purple:#c4b5fd;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(103,232,249,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(134,239,172,.14), transparent 34%),
+        linear-gradient(160deg,var(--bg),var(--bg2));
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+    }
+    a{color:#d9f7ff}
+    .deckShell{
+      max-width:1180px;
+      margin:0 auto;
+      padding:34px 22px 70px;
+    }
+    .deckHero,.slide{
+      border:1px solid var(--line);
+      background:rgba(7,17,31,.78);
+      box-shadow:0 18px 46px rgba(0,0,0,.28);
+    }
+    .deckHero{
+      border-radius:28px;
+      padding:30px 32px 28px;
+      margin-bottom:22px;
+    }
+    .deckTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#d7ecff;
+    }
+    .deckHero h1{
+      margin:0 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
+    .deckHero p{
+      max-width:840px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.58;
+    }
+    .buttonRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,.28);
+      background:rgba(122,195,255,.1);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.03em;
+    }
+    .metaGrid,.proofGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:12px;
+      margin-top:22px;
+    }
+    .metaCard,.proofCard{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      border-radius:18px;
+      padding:14px 16px;
+    }
+    .metaCard span,.proofCard span{
+      display:block;
+      color:#8fb3cc;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+    .metaCard strong,.proofCard strong{
+      display:block;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .deckLayout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 250px;
+      gap:22px;
+      align-items:start;
+    }
+    .slideStack{
+      display:grid;
+      gap:22px;
+    }
+    .slide{
+      position:relative;
+      min-height:628px;
+      aspect-ratio:16/9;
+      border-radius:24px;
+      overflow:hidden;
+      padding:34px 38px;
+    }
+    .slide::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(135deg, rgba(103,232,249,.08), transparent 34%),
+        linear-gradient(315deg, rgba(252,211,77,.07), transparent 32%);
+    }
+    .slideInner{
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:grid;
+      grid-template-rows:auto auto 1fr auto;
+      gap:14px;
+    }
+    .slideHeader{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:var(--cyan);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:14px;
+      font-weight:700;
+    }
+    .slideHeader::after{
+      content:"";
+      height:2px;
+      flex:1 1 auto;
+      background:linear-gradient(90deg,rgba(103,232,249,.85),transparent);
+    }
+    .slide h2{
+      margin:0;
+      max-width:930px;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.02;
+      letter-spacing:-.035em;
+    }
+    .claim{
+      max-width:870px;
+      color:var(--muted);
+      font-size:20px;
+      line-height:1.45;
+      margin:0;
+    }
+    .proofGrid{
+      align-self:end;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .proofCard{
+      min-height:76px;
+    }
+    .proofCard strong{
+      font-size:17px;
+    }
+    .visualFlow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .flowNode{
+      position:relative;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+      border-radius:16px;
+      padding:14px;
+      min-height:106px;
+    }
+    .flowNode strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--gold);
+    }
+    .flowNode span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .challengeGrid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      margin-top:12px;
+    }
+    .challengeRead{
+      display:grid;
+      gap:10px;
+    }
+    .bigMetric{
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .bigMetric strong{
+      display:block;
+      color:var(--red);
+      font-size:28px;
+      font-family:"SFMono-Regular",Consolas,monospace;
+    }
+    .bigMetric span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:5px;
+    }
+    .slideFooter{
+      color:#8fb3cc;
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .toc{
+      position:sticky;
+      top:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(7,17,31,.78);
+      border-radius:22px;
+      padding:18px;
+      max-height:calc(100vh - 36px);
+      overflow:auto;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:16px;
+    }
+    .toc ol{
+      margin:0;
+      padding-left:22px;
+      display:grid;
+      gap:8px;
+    }
+    .toc a{
+      color:#d9f7ff;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.25;
+    }
+    .sourceList{
+      margin-top:22px;
+      padding:20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+    }
+    .sourceList h2{
+      margin:0 0 12px;
+      font-size:20px;
+    }
+    .sourceList ul{
+      margin:0;
+      padding-left:20px;
+      columns:2;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:13px;
+    }
+    @media (max-width:980px){
+      .deckLayout{grid-template-columns:1fr}
+      .toc{position:static;max-height:none}
+      .slide{min-height:0;aspect-ratio:auto}
+      .visualFlow{grid-template-columns:1fr}
+      .challengeGrid{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      .deckShell{padding:20px 14px 54px}
+      .deckHero,.slide{padding:24px 20px}
+      .proofGrid{grid-template-columns:1fr}
+      .sourceList ul{columns:1}
+    }</style>
+</head>
+<body>
+  <main class="deckShell">
+    <section class="deckHero">
+      <div class="deckTop">
+        <span class="eyebrow">20-slide public overview</span>
+        <a class="button" href="white-paper.html">Open white paper</a>
+      </div>
+      <h1>Platinum, Aurora, And The Conformance Project</h1>
+      <p>A browser-arcade platform, evidence-led game ingestion program, and release discipline for AI-assisted software.</p>
+      <div class="metaGrid">
+        <article class="metaCard"><span>White paper</span><strong>v0.4.1-draft</strong></article>
+        <article class="metaCard"><span>Updated</span><strong>2026-06-04</strong></article>
+        <article class="metaCard"><span>Lane</span><strong>development</strong></article>
+        <article class="metaCard"><span>Build</span><strong>1.4.0.1</strong></article>
+        <article class="metaCard"><span>Slides</span><strong>20</strong></article>
+      </div>
+      <div class="buttonRow">
+        <a class="button" href="white-paper.html">Open white paper</a>
+        <a class="button" href="white-paper.pdf">Open white-paper PDF</a>
+        <a class="button" href="project-overview-slides.json">Open slide metadata</a>
+        <a class="button" href="project-guide.html">Open project guide</a>
+        <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+      </div>
+    </section>
+    <div class="deckLayout">
+      <div class="slideStack">
+        
+    <section class="slide" id="slide-1" aria-label="Platinum, Aurora &amp; The Conformance Project">
+      <div class="slideInner">
+        <div class="slideHeader"><span>01</span><span>Project overview</span></div>
+        <h2>Platinum, Aurora &amp; The Conformance Project</h2>
+        <p class="claim">A real game platform, a playable first game, and an evidence program for making AI-assisted software accountable.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Aurora release gate: 8.8/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Challenge set pieces: 4.3/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Measured runs: 904</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Artifact growth: 1.48GB</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Project overview</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-2" aria-label="The Claim: Fast AI-Assisted Work Can Still Be Accountable">
+      <div class="slideInner">
+        <div class="slideHeader"><span>02</span><span>Thesis</span></div>
+        <h2>The Claim: Fast AI-Assisted Work Can Still Be Accountable</h2>
+        <p class="claim">The project forces model-assisted iteration to leave evidence, checks, and public release artifacts behind.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Real releases, not only demos</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Reference-driven fidelity work</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Visible platform boundaries</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Local CPU/browser harnesses for repeated measurement</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Thesis</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-3" aria-label="The Arc Moved From One Game To A Conformance Program">
+      <div class="slideInner">
+        <div class="slideHeader"><span>03</span><span>History</span></div>
+        <h2>The Arc Moved From One Game To A Conformance Program</h2>
+        <p class="claim">Each release family made the project harder to fake and easier to review.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>1.0.0: first public Aurora</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>1.2.0: Platinum platform framing</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>1.4.0: multi-game and conformance baseline</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Next: conformance scale across games</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>History</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-4" aria-label="The Operating Model Is Five Layers, Not One Blob">
+      <div class="slideInner">
+        <div class="slideHeader"><span>04</span><span>System model</span></div>
+        <h2>The Operating Model Is Five Layers, Not One Blob</h2>
+        <p class="claim">Quality improves when reference evidence, ingestion, games, harnesses, and release claims have separate ownership.</p>
+        <div class="visualFlow">
+    <div class="flowNode"><strong>Reference</strong><span>Videos, manuals, audio packs, sprite sheets</span></div>
+  
+    <div class="flowNode"><strong>Ingestion</strong><span>Manifests, windows, event logs, tracks</span></div>
+  
+    <div class="flowNode"><strong>Runtime</strong><span>Game-owned implementation and captures</span></div>
+  
+    <div class="flowNode"><strong>Harness</strong><span>Scorecards, personas, correspondence checks</span></div>
+  
+    <div class="flowNode"><strong>Release</strong><span>Docs, gates, lanes, public claims</span></div>
+  </div>
+        <div class="slideFooter">
+          <span>System model</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-5" aria-label="Platinum Hosts; Game Packs Carry Game-Specific Authority">
+      <div class="slideInner">
+        <div class="slideHeader"><span>05</span><span>Architecture</span></div>
+        <h2>Platinum Hosts; Game Packs Carry Game-Specific Authority</h2>
+        <p class="claim">The platform scale bet only works if Aurora-specific truth does not leak into Platinum or the next game.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Platform owns shell, services, and lane model</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Aurora owns Galaga-like conformance</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Guardians owns Galaxian-like preview truth</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Architecture review says dev/beta separation is good but still worth hardening</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Architecture</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-6" aria-label="Current Game Portfolio: First Game, Second Proof, Third Intake">
+      <div class="slideInner">
+        <div class="slideHeader"><span>06</span><span>Portfolio</span></div>
+        <h2>Current Game Portfolio: First Game, Second Proof, Third Intake</h2>
+        <p class="claim">The platform matters because it can host genuinely different game instances, not just skins.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Aurora: first shipped application</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Galaxy Guardians: second-game proof</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Windigo / third game: intake lane</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Conformant reference modes first, unique public themes later</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Portfolio</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-7" aria-label="Ingestion Turns Examples Into Implementation Contracts">
+      <div class="slideInner">
+        <div class="slideHeader"><span>07</span><span>Ingestion</span></div>
+        <h2>Ingestion Turns Examples Into Implementation Contracts</h2>
+        <p class="claim">External examples become source manifests, windows, annotations, runtime captures, scores, and release gates.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Preserved source package</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Extracted clip or frame window</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Semantic annotation</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Runtime capture</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Score and gate</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Ingestion</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-8" aria-label="The Reference Corpus Expanded Beyond One Remembered Target">
+      <div class="slideInner">
+        <div class="slideHeader"><span>08</span><span>Evidence</span></div>
+        <h2>The Reference Corpus Expanded Beyond One Remembered Target</h2>
+        <p class="claim">Recent source recovery makes claims more defensible and exposes gaps more sharply.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Galaga challenge videos, audio cues, sprite/walkthrough bundles</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Galaxian no-voiceover and full-session gameplay</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Space Invaders early preserved-source lane</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Cabinet, manual, rule, and history sources</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Evidence</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-9" aria-label="The Score Is A Measurement Surface, Not A Trophy">
+      <div class="slideInner">
+        <div class="slideHeader"><span>09</span><span>Conformance</span></div>
+        <h2>The Score Is A Measurement Surface, Not A Trophy</h2>
+        <p class="claim">Scores carry confidence and resolution; a better scorer can lower a score while improving honesty.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Overall quality gate: 8.8/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Audio identity: 7.3/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Challenge set pieces: 4.3/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Runtime sprite conformance: 6.2/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Visual look and feel: 8.6/10</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Conformance</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-10" aria-label="Aurora Is Playable And Much More Honest Than It Was">
+      <div class="slideInner">
+        <div class="slideHeader"><span>10</span><span>Aurora state</span></div>
+        <h2>Aurora Is Playable And Much More Honest Than It Was</h2>
+        <p class="claim">The candidate is strong enough for review, but not yet for an easy 1.4.1 production promise.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Good overall roll-up</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Audio near the next gate</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Challenge-stage scorer now strict</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Highest-value next gameplay step is movement grammar</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Aurora state</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-11" aria-label="Challenge-Stage Work Improved The Process Before It Improved The Game">
+      <div class="slideInner">
+        <div class="slideHeader"><span>11</span><span>Case study</span></div>
+        <h2>Challenge-Stage Work Improved The Process Before It Improved The Game</h2>
+        <p class="claim">This is a measurement and ingestion success, but still a gameplay blocker.</p>
+        
+    <div class="challengeGrid">
+      <div class="challengeRead">
+        <div class="bigMetric"><strong>4.3/10</strong><span>Strict challenge-stage set-piece score.</span></div>
+        <div class="bigMetric"><strong style="color:var(--gold)">40/40</strong><span>Reference-backed challenge groups.</span></div>
+        <div class="bigMetric"><strong style="color:var(--green)">8.6/10</strong><span>Target trajectory-control readiness.</span></div>
+      </div>
+      <div class="challengeRead">
+        <div class="bigMetric"><strong>0</strong><span>Release-ready challenge contracts.</span></div>
+        <div class="bigMetric"><strong style="color:var(--purple)">3.6/10</strong><span>Target-video object-track fit.</span></div>
+        <div class="bigMetric"><strong style="color:var(--cyan)">Next</strong><span>Movement grammar plus human-perfect guard.</span></div>
+      </div>
+    </div>
+  
+        <div class="slideFooter">
+          <span>Case study</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-12" aria-label="The Next Unlock Is A Reusable Movement Grammar">
+      <div class="slideInner">
+        <div class="slideHeader"><span>12</span><span>Gameplay grammar</span></div>
+        <h2>The Next Unlock Is A Reusable Movement Grammar</h2>
+        <p class="claim">Challenge stages and normal-stage entries should use the same contract language for group arrivals, paths, timing, and player opportunity.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Group contracts</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Path primitives</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Timing contracts</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Human-perfect guard</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Motion identity</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 6</span>
+      <strong>Game-specific variation</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Gameplay grammar</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-13" aria-label="Audio Is Valuable, But The Economics Tell Us To Be Disciplined">
+      <div class="slideInner">
+        <div class="slideHeader"><span>13</span><span>Audio</span></div>
+        <h2>Audio Is Valuable, But The Economics Tell Us To Be Disciplined</h2>
+        <p class="claim">Audio clarity matters, but current tuning loops are expensive for modest score movement.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Audio identity: 7.3/10</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Audio consumed large local-compute blocks</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Audio loop around 39 minutes per positive score point</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Next gain should come from better evaluators or more stable cue windows</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Audio</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-14" aria-label="Sprites Need Three Separate Conformance Concepts">
+      <div class="slideInner">
+        <div class="slideHeader"><span>14</span><span>Sprites</span></div>
+        <h2>Sprites Need Three Separate Conformance Concepts</h2>
+        <p class="claim">One static sprite score hides the work players actually perceive.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Catalog proxy score</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Runtime canvas crop score</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Active motion planning</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Scale and formation context</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Frame-labeled motion windows needed</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Sprites</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-15" aria-label="Personas Turn Gameplay Assessment Into Repeatable Evidence">
+      <div class="slideInner">
+        <div class="slideHeader"><span>15</span><span>Personas</span></div>
+        <h2>Personas Turn Gameplay Assessment Into Repeatable Evidence</h2>
+        <p class="claim">Beginner, intermediate, professional, and expert runs help expose score, survival, and learnability changes.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Generic across games</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Distribution matters more than one run</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Challenge-tour/watch mode accelerates human review</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Capture/rescue persona behavior still needs richer strategy</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Personas</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-16" aria-label="The Economics Ledger Keeps Us Honest About Spend Versus Return">
+      <div class="slideInner">
+        <div class="slideHeader"><span>16</span><span>Economics</span></div>
+        <h2>The Economics Ledger Keeps Us Honest About Spend Versus Return</h2>
+        <p class="claim">The project tracks CPU, browser, Codex/GPU-equivalent time, artifact growth, and score movement.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>904 measured runs</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>971.3 tracked wall minutes</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>576.5 CPU wall minutes</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>429.6 browser wall minutes</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>630.8 GPU/Codex-equivalent wall minutes</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 6</span>
+      <strong>1.48GB artifact evidence</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Economics</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-17" aria-label="Release Discipline Is Part Of The Product">
+      <div class="slideInner">
+        <div class="slideHeader"><span>17</span><span>Release</span></div>
+        <h2>Release Discipline Is Part Of The Product</h2>
+        <p class="claim">The lane model prevents a passing build from becoming an exaggerated public promise.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Local: fast iteration</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Dev: hosted review</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Beta: authority-published candidate lineage</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Production: stable public claim</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>MacBook is release authority but production remains conservative</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Release</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-18" aria-label="Professionalism Also Means Review Records And Issue Closure">
+      <div class="slideInner">
+        <div class="slideHeader"><span>18</span><span>Review</span></div>
+        <h2>Professionalism Also Means Review Records And Issue Closure</h2>
+        <p class="claim">Code, architecture, documentation, security, and storage reviews are now artifacts rather than vibes.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Code review packets</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Architecture review</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Security/auth/storage gates</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Documentation freshness</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Review learning ledger</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Review</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-19" aria-label="Next 90 Days: Make Quality Movement Visible And Release-Worthy">
+      <div class="slideInner">
+        <div class="slideHeader"><span>19</span><span>Near-term path</span></div>
+        <h2>Next 90 Days: Make Quality Movement Visible And Release-Worthy</h2>
+        <p class="claim">The near-term plan is quality conversion, not just more artifacts.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Challenge movement grammar</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Sprite motion windows</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Guardians first-class evidence</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>1.4.1 candidate only when improvements are player-visible</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Production story only when release notes can defend the claim</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Near-term path</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="slide" id="slide-20" aria-label="The Longer Goal: A Conformance Factory, Then Original Variations">
+      <div class="slideInner">
+        <div class="slideHeader"><span>20</span><span>Longer path</span></div>
+        <h2>The Longer Goal: A Conformance Factory, Then Original Variations</h2>
+        <p class="claim">First prove true-to-reference modes; then make public games unique with confidence.</p>
+        <div class="proofGrid">
+    <article class="proofCard">
+      <span>Proof 1</span>
+      <strong>Ingest examples</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 2</span>
+      <strong>Conform reference mode</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 3</span>
+      <strong>Vary themes and movement</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 4</span>
+      <strong>Scale across games</strong>
+    </article>
+  
+    <article class="proofCard">
+      <span>Proof 5</span>
+      <strong>Publish an honest AI-assisted software story</strong>
+    </article>
+  </div>
+        <div class="slideFooter">
+          <span>Longer path</span>
+          <span>v0.4.1-draft · 2026-06-04 · 1.4.0.1</span>
+        </div>
+      </div>
+    </section>
+  
+        <section class="sourceList">
+          <h2>Source Artifacts</h2>
+          <ul><li><code>WHITE_PAPER.md</code></li>
+<li><code>REFERENCE_MEDIA_INVENTORY.md</code></li>
+<li><code>GAME_CONFORMANCE_CATALOG.md</code></li>
+<li><code>RELEASE_CONFORMANCE_DASHBOARD.md</code></li>
+<li><code>CONFORMANCE_ECONOMICS.md</code></li>
+<li><code>PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md</code></li>
+<li><code>GALAGA_TARGET_ARTIFACT_COVERAGE.md</code></li>
+<li><code>LEVEL_VISUAL_TIMING_ALIGNMENT.md</code></li>
+<li><code>AURORA_SPRITE_MOTION_CORRESPONDENCE.md</code></li>
+<li><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code></li>
+<li><code>reference-artifacts/analyses/conformance-economics/latest.json</code></li>
+<li><code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code></li>
+<li><code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code></li>
+<li><code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code></li></ul>
+        </section>
+      </div>
+      <aside class="toc">
+        <h2>Slide Index</h2>
+        <ol>
+    <li><a href="#slide-1">Platinum, Aurora &amp; The Conformance Project</a></li>
+  
+    <li><a href="#slide-2">The Claim: Fast AI-Assisted Work Can Still Be Accountable</a></li>
+  
+    <li><a href="#slide-3">The Arc Moved From One Game To A Conformance Program</a></li>
+  
+    <li><a href="#slide-4">The Operating Model Is Five Layers, Not One Blob</a></li>
+  
+    <li><a href="#slide-5">Platinum Hosts; Game Packs Carry Game-Specific Authority</a></li>
+  
+    <li><a href="#slide-6">Current Game Portfolio: First Game, Second Proof, Third Intake</a></li>
+  
+    <li><a href="#slide-7">Ingestion Turns Examples Into Implementation Contracts</a></li>
+  
+    <li><a href="#slide-8">The Reference Corpus Expanded Beyond One Remembered Target</a></li>
+  
+    <li><a href="#slide-9">The Score Is A Measurement Surface, Not A Trophy</a></li>
+  
+    <li><a href="#slide-10">Aurora Is Playable And Much More Honest Than It Was</a></li>
+  
+    <li><a href="#slide-11">Challenge-Stage Work Improved The Process Before It Improved The Game</a></li>
+  
+    <li><a href="#slide-12">The Next Unlock Is A Reusable Movement Grammar</a></li>
+  
+    <li><a href="#slide-13">Audio Is Valuable, But The Economics Tell Us To Be Disciplined</a></li>
+  
+    <li><a href="#slide-14">Sprites Need Three Separate Conformance Concepts</a></li>
+  
+    <li><a href="#slide-15">Personas Turn Gameplay Assessment Into Repeatable Evidence</a></li>
+  
+    <li><a href="#slide-16">The Economics Ledger Keeps Us Honest About Spend Versus Return</a></li>
+  
+    <li><a href="#slide-17">Release Discipline Is Part Of The Product</a></li>
+  
+    <li><a href="#slide-18">Professionalism Also Means Review Records And Issue Closure</a></li>
+  
+    <li><a href="#slide-19">Next 90 Days: Make Quality Movement Visible And Release-Worthy</a></li>
+  
+    <li><a href="#slide-20">The Longer Goal: A Conformance Factory, Then Original Variations</a></li>
+  </ol>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

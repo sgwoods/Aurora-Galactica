@@ -1003,7 +1003,7 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">June 3, 2026</span>
+              <span class="metaValue">June 7, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
@@ -2797,7 +2797,7 @@
       <td><strong>Audio cues: runtime cue assets vs Galaga-family references</strong><br><span class="docMeta">Primary user-experience gap</span></td>
       <td><strong>7/10</strong><br><span class="docMeta">Target: &gt;=7.5</span></td>
       <td>21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.</td>
-      <td><code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code><br><code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-06-03-ea43155b/report.json</code></td>
+      <td><code>reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json</code><br><code>reference-artifacts/analyses/aurora-audio-event-gap/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json</code></td>
       <td>Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change.</td>
     </tr>
   
@@ -2806,7 +2806,7 @@
       <td><strong>Audio timing and event alignment</strong><br><span class="docMeta">Guardrail measured in quality conformance</span></td>
       <td><strong>6/9 checks passed</strong><br><span class="docMeta">Target: All event-alignment checks pass with low drift</span></td>
       <td>Worst current delta 6.31 ms; worst drift from baseline 0 ms.</td>
-      <td><code>reference-artifacts/analyses/quality-conformance/2026-06-03-ea43155b/report.json</code></td>
+      <td><code>reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json</code></td>
       <td>Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips.</td>
     </tr>
   
@@ -2824,7 +2824,7 @@
       <td><strong>Frame, popups, shell controls, and icons</strong><br><span class="docMeta">Split from generic UI shell before final gate</span></td>
       <td><strong>9.2/10</strong><br><span class="docMeta">Target: &gt;=9.4</span></td>
       <td>12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.</td>
-      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-06-03-ea43155b/report.json</code><br><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
+      <td><code>reference-artifacts/analyses/release-conformance-dashboard/latest.json</code><br><code>reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json</code><br><code>reference-artifacts/analyses/aurora-visual-look-conformance/latest.json</code></td>
       <td>Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures.</td>
     </tr>
   
@@ -12415,18 +12415,26 @@
             <p>A deliberately critical stage-by-stage comparison of Aurora challenging stages against Galaga-style bonus-stage behavior. This separates rule conformance from interesting visual conformance: no enemy shooting and no ship loss are necessary, but the higher-value gap is authored alien movement, alien-family variation, and learnable set-piece novelty.</p>
           </div>
           <div class="docWrap">
-            <p><strong>Current strict read:</strong> 4.2/10 interesting factor; 4.2/10 movement; 4.5/10 graphics; 3.9/10 alien novelty; 5.6/10 shot opportunity; 4.2/10 challenge-stage conformance.</p>
-            <p>current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.2/10, strict graphics is 4.5/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 6.18/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.7/10, which is why the old read was too generous.</p>
+            <p><strong>Current strict read:</strong> 4.3/10 interesting factor; 4.4/10 movement; 4.5/10 graphics; 3.9/10 alien novelty; 5.5/10 shot opportunity; 4.3/10 challenge-stage conformance.</p>
+            <p>current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.4/10, strict graphics is 4.5/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 6.18/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.</p>
             <p class="docMeta"><strong>Scoring model:</strong> strict-v2-user-baseline. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
-            <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage 3 measured 928 candidates and retained 135 review rows. Decision: <strong>no-runtime-keeper-yet</strong>. Best candidate baseline-current scored 6/10 expected-reference and 3.1/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
-            <p class="docMeta"><strong>Full-analyzer candidate review:</strong> Latest full-analyzer candidate review: Stage 7 candidate stage7-target-controls-shape-only-p3 was rejected-full-analyzer-regression. Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion. Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
-            <p class="docMeta"><strong>Candidate sweep matrix:</strong> 8 stage(s), 15474 latest per-stage candidates represented, 0 runtime-ready. Stage 3: no-runtime-keeper-yet, expected 6/10, target-video 3.1/10, identity margin 0. late identity pass. Stage 7: no-runtime-keeper-yet, expected 5.7/10, target-video 4.9/10, identity margin 0. late identity pass. Stage 11: no-runtime-keeper-yet, expected 7.6/10, target-video n/a/10, identity margin n/a. Stage 15: no-runtime-keeper-yet, expected 5.9/10, target-video 3.8/10, identity margin 0. Stage 19: no-runtime-keeper-yet, expected 4.8/10, target-video 3.4/10, identity margin 0. late identity blocked (challenge-3-arrival-group-1 vs challenge 5). Stage 23: no-runtime-keeper-yet, expected 5.4/10, target-video 4.1/10, identity margin -0.4. Stage 27: no-runtime-keeper-yet, expected 5.1/10, target-video 3/10, identity margin -0.2. late identity blocked (challenge-1-arrival-group-1 vs challenge 7). Stage 31: no-runtime-keeper-yet, expected 6/10, target-video 2.9/10, identity margin n/a.</p>
+            <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage 7 measured 2565 candidates and retained 163 review rows. Decision: <strong>no-runtime-keeper-yet</strong>. Best candidate stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018 scored 5.7/10 expected-reference and 4.2/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Readability diagnostics:</strong> 12 row(s) retained. Best readability diagnostic stage7-read-balanced-balanced-outer-ls0-sd022-ripple scored 7.6/10 human-visible and remains blocked by: Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.37, bunching risk 0.75.</p>
+            <p class="docMeta"><strong>Swarm readability visual:</strong> Swarm readability visual: least-bunched diagnostic stage7-route-spread-left-right-id-sd016 has bunching risk 0.667 (delta -0.333 vs baseline). SVG: reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg.</p>
+            <figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg" alt="Stage challenge readability comparison visual"><figcaption>Baseline, best selection, best readability, and least-bunched candidates from the latest challenge-stage sweep.</figcaption></figure>
+            <p class="docMeta"><strong>Deconflict underperformance:</strong> Route-aware group offsets now beat direct deconflict on bunching risk, but they remain far from the promotion gate and need density, target-fit, and human-perfect review before runtime promotion. Direct deconflict still improves baseline readability, but the rejected full-analyzer trial shows local deconfliction can create misleading wins. Baseline risk 1, direct deconflict 0.688, route-aware 0.667, least-bunched 0.667. Best deconflict row: <code>stage7-deconflict-wide-softbias-flat-sync</code>; best route-aware row: <code>stage7-route-spread-left-right-fan-sd016</code>. Source artifact: <code>reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json</code>.</p>
+            <p class="docMeta"><strong>Route/path visual:</strong> Path visual compares 5 candidate route families. Path visuals make the alien route grammar inspectable: reviewers can see whether candidates arrive as coherent waves or collapse into unreadable clusters. Source artifact: <code>reference-artifacts/analyses/challenge-path-visuals/latest.json</code>.</p>
+            <figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-path-visuals/latest.svg" alt="Stage challenge path visual comparison"><figcaption>Trajectory comparison across baseline, best selection, least-bunched/deconflict, and route-aware candidate families.</figcaption></figure>
+            <p class="docMeta"><strong>Stage 7 authoring contract:</strong> Stage 7 / Challenging Stage 2: 5 target group(s). Current best stage7-target-starts-current-speed-p0 has bunching risk 0.811 and magic risk 0.288; least-bunched stage7-route-spread-left-right-id-sd016 has risk 0.667; route-aware stage7-route-spread-left-right-fan-sd016 has risk 0.667. Decision: no-runtime-keeper-yet. Gates: Safety remains pass: no challenge enemy shots, enemy attacks, or ship loss. Human-perfect potential must not regress from baseline and should remain &gt;= 7.4/10. Human-visible score should improve materially and remain &gt;= 7.8/10 before promotion. Bunching risk should move toward &lt;= 0.36; interim candidates below 0.65 are worth full-analyzer review.. Next: Use route-aware group offsets to separate whole groups before adding object-level offsets. Prefer contract-shaped candidates over broad blind sweeps. Generate path visuals for baseline, best readability, best route-aware, and best deconflict candidates. Promote only after full analyzer confirms the expected-label and target-video lift.. Source artifact: <code>reference-artifacts/analyses/stage7-authoring-contract/latest.json</code>.</p>
+            <p class="docMeta"><strong>Full-analyzer candidate review:</strong> Latest full-analyzer candidate review: Stage 7 candidate stage7-deconflict-wide-softbias-flat-sync was rejected-full-analyzer-regression. Rejected stage7-deconflict-wide-softbias-flat-sync: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta 0, target-video object-track delta -0.1, and Stage 7 target-fit delta 0.3 are not acceptable for runtime promotion. Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
+            <p class="docMeta"><strong>Candidate sweep matrix:</strong> 8 stage(s), 17218 latest per-stage candidates represented, 0 runtime-ready. Stage 3: no-runtime-keeper-yet, expected 5.6/10, target-video 4.6/10, identity margin 0. late identity pass. Stage 7: no-runtime-keeper-yet, expected 5.7/10, target-video 4.2/10, identity margin 0. late identity pass. Stage 11: no-runtime-keeper-yet, expected 5.1/10, target-video 4.6/10, identity margin 0. late identity pass. Stage 15: no-runtime-keeper-yet, expected 5.9/10, target-video 3.8/10, identity margin 0. late identity pass. Stage 19: no-runtime-keeper-yet, expected 4.5/10, target-video 4/10, identity margin 0. late identity pass. Stage 23: no-runtime-keeper-yet, expected 5.4/10, target-video 4.1/10, identity margin -0.4. Stage 27: no-runtime-keeper-yet, expected 5.1/10, target-video 3/10, identity margin -0.2. late identity blocked (challenge-1-arrival-group-1 vs challenge 7). Stage 31: no-runtime-keeper-yet, expected 6/10, target-video 2.9/10, identity margin n/a.</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> 8 challenge(s), 40 target group controls, 8.6/10 control readiness. Reference video object tracks now produce explicit candidate controls for challenge-stage group timing, speed, arc/drop scale, lower-field travel, y-offset, path-family hints, and representative sampled paths. This should reduce blind CPU sweeps and make failed candidates easier to diagnose. Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
-            <p class="docMeta"><strong>Set-piece contracts:</strong> 8 challenge contract(s), 40/40 reference-backed groups, current average 4.2/10, target-contract fit 5.4/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
+            <p class="docMeta"><strong>Set-piece contracts:</strong> 8 challenge contract(s), 40/40 reference-backed groups, current average 4.3/10, target-contract fit 5.2/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
+            <p class="docMeta"><strong>Runtime motion spec trial:</strong> Challenge 2 / internal Stage 7 has 5 runtime-facing spec group(s), 5 reference-backed, using reference-spline-v1. The strict score has not lifted yet; this is a measured seam for the next tuning pass. Source artifact: <code>reference-artifacts/analyses/challenge-motion-spec/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             
     <div class="docWrap">
-      <p><strong>Latest gameplay segment evidence:</strong> 28s Level 5 capture for professional review; 1 audio track captured; seed 9052; generated 2026-05-31T20:52:16.458Z.</p>
+      <p><strong>Latest gameplay segment evidence:</strong> 28s Level 7 capture for professional review; 1 audio track captured; seed 9052; generated 2026-06-06T02:50:10.168Z.</p>
       <p class="docMeta"><strong>Harness:</strong> <code>npm run harness:capture:gameplay-segment -- --start-kind=challenge --challenge-stage=N --mode=watch --persona=professional --seconds=30 --label=...</code>. Use the same seed/persona/start options for before-after candidate comparisons.</p>
       <p class="docMeta"><strong>Direct artifact links:</strong> Private companion store only; not exposed from the public repo.</p>
       
@@ -12442,7 +12450,7 @@
     
     </div>
   
-            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 3-4</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below preserve internal stage markers for traceability; human-facing copy should use between-stage labels like <strong>Challenging Stage A-B</strong> once the runtime mapping is confirmed.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             
     <div class="challengeCompareGrid">
@@ -12467,13 +12475,7 @@
       </div>
     </div>
     <div class="levelRoleImages">
-      
-      <div class="catalogMediaItem">
-        <span class="catalogMediaLabel">Stage 7 before/after contact sheet</span>
-        <div class="mediaPlaceholder">Private companion store only; not exposed from the public repo.</div>
-        <span class="catalogMediaNote">Ten deterministic time samples. Open the evidence panel for a wider native-scale review.</span>
-      </div>
-    
+      <div class="mediaPlaceholder">Stage 7 before/after contact sheet pending.</div>
     </div>
   
             <div class="inlineDocShelf">
@@ -12512,10 +12514,10 @@
                 
     <tr>
       <td><strong>Challenging Stage 3-4</strong><br><span class="docMeta">priority: highest<br>stage 3</span></td>
-      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.3; graphics 4.4; novelty 3.9</span></td>
+      <td><strong>4.2/10</strong><br><span class="docMeta">move 4.3; graphics 4.4; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">first-challenge-peel, classic-column-drop, side-hook-return</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.714</span></td>
-      <td>contract 6.9/10<br>target-video 3.1/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 6.9/10<br>target-video 3.2/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.</td>
     </tr>
@@ -12523,21 +12525,21 @@
 
     <tr>
       <td><strong>Challenging Stage 7-8</strong><br><span class="docMeta">priority: highest<br>stage 7</span></td>
-      <td><strong>3.6/10</strong><br><span class="docMeta">move 3; graphics 4; novelty 3.9</span></td>
+      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.5; graphics 4.1; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">cross-sweep, hook-arc</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.67</span></td>
-      <td>contract 6.2/10<br>target-video 3.2/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 6.2/10<br>target-video 4.7/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.</td>
     </tr>
   
 
     <tr>
-      <td><strong>Challenging Stage 11-12</strong><br><span class="docMeta">priority: highest<br>stage 11</span></td>
-      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.2; graphics 4.6; novelty 3.9</span></td>
+      <td><strong>Challenging Stage 11-12</strong><br><span class="docMeta">priority: high<br>stage 11</span></td>
+      <td><strong>4.4/10</strong><br><span class="docMeta">move 4.4; graphics 4.6; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">hook-arc</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.686</span></td>
-      <td>contract 7.3/10<br>target-video 5.0/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 7.2/10<br>target-video 4.7/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.</td>
     </tr>
@@ -12545,10 +12547,10 @@
 
     <tr>
       <td><strong>Challenging Stage 15-16</strong><br><span class="docMeta">priority: highest<br>stage 15</span></td>
-      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.3; graphics 4.6; novelty 3.9</span></td>
+      <td><strong>4.2/10</strong><br><span class="docMeta">move 4.3; graphics 4.6; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">pink-serpentine</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.691</span></td>
-      <td>contract 4.6/10<br>target-video 3.7/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 4.4/10<br>target-video 3.4/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.</td>
     </tr>
@@ -12559,7 +12561,7 @@
       <td><strong>4.4/10</strong><br><span class="docMeta">move 4.6; graphics 4.7; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">pink-green-low-sweep, pink-green-cascade</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.681</span></td>
-      <td>contract 4.3/10<br>target-video 3.3/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 3.9/10<br>target-video 2.7/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.</td>
     </tr>
@@ -12570,7 +12572,7 @@
       <td><strong>4.2/10</strong><br><span class="docMeta">move 4.3; graphics 4.5; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">green-ladder-high-exit, green-ladder-deep-drop</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.678</span></td>
-      <td>contract 4.5/10<br>target-video 3.6/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 4.5/10<br>target-video 3.5/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Rebuild Challenge 6 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.</td>
     </tr>
@@ -12578,10 +12580,10 @@
 
     <tr>
       <td><strong>Challenging Stage 27-28</strong><br><span class="docMeta">priority: highest<br>stage 27</span></td>
-      <td><strong>4.2/10</strong><br><span class="docMeta">move 4.3; graphics 4.6; novelty 3.9</span></td>
+      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.5; graphics 4.7; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">yellow-fan-low-drift, yellow-fan-cross-cut</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.651</span></td>
-      <td>contract 4.7/10<br>target-video 3.8/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 4.2/10<br>target-video 3.2/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.</td>
     </tr>
@@ -12589,10 +12591,10 @@
 
     <tr>
       <td><strong>Challenging Stage 31-32</strong><br><span class="docMeta">priority: highest<br>stage 31</span></td>
-      <td><strong>4.3/10</strong><br><span class="docMeta">move 4.3; graphics 4.7; novelty 3.9</span></td>
+      <td><strong>4.4/10</strong><br><span class="docMeta">move 4.5; graphics 4.7; novelty 3.9</span></td>
       <td>5 groups / 40 targets<br><span class="docMeta">blue-purple-finale</span></td>
       <td>5/5 reference paths<br><span class="docMeta">avg confidence 0.711</span></td>
-      <td>contract 4.4/10<br>target-video 3.4/10<br><span class="docMeta">safety pass</span></td>
+      <td>contract 4.2/10<br>target-video 3.1/10<br><span class="docMeta">safety pass</span></td>
       <td>3.2/10<br><span class="docMeta">provisional-target-only</span></td>
       <td>Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing.</td>
     </tr>
@@ -12612,7 +12614,7 @@
         <span class="scorePill">4.3/10 movement</span>
         <span class="scorePill">4.4/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">4.3/10 conform</span>
+        <span class="scorePill">4.2/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -12631,8 +12633,8 @@
         <span class="catalogMediaNote">Runtime path family: first-challenge-peel</span>
       </div>
     
-            <p>first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.3/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 5.7/10, target-contract fit 6.9/10.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.28. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-1-arrival-group-1; xRange 0.7899, yRange 0.6914, pathLength 0.6916.</p>
+            <p>first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.3/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 6.9/10.</p>
+            <p class="docMeta">Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-1-arrival-group-1; xRange 1.0447, yRange 0.7448, pathLength 0.7585.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -12645,9 +12647,9 @@
     
             <p><strong>Strict read:</strong> movement 4.3/10, graphics 4.4/10, alien novelty 3.9/10, progression 3.2/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>challenge-1-arrival-group-1</code> (8.5/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 6.9/10. Target contract fit is 6.9/10 for Challenging Stage 1 (Levels 3-4): group count 1, path-family order 1, type order 1, family order 1, object-track 0.28 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Target contract:</strong> 6.9/10. Target contract fit is 6.9/10 for Challenging Stage 1 (Levels 3-4): group count 1, path-family order 1, type order 1, family order 1, object-track 0.29 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should teach the player that challenge stages are safe, scoreable pattern reads rather than combat waves.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.4</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.2</span><span>playerShotOpportunity: 5.7</span><span>targetContractFit: 6.9</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.4</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.4</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.2</span><span>playerShotOpportunity: 5.6</span><span>targetContractFit: 6.9</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.4</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -12659,9 +12661,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.28. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-1-arrival-group-1; xRange 0.7899, yRange 0.6914, pathLength 0.6916.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.28. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 54/65</li><li>Active enemies: 2-24</li><li>X range: 159.545</li><li>Y range: 65.969</li><li>Lower-field share: 0.511</li></ul>
+            <p>Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-1-arrival-group-1; xRange 1.0447, yRange 0.7448, pathLength 0.7585.</p>
+            <p class="docMeta">Strict movement score 4.3/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 63/65</li><li>Active enemies: 2-30</li><li>X range: 200.986</li><li>Y range: 125.107</li><li>Lower-field share: 0.226</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -12672,14 +12674,14 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 1 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 40 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 46 sampled windows; 72% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.31.</p>
-            <p class="docMeta">Object silhouettes: 4.7/10; player shot opportunity: 5.7/10.</p>
+            <p>Runtime sprite-motion hook observed 1 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 38 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 61 sampled windows; 82% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.11.</p>
+            <p class="docMeta">Object silhouettes: 4.7/10; player shot opportunity: 5.6/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 2</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 0</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
@@ -12697,11 +12699,11 @@
           <span>Challenging Stage 7-8</span>
           <small>Internal challenge marker 7; runtime layout scorpion-cross-sweep</small>
         </span>
-        <span class="scorePill">3.7/10 interest</span>
-        <span class="scorePill">3/10 movement</span>
-        <span class="scorePill">4/10 graphics</span>
+        <span class="scorePill">4.3/10 interest</span>
+        <span class="scorePill">4.5/10 movement</span>
+        <span class="scorePill">4.1/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">3.6/10 conform</span>
+        <span class="scorePill">4.3/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -12720,8 +12722,8 @@
         <span class="catalogMediaNote">Runtime path family: cross-sweep</span>
       </div>
     
-            <p>scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 3/10, graphics 4/10, alien novelty 3.9/10, shot opportunity 5.7/10, target-contract fit 6.2/10.</p>
-            <p class="docMeta">Strict movement score 3/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.5, object-track fit 0.3. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.4/10 against challenge-1-arrival-group-1; xRange 0.7782, yRange 0.5279, pathLength 0.8934.</p>
+            <p>scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.5/10, graphics 4.1/10, alien novelty 3.9/10, shot opportunity 5.8/10, target-contract fit 6.2/10.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.8, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.8/10 against challenge-2-arrival-group-1; xRange 0.6142, yRange 0.6994, pathLength 0.9123.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -12732,25 +12734,25 @@
         <span class="catalogMediaNote">Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.</span>
       </div>
     
-            <p><strong>Strict read:</strong> movement 3/10, graphics 4/10, alien novelty 3.9/10, progression 2.4/10.</p>
-            <p><strong>Diagnostic best reference:</strong> <code>challenge-1-arrival-group-1</code> (8.4/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 6.2/10. Target contract fit is 6.2/10 for Challenging Stage 2 (Levels 7-8): group count 1, path-family order 0.6, type order 1, family order 1, object-track 0.3 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Strict read:</strong> movement 4.5/10, graphics 4.1/10, alien novelty 3.9/10, progression 3.2/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>challenge-2-arrival-group-1</code> (8.8/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> 6.2/10. Target contract fit is 6.2/10 for Challenging Stage 2 (Levels 7-8): group count 1, path-family order 0.4, type order 1, family order 1, object-track 0.5 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should introduce a stronger mixed-family visual grammar and a learnable crossing pattern.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 3</span><span>graphicalConformance: 4</span><span>alienNovelty: 3.9</span><span>stageProgression: 2.4</span><span>playerShotOpportunity: 5.7</span><span>targetContractFit: 6.2</span><span>safetyRule: 10</span><span>legacyCoverageScore: 5.8</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.5</span><span>graphicalConformance: 4.1</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.2</span><span>playerShotOpportunity: 5.8</span><span>targetContractFit: 6.2</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.4</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
           <article class="challengeEvidenceCard">
             <h3>Aliens</h3>
-            <p>Strict alien/progression novelty score 3.9/10. Current stages expose labels, type mixes, direct specialty-sprite target-crop evidence, and 1 visual family/families, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.</p>
-            <p class="docMeta">Group identity: 8.3/10. 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.</p>
+            <p>Strict alien/progression novelty score 3.9/10. Current stages expose labels, type mixes, direct specialty-sprite target-crop evidence, and 1 visual family/families, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 2/5 path signatures; average within-wave spawn span 0.42s.</p>
+            <p class="docMeta">Group identity: 7.6/10. 5/5 wave type signatures and 2/5 path signatures; average within-wave spawn span 0.42s.</p>
             <p class="docMeta">Lane types: but, boss, rogue, bee, bee, rogue, boss, but</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 3/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.5, object-track fit 0.3. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.4/10 against challenge-1-arrival-group-1; xRange 0.7782, yRange 0.5279, pathLength 0.8934.</p>
-            <p class="docMeta">Strict movement score 3/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.5, object-track fit 0.3. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 5/65</li><li>Active enemies: 1-8</li><li>X range: 41.16</li><li>Y range: 41.098</li><li>Lower-field share: 1</li></ul>
+            <p>Strict movement score 4.5/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.8, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.8/10 against challenge-2-arrival-group-1; xRange 0.6142, yRange 0.6994, pathLength 0.9123.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 0.8, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 50/65</li><li>Active enemies: 2-16</li><li>X range: 92.883</li><li>Y range: 56.002</li><li>Lower-field share: 0.526</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -12761,18 +12763,18 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 8 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 4 sampled windows; 100% had a lane with 2+ targets, lane diversity was 0.71, and center-lane bias was 0.11.</p>
-            <p class="docMeta">Object silhouettes: 4.6/10; player shot opportunity: 5.7/10.</p>
+            <p>Runtime sprite-motion hook observed 3 visual family/families, 2 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 38 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 46 sampled windows; 78% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.37.</p>
+            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.8/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 0</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 4</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
-            <ul><li>Best reference match is challenge-1-arrival-group-1, not expected challenge-2-arrival-group-1.</li><li>Movement conformance is only 3/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.</li><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Cross-sweep identity is visible in labels, but the measured vector still misses the expected Challenge 2 reference family.</li></ul>
+            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Cross-sweep identity now lands on the expected Challenge 2 reference family; next work is trajectory precision and active visual novelty, not basic identity.</li></ul>
             <ul><li>Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.</li><li>Score separate group identities so stage 7 is not just a slightly wider stage 3.</li></ul>
           </article>
         </div>
@@ -12786,11 +12788,11 @@
           <span>Challenging Stage 11-12</span>
           <small>Internal challenge marker 11; runtime layout stingray-crown-hook-hybrid</small>
         </span>
-        <span class="scorePill">4.3/10 interest</span>
-        <span class="scorePill">4.2/10 movement</span>
+        <span class="scorePill">4.4/10 interest</span>
+        <span class="scorePill">4.4/10 movement</span>
         <span class="scorePill">4.6/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">4.3/10 conform</span>
+        <span class="scorePill">4.4/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -12809,8 +12811,8 @@
         <span class="catalogMediaNote">Runtime path family: hook-arc</span>
       </div>
     
-            <p>stingray-crown-hook-hybrid / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly; strict movement 4.2/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 7.3/10.</p>
-            <p class="docMeta">Strict movement score 4.2/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 0.95, turn fit 0.5, object-track fit 0.54. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8/10 against challenge-3-arrival-group-1; xRange 0.445, yRange 0.7001, pathLength 0.8128.</p>
+            <p>stingray-crown-hook-hybrid / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly; strict movement 4.4/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.9/10, target-contract fit 7.2/10.</p>
+            <p class="docMeta">Strict movement score 4.4/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-3-arrival-group-1; xRange 0.5336, yRange 0.8672, pathLength 1.2258.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -12821,11 +12823,11 @@
         <span class="catalogMediaNote">Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.</span>
       </div>
     
-            <p><strong>Strict read:</strong> movement 4.2/10, graphics 4.6/10, alien novelty 3.9/10, progression 3.2/10.</p>
-            <p><strong>Diagnostic best reference:</strong> <code>challenge-3-arrival-group-1</code> (8/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 7.3/10. Target contract fit is 7.3/10 for Challenging Stage 3 (Levels 11-12): group count 1, path-family order 1, type order 1, family order 1, object-track 0.54 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Strict read:</strong> movement 4.4/10, graphics 4.6/10, alien novelty 3.9/10, progression 3.2/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>challenge-3-arrival-group-1</code> (8.5/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> 7.2/10. Target contract fit is 7.2/10 for Challenging Stage 3 (Levels 11-12): group count 1, path-family order 1, type order 1, family order 1, object-track 0.5 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should read as a later Galaga challenge with alien novelty and a distinct high-bonus route.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.2</span><span>graphicalConformance: 4.6</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.2</span><span>playerShotOpportunity: 5.6</span><span>targetContractFit: 7.3</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.8</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.4</span><span>graphicalConformance: 4.6</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.2</span><span>playerShotOpportunity: 5.9</span><span>targetContractFit: 7.2</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.9</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -12837,9 +12839,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.2/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 0.95, turn fit 0.5, object-track fit 0.54. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8/10 against challenge-3-arrival-group-1; xRange 0.445, yRange 0.7001, pathLength 0.8128.</p>
-            <p class="docMeta">Strict movement score 4.2/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 0.95, turn fit 0.5, object-track fit 0.54. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 8/65</li><li>Active enemies: 6-8</li><li>X range: 73.392</li><li>Y range: 101.104</li><li>Lower-field share: 0.552</li></ul>
+            <p>Strict movement score 4.4/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-3-arrival-group-1; xRange 0.5336, yRange 0.8672, pathLength 1.2258.</p>
+            <p class="docMeta">Strict movement score 4.4/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.5. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 58/65</li><li>Active enemies: 2-16</li><li>X range: 99.767</li><li>Y range: 73.643</li><li>Lower-field share: 0.564</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -12850,14 +12852,14 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 1 visual family/families, 2 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 16 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 7 sampled windows; 100% had a lane with 2+ targets, lane diversity was 0.86, and center-lane bias was 0.17.</p>
-            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.6/10.</p>
+            <p>Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 40 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 53 sampled windows; 89% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.28.</p>
+            <p class="docMeta">Object silhouettes: 4.7/10; player shot opportunity: 5.9/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 2</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 9</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
@@ -12879,7 +12881,7 @@
         <span class="scorePill">4.3/10 movement</span>
         <span class="scorePill">4.6/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">4.3/10 conform</span>
+        <span class="scorePill">4.2/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -12892,8 +12894,8 @@
           <article class="challengeEvidenceCard">
             <h3>Aurora Current</h3>
             <div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>
-            <p>pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.9/10, target-contract fit 4.6/10.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.36. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-4-pink-serpentine-group-1; xRange 1.0617, yRange 0.6363, pathLength 1.3096.</p>
+            <p>pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.2/10, target-contract fit 4.4/10.</p>
+            <p class="docMeta">Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.33. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-4-pink-serpentine-group-1; xRange 1.0153, yRange 0.5676, pathLength 1.6346.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -12906,9 +12908,9 @@
     
             <p><strong>Strict read:</strong> movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, progression 3.1/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>challenge-4-pink-serpentine-group-1</code> (8.9/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 4.6/10. Target contract fit is 4.6/10 for Challenging Stage 4 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.36 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Target contract:</strong> 4.4/10. Target contract fit is 4.4/10 for Challenging Stage 4 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.33 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.6</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.9</span><span>targetContractFit: 4.6</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.9</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.6</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.2</span><span>targetContractFit: 4.4</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.9</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -12920,9 +12922,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.36. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-4-pink-serpentine-group-1; xRange 1.0617, yRange 0.6363, pathLength 1.3096.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.36. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 38/65</li><li>Active enemies: 3-18</li><li>X range: 230.907</li><li>Y range: 69.981</li><li>Lower-field share: 0.818</li></ul>
+            <p>Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.33. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-4-pink-serpentine-group-1; xRange 1.0153, yRange 0.5676, pathLength 1.6346.</p>
+            <p class="docMeta">Strict movement score 4.3/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.33. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 62/65</li><li>Active enemies: 1-14</li><li>X range: 165.568</li><li>Y range: 68.141</li><li>Lower-field share: 0.672</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -12933,18 +12935,18 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 2 visual family/families, 2 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 29 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 35 sampled windows; 86% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.14.</p>
-            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.9/10.</p>
+            <p>Runtime sprite-motion hook observed 2 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 23 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 58 sampled windows; 59% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.18.</p>
+            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.2/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 7</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 5</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
-            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.6/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity.</li></ul>
+            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.4/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity.</li></ul>
             <ul><li>Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.</li><li>Add high-bonus readability probes so late-stage complexity stays learnable instead of becoming visual noise.</li></ul>
           </article>
         </div>
@@ -12970,13 +12972,13 @@
             <h3>Reference Target</h3>
             <div class="mediaPlaceholder">Reference contact sheet pending for this challenge stage.</div>
             <p>Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.</p>
-            <p class="docMeta">late cascade group with the clearest lower-field route read</p>
+            <p class="docMeta">second pink/green cascade group with a mirrored lower-field pass</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Aurora Current</h3>
             <div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>
-            <p>pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.5/10, target-contract fit 4.3/10.</p>
-            <p class="docMeta">Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.31. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.6/10 against challenge-5-pink-green-cascade-group-4; xRange 1.0651, yRange 0.6492, pathLength 1.6956.</p>
+            <p>pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.2/10, target-contract fit 3.9/10.</p>
+            <p class="docMeta">Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-2: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.23. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.6/10 against challenge-5-pink-green-cascade-group-2; xRange 1.0344, yRange 0.6434, pathLength 1.9861.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -12988,10 +12990,10 @@
       </div>
     
             <p><strong>Strict read:</strong> movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, progression 3.1/10.</p>
-            <p><strong>Diagnostic best reference:</strong> <code>challenge-5-pink-green-cascade-group-4</code> (9.6/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 4.3/10. Target contract fit is 4.3/10 for Challenging Stage 5 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.31 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>challenge-5-pink-green-cascade-group-2</code> (9.6/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> 3.9/10. Target contract fit is 3.9/10 for Challenging Stage 5 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.23 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.6</span><span>graphicalConformance: 4.7</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.5</span><span>targetContractFit: 4.3</span><span>safetyRule: 10</span><span>legacyCoverageScore: 7.1</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.6</span><span>graphicalConformance: 4.7</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.2</span><span>targetContractFit: 3.9</span><span>safetyRule: 10</span><span>legacyCoverageScore: 7.1</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -13003,9 +13005,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.31. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.6/10 against challenge-5-pink-green-cascade-group-4; xRange 1.0651, yRange 0.6492, pathLength 1.6956.</p>
-            <p class="docMeta">Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.31. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 37/65</li><li>Active enemies: 4-31</li><li>X range: 259.381</li><li>Y range: 77.992</li><li>Lower-field share: 0.275</li></ul>
+            <p>Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-2: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.23. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.6/10 against challenge-5-pink-green-cascade-group-2; xRange 1.0344, yRange 0.6434, pathLength 1.9861.</p>
+            <p class="docMeta">Strict movement score 4.6/10 against challenge-5-pink-green-cascade-group-2: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.23. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 47/65</li><li>Active enemies: 1-22</li><li>X range: 219.073</li><li>Y range: 74.003</li><li>Lower-field share: 0.191</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -13016,18 +13018,18 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 37 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 35 sampled windows; 80% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.17.</p>
-            <p class="docMeta">Object silhouettes: 4.7/10; player shot opportunity: 5.5/10.</p>
+            <p>Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 23 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 45 sampled windows; 67% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.18.</p>
+            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.2/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 1</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 0</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
-            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.3/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability.</li></ul>
+            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 3.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability.</li></ul>
             <ul><li>Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.</li><li>Score group-to-group alternation so cascade identity is not just a different path-family name.</li></ul>
           </article>
         </div>
@@ -13058,8 +13060,8 @@
           <article class="challengeEvidenceCard">
             <h3>Aurora Current</h3>
             <div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>
-            <p>green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.3/10, graphics 4.5/10, alien novelty 3.9/10, shot opportunity 5.8/10, target-contract fit 4.5/10.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-6-green-ladder-split-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.34. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-6-green-ladder-split-group-1; xRange 1.0698, yRange 0.8046, pathLength 2.0754.</p>
+            <p>green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.3/10, graphics 4.5/10, alien novelty 3.9/10, shot opportunity 5.5/10, target-contract fit 4.5/10.</p>
+            <p class="docMeta">Strict movement score 4.3/10 against challenge-6-green-ladder-split-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.34. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-6-green-ladder-split-group-1; xRange 1.0501, yRange 0.7984, pathLength 2.0261.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -13072,9 +13074,9 @@
     
             <p><strong>Strict read:</strong> movement 4.3/10, graphics 4.5/10, alien novelty 3.9/10, progression 2.7/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>challenge-6-green-ladder-split-group-1</code> (8.9/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 4.5/10. Target contract fit is 4.5/10 for Challenging Stage 6 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.34 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Target contract:</strong> 4.5/10. Target contract fit is 4.5/10 for Challenging Stage 6 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.33 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should make staggered group timing and split route separation visible enough for a player to learn.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.5</span><span>alienNovelty: 3.9</span><span>stageProgression: 2.7</span><span>playerShotOpportunity: 5.8</span><span>targetContractFit: 4.5</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.8</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.5</span><span>alienNovelty: 3.9</span><span>stageProgression: 2.7</span><span>playerShotOpportunity: 5.5</span><span>targetContractFit: 4.5</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.8</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -13086,9 +13088,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.3/10 against challenge-6-green-ladder-split-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.34. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-6-green-ladder-split-group-1; xRange 1.0698, yRange 0.8046, pathLength 2.0754.</p>
+            <p>Strict movement score 4.3/10 against challenge-6-green-ladder-split-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.34. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-6-green-ladder-split-group-1; xRange 1.0501, yRange 0.7984, pathLength 2.0261.</p>
             <p class="docMeta">Strict movement score 4.3/10 against challenge-6-green-ladder-split-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.34. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 35/65</li><li>Active enemies: 1-37</li><li>X range: 264.331</li><li>Y range: 91.448</li><li>Lower-field share: 0.431</li></ul>
+            <ul><li>Samples: 45/65</li><li>Active enemies: 1-29</li><li>X range: 245.427</li><li>Y range: 107.398</li><li>Lower-field share: 0.419</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -13099,14 +13101,14 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 2 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 38 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 32 sampled windows; 84% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.18.</p>
-            <p class="docMeta">Object silhouettes: 4.6/10; player shot opportunity: 5.8/10.</p>
+            <p>Runtime sprite-motion hook observed 2 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 30 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 42 sampled windows; 81% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.17.</p>
+            <p class="docMeta">Object silhouettes: 4.7/10; player shot opportunity: 5.5/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 4</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 1</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
@@ -13124,11 +13126,11 @@
           <span>Challenging Stage 27-28</span>
           <small>Internal challenge marker 27; runtime layout yellow-diagonal-fan</small>
         </span>
-        <span class="scorePill">4.2/10 interest</span>
-        <span class="scorePill">4.3/10 movement</span>
-        <span class="scorePill">4.6/10 graphics</span>
+        <span class="scorePill">4.3/10 interest</span>
+        <span class="scorePill">4.5/10 movement</span>
+        <span class="scorePill">4.7/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">4.2/10 conform</span>
+        <span class="scorePill">4.3/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -13136,13 +13138,13 @@
             <h3>Reference Target</h3>
             <div class="mediaPlaceholder">Reference contact sheet pending for this challenge stage.</div>
             <p>Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.</p>
-            <p class="docMeta">diagonal fan lane that creates a memorable late-stage aim/read pattern</p>
+            <p class="docMeta">final diagonal fan group before the perfect/result read</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Aurora Current</h3>
             <div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>
-            <p>yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.2/10, target-contract fit 4.7/10.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-7-yellow-diagonal-fan-group-1: y-range fit 0.98, path-length fit 1, turn fit 1, object-track fit 0.38. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.8/10 against challenge-7-yellow-diagonal-fan-group-1; xRange 1.004, yRange 0.5503, pathLength 1.2483.</p>
+            <p>yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.5/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.1/10, target-contract fit 4.2/10.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-7-yellow-diagonal-fan-group-5: y-range fit 0.93, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.5/10 against challenge-7-yellow-diagonal-fan-group-5; xRange 1.0468, yRange 0.538, pathLength 1.8102.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -13153,11 +13155,11 @@
         <span class="catalogMediaNote">Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.</span>
       </div>
     
-            <p><strong>Strict read:</strong> movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, progression 2.7/10.</p>
-            <p><strong>Diagnostic best reference:</strong> <code>challenge-7-yellow-diagonal-fan-group-1</code> (8.8/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 4.7/10. Target contract fit is 4.7/10 for Challenging Stage 7 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.38 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Strict read:</strong> movement 4.5/10, graphics 4.7/10, alien novelty 3.9/10, progression 2.7/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>challenge-7-yellow-diagonal-fan-group-5</code> (9.5/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> 4.2/10. Target contract fit is 4.2/10 for Challenging Stage 7 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.29 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should be visually and tactically unlike the prior ladder/cascade stages.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.6</span><span>alienNovelty: 3.9</span><span>stageProgression: 2.7</span><span>playerShotOpportunity: 5.2</span><span>targetContractFit: 4.7</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.8</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.5</span><span>graphicalConformance: 4.7</span><span>alienNovelty: 3.9</span><span>stageProgression: 2.7</span><span>playerShotOpportunity: 5.1</span><span>targetContractFit: 4.2</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.9</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -13169,9 +13171,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.3/10 against challenge-7-yellow-diagonal-fan-group-1: y-range fit 0.98, path-length fit 1, turn fit 1, object-track fit 0.38. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.8/10 against challenge-7-yellow-diagonal-fan-group-1; xRange 1.004, yRange 0.5503, pathLength 1.2483.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-7-yellow-diagonal-fan-group-1: y-range fit 0.98, path-length fit 1, turn fit 1, object-track fit 0.38. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 24/65</li><li>Active enemies: 1-14</li><li>X range: 211.855</li><li>Y range: 63.873</li><li>Lower-field share: 0.379</li></ul>
+            <p>Strict movement score 4.5/10 against challenge-7-yellow-diagonal-fan-group-5: y-range fit 0.93, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.5/10 against challenge-7-yellow-diagonal-fan-group-5; xRange 1.0468, yRange 0.538, pathLength 1.8102.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-7-yellow-diagonal-fan-group-5: y-range fit 0.93, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 31/65</li><li>Active enemies: 1-12</li><li>X range: 210.119</li><li>Y range: 73.927</li><li>Lower-field share: 0.303</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -13182,9 +13184,9 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 28 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 23 sampled windows; 78% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.17.</p>
-            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.2/10.</p>
+            <p>Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 20 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 31 sampled windows; 74% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.19.</p>
+            <p class="docMeta">Object silhouettes: 5/10; player shot opportunity: 5.1/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
@@ -13193,7 +13195,7 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
-            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.7/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing.</li></ul>
+            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing.</li></ul>
             <ul><li>Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.</li><li>Add a player-hit opportunity probe that rewards firing along the diagonal band rather than center-lane waiting.</li></ul>
           </article>
         </div>
@@ -13207,11 +13209,11 @@
           <span>Challenging Stage 31-32</span>
           <small>Internal challenge marker 31; runtime layout blue-purple-finale</small>
         </span>
-        <span class="scorePill">4.3/10 interest</span>
-        <span class="scorePill">4.3/10 movement</span>
+        <span class="scorePill">4.4/10 interest</span>
+        <span class="scorePill">4.5/10 movement</span>
         <span class="scorePill">4.7/10 graphics</span>
         <span class="scorePill">3.9/10 alien novelty</span>
-        <span class="scorePill">4.3/10 conform</span>
+        <span class="scorePill">4.4/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
         <div class="challengeCompareGrid">
@@ -13219,13 +13221,13 @@
             <h3>Reference Target</h3>
             <div class="mediaPlaceholder">Reference contact sheet pending for this challenge stage.</div>
             <p>Eighth visible challenge should act as a compact blue/purple late-loop capstone.</p>
-            <p class="docMeta">compact late-loop capstone with clustered arcs and no return to early-stage vocabulary</p>
+            <p class="docMeta">late compact finale group with a short but readable lower-field exit</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Aurora Current</h3>
             <div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>
-            <p>blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.7/10, target-contract fit 4.4/10.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-8-blue-purple-finale-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.32. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-8-blue-purple-finale-group-1; xRange 1.0571, yRange 0.8113, pathLength 1.9462.</p>
+            <p>blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.5/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.5/10, target-contract fit 4.2/10.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-8-blue-purple-finale-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.3/10 against challenge-8-blue-purple-finale-group-4; xRange 0.9897, yRange 0.7369, pathLength 2.5453.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
@@ -13236,11 +13238,11 @@
         <span class="catalogMediaNote">Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.</span>
       </div>
     
-            <p><strong>Strict read:</strong> movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, progression 3.1/10.</p>
-            <p><strong>Diagnostic best reference:</strong> <code>challenge-8-blue-purple-finale-group-1</code> (8.9/10 legacy broad coverage).</p>
-            <p><strong>Target contract:</strong> 4.4/10. Target contract fit is 4.4/10 for Challenging Stage 8 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.32 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
+            <p><strong>Strict read:</strong> movement 4.5/10, graphics 4.7/10, alien novelty 3.9/10, progression 3.1/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>challenge-8-blue-purple-finale-group-4</code> (9.3/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> 4.2/10. Target contract fit is 4.2/10 for Challenging Stage 8 target-video object tracks: group count 1, path-family order 0, type order 0, family order 0, object-track 0.29 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.</p>
             <p>Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.</p>
-            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.3</span><span>graphicalConformance: 4.7</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.7</span><span>targetContractFit: 4.4</span><span>safetyRule: 10</span><span>legacyCoverageScore: 6.9</span></div>
+            <div class="challengeComponentGrid"><span>baseline: 1</span><span>movementConformance: 4.5</span><span>graphicalConformance: 4.7</span><span>alienNovelty: 3.9</span><span>stageProgression: 3.1</span><span>playerShotOpportunity: 5.5</span><span>targetContractFit: 4.2</span><span>safetyRule: 10</span><span>legacyCoverageScore: 7</span></div>
           </article>
         </div>
         <div class="challengeAxisGrid">
@@ -13252,9 +13254,9 @@
           </article>
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
-            <p>Strict movement score 4.3/10 against challenge-8-blue-purple-finale-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.32. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.9/10 against challenge-8-blue-purple-finale-group-1; xRange 1.0571, yRange 0.8113, pathLength 1.9462.</p>
-            <p class="docMeta">Strict movement score 4.3/10 against challenge-8-blue-purple-finale-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.32. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
-            <ul><li>Samples: 34/65</li><li>Active enemies: 1-31</li><li>X range: 248.896</li><li>Y range: 91.701</li><li>Lower-field share: 0.401</li></ul>
+            <p>Strict movement score 4.5/10 against challenge-8-blue-purple-finale-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 9.3/10 against challenge-8-blue-purple-finale-group-4; xRange 0.9897, yRange 0.7369, pathLength 2.5453.</p>
+            <p class="docMeta">Strict movement score 4.5/10 against challenge-8-blue-purple-finale-group-4: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.29. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.</p>
+            <ul><li>Samples: 42/65</li><li>Active enemies: 2-22</li><li>X range: 239.625</li><li>Y range: 82.172</li><li>Lower-field share: 0.404</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -13265,18 +13267,18 @@
         <span class="catalogMediaNote">Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.</span>
       </div>
     
-            <p>Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 35 object-tracked silhouette track(s).</p>
-            <p>Shot-opportunity probe found scoreable targets in 31 sampled windows; 87% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.18.</p>
-            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.7/10.</p>
+            <p>Runtime sprite-motion hook observed 3 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 24 object-tracked silhouette track(s).</p>
+            <p>Shot-opportunity probe found scoreable targets in 38 sampled windows; 74% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.16.</p>
+            <p class="docMeta">Object silhouettes: 4.8/10; player shot opportunity: 5.5/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
             <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
-            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 5</li></ul>
+            <ul><li>Enemy shots: 0</li><li>Attack starts: 0</li><li>Ship losses: 0</li><li>Challenge contacts: 1</li></ul>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Gaps / Next</h3>
-            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.4/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone.</li></ul>
+            <ul><li>Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.</li><li>Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.</li><li>Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.</li><li>Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone.</li></ul>
             <ul><li>Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing.</li><li>Promote challenge enemy active-motion scoring so visual novelty is measured through animation, not only family labels.</li></ul>
           </article>
         </div>
@@ -13591,7 +13593,7 @@
         </ul>
         <p class="footer">
           Latest release note: <strong>Forward conformance measurement and sprite-readability guardrail pass</strong><br>
-          Release 1.4.0.1 · Updated June 3, 2026
+          Release 1.4.0.1 · Updated June 7, 2026
         </p>
       </aside>
     </main>
