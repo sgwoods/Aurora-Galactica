@@ -509,7 +509,7 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #accountRecoveryFields{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields[hidden]{display:none}
 #accountPanel .accountPasswordRow{display:flex;align-items:stretch;gap:8px}
-#accountPanel .accountPasswordRow input{flex:1}
+#accountPanel .accountPasswordRow input{flex:1;min-width:0}
 .accountPasswordToggle{flex:0 0 auto;min-width:42px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;padding:0 10px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 .accountPasswordToggle:hover,.accountPasswordToggle:focus-visible{outline:none;border-color:rgba(255,216,109,.72);color:#ffe39a;background:rgba(19,43,84,.9)}
 .accountPasswordToggle[disabled]{opacity:.45;cursor:default}
@@ -1027,8 +1027,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">Jun 07 2026, 11:20 AM EDT</span>
-      <span id="settingsState">main@b6c9247cc clean</span>
+      <span id="settingsRelease">Jun 10 2026, 6:58 AM EDT</span>
+      <span id="settingsState">codex/macbook-pro-1.4.1-guardians-integration@77dac584 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1327,7 +1327,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">Jun 07 2026, 11:20 AM EDT</span>
+    <span id="buildStampRelease">Jun 10 2026, 6:58 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1577,7 +1577,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-06-07T15%3A07%3A05.070Z%22%2C%22commit%22%3A%2241688d988%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-06-10T10%3A57%3A21.724Z%22%2C%22commit%22%3A%22ff87753a%22%2C%22branch%22%3A%22codex%2Fmacbook-pro-1.4.1-guardians-integration%22%2C%22overallCurrent%22%3A%228.8%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1834,8 +1834,8 @@ const PLATFORM_STORAGE_KEYS={
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
-const DEFAULT_GAME_SOUND_VOLUME=.20;
-const DEFAULT_ARCADE_MUSIC_VOLUME=.80;
+const DEFAULT_GAME_SOUND_VOLUME=.40;
+const DEFAULT_ARCADE_MUSIC_VOLUME=.60;
 const ARCADE_MUSIC_BACKUP_PLAYLIST_ID='PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo';
 const ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
 const ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
@@ -2103,7 +2103,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.1068.sha.b6c9247cc',commit:'b6c9247cc71d2c901f871569265abd24c9e6286a',branch:'main',dirty:false,released:'Jun 07 2026, 11:20 AM EDT',state:'main@b6c9247cc clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.1120.sha.77dac584',commit:'77dac584dfeb61c5f6baff7783917082e2e65a1e',branch:'codex/macbook-pro-1.4.1-guardians-integration',dirty:false,released:'Jun 10 2026, 6:58 AM EDT',state:'codex/macbook-pro-1.4.1-guardians-integration@77dac584 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -2534,7 +2534,7 @@ const sfx={
   return this.referenceBuffers[clip];
  },
  primeReferenceTheme(themeId=''){
-  if(String(themeId||'').trim()!=='galaga-reference-assets'||BUILD_INFO?.publicArtifactBoundaryEnabled)return;
+  if(String(themeId||'').trim()!=='galaga-reference-assets'||!referenceAudioPubliclyAvailable())return;
   [
    'assets/reference-audio/galaga3-start.m4a',
    'assets/reference-audio/galaga3-ambience-convoy.m4a',
@@ -3196,9 +3196,9 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),op
  const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}${watchScope}</span><span>SCORE NOT RECORDED</span></span>`:'';
  return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
-function recordScore(score,stage,initials='YOU'){
- const gameKey=currentScoreStorageGameKey();
- const gameTitle=currentScoreStorageGameTitle();
+function recordScore(score,stage,initials='YOU',opts={}){
+ const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+ const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
  const entry={
   id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,
   initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),
@@ -3209,14 +3209,14 @@ function recordScore(score,stage,initials='YOU'){
   gameKey,
   gameTitle
  };
- const board=loadScoreboard();
- const history=loadScoreHistory();
+ const board=loadScoreboard(gameKey);
+ const history=loadScoreHistory(gameKey);
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
  history.unshift(entry);
- saveScoreHistory(history);
+ saveScoreHistory(history,gameKey);
  const top=board.slice(0,10);
- saveScoreboard(top);
+ saveScoreboard(top,gameKey);
  S.best=top[0]?.score||0;
  writePref(scoreBestKey(gameKey),String(S.best));
  if(typeof syncAccountUi==='function')syncAccountUi();
@@ -3251,11 +3251,12 @@ function buildGameOverHtmlFromState(){
    })
   });
  }
- const board=leaderboardRowsForView();
+ const targetGameKey=normalizeScoreRecordGameKey(gameOverState.gameKey||currentScoreStorageGameKey());
+ const board=leaderboardRowsForView(LEADERBOARD.view,{gameKey:targetGameKey});
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
- const boardTitle=currentLeaderboardTitle();
+ const boardTitle=currentLeaderboardTitle(LEADERBOARD.view,targetGameKey);
  let entryHtml='';
  const authPromptText=typeof topScoreSavedLocallyPromptText==='function'
   ? topScoreSavedLocallyPromptText(gameOverState.gameTitle||'')
@@ -3280,6 +3281,8 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
  if(S.watchMode||S.playerTwo?.activeTurn==='done'){
   const shownStage=displayStageNumber(stage,challenge);
   const playerTwoMode=!!(!S.watchMode&&S.playerTwo?.activeTurn==='done');
+  const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+  const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
   const outcome=String(opts.outcome||'game_over').trim()||'game_over';
   const resultTitle=String(opts.resultTitle||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER')).trim()||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER');
   const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
@@ -3291,8 +3294,8 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
    stage:stage|0,
    challenge:!!challenge,
    shownStage,
-   gameKey:currentScoreStorageGameKey(),
-   gameTitle:currentScoreStorageGameTitle(),
+   gameKey,
+   gameTitle,
    stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
    initials:['-','-','-'],
    cursor:0,
@@ -3310,12 +3313,12 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
  const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
- const gameKey=currentScoreStorageGameKey();
- const gameTitle=currentScoreStorageGameTitle();
+ const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+ const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
  const outcome=String(opts.outcome||'game_over').trim()||'game_over';
  const resultTitle=String(opts.resultTitle||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER')).trim()||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER');
  const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
- const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
+ const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU',{gameKey,gameTitle});
  const editing=!!res.rank&&!hasLockedPilotInitials;
  const videoPosting=typeof topScoreVideoPostingEligibility==='function'
   ? topScoreVideoPostingEligibility(res.rank)
@@ -3431,7 +3434,7 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
   challenge:false,
-  audioTheme:'aurora-application',
+  audioTheme:referenceAudioPubliclyAvailable()?'galaga-reference-assets':'aurora-application',
   audioThemePinned:false,
   graphicsTheme:'aurora-borealis',
   spriteRenderMode:'auto',
@@ -3440,7 +3443,9 @@ const DEFAULT_TEST_CFG=Object.freeze({
 });
 let testCfgCache=null;
 function referenceAudioPubliclyAvailable(){
- return !BUILD_INFO?.publicArtifactBoundaryEnabled;
+ if(!BUILD_INFO?.publicArtifactBoundaryEnabled)return true;
+ const host=String(location?.hostname||'').toLowerCase();
+ return BUILD_INFO?.releaseChannel==='development'&&(host==='localhost'||host==='127.0.0.1'||host==='[::1]'||host==='::1');
 }
 function productionRootModeEnabled(){
  return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
@@ -6094,11 +6099,12 @@ function platformGameTitle(gameKey='',fallback=''){
   const resolved=String(scoreGameTitleForKey(normalizedKey,normalizedFallback)||'').trim();
   if(resolved)return resolved;
  }
+ if(normalizedFallback)return normalizedFallback;
  if(typeof currentScoreStorageGameTitle==='function'){
   const active=String(currentScoreStorageGameTitle()||'').trim();
   if(active)return active;
  }
- return normalizedFallback||'this game';
+ return 'this game';
 }
 function topScoreSavedLocallyPromptText(gameTitle=''){
  const label=platformGameTitle('',gameTitle);
@@ -6515,8 +6521,15 @@ function renderPilotRecords(rows){
  accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
  accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
-function currentLeaderboardTitle(view=LEADERBOARD.view){
- const gameTitle=String(currentScoreStorageGameTitle()||'Current Cabinet').toUpperCase();
+function currentLeaderboardTitle(view=LEADERBOARD.view,gameKey=currentScoreStorageGameKey()){
+ const normalized=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(gameKey)
+  : String(gameKey||'').trim();
+ const gameTitle=String(
+  typeof scoreGameTitleForKey==='function'
+   ? scoreGameTitleForKey(normalized)
+   : currentScoreStorageGameTitle()||'Current Cabinet'
+ ).toUpperCase();
  switch(view){
   case 'validated': return `${gameTitle} VALIDATED PILOTS`;
   case 'mine': return LEADERBOARD.user?`${gameTitle} MY SCORES`:`${gameTitle} MY SCORES · LOCAL`;
@@ -6528,15 +6541,20 @@ function latestCompletedLocalScoreRow(){
  const history=typeof loadScoreHistory==='function'?loadScoreHistory():[];
  return history[0]||null;
 }
-function leaderboardRowsForView(view=LEADERBOARD.view){
- if(view==='local')return localLeaderboardRows();
- if(view==='mine'&&!remoteAuthEnabled())return localLeaderboardRows();
- if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
- const rows=(LEADERBOARD.remote[view]||[]).filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true);
+function leaderboardRowsForView(view=LEADERBOARD.view,opts={}){
+ const targetGameKey=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey())
+  : String(opts.gameKey||'').trim();
+ const localRows=()=>localLeaderboardRows(targetGameKey);
+ const matchesGame=row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row,targetGameKey):true;
+ if(view==='local')return localRows();
+ if(view==='mine'&&!remoteAuthEnabled())return localRows();
+ if(view==='mine'&&!LEADERBOARD.user)return localRows();
+ const rows=(LEADERBOARD.remote[view]||[]).filter(matchesGame);
  if(rows.length)return rows;
- if((LEADERBOARD.remote[view]||[]).length)return localLeaderboardRows();
+ if((LEADERBOARD.remote[view]||[]).length)return localRows();
  if((view==='validated'||view==='mine')&&(LEADERBOARD.lastRemoteOk||LEADERBOARD.cacheStamp[view]))return [];
- return localLeaderboardRows();
+ return localRows();
 }
 function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='loading')return view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...';
@@ -7313,8 +7331,19 @@ function normalizePlayerTwoPersona(value=''){
 }
 function currentGameSupportsPlayerTwo(){
  const pack=typeof currentGamePack==='function'?currentGamePack():null;
- const gameKey=pack?.metadata?.gameKey||'aurora-galactica';
- return gameKey==='aurora-galactica';
+ return typeof gamePackSupportsPersonaRival==='function'
+  ? gamePackSupportsPersonaRival(pack)
+  : (pack?.metadata?.gameKey||'aurora-galactica')==='aurora-galactica';
+}
+function currentGameSupportsWatchMode(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const supports=typeof gamePackSupportsWatchMode==='function'
+  ? gamePackSupportsWatchMode(pack)
+  : true;
+ const canStart=typeof currentGamePackCanStart==='function'
+  ? currentGamePackCanStart()
+  : (typeof currentGamePackPlayable==='function'?currentGamePackPlayable():true);
+ return !!(supports&&canStart);
 }
 function playerTwoAuthReady(){
  if(window.__platinumHarnessPlayerTwoAuth||window.__auroraHarnessPlayerTwoAuth)return true;
@@ -7340,7 +7369,9 @@ function playerTwoSelectionState(){
  };
 }
 function selectedWatchPersona(){
- return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||'advanced');
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const config=typeof gamePackModalityConfig==='function'?gamePackModalityConfig(pack,'watch'):null;
+ return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||config?.defaultPersona||'advanced');
 }
 function setWatchPersona(key,opts={}){
  const personaKey=normalizePlayerTwoPersona(key);
@@ -7393,6 +7424,11 @@ function playerPersonaCardSummary(key='advanced'){
  };
 }
 function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
+ if(!currentGameSupportsWatchMode()){
+  if(typeof showToast==='function')showToast('Watch Mode is unavailable for this cabinet.');
+  if(typeof logEvent==='function')logEvent('watch_mode_blocked',{source:opts.source||'ui',reason:'unsupported_game'});
+  return '';
+ }
  const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
  const scope=setWatchScope(opts.scope||selectedWatchScope(),{silent:1,source:opts.source||'ui'});
  setPlayerTwoSelection(false,{silent:1,source:opts.source||'ui'});
@@ -7452,9 +7488,10 @@ function cyclePlayerTwoPersona(dir=1,opts={}){
  return setPlayerTwoPersona(next,opts);
 }
 function blockPlayerTwoSelection(source='ui'){
- setAccountNotice('Sign in to choose 2 PLAYERS with a persona rival.');
- if(typeof openAccountPanel==='function')openAccountPanel();
- if(typeof showToast==='function')showToast('Sign in to choose 2 PLAYERS.');
+ const supported=currentGameSupportsPlayerTwo();
+ setAccountNotice(supported?'Sign in to choose 2 PLAYERS with a persona rival.':'2UP persona Rival is not available for this cabinet.');
+ if(supported&&typeof openAccountPanel==='function')openAccountPanel();
+ if(typeof showToast==='function')showToast(supported?'Sign in to choose 2 PLAYERS.':'2UP persona Rival is not available for this cabinet.');
  if(typeof logEvent==='function')logEvent('player_two_mode_blocked',{source,reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
 }
 function setPlayerTwoSelection(enabled,opts={}){
@@ -8053,7 +8090,9 @@ function currentPilotCardState(){
  };
 }
 function buildPlayerTwoStartHtml(){
- if(!currentGameSupportsPlayerTwo())return '';
+ const supportsPlayerTwo=currentGameSupportsPlayerTwo();
+ const supportsWatch=currentGameSupportsWatchMode();
+ if(!supportsPlayerTwo&&!supportsWatch)return '';
  const state=playerTwoSelectionState();
  const watchPersona=selectedWatchPersona();
  const watchLabel=watchModePersonaLabel(watchPersona);
@@ -8061,15 +8100,17 @@ function buildPlayerTwoStartHtml(){
  const watchScopeLabel=watchModeScopeLabel(watchScope);
  const watchScopeMeta=watchScope==='challenges'?'CHALLENGING STAGES ONLY':'GAME FLOW';
  const p2Locked=!state.signedIn;
+ const p2Unsupported=!supportsPlayerTwo;
  const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
- const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
- const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
- const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
- const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
- const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked||p2Unsupported?' isLocked':''}`;
+ const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked||p2Unsupported?' isLocked':''}`;
+ const p2Status=p2Unsupported?'AURORA ONLY':p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
+ const personaMeta=p2Unsupported?'RIVAL UNSUPPORTED':p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
+ const personaHint=`<span class="k">1</span>${supportsPlayerTwo?'/<span class="k">2</span>':''} START${supportsWatch?'   <span class="k">W</span> WATCH':''}`;
  const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
- const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeStack"><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span><span class="playerModeText playerModeStepper playerModeScopeStepper"><span class="playerModeArrow" data-watch-scope="prev">&lt;</span><strong>${watchScopeLabel}</strong><span class="playerModeArrow" data-watch-scope="next">&gt;</span><em>${watchScopeMeta}</em></span></span></span>`;
- return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
+ const watchPicker=supportsWatch?`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeStack"><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span><span class="playerModeText playerModeStepper playerModeScopeStepper"><span class="playerModeArrow" data-watch-scope="prev">&lt;</span><strong>${watchScopeLabel}</strong><span class="playerModeArrow" data-watch-scope="next">&gt;</span><em>${watchScopeMeta}</em></span></span></span>`:'';
+ const playerTwoHtml=`<span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}`;
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked||p2Unsupported?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span>${playerTwoHtml}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
 }
 function buildPlayerTwoResultsHtml(){
  const p2=S.playerTwo;
@@ -8498,7 +8539,8 @@ const TEST_ACCOUNT_EMAIL='sgwoods@gmail.com';
 const TEST_ACCOUNT_USER_ID='';
 const TEST_ACCOUNT_EMAILS=["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"];
 const TEST_ACCOUNT_USER_IDS=[];
-const HARNESS_SUPABASE_BYPASS=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&!!readPref(SEED_PREF_KEY);
+// Seed prefs can linger in the persistent localhost browser; only bypass Supabase on ephemeral harness ports.
+const HARNESS_SUPABASE_BYPASS=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&location.port!=='8000'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';
@@ -8658,8 +8700,8 @@ function resolveRowTimestamp(row){
  return replayMatch?.createdAt||'';
 }
 
-function localLeaderboardRows(){
- return loadScoreboard().map(row=>Object.assign({verified:0},row));
+function localLeaderboardRows(gameKey=currentScoreStorageGameKey()){
+ return loadScoreboard(gameKey).map(row=>Object.assign({verified:0},row));
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
@@ -9169,6 +9211,7 @@ function updateChallengeEnemy(state,e,dt){
  const slotYOffset=Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0;
  const phaseOffsetS=Number.isFinite(+e.phaseOffsetS)?+e.phaseOffsetS:0;
  const lanePhaseOffsetS=Number.isFinite(+e.lanePhaseOffsetS)?+e.lanePhaseOffsetS:0;
+ const pathPlaybackScale=Number.isFinite(+e.pathPlaybackScale)?Math.max(.35,Math.min(1.45,+e.pathPlaybackScale)):1;
  const laneX=PLAY_W/2+side*(48+slot*16)*laneSpreadScale+slotXOffset;
  const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
  const topY=38+wave*14+row*8*rowSpreadScale+yOffset+slotYOffset;
@@ -9189,7 +9232,7 @@ function updateChallengeEnemy(state,e,dt){
 		 // challenge motion runs. Reference tracks store point times in seconds,
 		 // so their local increment is only the delta above or below real time.
 		 const pathTimeSpeed=referencePlaybackScale==null
-		  ? (baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1)
+		  ? (baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1)*pathPlaybackScale
 		  : referencePlaybackScale-1;
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
@@ -10559,7 +10602,9 @@ function spawnChallenge(state){
   const waveSpacingFieldGateS=Array.isArray(layout.groupSpacingFieldGateS)?layout.groupSpacingFieldGateS:null;
   const waveSpacingFieldPhaseS=Array.isArray(layout.groupSpacingFieldPhaseS)?layout.groupSpacingFieldPhaseS:null;
   const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
+  const waveContractGroups=Array.isArray(layout.contractGroups)?layout.contractGroups:null;
   const motionSpecGroup=waveMotionSpecs?.[wave]||null;
+  const contractGroup=waveContractGroups?.[wave]||null;
   const motionControls=motionSpecGroup?.controls||null;
   const laneOrder=Array.isArray(motionControls?.laneOrder)?motionControls.laneOrder:null;
   const motionLane=Number.isFinite(+laneOrder?.[lane])
@@ -10604,6 +10649,7 @@ function spawnChallenge(state){
    laneStaggerS,
    phaseOffsetS:motionControls?.phaseOffsetS??0,
    lanePhaseOffsetS,
+   pathPlaybackScale:motionControls?.pathPlaybackScale??1,
    slotXOffset:motionControls?.slotXOffset??0,
    slotYOffset:motionControls?.slotYOffset??0,
    deconflictSpread:motionControls?.deconflictSpread??0,
@@ -10625,6 +10671,7 @@ function spawnChallenge(state){
    leadInSideOffset:motionControls?.leadInSideOffset??waveLeadInSideOffsets?.[wave]??layout.leadInSideOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
+   contractGroup,
    spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS
   }));
  }
@@ -11882,16 +11929,16 @@ playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagshi
  clipDuration:.24
 }),
 enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.88}),
-attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94}),
-enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
+attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94,clipStart:.5,clipDuration:1.55}),
+enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
  bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{
   cooldownMs:240,
   referenceVolume:1.04,
   clipStart:1.149,
   clipDuration:.29
  }),
- enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
- bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.18}),
+ enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
+ bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
  captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),
  captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400}),
  captureRetreat:referenceAudioCue('assets/reference-audio/galaga3-capturing.m4a',{cooldownMs:1200}),
@@ -11993,9 +12040,13 @@ const AURORA_PUBLIC_SAFE_EFFECT_CUES=Object.freeze({
  })
 });
 
+const AURORA_REFERENCE_AUDIO_AVAILABLE=typeof referenceAudioPubliclyAvailable==='function'
+ ? referenceAudioPubliclyAvailable()
+ : !BUILD_INFO?.publicArtifactBoundaryEnabled;
+
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
  playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160,referenceVolume:.92,clipStart:.08,clipDuration:.24}),
- playerHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ playerHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.playerHit
   : Object.freeze({
    cooldownMs:1800,
@@ -12006,19 +12057,19 @@ const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
     referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:1.18,clipStart:.858,clipDuration:.13,delay:.832})
    ])
   }),
- enemyHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ enemyHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyHit
   : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
- bossHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ bossHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossHit
   : referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
- enemyBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+ enemyBoom:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyBoom
   : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
- bossBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+ bossBoom:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossBoom
   : referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
- captureSuccess:BUILD_INFO?.publicArtifactBoundaryEnabled
+ captureSuccess:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.captureSuccess
   : referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400,referenceVolume:1.16,clipStart:4.248,clipDuration:.36})
 });
@@ -12447,11 +12498,27 @@ const AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS=Object.freeze([
 ]);
 
 const AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS=Object.freeze([
- Object.freeze({id:'challenge-2-group-1',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:1.91,dropAmp:1.17,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:83,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:1.88,exitS:2.15}),referenceTrackId:'target-track-10'}),
- Object.freeze({id:'challenge-2-group-2',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.24,dropAmp:1.56,speedScale:2.34,softSpeedScale:1.97,lowerFieldBias:0,yOffset:0,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.63,exitS:2.69}),referenceTrackId:'target-track-66'}),
- Object.freeze({id:'challenge-2-group-3',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.07,dropAmp:1.07,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:86,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:.75,exitS:1.34}),referenceTrackId:'target-track-71'}),
- Object.freeze({id:'challenge-2-group-4',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:2.21,dropAmp:1.61,speedScale:2.52,softSpeedScale:2.12,lowerFieldBias:57,yOffset:10,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2,exitS:2.24}),referenceTrackId:'target-track-110'}),
- Object.freeze({id:'challenge-2-group-5',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.25,dropAmp:1.59,speedScale:3.28,softSpeedScale:2.65,lowerFieldBias:31,yOffset:0,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.5,exitS:2.6}),referenceTrackId:'target-track-142'})
+ Object.freeze({id:'challenge-2-group-1',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:1.91,dropAmp:1.17,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:83,laneSpreadScale:1.16,rowSpreadScale:1.04,laneStaggerS:.035,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:7,spacingFieldSpreadY:4,spacingFieldGateS:.45,spacingFieldPhaseS:0,leadInStartYOffset:-8,leadInSideOffset:46,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:1.88,exitS:2.15}),referenceTrackId:'target-track-10'}),
+ Object.freeze({id:'challenge-2-group-2',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:1.24,dropAmp:1.56,speedScale:2.34,softSpeedScale:1.97,lowerFieldBias:0,yOffset:0,laneSpreadScale:1.1,rowSpreadScale:1.08,laneStaggerS:.035,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:7.5,spacingFieldSpreadY:4.5,spacingFieldGateS:.45,spacingFieldPhaseS:.03,leadInStartYOffset:-9,leadInSideOffset:46,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.63,exitS:2.69}),referenceTrackId:'target-track-66'}),
+ Object.freeze({id:'challenge-2-group-3',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.07,dropAmp:1.07,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:86,laneSpreadScale:1.04,rowSpreadScale:1.02,laneStaggerS:.035,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:6,spacingFieldSpreadY:3.5,spacingFieldGateS:.4,spacingFieldPhaseS:.06,leadInStartYOffset:-9,leadInSideOffset:46,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:.75,exitS:1.34}),referenceTrackId:'target-track-71'}),
+ Object.freeze({id:'challenge-2-group-4',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:2.21,dropAmp:1.61,speedScale:2.52,softSpeedScale:2.12,lowerFieldBias:57,yOffset:10,laneSpreadScale:1.16,rowSpreadScale:1.08,laneStaggerS:.035,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:7.5,spacingFieldSpreadY:4.5,spacingFieldGateS:.5,spacingFieldPhaseS:.09,leadInStartYOffset:-10,leadInSideOffset:46,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2,exitS:2.24}),referenceTrackId:'target-track-110'}),
+ Object.freeze({id:'challenge-2-group-5',evaluator:'reference-spline-v1',pathFamilyHint:'boss-led-loop',controls:Object.freeze({arcAmp:1.25,dropAmp:1.59,speedScale:3.28,softSpeedScale:2.65,lowerFieldBias:31,yOffset:0,laneSpreadScale:1.1,rowSpreadScale:1.06,laneStaggerS:.035,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:6.5,spacingFieldSpreadY:4,spacingFieldGateS:.45,spacingFieldPhaseS:.12,leadInStartYOffset:-10,leadInSideOffset:46,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.5,exitS:2.6}),referenceTrackId:'target-track-142'})
+]);
+
+const AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS=Object.freeze([
+ Object.freeze({groupIndex:1,role:'classic cross-field opener',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['classic']),pathFamily:'cross-sweep',entrySide:'both-sides',exitSide:'opposite-lower-sides',scoreWindow:'wide crossing lanes',targetVisibleS:Object.freeze([.8,6])}),
+ Object.freeze({groupIndex:2,role:'scorpion introduction',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['scorpion']),pathFamily:'cross-sweep',entrySide:'both-sides',exitSide:'opposite-lower-sides',scoreWindow:'new-family crossing lanes',targetVisibleS:Object.freeze([2,7.4])}),
+ Object.freeze({groupIndex:3,role:'scorpion hook return',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['scorpion']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'turning hook lanes',targetVisibleS:Object.freeze([3.5,9.3])}),
+ Object.freeze({groupIndex:4,role:'stingray hook return',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'late specialty hook lanes',targetVisibleS:Object.freeze([5.1,11])}),
+ Object.freeze({groupIndex:5,role:'boss-led closing loop',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'boss-led loop cleanup',targetVisibleS:Object.freeze([6.8,13])})
+]);
+
+const AURORA_CHALLENGE_STAGE11_CONTRACT_GROUPS=Object.freeze([
+ Object.freeze({groupIndex:1,role:'dragonfly crown split',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'crown-split-cascade',entrySide:'top-and-sides',exitSide:'lower-sides',scoreWindow:'split crown lanes',targetVisibleS:Object.freeze([.8,6.6])}),
+ Object.freeze({groupIndex:2,role:'dragonfly boss-led loop',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'early boss-led loop',targetVisibleS:Object.freeze([2.2,8.2])}),
+ Object.freeze({groupIndex:3,role:'stingray hook arc',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'turning specialty lanes',targetVisibleS:Object.freeze([3.8,9.9])}),
+ Object.freeze({groupIndex:4,role:'galboss boss-led loop',expectedTypes:Object.freeze(['but','boss','rogue']),expectedFamilies:Object.freeze(['galboss']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'dense boss-led bonus lane',targetVisibleS:Object.freeze([5.3,11.6])}),
+ Object.freeze({groupIndex:5,role:'dragonfly hook finale',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'late hook cleanup',targetVisibleS:Object.freeze([7,13.7])})
 ]);
 
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
@@ -12480,7 +12547,42 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel']),
+  motionSpecGroups:Object.freeze([
+   null,
+   Object.freeze({
+    controls:Object.freeze({
+     arcAmp:.76,
+     dropAmp:.88,
+     pathPlaybackScale:1.02,
+     phaseOffsetS:.12,
+     routeCurveY:-4
+    })
+   }),
+   Object.freeze({
+    controls:Object.freeze({
+     arcAmp:.76,
+     dropAmp:.88,
+     pathPlaybackScale:1.02,
+     phaseOffsetS:.12,
+     routeCurveY:-4
+    })
+   }),
+   Object.freeze({
+    controls:Object.freeze({
+     pathPlaybackScale:.5,
+     routeCurveY:17.464,
+     routeOffsetX:60
+    })
+   }),
+   Object.freeze({
+    controls:Object.freeze({
+     pathPlaybackScale:1.18,
+     routeCurveY:12,
+     routeOffsetX:48
+    })
+   })
+  ])
  }),
  Object.freeze({
   fromStage:7,
@@ -12509,7 +12611,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
-  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop']),
+  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','hook-arc','boss-led-loop']),
+  contractGroups:AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS,
   motionSpecGroups:AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS,
   groupReferencePaths:AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS
  }),
@@ -12543,6 +12646,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   ]),
   groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','stingray','galboss','dragonfly']),
   groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc']),
+  contractGroups:AURORA_CHALLENGE_STAGE11_CONTRACT_GROUPS,
   groupReferencePaths:AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS
  }),
  Object.freeze({
@@ -12761,7 +12865,21 @@ const AURORA_GAME_PACK=Object.freeze({
   usesDualFighterMode:1,
   usesStaticShields:0,
   usesStageThemeProgression:1,
-  usesBossArchetypeVariants:1
+  usesBossArchetypeVariants:1,
+  supportsWatchMode:1,
+  supportsPersonaRival:1
+ }),
+ modalities:Object.freeze({
+  watch:Object.freeze({
+   enabled:1,
+   defaultPersona:'advanced',
+   scoreRecording:'disabled'
+  }),
+  personaRival:Object.freeze({
+   enabled:1,
+   requiresSignIn:1,
+   scoreRecording:'human-only'
+  })
  }),
  atmosphereThemes:AURORA_ATMOSPHERE_THEMES,
  audioThemes:AURORA_AUDIO_THEMES,
@@ -13315,7 +13433,20 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  usesDualFighterMode:0,
  usesStaticShields:0,
   usesStageThemeProgression:1,
-  usesBossArchetypeVariants:0
+  usesBossArchetypeVariants:0,
+  supportsWatchMode:1,
+  supportsPersonaRival:0
+ }),
+ modalities:Object.freeze({
+  watch:Object.freeze({
+   enabled:1,
+   defaultPersona:'advanced',
+   scoreRecording:'disabled'
+  }),
+  personaRival:Object.freeze({
+   enabled:0,
+   reason:'watch-first-guardians-preview'
+  })
  }),
  atmosphereThemes:GUARDIANS_ATMOSPHERE_THEMES,
  audioThemes:GUARDIANS_AUDIO_THEMES,
@@ -13601,27 +13732,122 @@ function guardiansPersonaSelectTarget(state,cfg){
 }
 
 function guardiansPersonaEffectiveCfg(state,cfg){
- if(!state||!cfg||cfg.name!=='advanced') return cfg;
- if((state.stage|0)!==1) return cfg;
- const expert=GALAXY_GUARDIANS_HARNESS_PERSONAS.expert;
- const professional=GALAXY_GUARDIANS_HARNESS_PERSONAS.professional;
- return Object.assign({}, expert, {
-  name:cfg.name,
-  shotCadence:professional.shotCadence,
-  stageOpeningHold:professional.stageOpeningHold,
-  openShotY:professional.openShotY,
-  diveBias:professional.diveBias,
-  escortBias:professional.escortBias,
-  flagshipBias:professional.flagshipBias,
-  linkedEscortBias:professional.linkedEscortBias,
-  rackClearBonus:professional.rackClearBonus,
-  holdFireDuringUrgentThreat:professional.holdFireDuringUrgentThreat||0
- });
+ if(!state||!cfg)return cfg;
+ const rank=typeof guardiansStageRank==='function'?guardiansStageRank(state):0;
+ let effective=cfg;
+ if(cfg.name==='advanced'&&(state.stage|0)===1){
+  const expert=GALAXY_GUARDIANS_HARNESS_PERSONAS.expert;
+  const professional=GALAXY_GUARDIANS_HARNESS_PERSONAS.professional;
+  effective=Object.assign({}, expert, {
+   name:cfg.name,
+   shotCadence:professional.shotCadence,
+   stageOpeningHold:professional.stageOpeningHold,
+   openShotY:professional.openShotY,
+   diveBias:professional.diveBias,
+   escortBias:professional.escortBias,
+   flagshipBias:professional.flagshipBias,
+   linkedEscortBias:professional.linkedEscortBias,
+   rackClearBonus:professional.rackClearBonus,
+   holdFireDuringUrgentThreat:professional.holdFireDuringUrgentThreat||0
+  });
+ }
+ if(rank===0&&(state.stage|0)<=2){
+  const isAdvanced=effective.name==='advanced';
+  const isExpert=effective.name==='expert';
+  const earlyThreatY=effective.name==='novice'?166:142;
+  const earlyThreatDx=effective.name==='novice'?34:44;
+  const earlyShotLook=effective.name==='novice'
+   ?116
+   :isAdvanced?Math.max(effective.urgentShotLook,136):isExpert?Math.max(effective.urgentShotLook,180):Math.max(effective.urgentShotLook,168);
+  const earlyShotDx=effective.name==='novice'
+   ?22
+   :isAdvanced?Math.max(effective.urgentShotDx,24):isExpert?Math.max(effective.urgentShotDx,36):Math.max(effective.urgentShotDx,32);
+  const edgeEscapeInset=effective.name==='novice'||effective.name==='professional'?24:undefined;
+  const expertSafeLane=isExpert?{
+   safeLane:1,
+   safeLaneStep:34,
+   safeLaneShotLook:230,
+   safeLaneShotDx:34,
+   safeLaneDiveY:140,
+   safeLaneDiveDx:22,
+   safeLaneShotWeight:1.35
+  }:null;
+  effective=Object.assign({}, effective, {
+   diveThreatY:Math.min(effective.diveThreatY,earlyThreatY),
+   diveThreatDx:Math.max(effective.diveThreatDx,earlyThreatDx),
+   urgentShotLook:earlyShotLook,
+   urgentShotDx:earlyShotDx,
+   edgeEscapeInset
+  },expertSafeLane||{});
+ }
+ if(rank>=3&&(effective.name==='expert'||effective.name==='professional')){
+  return Object.assign({}, effective, {
+   diveThreatY:Math.min(effective.diveThreatY,rank>=5?126:136),
+   diveThreatDx:Math.max(effective.diveThreatDx,rank>=5?56:48)
+  });
+ }
+ return effective;
+}
+
+function guardiansPersonaSafeLaneAxis(state,cfg,target){
+ const player=state.player||{};
+ const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const playerX=+player.x||0;
+ const playerY=+player.y||0;
+ const step=Math.max(18,+cfg.safeLaneStep||30);
+ const shotLook=Math.max(+cfg.urgentShotLook||0,+cfg.safeLaneShotLook||180);
+ const shotDx=Math.max(+cfg.urgentShotDx||0,+cfg.safeLaneShotDx||24);
+ const diveY=Number.isFinite(+cfg.safeLaneDiveY)?+cfg.safeLaneDiveY:(+cfg.diveThreatY||140);
+ const diveDx=Math.max(+cfg.diveThreatDx||0,+cfg.safeLaneDiveDx||28);
+ const shotWeight=Math.max(.2,+cfg.safeLaneShotWeight||1);
+ const diveWeight=Math.max(.2,+cfg.safeLaneDiveWeight||1);
+ const shots=(state.enemyShots||[]).filter(shot=>
+  shot&&shot.active!==0&&shot.y<playerY&&playerY-shot.y<shotLook
+ );
+ const dives=(state.aliens||[]).filter(alien=>
+  alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')&&alien.y<playerY&&alien.y>=diveY
+ );
+ if(!shots.length&&!dives.length)return null;
+ const targetX=target?+target.x||playerX:playfieldWidth/2;
+ const scored=[-1,0,1].map(axis=>{
+  const x=Math.max(18,Math.min(playfieldWidth-18,playerX+axis*step));
+  let risk=0;
+  for(const shot of shots){
+   const dx=Math.abs((+shot.x||0)-x);
+   const dy=Math.max(0,playerY-(+shot.y||0));
+   if(dx<=shotDx)risk+=shotWeight*(4+(shotDx-dx)/Math.max(1,shotDx)*4+Math.max(0,1-dy/Math.max(1,shotLook))*2);
+  }
+  for(const alien of dives){
+   const dx=Math.abs((+alien.x||0)-x);
+   const dy=Math.max(0,playerY-(+alien.y||0));
+   if(dx<=diveDx)risk+=diveWeight*(5+(diveDx-dx)/Math.max(1,diveDx)*5+Math.max(0,1-dy/Math.max(1,playerY-diveY))*2);
+  }
+  if(x<=22||x>=playfieldWidth-22)risk+=3;
+  risk+=Math.abs(targetX-x)*.006;
+  if(axis===0)risk+=.15;
+  return {axis,risk};
+ }).sort((a,b)=>a.risk-b.risk||Math.abs(a.axis)-Math.abs(b.axis));
+ const best=scored[0];
+ const current=scored.find(row=>row.axis===0);
+ if(!best||!Number.isFinite(best.risk))return null;
+ if(current&&current.risk<=best.risk+.45)return 0;
+ return best.axis;
 }
 
 function guardiansPersonaMoveAxis(state,cfg,target){
  const player=state.player||{};
  const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ if(Number.isFinite(cfg.edgeEscapeInset)){
+  const inset=Math.max(16,+cfg.edgeEscapeInset||0);
+  if(player.x<inset)return 1;
+  if(player.x>playfieldWidth-inset)return -1;
+ }
+ if(cfg.safeLane){
+  const axis=guardiansPersonaSafeLaneAxis(state,cfg,target);
+  if(axis!==null){
+   if((axis<0&&player.x>18)||(axis>0&&player.x<playfieldWidth-18)||axis===0)return axis;
+  }
+ }
  const diveThreat=guardiansPersonaNearestDiveThreat(state,cfg);
  if(diveThreat){
   const away=diveThreat.x>=player.x?-1:1;
@@ -13732,7 +13958,7 @@ function syncGalaxyGuardiansShellState(state){
  S.score=state.score|0;
  S.stage=state.stage|0;
  S.lives=Math.max(0,(state.lives|0)-1);
- S.harnessPersona=String(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ S.harnessPersona=String(S.watchPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  if(typeof currentGamePackStagePresentation==='function')S.stagePresentation=currentGamePackStagePresentation(S.stage,0);
  if(typeof stageBandProfile==='function')S.profile=stageBandProfile(S.stage,0);
  S.stageClock=+state.t||0;
@@ -13747,11 +13973,16 @@ function syncGalaxyGuardiansShellState(state){
   if(!gameOverState&&typeof buildGameOverState==='function'){
    const completed=!!state.completed||String(state.gameOverReason||'')==='mission_complete';
    gameOverState=buildGameOverState(state.score|0,state.stage|0,false,completed?{
+    gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+    gameTitle:GALAXY_GUARDIANS_PACK.metadata.title,
     outcome:'mission_complete',
     resultTitle:'MISSION COMPLETE',
     resultSub:'SIGNAL RACK BROKEN'
-   }:undefined);
-   if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+   }:{
+    gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+    gameTitle:GALAXY_GUARDIANS_PACK.metadata.title
+   });
+   if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&typeof submitGameOverScore==='function')submitGameOverScore();
   }
   gameOverHtml=typeof buildGameOverHtmlFromState==='function'
    ? buildGameOverHtmlFromState()
@@ -13996,6 +14227,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   watchPersona,
   watchScope
  });
+ S.harnessPersona=watchPersona||String(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
   stage:S.stage,
@@ -14041,7 +14273,7 @@ function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  const manualInput=galaxyGuardiansInputFromKeys();
  const personaInput=!guardiansHasManualInput(manualInput)
-  ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
+  ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,S.harnessPersona||S.watchPersona||'')
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
  if(typeof advanceGalaxyGuardiansPreviewStarfield==='function'){
@@ -14230,6 +14462,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotMaxLive:3,
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
+  alienCollisionHitbox:10,
   enemyShotBottomPadding:10,
   rackPulseIntervalBase:1.96,
   topReentryVy:70,
@@ -14949,7 +15182,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
    guardiansBeginTopReentry(state,alien);
   }
-  if((alien.mode==='diving'||alien.mode==='wrapping')&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=10&&Math.abs(alien.y-p.y)<=10){
+  if((alien.mode==='diving'||alien.mode==='wrapping')&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=rules.alienCollisionHitbox&&Math.abs(alien.y-p.y)<=rules.alienCollisionHitbox){
    loseGalaxyGuardiansPlayer(state,`alien_${alien.role}_collision`);
   }
  }
@@ -15113,6 +15346,34 @@ function packIsPlayable(pack=null){
  return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
 }
 
+function gamePackModalityConfig(packOrKey=currentGamePack(),modality=''){
+ const pack=typeof packOrKey==='string'?getGamePack(packOrKey):packOrKey;
+ const key=String(modality||'').trim();
+ if(!pack||!key)return Object.freeze({enabled:0});
+ const modalities=pack.modalities||{};
+ const config=modalities[key]||{};
+ const caps=pack.capabilities||{};
+ const fallbackEnabled=key==='watch'
+  ? caps.supportsWatchMode
+  : key==='personaRival'
+  ? caps.supportsPersonaRival
+  : undefined;
+ const enabled=config.enabled!==undefined?config.enabled:fallbackEnabled;
+ return Object.freeze(Object.assign({enabled:!!enabled},config));
+}
+
+function gamePackSupportsModality(packOrKey=currentGamePack(),modality=''){
+ return !!gamePackModalityConfig(packOrKey,modality).enabled;
+}
+
+function gamePackSupportsWatchMode(packOrKey=currentGamePack()){
+ return gamePackSupportsModality(packOrKey,'watch');
+}
+
+function gamePackSupportsPersonaRival(packOrKey=currentGamePack()){
+ return gamePackSupportsModality(packOrKey,'personaRival');
+}
+
 function gamePackVersionLine(pack=currentGamePack()){
  const meta=pack?.metadata||{};
  return String(meta.versionLine||meta.version||'--');
@@ -15251,6 +15512,7 @@ function cueUsesReferenceMedia(cue){
  if(!cue||typeof cue!=='object')return false;
  if(String(cue.referenceClip||'').trim())return true;
  if(Array.isArray(cue.layers)&&cue.layers.some(layer=>cueUsesReferenceMedia(layer)))return true;
+ if(Array.isArray(cue.variants)&&cue.variants.some(variant=>cueUsesReferenceMedia(variant)))return true;
  if(cue.byPhase&&typeof cue.byPhase==='object'){
   return Object.values(cue.byPhase).some(entry=>cueUsesReferenceMedia(entry));
  }
@@ -15275,7 +15537,10 @@ function currentGamePackAudioCue(cueName,opts={}){
   return base;
  };
  const primaryCue=resolveCue(theme);
- if(primaryCue&&!BUILD_INFO?.publicArtifactBoundaryEnabled)return primaryCue;
+ const referenceMediaAllowed=typeof referenceAudioPubliclyAvailable==='function'
+  ? referenceAudioPubliclyAvailable()
+  : !BUILD_INFO?.publicArtifactBoundaryEnabled;
+ if(primaryCue&&referenceMediaAllowed)return primaryCue;
  if(primaryCue&&!cueUsesReferenceMedia(primaryCue))return primaryCue;
  const publicSafeFallbacks=[
   currentGamePackAudioTheme('galaga-original-reference'),
@@ -15346,7 +15611,8 @@ function currentGamePackChallengeLayout(stage){
    groupLowerFieldBiases:Array.isArray(overrideLayout.groupLowerFieldBiases)?overrideLayout.groupLowerFieldBiases:(layout?.groupLowerFieldBiases||[]),
    groupYOffsets:Array.isArray(overrideLayout.groupYOffsets)?overrideLayout.groupYOffsets:(layout?.groupYOffsets||[]),
    groupSpeedScales:Array.isArray(overrideLayout.groupSpeedScales)?overrideLayout.groupSpeedScales:(layout?.groupSpeedScales||[]),
-   groupReferencePaths:Array.isArray(overrideLayout.groupReferencePaths)?overrideLayout.groupReferencePaths:(layout?.groupReferencePaths||[])
+   groupReferencePaths:Array.isArray(overrideLayout.groupReferencePaths)?overrideLayout.groupReferencePaths:(layout?.groupReferencePaths||[]),
+   contractGroups:Array.isArray(overrideLayout.contractGroups)?overrideLayout.contractGroups:(layout?.contractGroups||[])
   });
  }
  return layout;
@@ -15627,6 +15893,10 @@ window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
+window.gamePackModalityConfig=gamePackModalityConfig;
+window.gamePackSupportsModality=gamePackSupportsModality;
+window.gamePackSupportsWatchMode=gamePackSupportsWatchMode;
+window.gamePackSupportsPersonaRival=gamePackSupportsPersonaRival;
 window.gamePackVersionLine=gamePackVersionLine;
 window.gamePackReleaseTrackLine=gamePackReleaseTrackLine;
 window.gamePackRuntimeStatusLine=gamePackRuntimeStatusLine;
@@ -15926,6 +16196,7 @@ function enemyChallengeState({
   laneStaggerS=0,
   phaseOffsetS=0,
   lanePhaseOffsetS=0,
+  pathPlaybackScale=1,
   slotXOffset=0,
   slotYOffset=0,
   deconflictSpread=0,
@@ -15946,7 +16217,8 @@ function enemyChallengeState({
   leadInStartYOffset=null,
   leadInSideOffset=0,
   referencePath=null,
-  motionSpecGroup=null
+  motionSpecGroup=null,
+  contractGroup=null
 }={}){
  return {
   ch:1,
@@ -15969,6 +16241,7 @@ function enemyChallengeState({
   laneStaggerS,
   phaseOffsetS,
   lanePhaseOffsetS,
+  pathPlaybackScale,
   slotXOffset,
   slotYOffset,
   deconflictSpread,
@@ -15989,7 +16262,8 @@ function enemyChallengeState({
   leadInStartYOffset,
   leadInSideOffset,
   referencePath,
-  motionSpecGroup
+  motionSpecGroup,
+  contractGroup
  };
 }
 
@@ -16077,6 +16351,7 @@ function makePackChallengeEnemyState({
  laneStaggerS=0,
  phaseOffsetS=0,
  lanePhaseOffsetS=0,
+ pathPlaybackScale=1,
  slotXOffset=0,
  slotYOffset=0,
  deconflictSpread=0,
@@ -16098,6 +16373,7 @@ function makePackChallengeEnemyState({
  leadInSideOffset=0,
  referencePath=null,
  motionSpecGroup=null,
+ contractGroup=null,
  spawn=0
 }){
  return Object.assign({
@@ -16139,7 +16415,7 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,pathPlaybackScale,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup,contractGroup}));
 }
 
 // Source: src/js/15-game-picker.js
@@ -17195,12 +17471,40 @@ function referencePixelSpritesEnabled(){
  return currentSpriteRenderMode()==='reference-pixel-lab';
 }
 
+function drawTargetChallengePulseAccent(family,flap,palette){
+ if(!flap)return;
+ const colorA=palette?.C||palette?.G||palette?.B||palette?.M||palette?.Y||'#f4fbff';
+ const colorB=palette?.Y||palette?.R||palette?.O||palette?.M||colorA;
+ ctx.fillStyle=colorA;
+ if(family==='dragonfly'){
+  ctx.fillRect(-8,-8,3,2);
+  ctx.fillRect(5,-8,3,2);
+  ctx.fillRect(-9,-2,2,3);
+  ctx.fillRect(7,-2,2,3);
+ }else if(family==='mosquito'){
+  ctx.fillRect(-7,-4,2,2);
+  ctx.fillRect(5,-4,2,2);
+  ctx.fillStyle=colorB;
+  ctx.fillRect(-5,5,2,2);
+  ctx.fillRect(3,5,2,2);
+ }else{
+  ctx.fillRect(-7,-7,3,2);
+  ctx.fillRect(4,-7,3,2);
+ }
+}
+
+function drawTargetChallengeSprite(e,rows,palette,flap){
+ const drew=drawTargetSpriteRows(rows,palette,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(drew)drawTargetChallengePulseAccent(e?.fam,flap,palette);
+ return drew;
+}
+
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='dragonfly')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,flap);
+ if(e?.fam==='mosquito')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,flap);
+ if(e?.fam==='scorpion')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,flap);
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,flap);
  if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_BEE_SCALE,0,0,{xScale:TARGET_REFERENCE_BEE_X_SCALE});
  if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_BUTTERFLY_SCALE,0,0,{xScale:TARGET_REFERENCE_BUTTERFLY_X_SCALE});
  if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE,0,0,{xScale:TARGET_REFERENCE_BOSS_X_SCALE});
@@ -17313,7 +17617,13 @@ function endOfRunOverlayActive(){
 function drawEnemyFlapAccent(e,ps,pal,flap){
  if(!flap||!pal?.a)return;
  ctx.fillStyle=pal.a;
- if(e.t==='bee'){
+ if(['dragonfly','mosquito','scorpion','stingray','galboss','crown'].includes(e.fam)){
+  ctx.fillRect(-ps*5.7,-ps*3.8,ps,ps);
+  ctx.fillRect(ps*4.7,-ps*3.8,ps,ps);
+  ctx.fillStyle=pal.c||pal.b||pal.a;
+  ctx.fillRect(-ps*5.2,ps*2.5,ps,ps);
+  ctx.fillRect(ps*4.2,ps*2.5,ps,ps);
+ }else if(e.t==='bee'){
   ctx.fillRect(-ps*5,-ps*2.4,ps,ps);
   ctx.fillRect(ps*4,-ps*2.4,ps,ps);
  }else if(e.t==='but'){
@@ -19207,9 +19517,9 @@ window.__galagaHarness__={
  currentPackKey(){
   return typeof currentGamePackKey==='function'?currentGamePackKey():'';
  },
- localScoreRows(){
+ localScoreRows(gameKey=''){
   return typeof localLeaderboardRows==='function'
-   ? localLeaderboardRows().map(row=>({
+   ? localLeaderboardRows(gameKey||currentScoreStorageGameKey()).map(row=>({
       id:String(row?.id||''),
       score:+row?.score|0,
       stage:+row?.stage|0,
@@ -19218,9 +19528,9 @@ window.__galagaHarness__={
      }))
    : [];
  },
- localScoreHistory(){
+ localScoreHistory(gameKey=''){
   return typeof loadScoreHistory==='function'
-   ? loadScoreHistory().map(row=>({
+   ? loadScoreHistory(gameKey||currentScoreStorageGameKey()).map(row=>({
       id:String(row?.id||''),
       score:+row?.score|0,
       stage:+row?.stage|0,
@@ -19312,6 +19622,8 @@ window.__galagaHarness__={
   return{
    html:gameOverHtml||'',
    phase:gameOverState?.phase||'',
+   gameKey:String(gameOverState?.gameKey||''),
+   gameTitle:String(gameOverState?.gameTitle||''),
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
@@ -19464,6 +19776,29 @@ window.__galagaHarness__={
  sessionEvents(limit=256){
   const events=(typeof REC!=='undefined'&&Array.isArray(REC?.events))?REC.events:[];
   return events.slice(Math.max(0,events.length-Math.max(1,+limit||256)));
+ },
+ audioRuntimeInfo(){
+  const buildInfo=typeof BUILD_INFO!=='undefined'?BUILD_INFO:null;
+  const audioOverrides=typeof currentAudioOverrides==='function'?currentAudioOverrides():null;
+  return {
+   hostname:String(location?.hostname||'').toLowerCase(),
+   branch:String(buildInfo?.branch||''),
+   commit:String(buildInfo?.commit||buildInfo?.gitSha||''),
+   releaseChannel:String(buildInfo?.releaseChannel||''),
+   boundaryEnabled:!!buildInfo?.publicArtifactBoundaryEnabled,
+   referenceAudioAvailable:typeof referenceAudioPubliclyAvailable==='function'?referenceAudioPubliclyAvailable():!buildInfo?.publicArtifactBoundaryEnabled,
+   defaultAudioTheme:String(audioOverrides?.audioTheme||'auto')
+  };
+ },
+ audioCueSpec(name,opts={}){
+  if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return null;
+  const cue=sfx.cueDef(String(name),opts||{});
+  let spec=null;
+  try{spec=JSON.parse(JSON.stringify(cue));}catch{}
+  return {
+   spec,
+   event:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+  };
  },
  triggerAudioCue(name,opts={}){
   if(!name)return null;
@@ -19769,6 +20104,8 @@ window.__galagaHarness__={
    pathFamily:e.pathFamily||'classic-lane-wave',
    motionSpecId:e.motionSpecGroup?.id||'',
    motionSpecEvaluator:e.motionSpecGroup?.evaluator||'',
+   arcAmp:+(+e.arcAmp||1).toFixed(3),
+   dropAmp:+(+e.dropAmp||1).toFixed(3),
    speedScale:+(+e.speedScale||1).toFixed(3),
    lowerFieldBias:+(+e.lowerFieldBias||0).toFixed(2),
    laneSpreadScale:+(+e.laneSpreadScale||1).toFixed(3),
@@ -19776,6 +20113,7 @@ window.__galagaHarness__={
    laneStaggerS:+(+e.laneStaggerS||0).toFixed(3),
    phaseOffsetS:+(+e.phaseOffsetS||0).toFixed(3),
    lanePhaseOffsetS:+(+e.lanePhaseOffsetS||0).toFixed(3),
+   pathPlaybackScale:+(+e.pathPlaybackScale||1).toFixed(3),
    deconflictSpread:+(+e.deconflictSpread||0).toFixed(3),
    deconflictPhase:+(+e.deconflictPhase||0).toFixed(3),
    deconflictLaneBias:+(+e.deconflictLaneBias||0).toFixed(3),
@@ -19802,6 +20140,17 @@ window.__galagaHarness__={
     sourceTrackId:e.referencePath.sourceTrackId||'',
     pointCount:Array.isArray(e.referencePath.points)?e.referencePath.points.length:0,
     durationS:+(+e.referencePath.durationS||0).toFixed(2)
+   }:null,
+   contractGroup:e.contractGroup?{
+    groupIndex:+e.contractGroup.groupIndex||((+e.wave||0)+1),
+    role:e.contractGroup.role||'',
+    pathFamily:e.contractGroup.pathFamily||'',
+    expectedTypes:Array.isArray(e.contractGroup.expectedTypes)?e.contractGroup.expectedTypes.slice():[],
+    expectedFamilies:Array.isArray(e.contractGroup.expectedFamilies)?e.contractGroup.expectedFamilies.slice():[],
+    entrySide:e.contractGroup.entrySide||'',
+    exitSide:e.contractGroup.exitSide||'',
+    scoreWindow:e.contractGroup.scoreWindow||'',
+    targetVisibleS:Array.isArray(e.contractGroup.targetVisibleS)?e.contractGroup.targetVisibleS.slice():[]
    }:null,
    referenceLeadIn:+(+e.referenceLeadIn||0).toFixed(3),
    tm:+(+e.tm||0).toFixed(3),
@@ -19864,6 +20213,25 @@ window.__galagaHarness__={
   return typeof summarizeGalaxyGuardiansDevPreview==='function'
    ? summarizeGalaxyGuardiansDevPreview()
    : null;
+ },
+ forceGuardiansGameOver(cfg={}){
+  const state=typeof currentGalaxyGuardiansDevPreviewState==='function'
+   ? currentGalaxyGuardiansDevPreviewState()
+   : null;
+  if(!state||typeof syncGalaxyGuardiansShellState!=='function')return null;
+  state.score=+cfg.score||state.score||0;
+  state.stage=Math.max(1,+cfg.stage||state.stage||1);
+  state.lives=Math.max(0,+cfg.lives||0);
+  state.gameOver=true;
+  state.completed=!!cfg.completed;
+  state.gameOverReason=String(cfg.reason||(state.completed?'mission_complete':'harness_guardians_game_over'));
+  state.stats={
+   shots:+cfg.shots||+(state.stats?.shots||0),
+   hits:+cfg.hits||+(state.stats?.hits||0)
+  };
+  if(cfg.activePackDrift&&typeof installGamePack==='function')installGamePack(String(cfg.activePackDrift),{persist:false});
+  syncGalaxyGuardiansShellState(state);
+  return this.gameOverView();
  },
  redraw(){
   if(typeof draw==='function')draw();
