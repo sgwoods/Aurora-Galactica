@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Platinum Platform Guide</title>
@@ -638,7 +640,7 @@
           <div class="meta">
             <div class="metaCard">
               <span class="metaLabel">Current Release</span>
-              <span class="metaValue">1.4.0.1</span>
+              <span class="metaValue">1.4.1.1</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Lane</span>
@@ -646,11 +648,11 @@
             </div>
             <div class="metaCard">
               <span class="metaLabel">Updated</span>
-              <span class="metaValue">May 20, 2026</span>
+              <span class="metaValue">June 11, 2026</span>
             </div>
             <div class="metaCard">
               <span class="metaLabel">Latest Note</span>
-              <span class="metaValue">Production follow-through, white paper, and conformance refresh</span>
+              <span class="metaValue">1.4.1 production patch</span>
             </div>
           </div>
           <div class="heroLinks">
@@ -659,6 +661,7 @@
             <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
@@ -879,6 +882,12 @@
     <article class="linkCard">
       <a href="release-dashboard.html">Release Dashboard</a>
       <p>Current milestone and release-train status.</p>
+    </article>
+  
+
+    <article class="linkCard">
+      <a href="ingestion-dashboard.html">Ingestion Dashboard</a>
+      <p>Primary hosted cockpit for cross-game artifact intake, analysis status, and instantiation planning.</p>
     </article>
   
 
@@ -1172,7 +1181,7 @@
 <ul><li>a second full gameplay ruleset</li><li>a second complete scoring and stage-flow implementation</li><li>a second complete application harness family</li><li>a public registered gameplay adapter</li><li>release-ready public playability</li></ul>
 <p>That is intentional.</p>
 <p>Current branch-level next step:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md">GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md">GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md</a></li><li>own scores and pilot/replay identity</li><li>proper one-level completion and game-over endings</li><li>platform-frame parity for sign-in, high scores, pilot card, replay/video</li></ul>
 <p>capture, bug reports, and Arcade Music/SFX controls</p>
 <ul><li>enough completeness to validate Platinum changes against two real games</li><li>keep the aggregate first-class conformance gate green:</li></ul>
 <p><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></p>
@@ -1261,10 +1270,10 @@
 <ul><li>own score identity</li><li>proper completion ending</li><li>proper loss ending</li><li>clean restart and result behavior</li><li>platform validation value as a second real game</li><li>a readable first-class conformance target and review story rather than only a</li></ul>
 <p>scattered preview harness set</p>
 <ul><li>a readable game arc and stage-band progression that can later support</li></ul>
-<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
+<p>source-grounded homage variants without losing the original flavor, as now described in <a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md">GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md</a></p>
 <p>The first aggregate 0.1 candidate gate is already source-controlled, so future playable claims can cite one durable artifact instead of reassembling the visual, audio, movement, threat, and boundary evidence from memory.</p>
 <p>That candidate gate is now paired with a first-class conformance target and aggregate parity check:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a></li><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
 <ul><li>formation rack</li><li>dives</li><li>flagship and escort behavior</li><li>scoring</li><li>single-shot constraint</li><li>wrap-around threat</li><li>life loss and game over flow</li></ul>
 <p>Current hosted-lane playable-preview coverage:</p>
 <ul><li><code>src/js/13-galaxy-guardians-gameplay-adapter.js</code> owns the hosted-preview</li></ul>
@@ -1425,6 +1434,13 @@
 <ul><li><code>npm run machine:bootstrap</code></li><li><code>npm run machine:ensure-browser</code></li><li><code>npm run machine:doctor</code></li><li><code>npm run machine:status</code></li><li><code>npm run release:show-authority</code></li></ul>
 <p>This means machine readiness and release authority are now part of release discipline, not just local convention.</p>
 <p>Browser-backed gates use Playwright-managed Chromium. They must not launch the user&#39;s installed Google Chrome by default. In Codex Desktop on macOS, run these browser-backed commands with escalated sandbox permissions; the harness launcher will refuse sandboxed browser starts to avoid macOS Chromium/Chrome SIGABRT crash dialogs.</p>
+<h4>Repo Browser Runtime Rule</h4>
+<p>Project browser checks must use the repo harness launcher:</p>
+<ul><li><code>npm run machine:ensure-browser</code></li><li><code>tools/harness/browser-launch.js</code></li><li>npm harness scripts that depend on local <code>playwright-core</code></li></ul>
+<p>Do not use Codex&#39;s bundled Node/Playwright runtime directly for project release checks. That runtime can have a different expected browser cache and fail with missing <code>chromium_headless_shell-*</code> paths even when the repo-managed Chromium is correctly installed.</p>
+<p>Hosted public lanes also intentionally do not expose private gameplay harness APIs. Use the hosted DOM account smoke for sign-in field reachability:</p>
+<ul><li><code>npm run harness:check:live-account-input:dev</code></li><li><code>npm run harness:check:live-account-input:beta</code></li><li><code>npm run harness:check:live-account-input:production</code></li></ul>
+<p>Keep the older <code>harness:check:live-input:*</code> checks for lanes/artifacts where the gameplay harness is intentionally present.</p>
 <h3>Bug-Fix Discipline</h3>
 <p>We should not address a bug without also deciding how the fix is protected in the appropriate staging harness.</p>
 <p>Default rule:</p>
@@ -1436,7 +1452,7 @@
 <p>leave a clear follow-up path toward automation</p>
 <p>This is how we stay agile without relying on memory-only fixes.</p>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/DEVELOPMENT_PRINCIPLES.md">DEVELOPMENT_PRINCIPLES.md</a></li></ul>
 <h3>Lane Model</h3>
 <p>The expected lane model is:</p>
 <ol><li>local <code>localhost</code></li></ol>
@@ -1449,7 +1465,7 @@
 <ol><li>hosted <code>/production</code></li></ol>
 <ul><li>official public promise</li><li>should only move from an approved hosted <code>/beta</code> candidate</li></ul>
 <p>See also:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/release-authority.json">release-authority.json</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/MULTI_MACHINE_WORKFLOW.md">MULTI_MACHINE_WORKFLOW.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/release-authority.json">release-authority.json</a></li></ul>
 <h3>Release Scope Model</h3>
 <p>We now need to think about release work in three scopes, not one:</p>
 <ol><li><code>platform candidate</code></li></ol>
@@ -1480,6 +1496,34 @@
 <ul><li><code>npm run harness:refresh:release-conformance-docs</code></li><li><code>npm run build</code></li></ul>
 <p>Then commit the refreshed artifacts before any serious <code>/dev</code>, <code>/beta</code>, or <code>/production</code> publish attempt.</p>
 <p>The publish preflight and documentation-freshness checks should now fail if those release-owned conformance artifacts are obviously stale against the current release-prep head.</p>
+<h3>Hosted Pages Workflow Self-Heal</h3>
+<p>The hosted Aurora Pages repo currently runs in GitHub Pages <code>workflow</code> mode rather than direct branch-serving mode.</p>
+<p>That means a lane publish can be correct in the hosted repo itself while the live <code>sgwoods.github.io</code> lane stays stale if GitHub misses the expected <code>Deploy Pages</code> workflow trigger.</p>
+<p>The release-authority verification path now treats that as a recoverable host issue instead of only as a generic timeout:</p>
+<ul><li><code>node tools/build/verify-live-lane.js --lane dev</code></li><li><code>node tools/build/verify-live-lane.js --lane beta</code></li><li><code>node tools/build/verify-live-lane.js --lane production</code></li></ul>
+<p>If live lane build info does not match the expected local artifact, the verifier now checks whether:</p>
+<ul><li>the hosted repo&#39;s raw lane build-info already matches the expected artifact</li><li>the Pages site is configured with <code>build_type: workflow</code></li><li>a <code>Deploy Pages</code> run exists for the current hosted repo head</li></ul>
+<p>If the repo is already correct but no current Pages deploy run exists, the verifier dispatches <code>Deploy Pages</code> automatically and keeps polling the live site.</p>
+<p>This should reduce manual release-authority rescue work when a publish push lands in <code>sgwoods/Aurora-Galactica</code> but GitHub Pages does not start the deploy workflow on its own.</p>
+<h3>Release Pipeline Friction Log</h3>
+<p>The <code>1.4.1</code> beta path exposed several process issues that should be smoothed before the next production move:</p>
+<ul><li>public hosted lanes intentionally strip gameplay harness APIs, so hosted</li></ul>
+<p>account/sign-in checks need DOM-only probes rather than private harness probes</p>
+<ul><li>release evidence generation can make the next publish preflight look stale;</li></ul>
+<p>refresh release conformance docs before the final publish check, then commit that evidence once</p>
+<ul><li>beta security review should run after <code>promote:beta</code>, and production security</li></ul>
+<p>review should run last when preparing production-facing documentation</p>
+<ul><li>GitHub Pages deploy latency is recoverable, but it still lengthens lane</li></ul>
+<p>movement; keep verifier self-heal, and prefer a single release-preflight command once the current process stabilizes</p>
+<ul><li>evidence-only commits should be treated deliberately: publish them to hosted</li></ul>
+<p>lanes when docs/dashboards need to be visible, but do not confuse them with gameplay/runtime keepers</p>
+<p>Recommended simplification backlog:</p>
+<ul><li>add one patch-release preflight bundle that sequences machine readiness,</li></ul>
+<p>browser readiness, conformance refresh, security review, code review, build, and lane publish checks in the current best order</p>
+<ul><li>keep live DOM smoke, local gameplay harness smoke, and public artifact-boundary</li></ul>
+<p>checks as separate named gates</p>
+<ul><li>make the final dev -&gt; beta -&gt; production handoff print the exact artifact SHA,</li></ul>
+<p>version label, evidence commit, and remaining manual gates before each publish</p>
 <h3>Front-Door Copy Gate</h3>
 <p>Startup, initiation, and wait-mode copy is part of the release surface.</p>
 <p>For any candidate where front-door copy changes, we should verify:</p>
@@ -1507,6 +1551,7 @@
 <ul><li>bug fixes should gain coverage in the right harness family</li><li>fidelity changes should use measured reference artifacts where possible</li><li>when committed reference artifacts can settle a question, prefer that over</li></ul>
 <p>human-only evaluation</p>
 <ul><li>platform/application seam changes should prove that the boundary still holds</li></ul>
+<p>For long-cycle fidelity work, use <a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/LONG_CYCLE_KEEPER_PROCESS.md">LONG_CYCLE_KEEPER_PROCESS.md</a> to decide whether a measured candidate is only a measurement win or is ready to become a player-facing runtime keeper. Documentation/evidence-only improvements can move hosted <code>/dev</code>, but they should not justify hosted <code>/beta</code> by themselves.</p>
 <h3>Galaxy first-class parity</h3>
 <p><code>Galaxy Guardians</code> now has enough harness surface that we should treat it as a first-class parity program, not only as a preview experiment.</p>
 <p>That means every serious Galaxy review should preserve all three layers:</p>
@@ -1518,7 +1563,7 @@
 <ul><li><code>npm run harness:check:galaxy-guardians-visual-readability</code></li><li><code>npm run harness:check:galaxy-guardians-audio-character</code></li><li><code>npm run harness:check:gameplay-adapter-boundaries</code></li><li><code>npm run harness:check:platinum-pack-boot</code></li></ul>
 <p>The standing aggregate process gate is:</p>
 <ul><li><code>npm run harness:check:galaxy-guardians-first-class-conformance</code></li></ul>
-<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
+<p>That gate is intentionally broader than one gameplay check. It verifies that the Galaxy evidence stack, core docs, and harness family remain in sync with the maintained plan in <a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md">GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md</a>.</p>
 <h3>Ingestion And Conformance Rule</h3>
 <p>For new-game work, the first serious gate should be game-owned reference evidence, not platform improvisation.</p>
 <p>Ingestion is now a formal subsystem of the conformance project. It should be treated as the evidence-producing phase that makes later gameplay, harness, and release claims possible.</p>
@@ -1555,7 +1600,7 @@
 <p>summary data to explain the release without exposing the whole engineering workspace.</p>
 <h3>Supabase Data API Access Gate</h3>
 <p>Platinum&#39;s auth, profile, and leaderboard paths use Supabase through the Data API. The maintained access contract is:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/SUPABASE_DATA_API_ACCESS.md">SUPABASE_DATA_API_ACCESS.md</a></li><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>This is now a release-hardening gate because Supabase public-schema tables need explicit grants for new projects beginning May 30, 2026 and for existing projects by October 30, 2026.</p>
 <p>The source-level gate is:</p>
 <ul><li><code>npm run harness:check:supabase-data-api-contract</code></li></ul>
@@ -1595,9 +1640,9 @@
 <ul><li><code>npm run harness:score:quality-conformance</code> is the current Aurora numeric</li></ul>
 <p>roll-up gate.</p>
 <ul><li>The readable current table and next-gap interpretation live in</li></ul>
-<p><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/CONFORMANCE_METRIC_OVERVIEW.md">CONFORMANCE_METRIC_OVERVIEW.md</a>.</p>
 <ul><li>When this roll-up changes materially, update</li></ul>
-<p><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
+<p><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/QUALITY_RELEASE_SCORECARD.md">QUALITY_RELEASE_SCORECARD.md</a> and keep the generated artifact under <code>reference-artifacts/analyses/quality-conformance/</code>.</p>
 <ul><li><code>node tools/harness/check-galaxy-guardians-visual-readability.js</code> when the</li></ul>
 <p>changed surface touches Guardians sprites, role palettes, preview rendering, hit feedback, or gameplay-scale visual identity.</p>
 <h4>Profile C: Boundary change</h4>
@@ -1672,7 +1717,7 @@
 <ul><li>make more live-lane checks automatic instead of relying on memory</li><li>keep platform-only, application-only, and boundary harnesses clearly separated</li><li>add stronger pack-contract validation as the second application becomes real</li><li>keep docs refresh discipline boring and routine rather than exceptional</li><li>formalize check ownership so every application-level change proves it did not</li></ul>
 <p>leak into <code>Platinum</code>, and every platform-level change proves it did not alter hosted game rules unintentionally</p>
 <h3>Related Docs</h3>
-<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
+<ul><li>platform guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/PLATINUM.md">PLATINUM.md</a></li></ul></li><li>application-layer guide:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/APPLICATIONS_ON_PLATINUM.md">APPLICATIONS_ON_PLATINUM.md</a></li></ul></li><li>release policy:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/RELEASE_POLICY.md">RELEASE_POLICY.md</a></li></ul></li><li>release readiness review:<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/RELEASE_READINESS_REVIEW.md">RELEASE_READINESS_REVIEW.md</a></li></ul></li></ul>
         </div>
       </div>
     </section>
@@ -1706,7 +1751,7 @@
           </table>
         </div>
 <p>The maintained SQL access contract is:</p>
-<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/1dc23d8ab4f01769928f73ad40b619eb01f718ae/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
+<ul><li><a href="https://github.com/sgwoods/Codex-Test1/blob/6f9155d8a8c4e8ddee281df7a182db0cb466eb38/supabase/data-api-access-contract.sql">supabase/data-api-access-contract.sql</a></li></ul>
 <p>The contract is intentionally not a full database schema. It records the browser-visible tables, required grants, and RLS policies that make the current runtime behavior reproducible.</p>
 <h3>Release Gate</h3>
 <p>The automated source gate is:</p>
@@ -1991,8 +2036,8 @@
   
         </ul>
         <p class="footer">
-          Latest release note: <strong>Production follow-through, white paper, and conformance refresh</strong><br>
-          Release 1.4.0.1 · Updated May 20, 2026
+          Latest release note: <strong>1.4.1 production patch</strong><br>
+          Release 1.4.1.1 · Updated June 11, 2026
         </p>
       </aside>
     </main>
