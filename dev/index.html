@@ -831,7 +831,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <button id="arcadeMusicToggleBtn" type="button" aria-pressed="false" aria-label="Start Arcade Music" title="Start Arcade Music" data-action-tip="Start Arcade Music"><span class="dockIcon musicDockIcon" aria-hidden="true">🎵</span></button>
         <button id="muteToggleBtn" type="button" aria-pressed="false" aria-label="Mute sound effects" title="Mute sound effects" data-action-tip="Mute sound effects"><span class="dockIcon" aria-hidden="true">🔊</span></button>
         <button id="pauseToggleBtn" type="button" aria-pressed="false" aria-label="Pause game" title="Pause game" data-action-tip="Pause game"><span class="dockIcon" aria-hidden="true">⏸</span></button>
-        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open developer tools" data-action-tip="Open developer tools"><span class="dockIcon" aria-hidden="true">⚙</span></button>
+        <button id="settingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings" title="Open settings" data-action-tip="Open settings"><span class="dockIcon" aria-hidden="true">⚙</span></button>
       </div>
     </div>
   </div>
@@ -847,10 +847,10 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="settingsPanel" aria-hidden="true">
   <div id="settingsPanelHead" class="framePopupHead">
     <div>
-      <span id="settingsPanelTitle" class="framePopupTitle">Developer Tools</span>
-      <span id="settingsPanelSub" class="framePopupSub">Release diagnostics, conformance rollup, and local controls for this build.</span>
+      <span id="settingsPanelTitle" class="framePopupTitle">Settings</span>
+      <span id="settingsPanelSub" class="framePopupSub">Audio, display, playlist, and build information for this lane.</span>
     </div>
-    <button type="button" id="settingsPanelClose" aria-label="Close developer tools">×</button>
+    <button type="button" id="settingsPanelClose" aria-label="Close settings">×</button>
   </div>
   <div id="settingsActions">
     <button id="openViewerBtn" type="button" aria-label="Open log viewer">🔎 Open Viewer</button>
@@ -1040,8 +1040,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.1.1</span>
-      <span id="settingsRelease">Jun 11 2026, 10:29 AM EDT</span>
-      <span id="settingsState">main@f41e1e23 clean</span>
+      <span id="settingsRelease">Jun 11 2026, 11:04 AM EDT</span>
+      <span id="settingsState">main@d728ceec clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1088,7 +1088,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <div class="controlCard">
             <span class="controlCardIcon" aria-hidden="true">⏸</span>
             <span class="controlCardTitle">Pause</span>
-            <span class="controlCardBody"><strong>P</strong> pauses the run. <strong>T</strong> opens Developer Tools. <strong>L</strong> exports the log and <strong>X</strong> exports and returns to wait mode.</span>
+            <span class="controlCardBody"><strong>P</strong> pauses the run. <strong>T</strong> opens Settings. <strong>L</strong> exports the log and <strong>X</strong> exports and returns to wait mode.</span>
           </div>
         </div>
         <div id="controlsIndex">
@@ -1098,7 +1098,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
           <div class="controlRow"><span class="controlKeys">P</span><span class="controlAction">Pause</span></div>
           <div class="controlRow"><span class="controlKeys">F</span><span class="controlAction">Toggle arcade fullscreen / console view</span></div>
           <div class="controlRow"><span class="controlKeys">🎞</span><span class="controlAction">Open recent replays saved on this device</span></div>
-          <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Developer Tools</span></div>
+          <div class="controlRow"><span class="controlKeys">T</span><span class="controlAction">Settings</span></div>
           <div class="controlRow"><span class="controlKeys">L</span><span class="controlAction">Export session log</span></div>
           <div class="controlRow"><span class="controlKeys">X</span><span class="controlAction">Export and return to wait mode</span></div>
         </div>
@@ -1340,7 +1340,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.1.1</span>
-    <span id="buildStampRelease">Jun 11 2026, 10:29 AM EDT</span>
+    <span id="buildStampRelease">Jun 11 2026, 11:04 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -2315,7 +2315,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1.1',label:'1.4.1.1+build.1155.sha.f41e1e23',commit:'f41e1e2394c5f6f620185fdb5ceced030f030d21',branch:'main',dirty:false,released:'Jun 11 2026, 10:29 AM EDT',state:'main@f41e1e23 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"patch-candidate","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"patch-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1.1',label:'1.4.1.1+build.1156.sha.d728ceec',commit:'d728ceec084c6f2f770b1bef62079b50bc2cfacb',branch:'main',dirty:false,released:'Jun 11 2026, 11:04 AM EDT',state:'main@d728ceec clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"patch-candidate","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"patch-candidate","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
