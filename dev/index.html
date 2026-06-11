@@ -1040,8 +1040,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.0.1</span>
-      <span id="settingsRelease">Jun 10 2026, 6:09 PM EDT</span>
-      <span id="settingsState">main@c63591f6 clean</span>
+      <span id="settingsRelease">Jun 10 2026, 10:03 PM EDT</span>
+      <span id="settingsState">main@04cbd86f clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1340,7 +1340,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.0.1</span>
-    <span id="buildStampRelease">Jun 10 2026, 6:09 PM EDT</span>
+    <span id="buildStampRelease">Jun 10 2026, 10:03 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1872,8 +1872,8 @@ const GAME_THEME_SETS=Object.freeze({
   }),
   Object.freeze({
    id:'aurora-classic-synth',
-   label:'Aurora Classic Synth',
-   summary:'Classic arcade visuals with public-safe Galaga-style synthesized cues and Aurora arcade music.',
+   label:'Galaga-Style Synth',
+   summary:'Classic arcade visuals with public-safe Galaga-style synthesized cues and Aurora arcade music. Actual reference clips remain localhost-only.',
    audioTheme:'galaga-original-reference',
    graphicsTheme:'classic-arcade',
    spriteRenderMode:'reference-pixel-lab',
@@ -1883,8 +1883,8 @@ const GAME_THEME_SETS=Object.freeze({
   }),
   Object.freeze({
    id:'aurora-local-reference',
-   label:'Aurora Local Reference',
-   summary:'Local review preset for private Galaga reference clips, classic sprites, and Aurora arcade music.',
+   label:'Local Galaga Reference (localhost only)',
+   summary:'Localhost review preset for private Galaga reference clips, classic sprites, and Aurora arcade music.',
    audioTheme:'galaga-reference-assets',
    graphicsTheme:'classic-arcade',
    spriteRenderMode:'reference-pixel-lab',
@@ -2066,10 +2066,14 @@ function themeSetById(gameKey=currentThemeSetGameKey(),themeSetId=''){
  const id=String(themeSetId||'').trim();
  return themeSetsForGame(gameKey).find(set=>set.id===id)||null;
 }
+function themeSetAvailableForLane(themeSet){
+ return !!themeSet&&(!themeSet.localReferenceOnly||referenceAudioPubliclyAvailable());
+}
 function sanitizeThemeSetIdForGame(themeSetId='',gameKey=currentThemeSetGameKey()){
  const id=String(themeSetId||'').trim();
  if(id==='custom')return 'custom';
- if(themeSetById(gameKey,id))return id;
+ const themeSet=themeSetById(gameKey,id);
+ if(themeSet&&themeSetAvailableForLane(themeSet))return id;
  return defaultThemeSetIdForGame(gameKey);
 }
 function themeSetConfigForGame(gameKey=currentThemeSetGameKey(),themeSetId=''){
@@ -2100,10 +2104,18 @@ function populateThemeSetOptions(gameKey=currentThemeSetGameKey(),selected=''){
  if(!themeSetSelect)return;
  const sets=themeSetsForGame(gameKey);
  const options=[
-  ...sets.map(set=>({value:set.id,label:set.label||set.id})),
+  ...sets.map(set=>{
+   const available=themeSetAvailableForLane(set);
+   const label=set.label||set.id;
+   return {
+    value:set.id,
+    label:available?label:`${label} - unavailable on this lane`,
+    disabled:!available
+   };
+  }),
   {value:'custom',label:'Custom'}
  ];
- const markup=options.map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+ const markup=options.map(option=>`<option value="${option.value}"${option.disabled?' disabled':''}>${option.label}</option>`).join('');
  if(themeSetSelect.innerHTML!==markup)themeSetSelect.innerHTML=markup;
  themeSetSelect.value=sanitizeThemeSetIdForGame(selected,gameKey);
 }
@@ -2303,7 +2315,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.1140.sha.c63591f6',commit:'c63591f69afe69bb224d5477c803706b776ca3fe',branch:'main',dirty:false,released:'Jun 10 2026, 6:09 PM EDT',state:'main@c63591f6 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.0',versionLine:'1.4.0.1',label:'1.4.0.1+build.1141.sha.04cbd86f',commit:'04cbd86fbaee43066cb1b8caa2e1192d8d9fb3a6',branch:'main',dirty:false,released:'Jun 10 2026, 10:03 PM EDT',state:'main@04cbd86f clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.0","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.0","versionLine":"1.4.0","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
