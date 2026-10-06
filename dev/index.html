@@ -296,6 +296,12 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
 #testHint{margin-top:8px;color:#9fd0af}
+#guardiansStageFiveReview{display:flex;flex-direction:column;gap:9px;margin-top:10px;padding:11px;border:1px solid rgba(123,214,255,.28);background:rgba(6,19,31,.72)}
+#guardiansStageFiveReview[hidden]{display:none}
+#guardiansStageFiveReview h4{color:#9eefff}
+#guardiansStageFiveLaunch{min-height:36px;border:1px solid rgba(123,214,255,.5);background:#0a2940;color:#e8fbff;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#guardiansStageFiveLaunch:hover{border-color:#9eefff;background:#103b58}
+#guardiansStageFiveLaunch:disabled{opacity:.48;cursor:not-allowed}
 .settingsHint{color:#d7c38b}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
@@ -1035,13 +1041,35 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       </div>
       <input id="testChallenge" type="checkbox" hidden aria-hidden="true" />
       <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 3-4, not Level 4. Expert Plays starts the selected persona in Watch Mode for the chosen start point. Set either score to 0 to disable that bonus-ship award.</div>
+      <div id="guardiansStageFiveReview" hidden>
+        <h4>Guardians Stage 5 Review</h4>
+        <div class="settingsFieldGrid">
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveSeed">Review Seed</label>
+            <select id="guardiansStageFiveSeed">
+              <option value="12553" selected>12553 · Primary</option>
+              <option value="13550">13550 · Alternate A</option>
+              <option value="14547">14547 · Alternate B</option>
+            </select>
+          </div>
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveMode">Pilot</label>
+            <select id="guardiansStageFiveMode">
+              <option value="manual" selected>Manual Play</option>
+              <option value="professional">Professional Watch</option>
+            </select>
+          </div>
+        </div>
+        <button id="guardiansStageFiveLaunch" type="button">Launch Stage 5 Review</button>
+        <div id="guardiansStageFiveReviewStatus" class="settingsInlineHint">Rank-three policy · five ships · stages 5-9 · score not recorded in Watch Mode.</div>
+      </div>
     </div>
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
       <span id="settingsVersion">Version 1.4.1.1</span>
-      <span id="settingsRelease">Jun 12 2026, 7:26 AM EDT</span>
-      <span id="settingsState">main@1d9966d1 clean</span>
+      <span id="settingsRelease">Oct 06 2026, 11:16 AM EDT</span>
+      <span id="settingsState">codex/oct03-local-integration@7b16af66 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1340,7 +1368,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
     <span id="buildStampVersion">1.4.1.1</span>
-    <span id="buildStampRelease">Jun 12 2026, 7:26 AM EDT</span>
+    <span id="buildStampRelease">Oct 06 2026, 11:16 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1563,6 +1591,7 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),themeSetSelect=document.getElementById('themeSetSelect'),themeSetSummary=document.getElementById('themeSetSummary'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const guardiansStageFiveReview=document.getElementById('guardiansStageFiveReview'),guardiansStageFiveSeed=document.getElementById('guardiansStageFiveSeed'),guardiansStageFiveMode=document.getElementById('guardiansStageFiveMode'),guardiansStageFiveLaunch=document.getElementById('guardiansStageFiveLaunch'),guardiansStageFiveReviewStatus=document.getElementById('guardiansStageFiveReviewStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1590,7 +1619,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-06-12T11%3A23%3A00.611Z%22%2C%22commit%22%3A%22dab57ac7%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.8%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-06T14%3A45%3A55.825Z%22%2C%22commit%22%3A%22f314bb3e%22%2C%22branch%22%3A%22codex%2Foct03-local-integration%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -2315,7 +2344,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1.1',label:'1.4.1.1+build.1177.sha.1d9966d1',commit:'1d9966d1ac60b9ef82012f5dc9c9926be90a7bf6',branch:'main',dirty:false,released:'Jun 12 2026, 7:26 AM EDT',state:'main@1d9966d1 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1.1',label:'1.4.1.1+build.1224.sha.7b16af66',commit:'7b16af661867c1391b6dbcb42bd85c4610dcf3b2',branch:'codex/oct03-local-integration',dirty:false,released:'Oct 06 2026, 11:16 AM EDT',state:'codex/oct03-local-integration@7b16af66 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
@@ -3768,7 +3797,39 @@ function syncDeveloperToolsUi(){
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+ let activePackKey='';
+ try{if(typeof currentGamePackKey==='function')activePackKey=currentGamePackKey();}catch{}
+ const guardiansReviewAvailable=String(BUILD_INFO?.releaseChannel||'').toLowerCase()==='development'&&activePackKey==='galaxy-guardians-preview';
+ if(guardiansStageFiveReview)guardiansStageFiveReview.hidden=!guardiansReviewAvailable;
+ if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.disabled=!guardiansReviewAvailable;
  syncChallengeStartControls();
+}
+
+function launchGuardiansStageFiveReview(){
+ if(String(BUILD_INFO?.releaseChannel||'').toLowerCase()!=='development'||typeof currentGamePackKey!=='function'||currentGamePackKey()!=='galaxy-guardians-preview')return false;
+ if(typeof startGalaxyGuardiansDevPreview!=='function')return false;
+ const seed=(+guardiansStageFiveSeed?.value>>>0)||12553;
+ const mode=String(guardiansStageFiveMode?.value||'manual');
+ const watchMode=mode==='professional';
+ if(testStartKind)testStartKind.value='level';
+ if(testStage)testStage.value='5';
+ if(testShips)testShips.value='5';
+ if(testExpertPlays)testExpertPlays.value=watchMode?'professional':'human';
+ saveTestCfg();
+ const startedReview=startGalaxyGuardiansDevPreview({
+  stage:5,
+  ships:5,
+  seed,
+  maxPlayableStage:9,
+  watchMode,
+  watchPersona:watchMode?'professional':'',
+  stageFiveReview:true
+ });
+ if(startedReview){
+  if(guardiansStageFiveReviewStatus)guardiansStageFiveReviewStatus.textContent=`Active: Stage 5 · seed ${seed} · ${watchMode?'Professional Watch':'Manual Play'}`;
+  showToast(`Stage 5 review · seed ${seed} · ${watchMode?'watch':'manual'}`);
+ }
+ return startedReview;
 }
 function syncChallengeStartControls(){
  const cfg=testCfgCache||loadTestCfg();
@@ -3991,8 +4052,9 @@ function stopReferenceCueSet(names=[]){
 function holdReferenceGameplayCadence(seconds=0){
  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
 }
-function clearReferenceTransitionCueWindow(extra=[]){
- stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+function clearReferenceTransitionCueWindow(extra=[],preserve=[]){
+ const retained=new Set(preserve);
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])].filter(name=>!retained.has(name)));
 }
 function clearReferenceBossMomentCueWindow(){
  stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
@@ -4729,6 +4791,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.addEventListener('click',launchGuardiansStageFiveReview);
 if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
@@ -9573,7 +9636,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(28+slot*5)*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   // End entry at the interior lane, not an outward fan offset.
+	   e.x=startX+(laneX-startX)*q+fanDir*(1-q)*(slot-1.5)*14*arcAmp;
 	   e.y=topY+q*(48+slot*8)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
@@ -9656,8 +9720,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(78+slot*8)*dropAmp+Math.sin(q*Math.PI*1.4+p)*6;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(188+slot*27)*dropAmp;
+	   e.x=laneX+fanDir*q*202*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+q*(188+slot*27))*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*((q-.12)*116+(slot-1.5)*18)*fm.challengeSweep*arcAmp+Math.sin(q*Math.PI*1.6+p)*9;
@@ -9740,8 +9804,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+36+q*176*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
-	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
+	   e.x=laneX+fanDir*(202+q*186)*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+(188+slot*27)+q*344*fm.challengeDrop)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*(68+q*142+(slot-1.5)*16)*fm.challengeSweep*arcAmp;
@@ -9784,7 +9848,8 @@ function updateChallengeEnemy(state,e,dt){
    S.ch.upperBandSamples++;
   }
  }
- if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){
+ // Entry curves may begin outside the exit-removal boundary.
+ if(e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
   e.hp=0;
   e.miss=1;
  }
@@ -11020,7 +11085,8 @@ function queueStageTransition(state,mode='normal'){
   enemies:S.e.filter(e=>e.hp>0).length
  });
  if(usesReferenceTimingModel()){
-  clearReferenceTransitionCueWindow();
+  // Result audio continues across the gameplay handoff.
+  clearReferenceTransitionCueWindow([],mode==='challengeResult'?['challengeResults','challengePerfect']:[]);
   S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge
@@ -12143,12 +12209,10 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  resultHoldWindow:4.25,
-  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  resultBannerWindow:4.25,
-  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  nextStageWindow:7.35,
-  nextCueLeadBeforeSpawn:3.15,
+  resultHoldWindow:1.45,
+  resultBannerWindow:1.15,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
   cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
@@ -12250,7 +12314,7 @@ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-s
   cooldownMs:2400,
   clipStart:0,
   clipDuration:3.35,
-  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+  stopCueNames:Object.freeze(['stagePulse'])
  }),
  attractEnter:Object.freeze({
   byPhase:Object.freeze({
@@ -13071,8 +13135,13 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
 const AURORA_CHALLENGE_LAYOUT=AURORA_CHALLENGE_LAYOUTS[0];
 
 const AURORA_CHALLENGE_DEFAULT_LAYOUT=AURORA_CHALLENGE_LAYOUT;
+const AURORA_CHALLENGE_STAGE31_LAYOUT=Object.freeze({
+ ...AURORA_CHALLENGE_LAYOUTS[AURORA_CHALLENGE_LAYOUTS.length-1],
+ groupSpawnOffsets:Object.freeze([0,3.593,7.137,9.997,13.79])
+});
 
 function auroraChallengeLayoutForStage(stage){
+ if(stage===31)return AURORA_CHALLENGE_STAGE31_LAYOUT;
  let layout=AURORA_CHALLENGE_DEFAULT_LAYOUT;
  for(const candidate of AURORA_CHALLENGE_LAYOUTS){
   if(stage>=candidate.fromStage)layout=candidate;
@@ -13373,6 +13442,40 @@ const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
   firstScoutDiveDelay:2.55,
   flagshipEscortDelay:6.65,
   singleShotCooldown:.72
+ })
+});
+
+const GUARDIANS_STAGE_BEHAVIOR_POLICIES=Object.freeze({
+ rank3:Object.freeze({
+  id:'guardians-stage-five-active-dive-cap-v5',
+  status:'bounded-runtime-promotion',
+  minRank:3,
+  maxRank:3,
+  ruleScales:Object.freeze({
+   scoutDiveIntervalBase:1,
+   diveBaseVy:.97,
+   diveAccel:.94,
+   diveSideDrift:.9,
+   diveSwayAmplitude:.92
+  }),
+  diveSelection:Object.freeze({
+   playerCorridorExclusionPx:26,
+   lowerFieldSeparationPx:40,
+   maxLowerFieldDives:2,
+   maxActiveDives:2,
+   activeDiveSeparationPx:32
+  }),
+  enemyShotSource:Object.freeze({
+   crowdingThreshold:2,
+   playerCorridorExclusionPx:22,
+   minPlayerYGapPx:88,
+   lowerFieldDiveShotSeparationPx:30,
+   lowerFieldDiveShotYSeparationPx:108,
+   preferFormationWhenCrowded:1,
+   formationPoolSize:10,
+   allowBaseFallback:1
+  }),
+  evidence:'reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-visual-review-0.1.json'
  })
 });
 
@@ -13743,6 +13846,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
  scoreAdvancePresentation:GUARDIANS_SCORE_ADVANCE_PRESENTATION,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
+ stageBehaviorPolicies:GUARDIANS_STAGE_BEHAVIOR_POLICIES,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,
  formationLayouts:GUARDIANS_FORMATION_LAYOUTS,
@@ -14466,13 +14570,15 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   ? resolveWatchModeStartScope()
   : '';
  const requestedWatchPersona=String(
-  (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
-  || cfg.watchPersona
+  cfg.watchPersona
   || cfg.persona
+  || (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
   || 'advanced'
  ).trim().toLowerCase();
  const developerWatchPersona=cfg.watchMode?requestedWatchPersona:'';
- const watchPersona=armedWatchPersona||developerWatchPersona;
+ const watchPersona=cfg.stageFiveReview
+  ? developerWatchPersona
+  : (armedWatchPersona||developerWatchPersona);
  const watchScope=watchPersona
   ? String(
    armedWatchPersona
@@ -14520,13 +14626,21 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   stage:S.stage,
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
   seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719,
-  maxPlayableStage:Math.max(
+ maxPlayableStage:Math.max(
    1,
    +cfg.maxPlayableStage
    || +(window.__platinumHarnessRuntimeOverrides?.maxPlayableStage||window.__auroraHarnessRuntimeOverrides?.maxPlayableStage||0)
    || 1
  )
  });
+ if(cfg.stageFiveReview){
+  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig={
+   id:'guardians-stage-five-review',
+   stage:5,
+   seed:(+cfg.seed>>>0)||12553,
+   mode:watchMode?'professional-watch':'manual-play'
+  };
+ }
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.telemetryEventIndex=0;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
@@ -14619,9 +14733,11 @@ function currentGalaxyGuardiansDevPreviewState(){
 }
 
 function summarizeGalaxyGuardiansDevPreview(){
- return GALAXY_GUARDIANS_ACTIVE_DEV_STATE
-  ? summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
-  : null;
+ if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return null;
+ return Object.assign(
+  summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE),
+  {reviewConfig:GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig||null}
+ );
 }
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
@@ -14794,6 +14910,12 @@ function guardiansStageRank(stateOrStage=1){
  return 0;
 }
 
+function guardiansStageBehaviorPolicy(stateOrStage=1){
+ const rank=guardiansStageRank(stateOrStage);
+ const policies=GALAXY_GUARDIANS_PACK.stageBehaviorPolicies||{};
+ return Object.values(policies).find(policy=>rank>=(+policy.minRank||0)&&rank<=(+policy.maxRank||Infinity))||null;
+}
+
 function guardiansRuntimeRules(stateOrStage=1){
  const base=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules;
  const rank=guardiansStageRank(stateOrStage);
@@ -14814,7 +14936,7 @@ function guardiansRuntimeRules(stateOrStage=1){
   const diveAccelRelief=midrunRouteabilityRelief?.94:1;
   const diveSideDriftRelief=midrunRouteabilityRelief?.9:1;
   const shotMaxLive=Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2));
-  return Object.assign({},base,{
+  const rules=Object.assign({},base,{
   firstScoutDiveDelay:+(base.firstScoutDiveDelay*firstPressureScale).toFixed(3),
   flagshipEscortDelay:+(base.flagshipEscortDelay*Math.max(.78,1-rank*.032)).toFixed(3),
   scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale*scoutIntervalRelief).toFixed(3),
@@ -14837,6 +14959,11 @@ function guardiansRuntimeRules(stateOrStage=1){
   topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3),
   topReentrySwayAmplitude:+(base.topReentrySwayAmplitude*(1+rank*.04)).toFixed(3)
  });
+ const scales=guardiansStageBehaviorPolicy(stateOrStage)?.ruleScales||{};
+ for(const [key,scale] of Object.entries(scales)){
+  if(Number.isFinite(+rules[key])&&Number.isFinite(+scale))rules[key]=+(rules[key]*scale).toFixed(3);
+ }
+ return rules;
 }
 
 function guardiansMarchOffset(state,alien){
@@ -15066,6 +15193,18 @@ function guardiansPressureSnapshot(state,rules){
 function guardiansFairDivePredicate(state,rules,pressure){
  const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
  const playerX=+state.player?.x||0;
+ const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
+ if(policy){
+  const active=liveGuardiansAliens(state).filter(alien=>alien.mode==='diving'||alien.mode==='wrapping');
+  return alien=>{
+   const rackX=+alien.rackX||0;
+   if(active.length>=(+policy.maxActiveDives||Infinity))return false;
+   if(lowerFieldDives.length>=(+policy.maxLowerFieldDives||Infinity))return false;
+   if(Math.abs(rackX-playerX)<=(+policy.playerCorridorExclusionPx||0))return false;
+   if(!lowerFieldDives.every(threat=>Math.abs(rackX-(+threat.x||0))>=(+policy.lowerFieldSeparationPx||0)))return false;
+   return active.every(threat=>Math.abs(rackX-(+threat.x||+threat.rackX||0))>=(+policy.activeDiveSeparationPx||0));
+  };
+ }
  if(!lowerFieldDives.length)return ()=>true;
  const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 34 : 26;
  const playerCorridorWidth=pressure?.crowdingPenalty>=3 ? 26 : 22;
@@ -15095,6 +15234,8 @@ function pickGuardiansEscortAliens(state,count=0,leader=null){
 function startGuardiansDive(state,alien,escortCount=0){
  if(!alien||alien.hp<=0)return null;
  const rules=guardiansRuntimeRules(state);
+ const policy=guardiansStageBehaviorPolicy(state)?.diveSelection;
+ if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(alien))return null;
  alien.mode='diving';
  alien.diveT=0;
  alien.diveStartX=alien.x;
@@ -15103,7 +15244,22 @@ function startGuardiansDive(state,alien,escortCount=0){
  alien.escorts=escortCount;
  alien.linkedTo='';
  alien.escortSlot=0;
- const escorts=alien.role==='flagship'?pickGuardiansEscortAliens(state,escortCount,alien):[];
+ const candidates=alien.role==='flagship'?pickGuardiansEscortAliens(state,policy?state.aliens.length:escortCount,alien):[];
+ const escorts=[];
+ // Recheck after each activation: the leader and accepted escorts consume capacity.
+ for(const escort of candidates){
+  if(escorts.length>=Math.max(0,escortCount|0))break;
+  if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(escort))continue;
+  escort.mode='diving';
+  escort.diveT=-rules.escortLag*(escorts.length+1);
+  escort.diveStartX=escort.x;
+  escort.diveStartY=escort.y;
+  escort.diveSide=alien.diveSide;
+  escort.linkedTo=alien.id;
+  escort.escortSlot=escorts.length===0?-1:1;
+  escort.escorts=0;
+  escorts.push(escort);
+ }
  alien.escorts=escorts.length;
  guardiansRuntimeEvent(state,alien.role==='flagship'?'flagship_dive_start':'alien_dive_start',{
   id:alien.id,
@@ -15111,16 +15267,6 @@ function startGuardiansDive(state,alien,escortCount=0){
   visualId:alien.visualId,
   audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.diveAudioCue||'',
   escorts:escorts.length
- });
- escorts.forEach((escort,index)=>{
-  escort.mode='diving';
-  escort.diveT=-rules.escortLag*(index+1);
-  escort.diveStartX=escort.x;
-  escort.diveStartY=escort.y;
-  escort.diveSide=alien.diveSide;
-  escort.linkedTo=alien.id;
-  escort.escortSlot=index===0?-1:1;
-  escort.escorts=0;
  });
  if(escorts.length>0)guardiansRuntimeEvent(state,'escort_join',{
   flagship:alien.id,
@@ -15258,6 +15404,25 @@ function pickGuardiansEnemyShotSource(state){
  const live=liveGuardiansAliens(state).filter(alien=>alien.y<state.player.y-24);
  if(!live.length)return null;
  const diving=live.filter(alien=>alien.mode==='diving'||alien.mode==='wrapping');
+ const policy=guardiansStageBehaviorPolicy(state)?.enemyShotSource||null;
+ if(policy){
+  const lowerFieldDives=Array.isArray(pressure.lowerFieldDives)?pressure.lowerFieldDives:[];
+  const crowded=pressure.crowdingPenalty>=(+policy.crowdingThreshold||3);
+  const eligible=alien=>{
+   if(crowded&&Math.abs(alien.x-state.player.x)<=(+policy.playerCorridorExclusionPx||0))return false;
+   if(alien.y>=state.player.y-(+policy.minPlayerYGapPx||0))return false;
+   return lowerFieldDives.every(threat=>
+    Math.abs(alien.x-threat.x)>(+policy.lowerFieldDiveShotSeparationPx||0)
+    || Math.abs(alien.y-threat.y)>(+policy.lowerFieldDiveShotYSeparationPx||0)
+   );
+  };
+  const formation=live.filter(alien=>alien.mode==='formation'&&eligible(alien)).sort((a,b)=>b.y-a.y).slice(0,+policy.formationPoolSize||10);
+  const eligibleDiving=diving.filter(eligible);
+  let policyCandidates=policy.preferFormationWhenCrowded&&crowded?formation:eligibleDiving;
+  if(!policyCandidates.length&&!(policy.preferFormationWhenCrowded&&crowded))policyCandidates=formation;
+  if(policyCandidates.length)return policyCandidates[Math.floor(state.rng()*policyCandidates.length)%policyCandidates.length];
+  if(!policy.allowBaseFallback)return null;
+ }
   let candidates=diving.filter(alien=>{
   if(alien.y>=state.player.y-(pressure.crowdingPenalty>=2 ? 88 : 64))return false;
   if(pressure.crowdingPenalty>=3&&Math.abs(alien.x-state.player.x)<=14)return false;
@@ -15375,12 +15540,14 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    const deferScale=pressure.crowdingPenalty>=4?.24:.18;
    state.nextDiveAt=state.t+Math.max(.14,rules.scoutDiveIntervalBase*deferScale);
   }else{
-   const alien=pickGuardiansAlien(state,'scout',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'scout',null,diveRanker)
-    || pickGuardiansAlien(state,'escort',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'escort',null,diveRanker)
-    || pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+   const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
+   const predicate=guardiansFairDivePredicate(state,rules,pressure);
+   const alien=pickGuardiansAlien(state,'scout',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'scout',null,diveRanker))
+    || pickGuardiansAlien(state,'escort',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'escort',null,diveRanker))
+    || pickGuardiansAlien(state,'flagship',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'flagship',null,diveRanker));
    startGuardiansDive(state,alien,0);
    state.nextDiveAt=state.t+rules.scoutDiveIntervalBase+state.rng()*rules.scoutDiveIntervalJitter;
   }
@@ -15391,8 +15558,9 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    const deferScale=pressure.crowdingPenalty>=4?.18:.12;
    state.nextFlagshipAt=state.t+Math.max(.22,rules.flagshipDiveIntervalBase*deferScale);
   }else{
+   const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
    const flagship=pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+    || (!policy&&pickGuardiansAlien(state,'flagship',null,diveRanker));
    startGuardiansDive(state,flagship,Math.min(2,liveGuardiansAliens(state,'escort').filter(alien=>alien.mode==='formation').length));
    state.nextFlagshipAt=state.t+rules.flagshipDiveIntervalBase+state.rng()*rules.flagshipDiveIntervalJitter;
   }
@@ -16226,9 +16394,28 @@ function createAuroraGameplayAdapterState(opts={}){
  return state;
 }
 
-function startAuroraGameplayAdapter(){
+function startAuroraGameplayAdapter(cfg={}){
+ const trial=cfg.challengeScheduleTrial;
+ if(trial!==undefined){
+  const channel=typeof BUILD_INFO!=='undefined'?String(BUILD_INFO.releaseChannel||'').toLowerCase():'';
+  const launch=window.__platinumHarnessLaunchCfg;
+  const offsets=trial?.groupSpawnOffsets;
+  if(channel!=='development'||launch?.challengeScheduleTrial!==trial||
+   trial?.stage!==31||cfg.stage!==31||cfg.stageMode!=='display'||cfg.startKind!=='challenge'||cfg.challengeStage!==8||
+   !Array.isArray(offsets)||offsets.length!==5||offsets.some(value=>!Number.isFinite(value)||value<0||value>30)){
+   throw new Error('Challenge schedule trial requires a valid development harness Stage 31 launch.');
+  }
+ }
  const state=createAuroraGameplayAdapterState();
- return startAuroraGameplay(state);
+ if(trial)state.harnessChallengeLayoutOverride={stage:31,layout:{groupSpawnOffsets:[...trial.groupSpawnOffsets]}};
+ try{
+  const result=startAuroraGameplay(state);
+  if(trial)state.harnessChallengeLayoutSnapshot=currentGamePackChallengeLayout(state.stage);
+  return result;
+ }
+ finally{
+  if(trial)state.harnessChallengeLayoutOverride=null;
+ }
 }
 
 function updateAuroraGameplayAdapter(dt,input={}){
@@ -18972,6 +19159,16 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.fillStyle='#7bd6ff';
  ctx.shadowColor='rgba(123,214,255,.34)';
  ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
+ if(state.reviewConfig){
+  ctx.fillStyle='rgba(1,8,18,.82)';
+  ctx.fillRect(69,20,142,10);
+  ctx.textAlign='center';
+  ctx.fillStyle='#9eefff';
+  ctx.shadowColor='rgba(158,239,255,.34)';
+  ctx.font='6px "Courier New", Consolas, monospace';
+  ctx.fillText(`REVIEW S5 · ${state.reviewConfig.mode==='professional-watch'?'PRO WATCH':'MANUAL'} · SEED ${state.reviewConfig.seed}`,PLAY_W*.5,22);
+  ctx.textAlign='left';
+ }
  ctx.shadowBlur=0;
  ctx.fillStyle='rgba(216,236,255,.84)';
  ctx.fillText('CREDIT 0',12,PLAY_H-20);
@@ -19078,6 +19275,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
    summary.stage||state.stage||1
   ).core)).size,
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
+  reviewConfig:state.reviewConfig||null,
   starfieldCount:S.st.length,
   starfieldLeadSample:[...(window.__platinumRenderDebug.starfieldLeadSample||[])]
  });
@@ -20379,6 +20577,38 @@ window.__galagaHarness__={
    attackGap:+(+S.attackGapT||0).toFixed(3),
    recoverT:+(+S.recoverT||0).toFixed(3)
   };
+ },
+ challengeContactDiagnostics(id){
+  const e=S.e.find(enemy=>enemy.id===id&&enemy.hp>0&&enemy.ch);
+  if(!e)return null;
+  const u=e.tm+(+e.phaseOffsetS||0)+(+e.lanePhaseOffsetS||0);
+  const lowerQ=u>2.4?cl((u-2.4)/8.8,0,1):0;
+  const bias=(+e.lowerFieldBias||0)*lowerQ*lowerQ;
+  const he=enemyCollisionHitbox(e),hp=playerHitbox(),p=S.p;
+  const overlap=(x,y)=>Math.abs(x-p.x)<he.w+hp.w&&Math.abs(y-p.y)<he.h+hp.h;
+  return {
+   id:e.id,wave:e.wave,lane:e.c,pathFamily:e.pathFamily,spawn:e.spawn,
+   u,phase:u<3.15?'entry':u<9.7?'middle':'exit',
+   x:e.x,y:e.y,preBiasY:e.y-bias,lowerFieldBias:+e.lowerFieldBias||0,appliedBias:bias,
+   family:familyMotion(e),enemyHitbox:he,playerHitbox:hp,
+   player:{x:p.x,y:p.y,spawn:p.spawn,captured:!!p.captured,returning:!!p.returning},
+   bodyOverlap:overlap(e.x,e.y),sameFrameZeroBiasOverlap:overlap(e.x,e.y-bias),
+   drawnPoseUnion:this.challengeSpriteBounds(id)
+  };
+ },
+ challengeSpriteBounds(id){
+  const enemy=S.e.find(e=>e.id===id);
+  if(!enemy)return null;
+  const bounds={left:Infinity,top:Infinity,right:-Infinity,bottom:-Infinity};
+  const original=ctx.fillRect;
+  ctx.fillRect=(x,y,w,h)=>{
+   bounds.left=Math.min(bounds.left,x);bounds.top=Math.min(bounds.top,y);
+   bounds.right=Math.max(bounds.right,x+w);bounds.bottom=Math.max(bounds.bottom,y+h);
+  };
+  try{
+   for(const tm of [0,Math.PI/22])drawEnemy({...enemy,tm,ph:0,hitT:0,dive:0,carry:0});
+  }finally{ctx.fillRect=original;}
+  return Number.isFinite(bounds.left)?bounds:null;
  },
  challengeFormationState(){
   const active=S.e.filter(e=>e.hp>0&&e.ch).sort((a,b)=>(a.wave-b.wave)||(a.c-b.c));
