@@ -1067,9 +1067,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
-      <span id="settingsVersion">Version 1.4.1.1</span>
-      <span id="settingsRelease">Oct 06 2026, 11:16 AM EDT</span>
-      <span id="settingsState">codex/oct03-local-integration@7b16af66 clean</span>
+      <span id="settingsVersion">Version 1.4.1.2</span>
+      <span id="settingsRelease">Oct 14 2026, 11:29 PM EDT</span>
+      <span id="settingsState">main@8e93394b clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1077,8 +1077,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">1.4.1 production quality release</span>
-      <span id="settingsNotesBody">Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.</span>
+      <span id="settingsNotesTitle">Challenge cadence and readable exits dev review</span>
+      <span id="settingsNotesBody">Publishes the accepted local Aurora cadence, challenge clearance and continuous-exit repairs for hosted dev review. Retains demonstrated normal-input hits, bounds late combat pressure, preserves Stage 3 keepers, and includes the reviewed development-only Guardians launcher and stronger packaging checks. This is not beta or production approval.</span>
     </div>
   </div>
 </div>
@@ -1367,8 +1367,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.4.1.1</span>
-    <span id="buildStampRelease">Oct 06 2026, 11:16 AM EDT</span>
+    <span id="buildStampVersion">1.4.1.2</span>
+    <span id="buildStampRelease">Oct 14 2026, 11:29 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1619,7 +1619,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-06T14%3A45%3A55.825Z%22%2C%22commit%22%3A%22f314bb3e%22%2C%22branch%22%3A%22codex%2Foct03-local-integration%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-15T03%3A25%3A04.142Z%22%2C%22commit%22%3A%227dab1d79%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -2344,7 +2344,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1.1',label:'1.4.1.1+build.1224.sha.7b16af66',commit:'7b16af661867c1391b6dbcb42bd85c4610dcf3b2',branch:'codex/oct03-local-integration',dirty:false,released:'Oct 06 2026, 11:16 AM EDT',state:'codex/oct03-local-integration@7b16af66 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2',versionLine:'1.4.1.2',label:'1.4.1.2+build.1195.sha.8e93394b',commit:'8e93394bbc290d374d005cf13206e42e8c099b78',branch:'main',dirty:false,released:'Oct 14 2026, 11:29 PM EDT',state:'main@8e93394b clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
@@ -3263,6 +3263,8 @@ function advanceSharedStarfield(dt,opts={}){
 }
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
+// Combat pressure stops increasing after Stage 30; progression keeps its actual stage.
+const combatEffectiveStage=stage=>Math.min(stage,30);
 const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
 const STAGE_RULES={
  opening:{maxStage:1,tune:{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2},flight:{scriptedDiveVy:80,randomDiveVy:82,diveAccel:150}},
@@ -3270,7 +3272,7 @@ const STAGE_RULES={
  stage3:{maxStage:3,tune:{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:162}},
  stage4:{maxStage:4,tune:{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:172}},
  stage5:{maxStage:5,tune:{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}},
- endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
+ endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+combatEffectiveStage(s)*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
 };
 function stageRuleSet(stage){
  for(const key of Object.keys(STAGE_RULES)){
@@ -9271,7 +9273,7 @@ function runStage1Script(state,dt,p,T){
   const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.c===c).sort((a,b)=>b.y-a.y)[0];
   if(cand){
    const aim=cl((p.x-cand.x)*T.aimMul,-T.aimClamp,T.aimClamp);
-   fireEnemyBullet(S,cand,aim,T.bulletVy+S.stage*T.bulletVyStage,'script');
+   fireEnemyBullet(S,cand,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'script');
   }
   S.scriptShotT=1.35;
  }
@@ -9582,8 +9584,22 @@ function updateChallengeEnemy(state,e,dt){
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
 		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
+ const previousGreenExitPose=e.stage31GreenExitPose;
+ const laterGreenJoinDuration=.66;
+ const laterBlueJoinDuration=.9;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
-	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+	 const genericChallengePath=!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
+ const stage31Group3CurveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+ const stage31Group3CurveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+ const stage31Group3LaneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+ const stage31Group3YBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+ const stage31Group3GateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+ const stage31Group3Phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+ const stage31Group3PolicyEligible=genericChallengePath&&S.stage===31&&wave===2&&pathFamily==='blue-purple-finale'
+  &&!stage31Group3CurveX&&!stage31Group3CurveY&&!stage31Group3LaneBias&&!stage31Group3YBias
+  &&(!stage31Group3GateS||9.7+stage31Group3Phase+stage31Group3GateS*.28>=stage31Group3GateS);
+ let stage31Group3ExitDx=0,stage31Group3ExitDy=0;
+	 if(genericChallengePath){
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){
@@ -9790,6 +9806,17 @@ function updateChallengeEnemy(state,e,dt){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
 	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
+	   if(S.stage>=35&&u-9.7<laterGreenJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterGreenJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),rung=slot%2?-1:1;
+	    const middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*((middleQ-.5)*44+rung*(18+middleQ*13))*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(44+rung*13)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(146+slot*14)*dropAmp+(wave%2?Math.sin(middleQ*Math.PI)*7:0);
+	    const middleDy=((146+slot*14)*dropAmp+(wave%2?Math.PI*Math.cos(middleQ*Math.PI)*7:0))/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='green-ladder-deep-drop'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*64)*fm.challengeSweep*arcAmp+Math.sin(q*5.6+p)*3;
@@ -9821,6 +9848,39 @@ function updateChallengeEnemy(state,e,dt){
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
 	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
+	   if(stage31Group3PolicyEligible){
+	    const middleQ=(9.7-entryDuration)/6.55,elapsed=u-9.7;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*10*arcAmp*Math.PI*3)/6.55;
+	    if(elapsed<.9){
+	     const joinQ=elapsed/.9,blend=joinQ*joinQ*(3-2*joinQ);
+	     e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	     e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	    }else if(u>=11.05){
+	     const pivotQ=(11.05-9.7)/3.35,departure=u-11.05;
+	     const pivotX=laneX+sweep*(Math.sin(pivotQ*Math.PI*2.8+p)*34-pivotQ*76)*fm.challengeSweep*arcAmp;
+	     const pivotDx=sweep*(Math.cos(pivotQ*Math.PI*2.8+p)*34*Math.PI*2.8-76)*fm.challengeSweep*arcAmp/3.35;
+	     const pivotY=topY+18+pivotQ*216*fm.challengeDrop*dropAmp+Math.cos(pivotQ*8+p)*4;
+	     const pivotDy=(216*fm.challengeDrop*dropAmp-Math.sin(pivotQ*8+p)*32)/3.35;
+	     const turn=.12*(1-Math.exp(-departure/.12));
+	     e.x=pivotX-100*departure+(pivotDx+100)*turn;
+	     e.y=pivotY-260*departure+(pivotDy+260)*turn;
+	     stage31Group3ExitDx=-100+(pivotDx+100)*Math.exp(-departure/.12);
+	     stage31Group3ExitDy=-260+(pivotDy+260)*Math.exp(-departure/.12);
+	    }
+	   }
+	   if(S.stage>=35&&u-9.7<laterBlueJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterBlueJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*30*Math.PI*arcAmp)/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
@@ -9841,6 +9901,59 @@ function updateChallengeEnemy(state,e,dt){
   const lowerQ=cl((u-2.4)/8.8,0,1);
   e.y+=lowerFieldBias*lowerQ*lowerQ;
  }
+ // Experimental group1 side departure; final composed pose owns the exit bias.
+ if(genericChallengePath&&S.stage===31&&wave===0&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup1ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup1ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Experimental group5 departure, scoped to the selected generic evaluator.
+ if(genericChallengePath&&S.stage===31&&wave===4&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup5ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup5ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Provisional departure for local review; exact lane-reference fidelity is open.
+ if(S.stage===31&&pathFamily==='green-ladder-split'){
+  if(u<9.7){
+   e.stage31GreenExitPose={x:e.x,y:e.y,u,
+    dx:previousGreenExitPose?(e.x-previousGreenExitPose.x)/(u-previousGreenExitPose.u):0,
+    dy:previousGreenExitPose?(e.y-previousGreenExitPose.y)/(u-previousGreenExitPose.u):0};
+  }else if(previousGreenExitPose){
+   const elapsed=u-previousGreenExitPose.u;
+   const ease=.08*(1-Math.exp(-elapsed/.08));
+   e.x=previousGreenExitPose.x+80*elapsed+(previousGreenExitPose.dx-80)*ease;
+   e.y=previousGreenExitPose.y-400*elapsed+(previousGreenExitPose.dy+400)*ease;
+  }
+ }
+ // Provisional sprite-row clearance, preserving lateral motion and path time.
+ if(genericChallengePath&&S.stage>=31&&u>=entryDuration
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'&&u>=9.7&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){
@@ -9849,7 +9962,72 @@ function updateChallengeEnemy(state,e,dt){
   }
  }
  // Entry curves may begin outside the exit-removal boundary.
- if(e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
+ const stage31GreenUpperExit=S.stage===31&&pathFamily==='green-ladder-split'
+  &&u>=9.7&&!!previousGreenExitPose&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterEnvelopeSideExit=false;
+ const laterGreenJoinSettled=pathFamily!=='green-ladder-split'||u-9.7>=laterGreenJoinDuration;
+ if(genericChallengePath&&S.stage>=35&&u>=9.7&&laterGreenJoinSettled&&e.dive===9&&!e.hitT&&!e.carry
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // With saturated fields and no oscillation, these generic exits cannot return.
+  const direction=pathFamily==='green-ladder-split'
+   ? sweep*(72*fm.challengeSweep+(slot%2?-38:38))*arcAmp
+   : (wave%2?-1:1)*186*fm.challengeSweep*arcAmp;
+  if(!curveX&&!laneBias&&spacingSettled&&Number.isFinite(direction)&&direction!==0){
+   const extent=enemyDims(e).w/2+1;
+   laterEnvelopeSideExit=direction<0
+    ? Math.round(e.x)+extent<0
+    : Math.round(e.x)-extent>PLAY_W;
+  }
+ }
+ const scopedStage31Group3=stage31Group3PolicyEligible;
+ let stage31Group3ExitNoReturn=false;
+ if(scopedStage31Group3&&u>=11.65&&e.dive===9&&!e.hitT&&!e.carry&&1+pathTimeSpeed>0){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const curveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const yBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // Future derivatives interpolate between current values and negative terminals.
+  stage31Group3ExitNoReturn=!curveX&&!curveY&&!laneBias&&!yBias&&spacingSettled&&u>=11.2
+   &&Number.isFinite(stage31Group3ExitDx)&&Number.isFinite(stage31Group3ExitDy)
+   &&stage31Group3ExitDx<0&&stage31Group3ExitDy<0;
+ }
+ const stage31Group3UpperExit=stage31Group3ExitNoReturn&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterBlueSideExit=false,laterBlueProofEligible=false;
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'
+  &&u>=9.7+laterBlueJoinDuration&&e.dive===9&&!e.hitT&&!e.carry){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const amplitude=fm.challengeSweep*arcAmp,k=2.8*Math.PI,q=(u-9.7)/3.35;
+  if(!curveX&&!laneBias&&(!gateS||u+phase+gateS*.28>=gateS)
+   &&Number.isFinite(amplitude)&&amplitude>0&&(sweep===1||sweep===-1)){
+   const rawOscPart=sweep*amplitude*(34*Math.sin(k*q+p)-76*q);
+   const constantFold=sweep*(e.x-rawOscPart);
+   const critical=Math.acos(76/(34*k));
+   const theta=critical+2*Math.PI*Math.ceil((k*q+p-critical)/(2*Math.PI));
+   const qMax=(theta-p)/k;
+   const futureFoldMax=Math.max(sweep*e.x,constantFold+amplitude*(34*Math.sin(k*qMax+p)-76*qMax));
+   laterBlueProofEligible=Number.isFinite(futureFoldMax);
+   // Future local maxima decrease; include center rounding and sprite extent.
+   laterBlueSideExit=laterBlueProofEligible&&futureFoldMax+enemyUnrotatedCullExtent(e)+.5<(sweep>0?0:-PLAY_W);
+  }
+ }
+ const scopedLaterBlue=genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale';
+ const legacyHorizontalExit=u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54);
+ const blueBridgeActive=scopedLaterBlue&&u>=9.7&&u<9.7+laterBlueJoinDuration;
+ const allowedLegacyHorizontalExit=legacyHorizontalExit
+  &&(!scopedStage31Group3||u<9.7||(stage31Group3ExitNoReturn&&e.x<-54))
+  &&!blueBridgeActive&&(!scopedLaterBlue||!laterBlueProofEligible||laterBlueSideExit);
+ if(stage31GreenUpperExit||stage31Group3UpperExit||laterEnvelopeSideExit||laterBlueSideExit||e.y>PLAY_H+34||allowedLegacyHorizontalExit){
   e.hp=0;
   e.miss=1;
  }
@@ -9943,7 +10121,7 @@ function updateEnemy(state,e,dt,t,T,p){
   e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&randUnit()<dt*T.diveShotRate*.55){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'escort');
    e.shot--;
   }
   return;
@@ -9998,7 +10176,7 @@ function updateEnemy(state,e,dt,t,T,p){
   }
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'dive');
    e.shot--;
   }
   if(e.y>PLAY_H+30){
@@ -10037,7 +10215,7 @@ function updateEnemy(state,e,dt,t,T,p){
  // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
  const harnessDiveRateBoost=Math.max(1,+e.stage4Lane2ProbeDiveRateBoost||1);
  if(e.cool<=0&&randUnit()<dt*diveRate*harnessDiveRateBoost&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
-  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-combatEffectiveStage(S.stage)*.02;
   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
    ? currentGamePackReferenceTiming('enemyDiveCharge')
    : null;
@@ -11328,7 +11506,7 @@ function stepAuroraRuntime(state,dt,input={}){
   const list=Object.values(bottoms);
   if(list.length){
    let pool=list;
-   let bulletVx=rnd(2,-2),bulletVy=154+S.stage*4;
+   let bulletVx=rnd(2,-2),bulletVy=154+combatEffectiveStage(S.stage)*4;
    if(S.stage===4&&S.stageClock<12){
     // Early Stage 4 formation shots should pressure movement without coming
     // straight down the player's current lane while dive pressure is already active.
@@ -18022,6 +18200,23 @@ function enemyDims(e){
  if(e.t==='but')return{w:34,h:27};
  if(e.t==='rogue')return{w:35,h:28};
  return{w:32,h:26};
+}
+
+function enemyUnrotatedCullExtent(e,mode=currentSpriteRenderMode()){
+ const fallback=enemyDims(e).w/2+1;
+ if(!['auto','aurora-themed'].includes(mode)||e.dive!==9||e.hitT>0||e.carry
+  ||!['stingray','galboss'].includes(e.fam)||!['bee','but','rogue','boss'].includes(e.t))return fallback;
+ const model=e.t==='bee'?P.but:e.t==='but'?AURORA_CONFORMANCE_PIXELS.butterfly:e.t==='rogue'?P.rogue:P.boss;
+ const origin=e.t==='boss'?-9:-8,ps=2;
+ const patterns=[model.a,model.b,FAMILY_PIXELS[e.fam]];
+ if(patterns.some(p=>!Array.isArray(p)||p.some(point=>!Number.isFinite(point?.[0]))))return fallback;
+ let extent=0;
+ for(const pattern of patterns)for(const [x] of pattern){
+  extent=Math.max(extent,Math.abs(origin+ps*x),Math.abs(origin+ps*x+ps));
+ }
+ // Union of both flap poses, including the shared family accent rectangles.
+ extent=Math.max(extent,ps*5.7,ps*4.7+ps,ps*5.2,ps*4.2+ps);
+ return Math.ceil(extent);
 }
 
 function enemyHitbox(e){
