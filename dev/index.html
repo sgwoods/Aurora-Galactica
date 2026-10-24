@@ -788,6 +788,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 }
 #accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel,#platformSplashPanel,#gamePreviewPanel{max-height:var(--overlay-max-height);overflow:auto}
 #accountPanelHead,#leaderboardPanelHead{position:sticky;top:0;z-index:1;padding-bottom:8px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.9))}
+@media (max-width:620px){
+ #accountPanel[data-recovering="true"] #accountPanelHead{position:static}
+}
 </style>
 </head>
 <body>
@@ -1067,9 +1070,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
-      <span id="settingsVersion">Version 1.4.1.2</span>
-      <span id="settingsRelease">Oct 14 2026, 11:29 PM EDT</span>
-      <span id="settingsState">main@8e93394b clean</span>
+      <span id="settingsVersion">Version 1.4.1.5</span>
+      <span id="settingsRelease">Oct 23 2026, 8:00 PM EDT</span>
+      <span id="settingsState">codex/local-review-music-status-oct16@fde73577 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1077,8 +1080,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">Challenge cadence and readable exits dev review</span>
-      <span id="settingsNotesBody">Publishes the accepted local Aurora cadence, challenge clearance and continuous-exit repairs for hosted dev review. Retains demonstrated normal-input hits, bounds late combat pressure, preserves Stage 3 keepers, and includes the reviewed development-only Guardians launcher and stronger packaging checks. This is not beta or production approval.</span>
+      <span id="settingsNotesTitle">Per-game score persistence review</span>
+      <span id="settingsNotesBody">Local review source shared with beta.4. Preserves legacy Aurora scores and separates Guardians storage; retains password recovery repair. Hosted lanes unchanged.</span>
     </div>
   </div>
 </div>
@@ -1303,6 +1306,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <button id="accountLoginBtn" type="button">Sign In</button>
         <button id="accountResetBtn" type="button">Reset Password</button>
         <button id="accountApplyResetBtn" type="button" hidden>Set New Password</button>
+        <button id="accountCancelResetBtn" type="button" hidden>Cancel Reset</button>
         <button id="accountLogoutBtn" type="button">Sign Out</button>
       </div>
       <div id="accountInitialsSection">
@@ -1367,8 +1371,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.4.1.2</span>
-    <span id="buildStampRelease">Oct 14 2026, 11:29 PM EDT</span>
+    <span id="buildStampVersion">1.4.1.5</span>
+    <span id="buildStampRelease">Oct 23 2026, 8:00 PM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1494,6 +1498,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       duration: record.duration || 0,
       score: record.score || 0,
       stage: record.stage || 0,
+      displayStage: record.displayStage,
+      completedAt: record.completedAt || '',
+      scoreEntryId: record.scoreEntryId || '',
       challenge: !!record.challenge,
       build: record.build || '',
       gameKey: String(record.gameKey || '').trim() || 'aurora-galactica',
@@ -1619,7 +1626,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-15T03%3A25%3A04.142Z%22%2C%22commit%22%3A%227dab1d79%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-23T21%3A58%3A10.174Z%22%2C%22commit%22%3A%223d814e7e%22%2C%22branch%22%3A%22codex%2Flocal-review-music-status-oct16%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -2344,7 +2351,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2',versionLine:'1.4.1.2',label:'1.4.1.2+build.1195.sha.8e93394b',commit:'8e93394bbc290d374d005cf13206e42e8c099b78',branch:'main',dirty:false,released:'Oct 14 2026, 11:29 PM EDT',state:'main@8e93394b clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2-beta.4',versionLine:'1.4.1.5',label:'1.4.1.5+build.1214.sha.fde73577',commit:'fde7357713860fcb4fb90d8afeab293f741523dc',branch:'codex/local-review-music-status-oct16',dirty:false,released:'Oct 23 2026, 8:00 PM EDT',state:'codex/local-review-music-status-oct16@fde73577 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
@@ -3040,7 +3047,7 @@ function scoreRowMatchesGame(row={},gameKey=currentScoreStorageGameKey()){
 }
 
 function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
- return normalizeScoreRecordGameKey(gameKey)===DEFAULT_SCORE_GAME_KEY;
+ return ['aurora-galactica','galaxy-guardians-preview'].includes(String(gameKey));
 }
 
 function createAuroraRuntimeState(opts={}){
@@ -5180,6 +5187,9 @@ function arcadeMusicPlaylistId(){
 function arcadeMusicEffectiveMuted(){
  return !!(arcadeMusicMuted||ARCADE_MUSIC.forceMuted);
 }
+function arcadeMusicSessionActive(){
+ return ['playing','loading','unconfirmed','paused','ended'].includes(ARCADE_MUSIC.state);
+}
 function arcadeMusicState(){
  const config=arcadeMusicResolvedConfig();
  const effectiveMuted=arcadeMusicEffectiveMuted();
@@ -5212,9 +5222,9 @@ function arcadeMusicState(){
 }
 function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  const playing=ARCADE_MUSIC.state==='playing';
- const fallbackPlaying=playing&&ARCADE_MUSIC.fallbackMode==='iframe';
+ const fallbackUnconfirmed=ARCADE_MUSIC.state==='unconfirmed';
  const config=arcadeMusicResolvedConfig();
  const unavailable=ARCADE_MUSIC.state==='unavailable'||!config.playlistId;
  const warming=!!ARCADE_MUSIC.warming;
@@ -5238,9 +5248,11 @@ function syncArcadeMusicUi(){
     ?'Arcade Music warming until the opening ad finishes'
     :(ARCADE_MUSIC.state==='loading'
     ?'Starting Arcade Music'
-    :(fallbackPlaying
-      ?'Stop Arcade Music'
-      :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'))))));
+    :(fallbackUnconfirmed
+      ?'Stop Arcade Music (playback unconfirmed)'
+      :(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'
+       ?'Resume Arcade Music'
+       :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music')))))));
  arcadeMusicToggleBtn.setAttribute('aria-label',label);
  arcadeMusicToggleBtn.title=label;
  arcadeMusicToggleBtn.dataset.actionTip=label;
@@ -5299,6 +5311,28 @@ function clearArcadeMusicWarmProbe(){
  if(timerId)clearTimeout(timerId);
  ARCADE_MUSIC.warmProbeTimeoutId=0;
 }
+function clearArcadeMusicStateProbe(){
+ if(ARCADE_MUSIC.stateProbeTimeoutId)clearTimeout(ARCADE_MUSIC.stateProbeTimeoutId);
+ ARCADE_MUSIC.stateProbeTimeoutId=0;
+}
+function scheduleArcadeMusicStateProbe(){
+ clearArcadeMusicStateProbe();
+ const player=ARCADE_MUSIC.player;
+ const mountToken=ARCADE_MUSIC.mountToken;
+ if(!ARCADE_MUSIC.requested||!player||ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01')return;
+ ARCADE_MUSIC.stateProbeTimeoutId=setTimeout(()=>{
+  ARCADE_MUSIC.stateProbeTimeoutId=0;
+  if(!ARCADE_MUSIC.requested||player!==ARCADE_MUSIC.player||mountToken!==ARCADE_MUSIC.mountToken)return;
+  // Recover missed provider callbacks without repeatedly issuing playback commands.
+  try{
+   const code=player.getPlayerState?.();
+   if(Number.isFinite(code)&&code!==ARCADE_MUSIC.lastPlayerStateCode){
+    handleArcadeMusicPlayerStateChange({target:player,data:code});
+   }
+  }catch{}
+  if(ARCADE_MUSIC.requested&&player===ARCADE_MUSIC.player&&mountToken===ARCADE_MUSIC.mountToken)scheduleArcadeMusicStateProbe();
+ },1000);
+}
 function resolveArcadeMusicIframe(frameRef=null){
  const candidateFrame=
   (frameRef&&typeof frameRef.tagName==='string'&&String(frameRef.tagName).toLowerCase()==='iframe'&&frameRef.isConnected)
@@ -5308,8 +5342,6 @@ function resolveArcadeMusicIframe(frameRef=null){
   ARCADE_MUSIC.iframe=candidateFrame;
   return candidateFrame;
  }
- noteArcadeMusicFrame();
- if(ARCADE_MUSIC.iframe)return ARCADE_MUSIC.iframe;
  const domFrame=
   (arcadeMusicFrameHost&&typeof arcadeMusicFrameHost.querySelector==='function'
    ?arcadeMusicFrameHost.querySelector('iframe#arcadeMusicFrame, iframe')
@@ -5322,14 +5354,14 @@ function activateArcadeMusicIframeFallback(reason='api_attach_timeout',frameRef=
  const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
  if(!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
  if(!resolveArcadeMusicIframe(frameRef))return false;
- if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='playing')return true;
+ if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='unconfirmed')return true;
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  ARCADE_MUSIC.requested=true;
  if(!ARCADE_MUSIC.activePlaylistId)ARCADE_MUSIC.activePlaylistId=playlistId;
  if(!ARCADE_MUSIC.activePlaylistSource)ARCADE_MUSIC.activePlaylistSource=arcadeMusicResolvedConfig().playlistSource;
  ARCADE_MUSIC.fallbackMode='iframe';
- ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.state='unconfirmed';
  syncArcadeMusicUi();
  if(typeof console!=='undefined'&&typeof console.warn==='function'){
   console.warn('[Arcade Music] Falling back to iframe-only playlist playback; YouTube player API did not attach.', {
@@ -5426,12 +5458,15 @@ function mountArcadeMusicPlayer(mountToken,opts={},config=arcadeMusicResolvedCon
  };
  if(useHarnessVideo)playerConfig.videoId='M7lc1UVf-VE';
  ARCADE_MUSIC.player=new window.YT.Player('arcadeMusicFrame',playerConfig);
+ ARCADE_MUSIC.lastPlayerStateCode=null;
+ scheduleArcadeMusicStateProbe();
  return true;
 }
 function destroyArcadeMusicPlayer(){
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  clearArcadeMusicWarmProbe();
+ clearArcadeMusicStateProbe();
  const player=ARCADE_MUSIC.player;
  if(player&&typeof player.destroy==='function'){
   try{player.destroy()}catch{}
@@ -5501,7 +5536,8 @@ function loadArcadeMusicPlaylistIndex(player=ARCADE_MUSIC.player,index=0){
 }
 function handleArcadeMusicPlayerReady(event){
  const player=event?.target||null;
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=null;
  noteArcadeMusicFrame();
  const harnessPlaylist=ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01';
  ARCADE_MUSIC.state=harnessPlaylist?'playing':'loading';
@@ -5587,7 +5623,9 @@ function scheduleArcadeMusicWarmProbe(delayMs=900){
  const mountToken=+ARCADE_MUSIC.mountToken||0;
  ARCADE_MUSIC.warmProbeTimeoutId=setTimeout(()=>{
   if(!ARCADE_MUSIC.warming||!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken)return;
-  if(currentArcadeMusicTrackInPlaylist()){
+  let playing=false;
+  try{playing=ARCADE_MUSIC.player?.getPlayerState?.()===1}catch{}
+  if(playing&&currentArcadeMusicTrackInPlaylist()){
    completeArcadeMusicWarmup('warm_probe');
    return;
   }
@@ -5663,7 +5701,8 @@ function skipArcadeMusicBlockedTrack(code=0,eventTarget=null){
 function handleArcadeMusicPlayerStateChange(event){
  const player=event?.target||ARCADE_MUSIC.player||null;
  const stateCode=Number(event?.data);
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=stateCode;
  noteArcadeMusicFrame();
  if(stateCode===1){
   clearArcadeMusicStartupTimeout();
@@ -5700,10 +5739,16 @@ function handleArcadeMusicPlayerStateChange(event){
   }
   return;
  }
+ if(stateCode===0||stateCode===2){
+  if(!ARCADE_MUSIC.warming)clearArcadeMusicStartupTimeout();
+  ARCADE_MUSIC.state=stateCode===0?'ended':'paused';
+  syncArcadeMusicUi();
+ }
 }
 function handleArcadeMusicPlayerError(event){
  const code=Number(event?.data)||0;
  const player=event?.target||ARCADE_MUSIC.player||null;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
  if(skipArcadeMusicBlockedTrack(code,player))return;
  clearArcadeMusicStartupTimeout();
  if(ARCADE_MUSIC.warming){
@@ -5860,12 +5905,16 @@ function setArcadeMusicMuted(next,opts={}){
  ));
 }
 function toggleArcadeMusicMute(){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(!active){
   startArcadeMusic();
   return;
  }
  if(ARCADE_MUSIC.warming)return;
+ if(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'){
+  try{ARCADE_MUSIC.player?.playVideo?.()}catch{}
+  return;
+ }
  if(ARCADE_MUSIC.forceMuted){
   ARCADE_MUSIC.forceMuted=false;
   applyArcadeMusicVolume();
@@ -5888,7 +5937,7 @@ function toggleArcadeMusic(){
  toggleArcadeMusicMute();
 }
 function maybeAutoWarmArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||ARCADE_MUSIC.autoWarmAttempted)return false;
  const config=arcadeMusicResolvedConfig();
  if(!config.playlistId||!arcadeMusicFrameHost||config.playlistId==='PLarcadeMusicHarness01')return false;
@@ -5902,7 +5951,7 @@ function maybeAutoWarmArcadeMusic(opts={}){
  });
 }
 function maybeResumeRequestedArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||!ARCADE_MUSIC.requested)return false;
  if(opts.requireInteraction!==false&&!aud)return false;
  const config=arcadeMusicResolvedConfig();
@@ -5917,7 +5966,7 @@ function syncArcadeMusicForGamePackChange(){
  const config=arcadeMusicResolvedConfig();
  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  syncArcadeMusicUi();
- const active=!!(ARCADE_MUSIC.requested&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'||ARCADE_MUSIC.state==='unavailable'));
+ const active=!!(ARCADE_MUSIC.requested&&(arcadeMusicSessionActive()||ARCADE_MUSIC.state==='unavailable'));
  if(!active){
   maybeResumeRequestedArcadeMusic({silent:true,source:'pack_change'});
   return;
@@ -6323,6 +6372,9 @@ function currentReplayMeta(){
   stage:S.stage|0,
   challenge:!!S.challenge,
   attract:!!S.attract,
+  displayStage:gameKey==='aurora-galactica'?displayStageNumber(S.stage,!!S.challenge):(S.stage|0),
+  completedAt:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?new Date().toISOString():'',
+  scoreEntryId:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?String(gameOverState.entryId||''):'',
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
   watchMode:!!S.watchMode,
@@ -6349,10 +6401,15 @@ async function persistLocalReplay(blob,meta){
   console.warn('local replay save failed',err);
  }
 }
+function freezeRunRecordingMeta(){
+ if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+ if(!VIDEO_REC.rec.replayStopMeta)VIDEO_REC.rec.replayStopMeta=currentReplayMeta();
+}
 function stopRunRecording(){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  VIDEO_REC.active=0;
- VIDEO_REC.stopMeta=currentReplayMeta();
+ VIDEO_REC.stopMeta=VIDEO_REC.rec.replayStopMeta;
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
@@ -6363,6 +6420,7 @@ function stopRunRecording(){
 }
 function stopRunRecordingAfterAudioTail(delayMs=2200,sessionId=''){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  const targetSession=String(sessionId||VIDEO_REC.sessionId||'');
  const delay=Math.max(0,Number.isFinite(+delayMs)?+delayMs:2200);
  setTimeout(()=>{
@@ -6403,7 +6461,7 @@ function startRunRecording(){
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
   const blob=new Blob(chunks,{type:mime||'video/webm'});
-  const replayMeta=VIDEO_REC.stopMeta||currentReplayMeta();
+  const replayMeta=rec.replayStopMeta;
   if(currentStream)for(const t of currentStream.getTracks())t.stop();
   if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
   if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
@@ -6414,7 +6472,7 @@ function startRunRecording(){
     showToast('Run video downloaded');
    }
   }
-  VIDEO_REC.stopMeta=null;
+  if(VIDEO_REC.stopMeta===replayMeta)VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
  rec.start(250);
@@ -6517,6 +6575,7 @@ function harnessForceRemoteWriteEnabled(){
 }
 function remoteWriteEnabled(){
  if(harnessForceRemoteWriteEnabled())return true;
+ if(RELEASE_CHANNEL==='production'||RELEASE_CHANNEL==='production beta')return !!LEADERBOARD.user?.id;
  return RELEASE_CHANNEL==='development'&&isSignedInAsTestAccount();
 }
 function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){
@@ -6886,6 +6945,7 @@ function latestCompletedLocalScoreRow(){
  return history[0]||null;
 }
 function leaderboardRowsForView(view=LEADERBOARD.view,opts={}){
+ ensureLeaderboardScope();
  const targetGameKey=typeof normalizeScoreRecordGameKey==='function'
   ? normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey())
   : String(opts.gameKey||'').trim();
@@ -6922,14 +6982,15 @@ function persistLeaderboardCache(view){
  }catch{}
 }
 function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
+ ensureLeaderboardScope();
  if(view==='local')return 0;
  try{
   const raw=localStorage.getItem(leaderboardCacheKey(view,userId))
    ||localStorage.getItem(platformLeaderboardCacheKey(view,userId))
-   ||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
+   ||(currentScoreStorageGameKey()==='aurora-galactica'?localStorage.getItem(legacyLeaderboardCacheKey(view,userId)):null);
   if(!raw)return 0;
   const parsed=JSON.parse(raw);
-  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];
+  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow).filter(row=>scoreRowMatchesGame(row)):[];
   const fetchedAt=+parsed?.fetchedAt||0;
   LEADERBOARD.remote[view]=rows;
   LEADERBOARD.cacheStamp[view]=fetchedAt;
@@ -6940,6 +7001,7 @@ function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
  }
 }
 function leaderboardCacheFresh(view){
+ ensureLeaderboardScope();
  const stamp=LEADERBOARD.cacheStamp[view]||0;
  return !!stamp&&(Date.now()-stamp)<LEADERBOARD_STALE_MS;
 }
@@ -7119,6 +7181,7 @@ function openAccountPanel(){
  syncAccountPanelVisibility();
  syncAccountUi();
  if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
+ if(LEADERBOARD.user&&remoteAuthEnabled())refreshSignedInPilotRecords(1);
  syncOverlayPause();
 }
 function closeAccountPanel(){
@@ -7148,6 +7211,10 @@ function buildStartAccountPrompt(){
  return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
 function enterRecoveryMode(){
+ if(!LEADERBOARD.recoveryMode){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ }
  LEADERBOARD.recoveryMode=1;
  LEADERBOARD.accountPanelOpen=1;
  LEADERBOARD.panelOpen=0;
@@ -7175,9 +7242,14 @@ function syncAccountUi(){
  const hasLockedInitials=!!signedIn;
  const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
  const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanel)accountPanel.dataset.recovering=recovering?'true':'false';
  if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
  if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
+ if(accountCancelResetBtn){
+  accountCancelResetBtn.hidden=!recovering;
+  accountCancelResetBtn.disabled=!!LEADERBOARD.authBusy;
+ }
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
  if(accountPasswordLabel)accountPasswordLabel.hidden=signedIn&&!recovering;
@@ -7278,10 +7350,14 @@ function syncLeaderboardUi(){
  syncAccountUi();
 }
 function syncLeaderboardBest(){
+ ensureLeaderboardScope();
+ const gameKey=currentScoreStorageGameKey();
  const localBest=localLeaderboardRows()[0]?.score||0;
- const remoteBest=LEADERBOARD.remote.all[0]?.score||0;
- S.best=Math.max(S.best||0,localBest,remoteBest);
- writePref(BEST_SCORE_KEY,String(S.best));
+ const remoteBest=LEADERBOARD.remote.all.filter(row=>scoreRowMatchesGame(row,gameKey))[0]?.score||0;
+ const previous=LEADERBOARD.bestGameKey===gameKey?S.best||0:+readPref(scoreBestKey(gameKey))||0;
+ LEADERBOARD.bestGameKey=gameKey;
+ S.best=Math.max(previous,localBest,remoteBest);
+ writePref(scoreBestKey(gameKey),String(S.best));
 }
 
 // Source: src/js/05-player-combat.js
@@ -7508,6 +7584,7 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
@@ -7604,6 +7681,7 @@ function gameOver(state){
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
+ if(typeof freezeRunRecordingMeta==='function')freezeRunRecordingMeta();
  gameOverHtml=buildGameOverHtmlFromState();
  if(typeof queuePlayerTwoAutoTurn==='function'&&queuePlayerTwoAutoTurn('auto'))gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
@@ -7644,7 +7722,7 @@ const HARNESS_PERSONAS={
  novice:{name:'novice',captureRescueStyle:'rare-opportunistic',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:80,captureRescueBias:150,captureRescueUnsafePenalty:60,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
  advanced:{name:'advanced',captureRescueStyle:'practical-rescue',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:110,captureRescueBias:260,captureRescueUnsafePenalty:110,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
  expert:{name:'expert',captureRescueStyle:'rescue-priority',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:135,captureRescueBias:390,captureRescueUnsafePenalty:170,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
- professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
+ professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26}
 };
 
 const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
@@ -7959,6 +8037,7 @@ function restorePlayerTwoBoardSnapshot(board){
  S.stage4Lane2PriorityDive=+board.stage4Lane2PriorityDive?1:0;
  S.rogue=Math.max(0,+board.rogue||0)|0;
  S.att=Math.max(0,+board.att||0)|0;
+ resetHarnessHazardState(S.p);
  S.p=Object.assign(S.p,playerTwoClonePojo(board.p,{}));
  S.e.length=0;S.e.push(...playerTwoClonePojo(board.e,[]));
  S.pb.length=0;S.pb.push(...playerTwoClonePojo(board.pb,[]));
@@ -8053,6 +8132,7 @@ function playerTwoLaneDisplayName(key,p2=S.playerTwo){
  return key==='p2'?`2UP ${(p2?.initials||'---')}`:'1UP';
 }
 function resetPlayerForTurn(){
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:1.2,dual:0,captured:0,returning:0,pending:0,spawn:.75,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0,demoTargetId:null,demoTargetT:0});
 }
 function applyPlayerTwoLaneTurn(to='p1',source='auto'){
@@ -8558,26 +8638,18 @@ function harnessPersonaCfg(state){
  const S=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();
  const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  const base=HARNESS_PERSONAS[key]||null;
- const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
- if(!base||!p2)return base;
- const skill=cl(Number.isFinite(+p2.variance)?+p2.variance:1,.82,1.18);
- const agility=.92+skill*.08;
- const precision=.94+skill*.06;
- return Object.assign({},base,{
-  moveMul:cl(base.moveMul*agility,.32,.98),
-  urgentLook:base.urgentLook*precision,
-  deadZone:Math.max(3,base.deadZone/precision),
-  aimBoss:base.aimBoss*precision,
-  aimOther:base.aimOther*precision,
-  fireChance:cl(base.fireChance*precision,.1,.999),
-  challengeFireChance:cl(base.challengeFireChance*precision,.1,.999),
-  distanceBias:base.distanceBias/precision
- });
+ // A persona has one policy across harness, Watch and the rival's real turn.
+ if(key==='professional'&&S.stage>=4&&!S.challenge){
+  return Object.assign({},HARNESS_PERSONAS.expert,{name:'professional',fireChance:1});
+ }
+ return base;
 }
 
 function harnessTargetScore(state,e,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
+ // Wait for the carrying boss's attack; retreat shots can destroy the captive.
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&e.carry&&e.dive!==1)return -1e9;
  const rescueCandidate=!!(e.carry&&e.dive);
  const carriedBias=e.carry?(rescueCandidate?(cfg.captureRescueBias??cfg.carryBias??0):(cfg.carryBias??0)):0;
  const unsafeCarryPenalty=e.carry&&!rescueCandidate?(cfg.captureRescueUnsafePenalty||0):0;
@@ -8676,6 +8748,13 @@ function harnessLowerFieldThreat(state,p,cfg){
  const earlyStage=(S.stage|0)<=(cfg.cautiousUntilStage||0);
   return S.e
   .filter(e=>{
+   // Keep clearance until the diving collision box has passed the ship.
+   if((cfg.name==='professional'||cfg.name==='expert')&&S.stage>=4){
+    const he=enemyCollisionHitbox(e),hp=playerHitbox();
+    return e.hp>0&&e.dive&&e.y>=cfg.diveEmergencyY&&
+     e.y<p.y+hp.h+he.h+4&&
+     Math.abs(e.x-p.x)<cfg.lowerDiveEvadeDx+(e.t==='boss'?6:0);
+   }
    if(!(e.hp>0&&e.dive&&e.y<p.y))return 0;
    const laneGap=Math.abs(playLane(e.x)-playerLane);
    if(earlyStage&&e.y>=cfg.lowerDiveEvadeY&&laneGap<=(cfg.lowerDiveEvadeLaneGap??1)){
@@ -8713,6 +8792,59 @@ function harnessMoveAxis(state,p,cfg){
  return dx>0?1:-1;
 }
 
+function resetHarnessHazardState(p){
+ p.hHazardObservation=null;
+ p.hCaptureRiskSpent=false;
+}
+function harnessResolveHazardAxis(state,p,cfg,preferredAxis,dt){
+ if(state.stage<4)p.hCaptureRiskSpent=false;
+ if(cfg.name!=='professional'||state.challenge||state.stage<4)return preferredAxis;
+ if(state.captureCountStage>0||p.dual)p.hCaptureRiskSpent=true;
+ const hp=playerHitbox(),prior=p.hHazardObservation;
+ const elapsed=prior?state.simT-prior.t:0;
+ const sameTick=prior&&prior.stage===state.stage&&elapsed===0;
+ const continuous=prior&&prior.stage===state.stage&&elapsed>0&&elapsed<=Math.min(.05,dt*1.5);
+ // Estimate only from adjacent observed frames; discard motion across state changes.
+ const positions={};
+ const hazards=state.e.filter(e=>e.hp>0).map(e=>{
+  const he=enemyCollisionHitbox(e),old=(continuous||sameTick)&&prior.positions[e.id];
+  const valid=old&&old.dive===e.dive&&old.form===e.form&&Math.hypot(e.x-old.x,e.y-old.y)<=32;
+  let vx=0,vy=0;
+  if(valid&&continuous){vx=(e.x-old.x)/elapsed;vy=(e.y-old.y)/elapsed;}
+  else if(valid&&sameTick&&old.x===e.x&&old.y===e.y){vx=old.vx;vy=old.vy;}
+  positions[e.id]={x:e.x,y:e.y,dive:e.dive,form:e.form,vx,vy};
+  return{x:e.x,y:e.y,vx,vy,w:hp.w+he.w+12,h:hp.h+he.h+12};
+ });
+ p.hHazardObservation={stage:state.stage,t:state.simT,positions};
+ for(const b of state.eb){
+  if(b.vy<=0)continue;
+  hazards.push({x:b.x,y:b.y,vx:b.vx||0,vy:b.vy,w:hp.w+8,h:hp.h+8});
+ }
+ // Permit an initial dual-fighter opportunity only while there are spare ships.
+ if((p.hCaptureRiskSpent||state.lives<2)&&canCapture(state))for(const e of state.e){
+  if(e.hp>0&&enemyHasActiveBeam(e)&&p.y>e.y+12&&p.y<e.y+VIS.beamLen){
+   hazards.push({x:e.x,y:p.y,vx:0,vy:0,w:12,h:1});
+  }
+ }
+ const clearance=axis=>{
+  let nearest=Infinity;
+  for(let step=1;step<=2;step++){
+   const x=cl(p.x+axis*p.s*dt*cfg.moveMul*step,hp.w+2,PLAY_W-hp.w-2);
+   for(const h of hazards){
+    nearest=Math.min(nearest,Math.max(Math.abs(x-h.x-h.vx*dt*step)/h.w,Math.abs(p.y-h.y-h.vy*dt*step)/h.h));
+   }
+  }
+  return nearest;
+ };
+ if(clearance(preferredAxis)>=1)return preferredAxis;
+ let bestAxis=0,bestClearance=clearance(0);
+ for(const axis of [-1,1]){
+  const value=clearance(axis);
+  if(value>bestClearance+1e-9){bestAxis=axis;bestClearance=value;}
+ }
+ return bestAxis;
+}
+
 function runHarnessPlayer(state,dt,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
@@ -8721,7 +8853,8 @@ function runHarnessPlayer(state,dt,p,cfg){
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
  const lowerFieldThreat=harnessLowerFieldThreat(S,p,cfg);
- const axis=harnessMoveAxis(S,p,cfg);
+ const preferredAxis=harnessMoveAxis(S,p,cfg);
+ const axis=harnessResolveHazardAxis(S,p,cfg,preferredAxis,dt);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
  const target=attackables.sort((a,b)=>compareHarnessTargets(S,a,b,p,cfg))[0]||harnessSelectTarget(S,p,cfg);
@@ -8731,6 +8864,7 @@ function runHarnessPlayer(state,dt,p,cfg){
   targetX:target?+target.x.toFixed(2):null,
   targetDx:target?+(target.x-p.x).toFixed(2):null,
   axis,
+  preferredAxis,
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
  },harnessTargetDebug(S,target,p,cfg)));
@@ -8755,6 +8889,10 @@ function runHarnessPlayer(state,dt,p,cfg){
  }
  if(S.pb.length>=bulletsMax(S)){
   logProfessionalDecision(S,p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(S,target,p,cfg)));
+  return;
+ }
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&S.e.some(e=>e.hp>0&&e.carry&&e.dive!==1&&e.y<p.y&&Math.abs(e.x-p.x)<enemyHitbox(e).w+6)){
+  logProfessionalDecision(S,p,cfg,'protect_captive',{targetId:target.id});
   return;
  }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
@@ -8794,6 +8932,7 @@ function updatePlayerControl(state,dt,p){
  if(!isAuroraRuntimeState(state)){p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
  const harnessPersona=harnessPersonaCfg(S);
+ const automatedTurn=!!S.watchMode||!!(S.playerTwo?.enabled&&S.playerTwo.activeTurn==='p2');
  const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
  const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
@@ -8805,7 +8944,7 @@ function updatePlayerControl(state,dt,p){
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(S,dt,p);
-  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
+  else if(harnessPersona&&(automatedTurn||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
   else{
    const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
@@ -8825,7 +8964,7 @@ function updatePlayerControl(state,dt,p){
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot(S);
- else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot(S);
+ else if(!S.attract&&harnessPersona&&manualFire&&!automatedTurn)shoot(S);
 }
 
 // Source: src/js/05-supabase.js
@@ -8851,6 +8990,7 @@ const accountPassword=document.getElementById('accountPassword');
 const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
+const accountCancelResetBtn=document.getElementById('accountCancelResetBtn');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
 const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -8954,8 +9094,9 @@ function pilotLocalReplayRows(){
    id:`local-replay:${run.id}`,
    initials:sanitizeInitials(run.pilotInitials||preferredInitialsFromUser()||'YOU').padEnd(3,'-').slice(0,3),
    score:+run.score||0,
-   stage:+run.stage||0,
-   at:String(run.createdAt||''),
+   stage:Number.isFinite(run.displayStage)?run.displayStage:(+run.stage||0),
+   at:String(run.completedAt||run.createdAt||''),
+   scoreEntryId:String(run.scoreEntryId||''),
    verified:0,
    replayId:String(run.id||''),
    localReplay:1,
@@ -8983,6 +9124,8 @@ function mergePilotProfileRows(remoteRows,localRows){
    if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(row,localRow.gameKey||currentScoreStorageGameKey()))return false;
    if((+row.score||0)!== (+localRow.score||0))return false;
    if((+row.stage||0)!== (+localRow.stage||0))return false;
+   if(localRow.scoreEntryId&&(row.localScore||row.scoreEntryId))return String(row.id||'')===localRow.scoreEntryId||String(row.scoreEntryId||'')===localRow.scoreEntryId;
+   if(row.replayId&&localRow.replayId)return row.replayId===localRow.replayId;
    const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
    if(Number.isFinite(localStamp)&&Number.isFinite(rowStamp))return Math.abs(localStamp-rowStamp)<=120000;
    return false;
@@ -8997,6 +9140,7 @@ function mergePilotProfileRows(remoteRows,localRows){
  return merged;
 }
 function rowsForPilotProfile(){
+ ensureLeaderboardScope();
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)
    ? LEADERBOARD.remote.mine.filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true).slice()
@@ -9051,10 +9195,10 @@ function localLeaderboardRows(gameKey=currentScoreStorageGameKey()){
  return loadScoreboard(gameKey).map(row=>Object.assign({verified:0},row));
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function platformLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function legacyLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEGACY_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
@@ -9088,6 +9232,7 @@ if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword);
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
+if(accountCancelResetBtn)accountCancelResetBtn.addEventListener('click',exitRecoveryMode);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
@@ -11565,22 +11710,42 @@ function update(dt){
 // Shared remote leaderboard fetch, cache, and score-submit helpers.
 async function loadOwnProfile(){
  if(!LEADERBOARD.client||!LEADERBOARD.user){LEADERBOARD.profile=null;return null;}
- let {data}=await LEADERBOARD.client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',LEADERBOARD.user.id).maybeSingle();
+ const client=LEADERBOARD.client;
+ const user=LEADERBOARD.user;
+ const current=()=>LEADERBOARD.client===client&&LEADERBOARD.user?.id===user.id;
+ let {data}=await client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',user.id).maybeSingle();
+ if(!current())return null;
  if(!data){
-  const initials=preferredInitialsFromUser(LEADERBOARD.user);
+  const initials=preferredInitialsFromUser(user);
   if(initials){
-   const seeded=await LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
+   const seeded=await client.from('profiles').upsert({user_id:user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
    if(!seeded.error)data=seeded.data||null;
   }
  }
+ if(!current())return null;
  LEADERBOARD.profile=data||null;
  syncAccountUi();
  return LEADERBOARD.profile;
 }
-function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
- let select='id,initials,score,stage,achieved_at,is_verified,build';
- if(includeGameColumns)select+=',game_key,game_title';
- let query=LEADERBOARD.client.from('scores').select(select).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
+function scoreTableQuery(gameKey=currentScoreStorageGameKey()){
+ if(gameKey==='aurora-galactica')return LEADERBOARD.client.from('scores');
+ if(gameKey==='galaxy-guardians-preview')return LEADERBOARD.client.from('game_scores');
+ throw new Error('Online scores are unavailable for this game.');
+}
+function ensureLeaderboardScope(){
+ const scope=`${currentScoreStorageGameKey()}:${LEADERBOARD.user?.id||'anon'}`;
+ if(LEADERBOARD.scope===scope&&LEADERBOARD.scopeClient===LEADERBOARD.client)return scope;
+ LEADERBOARD.scopeClient=LEADERBOARD.client;
+ LEADERBOARD.scope=scope;
+ LEADERBOARD.remote={all:[],validated:[],mine:[]};
+ LEADERBOARD.cacheStamp={all:0,validated:0,mine:0};
+ LEADERBOARD.loading={all:0,validated:0,mine:0};
+ LEADERBOARD.lastRemoteOk=0;
+ return scope;
+}
+function buildLeaderboardScoresQuery(view='all',gameKey=currentScoreStorageGameKey()){
+ const select='id,initials,score,stage,achieved_at,is_verified,build,game_key,game_title';
+ let query=scoreTableQuery(gameKey).select(select).eq('game_key',gameKey).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
  if(shouldHideTestAccountScores()&&view!=='mine'){
   const hiddenIds=configuredTestAccountUserIds();
@@ -11591,13 +11756,13 @@ function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
  return query;
 }
 async function fetchLeaderboardScores(view='all'){
- let result=await buildLeaderboardScoresQuery(view,{includeGameColumns:1});
- if(!result.error)return result;
- const message=String(result.error?.message||'').toLowerCase();
- if(!message.includes('game_key')&&!message.includes('game_title'))return result;
- return buildLeaderboardScoresQuery(view,{includeGameColumns:0});
+ return buildLeaderboardScoresQuery(view);
 }
 async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
+ const scope=ensureLeaderboardScope();
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user?.id;
+ const gameKey=currentScoreStorageGameKey();
  view=normalizeLeaderboardViewForLane(view);
  if(view==='local'){
   syncLeaderboardBest();
@@ -11622,10 +11787,15 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
   return leaderboardRowsForView(view);
  }
  if(LEADERBOARD.loading[view])return leaderboardRowsForView(view);
- LEADERBOARD.loading[view]=1;
+ const request={};
+ LEADERBOARD.loading[view]=request;
  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
- const {data,error}=await fetchLeaderboardScores(view);
+ let result;
+ try{result=await fetchLeaderboardScores(view);}
+ catch(error){result={error};}
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()||scope!==LEADERBOARD.scope||LEADERBOARD.loading[view]!==request)return [];
+ const {data,error}=result;
  LEADERBOARD.loading[view]=0;
  if(error){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'fallback'));
@@ -11723,6 +11893,8 @@ async function submitScoreRemote(entry){
   return 0;
  }
  const payload={
+  game_key:gameKey,
+  game_title:gameTitle,
   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
   score:+entry.score|0,
   stage:+entry.stage|0,
@@ -11730,7 +11902,8 @@ async function submitScoreRemote(entry){
  };
  if(LEADERBOARD.user?.id){
   payload.user_id=LEADERBOARD.user.id;
-  payload.is_verified=!!LEADERBOARD.user.email_confirmed_at;
+  // Account ownership does not establish gameplay validity.
+  payload.is_verified=false;
  }
  if(typeof recordSystemIssue==='function'){
   recordSystemIssue('score_submit_attempt','Attempting remote score submit',{
@@ -11744,7 +11917,7 @@ async function submitScoreRemote(entry){
   },{level:'info'});
  }
  try{
-  const {error}=await LEADERBOARD.client.from('scores').insert(payload);
+  const {error}=await scoreTableQuery(gameKey).insert(payload);
   if(error){
    const failureCopy=typeof remoteScoreFailureCopy==='function'
     ? remoteScoreFailureCopy(gameTitle)
@@ -11972,7 +12145,7 @@ async function resetAccountPassword(){
  syncAccountUi();
 }
 async function applyRecoveredPassword(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
+ if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
  const password=String(accountPassword?.value||'');
  const confirm=String(accountPasswordConfirm?.value||'');
  if(!password){
@@ -11993,24 +12166,38 @@ async function applyRecoveredPassword(){
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.auth.updateUser({password});
- LEADERBOARD.authBusy=0;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ let result;
+ try{
+  result=await client.auth.updateUser({password});
+ }catch{
+  result={error:{message:'Connection failed. Try saving the new password again.'}};
+ }finally{
+  LEADERBOARD.authBusy=0;
+ }
+ if(client!==LEADERBOARD.client||LEADERBOARD.user?.id!==userId){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+  syncAccountUi();
+  return;
+ }
+ const {error}=result;
  if(error){
   setAccountNotice(`Could not update password: ${error.message}`);
   syncAccountUi();
   return;
  }
- const {data:{session}}=await LEADERBOARD.client.auth.getSession();
- LEADERBOARD.user=session?.user||LEADERBOARD.user;
- if(LEADERBOARD.user)await loadOwnProfile();
- await refreshSignedInPilotRecords(1);
+ LEADERBOARD.user=result.data?.user||LEADERBOARD.user;
+ exitRecoveryMode();
  setAccountNotice('Password updated. You can now keep using this pilot account.');
- LEADERBOARD.recoveryMode=0;
- if(accountPassword)accountPassword.value='';
- if(accountPasswordConfirm)accountPasswordConfirm.value='';
  syncLeaderboardBest();
  syncAccountUi();
  syncLeaderboardUi();
+ try{
+  await loadOwnProfile();
+  if(LEADERBOARD.user?.id===userId)await refreshSignedInPilotRecords(1);
+ }catch{}
 }
 async function logoutAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
@@ -12047,11 +12234,17 @@ async function saveAccountInitials(){
 }
 async function resetTestPilotScores(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!isSignedInAsTestAccount())return;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ const gameKey=currentScoreStorageGameKey();
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.from('scores').delete().eq('user_id',LEADERBOARD.user.id);
+ let error;
+ try{({error}=await scoreTableQuery(gameKey).delete().eq('game_key',gameKey).eq('user_id',userId));}
+ catch(failure){error=failure;}
  LEADERBOARD.authBusy=0;
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()){syncAccountUi();return;}
  if(error){
   setAccountNotice(`Could not reset test pilot scores: ${error.message}`);
   syncAccountUi();
@@ -12060,7 +12253,7 @@ async function resetTestPilotScores(){
  LEADERBOARD.remote.mine=[];
  LEADERBOARD.cacheStamp.mine=0;
  setLeaderboardStatus('Test pilot scores cleared');
- setAccountNotice('Cleared remote scores for the configured test pilot.');
+ setAccountNotice('Cleared this game\'s remote scores for the configured test pilot.');
  syncLeaderboardUi();
  refreshLeaderboard('all',{force:1});
  refreshLeaderboard('validated',{force:1});
@@ -12083,18 +12276,77 @@ async function initLeaderboard(){
   return;
  }
  try{
+  // Capture recovery intent before the SDK consumes and removes URL tokens.
+  const authHash=new URLSearchParams(location.hash.slice(1));
+  const hadAuthHash=remoteAuthEnabled()&&authHash.has('access_token');
+  let recoveryFromUrl=remoteAuthEnabled()&&authHash.get('type')==='recovery';
   LEADERBOARD.client=supabaseFactory.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
    auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
   });
+  const client=LEADERBOARD.client;
+  let authEventVersion=0;
+  function acceptAuthUser(user,event=''){
+   const previousId=LEADERBOARD.user?.id;
+   LEADERBOARD.user=user||null;
+   const prohibited=RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount();
+   if(prohibited){
+    user=null;
+    LEADERBOARD.user=null;
+    recoveryFromUrl=false;
+   }
+   if(!user){
+    if(event==='SIGNED_OUT')recoveryFromUrl=false;
+    exitRecoveryMode();
+    LEADERBOARD.profile=null;
+    LEADERBOARD.remote.mine=[];
+    LEADERBOARD.cacheStamp.mine=0;
+    if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
+   }else{
+    if(previousId&&previousId!==user.id)exitRecoveryMode();
+    if(event==='PASSWORD_RECOVERY'||recoveryFromUrl){
+     recoveryFromUrl=false;
+     enterRecoveryMode();
+    }else if(!LEADERBOARD.recoveryMode&&previousId!==user.id)setAccountNotice('');
+   }
+   return prohibited;
+  }
+  if(remoteAuthEnabled()){
+   client.auth.onAuthStateChange((event,sessionState)=>{
+    if(client!==LEADERBOARD.client)return;
+    const version=++authEventVersion;
+    const prohibited=acceptAuthUser(sessionState?.user,event);
+    syncLeaderboardBest();
+    syncLeaderboardUi();
+    // Supabase delivers events under its auth lock. Do provider work after it returns.
+    setTimeout(async()=>{
+     if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+     try{
+      if(prohibited){
+       await client.auth.signOut();
+       if(version===authEventVersion)acceptAuthUser(null,'SIGNED_OUT');
+       setAccountNotice('The test pilot account is disabled in production.');
+      }else if(LEADERBOARD.user){
+       hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+       await loadOwnProfile();
+       if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+       await refreshSignedInPilotRecords(1);
+      }
+      if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+      syncLeaderboardBest();
+      syncLeaderboardUi();
+      primeLeaderboard();
+      scheduleLeaderboardRefresh();
+     }catch{}
+    },0);
+   });
+  }
   hydrateLeaderboardCache('all');
   hydrateLeaderboardCache('validated');
   if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
-  const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
-  const hadRecoveryHash=remoteAuthEnabled()&&location.hash.includes('type=recovery');
   if(remoteAuthEnabled()){
    const {data:{session}}=await LEADERBOARD.client.auth.getSession();
-   LEADERBOARD.user=session?.user||null;
-   if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+   const prohibited=!authEventVersion&&acceptAuthUser(session?.user);
+   if(prohibited){
     await LEADERBOARD.client.auth.signOut();
     LEADERBOARD.user=null;
     setAccountNotice('The test pilot account is disabled in production.');
@@ -12102,7 +12354,6 @@ async function initLeaderboard(){
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
-    if(hadRecoveryHash)enterRecoveryMode();
    }
   }else{
    LEADERBOARD.user=null;
@@ -12117,35 +12368,6 @@ async function initLeaderboard(){
   syncLeaderboardUi();
   primeLeaderboard();
   scheduleLeaderboardRefresh();
-  if(remoteAuthEnabled()){
-   LEADERBOARD.client.auth.onAuthStateChange(async(event,sessionState)=>{
-    LEADERBOARD.user=sessionState?.user||null;
-    if(event==='PASSWORD_RECOVERY')LEADERBOARD.recoveryMode=1;
-    else if(sessionState?.user)LEADERBOARD.recoveryMode=0;
-    if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
-     await LEADERBOARD.client.auth.signOut();
-     LEADERBOARD.user=null;
-     setAccountNotice('The test pilot account is disabled in production.');
-    }
-    if(LEADERBOARD.user){
-     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
-     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-     await loadOwnProfile();
-     await refreshSignedInPilotRecords(1);
-    }else{
-     LEADERBOARD.recoveryMode=0;
-     setAccountNotice('');
-     LEADERBOARD.profile=null;
-     LEADERBOARD.remote.mine=[];
-     LEADERBOARD.cacheStamp.mine=0;
-     if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
-    }
-    syncLeaderboardBest();
-    syncLeaderboardUi();
-    primeLeaderboard();
-    scheduleLeaderboardRefresh();
-   });
-  }
  }catch(err){
   LEADERBOARD.client=null;
   LEADERBOARD.configured=0;
@@ -14349,6 +14571,7 @@ function guardiansPersonaEffectiveCfg(state,cfg){
    edgeEscapeInset
   },expertSafeLane||{});
  }
+ if(effective.name==='expert')effective=Object.assign({},effective,{safeLane:1});
  if(rank>=3&&(effective.name==='expert'||effective.name==='professional')){
   return Object.assign({}, effective, {
    diveThreatY:Math.min(effective.diveThreatY,rank>=5?126:136),
@@ -14360,47 +14583,54 @@ function guardiansPersonaEffectiveCfg(state,cfg){
 
 function guardiansPersonaSafeLaneAxis(state,cfg,target){
  const player=state.player||{};
- const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const rules=guardiansRuntimeRules(state);
+ const playfieldWidth=rules.playfieldWidth||280;
  const playerX=+player.x||0;
  const playerY=+player.y||0;
- const step=Math.max(18,+cfg.safeLaneStep||30);
- const shotLook=Math.max(+cfg.urgentShotLook||0,+cfg.safeLaneShotLook||180);
- const shotDx=Math.max(+cfg.urgentShotDx||0,+cfg.safeLaneShotDx||24);
- const diveY=Number.isFinite(+cfg.safeLaneDiveY)?+cfg.safeLaneDiveY:(+cfg.diveThreatY||140);
- const diveDx=Math.max(+cfg.diveThreatDx||0,+cfg.safeLaneDiveDx||28);
- const shotWeight=Math.max(.2,+cfg.safeLaneShotWeight||1);
- const diveWeight=Math.max(.2,+cfg.safeLaneDiveWeight||1);
- const shots=(state.enemyShots||[]).filter(shot=>
-  shot&&shot.active!==0&&shot.y<playerY&&playerY-shot.y<shotLook
- );
- const dives=(state.aliens||[]).filter(alien=>
-  alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')&&alien.y<playerY&&alien.y>=diveY
- );
- if(!shots.length&&!dives.length)return null;
- const targetX=target?+target.x||playerX:playfieldWidth/2;
+ const memory=guardiansPersonaMemory(state,cfg);
+ const previous=memory.safeLaneObservations||{};
+ const observations={};
+ const threats=[];
+ // Estimate motion from successive observations, without advancing enemy state.
+ const observe=(entity,key,hitbox)=>{
+  const old=previous[key];
+  const elapsed=old?(+state.t||0)-old.t:0;
+  const continuous=elapsed>0&&elapsed<=.1&&old.mode===entity.mode
+   &&Math.abs(entity.x-old.x)<40&&Math.abs(entity.y-old.y)<40;
+  const vx=continuous?(entity.x-old.x)/elapsed:elapsed===0?(old?.vx||0):0;
+  const vy=continuous?(entity.y-old.y)/elapsed:elapsed===0?(old?.vy||0):0;
+  observations[key]={x:entity.x,y:entity.y,t:+state.t||0,mode:entity.mode,vx,vy};
+  threats.push({x:entity.x,y:entity.y,vx,vy,hitbox});
+ };
+ (state.enemyShots||[]).forEach((shot,index)=>{
+  if(shot&&shot.active!==0)observe(shot,`shot:${shot.id??index}`,rules.enemyShotPlayerHitbox||7);
+ });
+ (state.aliens||[]).forEach((alien,index)=>{
+  if(alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')){
+   observe(alien,`alien:${alien.id??index}`,rules.alienCollisionHitbox||10);
+  }
+ });
+ memory.safeLaneObservations=observations;
+ const targetX=Math.max(12,Math.min(playfieldWidth-12,target?+target.x:playfieldWidth/2));
+ const speed=rules.playerSpeed||108;
  const scored=[-1,0,1].map(axis=>{
-  const x=Math.max(18,Math.min(playfieldWidth-18,playerX+axis*step));
   let risk=0;
-  for(const shot of shots){
-   const dx=Math.abs((+shot.x||0)-x);
-   const dy=Math.max(0,playerY-(+shot.y||0));
-   if(dx<=shotDx)risk+=shotWeight*(4+(shotDx-dx)/Math.max(1,shotDx)*4+Math.max(0,1-dy/Math.max(1,shotLook))*2);
+  let x=playerX;
+  for(let tick=1;tick<=13;tick++){
+   const t=tick*.05;
+   x=Math.max(12,Math.min(playfieldWidth-12,playerX+axis*speed*t));
+   if(axis&&Math.sign(targetX-playerX)===axis&&Math.abs(x-playerX)>Math.abs(targetX-playerX))x=targetX;
+   for(const threat of threats){
+    const dx=Math.abs(threat.x+threat.vx*t-x);
+    const dy=Math.abs(threat.y+threat.vy*t-playerY);
+    const margin=threat.hitbox+6+t*8;
+    if(dx<margin&&dy<margin)risk+=(1-dx/margin)*(1-dy/margin)*(1-t*.5)*1000;
+   }
   }
-  for(const alien of dives){
-   const dx=Math.abs((+alien.x||0)-x);
-   const dy=Math.max(0,playerY-(+alien.y||0));
-   if(dx<=diveDx)risk+=diveWeight*(5+(diveDx-dx)/Math.max(1,diveDx)*5+Math.max(0,1-dy/Math.max(1,playerY-diveY))*2);
-  }
-  if(x<=22||x>=playfieldWidth-22)risk+=3;
-  risk+=Math.abs(targetX-x)*.006;
-  if(axis===0)risk+=.15;
-  return {axis,risk};
+  const pursuit=Math.abs(targetX-x)*.05;
+  return {axis,risk:risk+pursuit};
  }).sort((a,b)=>a.risk-b.risk||Math.abs(a.axis)-Math.abs(b.axis));
- const best=scored[0];
- const current=scored.find(row=>row.axis===0);
- if(!best||!Number.isFinite(best.risk))return null;
- if(current&&current.risk<=best.risk+.45)return 0;
- return best.axis;
+ return scored[0]?.axis??null;
 }
 
 function guardiansPersonaMoveAxis(state,cfg,target){
@@ -14794,6 +15024,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   attract:0,
   simT:0,
   stageClock:0,
+  playerTwo:{enabled:false},
   watchMode:watchMode?1:0,
   watchPersona,
   watchScope
@@ -14851,7 +15082,8 @@ function galaxyGuardiansInputFromKeys(){
 function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  const manualInput=galaxyGuardiansInputFromKeys();
- const personaInput=!guardiansHasManualInput(manualInput)
+ const automatedTurn=!!S.watchMode;
+ const personaInput=automatedTurn||!guardiansHasManualInput(manualInput)
   ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,S.harnessPersona||S.watchPersona||'')
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
@@ -19886,6 +20118,22 @@ window.__galagaHarness__={
    blob
   });
   return true;
+ },
+ async checkReplayProfileMetadata(){
+  await this.setupPilotRecordsPanelTest({clearExisting:true,userId:'fixture-pilot',email:'fixture@example.test',initials:'TST',score:102410,stage:13});
+  S.stage=17;S.score=102410;S.challenge=false;
+  gameOverState={score:102410,stage:17,entryId:'fixture-score'};
+  const meta=currentReplayMeta();
+  meta.id='metadata-browser-fixture';
+  await window.AuroraReplayStore.saveReplay({...meta,blob:new Blob(['fixture'],{type:'video/webm'})});
+  const catalog=await window.AuroraReplayStore.listReplays();
+  const saved=catalog.find(r=>r.id===meta.id);
+  window.__platinumReplayCatalog=[saved];
+  const rows=pilotLocalReplayRows();
+  const score={id:'fixture-score',localScore:1,score:102410,stage:13,at:meta.completedAt,gameKey:meta.gameKey};
+  const merged=mergePilotProfileRows([score],rows);
+  renderPilotRecords(merged);
+  return {saved,rows,merged,rendered:document.getElementById('accountRecordsTop5').textContent};
  },
  async setupPilotRecordsPanelTest(cfg={}){
   const replayCreatedAt=cfg.createdAt || new Date(Date.now()-18*60*1000).toISOString();
