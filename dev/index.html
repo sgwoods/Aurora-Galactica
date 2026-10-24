@@ -1070,9 +1070,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane development</span>
-      <span id="settingsVersion">Version 1.4.1.5</span>
-      <span id="settingsRelease">Oct 23 2026, 8:00 PM EDT</span>
-      <span id="settingsState">codex/local-review-music-status-oct16@fde73577 clean</span>
+      <span id="settingsVersion">Version 1.4.1.6</span>
+      <span id="settingsRelease">Oct 24 2026, 11:41 AM EDT</span>
+      <span id="settingsState">main@ea779a76 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1080,8 +1080,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">Per-game score persistence review</span>
-      <span id="settingsNotesBody">Local review source shared with beta.4. Preserves legacy Aurora scores and separates Guardians storage; retains password recovery repair. Hosted lanes unchanged.</span>
+      <span id="settingsNotesTitle">Account scores and stronger arcade pilots</span>
+      <span id="settingsNotesBody">Beta review of per-game signed-in scores, password recovery, stronger Professional play, replay history metadata and smoother challenge transitions. Expert consistency remains a documented limitation. Production remains 1.4.1; this is not production approval.</span>
     </div>
   </div>
 </div>
@@ -1371,8 +1371,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.4.1.5</span>
-    <span id="buildStampRelease">Oct 23 2026, 8:00 PM EDT</span>
+    <span id="buildStampVersion">1.4.1.6</span>
+    <span id="buildStampRelease">Oct 24 2026, 11:41 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1626,7 +1626,7 @@ let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
 let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-23T21%3A58%3A10.174Z%22%2C%22commit%22%3A%223d814e7e%22%2C%22branch%22%3A%22codex%2Flocal-review-music-status-oct16%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-24T15%3A38%3A17.646Z%22%2C%22commit%22%3A%22e557af14%22%2C%22branch%22%3A%22codex%2Flocal-review-music-status-oct16%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -2351,7 +2351,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2-beta.4',versionLine:'1.4.1.5',label:'1.4.1.5+build.1214.sha.fde73577',commit:'fde7357713860fcb4fb90d8afeab293f741523dc',branch:'codex/local-review-music-status-oct16',dirty:false,released:'Oct 23 2026, 8:00 PM EDT',state:'codex/local-review-music-status-oct16@fde73577 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2-beta.5',versionLine:'1.4.1.6',label:'1.4.1.6+build.1218.sha.ea779a76',commit:'ea779a76aa761a3c34d679bd519e978bddee8cf8',branch:'main',dirty:false,released:'Oct 24 2026, 11:41 AM EDT',state:'main@ea779a76 clean',releaseChannel:'development',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":["sgwoods@gmail.com","waskesiuhobiecat@gmail.com"],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
 PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
