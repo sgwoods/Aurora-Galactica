@@ -298,6 +298,12 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
 #testHint{margin-top:8px;color:#9fd0af}
+#guardiansStageFiveReview{display:flex;flex-direction:column;gap:9px;margin-top:10px;padding:11px;border:1px solid rgba(123,214,255,.28);background:rgba(6,19,31,.72)}
+#guardiansStageFiveReview[hidden]{display:none}
+#guardiansStageFiveReview h4{color:#9eefff}
+#guardiansStageFiveLaunch{min-height:36px;border:1px solid rgba(123,214,255,.5);background:#0a2940;color:#e8fbff;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#guardiansStageFiveLaunch:hover{border-color:#9eefff;background:#103b58}
+#guardiansStageFiveLaunch:disabled{opacity:.48;cursor:not-allowed}
 .settingsHint{color:#d7c38b}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}
@@ -784,6 +790,9 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 }
 #accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel,#platformSplashPanel,#gamePreviewPanel{max-height:var(--overlay-max-height);overflow:auto}
 #accountPanelHead,#leaderboardPanelHead{position:sticky;top:0;z-index:1;padding-bottom:8px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.9))}
+@media (max-width:620px){
+ #accountPanel[data-recovering="true"] #accountPanelHead{position:static}
+}
 </style>
 </head>
 <body>
@@ -1037,13 +1046,35 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
       </div>
       <input id="testChallenge" type="checkbox" hidden aria-hidden="true" />
       <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 3-4, not Level 4. Expert Plays starts the selected persona in Watch Mode for the chosen start point. Set either score to 0 to disable that bonus-ship award.</div>
+      <div id="guardiansStageFiveReview" hidden>
+        <h4>Guardians Stage 5 Review</h4>
+        <div class="settingsFieldGrid">
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveSeed">Review Seed</label>
+            <select id="guardiansStageFiveSeed">
+              <option value="12553" selected>12553 · Primary</option>
+              <option value="13550">13550 · Alternate A</option>
+              <option value="14547">14547 · Alternate B</option>
+            </select>
+          </div>
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveMode">Pilot</label>
+            <select id="guardiansStageFiveMode">
+              <option value="manual" selected>Manual Play</option>
+              <option value="professional">Professional Watch</option>
+            </select>
+          </div>
+        </div>
+        <button id="guardiansStageFiveLaunch" type="button">Launch Stage 5 Review</button>
+        <div id="guardiansStageFiveReviewStatus" class="settingsInlineHint">Rank-three policy · five ships · stages 5-9 · score not recorded in Watch Mode.</div>
+      </div>
     </div>
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>
       <span id="settingsChannel">Lane production</span>
-      <span id="settingsVersion">Version 1.4.1.1</span>
-      <span id="settingsRelease">Jun 11 2026, 12:33 PM EDT</span>
-      <span id="settingsState">beta@54398ff5 clean</span>
+      <span id="settingsVersion">Version 1.4.1.6</span>
+      <span id="settingsRelease">Oct 24 2026, 11:41 AM EDT</span>
+      <span id="settingsState">beta@ea779a76 clean</span>
     </div>
     <div id="settingsAudioDebug">
       <span id="settingsAudioDebugLabel">Audio Test Status</span>
@@ -1051,8 +1082,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
     </div>
     <div id="settingsNotes">
       <span id="settingsNotesLabel">Latest Note</span>
-      <span id="settingsNotesTitle">1.4.1 production quality release</span>
-      <span id="settingsNotesBody">Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.</span>
+      <span id="settingsNotesTitle">Account scores and arcade pilots</span>
+      <span id="settingsNotesBody">Promotes accepted beta 5 gameplay with per-game signed-in scores, password recovery, stronger Professional play and replay history fixes. Expert consistency remains limited. User-approved for production publication after live account acceptance; deployment identity is recorded in build-info.json.</span>
     </div>
   </div>
 </div>
@@ -1277,6 +1308,7 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
         <button id="accountLoginBtn" type="button">Sign In</button>
         <button id="accountResetBtn" type="button">Reset Password</button>
         <button id="accountApplyResetBtn" type="button" hidden>Set New Password</button>
+        <button id="accountCancelResetBtn" type="button" hidden>Cancel Reset</button>
         <button id="accountLogoutBtn" type="button">Sign Out</button>
       </div>
       <div id="accountInitialsSection">
@@ -1341,8 +1373,8 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 <div id="buildStamp" role="button" tabindex="0" aria-label="Open platform messages" title="Open platform messages">
   <div id="buildStampBody">
     <span id="buildStampChannel">development</span>
-    <span id="buildStampVersion">1.4.1.1</span>
-    <span id="buildStampRelease">Jun 11 2026, 12:33 PM EDT</span>
+    <span id="buildStampVersion">1.4.1.6</span>
+    <span id="buildStampRelease">Oct 24 2026, 11:41 AM EDT</span>
     <button type="button" id="buildStampRefreshBtn" hidden>Refresh Now</button>
   </div>
 </div>
@@ -1468,6 +1500,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       duration: record.duration || 0,
       score: record.score || 0,
       stage: record.stage || 0,
+      displayStage: record.displayStage,
+      completedAt: record.completedAt || '',
+      scoreEntryId: record.scoreEntryId || '',
       challenge: !!record.challenge,
       build: record.build || '',
       gameKey: String(record.gameKey || '').trim() || 'aurora-galactica',
@@ -1565,6 +1600,7 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),themeSetSelect=document.getElementById('themeSetSelect'),themeSetSummary=document.getElementById('themeSetSummary'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const guardiansStageFiveReview=document.getElementById('guardiansStageFiveReview'),guardiansStageFiveSeed=document.getElementById('guardiansStageFiveSeed'),guardiansStageFiveMode=document.getElementById('guardiansStageFiveMode'),guardiansStageFiveLaunch=document.getElementById('guardiansStageFiveLaunch'),guardiansStageFiveReviewStatus=document.getElementById('guardiansStageFiveReviewStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1591,8 +1627,8 @@ let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='development';
-const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
-const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-06-11T16%3A32%3A38.961Z%22%2C%22commit%22%3A%2250534117%22%2C%22branch%22%3A%22main%22%2C%22overallCurrent%22%3A%228.8%2F10%22%2C%22audioCurrent%22%3A%227.3%2F10%22%2C%22levelArcCurrent%22%3A%228.8%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
+let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('%7B%22available%22%3Atrue%2C%22generatedAt%22%3A%222026-10-24T15%3A38%3A17.646Z%22%2C%22commit%22%3A%22e557af14%22%2C%22branch%22%3A%22codex%2Flocal-review-music-status-oct16%22%2C%22overallCurrent%22%3A%228.7%2F10%22%2C%22audioCurrent%22%3A%227%2F10%22%2C%22levelArcCurrent%22%3A%228.6%2F10%22%2C%22visualCurrent%22%3A%228.6%2F10%22%2C%22weakestMetric%22%3A%22Challenge-stage%20set-piece%20conformance%3A%20movement%2C%20graphics%2C%20alien%20novelty%22%2C%22weakestCurrent%22%3A%224.3%2F10%22%2C%22dashboardUrl%22%3A%22http%3A%2F%2Flocalhost%3A4312%2Flocal-dev%2Fconformance-dashboard.html%22%7D'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
 window.__platinumCarryDebug=window.__platinumCarryDebug??window.__auroraCarryDebug??0;
@@ -1947,7 +1983,7 @@ let arcadeFullscreenActive=0;
 const ARCADE_MUSIC_PLAYLIST_ID="PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH";
 const arcadeMusicRequestedPref=readPref(ARCADE_MUSIC_PREF_KEY);
 const ARCADE_MUSIC={
- state:'main@54398ff5 clean',
+ state:'main@ea779a76 clean',
  requested:arcadeMusicRequestedPref==='1',
  playlistOverride:'',
  iframe:null,
@@ -2317,7 +2353,8 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:"Aurora Galactica",version:'1.4.1',versionLine:'1.4.1',label:'1.4.1+build.1164.sha.54398ff5',commit:'54398ff5c95bf9a6b3571c42a0efcf46cf43cebb',branch:'main',dirty:false,released:'Jun 11 2026, 12:33 PM EDT',state:'main@54398ff5 clean',releaseChannel:'production',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":[],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+const BUILD_INFO={product:"Aurora Galactica",version:'1.4.2',versionLine:'1.4.2',label:'1.4.2+build.1218.sha.ea779a76',commit:'ea779a76aa761a3c34d679bd519e978bddee8cf8',branch:'main',dirty:false,released:'Oct 24 2026, 11:41 AM EDT',state:'main@ea779a76 clean',releaseChannel:'production',publicArtifactBoundaryEnabled:true,platform:{"key":"platinum","name":"Platinum","version":"1.4.1","releaseTrack":"production-family","compatibility":"platinum-1.4","notes":"Platform-owned shell, release lanes, docs, replay, services, and host contract.","media":{"arcadeMusicPlaylistId":"PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"},"auth":{"nonProductionTestPilotEmails":[],"nonProductionTestPilotUserIds":[]}},applications:[{"gameKey":"aurora-galactica","title":"Aurora Galactica","version":"1.4.1","versionLine":"1.4.1","releaseTrack":"production-family","runtimeStatus":"playable","platformCompatibility":"platinum-1.4","launchPolicy":"production-capable"},{"gameKey":"galaxy-guardians-preview","title":"Galaxy Guardians","version":"0.1.0-preview","versionLine":"0.1.0 preview","releaseTrack":"playable-preview","runtimeStatus":"production-playable-preview","platformCompatibility":"platinum-1.4","launchPolicy":"production-preview-playable"}]};
+PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -3012,7 +3049,7 @@ function scoreRowMatchesGame(row={},gameKey=currentScoreStorageGameKey()){
 }
 
 function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
- return normalizeScoreRecordGameKey(gameKey)===DEFAULT_SCORE_GAME_KEY;
+ return ['aurora-galactica','galaxy-guardians-preview'].includes(String(gameKey));
 }
 
 function createAuroraRuntimeState(opts={}){
@@ -3235,6 +3272,8 @@ function advanceSharedStarfield(dt,opts={}){
 }
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
+// Combat pressure stops increasing after Stage 30; progression keeps its actual stage.
+const combatEffectiveStage=stage=>Math.min(stage,30);
 const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
 const STAGE_RULES={
  opening:{maxStage:1,tune:{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2},flight:{scriptedDiveVy:80,randomDiveVy:82,diveAccel:150}},
@@ -3242,7 +3281,7 @@ const STAGE_RULES={
  stage3:{maxStage:3,tune:{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:162}},
  stage4:{maxStage:4,tune:{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:172}},
  stage5:{maxStage:5,tune:{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}},
- endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
+ endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+combatEffectiveStage(s)*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
 };
 function stageRuleSet(stage){
  for(const key of Object.keys(STAGE_RULES)){
@@ -3769,7 +3808,39 @@ function syncDeveloperToolsUi(){
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+ let activePackKey='';
+ try{if(typeof currentGamePackKey==='function')activePackKey=currentGamePackKey();}catch{}
+ const guardiansReviewAvailable=String(BUILD_INFO?.releaseChannel||'').toLowerCase()==='development'&&activePackKey==='galaxy-guardians-preview';
+ if(guardiansStageFiveReview)guardiansStageFiveReview.hidden=!guardiansReviewAvailable;
+ if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.disabled=!guardiansReviewAvailable;
  syncChallengeStartControls();
+}
+
+function launchGuardiansStageFiveReview(){
+ if(String(BUILD_INFO?.releaseChannel||'').toLowerCase()!=='development'||typeof currentGamePackKey!=='function'||currentGamePackKey()!=='galaxy-guardians-preview')return false;
+ if(typeof startGalaxyGuardiansDevPreview!=='function')return false;
+ const seed=(+guardiansStageFiveSeed?.value>>>0)||12553;
+ const mode=String(guardiansStageFiveMode?.value||'manual');
+ const watchMode=mode==='professional';
+ if(testStartKind)testStartKind.value='level';
+ if(testStage)testStage.value='5';
+ if(testShips)testShips.value='5';
+ if(testExpertPlays)testExpertPlays.value=watchMode?'professional':'human';
+ saveTestCfg();
+ const startedReview=startGalaxyGuardiansDevPreview({
+  stage:5,
+  ships:5,
+  seed,
+  maxPlayableStage:9,
+  watchMode,
+  watchPersona:watchMode?'professional':'',
+  stageFiveReview:true
+ });
+ if(startedReview){
+  if(guardiansStageFiveReviewStatus)guardiansStageFiveReviewStatus.textContent=`Active: Stage 5 · seed ${seed} · ${watchMode?'Professional Watch':'Manual Play'}`;
+  showToast(`Stage 5 review · seed ${seed} · ${watchMode?'watch':'manual'}`);
+ }
+ return startedReview;
 }
 function syncChallengeStartControls(){
  const cfg=testCfgCache||loadTestCfg();
@@ -3992,8 +4063,9 @@ function stopReferenceCueSet(names=[]){
 function holdReferenceGameplayCadence(seconds=0){
  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
 }
-function clearReferenceTransitionCueWindow(extra=[]){
- stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+function clearReferenceTransitionCueWindow(extra=[],preserve=[]){
+ const retained=new Set(preserve);
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])].filter(name=>!retained.has(name)));
 }
 function clearReferenceBossMomentCueWindow(){
  stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
@@ -4730,6 +4802,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.addEventListener('click',launchGuardiansStageFiveReview);
 if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
@@ -5116,6 +5189,9 @@ function arcadeMusicPlaylistId(){
 function arcadeMusicEffectiveMuted(){
  return !!(arcadeMusicMuted||ARCADE_MUSIC.forceMuted);
 }
+function arcadeMusicSessionActive(){
+ return ['playing','loading','unconfirmed','paused','ended'].includes(ARCADE_MUSIC.state);
+}
 function arcadeMusicState(){
  const config=arcadeMusicResolvedConfig();
  const effectiveMuted=arcadeMusicEffectiveMuted();
@@ -5148,9 +5224,9 @@ function arcadeMusicState(){
 }
 function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  const playing=ARCADE_MUSIC.state==='playing';
- const fallbackPlaying=playing&&ARCADE_MUSIC.fallbackMode==='iframe';
+ const fallbackUnconfirmed=ARCADE_MUSIC.state==='unconfirmed';
  const config=arcadeMusicResolvedConfig();
  const unavailable=ARCADE_MUSIC.state==='unavailable'||!config.playlistId;
  const warming=!!ARCADE_MUSIC.warming;
@@ -5174,9 +5250,11 @@ function syncArcadeMusicUi(){
     ?'Arcade Music warming until the opening ad finishes'
     :(ARCADE_MUSIC.state==='loading'
     ?'Starting Arcade Music'
-    :(fallbackPlaying
-      ?'Stop Arcade Music'
-      :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'))))));
+    :(fallbackUnconfirmed
+      ?'Stop Arcade Music (playback unconfirmed)'
+      :(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'
+       ?'Resume Arcade Music'
+       :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music')))))));
  arcadeMusicToggleBtn.setAttribute('aria-label',label);
  arcadeMusicToggleBtn.title=label;
  arcadeMusicToggleBtn.dataset.actionTip=label;
@@ -5235,6 +5313,28 @@ function clearArcadeMusicWarmProbe(){
  if(timerId)clearTimeout(timerId);
  ARCADE_MUSIC.warmProbeTimeoutId=0;
 }
+function clearArcadeMusicStateProbe(){
+ if(ARCADE_MUSIC.stateProbeTimeoutId)clearTimeout(ARCADE_MUSIC.stateProbeTimeoutId);
+ ARCADE_MUSIC.stateProbeTimeoutId=0;
+}
+function scheduleArcadeMusicStateProbe(){
+ clearArcadeMusicStateProbe();
+ const player=ARCADE_MUSIC.player;
+ const mountToken=ARCADE_MUSIC.mountToken;
+ if(!ARCADE_MUSIC.requested||!player||ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01')return;
+ ARCADE_MUSIC.stateProbeTimeoutId=setTimeout(()=>{
+  ARCADE_MUSIC.stateProbeTimeoutId=0;
+  if(!ARCADE_MUSIC.requested||player!==ARCADE_MUSIC.player||mountToken!==ARCADE_MUSIC.mountToken)return;
+  // Recover missed provider callbacks without repeatedly issuing playback commands.
+  try{
+   const code=player.getPlayerState?.();
+   if(Number.isFinite(code)&&code!==ARCADE_MUSIC.lastPlayerStateCode){
+    handleArcadeMusicPlayerStateChange({target:player,data:code});
+   }
+  }catch{}
+  if(ARCADE_MUSIC.requested&&player===ARCADE_MUSIC.player&&mountToken===ARCADE_MUSIC.mountToken)scheduleArcadeMusicStateProbe();
+ },1000);
+}
 function resolveArcadeMusicIframe(frameRef=null){
  const candidateFrame=
   (frameRef&&typeof frameRef.tagName==='string'&&String(frameRef.tagName).toLowerCase()==='iframe'&&frameRef.isConnected)
@@ -5244,8 +5344,6 @@ function resolveArcadeMusicIframe(frameRef=null){
   ARCADE_MUSIC.iframe=candidateFrame;
   return candidateFrame;
  }
- noteArcadeMusicFrame();
- if(ARCADE_MUSIC.iframe)return ARCADE_MUSIC.iframe;
  const domFrame=
   (arcadeMusicFrameHost&&typeof arcadeMusicFrameHost.querySelector==='function'
    ?arcadeMusicFrameHost.querySelector('iframe#arcadeMusicFrame, iframe')
@@ -5258,14 +5356,14 @@ function activateArcadeMusicIframeFallback(reason='api_attach_timeout',frameRef=
  const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
  if(!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
  if(!resolveArcadeMusicIframe(frameRef))return false;
- if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='playing')return true;
+ if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='unconfirmed')return true;
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  ARCADE_MUSIC.requested=true;
  if(!ARCADE_MUSIC.activePlaylistId)ARCADE_MUSIC.activePlaylistId=playlistId;
  if(!ARCADE_MUSIC.activePlaylistSource)ARCADE_MUSIC.activePlaylistSource=arcadeMusicResolvedConfig().playlistSource;
  ARCADE_MUSIC.fallbackMode='iframe';
- ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.state='unconfirmed';
  syncArcadeMusicUi();
  if(typeof console!=='undefined'&&typeof console.warn==='function'){
   console.warn('[Arcade Music] Falling back to iframe-only playlist playback; YouTube player API did not attach.', {
@@ -5362,12 +5460,15 @@ function mountArcadeMusicPlayer(mountToken,opts={},config=arcadeMusicResolvedCon
  };
  if(useHarnessVideo)playerConfig.videoId='M7lc1UVf-VE';
  ARCADE_MUSIC.player=new window.YT.Player('arcadeMusicFrame',playerConfig);
+ ARCADE_MUSIC.lastPlayerStateCode=null;
+ scheduleArcadeMusicStateProbe();
  return true;
 }
 function destroyArcadeMusicPlayer(){
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  clearArcadeMusicWarmProbe();
+ clearArcadeMusicStateProbe();
  const player=ARCADE_MUSIC.player;
  if(player&&typeof player.destroy==='function'){
   try{player.destroy()}catch{}
@@ -5437,7 +5538,8 @@ function loadArcadeMusicPlaylistIndex(player=ARCADE_MUSIC.player,index=0){
 }
 function handleArcadeMusicPlayerReady(event){
  const player=event?.target||null;
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=null;
  noteArcadeMusicFrame();
  const harnessPlaylist=ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01';
  ARCADE_MUSIC.state=harnessPlaylist?'playing':'loading';
@@ -5523,7 +5625,9 @@ function scheduleArcadeMusicWarmProbe(delayMs=900){
  const mountToken=+ARCADE_MUSIC.mountToken||0;
  ARCADE_MUSIC.warmProbeTimeoutId=setTimeout(()=>{
   if(!ARCADE_MUSIC.warming||!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken)return;
-  if(currentArcadeMusicTrackInPlaylist()){
+  let playing=false;
+  try{playing=ARCADE_MUSIC.player?.getPlayerState?.()===1}catch{}
+  if(playing&&currentArcadeMusicTrackInPlaylist()){
    completeArcadeMusicWarmup('warm_probe');
    return;
   }
@@ -5599,7 +5703,8 @@ function skipArcadeMusicBlockedTrack(code=0,eventTarget=null){
 function handleArcadeMusicPlayerStateChange(event){
  const player=event?.target||ARCADE_MUSIC.player||null;
  const stateCode=Number(event?.data);
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=stateCode;
  noteArcadeMusicFrame();
  if(stateCode===1){
   clearArcadeMusicStartupTimeout();
@@ -5636,10 +5741,16 @@ function handleArcadeMusicPlayerStateChange(event){
   }
   return;
  }
+ if(stateCode===0||stateCode===2){
+  if(!ARCADE_MUSIC.warming)clearArcadeMusicStartupTimeout();
+  ARCADE_MUSIC.state=stateCode===0?'ended':'paused';
+  syncArcadeMusicUi();
+ }
 }
 function handleArcadeMusicPlayerError(event){
  const code=Number(event?.data)||0;
  const player=event?.target||ARCADE_MUSIC.player||null;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
  if(skipArcadeMusicBlockedTrack(code,player))return;
  clearArcadeMusicStartupTimeout();
  if(ARCADE_MUSIC.warming){
@@ -5796,12 +5907,16 @@ function setArcadeMusicMuted(next,opts={}){
  ));
 }
 function toggleArcadeMusicMute(){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(!active){
   startArcadeMusic();
   return;
  }
  if(ARCADE_MUSIC.warming)return;
+ if(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'){
+  try{ARCADE_MUSIC.player?.playVideo?.()}catch{}
+  return;
+ }
  if(ARCADE_MUSIC.forceMuted){
   ARCADE_MUSIC.forceMuted=false;
   applyArcadeMusicVolume();
@@ -5824,7 +5939,7 @@ function toggleArcadeMusic(){
  toggleArcadeMusicMute();
 }
 function maybeAutoWarmArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||ARCADE_MUSIC.autoWarmAttempted)return false;
  const config=arcadeMusicResolvedConfig();
  if(!config.playlistId||!arcadeMusicFrameHost||config.playlistId==='PLarcadeMusicHarness01')return false;
@@ -5838,7 +5953,7 @@ function maybeAutoWarmArcadeMusic(opts={}){
  });
 }
 function maybeResumeRequestedArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||!ARCADE_MUSIC.requested)return false;
  if(opts.requireInteraction!==false&&!aud)return false;
  const config=arcadeMusicResolvedConfig();
@@ -5853,7 +5968,7 @@ function syncArcadeMusicForGamePackChange(){
  const config=arcadeMusicResolvedConfig();
  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  syncArcadeMusicUi();
- const active=!!(ARCADE_MUSIC.requested&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'||ARCADE_MUSIC.state==='unavailable'));
+ const active=!!(ARCADE_MUSIC.requested&&(arcadeMusicSessionActive()||ARCADE_MUSIC.state==='unavailable'));
  if(!active){
   maybeResumeRequestedArcadeMusic({silent:true,source:'pack_change'});
   return;
@@ -6259,6 +6374,9 @@ function currentReplayMeta(){
   stage:S.stage|0,
   challenge:!!S.challenge,
   attract:!!S.attract,
+  displayStage:gameKey==='aurora-galactica'?displayStageNumber(S.stage,!!S.challenge):(S.stage|0),
+  completedAt:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?new Date().toISOString():'',
+  scoreEntryId:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?String(gameOverState.entryId||''):'',
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
   watchMode:!!S.watchMode,
@@ -6285,10 +6403,15 @@ async function persistLocalReplay(blob,meta){
   console.warn('local replay save failed',err);
  }
 }
+function freezeRunRecordingMeta(){
+ if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+ if(!VIDEO_REC.rec.replayStopMeta)VIDEO_REC.rec.replayStopMeta=currentReplayMeta();
+}
 function stopRunRecording(){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  VIDEO_REC.active=0;
- VIDEO_REC.stopMeta=currentReplayMeta();
+ VIDEO_REC.stopMeta=VIDEO_REC.rec.replayStopMeta;
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
@@ -6299,6 +6422,7 @@ function stopRunRecording(){
 }
 function stopRunRecordingAfterAudioTail(delayMs=2200,sessionId=''){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  const targetSession=String(sessionId||VIDEO_REC.sessionId||'');
  const delay=Math.max(0,Number.isFinite(+delayMs)?+delayMs:2200);
  setTimeout(()=>{
@@ -6339,7 +6463,7 @@ function startRunRecording(){
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
   const blob=new Blob(chunks,{type:mime||'video/webm'});
-  const replayMeta=VIDEO_REC.stopMeta||currentReplayMeta();
+  const replayMeta=rec.replayStopMeta;
   if(currentStream)for(const t of currentStream.getTracks())t.stop();
   if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
   if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
@@ -6350,7 +6474,7 @@ function startRunRecording(){
     showToast('Run video downloaded');
    }
   }
-  VIDEO_REC.stopMeta=null;
+  if(VIDEO_REC.stopMeta===replayMeta)VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
  rec.start(250);
@@ -6453,6 +6577,7 @@ function harnessForceRemoteWriteEnabled(){
 }
 function remoteWriteEnabled(){
  if(harnessForceRemoteWriteEnabled())return true;
+ if(RELEASE_CHANNEL==='production'||RELEASE_CHANNEL==='production beta')return !!LEADERBOARD.user?.id;
  return RELEASE_CHANNEL==='development'&&isSignedInAsTestAccount();
 }
 function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){
@@ -6822,6 +6947,7 @@ function latestCompletedLocalScoreRow(){
  return history[0]||null;
 }
 function leaderboardRowsForView(view=LEADERBOARD.view,opts={}){
+ ensureLeaderboardScope();
  const targetGameKey=typeof normalizeScoreRecordGameKey==='function'
   ? normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey())
   : String(opts.gameKey||'').trim();
@@ -6858,14 +6984,15 @@ function persistLeaderboardCache(view){
  }catch{}
 }
 function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
+ ensureLeaderboardScope();
  if(view==='local')return 0;
  try{
   const raw=localStorage.getItem(leaderboardCacheKey(view,userId))
    ||localStorage.getItem(platformLeaderboardCacheKey(view,userId))
-   ||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
+   ||(currentScoreStorageGameKey()==='aurora-galactica'?localStorage.getItem(legacyLeaderboardCacheKey(view,userId)):null);
   if(!raw)return 0;
   const parsed=JSON.parse(raw);
-  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];
+  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow).filter(row=>scoreRowMatchesGame(row)):[];
   const fetchedAt=+parsed?.fetchedAt||0;
   LEADERBOARD.remote[view]=rows;
   LEADERBOARD.cacheStamp[view]=fetchedAt;
@@ -6876,6 +7003,7 @@ function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
  }
 }
 function leaderboardCacheFresh(view){
+ ensureLeaderboardScope();
  const stamp=LEADERBOARD.cacheStamp[view]||0;
  return !!stamp&&(Date.now()-stamp)<LEADERBOARD_STALE_MS;
 }
@@ -7055,6 +7183,7 @@ function openAccountPanel(){
  syncAccountPanelVisibility();
  syncAccountUi();
  if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
+ if(LEADERBOARD.user&&remoteAuthEnabled())refreshSignedInPilotRecords(1);
  syncOverlayPause();
 }
 function closeAccountPanel(){
@@ -7084,6 +7213,10 @@ function buildStartAccountPrompt(){
  return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
 function enterRecoveryMode(){
+ if(!LEADERBOARD.recoveryMode){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ }
  LEADERBOARD.recoveryMode=1;
  LEADERBOARD.accountPanelOpen=1;
  LEADERBOARD.panelOpen=0;
@@ -7111,9 +7244,14 @@ function syncAccountUi(){
  const hasLockedInitials=!!signedIn;
  const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
  const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanel)accountPanel.dataset.recovering=recovering?'true':'false';
  if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
  if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
+ if(accountCancelResetBtn){
+  accountCancelResetBtn.hidden=!recovering;
+  accountCancelResetBtn.disabled=!!LEADERBOARD.authBusy;
+ }
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
  if(accountPasswordLabel)accountPasswordLabel.hidden=signedIn&&!recovering;
@@ -7214,10 +7352,14 @@ function syncLeaderboardUi(){
  syncAccountUi();
 }
 function syncLeaderboardBest(){
+ ensureLeaderboardScope();
+ const gameKey=currentScoreStorageGameKey();
  const localBest=localLeaderboardRows()[0]?.score||0;
- const remoteBest=LEADERBOARD.remote.all[0]?.score||0;
- S.best=Math.max(S.best||0,localBest,remoteBest);
- writePref(BEST_SCORE_KEY,String(S.best));
+ const remoteBest=LEADERBOARD.remote.all.filter(row=>scoreRowMatchesGame(row,gameKey))[0]?.score||0;
+ const previous=LEADERBOARD.bestGameKey===gameKey?S.best||0:+readPref(scoreBestKey(gameKey))||0;
+ LEADERBOARD.bestGameKey=gameKey;
+ S.best=Math.max(previous,localBest,remoteBest);
+ writePref(scoreBestKey(gameKey),String(S.best));
 }
 
 // Source: src/js/05-player-combat.js
@@ -7444,6 +7586,7 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
@@ -7540,6 +7683,7 @@ function gameOver(state){
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
+ if(typeof freezeRunRecordingMeta==='function')freezeRunRecordingMeta();
  gameOverHtml=buildGameOverHtmlFromState();
  if(typeof queuePlayerTwoAutoTurn==='function'&&queuePlayerTwoAutoTurn('auto'))gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
@@ -7580,7 +7724,7 @@ const HARNESS_PERSONAS={
  novice:{name:'novice',captureRescueStyle:'rare-opportunistic',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:80,captureRescueBias:150,captureRescueUnsafePenalty:60,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
  advanced:{name:'advanced',captureRescueStyle:'practical-rescue',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:110,captureRescueBias:260,captureRescueUnsafePenalty:110,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
  expert:{name:'expert',captureRescueStyle:'rescue-priority',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:135,captureRescueBias:390,captureRescueUnsafePenalty:170,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
- professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
+ professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26}
 };
 
 const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
@@ -7895,6 +8039,7 @@ function restorePlayerTwoBoardSnapshot(board){
  S.stage4Lane2PriorityDive=+board.stage4Lane2PriorityDive?1:0;
  S.rogue=Math.max(0,+board.rogue||0)|0;
  S.att=Math.max(0,+board.att||0)|0;
+ resetHarnessHazardState(S.p);
  S.p=Object.assign(S.p,playerTwoClonePojo(board.p,{}));
  S.e.length=0;S.e.push(...playerTwoClonePojo(board.e,[]));
  S.pb.length=0;S.pb.push(...playerTwoClonePojo(board.pb,[]));
@@ -7989,6 +8134,7 @@ function playerTwoLaneDisplayName(key,p2=S.playerTwo){
  return key==='p2'?`2UP ${(p2?.initials||'---')}`:'1UP';
 }
 function resetPlayerForTurn(){
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:1.2,dual:0,captured:0,returning:0,pending:0,spawn:.75,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0,demoTargetId:null,demoTargetT:0});
 }
 function applyPlayerTwoLaneTurn(to='p1',source='auto'){
@@ -8494,26 +8640,18 @@ function harnessPersonaCfg(state){
  const S=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();
  const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  const base=HARNESS_PERSONAS[key]||null;
- const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
- if(!base||!p2)return base;
- const skill=cl(Number.isFinite(+p2.variance)?+p2.variance:1,.82,1.18);
- const agility=.92+skill*.08;
- const precision=.94+skill*.06;
- return Object.assign({},base,{
-  moveMul:cl(base.moveMul*agility,.32,.98),
-  urgentLook:base.urgentLook*precision,
-  deadZone:Math.max(3,base.deadZone/precision),
-  aimBoss:base.aimBoss*precision,
-  aimOther:base.aimOther*precision,
-  fireChance:cl(base.fireChance*precision,.1,.999),
-  challengeFireChance:cl(base.challengeFireChance*precision,.1,.999),
-  distanceBias:base.distanceBias/precision
- });
+ // A persona has one policy across harness, Watch and the rival's real turn.
+ if(key==='professional'&&S.stage>=4&&!S.challenge){
+  return Object.assign({},HARNESS_PERSONAS.expert,{name:'professional',fireChance:1});
+ }
+ return base;
 }
 
 function harnessTargetScore(state,e,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
+ // Wait for the carrying boss's attack; retreat shots can destroy the captive.
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&e.carry&&e.dive!==1)return -1e9;
  const rescueCandidate=!!(e.carry&&e.dive);
  const carriedBias=e.carry?(rescueCandidate?(cfg.captureRescueBias??cfg.carryBias??0):(cfg.carryBias??0)):0;
  const unsafeCarryPenalty=e.carry&&!rescueCandidate?(cfg.captureRescueUnsafePenalty||0):0;
@@ -8612,6 +8750,13 @@ function harnessLowerFieldThreat(state,p,cfg){
  const earlyStage=(S.stage|0)<=(cfg.cautiousUntilStage||0);
   return S.e
   .filter(e=>{
+   // Keep clearance until the diving collision box has passed the ship.
+   if((cfg.name==='professional'||cfg.name==='expert')&&S.stage>=4){
+    const he=enemyCollisionHitbox(e),hp=playerHitbox();
+    return e.hp>0&&e.dive&&e.y>=cfg.diveEmergencyY&&
+     e.y<p.y+hp.h+he.h+4&&
+     Math.abs(e.x-p.x)<cfg.lowerDiveEvadeDx+(e.t==='boss'?6:0);
+   }
    if(!(e.hp>0&&e.dive&&e.y<p.y))return 0;
    const laneGap=Math.abs(playLane(e.x)-playerLane);
    if(earlyStage&&e.y>=cfg.lowerDiveEvadeY&&laneGap<=(cfg.lowerDiveEvadeLaneGap??1)){
@@ -8649,6 +8794,59 @@ function harnessMoveAxis(state,p,cfg){
  return dx>0?1:-1;
 }
 
+function resetHarnessHazardState(p){
+ p.hHazardObservation=null;
+ p.hCaptureRiskSpent=false;
+}
+function harnessResolveHazardAxis(state,p,cfg,preferredAxis,dt){
+ if(state.stage<4)p.hCaptureRiskSpent=false;
+ if(cfg.name!=='professional'||state.challenge||state.stage<4)return preferredAxis;
+ if(state.captureCountStage>0||p.dual)p.hCaptureRiskSpent=true;
+ const hp=playerHitbox(),prior=p.hHazardObservation;
+ const elapsed=prior?state.simT-prior.t:0;
+ const sameTick=prior&&prior.stage===state.stage&&elapsed===0;
+ const continuous=prior&&prior.stage===state.stage&&elapsed>0&&elapsed<=Math.min(.05,dt*1.5);
+ // Estimate only from adjacent observed frames; discard motion across state changes.
+ const positions={};
+ const hazards=state.e.filter(e=>e.hp>0).map(e=>{
+  const he=enemyCollisionHitbox(e),old=(continuous||sameTick)&&prior.positions[e.id];
+  const valid=old&&old.dive===e.dive&&old.form===e.form&&Math.hypot(e.x-old.x,e.y-old.y)<=32;
+  let vx=0,vy=0;
+  if(valid&&continuous){vx=(e.x-old.x)/elapsed;vy=(e.y-old.y)/elapsed;}
+  else if(valid&&sameTick&&old.x===e.x&&old.y===e.y){vx=old.vx;vy=old.vy;}
+  positions[e.id]={x:e.x,y:e.y,dive:e.dive,form:e.form,vx,vy};
+  return{x:e.x,y:e.y,vx,vy,w:hp.w+he.w+12,h:hp.h+he.h+12};
+ });
+ p.hHazardObservation={stage:state.stage,t:state.simT,positions};
+ for(const b of state.eb){
+  if(b.vy<=0)continue;
+  hazards.push({x:b.x,y:b.y,vx:b.vx||0,vy:b.vy,w:hp.w+8,h:hp.h+8});
+ }
+ // Permit an initial dual-fighter opportunity only while there are spare ships.
+ if((p.hCaptureRiskSpent||state.lives<2)&&canCapture(state))for(const e of state.e){
+  if(e.hp>0&&enemyHasActiveBeam(e)&&p.y>e.y+12&&p.y<e.y+VIS.beamLen){
+   hazards.push({x:e.x,y:p.y,vx:0,vy:0,w:12,h:1});
+  }
+ }
+ const clearance=axis=>{
+  let nearest=Infinity;
+  for(let step=1;step<=2;step++){
+   const x=cl(p.x+axis*p.s*dt*cfg.moveMul*step,hp.w+2,PLAY_W-hp.w-2);
+   for(const h of hazards){
+    nearest=Math.min(nearest,Math.max(Math.abs(x-h.x-h.vx*dt*step)/h.w,Math.abs(p.y-h.y-h.vy*dt*step)/h.h));
+   }
+  }
+  return nearest;
+ };
+ if(clearance(preferredAxis)>=1)return preferredAxis;
+ let bestAxis=0,bestClearance=clearance(0);
+ for(const axis of [-1,1]){
+  const value=clearance(axis);
+  if(value>bestClearance+1e-9){bestAxis=axis;bestClearance=value;}
+ }
+ return bestAxis;
+}
+
 function runHarnessPlayer(state,dt,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
@@ -8657,7 +8855,8 @@ function runHarnessPlayer(state,dt,p,cfg){
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
  const lowerFieldThreat=harnessLowerFieldThreat(S,p,cfg);
- const axis=harnessMoveAxis(S,p,cfg);
+ const preferredAxis=harnessMoveAxis(S,p,cfg);
+ const axis=harnessResolveHazardAxis(S,p,cfg,preferredAxis,dt);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
  const target=attackables.sort((a,b)=>compareHarnessTargets(S,a,b,p,cfg))[0]||harnessSelectTarget(S,p,cfg);
@@ -8667,6 +8866,7 @@ function runHarnessPlayer(state,dt,p,cfg){
   targetX:target?+target.x.toFixed(2):null,
   targetDx:target?+(target.x-p.x).toFixed(2):null,
   axis,
+  preferredAxis,
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
  },harnessTargetDebug(S,target,p,cfg)));
@@ -8691,6 +8891,10 @@ function runHarnessPlayer(state,dt,p,cfg){
  }
  if(S.pb.length>=bulletsMax(S)){
   logProfessionalDecision(S,p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(S,target,p,cfg)));
+  return;
+ }
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&S.e.some(e=>e.hp>0&&e.carry&&e.dive!==1&&e.y<p.y&&Math.abs(e.x-p.x)<enemyHitbox(e).w+6)){
+  logProfessionalDecision(S,p,cfg,'protect_captive',{targetId:target.id});
   return;
  }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
@@ -8730,6 +8934,7 @@ function updatePlayerControl(state,dt,p){
  if(!isAuroraRuntimeState(state)){p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
  const harnessPersona=harnessPersonaCfg(S);
+ const automatedTurn=!!S.watchMode||!!(S.playerTwo?.enabled&&S.playerTwo.activeTurn==='p2');
  const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
  const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
@@ -8741,7 +8946,7 @@ function updatePlayerControl(state,dt,p){
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(S,dt,p);
-  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
+  else if(harnessPersona&&(automatedTurn||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
   else{
    const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
@@ -8761,7 +8966,7 @@ function updatePlayerControl(state,dt,p){
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot(S);
- else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot(S);
+ else if(!S.attract&&harnessPersona&&manualFire&&!automatedTurn)shoot(S);
 }
 
 // Source: src/js/05-supabase.js
@@ -8787,6 +8992,7 @@ const accountPassword=document.getElementById('accountPassword');
 const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
+const accountCancelResetBtn=document.getElementById('accountCancelResetBtn');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
 const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -8890,8 +9096,9 @@ function pilotLocalReplayRows(){
    id:`local-replay:${run.id}`,
    initials:sanitizeInitials(run.pilotInitials||preferredInitialsFromUser()||'YOU').padEnd(3,'-').slice(0,3),
    score:+run.score||0,
-   stage:+run.stage||0,
-   at:String(run.createdAt||''),
+   stage:Number.isFinite(run.displayStage)?run.displayStage:(+run.stage||0),
+   at:String(run.completedAt||run.createdAt||''),
+   scoreEntryId:String(run.scoreEntryId||''),
    verified:0,
    replayId:String(run.id||''),
    localReplay:1,
@@ -8919,6 +9126,8 @@ function mergePilotProfileRows(remoteRows,localRows){
    if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(row,localRow.gameKey||currentScoreStorageGameKey()))return false;
    if((+row.score||0)!== (+localRow.score||0))return false;
    if((+row.stage||0)!== (+localRow.stage||0))return false;
+   if(localRow.scoreEntryId&&(row.localScore||row.scoreEntryId))return String(row.id||'')===localRow.scoreEntryId||String(row.scoreEntryId||'')===localRow.scoreEntryId;
+   if(row.replayId&&localRow.replayId)return row.replayId===localRow.replayId;
    const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
    if(Number.isFinite(localStamp)&&Number.isFinite(rowStamp))return Math.abs(localStamp-rowStamp)<=120000;
    return false;
@@ -8933,6 +9142,7 @@ function mergePilotProfileRows(remoteRows,localRows){
  return merged;
 }
 function rowsForPilotProfile(){
+ ensureLeaderboardScope();
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)
    ? LEADERBOARD.remote.mine.filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true).slice()
@@ -8987,10 +9197,10 @@ function localLeaderboardRows(gameKey=currentScoreStorageGameKey()){
  return loadScoreboard(gameKey).map(row=>Object.assign({verified:0},row));
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function platformLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function legacyLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEGACY_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
@@ -9024,6 +9234,7 @@ if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword);
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
+if(accountCancelResetBtn)accountCancelResetBtn.addEventListener('click',exitRecoveryMode);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{
@@ -9209,7 +9420,7 @@ function runStage1Script(state,dt,p,T){
   const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.c===c).sort((a,b)=>b.y-a.y)[0];
   if(cand){
    const aim=cl((p.x-cand.x)*T.aimMul,-T.aimClamp,T.aimClamp);
-   fireEnemyBullet(S,cand,aim,T.bulletVy+S.stage*T.bulletVyStage,'script');
+   fireEnemyBullet(S,cand,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'script');
   }
   S.scriptShotT=1.35;
  }
@@ -9520,8 +9731,22 @@ function updateChallengeEnemy(state,e,dt){
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
 		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
+ const previousGreenExitPose=e.stage31GreenExitPose;
+ const laterGreenJoinDuration=.66;
+ const laterBlueJoinDuration=.9;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
-	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+	 const genericChallengePath=!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
+ const stage31Group3CurveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+ const stage31Group3CurveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+ const stage31Group3LaneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+ const stage31Group3YBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+ const stage31Group3GateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+ const stage31Group3Phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+ const stage31Group3PolicyEligible=genericChallengePath&&S.stage===31&&wave===2&&pathFamily==='blue-purple-finale'
+  &&!stage31Group3CurveX&&!stage31Group3CurveY&&!stage31Group3LaneBias&&!stage31Group3YBias
+  &&(!stage31Group3GateS||9.7+stage31Group3Phase+stage31Group3GateS*.28>=stage31Group3GateS);
+ let stage31Group3ExitDx=0,stage31Group3ExitDy=0;
+	 if(genericChallengePath){
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){
@@ -9574,7 +9799,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(28+slot*5)*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   // End entry at the interior lane, not an outward fan offset.
+	   e.x=startX+(laneX-startX)*q+fanDir*(1-q)*(slot-1.5)*14*arcAmp;
 	   e.y=topY+q*(48+slot*8)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
@@ -9657,8 +9883,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(78+slot*8)*dropAmp+Math.sin(q*Math.PI*1.4+p)*6;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(188+slot*27)*dropAmp;
+	   e.x=laneX+fanDir*q*202*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+q*(188+slot*27))*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*((q-.12)*116+(slot-1.5)*18)*fm.challengeSweep*arcAmp+Math.sin(q*Math.PI*1.6+p)*9;
@@ -9727,6 +9953,17 @@ function updateChallengeEnemy(state,e,dt){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
 	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
+	   if(S.stage>=35&&u-9.7<laterGreenJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterGreenJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),rung=slot%2?-1:1;
+	    const middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*((middleQ-.5)*44+rung*(18+middleQ*13))*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(44+rung*13)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(146+slot*14)*dropAmp+(wave%2?Math.sin(middleQ*Math.PI)*7:0);
+	    const middleDy=((146+slot*14)*dropAmp+(wave%2?Math.PI*Math.cos(middleQ*Math.PI)*7:0))/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='green-ladder-deep-drop'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*64)*fm.challengeSweep*arcAmp+Math.sin(q*5.6+p)*3;
@@ -9741,8 +9978,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+36+q*176*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
-	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
+	   e.x=laneX+fanDir*(202+q*186)*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+(188+slot*27)+q*344*fm.challengeDrop)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*(68+q*142+(slot-1.5)*16)*fm.challengeSweep*arcAmp;
@@ -9758,6 +9995,39 @@ function updateChallengeEnemy(state,e,dt){
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
 	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
+	   if(stage31Group3PolicyEligible){
+	    const middleQ=(9.7-entryDuration)/6.55,elapsed=u-9.7;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*10*arcAmp*Math.PI*3)/6.55;
+	    if(elapsed<.9){
+	     const joinQ=elapsed/.9,blend=joinQ*joinQ*(3-2*joinQ);
+	     e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	     e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	    }else if(u>=11.05){
+	     const pivotQ=(11.05-9.7)/3.35,departure=u-11.05;
+	     const pivotX=laneX+sweep*(Math.sin(pivotQ*Math.PI*2.8+p)*34-pivotQ*76)*fm.challengeSweep*arcAmp;
+	     const pivotDx=sweep*(Math.cos(pivotQ*Math.PI*2.8+p)*34*Math.PI*2.8-76)*fm.challengeSweep*arcAmp/3.35;
+	     const pivotY=topY+18+pivotQ*216*fm.challengeDrop*dropAmp+Math.cos(pivotQ*8+p)*4;
+	     const pivotDy=(216*fm.challengeDrop*dropAmp-Math.sin(pivotQ*8+p)*32)/3.35;
+	     const turn=.12*(1-Math.exp(-departure/.12));
+	     e.x=pivotX-100*departure+(pivotDx+100)*turn;
+	     e.y=pivotY-260*departure+(pivotDy+260)*turn;
+	     stage31Group3ExitDx=-100+(pivotDx+100)*Math.exp(-departure/.12);
+	     stage31Group3ExitDy=-260+(pivotDy+260)*Math.exp(-departure/.12);
+	    }
+	   }
+	   if(S.stage>=35&&u-9.7<laterBlueJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterBlueJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*30*Math.PI*arcAmp)/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
@@ -9778,6 +10048,59 @@ function updateChallengeEnemy(state,e,dt){
   const lowerQ=cl((u-2.4)/8.8,0,1);
   e.y+=lowerFieldBias*lowerQ*lowerQ;
  }
+ // Experimental group1 side departure; final composed pose owns the exit bias.
+ if(genericChallengePath&&S.stage===31&&wave===0&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup1ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup1ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Experimental group5 departure, scoped to the selected generic evaluator.
+ if(genericChallengePath&&S.stage===31&&wave===4&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup5ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup5ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Provisional departure for local review; exact lane-reference fidelity is open.
+ if(S.stage===31&&pathFamily==='green-ladder-split'){
+  if(u<9.7){
+   e.stage31GreenExitPose={x:e.x,y:e.y,u,
+    dx:previousGreenExitPose?(e.x-previousGreenExitPose.x)/(u-previousGreenExitPose.u):0,
+    dy:previousGreenExitPose?(e.y-previousGreenExitPose.y)/(u-previousGreenExitPose.u):0};
+  }else if(previousGreenExitPose){
+   const elapsed=u-previousGreenExitPose.u;
+   const ease=.08*(1-Math.exp(-elapsed/.08));
+   e.x=previousGreenExitPose.x+80*elapsed+(previousGreenExitPose.dx-80)*ease;
+   e.y=previousGreenExitPose.y-400*elapsed+(previousGreenExitPose.dy+400)*ease;
+  }
+ }
+ // Provisional sprite-row clearance, preserving lateral motion and path time.
+ if(genericChallengePath&&S.stage>=31&&u>=entryDuration
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'&&u>=9.7&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){
@@ -9785,7 +10108,73 @@ function updateChallengeEnemy(state,e,dt){
    S.ch.upperBandSamples++;
   }
  }
- if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){
+ // Entry curves may begin outside the exit-removal boundary.
+ const stage31GreenUpperExit=S.stage===31&&pathFamily==='green-ladder-split'
+  &&u>=9.7&&!!previousGreenExitPose&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterEnvelopeSideExit=false;
+ const laterGreenJoinSettled=pathFamily!=='green-ladder-split'||u-9.7>=laterGreenJoinDuration;
+ if(genericChallengePath&&S.stage>=35&&u>=9.7&&laterGreenJoinSettled&&e.dive===9&&!e.hitT&&!e.carry
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // With saturated fields and no oscillation, these generic exits cannot return.
+  const direction=pathFamily==='green-ladder-split'
+   ? sweep*(72*fm.challengeSweep+(slot%2?-38:38))*arcAmp
+   : (wave%2?-1:1)*186*fm.challengeSweep*arcAmp;
+  if(!curveX&&!laneBias&&spacingSettled&&Number.isFinite(direction)&&direction!==0){
+   const extent=enemyDims(e).w/2+1;
+   laterEnvelopeSideExit=direction<0
+    ? Math.round(e.x)+extent<0
+    : Math.round(e.x)-extent>PLAY_W;
+  }
+ }
+ const scopedStage31Group3=stage31Group3PolicyEligible;
+ let stage31Group3ExitNoReturn=false;
+ if(scopedStage31Group3&&u>=11.65&&e.dive===9&&!e.hitT&&!e.carry&&1+pathTimeSpeed>0){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const curveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const yBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // Future derivatives interpolate between current values and negative terminals.
+  stage31Group3ExitNoReturn=!curveX&&!curveY&&!laneBias&&!yBias&&spacingSettled&&u>=11.2
+   &&Number.isFinite(stage31Group3ExitDx)&&Number.isFinite(stage31Group3ExitDy)
+   &&stage31Group3ExitDx<0&&stage31Group3ExitDy<0;
+ }
+ const stage31Group3UpperExit=stage31Group3ExitNoReturn&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterBlueSideExit=false,laterBlueProofEligible=false;
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'
+  &&u>=9.7+laterBlueJoinDuration&&e.dive===9&&!e.hitT&&!e.carry){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const amplitude=fm.challengeSweep*arcAmp,k=2.8*Math.PI,q=(u-9.7)/3.35;
+  if(!curveX&&!laneBias&&(!gateS||u+phase+gateS*.28>=gateS)
+   &&Number.isFinite(amplitude)&&amplitude>0&&(sweep===1||sweep===-1)){
+   const rawOscPart=sweep*amplitude*(34*Math.sin(k*q+p)-76*q);
+   const constantFold=sweep*(e.x-rawOscPart);
+   const critical=Math.acos(76/(34*k));
+   const theta=critical+2*Math.PI*Math.ceil((k*q+p-critical)/(2*Math.PI));
+   const qMax=(theta-p)/k;
+   const futureFoldMax=Math.max(sweep*e.x,constantFold+amplitude*(34*Math.sin(k*qMax+p)-76*qMax));
+   laterBlueProofEligible=Number.isFinite(futureFoldMax);
+   // Future local maxima decrease; include center rounding and sprite extent.
+   laterBlueSideExit=laterBlueProofEligible&&futureFoldMax+enemyUnrotatedCullExtent(e)+.5<(sweep>0?0:-PLAY_W);
+  }
+ }
+ const scopedLaterBlue=genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale';
+ const legacyHorizontalExit=u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54);
+ const blueBridgeActive=scopedLaterBlue&&u>=9.7&&u<9.7+laterBlueJoinDuration;
+ const allowedLegacyHorizontalExit=legacyHorizontalExit
+  &&(!scopedStage31Group3||u<9.7||(stage31Group3ExitNoReturn&&e.x<-54))
+  &&!blueBridgeActive&&(!scopedLaterBlue||!laterBlueProofEligible||laterBlueSideExit);
+ if(stage31GreenUpperExit||stage31Group3UpperExit||laterEnvelopeSideExit||laterBlueSideExit||e.y>PLAY_H+34||allowedLegacyHorizontalExit){
   e.hp=0;
   e.miss=1;
  }
@@ -9879,7 +10268,7 @@ function updateEnemy(state,e,dt,t,T,p){
   e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&randUnit()<dt*T.diveShotRate*.55){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'escort');
    e.shot--;
   }
   return;
@@ -9934,7 +10323,7 @@ function updateEnemy(state,e,dt,t,T,p){
   }
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'dive');
    e.shot--;
   }
   if(e.y>PLAY_H+30){
@@ -9973,7 +10362,7 @@ function updateEnemy(state,e,dt,t,T,p){
  // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
  const harnessDiveRateBoost=Math.max(1,+e.stage4Lane2ProbeDiveRateBoost||1);
  if(e.cool<=0&&randUnit()<dt*diveRate*harnessDiveRateBoost&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
-  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-combatEffectiveStage(S.stage)*.02;
   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
    ? currentGamePackReferenceTiming('enemyDiveCharge')
    : null;
@@ -11021,7 +11410,8 @@ function queueStageTransition(state,mode='normal'){
   enemies:S.e.filter(e=>e.hp>0).length
  });
  if(usesReferenceTimingModel()){
-  clearReferenceTransitionCueWindow();
+  // Result audio continues across the gameplay handoff.
+  clearReferenceTransitionCueWindow([],mode==='challengeResult'?['challengeResults','challengePerfect']:[]);
   S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge
@@ -11263,7 +11653,7 @@ function stepAuroraRuntime(state,dt,input={}){
   const list=Object.values(bottoms);
   if(list.length){
    let pool=list;
-   let bulletVx=rnd(2,-2),bulletVy=154+S.stage*4;
+   let bulletVx=rnd(2,-2),bulletVy=154+combatEffectiveStage(S.stage)*4;
    if(S.stage===4&&S.stageClock<12){
     // Early Stage 4 formation shots should pressure movement without coming
     // straight down the player's current lane while dive pressure is already active.
@@ -11322,22 +11712,42 @@ function update(dt){
 // Shared remote leaderboard fetch, cache, and score-submit helpers.
 async function loadOwnProfile(){
  if(!LEADERBOARD.client||!LEADERBOARD.user){LEADERBOARD.profile=null;return null;}
- let {data}=await LEADERBOARD.client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',LEADERBOARD.user.id).maybeSingle();
+ const client=LEADERBOARD.client;
+ const user=LEADERBOARD.user;
+ const current=()=>LEADERBOARD.client===client&&LEADERBOARD.user?.id===user.id;
+ let {data}=await client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',user.id).maybeSingle();
+ if(!current())return null;
  if(!data){
-  const initials=preferredInitialsFromUser(LEADERBOARD.user);
+  const initials=preferredInitialsFromUser(user);
   if(initials){
-   const seeded=await LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
+   const seeded=await client.from('profiles').upsert({user_id:user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
    if(!seeded.error)data=seeded.data||null;
   }
  }
+ if(!current())return null;
  LEADERBOARD.profile=data||null;
  syncAccountUi();
  return LEADERBOARD.profile;
 }
-function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
- let select='id,initials,score,stage,achieved_at,is_verified,build';
- if(includeGameColumns)select+=',game_key,game_title';
- let query=LEADERBOARD.client.from('scores').select(select).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
+function scoreTableQuery(gameKey=currentScoreStorageGameKey()){
+ if(gameKey==='aurora-galactica')return LEADERBOARD.client.from('scores');
+ if(gameKey==='galaxy-guardians-preview')return LEADERBOARD.client.from('game_scores');
+ throw new Error('Online scores are unavailable for this game.');
+}
+function ensureLeaderboardScope(){
+ const scope=`${currentScoreStorageGameKey()}:${LEADERBOARD.user?.id||'anon'}`;
+ if(LEADERBOARD.scope===scope&&LEADERBOARD.scopeClient===LEADERBOARD.client)return scope;
+ LEADERBOARD.scopeClient=LEADERBOARD.client;
+ LEADERBOARD.scope=scope;
+ LEADERBOARD.remote={all:[],validated:[],mine:[]};
+ LEADERBOARD.cacheStamp={all:0,validated:0,mine:0};
+ LEADERBOARD.loading={all:0,validated:0,mine:0};
+ LEADERBOARD.lastRemoteOk=0;
+ return scope;
+}
+function buildLeaderboardScoresQuery(view='all',gameKey=currentScoreStorageGameKey()){
+ const select='id,initials,score,stage,achieved_at,is_verified,build,game_key,game_title';
+ let query=scoreTableQuery(gameKey).select(select).eq('game_key',gameKey).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
  if(shouldHideTestAccountScores()&&view!=='mine'){
   const hiddenIds=configuredTestAccountUserIds();
@@ -11348,13 +11758,13 @@ function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
  return query;
 }
 async function fetchLeaderboardScores(view='all'){
- let result=await buildLeaderboardScoresQuery(view,{includeGameColumns:1});
- if(!result.error)return result;
- const message=String(result.error?.message||'').toLowerCase();
- if(!message.includes('game_key')&&!message.includes('game_title'))return result;
- return buildLeaderboardScoresQuery(view,{includeGameColumns:0});
+ return buildLeaderboardScoresQuery(view);
 }
 async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
+ const scope=ensureLeaderboardScope();
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user?.id;
+ const gameKey=currentScoreStorageGameKey();
  view=normalizeLeaderboardViewForLane(view);
  if(view==='local'){
   syncLeaderboardBest();
@@ -11379,10 +11789,15 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
   return leaderboardRowsForView(view);
  }
  if(LEADERBOARD.loading[view])return leaderboardRowsForView(view);
- LEADERBOARD.loading[view]=1;
+ const request={};
+ LEADERBOARD.loading[view]=request;
  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
- const {data,error}=await fetchLeaderboardScores(view);
+ let result;
+ try{result=await fetchLeaderboardScores(view);}
+ catch(error){result={error};}
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()||scope!==LEADERBOARD.scope||LEADERBOARD.loading[view]!==request)return [];
+ const {data,error}=result;
  LEADERBOARD.loading[view]=0;
  if(error){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'fallback'));
@@ -11442,17 +11857,146 @@ function resolveGameOverScoreEntry(){
  };
 }
 async function submitScoreRemote(entry){
- if(entry&&typeof recordSystemIssue==='function'){
-  recordSystemIssue('score_submit_blocked','Remote score submit disabled in public lanes pending server-side validation',{
-   score:+entry.score|0,
-   stage:+entry.stage|0,
-   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
-   releaseChannel:RELEASE_CHANNEL
+ if(!entry||!LEADERBOARD.configured||!LEADERBOARD.client)return 0;
+ const gameKey=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
+  : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica';
+ const gameTitle=typeof scoreGameTitleForKey==='function'
+  ? scoreGameTitleForKey(gameKey,entry.gameTitle||'')
+  : String(entry.gameTitle||'').trim();
+ if(!remoteWriteEnabled()){
+  setLeaderboardStatus('Saved locally · production submit disabled in this lane');
+  syncLeaderboardUi();
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_blocked','Remote score submit blocked by lane policy',{
+    score:+entry.score|0,
+    stage:+entry.stage|0,
+    initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+    releaseChannel:RELEASE_CHANNEL,
+    gameKey,
+    gameTitle
+   },{level:'info'});
+  }
+  return 0;
+ }
+ if(typeof scoreGameSupportsSharedRemote==='function'&&!scoreGameSupportsSharedRemote(gameKey)){
+  setLeaderboardStatus(`Saved locally · ${gameTitle} online scores stay local until the shared schema is game-owned`);
+  syncLeaderboardUi();
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_blocked','Remote score submit blocked until game-owned leaderboard schema exists',{
+    score:+entry.score|0,
+    stage:+entry.stage|0,
+    initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+    releaseChannel:RELEASE_CHANNEL,
+    gameKey,
+    gameTitle
+   },{level:'info'});
+  }
+  return 0;
+ }
+ const payload={
+  game_key:gameKey,
+  game_title:gameTitle,
+  initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+  score:+entry.score|0,
+  stage:+entry.stage|0,
+  build:BUILD
+ };
+ if(LEADERBOARD.user?.id){
+  payload.user_id=LEADERBOARD.user.id;
+  // Account ownership does not establish gameplay validity.
+  payload.is_verified=false;
+ }
+ if(typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_attempt','Attempting remote score submit',{
+   score:payload.score,
+   stage:payload.stage,
+   initials:payload.initials,
+   verified:!!payload.is_verified,
+   userId:payload.user_id||'',
+   gameKey,
+   gameTitle
   },{level:'info'});
  }
- setLeaderboardStatus('Saved locally · online submit disabled pending server validation');
+ try{
+  const {error}=await LEADERBOARD.client.rpc('submit_platform_score',{
+   p_game_key:gameKey,p_initials:payload.initials,p_score:payload.score,p_stage:payload.stage,p_build:payload.build
+  });
+  if(error){
+   const failureCopy=typeof remoteScoreFailureCopy==='function'
+    ? remoteScoreFailureCopy(gameTitle)
+    : {
+      summary:'Online score save failed',
+      description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+      prompt:'Online score save failed. Please submit a bug report.'
+     };
+   if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(error.message||error)||'Remote score insert failed',{
+     score:payload.score,
+     stage:payload.stage,
+     initials:payload.initials,
+     verified:!!payload.is_verified,
+     userId:payload.user_id||'',
+     gameKey,
+     gameTitle
+    },{
+     level:'error',
+     suggestBugReport:1,
+     summary:failureCopy.summary,
+     description:failureCopy.description,
+     prompt:failureCopy.prompt
+    });
+   }
+   setLeaderboardStatus('Saved locally only · online submit failed');
+   syncLeaderboardUi();
+   return 0;
+  }
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_ok','Remote score submit succeeded',{
+    score:payload.score,
+    stage:payload.stage,
+    initials:payload.initials,
+    verified:!!payload.is_verified,
+    userId:payload.user_id||'',
+    gameKey,
+    gameTitle
+   },{level:'info'});
+ }
+}catch(err){
+  const failureCopy=typeof remoteScoreFailureCopy==='function'
+   ? remoteScoreFailureCopy(gameTitle)
+   : {
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    };
+  if(typeof recordSystemIssue==='function'){
+    recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
+     score:payload.score,
+     stage:payload.stage,
+     initials:payload.initials,
+     verified:!!payload.is_verified,
+     userId:payload.user_id||'',
+     gameKey,
+     gameTitle
+    },{
+    level:'error',
+    suggestBugReport:1,
+    summary:failureCopy.summary,
+    description:failureCopy.description,
+    prompt:failureCopy.prompt
+   });
+  }
+  setLeaderboardStatus('Saved locally only · online submit failed');
+  syncLeaderboardUi();
+  return 0;
+ }
+ setLeaderboardStatus(payload.is_verified?'Verified score saved online':'Shared leaderboard updated');
  syncLeaderboardUi();
- return 0;
+ refreshLeaderboard('all',{force:1});
+ if(payload.is_verified)refreshLeaderboard('validated',{force:1});
+ if(payload.user_id)refreshLeaderboard('mine',{force:1});
+ return 1;
 }
 function submitGameOverScore(){
  if(!gameOverState||gameOverState.editing||gameOverState.remoteSubmitted||LEADERBOARD.submitBusy)return;
@@ -11605,7 +12149,7 @@ async function resetAccountPassword(){
  syncAccountUi();
 }
 async function applyRecoveredPassword(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
+ if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
  const password=String(accountPassword?.value||'');
  const confirm=String(accountPasswordConfirm?.value||'');
  if(!password){
@@ -11626,24 +12170,38 @@ async function applyRecoveredPassword(){
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.auth.updateUser({password});
- LEADERBOARD.authBusy=0;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ let result;
+ try{
+  result=await client.auth.updateUser({password});
+ }catch{
+  result={error:{message:'Connection failed. Try saving the new password again.'}};
+ }finally{
+  LEADERBOARD.authBusy=0;
+ }
+ if(client!==LEADERBOARD.client||LEADERBOARD.user?.id!==userId){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+  syncAccountUi();
+  return;
+ }
+ const {error}=result;
  if(error){
   setAccountNotice(`Could not update password: ${error.message}`);
   syncAccountUi();
   return;
  }
- const {data:{session}}=await LEADERBOARD.client.auth.getSession();
- LEADERBOARD.user=session?.user||LEADERBOARD.user;
- if(LEADERBOARD.user)await loadOwnProfile();
- await refreshSignedInPilotRecords(1);
+ LEADERBOARD.user=result.data?.user||LEADERBOARD.user;
+ exitRecoveryMode();
  setAccountNotice('Password updated. You can now keep using this pilot account.');
- LEADERBOARD.recoveryMode=0;
- if(accountPassword)accountPassword.value='';
- if(accountPasswordConfirm)accountPasswordConfirm.value='';
  syncLeaderboardBest();
  syncAccountUi();
  syncLeaderboardUi();
+ try{
+  await loadOwnProfile();
+  if(LEADERBOARD.user?.id===userId)await refreshSignedInPilotRecords(1);
+ }catch{}
 }
 async function logoutAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
@@ -11680,11 +12238,17 @@ async function saveAccountInitials(){
 }
 async function resetTestPilotScores(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!isSignedInAsTestAccount())return;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ const gameKey=currentScoreStorageGameKey();
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.from('scores').delete().eq('user_id',LEADERBOARD.user.id);
+ let error;
+ try{({error}=await scoreTableQuery(gameKey).delete().eq('game_key',gameKey).eq('user_id',userId));}
+ catch(failure){error=failure;}
  LEADERBOARD.authBusy=0;
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()){syncAccountUi();return;}
  if(error){
   setAccountNotice(`Could not reset test pilot scores: ${error.message}`);
   syncAccountUi();
@@ -11693,7 +12257,7 @@ async function resetTestPilotScores(){
  LEADERBOARD.remote.mine=[];
  LEADERBOARD.cacheStamp.mine=0;
  setLeaderboardStatus('Test pilot scores cleared');
- setAccountNotice('Cleared remote scores for the configured test pilot.');
+ setAccountNotice('Cleared this game\'s remote scores for the configured test pilot.');
  syncLeaderboardUi();
  refreshLeaderboard('all',{force:1});
  refreshLeaderboard('validated',{force:1});
@@ -11716,18 +12280,77 @@ async function initLeaderboard(){
   return;
  }
  try{
+  // Capture recovery intent before the SDK consumes and removes URL tokens.
+  const authHash=new URLSearchParams(location.hash.slice(1));
+  const hadAuthHash=remoteAuthEnabled()&&authHash.has('access_token');
+  let recoveryFromUrl=remoteAuthEnabled()&&authHash.get('type')==='recovery';
   LEADERBOARD.client=supabaseFactory.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
    auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
   });
+  const client=LEADERBOARD.client;
+  let authEventVersion=0;
+  function acceptAuthUser(user,event=''){
+   const previousId=LEADERBOARD.user?.id;
+   LEADERBOARD.user=user||null;
+   const prohibited=RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount();
+   if(prohibited){
+    user=null;
+    LEADERBOARD.user=null;
+    recoveryFromUrl=false;
+   }
+   if(!user){
+    if(event==='SIGNED_OUT')recoveryFromUrl=false;
+    exitRecoveryMode();
+    LEADERBOARD.profile=null;
+    LEADERBOARD.remote.mine=[];
+    LEADERBOARD.cacheStamp.mine=0;
+    if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
+   }else{
+    if(previousId&&previousId!==user.id)exitRecoveryMode();
+    if(event==='PASSWORD_RECOVERY'||recoveryFromUrl){
+     recoveryFromUrl=false;
+     enterRecoveryMode();
+    }else if(!LEADERBOARD.recoveryMode&&previousId!==user.id)setAccountNotice('');
+   }
+   return prohibited;
+  }
+  if(remoteAuthEnabled()){
+   client.auth.onAuthStateChange((event,sessionState)=>{
+    if(client!==LEADERBOARD.client)return;
+    const version=++authEventVersion;
+    const prohibited=acceptAuthUser(sessionState?.user,event);
+    syncLeaderboardBest();
+    syncLeaderboardUi();
+    // Supabase delivers events under its auth lock. Do provider work after it returns.
+    setTimeout(async()=>{
+     if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+     try{
+      if(prohibited){
+       await client.auth.signOut();
+       if(version===authEventVersion)acceptAuthUser(null,'SIGNED_OUT');
+       setAccountNotice('The test pilot account is disabled in production.');
+      }else if(LEADERBOARD.user){
+       hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+       await loadOwnProfile();
+       if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+       await refreshSignedInPilotRecords(1);
+      }
+      if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+      syncLeaderboardBest();
+      syncLeaderboardUi();
+      primeLeaderboard();
+      scheduleLeaderboardRefresh();
+     }catch{}
+    },0);
+   });
+  }
   hydrateLeaderboardCache('all');
   hydrateLeaderboardCache('validated');
   if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
-  const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
-  const hadRecoveryHash=remoteAuthEnabled()&&location.hash.includes('type=recovery');
   if(remoteAuthEnabled()){
    const {data:{session}}=await LEADERBOARD.client.auth.getSession();
-   LEADERBOARD.user=session?.user||null;
-   if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+   const prohibited=!authEventVersion&&acceptAuthUser(session?.user);
+   if(prohibited){
     await LEADERBOARD.client.auth.signOut();
     LEADERBOARD.user=null;
     setAccountNotice('The test pilot account is disabled in production.');
@@ -11735,7 +12358,6 @@ async function initLeaderboard(){
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
-    if(hadRecoveryHash)enterRecoveryMode();
    }
   }else{
    LEADERBOARD.user=null;
@@ -11750,35 +12372,6 @@ async function initLeaderboard(){
   syncLeaderboardUi();
   primeLeaderboard();
   scheduleLeaderboardRefresh();
-  if(remoteAuthEnabled()){
-   LEADERBOARD.client.auth.onAuthStateChange(async(event,sessionState)=>{
-    LEADERBOARD.user=sessionState?.user||null;
-    if(event==='PASSWORD_RECOVERY')LEADERBOARD.recoveryMode=1;
-    else if(sessionState?.user)LEADERBOARD.recoveryMode=0;
-    if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
-     await LEADERBOARD.client.auth.signOut();
-     LEADERBOARD.user=null;
-     setAccountNotice('The test pilot account is disabled in production.');
-    }
-    if(LEADERBOARD.user){
-     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
-     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-     await loadOwnProfile();
-     await refreshSignedInPilotRecords(1);
-    }else{
-     LEADERBOARD.recoveryMode=0;
-     setAccountNotice('');
-     LEADERBOARD.profile=null;
-     LEADERBOARD.remote.mine=[];
-     LEADERBOARD.cacheStamp.mine=0;
-     if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
-    }
-    syncLeaderboardBest();
-    syncLeaderboardUi();
-    primeLeaderboard();
-    scheduleLeaderboardRefresh();
-   });
-  }
  }catch(err){
   LEADERBOARD.client=null;
   LEADERBOARD.configured=0;
@@ -12020,12 +12613,10 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  resultHoldWindow:4.25,
-  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  resultBannerWindow:4.25,
-  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  nextStageWindow:7.35,
-  nextCueLeadBeforeSpawn:3.15,
+  resultHoldWindow:1.45,
+  resultBannerWindow:1.15,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
   cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
@@ -12127,7 +12718,7 @@ challengeResults:referenceAudioCue('',{
   cooldownMs:2400,
   clipStart:0,
   clipDuration:3.35,
-  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+  stopCueNames:Object.freeze(['stagePulse'])
  }),
  attractEnter:Object.freeze({
   byPhase:Object.freeze({
@@ -12708,7 +13299,12 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
   groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel']),
   motionSpecGroups:Object.freeze([
-   null,
+   Object.freeze({
+    controls:Object.freeze({
+     laneOrder:Object.freeze([4,5,6,7,0,1,2,3]),
+     lanePhaseOffsets:Object.freeze([0,0,0,0,.18,.12,.06,0])
+    })
+   }),
    Object.freeze({
     controls:Object.freeze({
      arcAmp:.76,
@@ -12943,8 +13539,13 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
 const AURORA_CHALLENGE_LAYOUT=AURORA_CHALLENGE_LAYOUTS[0];
 
 const AURORA_CHALLENGE_DEFAULT_LAYOUT=AURORA_CHALLENGE_LAYOUT;
+const AURORA_CHALLENGE_STAGE31_LAYOUT=Object.freeze({
+ ...AURORA_CHALLENGE_LAYOUTS[AURORA_CHALLENGE_LAYOUTS.length-1],
+ groupSpawnOffsets:Object.freeze([0,3.593,7.137,9.997,13.79])
+});
 
 function auroraChallengeLayoutForStage(stage){
+ if(stage===31)return AURORA_CHALLENGE_STAGE31_LAYOUT;
  let layout=AURORA_CHALLENGE_DEFAULT_LAYOUT;
  for(const candidate of AURORA_CHALLENGE_LAYOUTS){
   if(stage>=candidate.fromStage)layout=candidate;
@@ -13245,6 +13846,40 @@ const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
   firstScoutDiveDelay:2.55,
   flagshipEscortDelay:6.65,
   singleShotCooldown:.72
+ })
+});
+
+const GUARDIANS_STAGE_BEHAVIOR_POLICIES=Object.freeze({
+ rank3:Object.freeze({
+  id:'guardians-stage-five-active-dive-cap-v5',
+  status:'bounded-runtime-promotion',
+  minRank:3,
+  maxRank:3,
+  ruleScales:Object.freeze({
+   scoutDiveIntervalBase:1,
+   diveBaseVy:.97,
+   diveAccel:.94,
+   diveSideDrift:.9,
+   diveSwayAmplitude:.92
+  }),
+  diveSelection:Object.freeze({
+   playerCorridorExclusionPx:26,
+   lowerFieldSeparationPx:40,
+   maxLowerFieldDives:2,
+   maxActiveDives:2,
+   activeDiveSeparationPx:32
+  }),
+  enemyShotSource:Object.freeze({
+   crowdingThreshold:2,
+   playerCorridorExclusionPx:22,
+   minPlayerYGapPx:88,
+   lowerFieldDiveShotSeparationPx:30,
+   lowerFieldDiveShotYSeparationPx:108,
+   preferFormationWhenCrowded:1,
+   formationPoolSize:10,
+   allowBaseFallback:1
+  }),
+  evidence:'reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-visual-review-0.1.json'
  })
 });
 
@@ -13570,11 +14205,11 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
    'Shared Platinum sign-in, score, replay, bug-report, music, and release shell support'
   ]),
   milestones:Object.freeze([
-   Object.freeze({label:'Pack identity and shell preview',state:'main@54398ff5 clean'}),
-   Object.freeze({label:'Reference footage and movement map',state:'main@54398ff5 clean'}),
-   Object.freeze({label:'Visual and audio identity catalog',state:'main@54398ff5 clean'}),
-   Object.freeze({label:'Minimal scout-wave playable slice',state:'main@54398ff5 clean'}),
-   Object.freeze({label:'Application-owned scoring harness',state:'main@54398ff5 clean'})
+   Object.freeze({label:'Pack identity and shell preview',state:'main@ea779a76 clean'}),
+   Object.freeze({label:'Reference footage and movement map',state:'main@ea779a76 clean'}),
+   Object.freeze({label:'Visual and audio identity catalog',state:'main@ea779a76 clean'}),
+   Object.freeze({label:'Minimal scout-wave playable slice',state:'main@ea779a76 clean'}),
+   Object.freeze({label:'Application-owned scoring harness',state:'main@ea779a76 clean'})
   ]),
   launchFallbackToast:'Galaxy Guardians playable preview is unavailable in this build. Launching Aurora Galactica.'
  }),
@@ -13615,6 +14250,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
  scoreAdvancePresentation:GUARDIANS_SCORE_ADVANCE_PRESENTATION,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
+ stageBehaviorPolicies:GUARDIANS_STAGE_BEHAVIOR_POLICIES,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,
  formationLayouts:GUARDIANS_FORMATION_LAYOUTS,
@@ -13939,6 +14575,7 @@ function guardiansPersonaEffectiveCfg(state,cfg){
    edgeEscapeInset
   },expertSafeLane||{});
  }
+ if(effective.name==='expert')effective=Object.assign({},effective,{safeLane:1});
  if(rank>=3&&(effective.name==='expert'||effective.name==='professional')){
   return Object.assign({}, effective, {
    diveThreatY:Math.min(effective.diveThreatY,rank>=5?126:136),
@@ -13950,47 +14587,54 @@ function guardiansPersonaEffectiveCfg(state,cfg){
 
 function guardiansPersonaSafeLaneAxis(state,cfg,target){
  const player=state.player||{};
- const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const rules=guardiansRuntimeRules(state);
+ const playfieldWidth=rules.playfieldWidth||280;
  const playerX=+player.x||0;
  const playerY=+player.y||0;
- const step=Math.max(18,+cfg.safeLaneStep||30);
- const shotLook=Math.max(+cfg.urgentShotLook||0,+cfg.safeLaneShotLook||180);
- const shotDx=Math.max(+cfg.urgentShotDx||0,+cfg.safeLaneShotDx||24);
- const diveY=Number.isFinite(+cfg.safeLaneDiveY)?+cfg.safeLaneDiveY:(+cfg.diveThreatY||140);
- const diveDx=Math.max(+cfg.diveThreatDx||0,+cfg.safeLaneDiveDx||28);
- const shotWeight=Math.max(.2,+cfg.safeLaneShotWeight||1);
- const diveWeight=Math.max(.2,+cfg.safeLaneDiveWeight||1);
- const shots=(state.enemyShots||[]).filter(shot=>
-  shot&&shot.active!==0&&shot.y<playerY&&playerY-shot.y<shotLook
- );
- const dives=(state.aliens||[]).filter(alien=>
-  alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')&&alien.y<playerY&&alien.y>=diveY
- );
- if(!shots.length&&!dives.length)return null;
- const targetX=target?+target.x||playerX:playfieldWidth/2;
+ const memory=guardiansPersonaMemory(state,cfg);
+ const previous=memory.safeLaneObservations||{};
+ const observations={};
+ const threats=[];
+ // Estimate motion from successive observations, without advancing enemy state.
+ const observe=(entity,key,hitbox)=>{
+  const old=previous[key];
+  const elapsed=old?(+state.t||0)-old.t:0;
+  const continuous=elapsed>0&&elapsed<=.1&&old.mode===entity.mode
+   &&Math.abs(entity.x-old.x)<40&&Math.abs(entity.y-old.y)<40;
+  const vx=continuous?(entity.x-old.x)/elapsed:elapsed===0?(old?.vx||0):0;
+  const vy=continuous?(entity.y-old.y)/elapsed:elapsed===0?(old?.vy||0):0;
+  observations[key]={x:entity.x,y:entity.y,t:+state.t||0,mode:entity.mode,vx,vy};
+  threats.push({x:entity.x,y:entity.y,vx,vy,hitbox});
+ };
+ (state.enemyShots||[]).forEach((shot,index)=>{
+  if(shot&&shot.active!==0)observe(shot,`shot:${shot.id??index}`,rules.enemyShotPlayerHitbox||7);
+ });
+ (state.aliens||[]).forEach((alien,index)=>{
+  if(alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')){
+   observe(alien,`alien:${alien.id??index}`,rules.alienCollisionHitbox||10);
+  }
+ });
+ memory.safeLaneObservations=observations;
+ const targetX=Math.max(12,Math.min(playfieldWidth-12,target?+target.x:playfieldWidth/2));
+ const speed=rules.playerSpeed||108;
  const scored=[-1,0,1].map(axis=>{
-  const x=Math.max(18,Math.min(playfieldWidth-18,playerX+axis*step));
   let risk=0;
-  for(const shot of shots){
-   const dx=Math.abs((+shot.x||0)-x);
-   const dy=Math.max(0,playerY-(+shot.y||0));
-   if(dx<=shotDx)risk+=shotWeight*(4+(shotDx-dx)/Math.max(1,shotDx)*4+Math.max(0,1-dy/Math.max(1,shotLook))*2);
+  let x=playerX;
+  for(let tick=1;tick<=13;tick++){
+   const t=tick*.05;
+   x=Math.max(12,Math.min(playfieldWidth-12,playerX+axis*speed*t));
+   if(axis&&Math.sign(targetX-playerX)===axis&&Math.abs(x-playerX)>Math.abs(targetX-playerX))x=targetX;
+   for(const threat of threats){
+    const dx=Math.abs(threat.x+threat.vx*t-x);
+    const dy=Math.abs(threat.y+threat.vy*t-playerY);
+    const margin=threat.hitbox+6+t*8;
+    if(dx<margin&&dy<margin)risk+=(1-dx/margin)*(1-dy/margin)*(1-t*.5)*1000;
+   }
   }
-  for(const alien of dives){
-   const dx=Math.abs((+alien.x||0)-x);
-   const dy=Math.max(0,playerY-(+alien.y||0));
-   if(dx<=diveDx)risk+=diveWeight*(5+(diveDx-dx)/Math.max(1,diveDx)*5+Math.max(0,1-dy/Math.max(1,playerY-diveY))*2);
-  }
-  if(x<=22||x>=playfieldWidth-22)risk+=3;
-  risk+=Math.abs(targetX-x)*.006;
-  if(axis===0)risk+=.15;
-  return {axis,risk};
+  const pursuit=Math.abs(targetX-x)*.05;
+  return {axis,risk:risk+pursuit};
  }).sort((a,b)=>a.risk-b.risk||Math.abs(a.axis)-Math.abs(b.axis));
- const best=scored[0];
- const current=scored.find(row=>row.axis===0);
- if(!best||!Number.isFinite(best.risk))return null;
- if(current&&current.risk<=best.risk+.45)return 0;
- return best.axis;
+ return scored[0]?.axis??null;
 }
 
 function guardiansPersonaMoveAxis(state,cfg,target){
@@ -14338,13 +14982,15 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   ? resolveWatchModeStartScope()
   : '';
  const requestedWatchPersona=String(
-  (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
-  || cfg.watchPersona
+  cfg.watchPersona
   || cfg.persona
+  || (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
   || 'advanced'
  ).trim().toLowerCase();
  const developerWatchPersona=cfg.watchMode?requestedWatchPersona:'';
- const watchPersona=armedWatchPersona||developerWatchPersona;
+ const watchPersona=cfg.stageFiveReview
+  ? developerWatchPersona
+  : (armedWatchPersona||developerWatchPersona);
  const watchScope=watchPersona
   ? String(
    armedWatchPersona
@@ -14382,6 +15028,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   attract:0,
   simT:0,
   stageClock:0,
+  playerTwo:{enabled:false},
   watchMode:watchMode?1:0,
   watchPersona,
   watchScope
@@ -14392,13 +15039,21 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   stage:S.stage,
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
   seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719,
-  maxPlayableStage:Math.max(
+ maxPlayableStage:Math.max(
    1,
    +cfg.maxPlayableStage
    || +(window.__platinumHarnessRuntimeOverrides?.maxPlayableStage||window.__auroraHarnessRuntimeOverrides?.maxPlayableStage||0)
    || 1
  )
  });
+ if(cfg.stageFiveReview){
+  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig={
+   id:'guardians-stage-five-review',
+   stage:5,
+   seed:(+cfg.seed>>>0)||12553,
+   mode:watchMode?'professional-watch':'manual-play'
+  };
+ }
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.telemetryEventIndex=0;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
@@ -14431,7 +15086,8 @@ function galaxyGuardiansInputFromKeys(){
 function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  const manualInput=galaxyGuardiansInputFromKeys();
- const personaInput=!guardiansHasManualInput(manualInput)
+ const automatedTurn=!!S.watchMode;
+ const personaInput=automatedTurn||!guardiansHasManualInput(manualInput)
   ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,S.harnessPersona||S.watchPersona||'')
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
@@ -14491,9 +15147,11 @@ function currentGalaxyGuardiansDevPreviewState(){
 }
 
 function summarizeGalaxyGuardiansDevPreview(){
- return GALAXY_GUARDIANS_ACTIVE_DEV_STATE
-  ? summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
-  : null;
+ if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return null;
+ return Object.assign(
+  summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE),
+  {reviewConfig:GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig||null}
+ );
 }
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({
@@ -14666,6 +15324,12 @@ function guardiansStageRank(stateOrStage=1){
  return 0;
 }
 
+function guardiansStageBehaviorPolicy(stateOrStage=1){
+ const rank=guardiansStageRank(stateOrStage);
+ const policies=GALAXY_GUARDIANS_PACK.stageBehaviorPolicies||{};
+ return Object.values(policies).find(policy=>rank>=(+policy.minRank||0)&&rank<=(+policy.maxRank||Infinity))||null;
+}
+
 function guardiansRuntimeRules(stateOrStage=1){
  const base=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules;
  const rank=guardiansStageRank(stateOrStage);
@@ -14686,7 +15350,7 @@ function guardiansRuntimeRules(stateOrStage=1){
   const diveAccelRelief=midrunRouteabilityRelief?.94:1;
   const diveSideDriftRelief=midrunRouteabilityRelief?.9:1;
   const shotMaxLive=Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2));
-  return Object.assign({},base,{
+  const rules=Object.assign({},base,{
   firstScoutDiveDelay:+(base.firstScoutDiveDelay*firstPressureScale).toFixed(3),
   flagshipEscortDelay:+(base.flagshipEscortDelay*Math.max(.78,1-rank*.032)).toFixed(3),
   scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale*scoutIntervalRelief).toFixed(3),
@@ -14709,6 +15373,11 @@ function guardiansRuntimeRules(stateOrStage=1){
   topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3),
   topReentrySwayAmplitude:+(base.topReentrySwayAmplitude*(1+rank*.04)).toFixed(3)
  });
+ const scales=guardiansStageBehaviorPolicy(stateOrStage)?.ruleScales||{};
+ for(const [key,scale] of Object.entries(scales)){
+  if(Number.isFinite(+rules[key])&&Number.isFinite(+scale))rules[key]=+(rules[key]*scale).toFixed(3);
+ }
+ return rules;
 }
 
 function guardiansMarchOffset(state,alien){
@@ -14938,6 +15607,18 @@ function guardiansPressureSnapshot(state,rules){
 function guardiansFairDivePredicate(state,rules,pressure){
  const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
  const playerX=+state.player?.x||0;
+ const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
+ if(policy){
+  const active=liveGuardiansAliens(state).filter(alien=>alien.mode==='diving'||alien.mode==='wrapping');
+  return alien=>{
+   const rackX=+alien.rackX||0;
+   if(active.length>=(+policy.maxActiveDives||Infinity))return false;
+   if(lowerFieldDives.length>=(+policy.maxLowerFieldDives||Infinity))return false;
+   if(Math.abs(rackX-playerX)<=(+policy.playerCorridorExclusionPx||0))return false;
+   if(!lowerFieldDives.every(threat=>Math.abs(rackX-(+threat.x||0))>=(+policy.lowerFieldSeparationPx||0)))return false;
+   return active.every(threat=>Math.abs(rackX-(+threat.x||+threat.rackX||0))>=(+policy.activeDiveSeparationPx||0));
+  };
+ }
  if(!lowerFieldDives.length)return ()=>true;
  const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 34 : 26;
  const playerCorridorWidth=pressure?.crowdingPenalty>=3 ? 26 : 22;
@@ -14967,6 +15648,8 @@ function pickGuardiansEscortAliens(state,count=0,leader=null){
 function startGuardiansDive(state,alien,escortCount=0){
  if(!alien||alien.hp<=0)return null;
  const rules=guardiansRuntimeRules(state);
+ const policy=guardiansStageBehaviorPolicy(state)?.diveSelection;
+ if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(alien))return null;
  alien.mode='diving';
  alien.diveT=0;
  alien.diveStartX=alien.x;
@@ -14975,7 +15658,22 @@ function startGuardiansDive(state,alien,escortCount=0){
  alien.escorts=escortCount;
  alien.linkedTo='';
  alien.escortSlot=0;
- const escorts=alien.role==='flagship'?pickGuardiansEscortAliens(state,escortCount,alien):[];
+ const candidates=alien.role==='flagship'?pickGuardiansEscortAliens(state,policy?state.aliens.length:escortCount,alien):[];
+ const escorts=[];
+ // Recheck after each activation: the leader and accepted escorts consume capacity.
+ for(const escort of candidates){
+  if(escorts.length>=Math.max(0,escortCount|0))break;
+  if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(escort))continue;
+  escort.mode='diving';
+  escort.diveT=-rules.escortLag*(escorts.length+1);
+  escort.diveStartX=escort.x;
+  escort.diveStartY=escort.y;
+  escort.diveSide=alien.diveSide;
+  escort.linkedTo=alien.id;
+  escort.escortSlot=escorts.length===0?-1:1;
+  escort.escorts=0;
+  escorts.push(escort);
+ }
  alien.escorts=escorts.length;
  guardiansRuntimeEvent(state,alien.role==='flagship'?'flagship_dive_start':'alien_dive_start',{
   id:alien.id,
@@ -14983,16 +15681,6 @@ function startGuardiansDive(state,alien,escortCount=0){
   visualId:alien.visualId,
   audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.diveAudioCue||'',
   escorts:escorts.length
- });
- escorts.forEach((escort,index)=>{
-  escort.mode='diving';
-  escort.diveT=-rules.escortLag*(index+1);
-  escort.diveStartX=escort.x;
-  escort.diveStartY=escort.y;
-  escort.diveSide=alien.diveSide;
-  escort.linkedTo=alien.id;
-  escort.escortSlot=index===0?-1:1;
-  escort.escorts=0;
  });
  if(escorts.length>0)guardiansRuntimeEvent(state,'escort_join',{
   flagship:alien.id,
@@ -15130,6 +15818,25 @@ function pickGuardiansEnemyShotSource(state){
  const live=liveGuardiansAliens(state).filter(alien=>alien.y<state.player.y-24);
  if(!live.length)return null;
  const diving=live.filter(alien=>alien.mode==='diving'||alien.mode==='wrapping');
+ const policy=guardiansStageBehaviorPolicy(state)?.enemyShotSource||null;
+ if(policy){
+  const lowerFieldDives=Array.isArray(pressure.lowerFieldDives)?pressure.lowerFieldDives:[];
+  const crowded=pressure.crowdingPenalty>=(+policy.crowdingThreshold||3);
+  const eligible=alien=>{
+   if(crowded&&Math.abs(alien.x-state.player.x)<=(+policy.playerCorridorExclusionPx||0))return false;
+   if(alien.y>=state.player.y-(+policy.minPlayerYGapPx||0))return false;
+   return lowerFieldDives.every(threat=>
+    Math.abs(alien.x-threat.x)>(+policy.lowerFieldDiveShotSeparationPx||0)
+    || Math.abs(alien.y-threat.y)>(+policy.lowerFieldDiveShotYSeparationPx||0)
+   );
+  };
+  const formation=live.filter(alien=>alien.mode==='formation'&&eligible(alien)).sort((a,b)=>b.y-a.y).slice(0,+policy.formationPoolSize||10);
+  const eligibleDiving=diving.filter(eligible);
+  let policyCandidates=policy.preferFormationWhenCrowded&&crowded?formation:eligibleDiving;
+  if(!policyCandidates.length&&!(policy.preferFormationWhenCrowded&&crowded))policyCandidates=formation;
+  if(policyCandidates.length)return policyCandidates[Math.floor(state.rng()*policyCandidates.length)%policyCandidates.length];
+  if(!policy.allowBaseFallback)return null;
+ }
   let candidates=diving.filter(alien=>{
   if(alien.y>=state.player.y-(pressure.crowdingPenalty>=2 ? 88 : 64))return false;
   if(pressure.crowdingPenalty>=3&&Math.abs(alien.x-state.player.x)<=14)return false;
@@ -15247,12 +15954,14 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    const deferScale=pressure.crowdingPenalty>=4?.24:.18;
    state.nextDiveAt=state.t+Math.max(.14,rules.scoutDiveIntervalBase*deferScale);
   }else{
-   const alien=pickGuardiansAlien(state,'scout',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'scout',null,diveRanker)
-    || pickGuardiansAlien(state,'escort',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'escort',null,diveRanker)
-    || pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+   const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
+   const predicate=guardiansFairDivePredicate(state,rules,pressure);
+   const alien=pickGuardiansAlien(state,'scout',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'scout',null,diveRanker))
+    || pickGuardiansAlien(state,'escort',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'escort',null,diveRanker))
+    || pickGuardiansAlien(state,'flagship',predicate,diveRanker)
+    || (!policy&&pickGuardiansAlien(state,'flagship',null,diveRanker));
    startGuardiansDive(state,alien,0);
    state.nextDiveAt=state.t+rules.scoutDiveIntervalBase+state.rng()*rules.scoutDiveIntervalJitter;
   }
@@ -15263,8 +15972,9 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    const deferScale=pressure.crowdingPenalty>=4?.18:.12;
    state.nextFlagshipAt=state.t+Math.max(.22,rules.flagshipDiveIntervalBase*deferScale);
   }else{
+   const policy=guardiansStageBehaviorPolicy(state)?.diveSelection||null;
    const flagship=pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
-    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+    || (!policy&&pickGuardiansAlien(state,'flagship',null,diveRanker));
    startGuardiansDive(state,flagship,Math.min(2,liveGuardiansAliens(state,'escort').filter(alien=>alien.mode==='formation').length));
    state.nextFlagshipAt=state.t+rules.flagshipDiveIntervalBase+state.rng()*rules.flagshipDiveIntervalJitter;
   }
@@ -16098,9 +16808,28 @@ function createAuroraGameplayAdapterState(opts={}){
  return state;
 }
 
-function startAuroraGameplayAdapter(){
+function startAuroraGameplayAdapter(cfg={}){
+ const trial=cfg.challengeScheduleTrial;
+ if(trial!==undefined){
+  const channel=typeof BUILD_INFO!=='undefined'?String(BUILD_INFO.releaseChannel||'').toLowerCase():'';
+  const launch=window.__platinumHarnessLaunchCfg;
+  const offsets=trial?.groupSpawnOffsets;
+  if(channel!=='development'||launch?.challengeScheduleTrial!==trial||
+   trial?.stage!==31||cfg.stage!==31||cfg.stageMode!=='display'||cfg.startKind!=='challenge'||cfg.challengeStage!==8||
+   !Array.isArray(offsets)||offsets.length!==5||offsets.some(value=>!Number.isFinite(value)||value<0||value>30)){
+   throw new Error('Challenge schedule trial requires a valid development harness Stage 31 launch.');
+  }
+ }
  const state=createAuroraGameplayAdapterState();
- return startAuroraGameplay(state);
+ if(trial)state.harnessChallengeLayoutOverride={stage:31,layout:{groupSpawnOffsets:[...trial.groupSpawnOffsets]}};
+ try{
+  const result=startAuroraGameplay(state);
+  if(trial)state.harnessChallengeLayoutSnapshot=currentGamePackChallengeLayout(state.stage);
+  return result;
+ }
+ finally{
+  if(trial)state.harnessChallengeLayoutOverride=null;
+ }
 }
 
 function updateAuroraGameplayAdapter(dt,input={}){
@@ -17709,6 +18438,23 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 
+function enemyUnrotatedCullExtent(e,mode=currentSpriteRenderMode()){
+ const fallback=enemyDims(e).w/2+1;
+ if(!['auto','aurora-themed'].includes(mode)||e.dive!==9||e.hitT>0||e.carry
+  ||!['stingray','galboss'].includes(e.fam)||!['bee','but','rogue','boss'].includes(e.t))return fallback;
+ const model=e.t==='bee'?P.but:e.t==='but'?AURORA_CONFORMANCE_PIXELS.butterfly:e.t==='rogue'?P.rogue:P.boss;
+ const origin=e.t==='boss'?-9:-8,ps=2;
+ const patterns=[model.a,model.b,FAMILY_PIXELS[e.fam]];
+ if(patterns.some(p=>!Array.isArray(p)||p.some(point=>!Number.isFinite(point?.[0]))))return fallback;
+ let extent=0;
+ for(const pattern of patterns)for(const [x] of pattern){
+  extent=Math.max(extent,Math.abs(origin+ps*x),Math.abs(origin+ps*x+ps));
+ }
+ // Union of both flap poses, including the shared family accent rectangles.
+ extent=Math.max(extent,ps*5.7,ps*4.7+ps,ps*5.2,ps*4.2+ps);
+ return Math.ceil(extent);
+}
+
 function enemyHitbox(e){
  const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.14:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
  return{w:d.w*scale,h:d.h*scale};
@@ -18844,6 +19590,16 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.fillStyle='#7bd6ff';
  ctx.shadowColor='rgba(123,214,255,.34)';
  ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
+ if(state.reviewConfig){
+  ctx.fillStyle='rgba(1,8,18,.82)';
+  ctx.fillRect(69,20,142,10);
+  ctx.textAlign='center';
+  ctx.fillStyle='#9eefff';
+  ctx.shadowColor='rgba(158,239,255,.34)';
+  ctx.font='6px "Courier New", Consolas, monospace';
+  ctx.fillText(`REVIEW S5 · ${state.reviewConfig.mode==='professional-watch'?'PRO WATCH':'MANUAL'} · SEED ${state.reviewConfig.seed}`,PLAY_W*.5,22);
+  ctx.textAlign='left';
+ }
  ctx.shadowBlur=0;
  ctx.fillStyle='rgba(216,236,255,.84)';
  ctx.fillText('CREDIT 0',12,PLAY_H-20);
@@ -18950,6 +19706,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
    summary.stage||state.stage||1
   ).core)).size,
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
+  reviewConfig:state.reviewConfig||null,
   starfieldCount:S.st.length,
   starfieldLeadSample:[...(window.__platinumRenderDebug.starfieldLeadSample||[])]
  });
